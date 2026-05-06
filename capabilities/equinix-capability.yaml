@@ -1,0 +1,93 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Equinix API Authentication
+  description: Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password
+    and the client credentials flow. To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under
+    "My Apps". Then your client application requests an access token from the Equinix API Authorization endpoint, extracts
+    the access_token from the response, and sends the Bearer token to the API that you want to access
+  tags:
+  - Equinix
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: equinix
+    baseUri: https://api.equinix.com
+    description: Equinix API Authentication HTTP API.
+    resources:
+    - name: oauth2-v1-refreshaccesstoken
+      path: /oauth2/v1/refreshaccesstoken
+      operations:
+      - name: refreshoauth2accesstoken
+        method: POST
+        description: Renew Access Tokens
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: oauth2-v1-token
+      path: /oauth2/v1/token
+      operations:
+      - name: getoauth2accesstoken
+        method: POST
+        description: Generate New Access Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: equinix-rest
+    description: REST adapter for Equinix API Authentication.
+    resources:
+    - path: /oauth2/v1/refreshaccesstoken
+      name: refreshoauth2accesstoken
+      operations:
+      - method: POST
+        name: refreshoauth2accesstoken
+        description: Renew Access Tokens
+        call: equinix.refreshoauth2accesstoken
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /oauth2/v1/token
+      name: getoauth2accesstoken
+      operations:
+      - method: POST
+        name: getoauth2accesstoken
+        description: Generate New Access Token
+        call: equinix.getoauth2accesstoken
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: equinix-mcp
+    transport: http
+    description: MCP adapter for Equinix API Authentication for AI agent use.
+    tools:
+    - name: refreshoauth2accesstoken
+      description: Renew Access Tokens
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: equinix.refreshoauth2accesstoken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getoauth2accesstoken
+      description: Generate New Access Token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: equinix.getoauth2accesstoken
+      outputParameters:
+      - type: object
+        mapping: $.
