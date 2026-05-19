@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Equinix Internet Access API — EIA Service
+  description: 'Equinix Internet Access API — EIA Service. 1 operations. Lead operation: Creates Equinix Internet Access Service.
+    Self-contained Naftiko capability covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - EIA Service
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: eia-eia-service
+    baseUri: https://api.equinix.com
+    description: Equinix Internet Access API — EIA Service business capability. Self-contained, no shared references.
+    resources:
+    - name: internetAccess-v2-services
+      path: /internetAccess/v2/services
+      operations:
+      - name: createequinixinternetaccessv2
+        method: POST
+        description: Creates Equinix Internet Access Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.EQUINIX_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: eia-eia-service-rest
+    port: 8080
+    description: REST adapter for Equinix Internet Access API — EIA Service. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/internetaccess/v2/services
+      name: internetaccess-v2-services
+      description: REST surface for internetAccess-v2-services.
+      operations:
+      - method: POST
+        name: createequinixinternetaccessv2
+        description: Creates Equinix Internet Access Service
+        call: eia-eia-service.createequinixinternetaccessv2
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: eia-eia-service-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Equinix Internet Access API — EIA Service. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: creates-equinix-internet-access-service
+      description: Creates Equinix Internet Access Service
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: eia-eia-service.createequinixinternetaccessv2
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

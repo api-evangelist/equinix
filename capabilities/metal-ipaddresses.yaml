@@ -1,0 +1,394 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metal API — IPAddresses
+  description: 'Metal API — IPAddresses. 7 operations. Lead operation: Unassign an ip address. Self-contained Naftiko capability
+    covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - IPAddresses
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metal-ipaddresses
+    baseUri: https://api.equinix.com/metal/v1
+    description: Metal API — IPAddresses business capability. Self-contained, no shared references.
+    resources:
+    - name: ips-id
+      path: /ips/{id}
+      operations:
+      - name: deleteipaddress
+        method: DELETE
+        description: Unassign an ip address
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: IP Address UUID
+          required: true
+      - name: findipaddressbyid
+        method: GET
+        description: Retrieve an ip address
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: IP Address UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+      - name: updateipaddress
+        method: PATCH
+        description: Update an ip address
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: IP Address UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: ips-id-available
+      path: /ips/{id}/available
+      operations:
+      - name: findipavailabilities
+        method: GET
+        description: Retrieve all available subnets of a particular reservation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: IP Reservation UUID
+          required: true
+        - name: cidr
+          in: query
+          type: string
+          description: Size of subnets in bits
+          required: true
+    - name: ips-id-customdata
+      path: /ips/{id}/customdata
+      operations:
+      - name: findipaddresscustomdata
+        method: GET
+        description: Retrieve the custom metadata of an IP Reservation or IP Assignment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Ip Reservation UUID
+          required: true
+    - name: projects-id-ips
+      path: /projects/{id}/ips
+      operations:
+      - name: findipreservations
+        method: GET
+        description: Retrieve all ip reservations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+        - name: types
+          in: query
+          type: array
+          description: Filter project IP reservations by reservation type
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: per_page
+          in: query
+          type: integer
+          description: Items returned per page
+      - name: requestipreservation
+        method: POST
+        description: Requesting IP reservations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.EQUINIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: metal-ipaddresses-rest
+    port: 8080
+    description: REST adapter for Metal API — IPAddresses. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/ips/{id}
+      name: ips-id
+      description: REST surface for ips-id.
+      operations:
+      - method: DELETE
+        name: deleteipaddress
+        description: Unassign an ip address
+        call: metal-ipaddresses.deleteipaddress
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: findipaddressbyid
+        description: Retrieve an ip address
+        call: metal-ipaddresses.findipaddressbyid
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateipaddress
+        description: Update an ip address
+        call: metal-ipaddresses.updateipaddress
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ips/{id}/available
+      name: ips-id-available
+      description: REST surface for ips-id-available.
+      operations:
+      - method: GET
+        name: findipavailabilities
+        description: Retrieve all available subnets of a particular reservation
+        call: metal-ipaddresses.findipavailabilities
+        with:
+          id: rest.id
+          cidr: rest.cidr
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ips/{id}/customdata
+      name: ips-id-customdata
+      description: REST surface for ips-id-customdata.
+      operations:
+      - method: GET
+        name: findipaddresscustomdata
+        description: Retrieve the custom metadata of an IP Reservation or IP Assignment
+        call: metal-ipaddresses.findipaddresscustomdata
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{id}/ips
+      name: projects-id-ips
+      description: REST surface for projects-id-ips.
+      operations:
+      - method: GET
+        name: findipreservations
+        description: Retrieve all ip reservations
+        call: metal-ipaddresses.findipreservations
+        with:
+          id: rest.id
+          types: rest.types
+          include: rest.include
+          exclude: rest.exclude
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: requestipreservation
+        description: Requesting IP reservations
+        call: metal-ipaddresses.requestipreservation
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metal-ipaddresses-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metal API — IPAddresses. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: unassign-ip-address
+      description: Unassign an ip address
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: metal-ipaddresses.deleteipaddress
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-ip-address
+      description: Retrieve an ip address
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-ipaddresses.findipaddressbyid
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-ip-address
+      description: Update an ip address
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: metal-ipaddresses.updateipaddress
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-all-available-subnets-particular
+      description: Retrieve all available subnets of a particular reservation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-ipaddresses.findipavailabilities
+      with:
+        id: tools.id
+        cidr: tools.cidr
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-custom-metadata-ip-reservation
+      description: Retrieve the custom metadata of an IP Reservation or IP Assignment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-ipaddresses.findipaddresscustomdata
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-all-ip-reservations
+      description: Retrieve all ip reservations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-ipaddresses.findipreservations
+      with:
+        id: tools.id
+        types: tools.types
+        include: tools.include
+        exclude: tools.exclude
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: requesting-ip-reservations
+      description: Requesting IP reservations
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-ipaddresses.requestipreservation
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

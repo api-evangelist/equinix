@@ -1,0 +1,154 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metal API — TwoFactorAuth
+  description: 'Metal API — TwoFactorAuth. 4 operations. Lead operation: Disable two factor authentication. Self-contained
+    Naftiko capability covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - TwoFactorAuth
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metal-twofactorauth
+    baseUri: https://api.equinix.com/metal/v1
+    description: Metal API — TwoFactorAuth business capability. Self-contained, no shared references.
+    resources:
+    - name: user-otp-app
+      path: /user/otp/app
+      operations:
+      - name: disabletfaapp
+        method: DELETE
+        description: Disable two factor authentication
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: enabletfaapp
+        method: POST
+        description: Enable two factor auth using app
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: user-otp-sms
+      path: /user/otp/sms
+      operations:
+      - name: disabletfasms
+        method: DELETE
+        description: Disable two factor authentication
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: enabletfasms
+        method: POST
+        description: Enable two factor auth using sms
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.EQUINIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: metal-twofactorauth-rest
+    port: 8080
+    description: REST adapter for Metal API — TwoFactorAuth. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/user/otp/app
+      name: user-otp-app
+      description: REST surface for user-otp-app.
+      operations:
+      - method: DELETE
+        name: disabletfaapp
+        description: Disable two factor authentication
+        call: metal-twofactorauth.disabletfaapp
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: enabletfaapp
+        description: Enable two factor auth using app
+        call: metal-twofactorauth.enabletfaapp
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user/otp/sms
+      name: user-otp-sms
+      description: REST surface for user-otp-sms.
+      operations:
+      - method: DELETE
+        name: disabletfasms
+        description: Disable two factor authentication
+        call: metal-twofactorauth.disabletfasms
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: enabletfasms
+        description: Enable two factor auth using sms
+        call: metal-twofactorauth.enabletfasms
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metal-twofactorauth-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metal API — TwoFactorAuth. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: disable-two-factor-authentication
+      description: Disable two factor authentication
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: metal-twofactorauth.disabletfaapp
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: enable-two-factor-auth-using
+      description: Enable two factor auth using app
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-twofactorauth.enabletfaapp
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: disable-two-factor-authentication-2
+      description: Disable two factor authentication
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: metal-twofactorauth.disabletfasms
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: enable-two-factor-auth-using-2
+      description: Enable two factor auth using sms
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-twofactorauth.enabletfasms
+      outputParameters:
+      - type: object
+        mapping: $.

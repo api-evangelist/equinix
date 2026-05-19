@@ -1,0 +1,87 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metal API — Incidents
+  description: 'Metal API — Incidents. 1 operations. Lead operation: Retrieve the number of incidents. Self-contained Naftiko
+    capability covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - Incidents
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metal-incidents
+    baseUri: https://api.equinix.com/metal/v1
+    description: Metal API — Incidents business capability. Self-contained, no shared references.
+    resources:
+    - name: incidents
+      path: /incidents
+      operations:
+      - name: findincidents
+        method: GET
+        description: Retrieve the number of incidents
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.EQUINIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: metal-incidents-rest
+    port: 8080
+    description: REST adapter for Metal API — Incidents. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/incidents
+      name: incidents
+      description: REST surface for incidents.
+      operations:
+      - method: GET
+        name: findincidents
+        description: Retrieve the number of incidents
+        call: metal-incidents.findincidents
+        with:
+          include: rest.include
+          exclude: rest.exclude
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metal-incidents-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metal API — Incidents. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: retrieve-number-incidents
+      description: Retrieve the number of incidents
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-incidents.findincidents
+      with:
+        include: tools.include
+        exclude: tools.exclude
+      outputParameters:
+      - type: object
+        mapping: $.

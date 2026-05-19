@@ -1,0 +1,1165 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metal API — Devices
+  description: 'Metal API — Devices. 20 operations. Lead operation: Delete the device. Self-contained Naftiko capability covering
+    one Equinix business surface.'
+  tags:
+  - Equinix
+  - Devices
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metal-devices
+    baseUri: https://api.equinix.com/metal/v1
+    description: Metal API — Devices business capability. Self-contained, no shared references.
+    resources:
+    - name: devices-id
+      path: /devices/{id}
+      operations:
+      - name: deletedevice
+        method: DELETE
+        description: Delete the device
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Device UUID
+          required: true
+        - name: force_delete
+          in: query
+          type: boolean
+          description: Force the deletion of the device, by detaching any storage volume still active.
+      - name: finddevicebyid
+        method: GET
+        description: Retrieve a device
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Device UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+      - name: updatedevice
+        method: PUT
+        description: Update the device
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Device UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: devices-id-actions
+      path: /devices/{id}/actions
+      operations:
+      - name: performaction
+        method: POST
+        description: Perform an action
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Device UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: devices-id-bandwidth
+      path: /devices/{id}/bandwidth
+      operations:
+      - name: findinstancebandwidth
+        method: GET
+        description: Retrieve an instance bandwidth
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Device UUID
+          required: true
+        - name: from
+          in: query
+          type: string
+          description: Timestamp from range
+          required: true
+        - name: until
+          in: query
+          type: string
+          description: Timestamp to range
+          required: true
+    - name: devices-id-bgp-neighbors
+      path: /devices/{id}/bgp/neighbors
+      operations:
+      - name: getbgpneighbordata
+        method: GET
+        description: Retrieve BGP neighbor data for this device
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Device UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+    - name: devices-id-bgp-sessions
+      path: /devices/{id}/bgp/sessions
+      operations:
+      - name: findbgpsessions
+        method: GET
+        description: Retrieve all BGP sessions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Device UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+      - name: createbgpsession
+        method: POST
+        description: Create a BGP session
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Device UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: devices-id-customdata
+      path: /devices/{id}/customdata
+      operations:
+      - name: finddevicecustomdata
+        method: GET
+        description: Retrieve the custom metadata of an instance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Instance UUID
+          required: true
+    - name: devices-id-diagnostics-health-rollup
+      path: /devices/{id}/diagnostics/health/rollup
+      operations:
+      - name: getdevicehealthrollup
+        method: GET
+        description: Get Device's Health Status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Device UUID
+          required: true
+    - name: devices-id-firmware-sets
+      path: /devices/{id}/firmware-sets
+      operations:
+      - name: getdevicefirmwaresets
+        method: GET
+        description: Get Device's associated Firmware Set
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Device UUID
+          required: true
+    - name: devices-id-ips
+      path: /devices/{id}/ips
+      operations:
+      - name: findipassignments
+        method: GET
+        description: Retrieve all ip assignments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Device UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+      - name: createipassignment
+        method: POST
+        description: Create an ip assignment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: id
+          in: path
+          type: string
+          description: Device UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: devices-id-metadata
+      path: /devices/{id}/metadata
+      operations:
+      - name: finddevicemetadatabyid
+        method: GET
+        description: Retrieve metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Device UUID
+          required: true
+    - name: devices-id-traffic
+      path: /devices/{id}/traffic
+      operations:
+      - name: findtraffic
+        method: GET
+        description: Retrieve device traffic
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Device UUID
+          required: true
+        - name: direction
+          in: query
+          type: string
+          description: Traffic direction
+          required: true
+        - name: interval
+          in: query
+          type: string
+          description: Traffic interval
+        - name: bucket
+          in: query
+          type: string
+          description: Traffic bucket
+        - name: timeframe
+          in: query
+          type: string
+    - name: devices-id-userdata
+      path: /devices/{id}/userdata
+      operations:
+      - name: finddeviceuserdatabyid
+        method: GET
+        description: Retrieve userdata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Device UUID
+          required: true
+    - name: devices-instance_id-ips-id-customdata
+      path: /devices/{instance_id}/ips/{id}/customdata
+      operations:
+      - name: findipassignmentcustomdata
+        method: GET
+        description: Retrieve the custom metadata of an IP Assignment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: instance_id
+          in: path
+          type: string
+          description: Instance UUID
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: Ip Assignment UUID
+          required: true
+    - name: organizations-id-devices
+      path: /organizations/{id}/devices
+      operations:
+      - name: findorganizationdevices
+        method: GET
+        description: Retrieve all devices of an organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Organization UUID
+          required: true
+        - name: search
+          in: query
+          type: string
+          description: Search by hostname, description, short_id, reservation short_id, tags, plan name, plan slug, facility
+            code, facility name, operating system name, operating syst
+        - name: categories
+          in: query
+          type: array
+          description: Filter by plan category
+        - name: facility
+          in: query
+          type: string
+          description: Filter by device facility
+        - name: hostname
+          in: query
+          type: string
+          description: Filter by partial hostname
+        - name: reserved
+          in: query
+          type: boolean
+          description: Filter only reserved instances. When set to true, only include reserved instances. When set to false,
+            only include on-demand instances.
+        - name: tag
+          in: query
+          type: string
+          description: Filter by device tag
+        - name: type
+          in: query
+          type: string
+          description: Filter by instance type (ondemand,spot,reserved)
+        - name: has_termination_time
+          in: query
+          type: boolean
+          description: Filter only instances marked for termination. When set to true, only include instances that have a
+            termination time. When set to false, only include instances t
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: page
+          in: query
+          type: integer
+          description: Page to return
+        - name: per_page
+          in: query
+          type: integer
+          description: Items returned per page
+    - name: projects-id-devices
+      path: /projects/{id}/devices
+      operations:
+      - name: findprojectdevices
+        method: GET
+        description: Retrieve all devices of a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+        - name: search
+          in: query
+          type: string
+          description: Search by hostname, description, short_id, reservation short_id, tags, plan name, plan slug, facility
+            code, facility name, operating system name, operating syst
+        - name: categories
+          in: query
+          type: array
+          description: Filter by plan category
+        - name: facility
+          in: query
+          type: string
+          description: Filter by device facility
+        - name: metro
+          in: query
+          type: string
+          description: Filter by device metro
+        - name: hostname
+          in: query
+          type: string
+          description: Filter by partial hostname
+        - name: reserved
+          in: query
+          type: boolean
+          description: Filter only reserved instances. When set to true, only include reserved instances. When set to false,
+            only include on-demand instances.
+        - name: tag
+          in: query
+          type: string
+          description: Filter by device tag
+        - name: type
+          in: query
+          type: string
+          description: Filter by instance type (ondemand,spot,reserved)
+        - name: has_termination_time
+          in: query
+          type: boolean
+          description: Filter only instances marked for termination. When set to true, only include instances that have a
+            termination time. When set to false, only include instances t
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: page
+          in: query
+          type: integer
+          description: Page to return
+        - name: per_page
+          in: query
+          type: integer
+          description: Items returned per page
+      - name: createdevice
+        method: POST
+        description: Create a device
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.EQUINIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: metal-devices-rest
+    port: 8080
+    description: REST adapter for Metal API — Devices. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/devices/{id}
+      name: devices-id
+      description: REST surface for devices-id.
+      operations:
+      - method: DELETE
+        name: deletedevice
+        description: Delete the device
+        call: metal-devices.deletedevice
+        with:
+          id: rest.id
+          force_delete: rest.force_delete
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: finddevicebyid
+        description: Retrieve a device
+        call: metal-devices.finddevicebyid
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatedevice
+        description: Update the device
+        call: metal-devices.updatedevice
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/devices/{id}/actions
+      name: devices-id-actions
+      description: REST surface for devices-id-actions.
+      operations:
+      - method: POST
+        name: performaction
+        description: Perform an action
+        call: metal-devices.performaction
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/devices/{id}/bandwidth
+      name: devices-id-bandwidth
+      description: REST surface for devices-id-bandwidth.
+      operations:
+      - method: GET
+        name: findinstancebandwidth
+        description: Retrieve an instance bandwidth
+        call: metal-devices.findinstancebandwidth
+        with:
+          id: rest.id
+          from: rest.from
+          until: rest.until
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/devices/{id}/bgp/neighbors
+      name: devices-id-bgp-neighbors
+      description: REST surface for devices-id-bgp-neighbors.
+      operations:
+      - method: GET
+        name: getbgpneighbordata
+        description: Retrieve BGP neighbor data for this device
+        call: metal-devices.getbgpneighbordata
+        with:
+          id: rest.id
+          include: rest.include
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/devices/{id}/bgp/sessions
+      name: devices-id-bgp-sessions
+      description: REST surface for devices-id-bgp-sessions.
+      operations:
+      - method: GET
+        name: findbgpsessions
+        description: Retrieve all BGP sessions
+        call: metal-devices.findbgpsessions
+        with:
+          id: rest.id
+          include: rest.include
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createbgpsession
+        description: Create a BGP session
+        call: metal-devices.createbgpsession
+        with:
+          id: rest.id
+          include: rest.include
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/devices/{id}/customdata
+      name: devices-id-customdata
+      description: REST surface for devices-id-customdata.
+      operations:
+      - method: GET
+        name: finddevicecustomdata
+        description: Retrieve the custom metadata of an instance
+        call: metal-devices.finddevicecustomdata
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/devices/{id}/diagnostics/health/rollup
+      name: devices-id-diagnostics-health-rollup
+      description: REST surface for devices-id-diagnostics-health-rollup.
+      operations:
+      - method: GET
+        name: getdevicehealthrollup
+        description: Get Device's Health Status
+        call: metal-devices.getdevicehealthrollup
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/devices/{id}/firmware-sets
+      name: devices-id-firmware-sets
+      description: REST surface for devices-id-firmware-sets.
+      operations:
+      - method: GET
+        name: getdevicefirmwaresets
+        description: Get Device's associated Firmware Set
+        call: metal-devices.getdevicefirmwaresets
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/devices/{id}/ips
+      name: devices-id-ips
+      description: REST surface for devices-id-ips.
+      operations:
+      - method: GET
+        name: findipassignments
+        description: Retrieve all ip assignments
+        call: metal-devices.findipassignments
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createipassignment
+        description: Create an ip assignment
+        call: metal-devices.createipassignment
+        with:
+          include: rest.include
+          exclude: rest.exclude
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/devices/{id}/metadata
+      name: devices-id-metadata
+      description: REST surface for devices-id-metadata.
+      operations:
+      - method: GET
+        name: finddevicemetadatabyid
+        description: Retrieve metadata
+        call: metal-devices.finddevicemetadatabyid
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/devices/{id}/traffic
+      name: devices-id-traffic
+      description: REST surface for devices-id-traffic.
+      operations:
+      - method: GET
+        name: findtraffic
+        description: Retrieve device traffic
+        call: metal-devices.findtraffic
+        with:
+          id: rest.id
+          direction: rest.direction
+          interval: rest.interval
+          bucket: rest.bucket
+          timeframe: rest.timeframe
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/devices/{id}/userdata
+      name: devices-id-userdata
+      description: REST surface for devices-id-userdata.
+      operations:
+      - method: GET
+        name: finddeviceuserdatabyid
+        description: Retrieve userdata
+        call: metal-devices.finddeviceuserdatabyid
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/devices/{instance-id}/ips/{id}/customdata
+      name: devices-instance-id-ips-id-customdata
+      description: REST surface for devices-instance_id-ips-id-customdata.
+      operations:
+      - method: GET
+        name: findipassignmentcustomdata
+        description: Retrieve the custom metadata of an IP Assignment
+        call: metal-devices.findipassignmentcustomdata
+        with:
+          instance_id: rest.instance_id
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{id}/devices
+      name: organizations-id-devices
+      description: REST surface for organizations-id-devices.
+      operations:
+      - method: GET
+        name: findorganizationdevices
+        description: Retrieve all devices of an organization
+        call: metal-devices.findorganizationdevices
+        with:
+          id: rest.id
+          search: rest.search
+          categories: rest.categories
+          facility: rest.facility
+          hostname: rest.hostname
+          reserved: rest.reserved
+          tag: rest.tag
+          type: rest.type
+          has_termination_time: rest.has_termination_time
+          include: rest.include
+          exclude: rest.exclude
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{id}/devices
+      name: projects-id-devices
+      description: REST surface for projects-id-devices.
+      operations:
+      - method: GET
+        name: findprojectdevices
+        description: Retrieve all devices of a project
+        call: metal-devices.findprojectdevices
+        with:
+          id: rest.id
+          search: rest.search
+          categories: rest.categories
+          facility: rest.facility
+          metro: rest.metro
+          hostname: rest.hostname
+          reserved: rest.reserved
+          tag: rest.tag
+          type: rest.type
+          has_termination_time: rest.has_termination_time
+          include: rest.include
+          exclude: rest.exclude
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createdevice
+        description: Create a device
+        call: metal-devices.createdevice
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metal-devices-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metal API — Devices. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: delete-device
+      description: Delete the device
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: metal-devices.deletedevice
+      with:
+        id: tools.id
+        force_delete: tools.force_delete
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-device
+      description: Retrieve a device
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-devices.finddevicebyid
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-device
+      description: Update the device
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: metal-devices.updatedevice
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: perform-action
+      description: Perform an action
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-devices.performaction
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-instance-bandwidth
+      description: Retrieve an instance bandwidth
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-devices.findinstancebandwidth
+      with:
+        id: tools.id
+        from: tools.from
+        until: tools.until
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-bgp-neighbor-data-this
+      description: Retrieve BGP neighbor data for this device
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-devices.getbgpneighbordata
+      with:
+        id: tools.id
+        include: tools.include
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-all-bgp-sessions
+      description: Retrieve all BGP sessions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-devices.findbgpsessions
+      with:
+        id: tools.id
+        include: tools.include
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-bgp-session
+      description: Create a BGP session
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-devices.createbgpsession
+      with:
+        id: tools.id
+        include: tools.include
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-custom-metadata-instance
+      description: Retrieve the custom metadata of an instance
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-devices.finddevicecustomdata
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-device-s-health-status
+      description: Get Device's Health Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-devices.getdevicehealthrollup
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-device-s-associated-firmware-set
+      description: Get Device's associated Firmware Set
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-devices.getdevicefirmwaresets
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-all-ip-assignments
+      description: Retrieve all ip assignments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-devices.findipassignments
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-ip-assignment
+      description: Create an ip assignment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-devices.createipassignment
+      with:
+        include: tools.include
+        exclude: tools.exclude
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-metadata
+      description: Retrieve metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-devices.finddevicemetadatabyid
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-device-traffic
+      description: Retrieve device traffic
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-devices.findtraffic
+      with:
+        id: tools.id
+        direction: tools.direction
+        interval: tools.interval
+        bucket: tools.bucket
+        timeframe: tools.timeframe
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-userdata
+      description: Retrieve userdata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-devices.finddeviceuserdatabyid
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-custom-metadata-ip-assignment
+      description: Retrieve the custom metadata of an IP Assignment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-devices.findipassignmentcustomdata
+      with:
+        instance_id: tools.instance_id
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-all-devices-organization
+      description: Retrieve all devices of an organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-devices.findorganizationdevices
+      with:
+        id: tools.id
+        search: tools.search
+        categories: tools.categories
+        facility: tools.facility
+        hostname: tools.hostname
+        reserved: tools.reserved
+        tag: tools.tag
+        type: tools.type
+        has_termination_time: tools.has_termination_time
+        include: tools.include
+        exclude: tools.exclude
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-all-devices-project
+      description: Retrieve all devices of a project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-devices.findprojectdevices
+      with:
+        id: tools.id
+        search: tools.search
+        categories: tools.categories
+        facility: tools.facility
+        metro: tools.metro
+        hostname: tools.hostname
+        reserved: tools.reserved
+        tag: tools.tag
+        type: tools.type
+        has_termination_time: tools.has_termination_time
+        include: tools.include
+        exclude: tools.exclude
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-device
+      description: Create a device
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-devices.createdevice
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,261 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metal API — VLANs
+  description: 'Metal API — VLANs. 4 operations. Lead operation: Retrieve all virtual networks. Self-contained Naftiko capability
+    covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - VLANs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metal-vlans
+    baseUri: https://api.equinix.com/metal/v1
+    description: Metal API — VLANs business capability. Self-contained, no shared references.
+    resources:
+    - name: projects-id-virtual-networks
+      path: /projects/{id}/virtual-networks
+      operations:
+      - name: findvirtualnetworks
+        method: GET
+        description: Retrieve all virtual networks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: facility
+          in: query
+          type: string
+          description: Filter by Facility ID (uuid) or Facility Code
+        - name: metro
+          in: query
+          type: string
+          description: Filter by Metro ID (uuid) or Metro Code
+      - name: createvirtualnetwork
+        method: POST
+        description: Create a virtual network
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: virtual-networks-id
+      path: /virtual-networks/{id}
+      operations:
+      - name: deletevirtualnetwork
+        method: DELETE
+        description: Delete a virtual network
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Virtual Network UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+      - name: getvirtualnetwork
+        method: GET
+        description: Get a virtual network
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Virtual Network UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.EQUINIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: metal-vlans-rest
+    port: 8080
+    description: REST adapter for Metal API — VLANs. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/projects/{id}/virtual-networks
+      name: projects-id-virtual-networks
+      description: REST surface for projects-id-virtual-networks.
+      operations:
+      - method: GET
+        name: findvirtualnetworks
+        description: Retrieve all virtual networks
+        call: metal-vlans.findvirtualnetworks
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+          facility: rest.facility
+          metro: rest.metro
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createvirtualnetwork
+        description: Create a virtual network
+        call: metal-vlans.createvirtualnetwork
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/virtual-networks/{id}
+      name: virtual-networks-id
+      description: REST surface for virtual-networks-id.
+      operations:
+      - method: DELETE
+        name: deletevirtualnetwork
+        description: Delete a virtual network
+        call: metal-vlans.deletevirtualnetwork
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getvirtualnetwork
+        description: Get a virtual network
+        call: metal-vlans.getvirtualnetwork
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metal-vlans-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metal API — VLANs. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: retrieve-all-virtual-networks
+      description: Retrieve all virtual networks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-vlans.findvirtualnetworks
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+        facility: tools.facility
+        metro: tools.metro
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-virtual-network
+      description: Create a virtual network
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-vlans.createvirtualnetwork
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-virtual-network
+      description: Delete a virtual network
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: metal-vlans.deletevirtualnetwork
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-virtual-network
+      description: Get a virtual network
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-vlans.getvirtualnetwork
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+      outputParameters:
+      - type: object
+        mapping: $.

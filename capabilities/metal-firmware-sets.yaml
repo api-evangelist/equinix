@@ -1,0 +1,148 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metal API — Firmware Sets
+  description: 'Metal API — Firmware Sets. 2 operations. Lead operation: Get Organization''s Firmware Sets. Self-contained
+    Naftiko capability covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - Firmware Sets
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metal-firmware-sets
+    baseUri: https://api.equinix.com/metal/v1
+    description: Metal API — Firmware Sets business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-id-firmware-sets
+      path: /organizations/{id}/firmware-sets
+      operations:
+      - name: getorganizationfirmwaresets
+        method: GET
+        description: Get Organization's Firmware Sets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Organization UUID
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: page number to return
+        - name: per_page
+          in: query
+          type: integer
+          description: items returned per page.
+    - name: projects-id-firmware-sets
+      path: /projects/{id}/firmware-sets
+      operations:
+      - name: getprojectfirmwaresets
+        method: GET
+        description: Get Project's Firmware Sets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: page number to return
+        - name: per_page
+          in: query
+          type: integer
+          description: items returned per page.
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.EQUINIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: metal-firmware-sets-rest
+    port: 8080
+    description: REST adapter for Metal API — Firmware Sets. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/organizations/{id}/firmware-sets
+      name: organizations-id-firmware-sets
+      description: REST surface for organizations-id-firmware-sets.
+      operations:
+      - method: GET
+        name: getorganizationfirmwaresets
+        description: Get Organization's Firmware Sets
+        call: metal-firmware-sets.getorganizationfirmwaresets
+        with:
+          id: rest.id
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{id}/firmware-sets
+      name: projects-id-firmware-sets
+      description: REST surface for projects-id-firmware-sets.
+      operations:
+      - method: GET
+        name: getprojectfirmwaresets
+        description: Get Project's Firmware Sets
+        call: metal-firmware-sets.getprojectfirmwaresets
+        with:
+          id: rest.id
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metal-firmware-sets-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metal API — Firmware Sets. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-organization-s-firmware-sets
+      description: Get Organization's Firmware Sets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-firmware-sets.getorganizationfirmwaresets
+      with:
+        id: tools.id
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-project-s-firmware-sets
+      description: Get Project's Firmware Sets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-firmware-sets.getprojectfirmwaresets
+      with:
+        id: tools.id
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.

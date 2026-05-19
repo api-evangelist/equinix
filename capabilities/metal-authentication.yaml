@@ -1,0 +1,308 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metal API — Authentication
+  description: 'Metal API — Authentication. 6 operations. Lead operation: Delete the API key. Self-contained Naftiko capability
+    covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - Authentication
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metal-authentication
+    baseUri: https://api.equinix.com/metal/v1
+    description: Metal API — Authentication business capability. Self-contained, no shared references.
+    resources:
+    - name: api-keys-id
+      path: /api-keys/{id}
+      operations:
+      - name: deleteapikey
+        method: DELETE
+        description: Delete the API key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: API Key UUID
+          required: true
+    - name: projects-id-api-keys
+      path: /projects/{id}/api-keys
+      operations:
+      - name: findprojectapikeys
+        method: GET
+        description: Retrieve all API keys for the project.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+      - name: createprojectapikey
+        method: POST
+        description: Create an API key for a project.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: user-api-keys
+      path: /user/api-keys
+      operations:
+      - name: findapikeys
+        method: GET
+        description: Retrieve all user API keys
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: search
+          in: query
+          type: string
+          description: Search by description
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+      - name: createapikey
+        method: POST
+        description: Create an API key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: user-api-keys-id
+      path: /user/api-keys/{id}
+      operations:
+      - name: deleteuserapikey
+        method: DELETE
+        description: Delete the API key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: API Key UUID
+          required: true
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.EQUINIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: metal-authentication-rest
+    port: 8080
+    description: REST adapter for Metal API — Authentication. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api-keys/{id}
+      name: api-keys-id
+      description: REST surface for api-keys-id.
+      operations:
+      - method: DELETE
+        name: deleteapikey
+        description: Delete the API key
+        call: metal-authentication.deleteapikey
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{id}/api-keys
+      name: projects-id-api-keys
+      description: REST surface for projects-id-api-keys.
+      operations:
+      - method: GET
+        name: findprojectapikeys
+        description: Retrieve all API keys for the project.
+        call: metal-authentication.findprojectapikeys
+        with:
+          id: rest.id
+          include: rest.include
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createprojectapikey
+        description: Create an API key for a project.
+        call: metal-authentication.createprojectapikey
+        with:
+          id: rest.id
+          include: rest.include
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user/api-keys
+      name: user-api-keys
+      description: REST surface for user-api-keys.
+      operations:
+      - method: GET
+        name: findapikeys
+        description: Retrieve all user API keys
+        call: metal-authentication.findapikeys
+        with:
+          search: rest.search
+          include: rest.include
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createapikey
+        description: Create an API key
+        call: metal-authentication.createapikey
+        with:
+          include: rest.include
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user/api-keys/{id}
+      name: user-api-keys-id
+      description: REST surface for user-api-keys-id.
+      operations:
+      - method: DELETE
+        name: deleteuserapikey
+        description: Delete the API key
+        call: metal-authentication.deleteuserapikey
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metal-authentication-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metal API — Authentication. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: delete-api-key
+      description: Delete the API key
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: metal-authentication.deleteapikey
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-all-api-keys-project
+      description: Retrieve all API keys for the project.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-authentication.findprojectapikeys
+      with:
+        id: tools.id
+        include: tools.include
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-api-key-project
+      description: Create an API key for a project.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-authentication.createprojectapikey
+      with:
+        id: tools.id
+        include: tools.include
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-all-user-api-keys
+      description: Retrieve all user API keys
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-authentication.findapikeys
+      with:
+        search: tools.search
+        include: tools.include
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-api-key
+      description: Create an API key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-authentication.createapikey
+      with:
+        include: tools.include
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-api-key-2
+      description: Delete the API key
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: metal-authentication.deleteuserapikey
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

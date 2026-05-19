@@ -1,0 +1,381 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metal API — MetalGateways
+  description: 'Metal API — MetalGateways. 6 operations. Lead operation: Deletes the metal gateway. Self-contained Naftiko
+    capability covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - MetalGateways
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metal-metalgateways
+    baseUri: https://api.equinix.com/metal/v1
+    description: Metal API — MetalGateways business capability. Self-contained, no shared references.
+    resources:
+    - name: metal-gateways-id
+      path: /metal-gateways/{id}
+      operations:
+      - name: deletemetalgateway
+        method: DELETE
+        description: Deletes the metal gateway
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Metal Gateway UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+      - name: findmetalgatewaybyid
+        method: GET
+        description: Returns the metal gateway
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Metal Gateway UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+    - name: metal-gateways-id-ips
+      path: /metal-gateways/{id}/ips
+      operations:
+      - name: getmetalgatewayelasticips
+        method: GET
+        description: List Metal Gateway Elastic IPs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Metal Gateway UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+      - name: createmetalgatewayelasticip
+        method: POST
+        description: Create a Metal Gateway Elastic IP
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Metal Gateway UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: projects-project_id-metal-gateways
+      path: /projects/{project_id}/metal-gateways
+      operations:
+      - name: findmetalgatewaysbyproject
+        method: GET
+        description: Returns all metal gateways for a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project_id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: page
+          in: query
+          type: integer
+          description: Page to return
+        - name: per_page
+          in: query
+          type: integer
+          description: Items returned per page
+      - name: createmetalgateway
+        method: POST
+        description: Create a metal gateway
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project_id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: page
+          in: query
+          type: integer
+          description: Page to return
+        - name: per_page
+          in: query
+          type: integer
+          description: Items returned per page
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.EQUINIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: metal-metalgateways-rest
+    port: 8080
+    description: REST adapter for Metal API — MetalGateways. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/metal-gateways/{id}
+      name: metal-gateways-id
+      description: REST surface for metal-gateways-id.
+      operations:
+      - method: DELETE
+        name: deletemetalgateway
+        description: Deletes the metal gateway
+        call: metal-metalgateways.deletemetalgateway
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: findmetalgatewaybyid
+        description: Returns the metal gateway
+        call: metal-metalgateways.findmetalgatewaybyid
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/metal-gateways/{id}/ips
+      name: metal-gateways-id-ips
+      description: REST surface for metal-gateways-id-ips.
+      operations:
+      - method: GET
+        name: getmetalgatewayelasticips
+        description: List Metal Gateway Elastic IPs
+        call: metal-metalgateways.getmetalgatewayelasticips
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createmetalgatewayelasticip
+        description: Create a Metal Gateway Elastic IP
+        call: metal-metalgateways.createmetalgatewayelasticip
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project-id}/metal-gateways
+      name: projects-project-id-metal-gateways
+      description: REST surface for projects-project_id-metal-gateways.
+      operations:
+      - method: GET
+        name: findmetalgatewaysbyproject
+        description: Returns all metal gateways for a project
+        call: metal-metalgateways.findmetalgatewaysbyproject
+        with:
+          project_id: rest.project_id
+          include: rest.include
+          exclude: rest.exclude
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createmetalgateway
+        description: Create a metal gateway
+        call: metal-metalgateways.createmetalgateway
+        with:
+          project_id: rest.project_id
+          include: rest.include
+          exclude: rest.exclude
+          page: rest.page
+          per_page: rest.per_page
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metal-metalgateways-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metal API — MetalGateways. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: deletes-metal-gateway
+      description: Deletes the metal gateway
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: metal-metalgateways.deletemetalgateway
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: returns-metal-gateway
+      description: Returns the metal gateway
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-metalgateways.findmetalgatewaybyid
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-metal-gateway-elastic-ips
+      description: List Metal Gateway Elastic IPs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-metalgateways.getmetalgatewayelasticips
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-metal-gateway-elastic-ip
+      description: Create a Metal Gateway Elastic IP
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-metalgateways.createmetalgatewayelasticip
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: returns-all-metal-gateways-project
+      description: Returns all metal gateways for a project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-metalgateways.findmetalgatewaysbyproject
+      with:
+        project_id: tools.project_id
+        include: tools.include
+        exclude: tools.exclude
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-metal-gateway
+      description: Create a metal gateway
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-metalgateways.createmetalgateway
+      with:
+        project_id: tools.project_id
+        include: tools.include
+        exclude: tools.exclude
+        page: tools.page
+        per_page: tools.per_page
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

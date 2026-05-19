@@ -1,0 +1,351 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metal API — BGP
+  description: 'Metal API — BGP. 7 operations. Lead operation: Delete the BGP session. Self-contained Naftiko capability covering
+    one Equinix business surface.'
+  tags:
+  - Equinix
+  - BGP
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metal-bgp
+    baseUri: https://api.equinix.com/metal/v1
+    description: Metal API — BGP business capability. Self-contained, no shared references.
+    resources:
+    - name: bgp-sessions-id
+      path: /bgp/sessions/{id}
+      operations:
+      - name: deletebgpsession
+        method: DELETE
+        description: Delete the BGP session
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: BGP session UUID
+          required: true
+      - name: findbgpsessionbyid
+        method: GET
+        description: Retrieve a BGP session
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: BGP session UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+      - name: updatebgpsession
+        method: PUT
+        description: Update the BGP session
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: BGP session UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: projects-id-bgp-config
+      path: /projects/{id}/bgp-config
+      operations:
+      - name: findbgpconfigbyproject
+        method: GET
+        description: Retrieve a bgp config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+    - name: projects-id-bgp-configs
+      path: /projects/{id}/bgp-configs
+      operations:
+      - name: requestbgpconfig
+        method: POST
+        description: Requesting bgp config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: projects-id-bgp-sessions
+      path: /projects/{id}/bgp/sessions
+      operations:
+      - name: findprojectbgpsessions
+        method: GET
+        description: Retrieve all BGP sessions for project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+    - name: projects-id-global-bgp-ranges
+      path: /projects/{id}/global-bgp-ranges
+      operations:
+      - name: findglobalbgpranges
+        method: GET
+        description: Retrieve all global bgp ranges
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.EQUINIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: metal-bgp-rest
+    port: 8080
+    description: REST adapter for Metal API — BGP. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/bgp/sessions/{id}
+      name: bgp-sessions-id
+      description: REST surface for bgp-sessions-id.
+      operations:
+      - method: DELETE
+        name: deletebgpsession
+        description: Delete the BGP session
+        call: metal-bgp.deletebgpsession
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: findbgpsessionbyid
+        description: Retrieve a BGP session
+        call: metal-bgp.findbgpsessionbyid
+        with:
+          id: rest.id
+          include: rest.include
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatebgpsession
+        description: Update the BGP session
+        call: metal-bgp.updatebgpsession
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{id}/bgp-config
+      name: projects-id-bgp-config
+      description: REST surface for projects-id-bgp-config.
+      operations:
+      - method: GET
+        name: findbgpconfigbyproject
+        description: Retrieve a bgp config
+        call: metal-bgp.findbgpconfigbyproject
+        with:
+          id: rest.id
+          include: rest.include
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{id}/bgp-configs
+      name: projects-id-bgp-configs
+      description: REST surface for projects-id-bgp-configs.
+      operations:
+      - method: POST
+        name: requestbgpconfig
+        description: Requesting bgp config
+        call: metal-bgp.requestbgpconfig
+        with:
+          id: rest.id
+          include: rest.include
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{id}/bgp/sessions
+      name: projects-id-bgp-sessions
+      description: REST surface for projects-id-bgp-sessions.
+      operations:
+      - method: GET
+        name: findprojectbgpsessions
+        description: Retrieve all BGP sessions for project
+        call: metal-bgp.findprojectbgpsessions
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{id}/global-bgp-ranges
+      name: projects-id-global-bgp-ranges
+      description: REST surface for projects-id-global-bgp-ranges.
+      operations:
+      - method: GET
+        name: findglobalbgpranges
+        description: Retrieve all global bgp ranges
+        call: metal-bgp.findglobalbgpranges
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metal-bgp-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metal API — BGP. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: delete-bgp-session
+      description: Delete the BGP session
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: metal-bgp.deletebgpsession
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-bgp-session
+      description: Retrieve a BGP session
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-bgp.findbgpsessionbyid
+      with:
+        id: tools.id
+        include: tools.include
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-bgp-session
+      description: Update the BGP session
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: metal-bgp.updatebgpsession
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-bgp-config
+      description: Retrieve a bgp config
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-bgp.findbgpconfigbyproject
+      with:
+        id: tools.id
+        include: tools.include
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: requesting-bgp-config
+      description: Requesting bgp config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-bgp.requestbgpconfig
+      with:
+        id: tools.id
+        include: tools.include
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-all-bgp-sessions-project
+      description: Retrieve all BGP sessions for project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-bgp.findprojectbgpsessions
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-all-global-bgp-ranges
+      description: Retrieve all global bgp ranges
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-bgp.findglobalbgpranges
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,191 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metal API — SelfServiceReservations
+  description: 'Metal API — SelfServiceReservations. 3 operations. Lead operation: Retrieve all reservations. Self-contained
+    Naftiko capability covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - SelfServiceReservations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metal-selfservicereservations
+    baseUri: https://api.equinix.com/metal/v1
+    description: Metal API — SelfServiceReservations business capability. Self-contained, no shared references.
+    resources:
+    - name: projects-project_id-self-service-reservations
+      path: /projects/{project_id}/self-service/reservations
+      operations:
+      - name: findselfservicereservations
+        method: GET
+        description: Retrieve all reservations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Page to return
+        - name: per_page
+          in: query
+          type: integer
+          description: Items returned per page
+        - name: project_id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+        - name: categories
+          in: query
+          type: array
+          description: Filter reservations by items category
+      - name: createselfservicereservation
+        method: POST
+        description: Create a reservation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project_id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: projects-project_id-self-service-reservations-id
+      path: /projects/{project_id}/self-service/reservations/{id}
+      operations:
+      - name: findselfservicereservation
+        method: GET
+        description: Retrieve a reservation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Reservation short_id
+          required: true
+        - name: project_id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.EQUINIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: metal-selfservicereservations-rest
+    port: 8080
+    description: REST adapter for Metal API — SelfServiceReservations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/projects/{project-id}/self-service/reservations
+      name: projects-project-id-self-service-reservations
+      description: REST surface for projects-project_id-self-service-reservations.
+      operations:
+      - method: GET
+        name: findselfservicereservations
+        description: Retrieve all reservations
+        call: metal-selfservicereservations.findselfservicereservations
+        with:
+          page: rest.page
+          per_page: rest.per_page
+          project_id: rest.project_id
+          categories: rest.categories
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createselfservicereservation
+        description: Create a reservation
+        call: metal-selfservicereservations.createselfservicereservation
+        with:
+          project_id: rest.project_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project-id}/self-service/reservations/{id}
+      name: projects-project-id-self-service-reservations-id
+      description: REST surface for projects-project_id-self-service-reservations-id.
+      operations:
+      - method: GET
+        name: findselfservicereservation
+        description: Retrieve a reservation
+        call: metal-selfservicereservations.findselfservicereservation
+        with:
+          id: rest.id
+          project_id: rest.project_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metal-selfservicereservations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metal API — SelfServiceReservations. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: retrieve-all-reservations
+      description: Retrieve all reservations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-selfservicereservations.findselfservicereservations
+      with:
+        page: tools.page
+        per_page: tools.per_page
+        project_id: tools.project_id
+        categories: tools.categories
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-reservation
+      description: Create a reservation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-selfservicereservations.createselfservicereservation
+      with:
+        project_id: tools.project_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-reservation
+      description: Retrieve a reservation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-selfservicereservations.findselfservicereservation
+      with:
+        id: tools.id
+        project_id: tools.project_id
+      outputParameters:
+      - type: object
+        mapping: $.

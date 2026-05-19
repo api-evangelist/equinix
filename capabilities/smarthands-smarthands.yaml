@@ -1,0 +1,600 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Smart Hands — Smarthands
+  description: 'Smart Hands — Smarthands. 14 operations. Lead operation: This API is used to request cables per your specifications
+    for your equipment.. Self-contained Naftiko capability covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - Smarthands
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: smarthands-smarthands
+    baseUri: https://api.equinix.com
+    description: Smart Hands — Smarthands business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-orders-smarthands-cableRequest
+      path: /v1/orders/smarthands/cableRequest
+      operations:
+      - name: handlesmarthandcablerequestorder
+        method: POST
+        description: This API is used to request cables per your specifications for your equipment.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+    - name: v1-orders-smarthands-cageCleanup
+      path: /v1/orders/smarthands/cageCleanup
+      operations:
+      - name: handlesmarthandcagecleanuporder
+        method: POST
+        description: Request trash removal or cage cleanup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+    - name: v1-orders-smarthands-cageEscort
+      path: /v1/orders/smarthands/cageEscort
+      operations:
+      - name: handlesmarthandcageescortorder
+        method: POST
+        description: Request a patch cable to be moved between devices
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+    - name: v1-orders-smarthands-equipmentInstall
+      path: /v1/orders/smarthands/equipmentInstall
+      operations:
+      - name: handlesmarthandorder
+        method: POST
+        description: Request equipment installation per your specifications by an IBX Technician
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+    - name: v1-orders-smarthands-locatePackage
+      path: /v1/orders/smarthands/locatePackage
+      operations:
+      - name: handlesmarthandlocatepackageorder
+        method: POST
+        description: Get the location of your package(s) at an IBX.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+    - name: v1-orders-smarthands-locations
+      path: /v1/orders/smarthands/locations
+      operations:
+      - name: getlocation
+        method: GET
+        description: Get locations(ibx, cage) details for placing smart hands based on smart hands permission for user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: detail
+          in: query
+          type: boolean
+          description: When enable this flag returns detailed permission with Cage & Cabinets.
+        - name: ibxs
+          in: query
+          type: string
+          description: 'Example: AM1,AM2'
+        - name: cages
+          in: query
+          type: string
+          description: 'Example: AM1:02:002MC1'
+    - name: v1-orders-smarthands-moveJumperCable
+      path: /v1/orders/smarthands/moveJumperCable
+      operations:
+      - name: handlesmarthandmovejumpercableorder
+        method: POST
+        description: This API is used to request a patch cable to be moved between devices.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+    - name: v1-orders-smarthands-other
+      path: /v1/orders/smarthands/other
+      operations:
+      - name: handlesmarthandothersorder
+        method: POST
+        description: Request a Smart Hands order not listed in catalogue
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+    - name: v1-orders-smarthands-patchCableInstall
+      path: /v1/orders/smarthands/patchCableInstall
+      operations:
+      - name: handlesmarthandpatchcableinstallorder
+        method: POST
+        description: Request installation of a cross connect patch cable by an IBX Technician.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+    - name: v1-orders-smarthands-patchCableRemoval
+      path: /v1/orders/smarthands/patchCableRemoval
+      operations:
+      - name: handlesmarthandpatchcableremovalorder
+        method: POST
+        description: Request removal of a cross connect cable by an IBX Technician.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+    - name: v1-orders-smarthands-picturesDocument
+      path: /v1/orders/smarthands/picturesDocument
+      operations:
+      - name: handlesmarthandpicturesdocumentorder
+        method: POST
+        description: Request an IBX Technician to provide cage-related pictures or documentation.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+    - name: v1-orders-smarthands-runJumperCable
+      path: /v1/orders/smarthands/runJumperCable
+      operations:
+      - name: handlesmarthandrunjumpercableorder
+        method: POST
+        description: This API is used to request a jumper cable to be ran between devices.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+    - name: v1-orders-smarthands-shipmentUnpack
+      path: /v1/orders/smarthands/shipmentUnpack
+      operations:
+      - name: handlesmarthandshipmentunpackorder
+        method: POST
+        description: Request inbound shipment unpacking and packaging disposal.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+    - name: v1-orders-smarthands-types
+      path: /v1/orders/smarthands/types
+      operations:
+      - name: smarthandtypes
+        method: GET
+        description: All supported smart hands types API.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: smarthands-smarthands-rest
+    port: 8080
+    description: REST adapter for Smart Hands — Smarthands. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v1/orders/smarthands/cablerequest
+      name: v1-orders-smarthands-cablerequest
+      description: REST surface for v1-orders-smarthands-cableRequest.
+      operations:
+      - method: POST
+        name: handlesmarthandcablerequestorder
+        description: This API is used to request cables per your specifications for your equipment.
+        call: smarthands-smarthands.handlesmarthandcablerequestorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/orders/smarthands/cagecleanup
+      name: v1-orders-smarthands-cagecleanup
+      description: REST surface for v1-orders-smarthands-cageCleanup.
+      operations:
+      - method: POST
+        name: handlesmarthandcagecleanuporder
+        description: Request trash removal or cage cleanup
+        call: smarthands-smarthands.handlesmarthandcagecleanuporder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/orders/smarthands/cageescort
+      name: v1-orders-smarthands-cageescort
+      description: REST surface for v1-orders-smarthands-cageEscort.
+      operations:
+      - method: POST
+        name: handlesmarthandcageescortorder
+        description: Request a patch cable to be moved between devices
+        call: smarthands-smarthands.handlesmarthandcageescortorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/orders/smarthands/equipmentinstall
+      name: v1-orders-smarthands-equipmentinstall
+      description: REST surface for v1-orders-smarthands-equipmentInstall.
+      operations:
+      - method: POST
+        name: handlesmarthandorder
+        description: Request equipment installation per your specifications by an IBX Technician
+        call: smarthands-smarthands.handlesmarthandorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/orders/smarthands/locatepackage
+      name: v1-orders-smarthands-locatepackage
+      description: REST surface for v1-orders-smarthands-locatePackage.
+      operations:
+      - method: POST
+        name: handlesmarthandlocatepackageorder
+        description: Get the location of your package(s) at an IBX.
+        call: smarthands-smarthands.handlesmarthandlocatepackageorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/orders/smarthands/locations
+      name: v1-orders-smarthands-locations
+      description: REST surface for v1-orders-smarthands-locations.
+      operations:
+      - method: GET
+        name: getlocation
+        description: Get locations(ibx, cage) details for placing smart hands based on smart hands permission for user
+        call: smarthands-smarthands.getlocation
+        with:
+          detail: rest.detail
+          ibxs: rest.ibxs
+          cages: rest.cages
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/orders/smarthands/movejumpercable
+      name: v1-orders-smarthands-movejumpercable
+      description: REST surface for v1-orders-smarthands-moveJumperCable.
+      operations:
+      - method: POST
+        name: handlesmarthandmovejumpercableorder
+        description: This API is used to request a patch cable to be moved between devices.
+        call: smarthands-smarthands.handlesmarthandmovejumpercableorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/orders/smarthands/other
+      name: v1-orders-smarthands-other
+      description: REST surface for v1-orders-smarthands-other.
+      operations:
+      - method: POST
+        name: handlesmarthandothersorder
+        description: Request a Smart Hands order not listed in catalogue
+        call: smarthands-smarthands.handlesmarthandothersorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/orders/smarthands/patchcableinstall
+      name: v1-orders-smarthands-patchcableinstall
+      description: REST surface for v1-orders-smarthands-patchCableInstall.
+      operations:
+      - method: POST
+        name: handlesmarthandpatchcableinstallorder
+        description: Request installation of a cross connect patch cable by an IBX Technician.
+        call: smarthands-smarthands.handlesmarthandpatchcableinstallorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/orders/smarthands/patchcableremoval
+      name: v1-orders-smarthands-patchcableremoval
+      description: REST surface for v1-orders-smarthands-patchCableRemoval.
+      operations:
+      - method: POST
+        name: handlesmarthandpatchcableremovalorder
+        description: Request removal of a cross connect cable by an IBX Technician.
+        call: smarthands-smarthands.handlesmarthandpatchcableremovalorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/orders/smarthands/picturesdocument
+      name: v1-orders-smarthands-picturesdocument
+      description: REST surface for v1-orders-smarthands-picturesDocument.
+      operations:
+      - method: POST
+        name: handlesmarthandpicturesdocumentorder
+        description: Request an IBX Technician to provide cage-related pictures or documentation.
+        call: smarthands-smarthands.handlesmarthandpicturesdocumentorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/orders/smarthands/runjumpercable
+      name: v1-orders-smarthands-runjumpercable
+      description: REST surface for v1-orders-smarthands-runJumperCable.
+      operations:
+      - method: POST
+        name: handlesmarthandrunjumpercableorder
+        description: This API is used to request a jumper cable to be ran between devices.
+        call: smarthands-smarthands.handlesmarthandrunjumpercableorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/orders/smarthands/shipmentunpack
+      name: v1-orders-smarthands-shipmentunpack
+      description: REST surface for v1-orders-smarthands-shipmentUnpack.
+      operations:
+      - method: POST
+        name: handlesmarthandshipmentunpackorder
+        description: Request inbound shipment unpacking and packaging disposal.
+        call: smarthands-smarthands.handlesmarthandshipmentunpackorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/orders/smarthands/types
+      name: v1-orders-smarthands-types
+      description: REST surface for v1-orders-smarthands-types.
+      operations:
+      - method: GET
+        name: smarthandtypes
+        description: All supported smart hands types API.
+        call: smarthands-smarthands.smarthandtypes
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: smarthands-smarthands-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Smart Hands — Smarthands. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: this-api-is-used-request
+      description: This API is used to request cables per your specifications for your equipment.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: smarthands-smarthands.handlesmarthandcablerequestorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: request-trash-removal-cage-cleanup
+      description: Request trash removal or cage cleanup
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: smarthands-smarthands.handlesmarthandcagecleanuporder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: request-patch-cable-be-moved
+      description: Request a patch cable to be moved between devices
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: smarthands-smarthands.handlesmarthandcageescortorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: request-equipment-installation-per-your
+      description: Request equipment installation per your specifications by an IBX Technician
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: smarthands-smarthands.handlesmarthandorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-location-your-package-s-ibx
+      description: Get the location of your package(s) at an IBX.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: smarthands-smarthands.handlesmarthandlocatepackageorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-locations-ibx-cage-details-placing
+      description: Get locations(ibx, cage) details for placing smart hands based on smart hands permission for user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: smarthands-smarthands.getlocation
+      with:
+        detail: tools.detail
+        ibxs: tools.ibxs
+        cages: tools.cages
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: this-api-is-used-request-2
+      description: This API is used to request a patch cable to be moved between devices.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: smarthands-smarthands.handlesmarthandmovejumpercableorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: request-smart-hands-order-not
+      description: Request a Smart Hands order not listed in catalogue
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: smarthands-smarthands.handlesmarthandothersorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: request-installation-cross-connect-patch
+      description: Request installation of a cross connect patch cable by an IBX Technician.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: smarthands-smarthands.handlesmarthandpatchcableinstallorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: request-removal-cross-connect-cable
+      description: Request removal of a cross connect cable by an IBX Technician.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: smarthands-smarthands.handlesmarthandpatchcableremovalorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: request-ibx-technician-provide-cage
+      description: Request an IBX Technician to provide cage-related pictures or documentation.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: smarthands-smarthands.handlesmarthandpicturesdocumentorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: this-api-is-used-request-3
+      description: This API is used to request a jumper cable to be ran between devices.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: smarthands-smarthands.handlesmarthandrunjumpercableorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: request-inbound-shipment-unpacking-and
+      description: Request inbound shipment unpacking and packaging disposal.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: smarthands-smarthands.handlesmarthandshipmentunpackorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: all-supported-smart-hands-types
+      description: All supported smart hands types API.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: smarthands-smarthands.smarthandtypes
+      outputParameters:
+      - type: object
+        mapping: $.

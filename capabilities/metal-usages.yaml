@@ -1,0 +1,148 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metal API — Usages
+  description: 'Metal API — Usages. 2 operations. Lead operation: Retrieve all usages for device. Self-contained Naftiko capability
+    covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - Usages
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metal-usages
+    baseUri: https://api.equinix.com/metal/v1
+    description: Metal API — Usages business capability. Self-contained, no shared references.
+    resources:
+    - name: devices-id-usages
+      path: /devices/{id}/usages
+      operations:
+      - name: finddeviceusages
+        method: GET
+        description: Retrieve all usages for device
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Device UUID
+          required: true
+        - name: created[after]
+          in: query
+          type: string
+          description: Filter usages created after this date
+        - name: created[before]
+          in: query
+          type: string
+          description: Filter usages created before this date
+    - name: projects-id-usages
+      path: /projects/{id}/usages
+      operations:
+      - name: findprojectusage
+        method: GET
+        description: Retrieve all usages for project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+        - name: created[after]
+          in: query
+          type: string
+          description: Filter usages created after this date
+        - name: created[before]
+          in: query
+          type: string
+          description: Filter usages created before this date
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.EQUINIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: metal-usages-rest
+    port: 8080
+    description: REST adapter for Metal API — Usages. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/devices/{id}/usages
+      name: devices-id-usages
+      description: REST surface for devices-id-usages.
+      operations:
+      - method: GET
+        name: finddeviceusages
+        description: Retrieve all usages for device
+        call: metal-usages.finddeviceusages
+        with:
+          id: rest.id
+          created[after]: rest.created[after]
+          created[before]: rest.created[before]
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{id}/usages
+      name: projects-id-usages
+      description: REST surface for projects-id-usages.
+      operations:
+      - method: GET
+        name: findprojectusage
+        description: Retrieve all usages for project
+        call: metal-usages.findprojectusage
+        with:
+          id: rest.id
+          created[after]: rest.created[after]
+          created[before]: rest.created[before]
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metal-usages-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metal API — Usages. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: retrieve-all-usages-device
+      description: Retrieve all usages for device
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-usages.finddeviceusages
+      with:
+        id: tools.id
+        created[after]: tools.created[after]
+        created[before]: tools.created[before]
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-all-usages-project
+      description: Retrieve all usages for project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-usages.findprojectusage
+      with:
+        id: tools.id
+        created[after]: tools.created[after]
+        created[before]: tools.created[before]
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,107 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Retrieve Orders API — Retrieve Orders
+  description: 'Retrieve Orders API — Retrieve Orders. 2 operations. Lead operation: Search Orders History. Self-contained
+    Naftiko capability covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - Retrieve Orders
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: orderhistory-retrieve-orders
+    baseUri: https://api.equinix.com
+    description: Retrieve Orders API — Retrieve Orders business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-retrieve-orders
+      path: /v1/retrieve-orders
+      operations:
+      - name: postordershistory
+        method: POST
+        description: Search Orders History
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+    - name: v1-retrieve-orders-locations
+      path: /v1/retrieve-orders/locations
+      operations:
+      - name: getretrieveorderslocations
+        method: GET
+        description: Retrieve order permissible IBX locations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: orderhistory-retrieve-orders-rest
+    port: 8080
+    description: REST adapter for Retrieve Orders API — Retrieve Orders. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/retrieve-orders
+      name: v1-retrieve-orders
+      description: REST surface for v1-retrieve-orders.
+      operations:
+      - method: POST
+        name: postordershistory
+        description: Search Orders History
+        call: orderhistory-retrieve-orders.postordershistory
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/retrieve-orders/locations
+      name: v1-retrieve-orders-locations
+      description: REST surface for v1-retrieve-orders-locations.
+      operations:
+      - method: GET
+        name: getretrieveorderslocations
+        description: Retrieve order permissible IBX locations
+        call: orderhistory-retrieve-orders.getretrieveorderslocations
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: orderhistory-retrieve-orders-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Retrieve Orders API — Retrieve Orders. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: search-orders-history
+      description: Search Orders History
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: orderhistory-retrieve-orders.postordershistory
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-order-permissible-ibx-locations
+      description: Retrieve order permissible IBX locations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: orderhistory-retrieve-orders.getretrieveorderslocations
+      outputParameters:
+      - type: object
+        mapping: $.

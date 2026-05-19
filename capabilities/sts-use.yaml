@@ -1,0 +1,85 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Equinix Security Token Service — use
+  description: 'Equinix Security Token Service — use. 1 operations. Lead operation: use. Self-contained Naftiko capability
+    covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - use
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sts-use
+    baseUri: https://sts.eqix.equinix.com
+    description: Equinix Security Token Service — use business capability. Self-contained, no shared references.
+    resources:
+    - name: use-token
+      path: /use/token
+      operations:
+      - name: post
+        method: POST
+        description: An OAuth 2.0 token endpoint supporting RFC 8693 token exchange, used to exchange an OIDC ID token issued
+          by a trusted OIDC provider to a trusted client for an access token that can be used access other Equinix product
+          APIs.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: bearer
+      token: '{{env.EQUINIX_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sts-use-rest
+    port: 8080
+    description: REST adapter for Equinix Security Token Service — use. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/use/token
+      name: use-token
+      description: REST surface for use-token.
+      operations:
+      - method: POST
+        name: post
+        description: An OAuth 2.0 token endpoint supporting RFC 8693 token exchange, used to exchange an OIDC ID token issued
+          by a trusted OIDC provider to a trusted client for an access token that can be used access other Equinix product
+          APIs.
+        call: sts-use.post
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sts-use-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Equinix Security Token Service — use. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: oauth-2-0-token-endpoint-supporting
+      description: An OAuth 2.0 token endpoint supporting RFC 8693 token exchange, used to exchange an OIDC ID token issued
+        by a trusted OIDC provider to a trusted client for an access token that can be used access other Equinix product APIs.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sts-use.post
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

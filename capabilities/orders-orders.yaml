@@ -1,0 +1,267 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Orders — Orders
+  description: 'Orders — Orders. 5 operations. Lead operation: Retrieve an order. Self-contained Naftiko capability covering
+    one Equinix business surface.'
+  tags:
+  - Equinix
+  - Orders
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: orders-orders
+    baseUri: https://api.equinix.com
+    description: Orders — Orders business capability. Self-contained, no shared references.
+    resources:
+    - name: colocations-v2-orders-orderId
+      path: /colocations/v2/orders/{orderId}
+      operations:
+      - name: getorderdetails
+        method: GET
+        description: Retrieve an order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: orderId
+          in: path
+          type: string
+          description: Identifier of the Order
+          required: true
+        - name: ibxs
+          in: query
+          type: array
+          description: List of IBXs to be filtered
+    - name: colocations-v2-orders-orderId-cancel
+      path: /colocations/v2/orders/{orderId}/cancel
+      operations:
+      - name: cancelanorder
+        method: POST
+        description: Cancel an order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: orderId
+          in: path
+          type: string
+          description: Identifier of the order
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: colocations-v2-orders-orderId-negotiations
+      path: /colocations/v2/orders/{orderId}/negotiations
+      operations:
+      - name: retrieveordernegotiations
+        method: GET
+        description: Retrieve order negotiations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: orderId
+          in: path
+          type: string
+          description: Identifier of the order
+          required: true
+      - name: replytoanordernegotiation
+        method: POST
+        description: Reply to an order negotiation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: orderId
+          in: path
+          type: string
+          description: Identifier of the order
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: colocations-v2-orders-orderId-notes
+      path: /colocations/v2/orders/{orderId}/notes
+      operations:
+      - name: addnotestoanorder
+        method: POST
+        description: Add notes to an order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: orderId
+          in: path
+          type: string
+          description: Identifier of the order
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: bearer
+      token: '{{env.EQUINIX_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: orders-orders-rest
+    port: 8080
+    description: REST adapter for Orders — Orders. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/colocations/v2/orders/{orderid}
+      name: colocations-v2-orders-orderid
+      description: REST surface for colocations-v2-orders-orderId.
+      operations:
+      - method: GET
+        name: getorderdetails
+        description: Retrieve an order
+        call: orders-orders.getorderdetails
+        with:
+          orderId: rest.orderId
+          ibxs: rest.ibxs
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/colocations/v2/orders/{orderid}/cancel
+      name: colocations-v2-orders-orderid-cancel
+      description: REST surface for colocations-v2-orders-orderId-cancel.
+      operations:
+      - method: POST
+        name: cancelanorder
+        description: Cancel an order
+        call: orders-orders.cancelanorder
+        with:
+          orderId: rest.orderId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/colocations/v2/orders/{orderid}/negotiations
+      name: colocations-v2-orders-orderid-negotiations
+      description: REST surface for colocations-v2-orders-orderId-negotiations.
+      operations:
+      - method: GET
+        name: retrieveordernegotiations
+        description: Retrieve order negotiations
+        call: orders-orders.retrieveordernegotiations
+        with:
+          orderId: rest.orderId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: replytoanordernegotiation
+        description: Reply to an order negotiation
+        call: orders-orders.replytoanordernegotiation
+        with:
+          orderId: rest.orderId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/colocations/v2/orders/{orderid}/notes
+      name: colocations-v2-orders-orderid-notes
+      description: REST surface for colocations-v2-orders-orderId-notes.
+      operations:
+      - method: POST
+        name: addnotestoanorder
+        description: Add notes to an order
+        call: orders-orders.addnotestoanorder
+        with:
+          orderId: rest.orderId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: orders-orders-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Orders — Orders. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: retrieve-order
+      description: Retrieve an order
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: orders-orders.getorderdetails
+      with:
+        orderId: tools.orderId
+        ibxs: tools.ibxs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancel-order
+      description: Cancel an order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: orders-orders.cancelanorder
+      with:
+        orderId: tools.orderId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-order-negotiations
+      description: Retrieve order negotiations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: orders-orders.retrieveordernegotiations
+      with:
+        orderId: tools.orderId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: reply-order-negotiation
+      description: Reply to an order negotiation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: orders-orders.replytoanordernegotiation
+      with:
+        orderId: tools.orderId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-notes-order
+      description: Add notes to an order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: orders-orders.addnotestoanorder
+      with:
+        orderId: tools.orderId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

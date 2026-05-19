@@ -1,0 +1,300 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metal API — HardwareReservations
+  description: 'Metal API — HardwareReservations. 4 operations. Lead operation: Retrieve a hardware reservation. Self-contained
+    Naftiko capability covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - HardwareReservations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metal-hardwarereservations
+    baseUri: https://api.equinix.com/metal/v1
+    description: Metal API — HardwareReservations business capability. Self-contained, no shared references.
+    resources:
+    - name: hardware-reservations-id
+      path: /hardware-reservations/{id}
+      operations:
+      - name: findhardwarereservationbyid
+        method: GET
+        description: Retrieve a hardware reservation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: HardwareReservation UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+    - name: hardware-reservations-id-activate
+      path: /hardware-reservations/{id}/activate
+      operations:
+      - name: activatehardwarereservation
+        method: POST
+        description: Activate a spare hardware reservation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Hardware Reservation UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: hardware-reservations-id-move
+      path: /hardware-reservations/{id}/move
+      operations:
+      - name: movehardwarereservation
+        method: POST
+        description: Move a hardware reservation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Hardware Reservation UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: projects-id-hardware-reservations
+      path: /projects/{id}/hardware-reservations
+      operations:
+      - name: findprojecthardwarereservations
+        method: GET
+        description: Retrieve all hardware reservations for a given project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+        - name: query
+          in: query
+          type: string
+          description: Search by facility code, plan name, project name, reservation short ID or device hostname
+        - name: state
+          in: query
+          type: string
+          description: Filter by hardware reservation state
+        - name: provisionable
+          in: query
+          type: string
+          description: Filter hardware reservation that is provisionable
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: page
+          in: query
+          type: integer
+          description: Page to return
+        - name: per_page
+          in: query
+          type: integer
+          description: Items returned per page
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.EQUINIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: metal-hardwarereservations-rest
+    port: 8080
+    description: REST adapter for Metal API — HardwareReservations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/hardware-reservations/{id}
+      name: hardware-reservations-id
+      description: REST surface for hardware-reservations-id.
+      operations:
+      - method: GET
+        name: findhardwarereservationbyid
+        description: Retrieve a hardware reservation
+        call: metal-hardwarereservations.findhardwarereservationbyid
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/hardware-reservations/{id}/activate
+      name: hardware-reservations-id-activate
+      description: REST surface for hardware-reservations-id-activate.
+      operations:
+      - method: POST
+        name: activatehardwarereservation
+        description: Activate a spare hardware reservation
+        call: metal-hardwarereservations.activatehardwarereservation
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/hardware-reservations/{id}/move
+      name: hardware-reservations-id-move
+      description: REST surface for hardware-reservations-id-move.
+      operations:
+      - method: POST
+        name: movehardwarereservation
+        description: Move a hardware reservation
+        call: metal-hardwarereservations.movehardwarereservation
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{id}/hardware-reservations
+      name: projects-id-hardware-reservations
+      description: REST surface for projects-id-hardware-reservations.
+      operations:
+      - method: GET
+        name: findprojecthardwarereservations
+        description: Retrieve all hardware reservations for a given project
+        call: metal-hardwarereservations.findprojecthardwarereservations
+        with:
+          id: rest.id
+          query: rest.query
+          state: rest.state
+          provisionable: rest.provisionable
+          include: rest.include
+          exclude: rest.exclude
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metal-hardwarereservations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metal API — HardwareReservations. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: retrieve-hardware-reservation
+      description: Retrieve a hardware reservation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-hardwarereservations.findhardwarereservationbyid
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: activate-spare-hardware-reservation
+      description: Activate a spare hardware reservation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-hardwarereservations.activatehardwarereservation
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: move-hardware-reservation
+      description: Move a hardware reservation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-hardwarereservations.movehardwarereservation
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-all-hardware-reservations-given
+      description: Retrieve all hardware reservations for a given project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-hardwarereservations.findprojecthardwarereservations
+      with:
+        id: tools.id
+        query: tools.query
+        state: tools.state
+        provisionable: tools.provisionable
+        include: tools.include
+        exclude: tools.exclude
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.

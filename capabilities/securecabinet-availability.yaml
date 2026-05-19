@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Secure Cabinet API — availability
+  description: 'Secure Cabinet API — availability. 1 operations. Lead operation: Secure Cabinet availability.. Self-contained
+    Naftiko capability covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - availability
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: securecabinet-availability
+    baseUri: https://api.equinix.com
+    description: Secure Cabinet API — availability business capability. Self-contained, no shared references.
+    resources:
+    - name: securecabinet-v1-availability-accountNumber
+      path: /securecabinet/v1/availability/{accountNumber}
+      operations:
+      - name: getproductsavailability
+        method: GET
+        description: Secure Cabinet availability.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: accountNumber
+          in: path
+          type: string
+          description: Billing Account Number.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.EQUINIX_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: securecabinet-availability-rest
+    port: 8080
+    description: REST adapter for Secure Cabinet API — availability. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/securecabinet/v1/availability/{accountnumber}
+      name: securecabinet-v1-availability-accountnumber
+      description: REST surface for securecabinet-v1-availability-accountNumber.
+      operations:
+      - method: GET
+        name: getproductsavailability
+        description: Secure Cabinet availability.
+        call: securecabinet-availability.getproductsavailability
+        with:
+          accountNumber: rest.accountNumber
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: securecabinet-availability-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Secure Cabinet API — availability. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: secure-cabinet-availability
+      description: Secure Cabinet availability.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: securecabinet-availability.getproductsavailability
+      with:
+        accountNumber: tools.accountNumber
+      outputParameters:
+      - type: object
+        mapping: $.

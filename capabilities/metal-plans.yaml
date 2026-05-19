@@ -1,0 +1,159 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metal API — Plans
+  description: 'Metal API — Plans. 2 operations. Lead operation: Retrieve all plans. Self-contained Naftiko capability covering
+    one Equinix business surface.'
+  tags:
+  - Equinix
+  - Plans
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metal-plans
+    baseUri: https://api.equinix.com/metal/v1
+    description: Metal API — Plans business capability. Self-contained, no shared references.
+    resources:
+    - name: plans
+      path: /plans
+      operations:
+      - name: findplans
+        method: GET
+        description: Retrieve all plans
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: categories
+          in: query
+          type: array
+          description: Filter plans by its category
+        - name: type
+          in: query
+          type: string
+          description: Filter plans by its plan type
+        - name: slug
+          in: query
+          type: string
+          description: Filter plans by slug
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+    - name: projects-id-plans
+      path: /projects/{id}/plans
+      operations:
+      - name: findplansbyproject
+        method: GET
+        description: Retrieve all plans visible by the project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.EQUINIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: metal-plans-rest
+    port: 8080
+    description: REST adapter for Metal API — Plans. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/plans
+      name: plans
+      description: REST surface for plans.
+      operations:
+      - method: GET
+        name: findplans
+        description: Retrieve all plans
+        call: metal-plans.findplans
+        with:
+          categories: rest.categories
+          type: rest.type
+          slug: rest.slug
+          include: rest.include
+          exclude: rest.exclude
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{id}/plans
+      name: projects-id-plans
+      description: REST surface for projects-id-plans.
+      operations:
+      - method: GET
+        name: findplansbyproject
+        description: Retrieve all plans visible by the project
+        call: metal-plans.findplansbyproject
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metal-plans-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metal API — Plans. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: retrieve-all-plans
+      description: Retrieve all plans
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-plans.findplans
+      with:
+        categories: tools.categories
+        type: tools.type
+        slug: tools.slug
+        include: tools.include
+        exclude: tools.exclude
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-all-plans-visible-project
+      description: Retrieve all plans visible by the project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-plans.findplansbyproject
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+      outputParameters:
+      - type: object
+        mapping: $.

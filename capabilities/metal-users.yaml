@@ -1,0 +1,389 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metal API — Users
+  description: 'Metal API — Users. 7 operations. Lead operation: Retrieve current user invitations. Self-contained Naftiko
+    capability covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - Users
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metal-users
+    baseUri: https://api.equinix.com/metal/v1
+    description: Metal API — Users business capability. Self-contained, no shared references.
+    resources:
+    - name: invitations
+      path: /invitations
+      operations:
+      - name: findinvitations
+        method: GET
+        description: Retrieve current user invitations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: page
+          in: query
+          type: integer
+          description: Page to return
+        - name: per_page
+          in: query
+          type: integer
+          description: Items returned per page
+    - name: user
+      path: /user
+      operations:
+      - name: findcurrentuser
+        method: GET
+        description: Retrieve the current user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+      - name: updatecurrentuser
+        method: PUT
+        description: Update the current user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: users
+      path: /users
+      operations:
+      - name: findusers
+        method: GET
+        description: Retrieve all users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: page
+          in: query
+          type: integer
+          description: Page to return
+        - name: per_page
+          in: query
+          type: integer
+          description: Items returned per page
+      - name: createuser
+        method: POST
+        description: Create a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: users-id
+      path: /users/{id}
+      operations:
+      - name: finduserbyid
+        method: GET
+        description: Retrieve a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: User UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+    - name: users-id-customdata
+      path: /users/{id}/customdata
+      operations:
+      - name: findusercustomdata
+        method: GET
+        description: Retrieve the custom metadata of a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: User UUID
+          required: true
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.EQUINIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: metal-users-rest
+    port: 8080
+    description: REST adapter for Metal API — Users. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/invitations
+      name: invitations
+      description: REST surface for invitations.
+      operations:
+      - method: GET
+        name: findinvitations
+        description: Retrieve current user invitations
+        call: metal-users.findinvitations
+        with:
+          include: rest.include
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user
+      name: user
+      description: REST surface for user.
+      operations:
+      - method: GET
+        name: findcurrentuser
+        description: Retrieve the current user
+        call: metal-users.findcurrentuser
+        with:
+          include: rest.include
+          exclude: rest.exclude
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatecurrentuser
+        description: Update the current user
+        call: metal-users.updatecurrentuser
+        with:
+          include: rest.include
+          exclude: rest.exclude
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users
+      name: users
+      description: REST surface for users.
+      operations:
+      - method: GET
+        name: findusers
+        description: Retrieve all users
+        call: metal-users.findusers
+        with:
+          include: rest.include
+          exclude: rest.exclude
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createuser
+        description: Create a user
+        call: metal-users.createuser
+        with:
+          include: rest.include
+          exclude: rest.exclude
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/{id}
+      name: users-id
+      description: REST surface for users-id.
+      operations:
+      - method: GET
+        name: finduserbyid
+        description: Retrieve a user
+        call: metal-users.finduserbyid
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/{id}/customdata
+      name: users-id-customdata
+      description: REST surface for users-id-customdata.
+      operations:
+      - method: GET
+        name: findusercustomdata
+        description: Retrieve the custom metadata of a user
+        call: metal-users.findusercustomdata
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metal-users-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metal API — Users. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: retrieve-current-user-invitations
+      description: Retrieve current user invitations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-users.findinvitations
+      with:
+        include: tools.include
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-current-user
+      description: Retrieve the current user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-users.findcurrentuser
+      with:
+        include: tools.include
+        exclude: tools.exclude
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-current-user
+      description: Update the current user
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: metal-users.updatecurrentuser
+      with:
+        include: tools.include
+        exclude: tools.exclude
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-all-users
+      description: Retrieve all users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-users.findusers
+      with:
+        include: tools.include
+        exclude: tools.exclude
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-user
+      description: Create a user
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-users.createuser
+      with:
+        include: tools.include
+        exclude: tools.exclude
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-user
+      description: Retrieve a user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-users.finduserbyid
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-custom-metadata-user
+      description: Retrieve the custom metadata of a user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-users.findusercustomdata
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

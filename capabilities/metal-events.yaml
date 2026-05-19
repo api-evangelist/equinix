@@ -1,0 +1,622 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metal API — Events
+  description: 'Metal API — Events. 9 operations. Lead operation: Retrieve interconnection events. Self-contained Naftiko
+    capability covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - Events
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metal-events
+    baseUri: https://api.equinix.com/metal/v1
+    description: Metal API — Events business capability. Self-contained, no shared references.
+    resources:
+    - name: connections-connection_id-events
+      path: /connections/{connection_id}/events
+      operations:
+      - name: findinterconnectionevents
+        method: GET
+        description: Retrieve interconnection events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: connection_id
+          in: path
+          type: string
+          description: Interconnection UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: page
+          in: query
+          type: integer
+          description: Page to return
+        - name: per_page
+          in: query
+          type: integer
+          description: Items returned per page
+    - name: connections-connection_id-ports-id-events
+      path: /connections/{connection_id}/ports/{id}/events
+      operations:
+      - name: findinterconnectionportevents
+        method: GET
+        description: Retrieve interconnection port events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: connection_id
+          in: path
+          type: string
+          description: Interconnection UUID
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: Interconnection Port UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: page
+          in: query
+          type: integer
+          description: Page to return
+        - name: per_page
+          in: query
+          type: integer
+          description: Items returned per page
+    - name: devices-id-events
+      path: /devices/{id}/events
+      operations:
+      - name: finddeviceevents
+        method: GET
+        description: Retrieve device's events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Device UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: page
+          in: query
+          type: integer
+          description: Page to return
+        - name: per_page
+          in: query
+          type: integer
+          description: Items returned per page
+    - name: events
+      path: /events
+      operations:
+      - name: findevents
+        method: GET
+        description: Retrieve current user's events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: page
+          in: query
+          type: integer
+          description: Page to return
+        - name: per_page
+          in: query
+          type: integer
+          description: Items returned per page
+    - name: events-id
+      path: /events/{id}
+      operations:
+      - name: findeventbyid
+        method: GET
+        description: Retrieve an event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Event UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+    - name: organizations-id-events
+      path: /organizations/{id}/events
+      operations:
+      - name: findorganizationevents
+        method: GET
+        description: Retrieve organization's events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Organization UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: page
+          in: query
+          type: integer
+          description: Page to return
+        - name: per_page
+          in: query
+          type: integer
+          description: Items returned per page
+    - name: projects-id-events
+      path: /projects/{id}/events
+      operations:
+      - name: findprojectevents
+        method: GET
+        description: Retrieve project's events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: page
+          in: query
+          type: integer
+          description: Page to return
+        - name: per_page
+          in: query
+          type: integer
+          description: Items returned per page
+    - name: routes-id-events
+      path: /routes/{id}/events
+      operations:
+      - name: findvrfrouteevents
+        method: GET
+        description: Retrieve VRF route events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: VRF Route UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: page
+          in: query
+          type: integer
+          description: Page to return
+        - name: per_page
+          in: query
+          type: integer
+          description: Items returned per page
+    - name: virtual-circuits-id-events
+      path: /virtual-circuits/{id}/events
+      operations:
+      - name: findvirtualcircuitevents
+        method: GET
+        description: Retrieve virtual circuit events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Virtual Circuit UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: page
+          in: query
+          type: integer
+          description: Page to return
+        - name: per_page
+          in: query
+          type: integer
+          description: Items returned per page
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.EQUINIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: metal-events-rest
+    port: 8080
+    description: REST adapter for Metal API — Events. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/connections/{connection-id}/events
+      name: connections-connection-id-events
+      description: REST surface for connections-connection_id-events.
+      operations:
+      - method: GET
+        name: findinterconnectionevents
+        description: Retrieve interconnection events
+        call: metal-events.findinterconnectionevents
+        with:
+          connection_id: rest.connection_id
+          include: rest.include
+          exclude: rest.exclude
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/connections/{connection-id}/ports/{id}/events
+      name: connections-connection-id-ports-id-events
+      description: REST surface for connections-connection_id-ports-id-events.
+      operations:
+      - method: GET
+        name: findinterconnectionportevents
+        description: Retrieve interconnection port events
+        call: metal-events.findinterconnectionportevents
+        with:
+          connection_id: rest.connection_id
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/devices/{id}/events
+      name: devices-id-events
+      description: REST surface for devices-id-events.
+      operations:
+      - method: GET
+        name: finddeviceevents
+        description: Retrieve device's events
+        call: metal-events.finddeviceevents
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/events
+      name: events
+      description: REST surface for events.
+      operations:
+      - method: GET
+        name: findevents
+        description: Retrieve current user's events
+        call: metal-events.findevents
+        with:
+          include: rest.include
+          exclude: rest.exclude
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/events/{id}
+      name: events-id
+      description: REST surface for events-id.
+      operations:
+      - method: GET
+        name: findeventbyid
+        description: Retrieve an event
+        call: metal-events.findeventbyid
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{id}/events
+      name: organizations-id-events
+      description: REST surface for organizations-id-events.
+      operations:
+      - method: GET
+        name: findorganizationevents
+        description: Retrieve organization's events
+        call: metal-events.findorganizationevents
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{id}/events
+      name: projects-id-events
+      description: REST surface for projects-id-events.
+      operations:
+      - method: GET
+        name: findprojectevents
+        description: Retrieve project's events
+        call: metal-events.findprojectevents
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/routes/{id}/events
+      name: routes-id-events
+      description: REST surface for routes-id-events.
+      operations:
+      - method: GET
+        name: findvrfrouteevents
+        description: Retrieve VRF route events
+        call: metal-events.findvrfrouteevents
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/virtual-circuits/{id}/events
+      name: virtual-circuits-id-events
+      description: REST surface for virtual-circuits-id-events.
+      operations:
+      - method: GET
+        name: findvirtualcircuitevents
+        description: Retrieve virtual circuit events
+        call: metal-events.findvirtualcircuitevents
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metal-events-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metal API — Events. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: retrieve-interconnection-events
+      description: Retrieve interconnection events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-events.findinterconnectionevents
+      with:
+        connection_id: tools.connection_id
+        include: tools.include
+        exclude: tools.exclude
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-interconnection-port-events
+      description: Retrieve interconnection port events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-events.findinterconnectionportevents
+      with:
+        connection_id: tools.connection_id
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-device-s-events
+      description: Retrieve device's events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-events.finddeviceevents
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-current-user-s-events
+      description: Retrieve current user's events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-events.findevents
+      with:
+        include: tools.include
+        exclude: tools.exclude
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-event
+      description: Retrieve an event
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-events.findeventbyid
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-organization-s-events
+      description: Retrieve organization's events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-events.findorganizationevents
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-project-s-events
+      description: Retrieve project's events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-events.findprojectevents
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-vrf-route-events
+      description: Retrieve VRF route events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-events.findvrfrouteevents
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-virtual-circuit-events
+      description: Retrieve virtual circuit events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-events.findvirtualcircuitevents
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.

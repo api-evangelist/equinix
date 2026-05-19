@@ -1,0 +1,142 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metal API — Invoices
+  description: 'Metal API — Invoices. 2 operations. Lead operation: Retrieve an invoice. Self-contained Naftiko capability
+    covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - Invoices
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metal-invoices
+    baseUri: https://api.equinix.com/metal/v1
+    description: Metal API — Invoices business capability. Self-contained, no shared references.
+    resources:
+    - name: invoices-id
+      path: /invoices/{id}
+      operations:
+      - name: getinvoicebyid
+        method: GET
+        description: Retrieve an invoice
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Invoice UUID
+          required: true
+    - name: organizations-id-invoices
+      path: /organizations/{id}/invoices
+      operations:
+      - name: findorganizationinvoices
+        method: GET
+        description: Retrieve all invoices for an organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Organization UUID
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: page number
+        - name: per_page
+          in: query
+          type: integer
+          description: per page
+        - name: status
+          in: query
+          type: string
+          description: filter by status
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.EQUINIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: metal-invoices-rest
+    port: 8080
+    description: REST adapter for Metal API — Invoices. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/invoices/{id}
+      name: invoices-id
+      description: REST surface for invoices-id.
+      operations:
+      - method: GET
+        name: getinvoicebyid
+        description: Retrieve an invoice
+        call: metal-invoices.getinvoicebyid
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{id}/invoices
+      name: organizations-id-invoices
+      description: REST surface for organizations-id-invoices.
+      operations:
+      - method: GET
+        name: findorganizationinvoices
+        description: Retrieve all invoices for an organization
+        call: metal-invoices.findorganizationinvoices
+        with:
+          id: rest.id
+          page: rest.page
+          per_page: rest.per_page
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metal-invoices-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metal API — Invoices. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: retrieve-invoice
+      description: Retrieve an invoice
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-invoices.getinvoicebyid
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-all-invoices-organization
+      description: Retrieve all invoices for an organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-invoices.findorganizationinvoices
+      with:
+        id: tools.id
+        page: tools.page
+        per_page: tools.per_page
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.

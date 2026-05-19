@@ -1,0 +1,326 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Lookup — Lookup
+  description: 'Lookup — Lookup. 5 operations. Lead operation: Retrieve list of connection services. Self-contained Naftiko
+    capability covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - Lookup
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: lookup-lookup
+    baseUri: https://api.equinix.com
+    description: Lookup — Lookup business capability. Self-contained, no shared references.
+    resources:
+    - name: colocations-v2-connectionServices
+      path: /colocations/v2/connectionServices
+      operations:
+      - name: retrievelistofconnectionservices
+        method: GET
+        description: Retrieve list of connection services
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: ibx
+          in: query
+          type: string
+          description: IBX
+          required: true
+    - name: colocations-v2-locations
+      path: /colocations/v2/locations
+      operations:
+      - name: getlocationsbypermissioncode
+        method: GET
+        description: Get Locations by permission code
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: permissionCode
+          in: query
+          type: string
+          description: List of Permission code to be filtered
+          required: true
+        - name: ibxs
+          in: query
+          type: array
+          description: List of IBXs to be filtered
+        - name: providerAccountNumber
+          in: query
+          type: string
+          description: The service provider's account number (Z-side) linked to their cage. Mandatory when used together with
+            `aSideIbx`. This is only applicable when permissionCode i
+        - name: aSideIbx
+          in: query
+          type: string
+          description: A-Side IBX details to fetch the (Z-side). This is only applicable when permissionCode is `CROSS_CONNECT`
+        - name: connectionService
+          in: query
+          type: string
+          description: 'Type of connection service to fetch the Z-side details. This is only applicable when permissionCode
+            is `CROSS_CONNECT` and is required when searching for zSide '
+        - name: details
+          in: query
+          type: boolean
+          description: When `true`, API response returns cage, cabinet and account details
+    - name: colocations-v2-patchPanels
+      path: /colocations/v2/patchPanels
+      operations:
+      - name: retrieveallpatchpanels
+        method: GET
+        description: Retrieve all patch panels
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cabinetId
+          in: query
+          type: string
+          description: ID of the cabinet
+          required: true
+        - name: providerAccountNumber
+          in: query
+          type: string
+          description: The service provider's account number (Z-side) linked to their cage. Mandatory when used together with
+            `aSideIbx`
+        - name: aSideIbx
+          in: query
+          type: string
+          description: The IBX location code for A-Side. When used together with `providerAccountNumber`, this returns Z-side
+            patch panel details.
+        - name: accountNumber
+          in: query
+          type: string
+          description: Account number is only required when cabinet is shared.
+    - name: colocations-v2-patchPanels-patchPanelId
+      path: /colocations/v2/patchPanels/{patchPanelId}
+      operations:
+      - name: retrievepatchpaneldetails
+        method: GET
+        description: Retrieve patch panel details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: patchPanelId
+          in: path
+          type: string
+          description: ID of patch panel
+          required: true
+        - name: providerAccountNumber
+          in: query
+          type: string
+          description: The service provider's account number (Z-side) linked to their cage. Mandatory when used together with
+            `aSideIbx`
+        - name: aSideIbx
+          in: query
+          type: string
+          description: The IBX location code for A-Side. When used together with `providerAccountNumber` and `accountNumber`,
+            this returns Z-side patch panel details.
+        - name: accountNumber
+          in: query
+          type: string
+          description: A-Side cage account number
+    - name: colocations-v2-providers
+      path: /colocations/v2/providers
+      operations:
+      - name: retrievelistofproviders
+        method: GET
+        description: Retrieve list of providers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cageId
+          in: query
+          type: string
+          description: Cage ID
+          required: true
+        - name: accountNumber
+          in: query
+          type: string
+          description: Account number of A-Side cage
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.EQUINIX_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: lookup-lookup-rest
+    port: 8080
+    description: REST adapter for Lookup — Lookup. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/colocations/v2/connectionservices
+      name: colocations-v2-connectionservices
+      description: REST surface for colocations-v2-connectionServices.
+      operations:
+      - method: GET
+        name: retrievelistofconnectionservices
+        description: Retrieve list of connection services
+        call: lookup-lookup.retrievelistofconnectionservices
+        with:
+          ibx: rest.ibx
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/colocations/v2/locations
+      name: colocations-v2-locations
+      description: REST surface for colocations-v2-locations.
+      operations:
+      - method: GET
+        name: getlocationsbypermissioncode
+        description: Get Locations by permission code
+        call: lookup-lookup.getlocationsbypermissioncode
+        with:
+          permissionCode: rest.permissionCode
+          ibxs: rest.ibxs
+          providerAccountNumber: rest.providerAccountNumber
+          aSideIbx: rest.aSideIbx
+          connectionService: rest.connectionService
+          details: rest.details
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/colocations/v2/patchpanels
+      name: colocations-v2-patchpanels
+      description: REST surface for colocations-v2-patchPanels.
+      operations:
+      - method: GET
+        name: retrieveallpatchpanels
+        description: Retrieve all patch panels
+        call: lookup-lookup.retrieveallpatchpanels
+        with:
+          cabinetId: rest.cabinetId
+          providerAccountNumber: rest.providerAccountNumber
+          aSideIbx: rest.aSideIbx
+          accountNumber: rest.accountNumber
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/colocations/v2/patchpanels/{patchpanelid}
+      name: colocations-v2-patchpanels-patchpanelid
+      description: REST surface for colocations-v2-patchPanels-patchPanelId.
+      operations:
+      - method: GET
+        name: retrievepatchpaneldetails
+        description: Retrieve patch panel details
+        call: lookup-lookup.retrievepatchpaneldetails
+        with:
+          patchPanelId: rest.patchPanelId
+          providerAccountNumber: rest.providerAccountNumber
+          aSideIbx: rest.aSideIbx
+          accountNumber: rest.accountNumber
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/colocations/v2/providers
+      name: colocations-v2-providers
+      description: REST surface for colocations-v2-providers.
+      operations:
+      - method: GET
+        name: retrievelistofproviders
+        description: Retrieve list of providers
+        call: lookup-lookup.retrievelistofproviders
+        with:
+          cageId: rest.cageId
+          accountNumber: rest.accountNumber
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: lookup-lookup-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Lookup — Lookup. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: retrieve-list-connection-services
+      description: Retrieve list of connection services
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lookup-lookup.retrievelistofconnectionservices
+      with:
+        ibx: tools.ibx
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-locations-permission-code
+      description: Get Locations by permission code
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lookup-lookup.getlocationsbypermissioncode
+      with:
+        permissionCode: tools.permissionCode
+        ibxs: tools.ibxs
+        providerAccountNumber: tools.providerAccountNumber
+        aSideIbx: tools.aSideIbx
+        connectionService: tools.connectionService
+        details: tools.details
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-all-patch-panels
+      description: Retrieve all patch panels
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lookup-lookup.retrieveallpatchpanels
+      with:
+        cabinetId: tools.cabinetId
+        providerAccountNumber: tools.providerAccountNumber
+        aSideIbx: tools.aSideIbx
+        accountNumber: tools.accountNumber
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-patch-panel-details
+      description: Retrieve patch panel details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lookup-lookup.retrievepatchpaneldetails
+      with:
+        patchPanelId: tools.patchPanelId
+        providerAccountNumber: tools.providerAccountNumber
+        aSideIbx: tools.aSideIbx
+        accountNumber: tools.accountNumber
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-list-providers
+      description: Retrieve list of providers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: lookup-lookup.retrievelistofproviders
+      with:
+        cageId: tools.cageId
+        accountNumber: tools.accountNumber
+      outputParameters:
+      - type: object
+        mapping: $.

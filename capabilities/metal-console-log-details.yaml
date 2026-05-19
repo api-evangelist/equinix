@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metal API — Console Log Details
+  description: 'Metal API — Console Log Details. 1 operations. Lead operation: Console Log Details. Self-contained Naftiko
+    capability covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - Console Log Details
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metal-console-log-details
+    baseUri: https://api.equinix.com/metal/v1
+    description: Metal API — Console Log Details business capability. Self-contained, no shared references.
+    resources:
+    - name: devices-id-diagnostics-screenshot
+      path: /devices/{id}/diagnostics/screenshot
+      operations:
+      - name: capturescreenshot
+        method: GET
+        description: Capture a screenshot from the device, if supported, via the BMC.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Device UUID
+          required: true
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.EQUINIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: metal-console-log-details-rest
+    port: 8080
+    description: REST adapter for Metal API — Console Log Details. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/devices/{id}/diagnostics/screenshot
+      name: devices-id-diagnostics-screenshot
+      description: REST surface for devices-id-diagnostics-screenshot.
+      operations:
+      - method: GET
+        name: capturescreenshot
+        description: Capture a screenshot from the device, if supported, via the BMC.
+        call: metal-console-log-details.capturescreenshot
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metal-console-log-details-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metal API — Console Log Details. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: capture-screenshot-device-if-supported
+      description: Capture a screenshot from the device, if supported, via the BMC.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-console-log-details.capturescreenshot
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

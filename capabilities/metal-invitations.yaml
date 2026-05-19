@@ -1,0 +1,164 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metal API — Invitations
+  description: 'Metal API — Invitations. 3 operations. Lead operation: Decline an invitation. Self-contained Naftiko capability
+    covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - Invitations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metal-invitations
+    baseUri: https://api.equinix.com/metal/v1
+    description: Metal API — Invitations business capability. Self-contained, no shared references.
+    resources:
+    - name: invitations-id
+      path: /invitations/{id}
+      operations:
+      - name: declineinvitation
+        method: DELETE
+        description: Decline an invitation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Invitation UUID
+          required: true
+      - name: findinvitationbyid
+        method: GET
+        description: View an invitation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Invitation UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+      - name: acceptinvitation
+        method: PUT
+        description: Accept an invitation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Invitation UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.EQUINIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: metal-invitations-rest
+    port: 8080
+    description: REST adapter for Metal API — Invitations. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/invitations/{id}
+      name: invitations-id
+      description: REST surface for invitations-id.
+      operations:
+      - method: DELETE
+        name: declineinvitation
+        description: Decline an invitation
+        call: metal-invitations.declineinvitation
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: findinvitationbyid
+        description: View an invitation
+        call: metal-invitations.findinvitationbyid
+        with:
+          id: rest.id
+          include: rest.include
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: acceptinvitation
+        description: Accept an invitation
+        call: metal-invitations.acceptinvitation
+        with:
+          id: rest.id
+          include: rest.include
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metal-invitations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metal API — Invitations. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: decline-invitation
+      description: Decline an invitation
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: metal-invitations.declineinvitation
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: view-invitation
+      description: View an invitation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-invitations.findinvitationbyid
+      with:
+        id: tools.id
+        include: tools.include
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: accept-invitation
+      description: Accept an invitation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: metal-invitations.acceptinvitation
+      with:
+        id: tools.id
+        include: tools.include
+      outputParameters:
+      - type: object
+        mapping: $.

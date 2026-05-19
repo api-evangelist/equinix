@@ -1,0 +1,835 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metal API — Organizations
+  description: 'Metal API — Organizations. 15 operations. Lead operation: Retrieve all organizations. Self-contained Naftiko
+    capability covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - Organizations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metal-organizations
+    baseUri: https://api.equinix.com/metal/v1
+    description: Metal API — Organizations business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations
+      path: /organizations
+      operations:
+      - name: findorganizations
+        method: GET
+        description: Retrieve all organizations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: personal
+          in: query
+          type: string
+          description: Include, exclude or show only personal organizations.
+        - name: without_projects
+          in: query
+          type: string
+          description: Include, exclude or show only organizations that have no projects.
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: page
+          in: query
+          type: integer
+          description: Page to return
+        - name: per_page
+          in: query
+          type: integer
+          description: Items returned per page
+      - name: createorganization
+        method: POST
+        description: Create an organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-id
+      path: /organizations/{id}
+      operations:
+      - name: deleteorganization
+        method: DELETE
+        description: Delete the organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Organization UUID
+          required: true
+      - name: findorganizationbyid
+        method: GET
+        description: Retrieve an organization's details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Organization UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+      - name: updateorganization
+        method: PUT
+        description: Update the organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Organization UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-id-customdata
+      path: /organizations/{id}/customdata
+      operations:
+      - name: findorganizationcustomdata
+        method: GET
+        description: Retrieve the custom metadata of an organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Organization UUID
+          required: true
+    - name: organizations-id-invitations
+      path: /organizations/{id}/invitations
+      operations:
+      - name: findorganizationinvitations
+        method: GET
+        description: Retrieve organization invitations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: page
+          in: query
+          type: integer
+          description: Page to return
+        - name: per_page
+          in: query
+          type: integer
+          description: Items returned per page
+        - name: id
+          in: path
+          type: string
+          description: Organization UUID
+          required: true
+      - name: createorganizationinvitation
+        method: POST
+        description: Create an invitation for an organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Organization UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: organizations-id-operating-systems
+      path: /organizations/{id}/operating-systems
+      operations:
+      - name: findoperatingsystemsbyorganization
+        method: GET
+        description: Retrieve all operating systems visible by the organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Organization UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+    - name: organizations-id-payment-methods
+      path: /organizations/{id}/payment-methods
+      operations:
+      - name: findorganizationpaymentmethods
+        method: GET
+        description: Retrieve all payment methods of an organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Organization UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: page
+          in: query
+          type: integer
+          description: Page to return
+        - name: per_page
+          in: query
+          type: integer
+          description: Items returned per page
+      - name: createpaymentmethod
+        method: POST
+        description: Create a payment method for the given organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Organization UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-id-plans
+      path: /organizations/{id}/plans
+      operations:
+      - name: findplansbyorganization
+        method: GET
+        description: Retrieve all plans visible by the organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Organization UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+    - name: organizations-id-projects
+      path: /organizations/{id}/projects
+      operations:
+      - name: findorganizationprojects
+        method: GET
+        description: Retrieve all projects of an organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Organization UUID
+          required: true
+        - name: name
+          in: query
+          type: string
+          description: Filter results by name.
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: page
+          in: query
+          type: integer
+          description: Page to return
+        - name: per_page
+          in: query
+          type: integer
+          description: Items returned per page
+      - name: createorganizationproject
+        method: POST
+        description: Create a project for the organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Organization UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: exclude
+          in: query
+          type: array
+          description: Nested attributes to exclude. Excluded objects will return only the href
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-id-transfers
+      path: /organizations/{id}/transfers
+      operations:
+      - name: findorganizationtransfers
+        method: GET
+        description: Retrieve all project transfer requests from or to an organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Organization UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.EQUINIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: metal-organizations-rest
+    port: 8080
+    description: REST adapter for Metal API — Organizations. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/organizations
+      name: organizations
+      description: REST surface for organizations.
+      operations:
+      - method: GET
+        name: findorganizations
+        description: Retrieve all organizations
+        call: metal-organizations.findorganizations
+        with:
+          personal: rest.personal
+          without_projects: rest.without_projects
+          include: rest.include
+          exclude: rest.exclude
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createorganization
+        description: Create an organization
+        call: metal-organizations.createorganization
+        with:
+          include: rest.include
+          exclude: rest.exclude
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{id}
+      name: organizations-id
+      description: REST surface for organizations-id.
+      operations:
+      - method: DELETE
+        name: deleteorganization
+        description: Delete the organization
+        call: metal-organizations.deleteorganization
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: findorganizationbyid
+        description: Retrieve an organization's details
+        call: metal-organizations.findorganizationbyid
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateorganization
+        description: Update the organization
+        call: metal-organizations.updateorganization
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{id}/customdata
+      name: organizations-id-customdata
+      description: REST surface for organizations-id-customdata.
+      operations:
+      - method: GET
+        name: findorganizationcustomdata
+        description: Retrieve the custom metadata of an organization
+        call: metal-organizations.findorganizationcustomdata
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{id}/invitations
+      name: organizations-id-invitations
+      description: REST surface for organizations-id-invitations.
+      operations:
+      - method: GET
+        name: findorganizationinvitations
+        description: Retrieve organization invitations
+        call: metal-organizations.findorganizationinvitations
+        with:
+          include: rest.include
+          page: rest.page
+          per_page: rest.per_page
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createorganizationinvitation
+        description: Create an invitation for an organization
+        call: metal-organizations.createorganizationinvitation
+        with:
+          id: rest.id
+          include: rest.include
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{id}/operating-systems
+      name: organizations-id-operating-systems
+      description: REST surface for organizations-id-operating-systems.
+      operations:
+      - method: GET
+        name: findoperatingsystemsbyorganization
+        description: Retrieve all operating systems visible by the organization
+        call: metal-organizations.findoperatingsystemsbyorganization
+        with:
+          id: rest.id
+          include: rest.include
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{id}/payment-methods
+      name: organizations-id-payment-methods
+      description: REST surface for organizations-id-payment-methods.
+      operations:
+      - method: GET
+        name: findorganizationpaymentmethods
+        description: Retrieve all payment methods of an organization
+        call: metal-organizations.findorganizationpaymentmethods
+        with:
+          id: rest.id
+          include: rest.include
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createpaymentmethod
+        description: Create a payment method for the given organization
+        call: metal-organizations.createpaymentmethod
+        with:
+          id: rest.id
+          include: rest.include
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{id}/plans
+      name: organizations-id-plans
+      description: REST surface for organizations-id-plans.
+      operations:
+      - method: GET
+        name: findplansbyorganization
+        description: Retrieve all plans visible by the organization
+        call: metal-organizations.findplansbyorganization
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{id}/projects
+      name: organizations-id-projects
+      description: REST surface for organizations-id-projects.
+      operations:
+      - method: GET
+        name: findorganizationprojects
+        description: Retrieve all projects of an organization
+        call: metal-organizations.findorganizationprojects
+        with:
+          id: rest.id
+          name: rest.name
+          include: rest.include
+          exclude: rest.exclude
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createorganizationproject
+        description: Create a project for the organization
+        call: metal-organizations.createorganizationproject
+        with:
+          id: rest.id
+          include: rest.include
+          exclude: rest.exclude
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{id}/transfers
+      name: organizations-id-transfers
+      description: REST surface for organizations-id-transfers.
+      operations:
+      - method: GET
+        name: findorganizationtransfers
+        description: Retrieve all project transfer requests from or to an organization
+        call: metal-organizations.findorganizationtransfers
+        with:
+          id: rest.id
+          include: rest.include
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metal-organizations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metal API — Organizations. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: retrieve-all-organizations
+      description: Retrieve all organizations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-organizations.findorganizations
+      with:
+        personal: tools.personal
+        without_projects: tools.without_projects
+        include: tools.include
+        exclude: tools.exclude
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-organization
+      description: Create an organization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-organizations.createorganization
+      with:
+        include: tools.include
+        exclude: tools.exclude
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-organization
+      description: Delete the organization
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: metal-organizations.deleteorganization
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-organization-s-details
+      description: Retrieve an organization's details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-organizations.findorganizationbyid
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-organization
+      description: Update the organization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: metal-organizations.updateorganization
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-custom-metadata-organization
+      description: Retrieve the custom metadata of an organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-organizations.findorganizationcustomdata
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-organization-invitations
+      description: Retrieve organization invitations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-organizations.findorganizationinvitations
+      with:
+        include: tools.include
+        page: tools.page
+        per_page: tools.per_page
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-invitation-organization
+      description: Create an invitation for an organization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-organizations.createorganizationinvitation
+      with:
+        id: tools.id
+        include: tools.include
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-all-operating-systems-visible
+      description: Retrieve all operating systems visible by the organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-organizations.findoperatingsystemsbyorganization
+      with:
+        id: tools.id
+        include: tools.include
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-all-payment-methods-organization
+      description: Retrieve all payment methods of an organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-organizations.findorganizationpaymentmethods
+      with:
+        id: tools.id
+        include: tools.include
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-payment-method-given-organization
+      description: Create a payment method for the given organization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-organizations.createpaymentmethod
+      with:
+        id: tools.id
+        include: tools.include
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-all-plans-visible-organization
+      description: Retrieve all plans visible by the organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-organizations.findplansbyorganization
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-all-projects-organization
+      description: Retrieve all projects of an organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-organizations.findorganizationprojects
+      with:
+        id: tools.id
+        name: tools.name
+        include: tools.include
+        exclude: tools.exclude
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-project-organization
+      description: Create a project for the organization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-organizations.createorganizationproject
+      with:
+        id: tools.id
+        include: tools.include
+        exclude: tools.exclude
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-all-project-transfer-requests
+      description: Retrieve all project transfer requests from or to an organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-organizations.findorganizationtransfers
+      with:
+        id: tools.id
+        include: tools.include
+      outputParameters:
+      - type: object
+        mapping: $.

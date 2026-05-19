@@ -1,0 +1,415 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Metal API — SSHKeys
+  description: 'Metal API — SSHKeys. 8 operations. Lead operation: Retrieve a device''s ssh keys. Self-contained Naftiko capability
+    covering one Equinix business surface.'
+  tags:
+  - Equinix
+  - SSHKeys
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    EQUINIX_API_KEY: EQUINIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metal-sshkeys
+    baseUri: https://api.equinix.com/metal/v1
+    description: Metal API — SSHKeys business capability. Self-contained, no shared references.
+    resources:
+    - name: devices-id-ssh-keys
+      path: /devices/{id}/ssh-keys
+      operations:
+      - name: finddevicesshkeys
+        method: GET
+        description: Retrieve a device's ssh keys
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+        - name: Search string
+          in: query
+          type: string
+          description: Search by key, label, or fingerprint
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+    - name: projects-id-ssh-keys
+      path: /projects/{id}/ssh-keys
+      operations:
+      - name: findprojectsshkeys
+        method: GET
+        description: Retrieve a project's ssh keys
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+        - name: query
+          in: query
+          type: string
+          description: Search by key, label, or fingerprint
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+      - name: createprojectsshkey
+        method: POST
+        description: Create a ssh key for the given project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Project UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ssh-keys
+      path: /ssh-keys
+      operations:
+      - name: findsshkeys
+        method: GET
+        description: Retrieve all ssh keys
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: search
+          in: query
+          type: string
+          description: Search by key, label, or fingerprint
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+      - name: createsshkey
+        method: POST
+        description: Create a ssh key for the current user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: ssh-keys-id
+      path: /ssh-keys/{id}
+      operations:
+      - name: deletesshkey
+        method: DELETE
+        description: Delete the ssh key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: ssh key UUID
+          required: true
+      - name: findsshkeybyid
+        method: GET
+        description: Retrieve a ssh key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: SSH Key UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+      - name: updatesshkey
+        method: PUT
+        description: Update the ssh key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: SSH Key UUID
+          required: true
+        - name: include
+          in: query
+          type: array
+          description: Nested attributes to include. Included objects will return their full
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-Auth-Token
+      value: '{{env.EQUINIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: metal-sshkeys-rest
+    port: 8080
+    description: REST adapter for Metal API — SSHKeys. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/devices/{id}/ssh-keys
+      name: devices-id-ssh-keys
+      description: REST surface for devices-id-ssh-keys.
+      operations:
+      - method: GET
+        name: finddevicesshkeys
+        description: Retrieve a device's ssh keys
+        call: metal-sshkeys.finddevicesshkeys
+        with:
+          id: rest.id
+          Search string: rest.Search string
+          include: rest.include
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{id}/ssh-keys
+      name: projects-id-ssh-keys
+      description: REST surface for projects-id-ssh-keys.
+      operations:
+      - method: GET
+        name: findprojectsshkeys
+        description: Retrieve a project's ssh keys
+        call: metal-sshkeys.findprojectsshkeys
+        with:
+          id: rest.id
+          query: rest.query
+          include: rest.include
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createprojectsshkey
+        description: Create a ssh key for the given project
+        call: metal-sshkeys.createprojectsshkey
+        with:
+          id: rest.id
+          include: rest.include
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ssh-keys
+      name: ssh-keys
+      description: REST surface for ssh-keys.
+      operations:
+      - method: GET
+        name: findsshkeys
+        description: Retrieve all ssh keys
+        call: metal-sshkeys.findsshkeys
+        with:
+          search: rest.search
+          include: rest.include
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createsshkey
+        description: Create a ssh key for the current user
+        call: metal-sshkeys.createsshkey
+        with:
+          include: rest.include
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ssh-keys/{id}
+      name: ssh-keys-id
+      description: REST surface for ssh-keys-id.
+      operations:
+      - method: DELETE
+        name: deletesshkey
+        description: Delete the ssh key
+        call: metal-sshkeys.deletesshkey
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: findsshkeybyid
+        description: Retrieve a ssh key
+        call: metal-sshkeys.findsshkeybyid
+        with:
+          id: rest.id
+          include: rest.include
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatesshkey
+        description: Update the ssh key
+        call: metal-sshkeys.updatesshkey
+        with:
+          id: rest.id
+          include: rest.include
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metal-sshkeys-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Metal API — SSHKeys. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: retrieve-device-s-ssh-keys
+      description: Retrieve a device's ssh keys
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-sshkeys.finddevicesshkeys
+      with:
+        id: tools.id
+        Search string: tools.Search string
+        include: tools.include
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-project-s-ssh-keys
+      description: Retrieve a project's ssh keys
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-sshkeys.findprojectsshkeys
+      with:
+        id: tools.id
+        query: tools.query
+        include: tools.include
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-ssh-key-given-project
+      description: Create a ssh key for the given project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-sshkeys.createprojectsshkey
+      with:
+        id: tools.id
+        include: tools.include
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-all-ssh-keys
+      description: Retrieve all ssh keys
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-sshkeys.findsshkeys
+      with:
+        search: tools.search
+        include: tools.include
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-ssh-key-current-user
+      description: Create a ssh key for the current user
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metal-sshkeys.createsshkey
+      with:
+        include: tools.include
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-ssh-key
+      description: Delete the ssh key
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: metal-sshkeys.deletesshkey
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-ssh-key
+      description: Retrieve a ssh key
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metal-sshkeys.findsshkeybyid
+      with:
+        id: tools.id
+        include: tools.include
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-ssh-key
+      description: Update the ssh key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: metal-sshkeys.updatesshkey
+      with:
+        id: tools.id
+        include: tools.include
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
