@@ -1,0 +1,29 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/eia-openapi-original.yml, openapi/lookup-openapi-original.yml, openapi/metal-openapi-original.yml,
+  openapi/orders-openapi-original.yml, openapi/securecabinet-openapi-original.yml, openapi/sts-openapi-original.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/eia-openapi-original.yml
+  - openapi/lookup-openapi-original.yml
+  - openapi/orders-openapi-original.yml
+  - openapi/securecabinet-openapi-original.yml
+  - openapi/sts-openapi-original.yml
+- name: x_auth_token
+  type: apiKey
+  in: header
+  parameter: X-Auth-Token
+  description: HTTP header containing the User or Project API key that will be used to authenticate
+    the request.
+  sources:
+  - openapi/metal-openapi-original.yml
