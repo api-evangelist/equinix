@@ -1,0 +1,2713 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication Service Profiles API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- name: Service Profiles
+  description: Service Profiles
+paths:
+  /fabric/v4/serviceProfiles:
+    get:
+      tags:
+      - Service Profiles
+      summary: Get all Profiles
+      description: The API request returns all Equinix Fabric Service Profiles in accordance with the view point requested.
+      operationId: getServiceProfiles
+      parameters:
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          type: integer
+        example: 1
+      - name: limit
+        in: query
+        description: number of records to fetch
+        required: false
+        schema:
+          type: integer
+        example: 10
+      - name: viewPoint
+        in: query
+        description: flips view between buyer and seller representation
+        schema:
+          type: string
+          default: aSide
+          enum:
+          - aSide
+          - zSide
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ServiceProfiles'
+              examples:
+                ASideServiceProfile:
+                  $ref: '#/components/examples/ServiceProfilesResponse'
+                ZSideServiceProfile:
+                  $ref: '#/components/examples/SellerServiceProfilesResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-400'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-403-read'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-500'
+    post:
+      tags:
+      - Service Profiles
+      summary: Create Profile
+      description: Create Service Profile creates Equinix Fabric? Service Profile.
+      operationId: createServiceProfile
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceProfileRequest'
+            examples:
+              ServiceProfileCreate:
+                $ref: '#/components/examples/ServiceProfileCreate'
+              ServiceProfileCreate-CRH:
+                $ref: '#/components/examples/ServiceProfileCreate-CRH'
+        required: true
+      responses:
+        '201':
+          description: Successful Create operation
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ServiceProfile'
+              examples:
+                ServiceProfile:
+                  $ref: '#/components/examples/ServiceProfileCreateResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-400'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-403-create'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-500'
+  /fabric/v4/serviceProfiles/search:
+    post:
+      tags:
+      - Service Profiles
+      summary: Profile Search
+      description: Search service profiles by search criteria
+      operationId: searchServiceProfiles
+      parameters:
+      - name: viewPoint
+        in: query
+        description: flips view between buyer and seller representation
+        schema:
+          type: string
+          default: aSide
+          enum:
+          - aSide
+          - zSide
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceProfileSearchRequest'
+            examples:
+              ServiceProfileSearchWithUuid:
+                $ref: '#/components/examples/ServiceProfileSearchWithUuid'
+              ServiceProfileSearchWithName:
+                $ref: '#/components/examples/ServiceProfileSearchWithName'
+              ServiceProfileSearchWithState:
+                $ref: '#/components/examples/ServiceProfileSearchWithState'
+              ServiceProfileSearchWithVisibility:
+                $ref: '#/components/examples/ServiceProfileSearchWithVisibility'
+              ServiceProfileSearchWithProject:
+                $ref: '#/components/examples/ServiceProfileSearchWithProjectId'
+              ServiceProfileSearchWithPort:
+                $ref: '#/components/examples/ServiceProfileSearchWithPort'
+              ServiceProfileSearchWithMultipleFilter:
+                $ref: '#/components/examples/ServiceProfileSearchWithAnd'
+              IXPrivatePeeringServiceProfileSearchWithMetro:
+                $ref: '#/components/examples/ServiceProfileSearchWithMetro'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ServiceProfiles'
+              examples:
+                ServiceProfile:
+                  $ref: '#/components/examples/ServiceProfilesResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-400-search'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-401'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-500'
+  /fabric/v4/serviceProfiles/{serviceProfileId}:
+    get:
+      tags:
+      - Service Profiles
+      summary: Get Profile
+      description: Get service profile by UUID. View Point parameter if set to zSide will give seller's view of the profile otherwise buyer's view.
+      operationId: getServiceProfileByUuid
+      parameters:
+      - name: serviceProfileId
+        in: path
+        description: Service Profile UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/ServiceProfileId'
+      - name: viewPoint
+        in: query
+        description: flips view between buyer and seller representation
+        schema:
+          type: string
+          default: aSide
+          enum:
+          - aSide
+          - zSide
+      responses:
+        '200':
+          description: Successful operation
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ServiceProfile'
+              examples:
+                ASideServiceProfile:
+                  $ref: '#/components/examples/ServiceProfileResponse'
+                ZSideServiceProfile:
+                  $ref: '#/components/examples/SellerServiceProfileResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-400'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-403-read'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-500'
+    put:
+      tags:
+      - Service Profiles
+      summary: Replace Profile
+      description: This API request replaces a service profile definition
+      operationId: putServiceProfileByUuid
+      parameters:
+      - name: serviceProfileId
+        in: path
+        description: Service Profile UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/ServiceProfileId'
+      - name: If-Match
+        in: header
+        description: conditional request
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceProfileRequest'
+            examples:
+              ServiceProfileUpdate:
+                $ref: '#/components/examples/ServiceProfileUpdate'
+        required: true
+      responses:
+        '202':
+          description: Successful Put operation
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ServiceProfile'
+              examples:
+                ServiceProfile:
+                  $ref: '#/components/examples/ServiceProfilePutResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-400'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-403-update'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-404-get'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-500'
+    delete:
+      tags:
+      - Service Profiles
+      summary: Delete Profile
+      description: delete Service Profile by UUID
+      operationId: deleteServiceProfileByUuid
+      parameters:
+      - name: serviceProfileId
+        in: path
+        description: Service Profile UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/ServiceProfileId'
+      responses:
+        '200':
+          description: Successful Delete operation
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ServiceProfile'
+              examples:
+                ServiceProfile:
+                  $ref: '#/components/examples/ServiceProfileDeleteResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-400-delete'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-403-delete'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-404-get'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-500'
+    patch:
+      tags:
+      - Service Profiles
+      summary: Update Profile
+      description: Update Service Profile by UUID
+      operationId: updateServiceProfileByUuid
+      parameters:
+      - name: serviceProfileId
+        in: path
+        description: Service Profile UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/ServiceProfileId'
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/JsonPatch_1'
+            examples:
+              ServiceProfilePatchRequest:
+                $ref: '#/components/examples/ServiceProfilePatchRequest'
+              ServiceProfilePatchRequestForVisibility:
+                $ref: '#/components/examples/ServiceProfilePatchRequestForVisibility'
+        required: true
+      responses:
+        '200':
+          description: Successful Patch operation
+          headers:
+            ETag:
+              $ref: '#/components/headers/ETag'
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ServiceProfile'
+              examples:
+                ServiceProfile:
+                  $ref: '#/components/examples/ServiceProfilePatchResponse'
+                ServiceProfilePatchResponseForVisibility:
+                  $ref: '#/components/examples/ServiceProfilePatchResponseForVisibility'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-400'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-403-update'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-404-get'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-500'
+  /fabric/v4/serviceProfiles/{serviceProfileId}/actions:
+    post:
+      tags:
+      - Service Profiles
+      summary: Profile Actions
+      description: This API provides capability to accept/reject service profile update requests
+      operationId: createServiceProfileAction
+      parameters:
+      - name: serviceProfileId
+        in: path
+        description: Service Profile UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/ServiceProfileId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceProfileActionRequest'
+            examples:
+              AcceptProfileUpdate:
+                $ref: '#/components/examples/ServiceProfileActionRequest'
+              RejectProfileUpdate:
+                $ref: '#/components/examples/ServiceProfileActionRejectionRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ServiceProfileActionResponse'
+              examples:
+                ServiceProfileActionResponse:
+                  $ref: '#/components/examples/ServiceProfileActionResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-400'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-403-update'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-404-get'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-500'
+  /fabric/v4/serviceProfiles/{serviceProfileId}/metros:
+    get:
+      tags:
+      - Service Profiles
+      summary: Get Profile Metros
+      description: Get service profile metros by UUID.
+      operationId: getServiceProfileMetrosByUuid
+      parameters:
+      - name: serviceProfileId
+        in: path
+        description: Service Profile UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/ServiceProfileId'
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          type: integer
+        example: 1
+      - name: limit
+        in: query
+        description: number of records to fetch
+        required: false
+        schema:
+          type: integer
+        example: 10
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json; charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ServiceMetros'
+              examples:
+                ServiceProfileMetros:
+                  $ref: '#/components/examples/ServiceProfilesResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-400'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-403-read'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/sp-500'
+components:
+  examples:
+    ServiceProfileCreate:
+      value:
+        name: Service Profile 1
+        description: Sample_description
+        type: L2_PROFILE
+        notifications:
+        - emails:
+          - someone@sample.com
+          type: BANDWIDTH_ALERT
+        visibility: PUBLIC
+        allowedEmails:
+        - test@equinix.com
+        - testagain@equinix.com
+        ports:
+        - uuid: c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee
+          type: XF_PORT
+          location:
+            metroCode: SY
+        marketingInfo:
+          promotion: true
+        accessPointTypeConfigs:
+        - type: COLO
+          connectionRedundancyRequired: false
+          selectiveRedundancy: false
+          allowBandwidthAutoApproval: false
+          allowRemoteConnections: true
+          connectionLabel: Service Profile 1
+          enableAutoGenerateServiceKey: false
+          bandwidthAlertThreshold: 10
+          allowCustomBandwidth: true
+          apiConfig:
+            apiAvailable: false
+            equinixManagedVlan: false
+            bandwidthFromApi: false
+            integrationId: null
+            equinixManagedPort: false
+          authenticationKey:
+            required: false
+            label: Service Key
+            description: XYZ
+          supportedBandwidths:
+          - 100
+          - 500
+    ServiceProfileActionResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/serviceProfiles/f30a9de3-c79e-443e-b65d-0a0692c6f3e0/actions/ac2a3233-23d9-423c-b375-0e78717bd348
+        type: PROFILE_UPDATE_ACCEPTANCE
+        uuid: ac2a3233-23d9-423c-b375-0e78717bd348
+        comments: Approved to migrate to public
+        changeLog:
+          createdBy: adminuser
+          createdDateTime: 2026-03-04 10:30:00+00:00
+          updatedBy: adminuser
+          updatedDateTime: 2026-03-04 10:35:00+00:00
+    ServiceProfileCreate-CRH:
+      value:
+        name: Service Profile 1
+        description: Sample_description
+        type: L2_PROFILE
+        notifications:
+        - emails:
+          - someone@sample.com
+          type: BANDWIDTH_ALERT
+        project:
+          projectId: 30ad25e2-53dc-11ed-bdc3-0242ac120002
+        visibility: PUBLIC
+        allowedEmails:
+        - test@equinix.com
+        - testagain@equinix.com
+        ports:
+        - uuid: c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee
+          type: XF_PORT
+          location:
+            metroCode: SY
+        marketingInfo:
+          promotion: true
+        accessPointTypeConfigs:
+        - type: COLO
+          connectionRedundancyRequired: false
+          selectiveRedundancy: false
+          allowBandwidthAutoApproval: false
+          allowRemoteConnections: true
+          connectionLabel: Service Profile 1
+          enableAutoGenerateServiceKey: false
+          bandwidthAlertThreshold: 10
+          allowCustomBandwidth: true
+          apiConfig:
+            apiAvailable: false
+            equinixManagedVlan: false
+            bandwidthFromApi: false
+            integrationId: null
+            equinixManagedPort: false
+          authenticationKey:
+            required: false
+            label: Service Key
+            description: XYZ
+          supportedBandwidths:
+          - 100
+          - 500
+    ServiceProfilesResponse:
+      value:
+        data:
+        - state: ACTIVE
+          account:
+            organizationName: testSeller-270010
+          changeLog:
+            createdBy: fusiontestseller
+            createdByFullName: fusiontestSeller fusiontestSeller
+            createdByEmail: fusiontestSeller@equinix.com
+            createdDateTime: 2022-04-12 19:06:57.940000+00:00
+            updatedBy: fusiontestseller
+            updatedByFullName: fusiontestSeller fusiontestSeller
+            updatedByEmail: fusiontestSeller@equinix.com
+            updatedDateTime: 2022-04-12 19:11:04.017000+00:00
+          href: https://api.equinix.com/fabric/v4/serviceProfiles/ea4b5141-e4d2-49f1-9768-4ea6e215b37f?viewPoint=aSide
+          type: L2_PROFILE
+          name: Service Profile 2
+          uuid: ea4b5141-e4d2-49f1-9768-4ea6e215b37f
+          description: Sample_description
+          visibility: PUBLIC
+          allowedEmails:
+          - test@equinix.com
+          - testagain@equinix.com
+          accessPointTypeConfigs:
+          - type: COLO
+            uuid: f20c49cd-b022-4aeb-b3e4-49db4389aff3
+            supportedBandwidths:
+            - 100
+            - 500
+            allowRemoteConnections: false
+            allowCustomBandwidth: true
+            allowBandwidthAutoApproval: false
+            linkProtocolConfig:
+              encapsulationStrategy: CTAGED
+              reuseVlanSTag: false
+              encapsulation: DOT1Q
+            enableAutoGenerateServiceKey: false
+            connectionRedundancyRequired: false
+            selectiveRedundancy: false
+            apiConfig:
+              apiAvailable: false
+              bandwidthFromApi: false
+            connectionLabel: true1
+            authenticationKey:
+              required: false
+              label: Service Key
+          marketingInfo:
+            promotion: true
+          metros:
+          - code: SY
+            name: Sydney
+            ibxs:
+            - SY4
+            displayName: Sydney
+          selfProfile: true
+        pagination:
+          offset: 0
+          limit: 1
+          total: 52
+          next: /serviceProfiles?offset=1&limit=1
+    ServiceProfileUpdate:
+      value:
+        name: Service Profile 2
+        description: Sample_description
+        type: L2_PROFILE
+        notifications:
+        - emails:
+          - someone@sample.com
+          type: BANDWIDTH_ALERT
+        visibility: PUBLIC
+        allowedEmails:
+        - test@equinix.com
+        - testagain@equinix.com
+        ports:
+        - uuid: c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee
+          type: XF_PORT
+          location:
+            metroCode: SY
+        marketingInfo:
+          promotion: true
+        accessPointTypeConfigs:
+        - type: COLO
+          connectionRedundancyRequired: false
+          selectiveRedundancy: false
+          allowBandwidthAutoApproval: false
+          allowRemoteConnections: false
+          connectionLabel: true1
+          enableAutoGenerateServiceKey: false
+          bandwidthAlertThreshold: 10
+          allowCustomBandwidth: true
+          apiConfig:
+            apiAvailable: false
+            equinixManagedVlan: true
+            bandwidthFromApi: false
+            integrationId: null
+            equinixManagedPort: true
+          authenticationKey:
+            required: false
+            label: Service Key
+            description: XYZ
+          supportedBandwidths:
+          - 100
+          - 500
+    sp-401:
+      value:
+      - errorCode: EQ-3001207
+        errorMessage: Unauthorized user
+    sp-403-delete:
+      value:
+      - errorCode: EQ-3001034
+        errorMessage: You are not authorized to execute the requested action on the resource
+    ServiceProfileSearchWithPort:
+      value:
+        filter:
+          property: /ports/uuid
+          operator: '='
+          values:
+          - 23100b2d-234f-4425-ab5c-1449d4b806bf
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - direction: DESC
+          property: /changeLog/updatedDateTime
+    ServiceProfileActionRejectionRequest:
+      value:
+        type: PROFILE_UPDATE_REJECTION
+        description: Rejected the migration to public
+    sp-404-get:
+      value:
+      - errorCode: EQ-3001011
+        errorMessage: Invalid uuid
+    ServiceProfileSearchWithState:
+      value:
+        filter:
+          property: /state
+          operator: '='
+          values:
+          - ACTIVE
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - direction: DESC
+          property: /changeLog/updatedDateTime
+    ServiceProfilePatchResponseForVisibility:
+      value:
+        state: ACTIVE
+        account:
+          orgId: 91785
+          organizationName: testSeller-270010
+          globalOrgId: 0016u000003JZ4tAAG
+        change:
+          href: fabric/v4/serviceProfiles/ea4b5141-e4d2-49f1-9768-4ea6e215b37f/actions/9b9f8a9b-4583-4649-9d91-a48494f822a7
+          type: PROFILE_UPDATE_ACCEPTANCE
+          uuid: 9b9f8a9b-4583-4649-9d91-a48494f822a7
+          comments: Approved to migrate to public
+          createdDateTime: 2026-02-17 17:23:35.543000+00:00
+          data:
+          - op: replace
+            path: /visibility
+            value: PUBLIC
+        changeLog:
+          createdBy: fusiontestseller
+          createdByFullName: fusiontestSeller fusiontestSeller
+          createdByEmail: fusiontestSeller@equinix.com
+          createdDateTime: 2022-04-12 19:06:57.940000+00:00
+          updatedDateTime: 2022-04-12 19:11:04.017000+00:00
+        href: https://api.equinix.com/fabric/v4/serviceProfiles/ea4b5141-e4d2-49f1-9768-4ea6e215b37f
+        type: L2_PROFILE
+        name: Service Profile 2
+        uuid: ea4b5141-e4d2-49f1-9768-4ea6e215b37f
+        description: Sample_description
+        notifications:
+        - type: BANDWIDTH_ALERT
+          emails:
+          - someone@sample.com
+        - type: CONNECTION_APPROVAL
+          emails:
+          - someone@sample.com
+        - type: PROFILE_LIFECYCLE
+          emails:
+          - someone@sample.com
+        visibility: PRIVATE
+        tags:
+        - sample_tag
+        allowedEmails:
+        - test@equinix.com
+        - testagain@equinix.com
+        accessPointTypeConfigs:
+        - type: COLO
+          uuid: f20c49cd-b022-4aeb-b3e4-49db4389aff3
+          supportedBandwidths:
+          - 100
+          - 500
+          allowRemoteConnections: false
+          allowCustomBandwidth: true
+          bandwidthAlertThreshold: 10
+          allowBandwidthAutoApproval: false
+          linkProtocolConfig:
+            encapsulationStrategy: CTAGED
+            reuseVlanSTag: false
+            encapsulation: DOT1Q
+          enableAutoGenerateServiceKey: false
+          connectionRedundancyRequired: false
+          selectiveRedundancy: false
+          apiConfig:
+            apiAvailable: false
+            equinixManagedPort: true
+            equinixManagedVlan: true
+            allowOverSubscription: false
+            overSubscriptionLimit: 1
+            bandwidthFromApi: false
+          connectionLabel: true1
+          authenticationKey:
+            required: false
+            label: Service Key
+        marketingInfo:
+          promotion: true
+        ports:
+        - type: XF_PORT
+          uuid: c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee
+          location:
+            metroCode: SY
+        metros:
+        - code: SY
+          name: Sydney
+          ibxs:
+          - SY4
+          displayName: Sydney
+    sp-500:
+      value:
+      - errorCode: EQ-3001206
+        errorMessage: Internal Server Error
+    sp-403-create:
+      value:
+      - errorCode: EQ-3001036
+        errorMessage: You are not authorized to execute the requested action on the resource
+    sp-403-read:
+      value:
+      - errorCode: EQ-3001033
+        errorMessage: You are not authorized to execute the requested action on the resource
+    sp-400:
+      value:
+      - errorCode: EQ-3001015
+        errorMessage: Access point is not accessible
+      - errorCode: EQ-3001014
+        errorMessage: Redundant Service Profile requires at least one primary port and one secondary port in a metro
+      - errorCode: EQ-3001013
+        errorMessage: Some of the access point are duplicate
+      - errorCode: EQ-3001012
+        errorMessage: access point with same port encapsulation will be allowed in service profile request
+      - errorCode: EQ-3001019
+        errorMessage: If apiAvailable, then integrationId is mandatory
+      - errorCode: EQ-3001020
+        errorMessage: Speed from api required
+      - errorCode: EQ-3001021
+        errorMessage: Speedbands not allowed
+      - errorCode: EQ-3001112
+        errorMessage: API Integration should be enabled with Integration ID for deriving speed from API
+      - errorCode: EQ-3001023
+        errorMessage: Speed band length is invalid
+      - errorCode: EQ-3001024
+        errorMessage: Invalid api available
+      - errorCode: EQ-3001025
+        errorMessage: Seller port encapsulation cannot be DOT1Q if Auto generate service key is True
+      - errorCode: EQ-3001026
+        errorMessage: 'customFields[].options : must have values for customField with dataType=LIST'
+      - errorCode: EQ-3001027
+        errorMessage: Duplicate custom field lables
+      - errorCode: EQ-3001113
+        errorMessage: Service profile can be updated to ACTIVE or REJECTED
+      - errorCode: EQ-3001114
+        errorMessage: Some of the profile with the given id either not in valid state  or not exist in database
+      - errorCode: EQ-3001115
+        errorMessage: Unable to delete some of the profile because it does not exist
+      - errorCode: EQ-3001116
+        errorMessage: get metros call failed
+      - errorCode: EQ-3001028
+        errorMessage: Cannot change service profile type
+      - errorCode: EQ-3001029
+        errorMessage: Cannot change state if not admin user
+      - errorCode: EQ-3001030
+        errorMessage: Invalid Custom Field dataType
+      - errorCode: EQ-3001031
+        errorMessage: Invalid notification.type value
+      - errorCode: EQ-3001032
+        errorMessage: 'serviceProfile.type : unsupported value'
+      - errorCode: EQ-3001022
+        errorMessage: Only alphanumeric, hyphen(-) and underscore(_) characters are allowed in service profile name. Other special characters are not allowed
+      - errorCode: EQ-3001204
+        errorMessage: EPL ports are not supported
+    sp-403-update:
+      value:
+      - errorCode: EQ-3001035
+        errorMessage: You are not authorized to execute the requested action on the resource
+    ServiceProfileSearchWithProjectId:
+      value:
+        filter:
+          property: /project/projectId
+          operator: '='
+          values:
+          - e365ab86-0103-44a6-a08b-120c4374b000
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - direction: DESC
+          property: /changeLog/updatedDateTime
+    sp-400-search:
+      value:
+      - errorCode: EQ-3001022
+        errorMessage: INVALID_VALUE
+      - errorCode: EQ-3001202
+        errorMessage: Unsupported search property
+        details: 'Supported search properties are : /name,/uuid,/state,/metros/code,/visibility,/type'
+      - errorCode: EQ-3001202
+        errorMessage: Unsupported search property
+        details: 'Supported search operator is : ='
+      - errorCode: EQ-3001022
+        errorMessage: 'pagination.limit : must be greater than or equal to 1'
+        additionalInfo:
+        - property: pagination.limit
+          reason: must be greater than or equal to 1
+      - errorCode: EQ-3001022
+        errorMessage: 'pagination.offset : must be greater than or equal to 0'
+        additionalInfo:
+        - property: pagination.offset
+          reason: must be greater than or equal to 0
+      - errorCode: EQ-3001022
+        errorMessage: Unexpected value
+    ServiceProfilePatchResponse:
+      value:
+        state: ACTIVE
+        account:
+          orgId: 91785
+          organizationName: testSeller-270010
+          globalOrgId: 0016u000003JZ4tAAG
+        changeLog:
+          createdBy: fusiontestseller
+          createdByFullName: fusiontestSeller fusiontestSeller
+          createdByEmail: fusiontestSeller@equinix.com
+          createdDateTime: 2022-04-12 19:06:57.940000+00:00
+          updatedDateTime: 2022-04-12 19:11:04.017000+00:00
+        href: https://api.equinix.com/fabric/v4/serviceProfiles/ea4b5141-e4d2-49f1-9768-4ea6e215b37f
+        type: L2_PROFILE
+        name: Service Profile 2
+        uuid: ea4b5141-e4d2-49f1-9768-4ea6e215b37f
+        description: Sample_description
+        notifications:
+        - type: BANDWIDTH_ALERT
+          emails:
+          - someone@sample.com
+        - type: CONNECTION_APPROVAL
+          emails:
+          - someone@sample.com
+        - type: PROFILE_LIFECYCLE
+          emails:
+          - someone@sample.com
+        visibility: PUBLIC
+        tags:
+        - sample_tag
+        allowedEmails:
+        - test@equinix.com
+        - testagain@equinix.com
+        accessPointTypeConfigs:
+        - type: COLO
+          uuid: f20c49cd-b022-4aeb-b3e4-49db4389aff3
+          supportedBandwidths:
+          - 100
+          - 500
+          allowRemoteConnections: false
+          allowCustomBandwidth: true
+          bandwidthAlertThreshold: 10
+          allowBandwidthAutoApproval: false
+          linkProtocolConfig:
+            encapsulationStrategy: CTAGED
+            reuseVlanSTag: false
+            encapsulation: DOT1Q
+          enableAutoGenerateServiceKey: false
+          connectionRedundancyRequired: false
+          selectiveRedundancy: false
+          apiConfig:
+            apiAvailable: false
+            equinixManagedPort: true
+            equinixManagedVlan: true
+            allowOverSubscription: false
+            overSubscriptionLimit: 1
+            bandwidthFromApi: false
+          connectionLabel: true1
+          authenticationKey:
+            required: false
+            label: Service Key
+        marketingInfo:
+          promotion: true
+        ports:
+        - type: XF_PORT
+          uuid: c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee
+          location:
+            metroCode: SY
+        metros:
+        - code: SY
+          name: Sydney
+          ibxs:
+          - SY4
+          displayName: Sydney
+    ServiceProfileCreateResponse:
+      value:
+        state: PENDING_APPROVAL
+        account:
+          orgId: 91785
+          globalOrgId: 0016u000003JZ4tAAG
+        changeLog:
+          createdDateTime: 2022-04-12 19:06:57.940000+00:00
+        href: https://api.equinix.com/fabric/v4/serviceProfiles/ea4b5141-e4d2-49f1-9768-4ea6e215b37f
+        type: L2_PROFILE
+        name: Service Profile 1
+        uuid: ea4b5141-e4d2-49f1-9768-4ea6e215b37f
+        description: Sample_description
+        notifications:
+        - type: BANDWIDTH_ALERT
+          emails:
+          - someone@sample.com
+        - type: CONNECTION_APPROVAL
+          emails:
+          - someone@sample.com
+        - type: PROFILE_LIFECYCLE
+          emails:
+          - someone@sample.com
+        visibility: PUBLIC
+        allowedEmails:
+        - test@equinix.com
+        - testagain@equinix.com
+        accessPointTypeConfigs:
+        - type: COLO
+          uuid: f20c49cd-b022-4aeb-b3e4-49db4389aff3
+          supportedBandwidths:
+          - 100
+          - 500
+          allowRemoteConnections: false
+          allowCustomBandwidth: true
+          bandwidthAlertThreshold: 10
+          allowBandwidthAutoApproval: false
+          linkProtocolConfig:
+            encapsulationStrategy: CTAGED
+            reuseVlanSTag: false
+            encapsulation: DOT1Q
+          enableAutoGenerateServiceKey: false
+          connectionRedundancyRequired: false
+          selectiveRedundancy: false
+          apiConfig:
+            apiAvailable: false
+            equinixManagedPort: true
+            equinixManagedVlan: true
+            allowOverSubscription: false
+            overSubscriptionLimit: 1
+            bandwidthFromApi: false
+          connectionLabel: true1
+          authenticationKey:
+            required: false
+            label: Service Key
+        marketingInfo:
+          promotion: true
+        ports:
+        - type: XF_PORT
+          uuid: c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee
+          location:
+            metroCode: SY
+        metros:
+        - code: SY
+          ibxs:
+          - SY4
+    ServiceProfileSearchWithVisibility:
+      value:
+        filter:
+          property: /visibility
+          operator: '='
+          values:
+          - PUBLIC
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - direction: DESC
+          property: /changeLog/updatedDateTime
+    ServiceProfileDeleteResponse:
+      value:
+        state: DELETED
+        account:
+          orgId: 91785
+          organizationName: testSeller-270010
+          globalOrgId: 0016u000003JZ4tAAG
+        changeLog:
+          createdBy: fusiontestseller
+          createdByFullName: fusiontestSeller fusiontestSeller
+          createdByEmail: fusiontestSeller@equinix.com
+          createdDateTime: 2022-04-12 19:06:57.940000+00:00
+          updatedBy: fusiontestseller
+          updatedByFullName: fusiontestSeller fusiontestSeller
+          updatedByEmail: fusiontestSeller@equinix.com
+          updatedDateTime: 2022-04-12 21:53:57.816000+00:00
+        href: https://api.equinix.com/fabric/v4/serviceProfiles/ea4b5141-e4d2-49f1-9768-4ea6e215b37f
+        type: L2_PROFILE
+        name: Service Profile 2
+        uuid: ea4b5141-e4d2-49f1-9768-4ea6e215b37f
+        description: Sample_description
+        notifications:
+        - type: BANDWIDTH_ALERT
+          emails:
+          - someone@sample.com
+        - type: CONNECTION_APPROVAL
+          emails:
+          - someone@sample.com
+        - type: PROFILE_LIFECYCLE
+          emails:
+          - someone@sample.com
+        tags:
+        - sample_tag
+        visibility: PUBLIC
+        allowedEmails:
+        - test@equinix.com
+        - testagain@equinix.com
+        accessPointTypeConfigs:
+        - type: COLO
+          uuid: f20c49cd-b022-4aeb-b3e4-49db4389aff3
+          supportedBandwidths:
+          - 100
+          - 500
+          allowRemoteConnections: false
+          allowCustomBandwidth: true
+          bandwidthAlertThreshold: 10
+          allowBandwidthAutoApproval: false
+          linkProtocolConfig:
+            encapsulationStrategy: CTAGED
+            reuseVlanSTag: false
+            encapsulation: DOT1Q
+          enableAutoGenerateServiceKey: false
+          connectionRedundancyRequired: false
+          selectiveRedundancy: false
+          apiConfig:
+            apiAvailable: false
+            equinixManagedPort: true
+            equinixManagedVlan: true
+            allowOverSubscription: false
+            overSubscriptionLimit: 1
+            bandwidthFromApi: false
+          connectionLabel: true1
+          authenticationKey:
+            required: false
+            label: Service Key
+        marketingInfo:
+          promotion: true
+        ports:
+        - type: XF_PORT
+          uuid: c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee
+          location:
+            metroCode: SY
+        metros:
+        - code: SY
+          name: Sydney
+          ibxs:
+          - SY4
+          displayName: Sydney
+    ServiceProfileSearchWithName:
+      value:
+        filter:
+          property: /name
+          operator: '='
+          values:
+          - My-Service-Profile-1
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - direction: DESC
+          property: /changeLog/updatedDateTime
+    sp-400-delete:
+      value:
+      - errorCode: EQ-3001115
+        errorMessage: Unable to delete some of the profile because it does not exist
+    ServiceProfilePutResponse:
+      value:
+        state: ACTIVE
+        account:
+          orgId: 91785
+          organizationName: testSeller-270010
+          globalOrgId: 0016u000003JZ4tAAG
+        changeLog:
+          createdBy: fusiontestseller
+          createdByFullName: fusiontestSeller fusiontestSeller
+          createdByEmail: fusiontestSeller@equinix.com
+          createdDateTime: 2022-04-12 19:06:57.940000+00:00
+          updatedDateTime: 2022-04-12 19:11:04.017000+00:00
+        href: https://api.equinix.com/fabric/v4/serviceProfiles/ea4b5141-e4d2-49f1-9768-4ea6e215b37f
+        type: L2_PROFILE
+        name: Service Profile 2
+        uuid: ea4b5141-e4d2-49f1-9768-4ea6e215b37f
+        description: Sample_description
+        notifications:
+        - type: BANDWIDTH_ALERT
+          emails:
+          - someone@sample.com
+        - type: CONNECTION_APPROVAL
+          emails:
+          - someone@sample.com
+        - type: PROFILE_LIFECYCLE
+          emails:
+          - someone@sample.com
+        visibility: PUBLIC
+        allowedEmails:
+        - test@equinix.com
+        - testagain@equinix.com
+        accessPointTypeConfigs:
+        - type: COLO
+          uuid: f20c49cd-b022-4aeb-b3e4-49db4389aff3
+          supportedBandwidths:
+          - 100
+          - 500
+          allowRemoteConnections: false
+          allowCustomBandwidth: true
+          bandwidthAlertThreshold: 10
+          allowBandwidthAutoApproval: false
+          linkProtocolConfig:
+            encapsulationStrategy: CTAGED
+            reuseVlanSTag: false
+            encapsulation: DOT1Q
+          enableAutoGenerateServiceKey: false
+          connectionRedundancyRequired: false
+          selectiveRedundancy: false
+          apiConfig:
+            apiAvailable: false
+            equinixManagedPort: true
+            equinixManagedVlan: true
+            allowOverSubscription: false
+            overSubscriptionLimit: 1
+            bandwidthFromApi: false
+          connectionLabel: true1
+          authenticationKey:
+            required: false
+            label: Service Key
+        marketingInfo:
+          promotion: true
+        ports:
+        - type: XF_PORT
+          uuid: c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee
+          location:
+            metroCode: SY
+        metros:
+        - code: SY
+          name: Sydney
+          ibxs:
+          - SY4
+          displayName: Sydney
+    ServiceProfileSearchWithAnd:
+      value:
+        filter:
+          and:
+          - property: /state
+            operator: '='
+            values:
+            - ACTIVE
+          - property: /visibility
+            operator: '='
+            values:
+            - PRIVATE
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - direction: DESC
+          property: /changeLog/updatedDateTime
+    ServiceProfileSearchWithMetro:
+      value:
+        filter:
+          and:
+          - property: /type
+            operator: '='
+            values:
+            - IX_PRIVATE_PROFILE
+          - property: /metros/code
+            operator: '='
+            values:
+            - SG
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - direction: DESC
+          property: /changeLog/updatedDateTime
+    SellerServiceProfilesResponse:
+      value:
+        data:
+        - state: ACTIVE
+          account:
+            orgId: 91785
+            organizationName: testSeller-270010
+            globalOrgId: 0016u000003JZ4tAAG
+          changeLog:
+            createdBy: fusiontestseller
+            createdByFullName: fusiontestSeller fusiontestSeller
+            createdByEmail: fusiontestSeller@equinix.com
+            createdDateTime: 2022-04-12 19:06:57.940000+00:00
+            updatedBy: fusiontestseller
+            updatedByFullName: fusiontestSeller fusiontestSeller
+            updatedByEmail: fusiontestSeller@equinix.com
+            updatedDateTime: 2022-04-12 19:11:04.017000+00:00
+          href: https://api.equinix.com/fabric/v4/serviceProfiles/ea4b5141-e4d2-49f1-9768-4ea6e215b37f?viewPoint=zSide
+          type: L2_PROFILE
+          name: Service Profile 2
+          uuid: ea4b5141-e4d2-49f1-9768-4ea6e215b37f
+          description: Sample_description
+          notifications:
+          - type: BANDWIDTH_ALERT
+            emails:
+            - someone@sample.com
+          - type: CONNECTION_APPROVAL
+            emails:
+            - someone@sample.com
+          - type: PROFILE_LIFECYCLE
+            emails:
+            - someone@sample.com
+          visibility: PUBLIC
+          allowedEmails:
+          - test@equinix.com
+          - testagain@equinix.com
+          accessPointTypeConfigs:
+          - type: COLO
+            uuid: f20c49cd-b022-4aeb-b3e4-49db4389aff3
+            supportedBandwidths:
+            - 100
+            - 500
+            allowRemoteConnections: false
+            allowCustomBandwidth: true
+            bandwidthAlertThreshold: 10
+            allowBandwidthAutoApproval: false
+            linkProtocolConfig:
+              encapsulationStrategy: CTAGED
+              reuseVlanSTag: false
+              encapsulation: DOT1Q
+            enableAutoGenerateServiceKey: false
+            connectionRedundancyRequired: false
+            selectiveRedundancy: false
+            apiConfig:
+              apiAvailable: false
+              equinixManagedPort: true
+              equinixManagedVlan: true
+              allowOverSubscription: false
+              overSubscriptionLimit: 1
+              bandwidthFromApi: false
+            connectionLabel: true1
+            authenticationKey:
+              required: false
+              label: Service Key
+          marketingInfo:
+            promotion: true
+          ports:
+          - type: XF_PORT
+            uuid: c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee
+            location:
+              metroCode: SY
+          metros:
+          - code: SY
+            name: Sydney
+            ibxs:
+            - SY4
+            displayName: Sydney
+        pagination:
+          offset: 0
+          limit: 1
+          total: 31898
+          next: /serviceProfiles?offset=1&limit=1
+    ServiceProfilePatchRequestForVisibility:
+      value:
+      - op: replace
+        path: /visibility
+        value: PUBLIC
+    ServiceProfileActionRequest:
+      value:
+        type: PROFILE_UPDATE_ACCEPTANCE
+        description: Approved to migrate to public
+    ServiceProfileSearchWithUuid:
+      value:
+        filter:
+          property: /uuid
+          operator: '='
+          values:
+          - 13100b2d-234f-4425-ab5c-1449d4b806be
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - direction: DESC
+          property: /changeLog/updatedDateTime
+    ServiceProfilePatchRequest:
+      value:
+      - op: add
+        path: /tags
+        value:
+        - sample_tag
+    SellerServiceProfileResponse:
+      value:
+        state: ACTIVE
+        account:
+          orgId: 91785
+          organizationName: testSeller-270010
+          globalOrgId: 0016u000003JZ4tAAG
+        changeLog:
+          createdBy: fusiontestseller
+          createdByFullName: fusiontestSeller fusiontestSeller
+          createdByEmail: fusiontestSeller@equinix.com
+          createdDateTime: 2022-04-12 19:06:57.940000+00:00
+          updatedBy: fusiontestseller
+          updatedByFullName: fusiontestSeller fusiontestSeller
+          updatedByEmail: fusiontestSeller@equinix.com
+          updatedDateTime: 2022-04-12 19:11:04.017000+00:00
+        href: https://api.equinix.com/fabric/v4/serviceProfiles/ea4b5141-e4d2-49f1-9768-4ea6e215b37f?viewPoint=zSide
+        type: L2_PROFILE
+        name: Service Profile 2
+        uuid: ea4b5141-e4d2-49f1-9768-4ea6e215b37f
+        description: Sample_description
+        notifications:
+        - type: BANDWIDTH_ALERT
+          emails:
+          - someone@sample.com
+        - type: CONNECTION_APPROVAL
+          emails:
+          - someone@sample.com
+        - type: PROFILE_LIFECYCLE
+          emails:
+          - someone@sample.com
+        visibility: PUBLIC
+        allowedEmails:
+        - test@equinix.com
+        - testagain@equinix.com
+        accessPointTypeConfigs:
+        - type: COLO
+          uuid: f20c49cd-b022-4aeb-b3e4-49db4389aff3
+          supportedBandwidths:
+          - 100
+          - 500
+          allowRemoteConnections: false
+          allowCustomBandwidth: true
+          bandwidthAlertThreshold: 10
+          allowBandwidthAutoApproval: false
+          linkProtocolConfig:
+            encapsulationStrategy: CTAGED
+            reuseVlanSTag: false
+            encapsulation: DOT1Q
+          enableAutoGenerateServiceKey: false
+          connectionRedundancyRequired: false
+          selectiveRedundancy: false
+          apiConfig:
+            apiAvailable: false
+            equinixManagedPort: true
+            equinixManagedVlan: true
+            allowOverSubscription: false
+            overSubscriptionLimit: 1
+            bandwidthFromApi: false
+          connectionLabel: true1
+          authenticationKey:
+            required: false
+            label: Service Key
+        marketingInfo:
+          promotion: true
+        ports:
+        - type: XF_PORT
+          uuid: c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee
+          location:
+            metroCode: SY
+        metros:
+        - code: SY
+          name: Sydney
+          ibxs:
+          - SY4
+          displayName: Sydney
+    ServiceProfileResponse:
+      value:
+        state: ACTIVE
+        account:
+          organizationName: testSeller-270010
+        changeLog:
+          createdBy: fusiontestseller
+          createdByFullName: fusiontestSeller fusiontestSeller
+          createdByEmail: fusiontestSeller@equinix.com
+          createdDateTime: 2022-04-12 19:06:57.940000+00:00
+          updatedBy: fusiontestseller
+          updatedByFullName: fusiontestSeller fusiontestSeller
+          updatedByEmail: fusiontestSeller@equinix.com
+          updatedDateTime: 2022-04-12 19:11:04.017000+00:00
+        href: https://api.equinix.com/fabric/v4/serviceProfiles/ea4b5141-e4d2-49f1-9768-4ea6e215b37f?viewPoint=aSide
+        type: L2_PROFILE
+        name: Service Profile 2
+        uuid: ea4b5141-e4d2-49f1-9768-4ea6e215b37f
+        description: Sample_description
+        visibility: PUBLIC
+        allowedEmails:
+        - test@equinix.com
+        - testagain@equinix.com
+        accessPointTypeConfigs:
+        - type: COLO
+          uuid: f20c49cd-b022-4aeb-b3e4-49db4389aff3
+          supportedBandwidths:
+          - 100
+          - 500
+          allowRemoteConnections: false
+          allowCustomBandwidth: true
+          allowBandwidthAutoApproval: false
+          linkProtocolConfig:
+            encapsulationStrategy: CTAGED
+            reuseVlanSTag: false
+            encapsulation: DOT1Q
+          enableAutoGenerateServiceKey: false
+          connectionRedundancyRequired: false
+          selectiveRedundancy: false
+          apiConfig:
+            apiAvailable: false
+            bandwidthFromApi: false
+          connectionLabel: true1
+          authenticationKey:
+            required: false
+            label: Service Key
+        marketingInfo:
+          promotion: true
+        metros:
+        - code: SY
+          name: Sydney
+          ibxs:
+          - SY4
+          displayName: Sydney
+        selfProfile: true
+  headers:
+    ETag:
+      description: response header - identifier for a specific version of a resource.
+      schema:
+        type: string
+  schemas:
+    Bandwidths:
+      type: array
+      items:
+        $ref: '#/components/schemas/Bandwidth'
+    ServiceProfileRequest:
+      required:
+      - description
+      - name
+      - type
+      type: object
+      properties:
+        project:
+          $ref: '#/components/schemas/Project'
+      description: 'Service Profile is a software definition for a named provider service and it''s network connectivity requirements.
+
+        This includes the basic marketing information and one
+
+        or more sets of access points (a set per each access point type) fulfilling the provider service.
+
+        '
+      allOf:
+      - $ref: '#/components/schemas/SimplifiedServiceProfile'
+    ServiceProfileSortCriteria:
+      type: object
+      properties:
+        direction:
+          $ref: '#/components/schemas/ServiceProfileSortDirection'
+        property:
+          $ref: '#/components/schemas/ServiceProfileSortBy'
+    ServiceProfileTypeEnum:
+      type: string
+      description: Service profile type
+      example: L2_PROFILE
+      enum:
+      - L2_PROFILE
+      - L3_PROFILE
+      - IA_PROFILE
+      - IX_PROFILE
+      x-eqx-api-linter-skip-rules:
+      - 40
+    ProcessStep:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Service profile custom step title
+        subTitle:
+          type: string
+          description: Service profile custom step sub title
+        description:
+          type: string
+          description: Service profile custom step description
+      description: Definition of customized step while making connection
+    AddOperation:
+      required:
+      - op
+      - path
+      - value
+      type: object
+      properties:
+        op:
+          $ref: '#/components/schemas/OpEnum'
+        path:
+          $ref: '#/components/schemas/Path'
+        value:
+          type: object
+          description: value to add
+      description: Add Sub-Resource to the existing model
+    ApiConfig:
+      type: object
+      properties:
+        apiAvailable:
+          type: boolean
+          description: Setting indicating whether the API is available (true) or not (false).
+          example: true
+          default: false
+        integrationId:
+          type: string
+        equinixManagedPort:
+          type: boolean
+          description: Setting indicating that the port is managed by Equinix (true) or not (false).
+          example: true
+          default: false
+        equinixManagedVlan:
+          type: boolean
+          description: Setting indicating that the VLAN is managed by Equinix (true) or not (false).
+          example: true
+          default: false
+        allowOverSubscription:
+          type: boolean
+          description: 'Setting showing that oversubscription support is available (true) or not (false). The default is false.
+
+            Oversubscription is the sale of more than the available network bandwidth. This practice is common
+
+            and legitimate. After all, many customers use less bandwidth than they''ve purchased.
+
+            And network users don''t consume bandwidth all at the same time. The leftover bandwidth can be sold to
+
+            other customers. When demand surges, operational and engineering resources can be shifted to
+
+            accommodate the load.
+
+            '
+          example: false
+          default: false
+        overSubscriptionLimit:
+          maximum: 20
+          minimum: 1
+          type: integer
+          description: A cap on oversubscription.
+          example: 1
+          default: 1
+        bandwidthFromApi:
+          type: boolean
+          default: false
+      description: Configuration for API based Integration for Service Profile
+    ServiceProfileActionResponse:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Service Profile Action URI
+          format: uri
+          readOnly: true
+        type:
+          type: string
+          description: 'Action type. Example values: PROFILE_UPDATE_ACCEPTANCE, PROFILE_UPDATE_REJECTION'
+          example: PROFILE_UPDATE_ACCEPTANCE
+        uuid:
+          type: string
+          description: Equinix-assigned action identifier
+          format: uuid
+        comments:
+          type: string
+          description: Action comments
+          example: Approved to migrate to public
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+      description: Service Profile Action Response
+    ServiceProfileAccessPointTypeVD:
+      required:
+      - type
+      type: object
+      properties:
+        uuid:
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceProfileAccessPointTypeEnum'
+        supportedBandwidths:
+          $ref: '#/components/schemas/Bandwidths'
+        allowRemoteConnections:
+          type: boolean
+          description: Allow remote connections to Service Profile
+          example: true
+        allowCustomBandwidth:
+          type: boolean
+          example: true
+      additionalProperties: false
+      description: VirtualDevice Access Point Type
+    ServiceProfileLinkProtocolConfig:
+      type: object
+      properties:
+        encapsulationStrategy:
+          type: string
+          description: was tagType - missing on wiki
+          enum:
+          - CTAGED
+          - BOTH
+          - NAMED
+        namedTags:
+          maxItems: 64
+          type: array
+          items:
+            type: string
+        vlanCTagLabel:
+          type: string
+          description: was ctagLabel
+        reuseVlanSTag:
+          type: boolean
+          example: true
+          default: false
+        encapsulation:
+          type: string
+          description: Port encapsulation - Derived response attribute. Ignored on request payloads.
+          enum:
+          - QINQ
+          - DOT1Q
+          - UNTAGGED
+      description: Configuration for dot1q to qinq translation support
+    PaginationRequest:
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first element.
+          default: 0
+        limit:
+          minimum: 1
+          type: integer
+          description: Number of elements to be requested per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+      description: Pagination request information
+    ServiceProfileId:
+      type: string
+      description: Service Profile UUID
+      format: uuid
+    ServiceMetro:
+      type: object
+      properties:
+        code:
+          type: string
+          description: metro code
+        name:
+          type: string
+          description: metro name
+        vcBandwidthMax:
+          type: integer
+          description: max VC speed supported in Mbps
+        ibxs:
+          type: array
+          items:
+            type: string
+            description: ibx codes
+        inTrail:
+          type: boolean
+        displayName:
+          type: string
+          description: service metro display name
+        sellerRegions:
+          type: object
+          additionalProperties:
+            type: string
+    ServiceProfileSimpleExpression:
+      type: object
+      properties:
+        property:
+          type: string
+          description: "Possible field names to use on filters:\n * `/name` - Service Profile name\n * `/uuid` - Service Profile uuid\n * `/state` - Service Profile status\n * `/metros/code` - Service Profile metro code\n * `/visibility` - Service Profile package\n * `/type` - Service Profile package\n * `/project/projectId` - Service Profile project id\n"
+          example: /name
+        operator:
+          type: string
+          description: "Possible operators to use on filters:\n * `=` - equal\n"
+          example: '='
+        values:
+          type: array
+          items:
+            type: string
+            example: ServiceProfile-1
+    ServiceProfileMetadata:
+      type: object
+      properties:
+        props:
+          type: string
+        regEx:
+          type: string
+        regExMsg:
+          type: string
+        vlanRangeMaxValue:
+          type: integer
+        vlanRangeMinValue:
+          type: integer
+        maxQinq:
+          type: string
+        maxDot1q:
+          type: integer
+        variableBilling:
+          type: boolean
+        globalOrganization:
+          type: string
+        limitAuthKeyConn:
+          type: boolean
+        allowSecondaryLocation:
+          type: boolean
+        redundantProfileId:
+          type: string
+        allowVcMigration:
+          type: boolean
+        connectionEditable:
+          type: boolean
+        releaseVlan:
+          type: boolean
+        maxConnectionsOnPort:
+          type: integer
+        portAssignmentStrategy:
+          type: string
+        eqxManagedPort:
+          type: boolean
+        connectionNameEditable:
+          type: boolean
+      description: Metadata. Response attribute. Ignored on request payload.
+    ServiceProfileSortDirection:
+      type: string
+      description: Sorting direction
+      default: DESC
+      enum:
+      - DESC
+      - ASC
+    ServiceProfileVisibilityEnum:
+      type: string
+      enum:
+      - PRIVATE
+      - PUBLIC
+    ServiceProfileChange:
+      required:
+      - createdDateTime
+      - type
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Uniquely identifies a change
+        type:
+          type: string
+          description: Type of change
+          example: SERVICE_PROFILE_VISIBILITY_UPDATE
+        status:
+          type: string
+          description: Current outcome of the change flow
+          enum:
+          - APPROVED
+          - COMPLETED
+          - FAILED
+          - REJECTED
+          - REQUESTED
+          - SUBMITTED_FOR_APPROVAL
+        createdDateTime:
+          type: string
+          description: Set when change flow starts
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedDateTime:
+          type: string
+          description: Set when change object is updated
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        information:
+          type: string
+          description: Additional information
+        data:
+          $ref: '#/components/schemas/JsonPatch_1'
+      description: Current state of latest service profile change
+    Changelog:
+      type: object
+      properties:
+        createdBy:
+          type: string
+          description: Created by User Key
+          example: johnsmith
+        createdByFullName:
+          type: string
+          description: Created by User Full Name
+          example: John Smith
+        createdByEmail:
+          type: string
+          description: Created by User Email Address
+          example: john.smith@example.com
+        createdDateTime:
+          type: string
+          description: Created by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedBy:
+          type: string
+          description: Updated by User Key
+          example: johnsmith
+        updatedByFullName:
+          type: string
+          description: Updated by User Full Name
+          example: John Smith
+        updatedByEmail:
+          type: string
+          description: Updated by User Email Address
+          example: john.smith@example.com
+        updatedDateTime:
+          type: string
+          description: Updated by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        deletedBy:
+          type: string
+          description: Deleted by User Key
+          example: johnsmith
+        deletedByFullName:
+          type: string
+          description: Deleted by User Full Name
+          example: John Smith
+        deletedByEmail:
+          type: string
+          description: Deleted by User Email Address
+          example: john.smith@example.com
+        deletedDateTime:
+          type: string
+          description: Deleted by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+      description: Change log
+    ServiceProfileAccessPointVD:
+      required:
+      - type
+      - uuid
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - VD
+        uuid:
+          type: string
+          format: uuid
+          example: 94662143-e21b-4098-bfcf-e9416f47eae1
+        location:
+          $ref: '#/components/schemas/SimplifiedLocation'
+        interfaceUuid:
+          type: string
+          format: uuid
+          example: 94662143-e21b-4098-bfcf-e9416f47eae1
+      description: Virtual Device Point
+    ServiceProfiles:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceProfile'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      description: Service Profiles
+    ServiceMetros:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceMetro'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      description: Service Profile Metros
+    ReplaceOperation:
+      required:
+      - op
+      - path
+      - value
+      type: object
+      properties:
+        op:
+          $ref: '#/components/schemas/OpEnum'
+        path:
+          $ref: '#/components/schemas/Path'
+        value:
+          type: object
+          description: value to replace with
+      description: Replace attribute value or sub-resource in the existing model
+    ServiceProfileSortBy:
+      type: string
+      description: Possible field names to use on sorting
+      default: /changeLog/updatedDateTime
+      enum:
+      - /name
+      - /state
+      - /changeLog/createdDateTime
+      - /changeLog/updatedDateTime
+    Tags:
+      type: array
+      items:
+        type: string
+    JsonPatchOperation:
+      type: object
+      description: Service Profile Access Points
+      oneOf:
+      - $ref: '#/components/schemas/AddOperation'
+      - $ref: '#/components/schemas/RemoveOperation'
+      - $ref: '#/components/schemas/ReplaceOperation'
+    ServiceProfileAccessPointTypeEnum:
+      type: string
+      description: Access point type
+      enum:
+      - VD
+      - COLO
+    SimplifiedNotification:
+      required:
+      - emails
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          description: Notification Type
+          example: BANDWIDTH_ALERT
+          enum:
+          - NOTIFICATION
+          - BANDWIDTH_ALERT
+          - CONNECTION_APPROVAL
+          - PROFILE_LIFECYCLE
+          - ALL
+          - SALES_REP_NOTIFICATIONS
+          - TECHNICAL
+          - ORDERING
+        sendInterval:
+          type: string
+        emails:
+          type: array
+          description: Array of contact emails
+          items:
+            type: string
+            format: email
+        registeredUsers:
+          type: array
+          description: Array of registered users
+          items:
+            type: string
+    SimplifiedLocation:
+      type: object
+      properties:
+        metroHref:
+          type: string
+          example: https://api.equinix.com/fabric/v4/metros/AM
+        region:
+          type: string
+          example: AMER, APAC, EMEA
+        metroName:
+          type: string
+          example: Amsterdam
+        metroCode:
+          type: string
+          example: AM
+        ibx:
+          type: string
+          example: AM1
+          deprecated: true
+    JsonPatch_1:
+      type: array
+      items:
+        $ref: '#/components/schemas/JsonPatchOperation'
+    Bandwidth:
+      type: integer
+      description: speed in Mbps
+      example: 50
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    ServiceProfileStateEnum:
+      type: string
+      description: Equinix assigned state.
+      example: ACTIVE
+      enum:
+      - ACTIVE
+      - PENDING_APPROVAL
+      - DELETED
+      - REJECTED
+    ServiceProfileAndFilter:
+      type: object
+      properties:
+        and:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceProfileSimpleExpression'
+    ServiceProfileAccessPointCOLO:
+      required:
+      - type
+      - uuid
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - XF_PORT
+          - IX_PORT
+        uuid:
+          type: string
+          format: uuid
+          example: 94662143-e21b-4098-bfcf-e9416f47eae1
+        location:
+          $ref: '#/components/schemas/SimplifiedLocation'
+        sellerRegion:
+          type: string
+        sellerRegionDescription:
+          type: string
+        crossConnectId:
+          type: string
+      description: Colo Access Point
+    ServiceProfileAccessPointType:
+      type: object
+      description: Access Point Type
+      oneOf:
+      - $ref: '#/components/schemas/ServiceProfileAccessPointTypeCOLO'
+      - $ref: '#/components/schemas/ServiceProfileAccessPointTypeVD'
+    ServiceProfileActionRequest:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'Action type. Example values: PROFILE_UPDATE_ACCEPTANCE, PROFILE_UPDATE_REJECTION'
+          example: PROFILE_UPDATE_ACCEPTANCE
+        description:
+          type: string
+          description: Action description
+          example: Approved to migrate to public
+      description: Service Profile Action Request
+    ServiceProfileFilter:
+      type: object
+      anyOf:
+      - $ref: '#/components/schemas/ServiceProfileSimpleExpression'
+      - $ref: '#/components/schemas/ServiceProfileAndFilter'
+    CustomField:
+      required:
+      - dataType
+      - isRequired
+      - label
+      properties:
+        label:
+          type: string
+          example: Account Number
+        description:
+          type: string
+          example: Provide a valid account number
+        required:
+          type: boolean
+          example: true
+        dataType:
+          type: string
+          enum:
+          - STRING
+          - LIST
+          - NUMBER
+        options:
+          type: array
+          items:
+            type: string
+        captureInEmail:
+          type: boolean
+          description: capture this field as a part of email notification
+      description: Define Custom Attributes
+    Path:
+      type: string
+      description: A JSON Pointer path.
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    ServiceProfile:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/ServiceProfileStateEnum'
+        account:
+          description: Seller Account for Service Profile.
+          allOf:
+          - $ref: '#/components/schemas/SimplifiedAccount'
+          - type: object
+        project:
+          $ref: '#/components/schemas/Project'
+        change:
+          $ref: '#/components/schemas/ServiceProfileChange'
+        changeLog:
+          description: Seller Account for Service Profile.
+          allOf:
+          - $ref: '#/components/schemas/Changelog'
+          - type: object
+      description: 'Service Profile is a software definition for a named provider service and it''s network connectivity requirements.
+
+        This includes the basic marketing information and one
+
+        or more sets of access points (a set per each access point type) fulfilling the provider service.
+
+        '
+      allOf:
+      - $ref: '#/components/schemas/SimplifiedServiceProfile'
+    SimplifiedServiceProfile:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Service Profile URI response attribute
+          format: uri
+          readOnly: true
+        type:
+          $ref: '#/components/schemas/ServiceProfileTypeEnum'
+        name:
+          maxLength: 50
+          type: string
+          description: Customer-assigned service profile name
+          example: Sample Service Profile
+        uuid:
+          type: string
+          description: Equinix-assigned service profile identifier
+          format: uuid
+        description:
+          type: string
+          description: User-provided service description should be of maximum length 375
+          example: offering connectivity to my-network
+        notifications:
+          type: array
+          description: Recipients of notifications on service profile change
+          items:
+            $ref: '#/components/schemas/SimplifiedNotification'
+        tags:
+          $ref: '#/components/schemas/Tags'
+        visibility:
+          $ref: '#/components/schemas/ServiceProfileVisibilityEnum'
+        allowedEmails:
+          type: array
+          items:
+            type: string
+            format: email
+        accessPointTypeConfigs:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceProfileAccessPointType'
+        customFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomField'
+        marketingInfo:
+          $ref: '#/components/schemas/MarketingInfo'
+        ports:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceProfileAccessPointCOLO'
+        virtualDevices:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceProfileAccessPointVD'
+        metros:
+          type: array
+          description: Derived response attribute.
+          items:
+            $ref: '#/components/schemas/ServiceMetro'
+        selfProfile:
+          type: boolean
+          description: response attribute indicates whether the profile belongs to the same organization as the api-invoker.
+        projectId:
+          type: string
+      description: 'Service Profile is a software definition for a named provider service and it''s network connectivity requirements.
+
+        This includes the basic marketing information and one
+
+        or more sets of access points (a set per each access point type) fulfilling the provider service.
+
+        '
+    MarketingInfo:
+      type: object
+      properties:
+        logo:
+          type: string
+          description: Logo file name
+        promotion:
+          type: boolean
+          description: Profile promotion on marketplace
+        processSteps:
+          maxItems: 3
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessStep'
+    ServiceProfileAccessPointTypeCOLO:
+      required:
+      - type
+      type: object
+      properties:
+        uuid:
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceProfileAccessPointTypeEnum'
+        supportedBandwidths:
+          $ref: '#/components/schemas/Bandwidths'
+        allowRemoteConnections:
+          type: boolean
+          description: Setting to allow or prohibit remote connections to the service profile.
+          example: true
+          default: false
+        allowCustomBandwidth:
+          type: boolean
+          description: Setting to enable or disable the ability of the buyer to customize the bandwidth.
+          example: true
+          default: false
+        bandwidthAlertThreshold:
+          type: number
+          description: percentage of port bandwidth at which an allocation alert is generated - missing on wiki.
+        allowBandwidthAutoApproval:
+          type: boolean
+          description: Setting to enable or disable the ability of the buyer to change connection bandwidth without approval of the seller.
+          default: false
+        allowBandwidthUpgrade:
+          type: boolean
+          description: Availability of a bandwidth upgrade. The default is false.
+        linkProtocolConfig:
+          $ref: '#/components/schemas/ServiceProfileLinkProtocolConfig'
+        enableAutoGenerateServiceKey:
+          type: boolean
+          description: for verizon only.
+        connectionRedundancyRequired:
+          type: boolean
+          description: Mandate redundant connections
+          example: true
+          default: false
+        selectiveRedundancy:
+          type: boolean
+          description: Optional redundant connections
+          example: true
+          default: false
+        apiConfig:
+          $ref: '#/components/schemas/ApiConfig'
+        connectionLabel:
+          type: string
+          description: custom name for "Connection"
+        authenticationKey:
+          $ref: '#/components/schemas/AuthenticationKey'
+        metadata:
+          $ref: '#/components/schemas/ServiceProfileMetadata'
+      description: Colo Access Point Type
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
+    ServiceProfileSearchRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/ServiceProfileFilter'
+        pagination:
+          $ref: '#/components/schemas/PaginationRequest'
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceProfileSortCriteria'
+      description: Search requests containing criteria
+    SimplifiedAccount:
+      type: object
+      properties:
+        accountNumber:
+          type: integer
+          description: Account number
+          format: int64
+        accountName:
+          type: string
+          description: Account name
+        orgId:
+          type: integer
+          description: Customer organization identifier
+          format: int64
+        organizationName:
+          type: string
+          description: Customer organization name
+        globalOrgId:
+          type: string
+          description: Global organization identifier
+        globalOrganizationName:
+          type: string
+          description: Global organization name
+        ucmId:
+          type: string
+          description: Account ucmId
+        globalCustId:
+          type: string
+          description: Account name
+        resellerAccountNumber:
+          type: integer
+          description: Reseller account number
+          format: int64
+        resellerAccountName:
+          type: string
+          description: Reseller account name
+        resellerUcmId:
+          type: string
+          description: Reseller account ucmId
+        resellerOrgId:
+          type: integer
+          description: Reseller customer organization identifier
+          format: int64
+    RemoveOperation:
+      required:
+      - op
+      - path
+      type: object
+      properties:
+        op:
+          $ref: '#/components/schemas/OpEnum'
+        path:
+          $ref: '#/components/schemas/Path'
+      description: Remove sub-resource from an existing model
+    Project:
+      required:
+      - projectId
+      type: object
+      properties:
+        projectId:
+          type: string
+          description: Subscriber-assigned project ID
+          example: 44f4c4f8-2f39-494e-838c-d8e640591be5
+    OpEnum:
+      type: string
+      description: the operation to be performed
+      enum:
+      - add
+      - remove
+      - replace
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    AuthenticationKey:
+      type: object
+      properties:
+        required:
+          type: boolean
+          example: true
+          default: false
+        label:
+          type: string
+          example: Service Key
+        description:
+          type: string
+          example: description for the authentication key
+      description: Authentication Key Support and Customization
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

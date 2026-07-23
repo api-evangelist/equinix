@@ -1,0 +1,5603 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication Ports API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- description: 'Port ManagementCheck out the product docs to learn more about [Port configurations](https://metal.equinix.com/developers/docs/layer2-networking/overview/).
+
+    '
+  externalDocs:
+    url: https://metal.equinix.com/developers/docs/layer2-networking/overview/
+  name: Ports
+paths:
+  /ports/{id}:
+    get:
+      description: Returns a port
+      operationId: findPortById
+      parameters:
+      - description: Port UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Port'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Retrieve a port
+      tags:
+      - Ports
+  /ports/{id}/assign:
+    post:
+      description: Assign a hardware port to a virtual network.
+      operationId: assignPort
+      parameters:
+      - description: Port UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/PortAssignInput'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Port'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Assign a port to virtual network
+      tags:
+      - Ports
+  /ports/{id}/bond:
+    post:
+      description: Enabling bonding for one or all ports
+      operationId: bondPort
+      parameters:
+      - description: Port UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: enable both ports
+        in: query
+        name: bulk_enable
+        schema:
+          type: boolean
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Port'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Enabling bonding
+      tags:
+      - Ports
+  /ports/{id}/convert/layer-2:
+    post:
+      description: Converts a bond port to Layer 2. IP assignments of the port will be removed.
+      operationId: convertLayer2
+      parameters:
+      - description: Port UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/PortAssignInput'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Port'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Convert to Layer 2
+      tags:
+      - Ports
+  /ports/{id}/convert/layer-3:
+    post:
+      description: Converts a bond port to Layer 3. VLANs must first be unassigned.
+      operationId: convertLayer3
+      parameters:
+      - description: Port UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PortConvertLayer3Input'
+        description: IPs to request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Port'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Convert to Layer 3
+      tags:
+      - Ports
+  /ports/{id}/disbond:
+    post:
+      description: Disabling bonding for one or all ports
+      operationId: disbondPort
+      parameters:
+      - description: Port UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: disable both ports
+        in: query
+        name: bulk_disable
+        schema:
+          type: boolean
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Port'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Disabling bonding
+      tags:
+      - Ports
+  /ports/{id}/native-vlan:
+    delete:
+      description: Removes the native VLAN from this port
+      operationId: deleteNativeVlan
+      parameters:
+      - description: Port UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Port'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Remove native VLAN
+      tags:
+      - Ports
+    post:
+      description: Sets a virtual network on this port as a "native VLAN". The VLAN must have already been assigned using the using the "Assign a port to a virtual network" operation.
+      operationId: assignNativeVlan
+      parameters:
+      - description: Port UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Virtual Network ID. May be the UUID of the Virtual Network record, or the VLAN value itself (ex: ''1001'').'
+        in: query
+        name: vnid
+        required: true
+        schema:
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Port'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Assign a native VLAN
+      tags:
+      - Ports
+  /ports/{id}/unassign:
+    post:
+      description: Unassign a port for a hardware.
+      operationId: unassignPort
+      parameters:
+      - description: Port UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/PortAssignInput'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Port'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Unassign a port
+      tags:
+      - Ports
+  /ports/{id}/vlan-assignments:
+    get:
+      description: Show the port's current VLAN assignments, including if this VLAN is set as native, and the current state of the assignment (ex. 'assigned' or 'unassigning')
+      operationId: findPortVlanAssignments
+      parameters:
+      - description: Port UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: Nested attributes to include. Included objects will return their full attributes. Attribute names can be dotted (up to 3 levels) to included deeply nested objects.
+        in: query
+        name: include
+        schema:
+          default:
+          - port
+          - virtual_network
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortVlanAssignmentList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: List Current VLAN assignments for a port
+      tags:
+      - Ports
+  /ports/{id}/vlan-assignments/{assignment_id}:
+    get:
+      description: Show the details of a specific Port-VLAN assignment, including the current state and if the VLAN is set as native.
+      operationId: findPortVlanAssignmentByPortIdAndAssignmentId
+      parameters:
+      - description: Port UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: Assignment ID
+        in: path
+        name: assignment_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: Nested attributes to include. Included objects will return their full attributes. Attribute names can be dotted (up to 3 levels) to included deeply nested objects.
+        in: query
+        name: include
+        schema:
+          default:
+          - port
+          - virtual_network
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortVlanAssignment'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Show a particular Port VLAN assignment's details
+      tags:
+      - Ports
+  /ports/{id}/vlan-assignments/batches:
+    get:
+      description: Show all the VLAN assignment batches that have been created for managing this port's VLAN assignments
+      operationId: findPortVlanAssignmentBatches
+      parameters:
+      - description: Port UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortVlanAssignmentBatchList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: List the VLAN Assignment Batches for a port
+      tags:
+      - Ports
+    post:
+      description: Create a new asynchronous batch request which handles adding and/or removing the VLANs to which the port is assigned.
+      operationId: createPortVlanAssignmentBatch
+      parameters:
+      - description: Port UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PortVlanAssignmentBatchCreateInput'
+        description: VLAN Assignment batch details
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortVlanAssignmentBatch'
+          description: created
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Create a new Port-VLAN Assignment management batch
+      tags:
+      - Ports
+  /ports/{id}/vlan-assignments/batches/{batch_id}:
+    get:
+      description: Returns the details of an existing Port-VLAN Assignment batch, including the list of VLANs to assign or unassign, and the current state of the batch.
+      operationId: findPortVlanAssignmentBatchByPortIdAndBatchId
+      parameters:
+      - description: Port UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: Batch ID
+        in: path
+        name: batch_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortVlanAssignmentBatch'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Retrieve a VLAN Assignment Batch's details
+      tags:
+      - Ports
+  /fabric/v4/ports:
+    get:
+      tags:
+      - Ports
+      summary: Get All Ports
+      description: Get All Ports returns details of all assigned and available ports for the specified user credentials. The metro attribute in the response shows the origin of the proposed connection.
+      operationId: getPorts
+      parameters:
+      - name: name
+        in: query
+        description: port name to be provided if specific port(s) to be retrieved
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllPortsResponse'
+              examples:
+                portExample:
+                  $ref: '#/components/examples/ports'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '500':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                portExample:
+                  $ref: '#/components/examples/ports-500'
+                userFailureExample:
+                  $ref: '#/components/examples/ports-500-user-failure'
+    post:
+      tags:
+      - Ports
+      summary: Create Port
+      description: Creates Equinix Fabric? Port.
+      operationId: createPort
+      parameters:
+      - name: dryRun
+        in: query
+        description: option to verify that API calls will succeed
+        required: false
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PortRequest'
+            examples:
+              COLOSinglePortNonLag:
+                $ref: '#/components/examples/coloSinglePortNonLag'
+              COLOSinglePortLag:
+                $ref: '#/components/examples/coloSinglePortLag'
+              COLOUnlimitedPlusPortLag:
+                $ref: '#/components/examples/coloUnlimitedPlusPortLag'
+              COLOLagPortNewGroup:
+                $ref: '#/components/examples/coloLagPortNewGroup'
+              COLOAddSecondaryPort:
+                $ref: '#/components/examples/coloAddSecondaryPort'
+              COLOSinglePortNonLagDryRun:
+                $ref: '#/components/examples/COLOSinglePortNonLagCreateDryRun'
+              COLOSinglePortLagDryRun:
+                $ref: '#/components/examples/COLOSinglePortLagCreateDryRun'
+              REMOTESinglePortLag:
+                $ref: '#/components/examples/remoteSinglePortNewGroupLagRequest'
+              BMMRSinglePortLag:
+                $ref: '#/components/examples/bmmrSinglePortLag'
+              BMMRSinglePortNoLag:
+                $ref: '#/components/examples/bmmrSinglePortNoLag'
+              BMMRAddSecondaryPort:
+                $ref: '#/components/examples/bmmrAddSecondaryPort'
+              BMMRLagPortNewGroup:
+                $ref: '#/components/examples/bmmrLagPortNewGroup'
+              IXPublicPrivatePeeringPort:
+                $ref: '#/components/examples/createIXPublicPrivatePeeringPortRequest'
+              IXPublicPeeringPort:
+                $ref: '#/components/examples/createIXPublicPeeringPortRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Port_2'
+              examples:
+                portDryRunExample:
+                  $ref: '#/components/examples/PortCreateDryRunResponse'
+                bmmrPortDryRunExample:
+                  $ref: '#/components/examples/bmmrSinglePortCreateDryRunResponse'
+                remotePortDryRunExample:
+                  $ref: '#/components/examples/remoteSinglePortCreateDryRunResponse'
+        '202':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Port_2'
+              examples:
+                COLOSinglePortNonLag:
+                  $ref: '#/components/examples/coloSinglePortNonLagResponse'
+                BMMRSinglePortLag:
+                  $ref: '#/components/examples/bmmrSinglePortLagResponse'
+                REMOTESinglePortLag:
+                  $ref: '#/components/examples/remoteSinglePortLagResponse'
+                REMOTESinglePortLagWithOrderExemption:
+                  $ref: '#/components/examples/remoteSinglePortLagWithPurchaseOrderExemption'
+                IXPublicPrivatePeeringPort:
+                  $ref: '#/components/examples/createIXPublicPrivatePeeringPortResponse'
+                IXPublicPeeringPort:
+                  $ref: '#/components/examples/createIXPublicPeeringPortResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                validationError:
+                  $ref: '#/components/examples/port-400'
+                badRequest:
+                  $ref: '#/components/examples/createPortBadRequest'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/port-500'
+  /fabric/v4/ports/{portId}/physicalPorts/bulk:
+    post:
+      tags:
+      - Ports
+      summary: Add to Lag
+      description: Add Physical Ports to Virtual Port.<font color="red"> <sup color='red'>Preview</sup></font>
+      operationId: addToLag
+      parameters:
+      - name: portId
+        in: path
+        description: Port UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/PortUUID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkPhysicalPort'
+            examples:
+              COLOAddToLag:
+                $ref: '#/components/examples/coloAddToLag'
+              REMOTEAddToLag:
+                $ref: '#/components/examples/remoteAddToLag'
+              BMMRAddToLag:
+                $ref: '#/components/examples/bmmrAddToLag'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllPhysicalPortsResponse'
+              examples:
+                COLOAddToLag:
+                  $ref: '#/components/examples/coloAddToLagResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/port-400'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/port-500'
+  /fabric/v4/ports/{portId}:
+    get:
+      tags:
+      - Ports
+      summary: Get Port by uuid
+      description: Get Port By uuid returns details of assigned and available Equinix Fabric port for the specified user credentials. The metro code attribute in the response shows the origin of the proposed connection.
+      operationId: getPortByUuid
+      parameters:
+      - name: portId
+        in: path
+        description: Port UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/PortUUID'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Port_2'
+              examples:
+                portExample:
+                  $ref: '#/components/examples/portByUUID'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+    delete:
+      tags:
+      - Ports
+      summary: Delete a single port
+      description: The API provides capability to delete a single port
+      operationId: deletePort
+      parameters:
+      - name: portId
+        in: path
+        description: Port UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/PortUUID'
+      - name: dryRun
+        in: query
+        description: option to verify that API calls will succeed
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Port_2'
+              examples:
+                portDryRunExample:
+                  $ref: '#/components/examples/portDryRunDelete'
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Port_2'
+              examples:
+                portExample:
+                  $ref: '#/components/examples/portDelete'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+    patch:
+      tags:
+      - Ports
+      summary: Update by UUID
+      description: Update Port by UUID
+      operationId: updatePortByUuid
+      parameters:
+      - name: portId
+        in: path
+        description: Port UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/PortUUID'
+      - name: dryRun
+        in: query
+        description: option to verify that API calls will succeed
+        required: false
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/PortUpdateRequest'
+            examples:
+              PortUpdateNameRequest:
+                $ref: '#/components/examples/portUpdateNameRequest'
+              PortUpdateEncapsulationAndTagprotocolIdRequest:
+                $ref: '#/components/examples/portUpdateEncapsulationAndTagProtocolIdRequest'
+              PortUpdateNameDryRunRequest:
+                $ref: '#/components/examples/PortUpdateNameDryRunRequest'
+              PortUpdateLagEnabledRequest:
+                $ref: '#/components/examples/portUpdateLagEnabledRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllPortsResponse'
+              examples:
+                portDryRunExample:
+                  $ref: '#/components/examples/PortUpdateDryRunResponse'
+        '202':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Port_2'
+              examples:
+                portExample:
+                  $ref: '#/components/examples/portPatchResponse202'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                InvalidUUID:
+                  $ref: '#/components/examples/400'
+                ResourceUsedError:
+                  $ref: '#/components/examples/portPatchMultipleConnections400Response'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error_2'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+  /fabric/v4/ports/{portUuid}/linkProtocols:
+    get:
+      tags:
+      - Ports
+      summary: Get Vlans
+      description: The API provides capability to retrieve Vlans for a Port.
+      operationId: getVlans
+      parameters:
+      - name: portUuid
+        in: path
+        description: Port UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/PortUUID'
+      responses:
+        '200':
+          description: Get Vlans
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkProtocolGetResponse'
+              examples:
+                LinkProtocolQ1NQResponse:
+                  $ref: '#/components/examples/LinkProtocolGetQinqResponseExample'
+                LinkProtocolDOT1QResponse:
+                  $ref: '#/components/examples/LinkProtocolGetDot1qResponseExample'
+                LinkProtocolVlanRangeResponse:
+                  $ref: '#/components/examples/LinkProtocolGetVlanRangeResponseExample'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400_invalid_portId'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403-port-access'
+  /fabric/v4/ports/search:
+    post:
+      tags:
+      - Ports
+      summary: Search ports
+      description: The API provides capability to get list of user's virtual ports using search criteria, including optional filtering, pagination and sorting
+      operationId: searchPorts
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PortV4SearchRequest'
+            examples:
+              PortSearchDirection:
+                $ref: '#/components/examples/portSearchByProjectId'
+              PortSearchOptionalFilter:
+                $ref: '#/components/examples/portSearchByOptionalFilters'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllPortsResponse'
+              examples:
+                portExample:
+                  $ref: '#/components/examples/ports'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                invalidUuid:
+                  $ref: '#/components/examples/400'
+                invalidProjectIdRequest:
+                  $ref: '#/components/examples/portSearchInvalidProjectRequest'
+                invalidRequest:
+                  $ref: '#/components/examples/portSearchInvalidRequest'
+                invalidSearchFieldProperty:
+                  $ref: '#/components/examples/portSearchInvalidSearchFieldProperty'
+                invalidSearchFieldArgument:
+                  $ref: '#/components/examples/portSearchInvalidSearchFieldArgument'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '500':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                portExample:
+                  $ref: '#/components/examples/ports-500'
+                userFailureExample:
+                  $ref: '#/components/examples/ports-500-user-failure'
+components:
+  schemas:
+    PortAssignInput:
+      example:
+        vnid: '1001'
+      properties:
+        vnid:
+          description: 'Virtual Network ID. May be the UUID of the Virtual Network record, or the VLAN value itself.
+
+            '
+          example: '1001'
+          type: string
+      type: object
+    Port:
+      description: Port is a hardware port associated with a reserved or instantiated hardware device.
+      example:
+        native_virtual_network:
+          vxlan: 4
+          instances:
+          - href: href
+          - href: href
+          description: description
+          created_at: 2000-01-23 04:56:07+00:00
+          assigned_to_virtual_circuit: true
+          tags:
+          - tags
+          - tags
+          metal_gateways:
+          - gateway_address: 10.1.2.1/27
+            updated_at: 2000-01-23 04:56:07+00:00
+            vlan: 1001
+            created_at: 2000-01-23 04:56:07+00:00
+            href: href
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            state: null
+          - gateway_address: 10.1.2.1/27
+            updated_at: 2000-01-23 04:56:07+00:00
+            vlan: 1001
+            created_at: 2000-01-23 04:56:07+00:00
+            href: href
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            state: null
+          metro_code: metro_code
+          metro:
+            href: href
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          facility:
+            href: href
+          assigned_to:
+            href: href
+        disbond_operation_supported: true
+        data:
+          bonded: true
+          mac: mac
+        name: bond0
+        virtual_networks:
+        - href: href
+        - href: href
+        href: href
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        type: null
+        network_type: null
+        bond:
+          name: name
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        bond:
+          $ref: '#/components/schemas/BondPortData'
+        data:
+          $ref: '#/components/schemas/PortData'
+        disbond_operation_supported:
+          description: Indicates whether or not the bond can be broken on the port (when applicable).
+          type: boolean
+        href:
+          type: string
+        id:
+          format: uuid
+          type: string
+        name:
+          example: bond0
+          type: string
+        type:
+          $ref: '#/components/schemas/Port_type'
+        network_type:
+          $ref: '#/components/schemas/Port_network_type'
+        native_virtual_network:
+          $ref: '#/components/schemas/VirtualNetwork'
+        virtual_networks:
+          items:
+            $ref: '#/components/schemas/Href'
+          type: array
+      type: object
+    PortVlanAssignmentBatch:
+      example:
+        quantity: 0
+        updated_at: 2000-01-23 04:56:07+00:00
+        port:
+          native_virtual_network:
+            vxlan: 4
+            instances:
+            - href: href
+            - href: href
+            description: description
+            created_at: 2000-01-23 04:56:07+00:00
+            assigned_to_virtual_circuit: true
+            tags:
+            - tags
+            - tags
+            metal_gateways:
+            - gateway_address: 10.1.2.1/27
+              updated_at: 2000-01-23 04:56:07+00:00
+              vlan: 1001
+              created_at: 2000-01-23 04:56:07+00:00
+              href: href
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              state: null
+            - gateway_address: 10.1.2.1/27
+              updated_at: 2000-01-23 04:56:07+00:00
+              vlan: 1001
+              created_at: 2000-01-23 04:56:07+00:00
+              href: href
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              state: null
+            metro_code: metro_code
+            metro:
+              href: href
+            href: href
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            facility:
+              href: href
+            assigned_to:
+              href: href
+          disbond_operation_supported: true
+          data:
+            bonded: true
+            mac: mac
+          name: bond0
+          virtual_networks:
+          - href: href
+          - href: href
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          type: null
+          network_type: null
+          bond:
+            name: name
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        created_at: 2000-01-23 04:56:07+00:00
+        project:
+          href: href
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        state: null
+        error_messages:
+        - error_messages
+        - error_messages
+        vlan_assignments:
+        - vlan: 6
+          native: true
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          state: null
+        - vlan: 6
+          native: true
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          state: null
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        error_messages:
+          items:
+            type: string
+          type: array
+        id:
+          format: uuid
+          type: string
+        port:
+          $ref: '#/components/schemas/Port'
+        quantity:
+          type: integer
+        state:
+          $ref: '#/components/schemas/PortVlanAssignmentBatch_state'
+        updated_at:
+          format: date-time
+          type: string
+        vlan_assignments:
+          items:
+            $ref: '#/components/schemas/PortVlanAssignmentBatch_vlan_assignments_inner'
+          type: array
+        project:
+          $ref: '#/components/schemas/Href'
+      type: object
+    PortVlanAssignmentBatchList:
+      example:
+        batches:
+        - quantity: 0
+          updated_at: 2000-01-23 04:56:07+00:00
+          port:
+            native_virtual_network:
+              vxlan: 4
+              instances:
+              - href: href
+              - href: href
+              description: description
+              created_at: 2000-01-23 04:56:07+00:00
+              assigned_to_virtual_circuit: true
+              tags:
+              - tags
+              - tags
+              metal_gateways:
+              - gateway_address: 10.1.2.1/27
+                updated_at: 2000-01-23 04:56:07+00:00
+                vlan: 1001
+                created_at: 2000-01-23 04:56:07+00:00
+                href: href
+                id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                state: null
+              - gateway_address: 10.1.2.1/27
+                updated_at: 2000-01-23 04:56:07+00:00
+                vlan: 1001
+                created_at: 2000-01-23 04:56:07+00:00
+                href: href
+                id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                state: null
+              metro_code: metro_code
+              metro:
+                href: href
+              href: href
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              facility:
+                href: href
+              assigned_to:
+                href: href
+            disbond_operation_supported: true
+            data:
+              bonded: true
+              mac: mac
+            name: bond0
+            virtual_networks:
+            - href: href
+            - href: href
+            href: href
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            type: null
+            network_type: null
+            bond:
+              name: name
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created_at: 2000-01-23 04:56:07+00:00
+          project:
+            href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          state: null
+          error_messages:
+          - error_messages
+          - error_messages
+          vlan_assignments:
+          - vlan: 6
+            native: true
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            state: null
+          - vlan: 6
+            native: true
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            state: null
+        - quantity: 0
+          updated_at: 2000-01-23 04:56:07+00:00
+          port:
+            native_virtual_network:
+              vxlan: 4
+              instances:
+              - href: href
+              - href: href
+              description: description
+              created_at: 2000-01-23 04:56:07+00:00
+              assigned_to_virtual_circuit: true
+              tags:
+              - tags
+              - tags
+              metal_gateways:
+              - gateway_address: 10.1.2.1/27
+                updated_at: 2000-01-23 04:56:07+00:00
+                vlan: 1001
+                created_at: 2000-01-23 04:56:07+00:00
+                href: href
+                id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                state: null
+              - gateway_address: 10.1.2.1/27
+                updated_at: 2000-01-23 04:56:07+00:00
+                vlan: 1001
+                created_at: 2000-01-23 04:56:07+00:00
+                href: href
+                id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                state: null
+              metro_code: metro_code
+              metro:
+                href: href
+              href: href
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              facility:
+                href: href
+              assigned_to:
+                href: href
+            disbond_operation_supported: true
+            data:
+              bonded: true
+              mac: mac
+            name: bond0
+            virtual_networks:
+            - href: href
+            - href: href
+            href: href
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            type: null
+            network_type: null
+            bond:
+              name: name
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created_at: 2000-01-23 04:56:07+00:00
+          project:
+            href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          state: null
+          error_messages:
+          - error_messages
+          - error_messages
+          vlan_assignments:
+          - vlan: 6
+            native: true
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            state: null
+          - vlan: 6
+            native: true
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            state: null
+      properties:
+        batches:
+          items:
+            $ref: '#/components/schemas/PortVlanAssignmentBatch'
+          type: array
+      type: object
+    PortVlanAssignment_state:
+      enum:
+      - assigned
+      - unassigning
+      type: string
+    PortVlanAssignmentList:
+      example:
+        vlan_assignments:
+        - virtual_network:
+            href: href
+          updated_at: 2000-01-23 04:56:07+00:00
+          vlan: 0
+          native: true
+          port:
+            href: href
+          created_at: 2000-01-23 04:56:07+00:00
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          state: null
+        - virtual_network:
+            href: href
+          updated_at: 2000-01-23 04:56:07+00:00
+          vlan: 0
+          native: true
+          port:
+            href: href
+          created_at: 2000-01-23 04:56:07+00:00
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          state: null
+      properties:
+        vlan_assignments:
+          items:
+            $ref: '#/components/schemas/PortVlanAssignment'
+          type: array
+      type: object
+    PortData:
+      example:
+        bonded: true
+        mac: mac
+      properties:
+        mac:
+          description: MAC address is set for NetworkPort ports
+          type: string
+        bonded:
+          description: Bonded is true for NetworkPort ports in a bond and NetworkBondPort ports that are active
+          type: boolean
+      type: object
+    PortConvertLayer3Input:
+      example:
+        request_ips:
+        - address_family: 0
+          public: true
+        - address_family: 0
+          public: true
+      properties:
+        request_ips:
+          items:
+            $ref: '#/components/schemas/PortConvertLayer3Input_request_ips_inner'
+          type: array
+      type: object
+    BondPortData:
+      example:
+        name: name
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          description: ID of the bonding port
+          format: uuid
+          type: string
+        name:
+          description: Name of the port interface for the bond ("bond0")
+          type: string
+      type: object
+    PortVlanAssignment:
+      example:
+        virtual_network:
+          href: href
+        updated_at: 2000-01-23 04:56:07+00:00
+        vlan: 0
+        native: true
+        port:
+          href: href
+        created_at: 2000-01-23 04:56:07+00:00
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        state: null
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        id:
+          format: uuid
+          type: string
+        native:
+          type: boolean
+        port:
+          $ref: '#/components/schemas/Href'
+        state:
+          $ref: '#/components/schemas/PortVlanAssignment_state'
+        updated_at:
+          format: date-time
+          type: string
+        virtual_network:
+          $ref: '#/components/schemas/Href'
+        vlan:
+          type: integer
+      type: object
+    PortConvertLayer3Input_request_ips_inner:
+      example:
+        address_family: 0
+        public: true
+      properties:
+        address_family:
+          type: integer
+        public:
+          type: boolean
+      type: object
+    PortVlanAssignmentBatchCreateInput:
+      example:
+        vlan_assignments:
+        - vlan: vlan
+          native: true
+          state: null
+        - vlan: vlan
+          native: true
+          state: null
+      properties:
+        vlan_assignments:
+          items:
+            $ref: '#/components/schemas/PortVlanAssignmentBatchCreateInput_vlan_assignments_inner'
+          type: array
+      type: object
+    Port_type:
+      description: Type is either "NetworkBondPort" for bond ports or "NetworkPort" for bondable ethernet ports
+      enum:
+      - NetworkPort
+      - NetworkBondPort
+      type: string
+    VirtualNetwork:
+      example:
+        vxlan: 4
+        instances:
+        - href: href
+        - href: href
+        description: description
+        created_at: 2000-01-23 04:56:07+00:00
+        assigned_to_virtual_circuit: true
+        tags:
+        - tags
+        - tags
+        metal_gateways:
+        - gateway_address: 10.1.2.1/27
+          updated_at: 2000-01-23 04:56:07+00:00
+          vlan: 1001
+          created_at: 2000-01-23 04:56:07+00:00
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          state: null
+        - gateway_address: 10.1.2.1/27
+          updated_at: 2000-01-23 04:56:07+00:00
+          vlan: 1001
+          created_at: 2000-01-23 04:56:07+00:00
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          state: null
+        metro_code: metro_code
+        metro:
+          href: href
+        href: href
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        facility:
+          href: href
+        assigned_to:
+          href: href
+      properties:
+        assigned_to:
+          $ref: '#/components/schemas/Href'
+        assigned_to_virtual_circuit:
+          description: True if the virtual network is attached to a virtual circuit. False if not.
+          type: boolean
+        description:
+          type: string
+        facility:
+          $ref: '#/components/schemas/Href'
+        href:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        id:
+          format: uuid
+          type: string
+        instances:
+          description: A list of instances with ports currently associated to this Virtual Network.
+          items:
+            $ref: '#/components/schemas/Href'
+          type: array
+        metal_gateways:
+          description: A list of metal gateways currently associated to this Virtual Network.
+          items:
+            $ref: '#/components/schemas/MetalGatewayLite'
+          type: array
+        metro:
+          $ref: '#/components/schemas/Href'
+        metro_code:
+          description: The Metro code of the metro in which this Virtual Network is defined.
+          type: string
+        vxlan:
+          type: integer
+        tags:
+          items:
+            type: string
+          type: array
+      type: object
+    Port_network_type:
+      description: Composite network type of the bond
+      enum:
+      - layer2-bonded
+      - layer2-individual
+      - layer3
+      - hybrid
+      - hybrid-bonded
+      type: string
+    MetalGatewayLite:
+      example:
+        gateway_address: 10.1.2.1/27
+        updated_at: 2000-01-23 04:56:07+00:00
+        vlan: 1001
+        created_at: 2000-01-23 04:56:07+00:00
+        href: href
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        state: null
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        gateway_address:
+          description: The gateway address with subnet CIDR value for this Metal Gateway. For example, a Metal Gateway using an IP reservation with block 10.1.2.0/27 would have a gateway address of 10.1.2.1/27.
+          example: 10.1.2.1/27
+          type: string
+        href:
+          type: string
+        id:
+          format: uuid
+          type: string
+        state:
+          $ref: '#/components/schemas/MetalGateway_state'
+        updated_at:
+          format: date-time
+          type: string
+        vlan:
+          description: The VLAN id of the Virtual Network record associated to this Metal Gateway.
+          example: 1001
+          type: integer
+      type: object
+    PortVlanAssignmentBatch_state:
+      enum:
+      - queued
+      - in_progress
+      - completed
+      - failed
+      type: string
+    Error:
+      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
+      properties:
+        error:
+          description: A description of the error that caused the request to fail.
+          type: string
+        errors:
+          description: A list of errors that contributed to the request failing.
+          items:
+            description: An error message that contributed to the request failing.
+            type: string
+          type: array
+      type: object
+    PortVlanAssignmentBatch_vlan_assignments_inner_state:
+      enum:
+      - assigned
+      - unassigned
+      type: string
+    MetalGateway_state:
+      description: The current state of the Metal Gateway. 'Ready' indicates the gateway record has been configured, but is currently not active on the network. 'Active' indicates the gateway has been configured on the network. 'Deleting' is a temporary state used to indicate that the gateway is in the process of being un-configured from the network, after which the gateway record will be deleted.
+      enum:
+      - ready
+      - active
+      - deleting
+      type: string
+    PortVlanAssignmentBatch_vlan_assignments_inner:
+      example:
+        vlan: 6
+        native: true
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        state: null
+      properties:
+        id:
+          format: uuid
+          type: string
+        native:
+          type: boolean
+        state:
+          $ref: '#/components/schemas/PortVlanAssignmentBatch_vlan_assignments_inner_state'
+        vlan:
+          type: integer
+      type: object
+    Href:
+      example:
+        href: href
+      properties:
+        href:
+          type: string
+      required:
+      - href
+      type: object
+    PortVlanAssignmentBatchCreateInput_vlan_assignments_inner:
+      example:
+        vlan: vlan
+        native: true
+        state: null
+      properties:
+        native:
+          type: boolean
+        state:
+          $ref: '#/components/schemas/PortVlanAssignmentBatch_vlan_assignments_inner_state'
+        vlan:
+          type: string
+      type: object
+    PortRequest:
+      required:
+      - account
+      - connectivitySourceType
+      - encapsulation
+      - location
+      - physicalPortsSpeed
+      - physicalPortsType
+      - settings
+      - type
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/PortType'
+        name:
+          type: string
+          description: Equinix assigned response attribute for Port name
+        description:
+          type: string
+          description: Equinix assigned response attribute for Port description
+        physicalPortsSpeed:
+          minimum: 0
+          type: integer
+          description: Physical Ports Speed in Mbps
+        physicalPortsType:
+          type: string
+          description: Physical Ports Type. 10GBASE_SMF and 400GBASE_LR4 are only used for IX ports
+          enum:
+          - 1000BASE_LX
+          - 10GBASE_LR
+          - 100GBASE_LR4
+          - 10GBASE_ER
+          - 1000BASE_SX
+          - 10GBASE_SMF
+          - 400GBASE_LR4
+        physicalPortsCount:
+          type: integer
+        connectivitySourceType:
+          type: string
+          description: Port connectivity type
+          enum:
+          - COLO
+          - BMMR
+          - REMOTE
+        bmmrType:
+          type: string
+          enum:
+          - SELF
+          - EQUINIX
+        project:
+          $ref: '#/components/schemas/Project'
+        state:
+          $ref: '#/components/schemas/PortState'
+        order:
+          $ref: '#/components/schemas/PortOrder'
+        account:
+          $ref: '#/components/schemas/SimplifiedAccount'
+        serviceType:
+          type: string
+          description: Port service Type
+          deprecated: true
+          enum:
+          - EPL
+          - MSP
+        serviceCode:
+          $ref: '#/components/schemas/PortServiceCode'
+        bandwidth:
+          minimum: 0
+          type: integer
+          description: Equinix assigned response attribute for Port bandwidth in Mbps
+          deprecated: true
+        location:
+          $ref: '#/components/schemas/SimplifiedLocation'
+        device:
+          $ref: '#/components/schemas/PortDevice'
+        interface:
+          $ref: '#/components/schemas/PortInterface'
+        demarcationPointIbx:
+          type: string
+          description: A-side/Equinix ibx
+        tetherIbx:
+          type: string
+          description: z-side/Equinix ibx
+        demarcationPoint:
+          $ref: '#/components/schemas/PortDemarcationPoint'
+        redundancy:
+          $ref: '#/components/schemas/PortRedundancy'
+        encapsulation:
+          $ref: '#/components/schemas/PortEncapsulation'
+        lagEnabled:
+          type: boolean
+          description: If LAG enabled
+        lag:
+          allOf:
+          - $ref: '#/components/schemas/PortLag'
+        asn:
+          type: integer
+          description: Port ASN
+        package:
+          $ref: '#/components/schemas/Package'
+        settings:
+          $ref: '#/components/schemas/PortSettings'
+        physicalPortQuantity:
+          type: integer
+          description: Number of physical ports
+        notifications:
+          type: array
+          description: Notification preferences
+          items:
+            $ref: '#/components/schemas/PortNotification'
+        additionalInfo:
+          type: array
+          description: Port additional information
+          items:
+            $ref: '#/components/schemas/PortAdditionalInfo'
+        physicalPorts:
+          type: array
+          description: Physical ports that implement this port
+          items:
+            $ref: '#/components/schemas/PhysicalPort'
+        loas:
+          type: array
+          description: Port Loas
+          items:
+            $ref: '#/components/schemas/PortLoa'
+      description: PortRequest is the Request Object for creating single and bulk fabric ports
+    PortServiceCode:
+      type: string
+      description: type of product
+      enum:
+      - CX
+      - IX
+      - IA
+      - MC
+    PortState:
+      type: string
+      description: Port lifecycle state
+      enum:
+      - PENDING
+      - PROVISIONING
+      - REPROVISIONING
+      - PENDING_CROSS_CONNECT
+      - PROVISIONED
+      - ACTIVE
+      - DEPROVISIONING
+      - DEPROVISIONED
+      - INACTIVE
+      - FAILED
+      - ADDED
+      - DELETED
+      - TO_BE_ADDED
+      - TO_BE_DELETED
+    PortPriority:
+      type: string
+      description: Port priority in redundancy group
+      enum:
+      - PRIMARY
+      - SECONDARY
+    PortInterface:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Port interface type
+      description: Port interface
+    EndCustomer:
+      type: object
+      properties:
+        isDisclosed:
+          type: boolean
+          description: Indicate if endCustomer info should be disclosed or not
+          default: false
+        name:
+          type: string
+        mdmId:
+          type: string
+    PortUUID:
+      type: string
+      description: Port UUID
+      format: uuid
+    PhysicalPortType:
+      type: string
+      description: Type of Port
+      enum:
+      - XF_PHYSICAL_PORT
+    PaginationRequest:
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first element.
+          default: 0
+        limit:
+          minimum: 1
+          type: integer
+          description: Number of elements to be requested per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+      description: Pagination request information
+    PortType:
+      type: string
+      description: Type of Port
+      enum:
+      - XF_PORT
+    PortUpdateRequest:
+      minItems: 1
+      type: array
+      description: Port Update Request
+      items:
+        $ref: '#/components/schemas/PortChangeOperation'
+    PortEncapsulation:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Port encapsulation protocol type
+          enum:
+          - 'NULL'
+          - DOT1Q
+          - QINQ
+          - UNTAGGED
+        tagProtocolId:
+          type: string
+          description: Port encapsulation tag protocol identifier
+      description: Port encapsulation configuration
+    PortOperation:
+      type: object
+      properties:
+        operationalStatus:
+          type: string
+          description: Availability of a given physical port.
+          enum:
+          - UP
+          - DOWN
+          - PARTIAL
+        connectionCount:
+          type: integer
+          description: Total number of connections.
+          format: int64
+        evplVCCount:
+          type: integer
+          description: Total number of connections.
+          format: int64
+        fgVCCount:
+          type: integer
+          description: Total number of connections.
+          format: int64
+        accessVCCount:
+          type: integer
+          description: Total number of connections.
+          format: int64
+        opStatusChangedAt:
+          type: string
+          description: Date and time at which port availability changed.
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+      description: Operational specifications for ports.
+    PortSettings:
+      type: object
+      properties:
+        buyout:
+          type: boolean
+          deprecated: true
+        viewPortPermission:
+          type: boolean
+          deprecated: true
+        placeVcOrderPermission:
+          type: boolean
+          deprecated: true
+        layer3Enabled:
+          type: boolean
+          deprecated: true
+        sharedPortType:
+          type: boolean
+        sharedPortProduct:
+          type: string
+          enum:
+          - NETWORK_EDGE
+          - VIRTUAL_GATEWAY
+          - SMARTKEY
+          - EDGE_METAL
+        packageType:
+          type: string
+          description: Type of Port Package
+          deprecated: true
+          enum:
+          - STANDARD
+          - UNLIMITED
+          - UNLIMITED_PLUS
+      description: Port configuration settings
+    Changelog:
+      type: object
+      properties:
+        createdBy:
+          type: string
+          description: Created by User Key
+          example: johnsmith
+        createdByFullName:
+          type: string
+          description: Created by User Full Name
+          example: John Smith
+        createdByEmail:
+          type: string
+          description: Created by User Email Address
+          example: john.smith@example.com
+        createdDateTime:
+          type: string
+          description: Created by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedBy:
+          type: string
+          description: Updated by User Key
+          example: johnsmith
+        updatedByFullName:
+          type: string
+          description: Updated by User Full Name
+          example: John Smith
+        updatedByEmail:
+          type: string
+          description: Updated by User Email Address
+          example: john.smith@example.com
+        updatedDateTime:
+          type: string
+          description: Updated by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        deletedBy:
+          type: string
+          description: Deleted by User Key
+          example: johnsmith
+        deletedByFullName:
+          type: string
+          description: Deleted by User Full Name
+          example: John Smith
+        deletedByEmail:
+          type: string
+          description: Deleted by User Email Address
+          example: john.smith@example.com
+        deletedDateTime:
+          type: string
+          description: Deleted by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+      description: Change log
+    marketplaceSubscription:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Marketplace Subscription URI
+          format: uri
+          readOnly: true
+          example: https://api.equinix.com/fabric/v4/marketplaceSubscriptions/20d32a80-0d61-4333-bc03-707b591ae2f5
+        type:
+          type: string
+          description: Marketplace Subscription type
+          example: AWS_MARKETPLACE_SUBSCRIPTION
+          enum:
+          - AWS_MARKETPLACE_SUBSCRIPTION
+          - GCP_MARKETPLACE_SUBSCRIPTION
+          - AZURE_MARKETPLACE_SUBSCRIPTION
+        uuid:
+          type: string
+          description: Equinix-assigned Marketplace Subscription identifier
+          example: 20d32a80-0d61-4333-bc03-707b591ae2f5
+      description: Equinix Fabric Entity for Marketplace Subscription
+    PortTether:
+      type: object
+      properties:
+        crossConnectId:
+          type: string
+          description: Port cross connect identifier
+        cabinetNumber:
+          type: string
+          description: Port cabinet number
+        systemName:
+          type: string
+          description: Port system name
+        patchPanel:
+          type: string
+          description: Port patch panel
+        patchPanelPortA:
+          type: string
+          description: Port patch panel port A
+        patchPanelPortB:
+          type: string
+          description: Port patch panel port B
+        ibx:
+          type: string
+          description: z-side/Equinix IBX
+      description: Port physical connection
+    LinkProtocolResponse:
+      type: object
+      properties:
+        href:
+          type: string
+          description: LinkProtocol URI
+          format: uri
+          readOnly: true
+        uuid:
+          type: string
+          description: Equinix-assigned network identifier
+          format: uuid
+          example: 92dc376a-a932-43aa-a6a2-c806dedbd784
+        state:
+          $ref: '#/components/schemas/LinkProtocolState'
+        type:
+          $ref: '#/components/schemas/LinkProtocolRequestType'
+        vlanTag:
+          type: integer
+          example: 20
+        vni:
+          type: integer
+          example: 20
+        vlanTagMin:
+          type: integer
+          example: 20
+        vlanTagMax:
+          type: integer
+          example: 200
+        vlanSTag:
+          type: integer
+          example: 20
+        vlanCTag:
+          type: integer
+          example: 20
+        vlanCTagMin:
+          type: integer
+          example: 20
+        vlanCTagMax:
+          type: integer
+          example: 200
+        subInterface:
+          $ref: '#/components/schemas/SubInterface'
+        asset:
+          $ref: '#/components/schemas/LinkProtocolConnection'
+        serviceToken:
+          $ref: '#/components/schemas/LinkProtocolServiceToken'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+      description: Link Protocol response
+    PhysicalPort:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Equinix assigned response attribute for an absolute URL that is the subject of the link's context.
+          format: uri
+          readOnly: true
+        type:
+          $ref: '#/components/schemas/PhysicalPortType'
+        id:
+          type: integer
+          description: Equinix assigned response attribute for Physical Port Id
+          deprecated: true
+        state:
+          $ref: '#/components/schemas/PortState'
+        account:
+          $ref: '#/components/schemas/SimplifiedAccount'
+        interfaceSpeed:
+          minimum: 0
+          type: integer
+          description: Physical Port Speed in Mbps
+        interfaceType:
+          type: string
+          description: Physical Port Interface Type
+        uuid:
+          type: string
+          description: Equinix assigned response attribute for physical port identifier
+          format: uuid
+        tether:
+          $ref: '#/components/schemas/PortTether'
+        demarcationPoint:
+          $ref: '#/components/schemas/PortDemarcationPoint'
+        settings:
+          $ref: '#/components/schemas/PhysicalPortSettings'
+        interface:
+          $ref: '#/components/schemas/PortInterface'
+        notifications:
+          type: array
+          description: Notification preferences
+          items:
+            $ref: '#/components/schemas/PortNotification'
+        additionalInfo:
+          type: array
+          description: Physical Port additional information
+          items:
+            $ref: '#/components/schemas/PortAdditionalInfo'
+        order:
+          $ref: '#/components/schemas/PortOrder'
+        operation:
+          $ref: '#/components/schemas/PortOperation'
+        loas:
+          type: array
+          description: Port Loas
+          items:
+            $ref: '#/components/schemas/PortLoa'
+      description: Physical Port specification
+    PortSearchFieldName:
+      type: string
+      description: Possible field names to use on filters
+      enum:
+      - /device/name
+      - /physicalPorts/tether/crossConnectId
+      - /physicalPorts/interface/name
+      - /state
+      - /project/projectId
+      - /uuid
+      - /name
+      - /account/orgId
+      - /account/accountNumber
+      - /location/metroCode
+    PortAdditionalInfo:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Key
+        value:
+          type: string
+          description: Value
+      description: Additional information
+    LinkProtocolServiceToken:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Service Token URI
+          format: uri
+          readOnly: true
+        uuid:
+          type: string
+          format: uuid
+          example: cd67f685-41b0-1b07-6de0-0320a5c00abe
+        type:
+          type: string
+          example: TOKEN
+        bandwidth:
+          type: integer
+          format: int64
+          example: 1000
+      description: Service Token details of Link Protocol
+    PortLag:
+      type: object
+      properties:
+        id:
+          type: string
+          description: id
+        enabled:
+          type: boolean
+          description: enabled
+          deprecated: true
+        name:
+          type: string
+          description: name
+        memberStatus:
+          type: string
+          description: member status
+      description: Port Lag
+    SimplifiedLocation:
+      type: object
+      properties:
+        metroHref:
+          type: string
+          example: https://api.equinix.com/fabric/v4/metros/AM
+        region:
+          type: string
+          example: AMER, APAC, EMEA
+        metroName:
+          type: string
+          example: Amsterdam
+        metroCode:
+          type: string
+          example: AM
+        ibx:
+          type: string
+          example: AM1
+          deprecated: true
+    SubInterface:
+      type: object
+      properties:
+        name:
+          type: string
+          description: name of subinterafce of a port
+        unit:
+          type: integer
+          example: 200
+      description: Sub Interface information
+    PhysicalPortSettings:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        packageType:
+          type: string
+          deprecated: true
+      description: Physical Port configuration settings
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    PortSortDirection:
+      type: string
+      description: Sorting direction
+      default: DESC
+      enum:
+      - DESC
+      - ASC
+    Port_2:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Equinix assigned response attribute for an absolute URL that is the subject of the link's context.
+          format: uri
+          readOnly: true
+        type:
+          $ref: '#/components/schemas/PortType'
+        id:
+          type: integer
+          description: Equinix assigned response attribute for Port Id
+        uuid:
+          type: string
+          description: Equinix assigned response attribute for  port identifier
+          format: uuid
+        name:
+          type: string
+          description: Equinix assigned response attribute for Port name
+        description:
+          type: string
+          description: Equinix assigned response attribute for Port description
+        physicalPortsSpeed:
+          minimum: 0
+          type: integer
+          description: Physical Ports Speed in Mbps
+        connectionsCount:
+          minimum: 0
+          type: integer
+          description: Equinix assigned response attribute for Connection count
+        physicalPortsType:
+          type: string
+          description: Physical Ports Type. 10GBASE_SMF and 400GBASE_LR4 are only used for IX ports
+          enum:
+          - 1000BASE_LX
+          - 10GBASE_LR
+          - 100GBASE_LR4
+          - 10GBASE_ER
+          - 1000BASE_SX
+          - 10GBASE_SMF
+          - 400GBASE_LR4
+        physicalPortsCount:
+          type: integer
+        connectivitySourceType:
+          type: string
+          description: Port connectivity type
+          enum:
+          - COLO
+          - BMMR
+          - REMOTE
+        bmmrType:
+          type: string
+          enum:
+          - SELF
+          - EQUINIX
+        project:
+          $ref: '#/components/schemas/Project'
+        state:
+          $ref: '#/components/schemas/PortState'
+        order:
+          $ref: '#/components/schemas/PortOrder'
+        operation:
+          allOf:
+          - $ref: '#/components/schemas/PortOperation'
+        account:
+          $ref: '#/components/schemas/SimplifiedAccount'
+        change:
+          $ref: '#/components/schemas/PortChange'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+        serviceType:
+          type: string
+          description: Port service Type
+          deprecated: true
+          enum:
+          - EPL
+          - MSP
+        serviceCode:
+          $ref: '#/components/schemas/PortServiceCode'
+        bandwidth:
+          minimum: 0
+          type: integer
+          description: Equinix assigned response attribute for Port bandwidth in Mbps
+          deprecated: true
+        availableBandwidth:
+          minimum: 0
+          type: integer
+          description: Equinix assigned response attribute for Port available bandwidth in Mbps
+        usedBandwidth:
+          minimum: 0
+          type: integer
+          description: Equinix assigned response attribute for Port used bandwidth in Mbps
+        location:
+          $ref: '#/components/schemas/SimplifiedLocation'
+        device:
+          $ref: '#/components/schemas/PortDevice'
+        interface:
+          $ref: '#/components/schemas/PortInterface'
+        demarcationPointIbx:
+          type: string
+          description: A-side/Equinix ibx
+        tetherIbx:
+          type: string
+          description: z-side/Equinix ibx
+        demarcationPoint:
+          $ref: '#/components/schemas/PortDemarcationPoint'
+        redundancy:
+          $ref: '#/components/schemas/PortRedundancy'
+        encapsulation:
+          $ref: '#/components/schemas/PortEncapsulation'
+        lagEnabled:
+          type: boolean
+          description: If LAG enabled
+        lag:
+          allOf:
+          - $ref: '#/components/schemas/PortLag'
+        asn:
+          type: integer
+          description: Port ASN
+        package:
+          $ref: '#/components/schemas/Package'
+        settings:
+          $ref: '#/components/schemas/PortSettings'
+        physicalPortQuantity:
+          type: integer
+          description: Number of physical ports
+        notifications:
+          type: array
+          description: Notification preferences
+          items:
+            $ref: '#/components/schemas/PortNotification'
+        additionalInfo:
+          type: array
+          description: Port additional information
+          items:
+            $ref: '#/components/schemas/PortAdditionalInfo'
+        endCustomer:
+          $ref: '#/components/schemas/EndCustomer'
+        physicalPorts:
+          type: array
+          description: Physical ports that implement this port
+          items:
+            $ref: '#/components/schemas/PhysicalPort'
+        loas:
+          type: array
+          description: Port Loas
+          items:
+            $ref: '#/components/schemas/PortLoa'
+        marketplaceSubscription:
+          $ref: '#/components/schemas/marketplaceSubscription'
+      description: Port specification
+    LinkProtocolGetResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/LinkProtocolResponse'
+      description: List of Vlans
+    PortSortBy:
+      type: string
+      description: Possible field names to use on sorting
+      default: /device/name
+      enum:
+      - /device/name
+      - /name
+      - /state
+      - /location/metroName
+      - /demarcationPointIbx
+      - /device/redundancy/priority
+      - /lagEnabled
+      - /physicalPortsSpeed
+      - /encapsulation/type
+      - /physicalPorts/tether/crossConnectId
+      - /package/code
+    PortLoa:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: uuid
+        type:
+          type: string
+          description: Loa type
+          example: DIGITAL_LOA
+      description: Port Loas
+    PortDevice:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Device name
+          deprecated: true
+        redundancy:
+          $ref: '#/components/schemas/PortDeviceRedundancy'
+        vcBandwidthMax:
+          type: integer
+          description: Maximum bandwidth allowed for connection.
+          format: int64
+      description: Port device
+    PortChange:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Uniquely identifies a change
+        type:
+          type: string
+          description: Type of change
+          enum:
+          - PORT_CREATION
+          - PORT_UPDATE
+          - PORT_DELETION
+        status:
+          type: string
+          description: Current outcome of the change flow
+          enum:
+          - COMPLETED
+          - FAILED
+          - REQUESTED
+        information:
+          type: string
+          description: Additional information
+        data:
+          $ref: '#/components/schemas/PortChangeOperation'
+        createdDateTime:
+          type: string
+          description: Set when change flow starts
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedDateTime:
+          type: string
+          description: Set when change object is updated
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+      description: Current state of latest port change
+    PortOrder:
+      type: object
+      properties:
+        purchaseOrder:
+          $ref: '#/components/schemas/PortOrderPurchaseOrder'
+        orderId:
+          type: string
+          description: Order Identification
+        customerReferenceId:
+          type: string
+          description: Customer order reference Id
+        orderNumber:
+          type: string
+          description: Order Reference Number
+        uuid:
+          type: string
+          description: Equinix-assigned order identifier, this is a derived response atrribute
+          format: uuid
+          deprecated: true
+        signature:
+          $ref: '#/components/schemas/PortOrderSignature'
+    PortOrderSignatureDelegate:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: first name of delegate
+        lastName:
+          type: string
+          description: last Name of delegate
+        email:
+          type: string
+          description: email of delegate
+      description: order delegate details
+    AllPortsResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: GET All User Port Across Fabric Metros
+          items:
+            $ref: '#/components/schemas/Port_2'
+      description: GET All User Port Across Fabric Metros
+    LinkProtocolRequestType:
+      type: string
+      description: Type of Link Protocol
+      enum:
+      - UNTAGGED
+      - DOT1Q
+      - QINQ
+      - VXLAN
+    AllPhysicalPortsResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: GET All Physical Ports
+          items:
+            $ref: '#/components/schemas/PhysicalPort'
+      description: GET All Physical Ports
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    LinkProtocolConnection:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Connection URI
+          format: uri
+          readOnly: true
+        uuid:
+          type: string
+          format: string
+          example: cd67f685-41b0-1b07-6de0-320a5c00abe
+        type:
+          type: string
+          example: EVPL_VC
+        bandwidth:
+          type: integer
+          format: int64
+          example: 100
+      description: Connection details of Link Protocol
+    BulkPhysicalPort:
+      type: object
+      properties:
+        data:
+          type: array
+          description: add physical ports to virtual port
+          items:
+            $ref: '#/components/schemas/PhysicalPort'
+      description: Add to Lag request
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error_2'
+    PortV4SearchRequest:
+      required:
+      - filter
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/PortExpression'
+        pagination:
+          $ref: '#/components/schemas/PaginationRequest'
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortSortCriteria'
+      description: Search requests containing criteria
+    PortExpressions:
+      type: array
+      items:
+        $ref: '#/components/schemas/PortExpression'
+    PortOrderSignature:
+      type: object
+      properties:
+        signatory:
+          type: string
+          description: Port signature Type
+          enum:
+          - DELEGATE
+          - SELF
+          - ACCOUNT_SUPPORT
+        delegate:
+          $ref: '#/components/schemas/PortOrderSignatureDelegate'
+      description: Port signature details
+    PortDeviceRedundancy:
+      type: object
+      properties:
+        group:
+          type: string
+          description: Device redundancy group
+        priority:
+          type: string
+          description: Device redundancy priority
+          enum:
+          - PRIMARY
+          - SECONDARY
+      description: Device redundancy
+    SimplifiedAccount:
+      type: object
+      properties:
+        accountNumber:
+          type: integer
+          description: Account number
+          format: int64
+        accountName:
+          type: string
+          description: Account name
+        orgId:
+          type: integer
+          description: Customer organization identifier
+          format: int64
+        organizationName:
+          type: string
+          description: Customer organization name
+        globalOrgId:
+          type: string
+          description: Global organization identifier
+        globalOrganizationName:
+          type: string
+          description: Global organization name
+        ucmId:
+          type: string
+          description: Account ucmId
+        globalCustId:
+          type: string
+          description: Account name
+        resellerAccountNumber:
+          type: integer
+          description: Reseller account number
+          format: int64
+        resellerAccountName:
+          type: string
+          description: Reseller account name
+        resellerUcmId:
+          type: string
+          description: Reseller account ucmId
+        resellerOrgId:
+          type: integer
+          description: Reseller customer organization identifier
+          format: int64
+    Project:
+      required:
+      - projectId
+      type: object
+      properties:
+        projectId:
+          type: string
+          description: Subscriber-assigned project ID
+          example: 44f4c4f8-2f39-494e-838c-d8e640591be5
+    PortNotification:
+      required:
+      - registeredUsers
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          description: Notification Type
+          enum:
+          - NOTIFICATION
+          - TECHNICAL
+          - PEERING
+          - ESCALATION
+        registeredUsers:
+          type: array
+          description: Array of registered users
+          items:
+            type: string
+    PortExpression:
+      type: object
+      properties:
+        and:
+          $ref: '#/components/schemas/PortExpressions'
+        or:
+          $ref: '#/components/schemas/PortExpressions'
+        property:
+          $ref: '#/components/schemas/PortSearchFieldName'
+        operator:
+          type: string
+          enum:
+          - '='
+        values:
+          type: array
+          items:
+            type: string
+      description: 'Either use ''and'' for AND operations, ''or'' for OR operations,  or specify ''property'', ''operator'', and ''values'' for field filtering. Only one of these patterns should be used at a time.
+
+        '
+    PortRedundancy:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Access point redundancy
+        group:
+          type: string
+          description: Port UUID of respective primary port
+          deprecated: true
+        priority:
+          $ref: '#/components/schemas/PortPriority'
+      description: Port redundancy configuration
+    PortChangeOperation:
+      required:
+      - op
+      - path
+      - value
+      type: object
+      properties:
+        op:
+          type: string
+          description: Handy shortcut for operation name
+          example: replace
+        path:
+          type: string
+          description: path inside document leading to updated parameter
+          example: /name
+        value:
+          description: new value for updated parameter
+      description: Port change operation data
+    PortDemarcationPoint:
+      type: object
+      properties:
+        cabinetUniqueSpaceId:
+          type: string
+          description: Port cabinet unique space id
+        cageUniqueSpaceId:
+          type: string
+          description: Port cage unique space id
+        patchPanel:
+          type: string
+          description: Port patch panel
+        patchPanelName:
+          type: string
+          description: Port patch panel
+          deprecated: true
+        patchPanelPortA:
+          type: string
+          description: Port patch panel port A
+        patchPanelPortB:
+          type: string
+          description: Port patch panel port B
+        connectorType:
+          type: string
+          description: Port connector type
+        ibx:
+          type: string
+          description: Port ibx identifier
+      description: Customer physical Port
+    Error_2:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    PortOrderPurchaseOrder:
+      type: object
+      properties:
+        number:
+          type: string
+          description: purchase order number
+        amount:
+          type: string
+          description: purchase order amount
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        attachmentId:
+          type: string
+          format: uuid
+        selectionType:
+          type: string
+          deprecated: true
+          enum:
+          - EXEMPTION
+          - EXISTING
+          - NEW
+          - BLANKET
+        type:
+          type: string
+          enum:
+          - EXEMPTION
+          - EXISTING
+          - NEW
+          - BLANKET
+      description: purchase order
+    Package:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Type of Port Package
+          enum:
+          - STANDARD
+          - UNLIMITED
+          - UNLIMITED_PLUS
+        type:
+          type: string
+          description: Port service Type
+          enum:
+          - EPL
+          - MSP
+      description: Package settings for port
+    LinkProtocolState:
+      type: string
+      description: Network status
+      enum:
+      - RESERVED
+      - RELEASED
+    PortSortCriteria:
+      type: object
+      properties:
+        direction:
+          $ref: '#/components/schemas/PortSortDirection'
+        property:
+          $ref: '#/components/schemas/PortSortBy'
+  requestBodies:
+    PortAssignInput:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PortAssignInput'
+      description: 'Virtual Network ID. May be the UUID of the Virtual Network record, or the VLAN value itself (ex: ''1001'').'
+      required: true
+  examples:
+    bmmrSinglePortCreateDryRunResponse:
+      value:
+        type: XF_PORT
+        connectivitySourceType: BMMR
+        physicalPortsSpeed: 1000
+        physicalPortsType: 1000BASE_LX
+        physicalPortsCount: 1
+        location:
+          metroCode: AT
+        demarcationPointIbx: AT1
+        redundancy:
+          priority: PRIMARY
+        lagEnabled: false
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        package:
+          code: STANDARD
+        project:
+          projectId: b7c8d9e0-f1a2-4b3c-9d4e-5f6a7b8c9d0e
+        account:
+          accountNumber: 100001
+          accountName: Test-Account
+        order:
+          purchaseOrder:
+            number: Fabric-PO-TEST-001
+            amount: '1000'
+            startDate: 2025-01-01
+            endDate: 2030-01-01
+            type: EXISTING
+          signature:
+            signatory: SELF
+            delegate:
+              email: test-user@example.com
+        notifications:
+        - type: TECHNICAL
+          registeredUsers:
+          - test-technical-user
+        - type: NOTIFICATION
+          registeredUsers:
+          - test-notification-user
+        loas:
+        - uuid: a0b1c2d3-e4f5-4678-a6b7-c8d9e0f1a2b3
+    LinkProtocolGetDot1qResponseExample:
+      value:
+        pagination:
+          offset: 5
+          limit: 20
+          total: 40
+          next: /fabric/v4/ports/4ff4047c-7217-4b79-9943-c2c4a2f7324d/linkProtocols?offset=25&limit=20,
+          previous: /fabric/v4/ports/4ff4047c-7217-4b79-9943-c2c4a2f7324d/linkProtocols?offset=0&limit=20
+        data:
+        - type: DOT1Q
+          uuid: 52d61263-fb0a-459d-a086-bc7fd6bd7384
+          state: RESERVED
+          vlanTag: 200
+          asset:
+            href: https://api.equinix.com/fabric/v4/connections/cd67f685-41b0-1b07-6de0-320a5c00abee
+            uuid: cd67f685-41b0-1b07-6de0-320a5c00abee
+            bandwidth: 1000
+          changeLog:
+            createdDateTime: 2020-05-21 10:30:00+00:00
+        - type: DOT1Q
+          uuid: 8c589394-b0eb-4057-97dc-3bdb4f8ff6db
+          state: RESERVED
+          vlanTag: 257
+          serviceToken:
+            href: https://api.equinix.com/fabric/v4/serviceTokens/fc4fb78a-6b89-462d-a233-e75ef61a603f
+            uuid: fc4fb78a-6b89-462d-a233-e75ef61a603f
+            bandwidth: 1000
+          changeLog:
+            createdDateTime: 2020-05-21 10:30:00+00:00
+        - type: DOT1Q
+          uuid: 7f1da56d-e1ff-4b25-b542-883c7004e971
+          state: RESERVED
+          vlanTag: 250
+          serviceToken:
+            href: https://api.equinix.com/fabric/v4/serviceTokens/90f1af0e-134b-40d6-a007-e62cd6866373
+            uuid: 90f1af0e-134b-40d6-a007-e62cd6866373
+            bandwidth: 1000
+          changeLog:
+            createdDateTime: 2020-05-21 10:30:00+00:00
+        - type: DOT1Q
+          uuid: 7c968801-e03b-4530-8424-aa5ecc4339e2
+          state: RESERVED
+          vlanTag: 240
+          asset:
+            href: https://api.equinix.com/fabric/v4/connections/2ac4e14f-6120-4705-886e-d37f1d0c6a65
+            uuid: 2ac4e14f-6120-4705-886e-d37f1d0c6a65
+            bandwidth: 1000
+          changeLog:
+            createdDateTime: 2020-05-21 10:30:00+00:00
+        - type: DOT1Q
+          uuid: db812bba-94b8-43e6-8d9c-850f04350c3d
+          state: RESERVED
+          vlanTag: 240
+          asset:
+            href: https://api.equinix.com/fabric/v4/connections/3268d105-e57b-4b2b-8a0a-2e3e42312d95
+            uuid: 3268d105-e57b-4b2b-8a0a-2e3e42312d95
+            bandwidth: 1000
+          changeLog:
+            createdDateTime: 2020-05-21 10:30:00+00:00
+            updatedDateTime: 2020-05-21 10:30:00+00:00
+    portUpdateLagEnabledRequest:
+      value:
+      - op: replace
+        path: /lagEnabled
+        value: true
+    coloSinglePortNonLag:
+      value:
+        type: XF_PORT
+        physicalPortsSpeed: 1000
+        physicalPortsType: 1000BASE_LX
+        connectivitySourceType: COLO
+        location:
+          metroCode: GV
+        demarcationPointIbx: GV1
+        package:
+          code: STANDARD
+        lagEnabled: false
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        project:
+          projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931'
+        account:
+          accountNumber: 270848
+        notifications:
+        - registeredUsers:
+          - jaguarsuser-port-order
+          type: TECHNICAL
+        order:
+          purchaseOrder:
+            number: 156576
+            amount: 10
+            startDate: 2018-06-11 22:25:52.206000+00:00
+            endDate: 2018-07-11 22:25:52.206000+00:00
+            type: NEW
+          signature:
+            signatory: DELEGATE
+            delegate:
+              firstName: John
+              lastName: Doe
+              email: john.doe@company.com
+        physicalPorts:
+        - demarcationPoint:
+            ibx: GV1
+            cabinetUniqueSpaceId: Demarc
+            cageUniqueSpaceId: GV1:01:002174
+            patchPanel: CP:Demarc:1259684
+            connectorType: SC
+    portDelete:
+      value:
+        href: https://api.equinix.com/fabric/v4/ports/e91484bb-4f65-4ab3-8f77-500dec2f855d
+        type: XF_PORT
+        uuid: e91484bb-4f65-4ab3-8f77-500dec2f855d
+        name: test-AT1-Dot1q-L-Secondary-108608
+        state: DEPROVISIONING
+        bandwidth: 10000
+        usedBandwidth: 0
+        availableBandwidth: 20000
+        redundancy:
+          group: C91484bb-4f65-4ab3-8f77-500dec2f855C
+          priority: PRIMARY
+        location:
+          metroHref: https://api.equinix.com/fabric/v4/metros/AT
+          ibx: AT1
+          metroCode: AT
+          metroName: Atlanta
+          region: AMER
+        device:
+          name: dev-m7a2.lab
+          redundancy:
+            group: C91484bb-4f65-4ab3-8f77-500dec2f855C
+            priority: PRIMARY
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        lagEnabled: true
+        settings:
+          buyout: false
+          placeVcOrderPermission: true
+          viewPortPermission: true
+        physicalPorts:
+        - state: DEPROVISIONING
+          type: XF_PHYSICAL_PORT
+          bandwidth: 10000
+          tether:
+            crossConnectId: 100179-A
+            patchPanel: PP:8118:1586
+            patchPanelPortA: '92'
+            patchPanelPortB: '24'
+          demarcationPoint:
+            ibx: AT1
+            patchPanel: PP:8118:1586
+            patchPanelName: PP:8118:1586
+            patchPanelPortA: '92'
+            patchPanelPortB: '24'
+        account:
+          accountNumber: 100179
+          accountName: L2 account
+          globalCustId: 007700000090982RG8
+          orgId: 100179
+          organizationName: Cust_Org_100179
+        changeLog:
+          createdDateTime: 2018-06-14 17:21:25.587000+00:00
+    remoteSinglePortCreateDryRunResponse:
+      value:
+        type: XF_PORT
+        connectivitySourceType: REMOTE
+        physicalPortsSpeed: 1000
+        physicalPortsType: 1000BASE_LX
+        physicalPortsCount: 1
+        location:
+          metroCode: AT
+        demarcationPointIbx: AT1
+        redundancy:
+          priority: PRIMARY
+        lagEnabled: false
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        package:
+          code: STANDARD
+        project:
+          projectId: e3d4f5a6-7b8c-4d9e-a0b1-c2d3e4f56789
+        account:
+          accountNumber: 100002
+          accountName: Test-Account
+        order:
+          purchaseOrder:
+            number: Fabric-PO-TEST-002
+            amount: '1000'
+            startDate: 2025-01-01
+            endDate: 2030-01-01
+            type: EXISTING
+          signature:
+            signatory: SELF
+            delegate:
+              email: test-user@example.com
+        notifications:
+        - type: TECHNICAL
+          registeredUsers:
+          - test-technical-user
+        - type: NOTIFICATION
+          registeredUsers:
+          - test-notification-user
+        loas:
+        - uuid: f1e2d3c4-b5a6-4978-8e0f-1a2b3c4d5e6f
+    bmmrSinglePortLag:
+      value:
+        type: XF_PORT
+        connectivitySourceType: BMMR
+        location:
+          metroCode: SE
+        settings:
+          sharedPortType: false
+        package:
+          code: STANDARD
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        account:
+          accountNumber: '200551'
+        project:
+          projectId: 333cd592-1709-4238-bb0d-2c2b41896aa1
+        redundancy:
+          priority: PRIMARY
+        lagEnabled: true
+        physicalPortsSpeed: 1000
+        physicalPortsType: 1000BASE_LX
+        physicalPortsCount: 1
+        demarcationPointIbx: SE2
+        bmmrType: SELF
+        notifications:
+        - type: TECHNICAL
+          registeredUsers:
+          - falconsExternalUser@seller.com
+        - type: NOTIFICATION
+          registeredUsers:
+          - falconsExternalUser@seller.com
+        additionalInfo:
+        - key: lagType
+          value: New
+    createIXPublicPrivatePeeringPortResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/ports/11abfba0-907f-460b-95ff-5a7bda4471ed
+        type: XF_PORT
+        uuid: 11abfba0-907f-460b-95ff-5a7bda4471ed
+        physicalPortsSpeed: 400000
+        physicalPortsType: 400GBASE_LR4
+        physicalPortsCount: 1
+        connectivitySourceType: COLO
+        project:
+          projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931
+        state: PENDING
+        order:
+          orderNumber: 1-633948565342
+          uuid: d8ab29fe-e849-417d-b0a0-946e69dcd2ce
+        account:
+          accountNumber: 270848
+          accountName: Jaguars_toronto__sig
+          ucmId: 86B71B7D-D0CC-4ee9-854D-A2C1AA7FA152
+        changeLog:
+          createdBy: '923209'
+          createdDateTime: 2025-06-11 22:41:39.669000+00:00
+        location:
+          metroCode: GV
+        demarcationPointIbx: GV1
+        redundancy:
+          priority: PRIMARY
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        lagEnabled: false
+        settings:
+          sharedPortType: false
+          productCode: IX
+        notifications:
+        - type: TECHNICAL
+          registeredUsers:
+          - jaguars-test-user-001
+        - type: NOTIFICATION
+          registeredUsers:
+          - jaguars-test-user-001
+        physicalPorts:
+        - demarcationPoint:
+            ibx: GV1
+            cabinetUniqueSpaceId: Demarc
+            cageUniqueSpaceId: GV1:01:002174
+            patchPanel: CP:Demarc:1259684
+            connectorType: SC
+    portSearchInvalidProjectRequest:
+      value:
+      - errorCode: EQ-3046110
+        errorMessage: ProjectID required.
+        details: ProjectId and ports are not found for the user
+        correlationId: TEST
+        additionalInfo:
+        - property: /project/projectId
+          reason: ' before searching for ports, assign project and ports'
+    '400':
+      value:
+      - errorCode: EQ-3142102
+        errorMessage: Connection has duplicate buyer-side VLAN ID for port or the same VLAN ID is in the process of being deleted and should be freed up soon
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: /aSide/accessPoint/linkProtocol
+      - errorCode: EQ-3142535
+        errorMessage: The connection bandwidth provided in the connection request exceeds the bandwidth Limit on ServiceToken
+        details: Please enter bandwidth less than the Speed limit on ServiceToken
+        correlationId: test
+        additionalInfo:
+        - property: /aSide/serviceToken/uuid
+      - errorCode: EQ-3142536
+        errorMessage: Remote connection cannot be created with the provided ServiceToken
+        details: Only local Connection can be created using this ServiceToken
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/port/uuid
+      - errorCode: EQ-3142701
+        errorMessage: The connection bandwidth provided in the connection request exceeds the bandwidth Limit on ServiceToken
+        details: not an authorized user
+        correlationId: test
+      - errorCode: EQ-3142501
+        errorMessage: Invalid input
+        correlationId: 20d32a80-0d61-4333-bc03-707b591ae2f5
+        additionalInfo:
+        - property: aSide/accessPoint/port/uuid
+      - errorCode: EQ-3142509
+        errorMessage: Connection already deleted
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: uuid
+      - errorCode: EQ-3142510
+        errorMessage: Connection is in transient state
+        correlationId: 20d32a80-0d61-4333-bc03-707b591ae2f5
+        additionalInfo:
+        - property: uuid
+      - errorCode: EQ-3142221
+        errorMessage: The primary and secondary token provided have different bandwidth tiers. Please use two tokens that support the same bandwidth tiers
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/serviceToken/uuid
+      - errorCode: EQ-3142222
+        errorMessage: The primary and secondary tokens have different encapsulation types (Dot1Q or QinQ). Please use two tokens that support the same encapsulation type
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/serviceToken/uuid
+      - errorCode: EQ-3142223
+        errorMessage: The primary and secondary tokens belong to different projects. Please use two tokens that belong to the same project
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/serviceToken/uuid
+      - errorCode: EQ-3142224
+        errorMessage: The primary and secondary ports have different port speeds (bandwidth). Please use two tokens that support the same port speed
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/serviceToken/uuid
+      - errorCode: EQ-3142225
+        errorMessage: The primary and secondary tokens provided are the same. Please provide a different token
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/serviceToken/uuid
+      - errorCode: EQ-3142514
+        errorMessage: Redundancy group is required
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/group
+      - errorCode: EQ-3142515
+        errorMessage: Redundancy priority is required
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/priority
+      - errorCode: EQ-3142516
+        errorMessage: Invalid redundancy group
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/group
+      - errorCode: EQ-3142517
+        errorMessage: Invalid redundancy priority
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/priority
+      - errorCode: EQ-3142303
+        errorMessage: Only Primary connection allowed for this CSP
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/priority
+      - errorCode: EQ-3142320
+        errorMessage: For redundant connection, Service Profile should be the same
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/profile/uuid
+      - errorCode: EQ-3142021
+        errorMessage: For redundant connection, Fabric Cloud Router should be the same
+        correlationId: test
+        additionalInfo:
+        - property: /aSide/accessPoint/router/uuid
+      - errorCode: EQ-3142012
+        errorMessage: Fabric Cloud Router is not in PROVISIONED state
+        correlationId: test
+        additionalInfo:
+        - property: /aSide/accessPoint/router/uuid
+      - errorCode: EQ-3142301
+        errorMessage: Given profile does not exist
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/profile/uuid
+      - errorCode: EQ-3142302
+        errorMessage: Service provider does not exist in required zSide metro
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/location/metroCode
+      - errorCode: EQ-3142013
+        errorMessage: Invalid metro for Cloud Router connection
+        correlationId: test
+        additionalInfo:
+        - property: /aSide/accessPoint/router/uuid
+      - errorCode: EQ-3142304
+        errorMessage: Private connections are not allowed on public profiles
+        correlationId: test
+        additionalInfo:
+        - property: visibility
+      - errorCode: EQ-3142306
+        errorMessage: Requested bandwidth is not supported by service profile
+        correlationId: test
+        additionalInfo:
+        - property: /bandwidth
+      - errorCode: EQ-3142308
+        errorMessage: Authentication key is required
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/authenticationKey
+    portByUUID:
+      value:
+        href: https://api.equinix.com/fabric/v4/ports/44c5712b-d704-4ca5-9b42-ee6be32ee06a
+        type: XF_PORT
+        uuid: 44c5712b-d704-4ca5-9b42-ee6be32ee06a
+        name: 270843-DA1-CX-PRI-33
+        physicalPortsSpeed: 1000
+        physicalPortsType: 1000BASE_LX
+        project:
+          projectId: 66a2d2f7-b79b-49bc-8642-d2b3c1c138b4
+        package:
+          code: UNLIMITED
+        state: ACTIVE
+        cvpId: '2000833'
+        connectivitySourceType: COLO
+        operation:
+          operationalStatus: UP
+          connectionCount: 10
+          evplVCCount: 10
+          accessVCCount: 0
+        account:
+          accountNumber: 270843
+          accountName: ctr-sit-account1
+          orgId: 93055
+          organizationName: ctr-sit-account1-270843
+          ucmId: 64726950-A62C-4749-98E2-5AA4CA44284F
+          globalCustId: 0016u000003JZ3XAAW
+        change:
+          uuid: ed41e367-e09d-4c2f-b6ab-30506de4437f
+          type: PORT_UPDATE
+          status: COMPLETED
+          data:
+            op: REPLACE
+            path: /encapsulation
+            value:
+              type: QINQ
+              tagProtocolId: 34984
+          createdDateTime: 2025-05-29 20:38:45.630759+00:00
+          updatedDateTime: 2025-05-29 20:38:49.330822+00:00
+        changeLog:
+          createdBy: qa-automation
+          createdDateTime: 2025-05-21 18:12:18.300000+00:00
+          updatedBy: qa-automation
+          updatedDateTime: 2025-05-29 20:38:48.900000+00:00
+        bandwidth: 1000
+        availableBandwidth: 500
+        usedBandwidth: 500
+        location:
+          metroHref: https://api.equinix.com/fabric/v4/metros/DA
+          region: AMER
+          metroName: Dallas
+          metroCode: DA
+          ibx: DA1
+        device:
+          name: qa3-da-a1.lab
+          redundancy:
+            priority: PRIMARY
+        demarcationPointIbx: DA1
+        tetherIbx: DA1
+        redundancy:
+          priority: PRIMARY
+        encapsulation:
+          type: QINQ
+          tagProtocolId: 34984
+        lagEnabled: false
+        settings:
+          buyout: true
+          viewPortPermission: true
+          placeVcOrderPermission: true
+        physicalPorts:
+        - type: XF_PHYSICAL_PORT
+          id: 1426359
+          state: ADDED
+          bandwidth: 0
+          uuid: 0189244a-f3ac-7258-a8b4-3167af899305
+          tether:
+            crossConnectId: '513213223'
+            ibx: DA1
+          demarcationPoint:
+            ibx: DA1
+          operation:
+            operationalStatus: UP
+    remoteSinglePortLagWithPurchaseOrderExemption:
+      value:
+        type: XF_PORT
+        connectivitySourceType: REMOTE
+        location:
+          metroCode: AT
+        package:
+          code: STANDARD
+        settings:
+          sharedPortType: false
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        account:
+          accountNumber: '200551'
+        project:
+          projectId: 333cd592-1709-4238-bb0d-2c2b41896aa1
+        redundancy:
+          priority: PRIMARY
+        lagEnabled: true
+        physicalPortsSpeed: 1000
+        physicalPortsType: 1000BASE_LX
+        physicalPortsCount: 1
+        demarcationPointIbx: AT1
+        order:
+          purchaseOrder:
+            type: EXEMPTION
+        notifications:
+        - type: TECHNICAL
+          registeredUsers:
+          - falconsExternalUser@seller.com
+        - type: NOTIFICATION
+          registeredUsers:
+          - falconsExternalUser@seller.com
+        additionalInfo:
+        - key: lagType
+          value: New
+        loas:
+        - uuid: 2f78191c-0920-4f13-b1c7-2cef03d07570
+    bmmrAddSecondaryPort:
+      value:
+        type: XF_PORT
+        physicalPortsSpeed: 10000
+        physicalPortsType: 1000BASE_LX
+        connectivitySourceType: BMMR
+        bmmrType: SELF
+        location:
+          metroCode: GV
+        demarcationPointIbx: GV1
+        settings:
+          sharedPortType: false
+        redundancy:
+          priority: SECONDARY
+          group: 1f6bdb37-f131-5925-c039-fe1785fad165
+        lagEnabled: false
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        project:
+          projectId: 567
+        package:
+          code: STANDARD
+        account:
+          accountNumber: 1000
+        order:
+          purchaseOrder:
+            number: 156576
+            amount: 10
+            startDate: 2018-06-11 22:25:52.206000+00:00
+            endDate: 2018-07-11 22:25:52.206000+00:00
+            type: NEW
+          signature:
+            signatory: DELEGATE
+            delegate:
+              firstName: John
+              lastName: Doe
+              email: john.doe@company.com
+        notifications:
+        - type: TECHNICAL
+          registeredUsers:
+          - jaguarsuser-port-order
+        - type: NOTIFICATION
+          registeredUsers:
+          - jaguarsuser-port-order
+        - type: PEERING
+          registeredUsers:
+          - jaguarsuser-port-order
+        - type: ESCALATION
+          registeredUsers:
+          - jaguarsuser-port-order
+        loas:
+        - uuid: f47a6f46-e3f8-430e-9459-bfcc0f54f3c3
+        - uuid: f47a6f46-e3f8-430e-9459-bfcc0f54f3c4
+    createIXPublicPeeringPortRequest:
+      value:
+        type: XF_PORT
+        physicalPortsSpeed: 400000
+        physicalPortsType: 400GBASE_LR4
+        connectivitySourceType: COLO
+        location:
+          metroCode: GV
+        demarcationPointIbx: GV1
+        lagEnabled: false
+        encapsulation:
+          type: UNTAGGED
+        project:
+          projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931
+        account:
+          accountNumber: 270848
+        notifications:
+        - registeredUsers:
+          - jaguarsuser-port-order
+          type: TECHNICAL
+        physicalPorts:
+        - demarcationPoint:
+            ibx: GV1
+            cabinetUniqueSpaceId: Demarc
+            cageUniqueSpaceId: GV1:01:002174
+            patchPanel: CP:Demarc:1259684
+            connectorType: SC
+        settings:
+          productCode: IX
+    coloAddToLag:
+      value:
+        data:
+        - type: XF_PHYSICAL_PORT
+          demarcationPoint:
+            ibx: AM1
+            cabinetUniqueSpaceId: AM1:02:032575:0105
+            cageUniqueSpaceId: AM1:02:032575
+            patchPanel: PP:0105:1260379
+            patchPanelPortA: 14
+            patchPanelPortB: 15
+            connectorType: LC
+          account:
+            accountNumber: 17829
+          order:
+            purchaseOrder:
+              number: 156576
+              amount: 10
+              startDate: 2018-06-11 22:25:52.206000+00:00
+              endDate: 2018-07-11 22:25:52.206000+00:00
+              type: NEW
+            signature:
+              signatory: DELEGATE
+              delegate:
+                firstName: John
+                lastName: Doe
+                email: john.doe@company.com
+          notifications:
+          - registeredUsers:
+            - jaguarsuser-port-order
+            type: NOTIFICATION
+        - type: XF_PHYSICAL_PORT
+          account:
+            accountNumber: 17829
+          demarcationPoint:
+            ibx: AM1
+            cabinetUniqueSpaceId: AM1:02:032575:0105
+            cageUniqueSpaceId: AM1:02:032575
+            patchPanel: PP:0105:1260379
+            patchPanelPortA: 16
+            patchPanelPortB: 17
+            connectorType: LC
+          order:
+            purchaseOrder:
+              number: 156576
+              amount: 10
+              startDate: 2018-06-11 22:25:52.206000+00:00
+              endDate: 2018-07-11 22:25:52.206000+00:00
+              type: NEW
+            signature:
+              signatory: DELEGATE
+              delegate:
+                firstName: John
+                lastName: Doe
+                email: john.doe@company.com
+          notifications:
+          - registeredUsers:
+            - jaguarsuser-port-order
+            type: NOTIFICATION
+    PortUpdateNameDryRunRequest:
+      value:
+      - op: replace
+        path: /name
+        value: 1234-ibx-port
+    coloAddSecondaryPort:
+      value:
+        type: XF_PORT
+        physicalPortsSpeed: 10000
+        physicalPortsType: 1000BASE_LX
+        connectivitySourceType: COLO
+        location:
+          metroCode: GV
+        demarcationPointIbx: GV1
+        settings:
+          sharedPortType: false
+        package:
+          code: STANDARD
+        redundancy:
+          priority: SECONDARY
+          group: 1f6bdb37-f131-5925-c039-fe1785fad165
+        lagEnabled: false
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        project:
+          projectId: 567
+        account:
+          accountNumber: 1000
+        order:
+          purchaseOrder:
+            number: 156576
+            amount: 10
+            startDate: 2018-06-11 22:25:52.206000+00:00
+            endDate: 2018-07-11 22:25:52.206000+00:00
+            type: NEW
+          signature:
+            signatory: DELEGATE
+            delegate:
+              firstName: John
+              lastName: Doe
+              email: john.doe@company.com
+        notifications:
+        - type: TECHNICAL
+          registeredUsers:
+          - jaguarsuser-port-order
+        - type: NOTIFICATION
+          registeredUsers:
+          - jaguarsuser-port-order
+        - type: PEERING
+          registeredUsers:
+          - jaguarsuser-port-order
+        - type: ESCALATION
+          registeredUsers:
+          - jaguarsuser-port-order
+        physicalPorts:
+        - demarcationPoint:
+            ibx: AM1
+            cabinet: AM1:02:032575:0105
+            cage: AM1:02:032575
+            patchPanel: PP:0105:1260379
+            patchPanelPortA: 14
+            patchPanelPortB: 15
+            connectorType: LC
+    bmmrSinglePortNoLag:
+      value:
+        type: XF_PORT
+        physicalPortsSpeed: 1000
+        physicalPortsType: 1000BASE_LX
+        connectivitySourceType: BMMR
+        location:
+          metroCode: GV
+        demarcationPointIbx: GV1
+        lagEnabled: false
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        project:
+          projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931
+        package:
+          code: STANDARD
+        account:
+          accountNumber: 270848
+        order:
+          purchaseOrder:
+            number: 156576
+            amount: 10
+            startDate: 2018-06-11 22:25:52.206000+00:00
+            endDate: 2018-07-11 22:25:52.206000+00:00
+            type: NEW
+          signature:
+            signatory: DELEGATE
+            delegate:
+              firstName: John
+              lastName: Doe
+              email: john.doe@company.com
+        notifications:
+        - registeredUsers:
+          - jaguarsuser-port-order
+          type: TECHNICAL
+        loas:
+        - uuid: f47a6f46-e3f8-430e-9459-bfcc0f54f3c3
+        - uuid: f47a6f46-e3f8-430e-9459-bfcc0f54f3c4
+    bmmrSinglePortLagResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/ports/ed9d0b79-ff29-404a-b016-566435093afc
+        type: XF_PORT
+        uuid: ed9d0b79-ff29-404a-b016-566435093afc
+        physicalPortsSpeed: 1000
+        physicalPortsType: 1000BASE_LX
+        physicalPortsCount: 0
+        connectivitySourceType: BMMR
+        project:
+          projectId: 333cd592-1709-4238-bb0d-2c2b41896aa1
+        state: PENDING
+        order:
+          orderNumber: 1-289477804403
+          uuid: b325f02c-69dd-41d2-838b-ea495c873e9d
+        account:
+          accountNumber: 200551
+          accountName: gen-l2-qa-01-auto-200551
+          ucmId: 83C58EBD-E231-4a8b-902E-0CFBE50E32C2
+        changeLog:
+          createdBy: '1067822'
+          createdDateTime: 2025-06-21 00:15:48.414000+00:00
+        location:
+          metroCode: SE
+        demarcationPointIbx: SE2
+        redundancy:
+          priority: PRIMARY
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        lagEnabled: true
+        package:
+          code: STANDARD
+        settings:
+          sharedPortType: false
+        notifications:
+        - type: TECHNICAL
+          registeredUsers:
+          - falconsExternalUser@seller.com
+        - type: NOTIFICATION
+          registeredUsers:
+          - falconsExternalUser@seller.com
+        additionalInfo:
+        - key: lagType
+          value: New
+    coloLagPortNewGroup:
+      value:
+        type: XF_PORT
+        connectivitySourceType: COLO
+        location:
+          metroCode: TR
+        settings:
+          sharedPortType: false
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        account:
+          accountNumber: '96127367'
+        package:
+          code: UNLIMITED
+        project:
+          projectId: 66a2d2f7-b79b-49bc-8642-d2b3c1c138b4
+        redundancy:
+          priority: PRIMARY
+        lagEnabled: true
+        physicalPorts:
+        - type: XF_PHYSICAL_PORT
+          demarcationPoint:
+            ibx: TR1
+            cageUniqueSpaceId: TR1:01:JSIT001
+            cabinetUniqueSpaceId: DEM
+            patchPanel: PP:DEM:1265410
+            connectorType: LC
+            patchPanelPortA: null
+        physicalPortsSpeed: 1000
+        physicalPortsType: 1000BASE_LX
+        physicalPortsCount: 1
+        demarcationPointIbx: TR1
+        order:
+          signature:
+            signatory: SELF
+            delegate:
+              email: jaguars-test-user-001@equinix.com
+          purchaseOrder:
+            type: EXEMPTION
+        notifications:
+        - type: TECHNICAL
+          registeredUsers:
+          - jaguars-test-user-001
+        - type: NOTIFICATION
+          registeredUsers:
+          - jaguars-test-user-001
+        additionalInfo:
+        - key: lagType
+          value: New
+    portSearchInvalidSearchFieldArgument:
+      value:
+      - errorCode: EQ-3046112
+        errorMessage: Invalid argument value.
+        details: Please refer the contracts for correct fields
+        correlationId: TEST
+    portDryRunDelete:
+      value:
+        type: XF_PORT
+        uuid: e91484bb-4f65-4ab3-8f77-500dec2f855d
+        name: test-AT1-Dot1q-L-Secondary-108608
+        physicalPortsType: 10GBASE_L
+        physicalPortsSpeed: 10000
+        physicalPortsCount: 1
+        location:
+          metroCode: AM
+        demarcationPointIbx: AM1
+        redundancy:
+          group: 1
+          priority: PRIMARY
+        lagEnabled: true
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        package:
+          code: STANDARD
+        settings:
+          sharedPortType: false
+        project:
+          projectId: 567
+        account:
+          accountNumber: 1000
+        order:
+          orderNumber: 1-207799950758
+          signature:
+            signatory: DELEGATE
+            delegate:
+              email: testEmail1@equinix.com
+        notifications:
+        - type: TECHNICAL
+          registeredUsers:
+          - jaguarsuser-port-order
+        - type: NOTIFICATION
+          registeredUsers:
+          - jaguarsuser-port-order
+        - type: PEERING
+          registeredUsers:
+          - jaguarsuser-port-order
+        - type: ESCALATION
+          registeredUsers:
+          - jaguarsuser-port-order
+        physicalPorts:
+          tether:
+            crossConnectId: 100179-A
+            patchPanel: PP:8118:1586
+            patchPanelPortA: '92'
+            patchPanelPortB: '24'
+          demarcationPoint:
+            ibx: AT1
+            patchPanel: PP:8118:1586
+            patchPanelName: PP:8118:1586
+            patchPanelPortA: '92'
+            patchPanelPortB: '24'
+    '403':
+      value:
+      - errorCode: EQ-3045003
+        errorMessage: Operation not allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Operation not allowed for current user
+    ports-500-user-failure:
+      value:
+      - errorCode: IC-USR-014-01
+        errorMessage: Error in getting user's profile
+    remoteSinglePortNewGroupLagRequest:
+      value:
+        type: XF_PORT
+        physicalPortsSpeed: 1000
+        physicalPortsType: 1000BASE_LX
+        connectivitySourceType: REMOTE
+        physicalPortsCount: 1
+        location:
+          metroCode: GV
+        demarcationPointIbx: GV1
+        package:
+          code: STANDARD
+        settings:
+          sharedPortType: false
+        lagEnabled: true
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        project:
+          projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931
+        account:
+          accountNumber: 270848
+        notifications:
+        - registeredUsers:
+          - jaguarsuser-port-order
+          type: TECHNICAL
+        loas:
+        - uuid: 396e93c2-3b3a-4d47-a9d9-1ea68627374b
+        order:
+          purchaseOrder:
+            number: 156576
+            amount: 10
+            startDate: 2018-06-11 22:25:52.206000+00:00
+            endDate: 2018-07-11 22:25:52.206000+00:00
+            type: NEW
+          signature:
+            signatory: DELEGATE
+            delegate:
+              firstName: John
+              lastName: Doe
+              email: john.doe@company.com
+    '500':
+      value:
+      - errorCode: EQ-3045004
+        errorMessage: Internal Server Error
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Internal Server Error
+    port-400:
+      value:
+      - errorCode: EQ-3143101
+        errorMessage: NOTIFICATION_CONTACT_NOT_VALID
+        details: notifications
+      - errorCode: EQ-3143103
+        errorMessage: NOTIFICATION_CONTACT_MISSING
+        details: notifications
+      - errorCode: EQ-3143104
+        errorMessage: ORDERING_CONTACT_MISSING
+        details: notifications
+      - errorCode: EQ-3143105
+        errorMessage: ORDERING_CONTACT_NOT_VALID
+        details: notifications
+      - errorCode: EQ-3143106
+        errorMessage: INVALID_PHYSICAL_PORTS
+        details: physicalPorts[%s].Demarcation.cageUniqueSpaceId
+      - errorCode: EQ-3143107
+        errorMessage: INVALID_PATCH_PANEL_NAME
+        details: physicalPorts[%s].Demarcation.patchPanelName is not valid
+      - errorCode: EQ-3143108
+        errorMessage: PHYSICAL_PORTS_MISSING
+        details: PhysicalPorts
+      - errorCode: EQ-3143109
+        errorMessage: ALL_PORTS_USED
+        details: PhysicalPorts.Demarcation.port
+      - errorCode: EQ-3143110
+        errorMessage: INVALID_PHYSICAL_PORTS_PORTA_DUPLICATE
+        details: PhysicalPorts[%s].Demarcation.portA
+      - errorCode: EQ-3143111
+        errorMessage: INVALID_PHYSICAL_PORTS_PORTB_DUPLICATE
+        details: PhysicalPorts[%s].Demarcation.portB
+      - errorCode: EQ-3143112
+        errorMessage: NEXT_AVAIL_CANNOT_BE_TRUE
+        details: PhysicalPorts[%s].Demarcation.portA
+      - errorCode: EQ-3143113
+        errorMessage: provided metroCode is not available for this user
+        details: metroCode
+      - errorCode: EQ-3143114
+        errorMessage: MISSING_PORTB
+        details: PhysicalPorts[%s].Demarcation.portB
+      - errorCode: EQ-3143115
+        errorMessage: PORT_PRIORITY_SHOULD_BE_PRIMARY
+        details: priority
+      - errorCode: EQ-3143116
+        errorMessage: INVALID_PHYSICAL_PORTS_SPEED
+        details: physicalPortsSpeed
+      - errorCode: EQ-3143117
+        errorMessage: INVALID_PHYSICAL_PORTS_TYPE
+        details: physicalPortsType
+      - errorCode: EQ-3143121
+        errorMessage: SHARED_PORT_PRODUCT_INVALID
+        details: sharedPortProduct
+      - errorCode: EQ-3143122
+        errorMessage: INVALID_USER
+        details: sharedPortType
+      - errorCode: EQ-3143123
+        errorMessage: INVALID_CONNECTIVITY_SOURCE_TYPE
+        details: ConnectivitySourceType
+      - errorCode: EQ-3143124
+        errorMessage: ACCOUNT_SERVICE_ERROR
+        details: AccountNumber
+      - errorCode: EQ-3143125
+        errorMessage: MANDATORY_ATTRIBUTE_ERROR
+        details: PhysicalPorts[%s].Demarcation.portA
+      - errorCode: EQ-3143126
+        errorMessage: UNTAGGED_INVALID_PACKAGE_TYPE
+        details: settings.packageType
+      - errorCode: EQ-3143127
+        errorMessage: UNTAGGED_INVALID_ENCAPSULATION
+        details: encapsulation.type
+      - errorCode: EQ-3143128
+        errorMessage: UNTAGGED_REDUNDANT
+        details: redundancy.priority
+      - errorCode: EQ-3143129
+        errorMessage: UNTAGGED_LAG
+        details: lagEnabled
+      - errorCode: EQ-3143130
+        errorMessage: UNTAGGED_SHARED
+        details: settings.sharedPortType
+      - errorCode: EQ-3143131
+        errorMessage: UNTAGGED_TPID
+        details: encapsulation.tagProtocolId
+      - errorCode: EQ-3143132
+        errorMessage: PHYSICAL_PORTS_SPEED_NOT_AVAILABLE
+        details: physicalPortsSpeed
+      - errorCode: EQ-3143133
+        errorMessage: Invalid A side ibx in MC order payload
+        details: ibx
+      - errorCode: EQ-3143134
+        errorMessage: Invalid Z side ibx in MC order payload
+        details: ibx
+      - errorCode: EQ-3143135
+        errorMessage: LAG_PORT_WITHOUT_LAG
+        details: lagPort
+      - errorCode: EQ-3143136
+        errorMessage: LAG_WITH_WITHOUT_LAG
+        details: lag.type
+      - errorCode: EQ-3143137
+        errorMessage: ORDER_NOT_BELONG_TO_USER
+      - errorCode: EQ-3143138
+        errorMessage: ORDER_NOT_FOUND
+    bmmrLagPortNewGroup:
+      value:
+        type: XF_PORT
+        physicalPortsSpeed: 1000
+        physicalPortsType: 1000BASE_LX
+        connectivitySourceType: BMMR
+        bmmrType: SELF
+        physicalPortsCount: 1
+        location:
+          metroCode: GV
+        demarcationPointIbx: GV1
+        package:
+          code: STANDARD
+        lagEnabled: true
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        project:
+          projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931
+        account:
+          accountNumber: 270848
+        notifications:
+        - registeredUsers:
+          - jaguarsuser-port-order
+          type: TECHNICAL
+        order:
+          purchaseOrder:
+            number: 156576
+            amount: 10
+            startDate: 2018-06-11 22:25:52.206000+00:00
+            endDate: 2018-07-11 22:25:52.206000+00:00
+            type: NEW
+          signature:
+            signatory: DELEGATE
+            delegate:
+              firstName: John
+              lastName: Doe
+              email: john.doe@company.com
+    createPortBadRequest:
+      value:
+      - errorCode: EQ-3143004
+        errorMessage: Json syntax error, please check request body
+        details: Unknown json property
+        correlationId: TEST
+        additionalInfo:
+        - property: encapsulation.type
+          reason: Unexpected value 'DOT1'
+    portSearchByProjectId:
+      value:
+        filter:
+          or:
+          - and:
+            - property: /state
+              operator: '='
+              values:
+              - ACTIVE
+              - REPROVISIONING
+            - property: /settings/productCode
+              operator: '='
+              values:
+              - CX
+            - property: /project/projectId
+              operator: '='
+              values:
+              - 66a2d2f7-b79b-49bc-8642-d2b3c1c138b4
+        pagination:
+          limit: 1000
+          offset: 0
+        sort:
+        - property: /device/name
+          direction: DESC
+    portUpdateEncapsulationAndTagProtocolIdRequest:
+      value:
+      - op: replace
+        path: /encapsulation
+        value:
+          type: DOT1Q
+          tagProtocolId: 33024
+    portPatchMultipleConnections400Response:
+      value:
+      - errorCode: EQ-3143253
+        errorMessage: Port is used by one or more Connections, connectors, subscriptions and/or tokens
+        details: There are 9 Connections/ connectors/ subscriptions/ tokens associated to this port
+        correlationId: TEST
+        additionalInfo:
+        - property: /uuid
+    bmmrAddToLag:
+      value:
+        data:
+        - type: XF_PHYSICAL_PORT
+          account:
+            accountNumber: 17829
+          order:
+            purchaseOrder:
+              number: 156576
+              amount: 10
+              startDate: 2018-06-11 22:25:52.206000+00:00
+              endDate: 2018-07-11 22:25:52.206000+00:00
+              type: NEW
+            signature:
+              signatory: DELEGATE
+              delegate:
+                firstName: John
+                lastName: Doe
+                email: john.doe@company.com
+        - loas:
+          - uuid: 64de7e5-7fe7-41e6-b984-80d5aa159a0e
+        - type: XF_PHYSICAL_PORT
+          account:
+            accountNumber: 17829
+          order:
+            purchaseOrder:
+              number: 156576
+              amount: 10
+              startDate: 2018-06-11 22:25:52.206000+00:00
+              endDate: 2018-07-11 22:25:52.206000+00:00
+              type: NEW
+            signature:
+              signatory: DELEGATE
+              delegate:
+                firstName: John
+                lastName: Doe
+                email: john.doe@company.com
+        - loas:
+          - uuid: 64de7e5-7fe7-41e6-b984-80d5aa159a0e
+    port-500:
+      value:
+      - errorCode: EQ-3143001
+        errorMessage: Please contact support@equinix.com for more info
+      - errorCode: EQ-3143002
+        errorMessage: Invalid response from order service
+      - errorCode: EQ-3143003
+        errorMessage: Invalid argument value passed
+      - errorCode: EQ-3143004
+        errorMessage: Json syntax error, please check request body
+      - errorCode: EQ-3143005
+        errorMessage: Invalid argument passed
+      - errorCode: EQ-3143006
+        errorMessage: Method not supported, Please check the URL passed
+      - errorCode: EQ-3143008
+        errorMessage: virtual Port not found
+        details: connectionDetails[%s].patchPanelName is not valid
+    403-port-access:
+      value:
+      - errorCode: EQ-3035002
+        errorMessage: Access Forbidden
+        correlationId: UnAuthorized User- Cannot perform action
+    PortUpdateDryRunResponse:
+      value:
+        pagination:
+          offset: 0
+          limit: 5
+          total: 1
+        data:
+        - href: https://api.equinix.com/fabric/v4/ports/e91484bb-4f65-4ab3-8f77-500dec2f855d
+          type: XF_PORT
+          uuid: e91484bb-4f65-4ab3-8f77-500dec2f855d
+          name: test-AT1-Dot1q-L-Secondary-108608
+          state: ACTIVE
+          bandwidth: 10000
+          usedBandwidth: 0
+          availableBandwidth: 20000
+          physicalPortSpeed: 10000
+          redundancy:
+            priority: SECONDARY
+          location:
+            metroHref: https://api.equinix.com/fabric/v4/metros/AT
+            ibx: AT1
+            metroCode: AT
+            metroName: Atlanta
+            region: AMER
+          device:
+            name: dev-m7a2.lab
+            redundancy:
+              group: '1'
+              priority: SECONDARY
+          encapsulation:
+            type: DOT1Q
+            tagProtocolId: 33024
+          lagEnabled: true
+          package:
+            code: STANDARD
+            type: MSP
+          settings:
+            buyout: false
+            placeVcOrderPermission: true
+            viewPortPermission: true
+          physicalPorts:
+          - state: ACTIVE
+            type: XF_PHYSICAL_PORT
+            id: 6967
+            bandwidth: 10000
+            tether:
+              crossConnectId: 100179-A
+              patchPanel: PP:956:66107
+              patchPanelPortA: '5'
+              patchPanelPortB: '42'
+            operation:
+              operationalStatus: UP
+          - state: ACTIVE
+            type: XF_PHYSICAL_PORT
+            id: 6968
+            bandwidth: 10000
+            tether:
+              crossConnectId: 100179-A
+              patchPanel: PP:8118:1586
+              patchPanelPortA: '92'
+              patchPanelPortB: '24'
+            operation:
+              operationalStatus: UP
+            demarcationPoint:
+              ibx: AT1
+              patchPanel: PP:8118:1586
+              patchPanelName: PP:8118:1586
+              patchPanelPortA: '92'
+              patchPanelPortB: '24'
+          operation:
+            operationalStatus: UP
+            opStatusChangedAt: 2021-06-14 17:21:25.586000+00:00
+            connectionCount: 0
+            evplVcCount: 0
+            fgVcCount: 0
+            accessVcCount: 0
+          account:
+            accountNumber: 100179
+            accountName: L2
+            globalCustId: 007700000090982RG8
+            orgId: 100179
+            organizationName: Cust_Org_100179
+          order:
+            purchaseOrder:
+              startDate: 2020-06-14 17:21:25.586000+00:00
+              endDate: 2020-06-15 17:21:25.586000+00:00
+              type: NEW
+            orderNumber: 1-222078525611
+          changeLog:
+            createdDateTime: 2020-06-14 17:21:25.586000+00:00
+          project:
+            projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931
+    portSearchInvalidRequest:
+      value:
+      - errorCode: EQ-3046116
+        errorMessage: JSON syntax error.
+        details: Unknown json property
+        correlationId: TEST
+        additionalInfo:
+        - property: filter.or.[0].and.[1].property
+          reason: Unexpected value '/settings/productCod'
+    400_invalid_portId:
+      value:
+      - errorCode: EQ-3035202
+        errorMessage: Unable to fetch port details
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: The uuid requested could not be found in system. Please try again after sometime
+        additionalInfo:
+          property: portUuid
+    ports:
+      value:
+        pagination:
+          offset: 0
+          limit: 1000
+          total: 2
+        data:
+        - href: https://api.equinix.com/fabric/v4/ports/c4d93b39-02db-2dbc-ace0-30fa5c00ad04
+          type: XF_PORT
+          uuid: c4d93b39-02db-2dbc-ace0-30fa5c00ad04
+          name: gen-l2-qa-01-auto-TY4-L-Qinq-STD-SEC-10G-JUN-598
+          physicalPortsSpeed: 10000
+          physicalPortsType: 10GBASE_LR
+          connectivitySourceType: COLO
+          project:
+            projectId: 333cd592-1709-4238-bb0d-2c2b41896aa1
+          package:
+            code: STANDARD
+          state: REPROVISIONING
+          cvpId: '1616554'
+          operation:
+            connectionCount: 0
+            evplVCCount: 0
+            accessVCCount: 0
+          account:
+            accountNumber: 200559
+            accountName: gen-l2-qa-01-auto-200559
+            orgId: 90946
+            organizationName: gen-l2-qa-01-auto-200551.
+            ucmId: 500DFED2-EBDB-480d-896C-C7870E52D0D8
+            globalCustId: 0017i000011X242AAC
+          changeLog:
+            createdBy: vvyugovskiy-IMPORT_JOB
+            createdDateTime: 2021-06-16 01:46:52+00:00
+            updatedBy: Order-to-activation
+            updatedDateTime: 2025-04-07 23:03:08.900000+00:00
+          bandwidth: 10000
+          availableBandwidth: 10000
+          usedBandwidth: 0
+          location:
+            metroHref: https://api.equinix.com/fabric/v4/metros/TY
+            region: APAC
+            metroName: Tokyo
+            metroCode: TY
+            ibx: TY4
+          device:
+            name: sit-tb1-ty-a2.lab
+            redundancy:
+              priority: SECONDARY
+          demarcationPointIbx: TY4
+          tetherIbx: TY4
+          redundancy:
+            priority: SECONDARY
+          encapsulation:
+            type: QINQ
+            tagProtocolId: 37120
+          lagEnabled: false
+          settings:
+            buyout: false
+          physicalPorts:
+          - type: XF_PHYSICAL_PORT
+            id: 1362185
+            state: TO_BE_ADDED
+            uuid: 01892489-ce9b-7f25-b1f5-d32a5ac6a423
+            tether:
+              crossConnectId: ECX.05.00001836
+              cabinetNumber: Demarc
+              systemName: TY4:01:002181
+              patchPanel: PP:1240:1089399
+              patchPanelPortA: '7'
+              patchPanelPortB: '8'
+              ibx: TY4
+            demarcationPoint:
+              patchPanel: PP:Demarc:00002181
+              patchPanelName: PP:Demarc:00002181
+              patchPanelPortA: '5'
+              patchPanelPortB: '6'
+              ibx: TY4
+            operation:
+              operationalStatus: UP
+        - href: https://api.equinix.com/fabric/v4/ports/6f0f3015-2d51-4b6e-a98c-1defb4fe88f1
+          type: XF_PORT
+          uuid: 6f0f3015-2d51-4b6e-a98c-1defb4fe88f1
+          name: 200558-SY4-CX-PRI-02
+          physicalPortsSpeed: 10000
+          physicalPortsType: 10GBASE_LR
+          project:
+            projectId: 333cd592-1709-4238-bb0d-2c2b41896aa1
+          package:
+            code: STANDARD
+          state: ACTIVE
+          cvpId: '2000348'
+          operation:
+            connectionCount: 1
+            evplVCCount: 1
+            accessVCCount: 0
+          account:
+            accountNumber: 200558
+            accountName: Gen-L2-Qa-01-Auto-200558
+            orgId: 90946
+            organizationName: gen-l2-qa-01-auto-200551.
+            ucmId: 2D26D682-B62E-495d-AFDF-698EC3B353F8
+            globalCustId: 0017i000011X242AAC
+          changeLog:
+            createdDateTime: 2025-05-06 17:29:30.800000+00:00
+            updatedBy: API
+            updatedDateTime: 2025-05-06 17:29:40.300000+00:00
+          bandwidth: 10000
+          availableBandwidth: 9500
+          usedBandwidth: 500
+          location:
+            metroHref: https://api.equinix.com/fabric/v4/metros/SY
+            region: APAC
+            metroName: Sydney
+            metroCode: SY
+            ibx: SY4
+          device:
+            name: sit-tb1-sy-e1.lab
+            redundancy:
+              group: '1'
+              priority: PRIMARY
+          demarcationPointIbx: SY4
+          tetherIbx: SY4
+          redundancy:
+            priority: PRIMARY
+          encapsulation:
+            type: DOT1Q
+            tagProtocolId: 33024
+          lagEnabled: true
+          settings:
+            buyout: false
+          physicalPorts:
+          - type: XF_PHYSICAL_PORT
+            id: 1362737
+            state: ACTIVE
+            uuid: 01892489-ce07-7962-b676-b1a4d8091515
+            tether:
+              crossConnectId: '22035616'
+              cabinetNumber: Demarc
+              systemName: SY4:01:002204
+              patchPanel: PP:1240:1089399
+              patchPanelPortA: '12'
+              patchPanelPortB: '14'
+              ibx: SY4
+            demarcationPoint:
+              patchPanel: PP:Demarc:00002204
+              patchPanelName: PP:Demarc:00002204
+              patchPanelPortA: '17'
+              patchPanelPortB: '18'
+              ibx: SY4
+            operation:
+              operationalStatus: UP
+    createIXPublicPrivatePeeringPortRequest:
+      value:
+        type: XF_PORT
+        physicalPortsSpeed: 400000
+        physicalPortsType: 400GBASE_LR4
+        connectivitySourceType: COLO
+        location:
+          metroCode: GV
+        demarcationPointIbx: GV1
+        lagEnabled: false
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        project:
+          projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931
+        account:
+          accountNumber: 270848
+        notifications:
+        - registeredUsers:
+          - jaguarsuser-port-order
+          type: TECHNICAL
+        physicalPorts:
+        - demarcationPoint:
+            ibx: GV1
+            cabinetUniqueSpaceId: Demarc
+            cageUniqueSpaceId: GV1:01:002174
+            patchPanel: CP:Demarc:1259684
+            connectorType: SC
+        settings:
+          productCode: IX
+    portPatchResponse202:
+      value:
+        href: https://api.equinix.com/fabric/v4/ports/44c5712b-d704-4ca5-9b42-ee6be32ee06a
+        type: XF_PORT
+        uuid: 08693250-e67f-431f-b1ac-d3204263876a
+        name: 290061-SV1-NE-Shared-CX-PRI-01
+        physicalPortsSpeed: 10000
+        physicalPortsType: 10GBASE_LR
+        physicalPortsCount: 1
+        project:
+          projectId: '377533000114703'
+        state: REPROVISIONING
+        cvpId: '2001190'
+        account:
+          accountNumber: 290061
+          ucmId: BD8EB6F3-F8EF-40dc-8AAF-032B85804920
+        change:
+          type: PORT_UPDATE
+          status: REQUESTED
+          data:
+            op: REPLACE
+            path: /encapsulation
+            value:
+              type: DOT1Q
+              tagProtocolId: 33024
+        bandwidth: 10000
+        location:
+          metroName: Silicon Valley
+          metroCode: SV
+        device:
+          name: qa3-sv-em-e3.lab
+          redundancy:
+            priority: PRIMARY
+          configModel: UPF
+        demarcationPointIbx: SV5
+        encapsulation:
+          type: QINQ
+          tagProtocolId: 37120
+        lagEnabled: true
+        settings:
+          buyout: false
+        additionalInfo:
+        - key: crossConnectId
+          value: 21918108-A
+        package:
+          code: STANDARD
+        physicalPorts:
+        - tether:
+            crossConnectId: 21918108-A
+            patchPanel: CP:Demarc:1257694
+            patchPanelPortA: '21'
+            patchPanelPortB: '22'
+          demarcationPoint:
+            patchPanelPortA: '18'
+            patchPanelPortB: '19'
+            ibx: SV1
+    portSearchInvalidSearchFieldProperty:
+      value:
+      - errorCode: EQ-3046116
+        errorMessage: JSON syntax error.
+        details: Please refer the contracts for correct fields
+        correlationId: TEST
+    portSearchByOptionalFilters:
+      value:
+        filter:
+          or:
+          - and:
+            - property: /device/name
+              operator: '='
+              values:
+              - qa3-sv-em-e3.lab
+            - property: /physicalPorts/tether/crossConnectId
+              operator: '='
+              values:
+              - 21918108-A
+            - property: /physicalPorts/interface/name
+              operator: '='
+              values:
+              - et-0/0/0
+            - property: /uuid
+              operator: '='
+              values:
+              - 08693250-e67f-431f-b1ac-d3204263876a
+            - property: /name
+              operator: '='
+              values:
+              - port-name
+            - property: /account/orgId
+              operator: '='
+              values:
+              - 94513
+            - property: /account/accountNumber
+              operator: '='
+              values:
+              - 290061
+            - property: /location/metroCode
+              operator: '='
+              values:
+              - SV
+        pagination:
+          limit: 1000
+          offset: 0
+        sort:
+        - property: /device/name
+          direction: DESC
+    portUpdateNameRequest:
+      value:
+      - op: replace
+        path: /name
+        value: 1234-ibx-port
+    PortCreateDryRunResponse:
+      value:
+        type: XF_PORT
+        physicalPortsType: 10GBASE_L
+        physicalPortsSpeed: 10000
+        physicalPortsCount: 1
+        location:
+          metroCode: AM
+        demarcationPointIbx: AM1
+        redundancy:
+          group: 1
+          priority: PRIMARY
+        lagEnabled: true
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        package:
+          code: STANDARD
+        settings:
+          sharedPortType: false
+        project:
+          projectId: 567
+        account:
+          accountNumber: 1000
+        order:
+          orderNumber: 1-207799950758
+          signature:
+            signatory: DELEGATE
+            delegate:
+              email: testEmail1@equinix.com
+        notifications:
+        - type: TECHNICAL
+          registeredUsers:
+          - jaguarsuser-port-order
+        - type: NOTIFICATION
+          registeredUsers:
+          - jaguarsuser-port-order
+        - type: PEERING
+          registeredUsers:
+          - jaguarsuser-port-order
+        - type: ESCALATION
+          registeredUsers:
+          - jaguarsuser-port-order
+    remoteSinglePortLagResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/ports/68adcd26-d66c-489d-9c72-8990b92a288e
+        type: XF_PORT
+        uuid: 68adcd26-d66c-489d-9c72-8990b92a288e
+        physicalPortsSpeed: 1000
+        physicalPortsType: 1000BASE_LX
+        physicalPortsCount: 1
+        connectivitySourceType: REMOTE
+        project:
+          projectId: 333cd592-1709-4238-bb0d-2c2b41896aa1
+        state: PENDING
+        order:
+          orderNumber: 1-289477804403
+          uuid: b325f02c-69dd-41d2-838b-ea495c873e9d
+          purchaseOrder:
+            type: EXEMPTION
+        account:
+          accountNumber: 200551
+          accountName: gen-l2-qa-01-auto-200551
+          ucmId: 83C58EBD-E231-4a8b-902E-0CFBE50E32C2
+        changeLog:
+          createdBy: '1067822'
+          createdDateTime: 2025-06-21 00:15:48.414000+00:00
+        location:
+          metroCode: SE
+        demarcationPointIbx: SE2
+        redundancy:
+          priority: PRIMARY
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        lagEnabled: true
+        package:
+          code: STANDARD
+        settings:
+          productCode: CX
+          sharedPortType: false
+        notifications:
+        - type: TECHNICAL
+          registeredUsers:
+          - falconsExternalUser@seller.com
+        - type: NOTIFICATION
+          registeredUsers:
+          - falconsExternalUser@seller.com
+        additionalInfo:
+        - key: lagType
+          value: New
+    COLOSinglePortLagCreateDryRun:
+      value:
+        type: XF_PORT
+        physicalPortsSpeed: 1000
+        physicalPortsType: 1000BASE_LX
+        connectivitySourceType: COLO
+        location:
+          metroCode: GV
+        demarcationPointIbx: GV1
+        package:
+          code: STANDARD
+        lagEnabled: true
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        project:
+          projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931
+        account:
+          accountNumber: 270848
+        notifications:
+        - registeredUsers:
+          - jaguarsuser-port-order
+          type: TECHNICAL
+        order:
+          purchaseOrder:
+            number: 156576
+            amount: 10
+            startDate: 2018-06-11 22:25:52.206000+00:00
+            endDate: 2018-07-11 22:25:52.206000+00:00
+            type: NEW
+          signature:
+            signatory: DELEGATE
+            delegate:
+              firstName: John
+              lastName: Doe
+              email: john.doe@company.com
+        physicalPorts:
+        - demarcationPoint:
+            ibx: GV1
+            cabinetUniqueSpaceId: Demarc
+            cageUniqueSpaceId: GV1:01:002174
+            patchPanel: CP:Demarc:1259684
+            connectorType: SC
+    '404':
+      value:
+      - errorCode: EQ-3045811
+        errorMessage: uuid not found
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: uuid not found
+    LinkProtocolGetVlanRangeResponseExample:
+      value:
+        pagination:
+          offset: 5
+          limit: 20
+          total: 40
+          next: /fabric/v4/ports/4ff4047c-7217-4b79-9943-c2c4a2f7324d/linkProtocols?offset=25&limit=20,
+          previous: /fabric/v4/ports/4ff4047c-7217-4b79-9943-c2c4a2f7324d/linkProtocols?offset=0&limit=20
+        data:
+        - type: DOT1Q
+          uuid: 52d61263-fb0a-459d-a086-bc7fd6bd7384
+          state: RESERVED
+          vlanTagMin: 177
+          vlanTagMax: 179
+          asset:
+            href: https://api.equinix.com/fabric/v4/connections/cd67f685-41b0-1b07-6de0-320a5c00abee
+            uuid: cd67f685-41b0-1b07-6de0-320a5c00abee
+            bandwidth: 1000
+          changeLog:
+            createdDateTime: 2020-05-21 10:30:00+00:00
+        - type: DOT1Q
+          uuid: 8c589394-b0eb-4057-97dc-3bdb4f8ff6db
+          state: RESERVED
+          vlanTagMin: 177
+          vlanTagMax: 179
+          serviceToken:
+            href: https://api.equinix.com/fabric/v4/serviceTokens/fc4fb78a-6b89-462d-a233-e75ef61a603f
+            uuid: fc4fb78a-6b89-462d-a233-e75ef61a603f
+            bandwidth: 1000
+          changeLog:
+            createdDateTime: 2020-05-21 10:30:00+00:00
+        - type: DOT1Q
+          uuid: 7f1da56d-e1ff-4b25-b542-883c7004e971
+          state: RESERVED
+          vlanTagMin: 177
+          vlanTagMax: 179
+          serviceToken:
+            href: https://api.equinix.com/fabric/v4/serviceTokens/90f1af0e-134b-40d6-a007-e62cd6866373
+            uuid: 90f1af0e-134b-40d6-a007-e62cd6866373
+            bandwidth: 1000
+          changeLog:
+            createdDateTime: 2020-05-21 10:30:00+00:00
+        - type: DOT1Q
+          uuid: 7c968801-e03b-4530-8424-aa5ecc4339e2
+          state: RESERVED
+          vlanTagMin: 177
+          vlanTagMax: 179
+          asset:
+            href: https://api.equinix.com/fabric/v4/connections/2ac4e14f-6120-4705-886e-d37f1d0c6a65
+            uuid: 2ac4e14f-6120-4705-886e-d37f1d0c6a65
+            bandwidth: 1000
+          changeLog:
+            createdDateTime: 2020-05-21 10:30:00+00:00
+        - type: DOT1Q
+          uuid: db812bba-94b8-43e6-8d9c-850f04350c3d
+          state: RESERVED
+          vlanTagMin: 177
+          vlanTagMax: 179
+          asset:
+            href: https://api.equinix.com/fabric/v4/connections/3268d105-e57b-4b2b-8a0a-2e3e42312d95
+            uuid: 3268d105-e57b-4b2b-8a0a-2e3e42312d95
+            bandwidth: 1000
+          changeLog:
+            createdDateTime: 2020-05-21 10:30:00+00:00
+            updatedDateTime: 2020-05-21 10:30:00+00:00
+    coloAddToLagResponse:
+      value:
+        data:
+        - type: XF_PHYSICAL_PORT
+          demarcationPoint:
+            cabinetUniqueSpaceId: Demarc
+            cageUniqueSpaceId: GV1:01:002174
+            patchPanel: CP:Demarc:1259684
+            patchPanelPortA: '39'
+            patchPanelPortB: '40'
+            connectorType: SC
+            ibx: GV1
+          order:
+            orderNumber: 1-210210611904
+            uuid: bdfa360d-8ffb-4394-8905-56ea6ae3e87d
+          notifications:
+          - type: NOTIFICATION
+            registeredUsers:
+            - jaguarsuser-port-order
+        - type: XF_PHYSICAL_PORT
+          demarcationPoint:
+            cabinetUniqueSpaceId: Demarc
+            cageUniqueSpaceId: GV1:01:002174
+            patchPanel: CP:Demarc:1259684
+            patchPanelPortA: '41'
+            patchPanelPortB: '42'
+            connectorType: SC
+            ibx: GV1
+          order:
+            orderNumber: 1-210210611904
+            uuid: bdfa360d-8ffb-4394-8905-56ea6ae3e87d
+          notifications:
+          - type: NOTIFICATION
+            registeredUsers:
+            - jaguarsuser-port-order
+    remoteAddToLag:
+      value:
+        data:
+        - type: XF_PHYSICAL_PORT
+          order:
+            purchaseOrder:
+              number: 156576
+              amount: 10
+              startDate: 2018-06-11 22:25:52.206000+00:00
+              endDate: 2018-07-11 22:25:52.206000+00:00
+              type: NEW
+            signature:
+              signatory: DELEGATE
+              delegate:
+                firstName: John
+                lastName: Doe
+                email: john.doe@company.com
+          account:
+            accountReferenceId: 17829Id
+        - loas:
+          - uuid: 64de7e5-7fe7-41e6-b984-80d5aa159a0e
+        - type: XF_PHYSICAL_PORT
+          account:
+            accountReferenceId: 17829Id
+        - loas:
+          - uuid: 64de7e5-7fe7-41e6-b984-80d5aa159a0e
+    '401':
+      value:
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    coloUnlimitedPlusPortLag:
+      value:
+        type: XF_PORT
+        connectivitySourceType: COLO
+        location:
+          metroCode: GV
+        settings:
+          sharedPortType: false
+        package:
+          code: UNLIMITED_PLUS
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        account:
+          accountNumber: '270848'
+        project:
+          projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931
+        redundancy:
+          priority: PRIMARY
+        lagEnabled: true
+        physicalPorts:
+        - type: XF_PHYSICAL_PORT
+          demarcationPoint:
+            ibx: GV1
+            cageUniqueSpaceId: GV1:01:002174
+            cabinetUniqueSpaceId: Demarc
+            patchPanel: CP:Demarc:1259684
+            connectorType: SC
+            patchPanelPortA: null
+            patchPanelPortB: null
+        endCustomer:
+          isDisclosed: false
+        physicalPortsSpeed: 1000
+        physicalPortsType: 1000BASE_LX
+        physicalPortsCount: 1
+        demarcationPointIbx: GV1
+        notifications:
+        - type: TECHNICAL
+          registeredUsers:
+          - jaguarsuser-port-order
+        - type: NOTIFICATION
+          registeredUsers:
+          - jaguarsuser-port-order
+        additionalInfo:
+        - key: lagType
+          value: New
+    COLOSinglePortNonLagCreateDryRun:
+      value:
+        type: XF_PORT
+        physicalPortsSpeed: 1000
+        physicalPortsType: 1000BASE_LX
+        connectivitySourceType: COLO
+        location:
+          metroCode: GV
+        demarcationPointIbx: GV1
+        package:
+          code: STANDARD
+        lagEnabled: false
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        project:
+          projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931'
+        account:
+          accountNumber: 270848
+        notifications:
+        - registeredUsers:
+          - jaguarsuser-port-order
+          type: TECHNICAL
+        order:
+          purchaseOrder:
+            number: 156576
+            amount: 10
+            startDate: 2018-06-11 22:25:52.206000+00:00
+            endDate: 2018-07-11 22:25:52.206000+00:00
+            type: NEW
+          signature:
+            signatory: DELEGATE
+            delegate:
+              firstName: John
+              lastName: Doe
+              email: john.doe@company.com
+        physicalPorts:
+        - demarcationPoint:
+            ibx: GV1
+            cabinetUniqueSpaceId: Demarc
+            cageUniqueSpaceId: GV1:01:002174
+            patchPanel: CP:Demarc:1259684
+            connectorType: SC
+    coloSinglePortNonLagResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/ports/11abfba0-907f-460b-95ff-5a7bda4471ed
+        type: XF_PORT
+        uuid: 11abfba0-907f-460b-95ff-5a7bda4471ed
+        physicalPortsSpeed: 1000
+        physicalPortsType: 1000BASE_LX
+        physicalPortsCount: 1
+        connectivitySourceType: COLO
+        project:
+          projectId: 66a2d2f7-b79b-49bc-8642-d2b3c1c138b4
+        state: PENDING
+        order:
+          orderNumber: 1-233948565342
+          uuid: d8ab29fe-e849-417d-b0a0-946e69dcd2ce
+          purchaseOrder:
+            number: 156576
+            amount: 10
+            startDate: 2018-06-11 22:25:52.206000+00:00
+            endDate: 2018-07-11 22:25:52.206000+00:00
+            type: NEW
+          signature:
+            signatory: DELEGATE
+            delegate:
+              firstName: John
+              lastName: Doe
+              email: john.doe@company.com
+        account:
+          accountNumber: 96127367
+          accountName: Jaguars_toronto__sig
+          ucmId: 86B71B7D-D0CC-4ee9-854D-A2C1AA7FA152
+        changeLog:
+          createdBy: '923209'
+          createdDateTime: 2025-06-11 22:41:39.669000+00:00
+        location:
+          metroCode: TR
+        demarcationPointIbx: TR1
+        redundancy:
+          priority: PRIMARY
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        lagEnabled: false
+        settings:
+          sharedPortType: false
+        package:
+          code: STANDARD
+        notifications:
+        - type: TECHNICAL
+          registeredUsers:
+          - jaguars-test-user-001
+        - type: NOTIFICATION
+          registeredUsers:
+          - jaguars-test-user-001
+        physicalPorts:
+        - demarcationPoint:
+            ibx: GV1
+            cabinetUniqueSpaceId: Demarc
+            cageUniqueSpaceId: GV1:01:002174
+            patchPanel: CP:Demarc:1259684
+            connectorType: SC
+    ports-500:
+      value:
+      - errorCode: EQ-3046030
+        errorMessage: Internal error.
+        details: Internal system error
+    coloSinglePortLag:
+      value:
+        type: XF_PORT
+        connectivitySourceType: COLO
+        location:
+          metroCode: AT
+        settings:
+          sharedPortType: false
+        encapsulation:
+          type: DOT1Q
+          tagProtocolId: 33024
+        account:
+          accountNumber: '16432'
+        project:
+          projectId: e275485c-7072-439f-943a-c923548b2be5
+        package:
+          code: STANDARD
+        redundancy:
+          priority: PRIMARY
+        lagEnabled: true
+        physicalPorts:
+        - type: XF_PHYSICAL_PORT
+          demarcationPoint:
+            ibx: AT1
+            cageUniqueSpaceId: AT1:02:FE50010
+            cabinetUniqueSpaceId: '9999'
+            patchPanel: CD:9999:186947
+            connectorType: SC
+            patchPanelPortA: 4
+            patchPanelPortB: 5
+        endCustomer:
+          isDisclosed: true
+        physicalPortsSpeed: 1000
+        physicalPortsType: 1000BASE_LX
+        physicalPortsCount: 1
+        demarcationPointIbx: AT1
+        notifications:
+        - type: TECHNICAL
+          registeredUsers:
+          - username
+        - type: NOTIFICATION
+          registeredUsers:
+          - user@equinix.com
+        additionalInfo:
+        - key: lagType
+          value: New
+    createIXPublicPeeringPortResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/ports/1babfba0-907f-460b-95ff-5a7bda4471ed
+        type: XF_PORT
+        uuid: 1babfba0-907f-460b-95ff-5a7bda4471ed
+        physicalPortsSpeed: 400000
+        physicalPortsType: 400GBASE_LR4
+        physicalPortsCount: 1
+        connectivitySourceType: COLO
+        project:
+          projectId: 8f23b36f-db8f-44c8-a6e5-606e1b485931
+        state: PENDING
+        order:
+          orderNumber: 1-233948565342
+          uuid: a8ab29fe-e849-417d-b0a0-946e69dcd2ce
+        account:
+          accountNumber: 270848
+          accountName: Jaguars_toronto__sig
+          ucmId: 86B71B7D-D0CC-4ee9-854D-A2C1AA7FA152
+        changeLog:
+          createdBy: '923209'
+          createdDateTime: 2025-06-11 22:41:39.669000+00:00
+        location:
+          metroCode: GV
+        demarcationPointIbx: GV1
+        redundancy:
+          priority: PRIMARY
+        encapsulation:
+          type: UNTAGGED
+        lagEnabled: false
+        settings:
+          sharedPortType: false
+          productCode: IX
+        notifications:
+        - type: TECHNICAL
+          registeredUsers:
+          - jaguars-test-user-001
+        - type: NOTIFICATION
+          registeredUsers:
+          - jaguars-test-user-001
+        physicalPorts:
+        - demarcationPoint:
+            ibx: GV1
+            cabinetUniqueSpaceId: Demarc
+            cageUniqueSpaceId: GV1:01:002174
+            patchPanel: CP:Demarc:1259684
+            connectorType: SC
+    LinkProtocolGetQinqResponseExample:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 5
+        data:
+        - type: QINQ
+          uuid: 52d61263-fb0a-459d-a086-bc7fd6bd7384
+          state: RESERVED
+          vlanSTag: 1000
+          vlanCTag: 500
+          asset:
+            href: https://api.equinix.com/fabric/v4/connections/cd67f685-41b0-1b07-6de0-320a5c00abee
+            uuid: cd67f685-41b0-1b07-6de0-320a5c00abee
+          changeLog:
+            createdDateTime: 2020-05-21 10:30:00+00:00
+        - type: QINQ
+          uuid: 8c589394-b0eb-4057-97dc-3bdb4f8ff6db
+          state: RESERVED
+          vlanSTag: 1000
+          vlanCTag: 500
+          serviceToken:
+            href: https://api.equinix.com/fabric/v4/serviceTokens/fc4fb78a-6b89-462d-a233-e75ef61a603f
+            uuid: fc4fb78a-6b89-462d-a233-e75ef61a603f
+          changeLog:
+            createdDateTime: 2020-05-21 10:30:00+00:00
+        - type: QINQ
+          uuid: 7f1da56d-e1ff-4b25-b542-883c7004e971
+          state: RESERVED
+          vlanSTag: 1000
+          vlanCTag: 500
+          serviceToken:
+            href: https://api.equinix.com/fabric/v4/serviceTokens/90f1af0e-134b-40d6-a007-e62cd6866373
+            uuid: 90f1af0e-134b-40d6-a007-e62cd6866373
+            bandwidth: 1000
+          changeLog:
+            createdDateTime: 2020-05-21 10:30:00+00:00
+        - type: QINQ
+          uuid: 7c968801-e03b-4530-8424-aa5ecc4339e2
+          state: RESERVED
+          vlanSTag: 1000
+          vlanCTag: 500
+          asset:
+            href: https://api.equinix.com/fabric/v4/connections/2ac4e14f-6120-4705-886e-d37f1d0c6a65
+            uuid: 2ac4e14f-6120-4705-886e-d37f1d0c6a65
+          changeLog:
+            createdDateTime: 2020-05-21 10:30:00+00:00
+        - type: QINQ
+          uuid: db812bba-94b8-43e6-8d9c-850f04350c3d
+          state: RESERVED
+          vlanSTag: 1001
+          vlanCTag: 1001
+          asset:
+            href: https://api.equinix.com/fabric/v4/connections/3268d105-e57b-4b2b-8a0a-2e3e42312d95
+            uuid: 3268d105-e57b-4b2b-8a0a-2e3e42312d95
+          changeLog:
+            createdDateTime: 2020-05-21 10:30:00+00:00
+            updatedDateTime: 2020-05-21 10:30:00+00:00
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

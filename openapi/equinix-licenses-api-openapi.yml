@@ -1,0 +1,462 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication Licenses API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- description: 'Manage licenses. See project endpoints to list and create licenses for a particular project.
+
+    '
+  externalDocs:
+    url: https://metal.equinix.com/developers/docs/operating-systems/licensed/
+  name: Licenses
+paths:
+  /licenses/{id}:
+    delete:
+      description: Deletes a license.
+      operationId: deleteLicense
+      parameters:
+      - description: License UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: no content
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Delete the license
+      tags:
+      - Licenses
+    get:
+      description: Returns a license
+      operationId: findLicenseById
+      parameters:
+      - description: License UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: 'Nested attributes to exclude. Excluded objects will return only the href
+
+          attribute. Attribute names can be dotted (up to 3 levels) to exclude deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: exclude
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/License'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Retrieve a license
+      tags:
+      - Licenses
+    put:
+      description: Updates the license.
+      operationId: updateLicense
+      parameters:
+      - description: License UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: 'Nested attributes to exclude. Excluded objects will return only the href
+
+          attribute. Attribute names can be dotted (up to 3 levels) to exclude deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: exclude
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LicenseUpdateInput'
+        description: License to update
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/License'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Update the license
+      tags:
+      - Licenses
+  /projects/{id}/licenses:
+    get:
+      description: Provides a collection of licenses for a given project.
+      operationId: findProjectLicenses
+      parameters:
+      - description: Project UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: 'Nested attributes to exclude. Excluded objects will return only the href
+
+          attribute. Attribute names can be dotted (up to 3 levels) to exclude deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: exclude
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Page to return
+        in: query
+        name: page
+        schema:
+          default: 1
+          format: int32
+          maximum: 100000
+          minimum: 1
+          type: integer
+      - description: Items returned per page
+        in: query
+        name: per_page
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicenseList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Retrieve all licenses
+      tags:
+      - Licenses
+    post:
+      description: Creates a new license for the given project
+      operationId: createLicense
+      parameters:
+      - description: Project UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: 'Nested attributes to exclude. Excluded objects will return only the href
+
+          attribute. Attribute names can be dotted (up to 3 levels) to exclude deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: exclude
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LicenseCreateInput'
+        description: License to create
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/License'
+          description: created
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Create a License
+      tags:
+      - Licenses
+components:
+  schemas:
+    LicenseUpdateInput:
+      example:
+        size: 0.8008281904610115
+        description: description
+      properties:
+        description:
+          type: string
+        size:
+          type: number
+      type: object
+    Error:
+      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
+      properties:
+        error:
+          description: A description of the error that caused the request to fail.
+          type: string
+        errors:
+          description: A list of errors that contributed to the request failing.
+          items:
+            description: An error message that contributed to the request failing.
+            type: string
+          type: array
+      type: object
+    License:
+      example:
+        licensee_product:
+          href: href
+        size: 0.8008281904610115
+        description: description
+        project:
+          href: href
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        license_key: license_key
+      properties:
+        description:
+          type: string
+        id:
+          format: uuid
+          type: string
+        license_key:
+          type: string
+        licensee_product:
+          $ref: '#/components/schemas/Href'
+        project:
+          $ref: '#/components/schemas/Href'
+        size:
+          type: number
+      type: object
+    LicenseList:
+      example:
+        licenses:
+        - licensee_product:
+            href: href
+          size: 0.8008281904610115
+          description: description
+          project:
+            href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          license_key: license_key
+        - licensee_product:
+            href: href
+          size: 0.8008281904610115
+          description: description
+          project:
+            href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          license_key: license_key
+      properties:
+        licenses:
+          items:
+            $ref: '#/components/schemas/License'
+          type: array
+      type: object
+    LicenseCreateInput:
+      example:
+        size: 0.8008281904610115
+        licensee_product_id: licensee_product_id
+        description: description
+      properties:
+        description:
+          type: string
+        licensee_product_id:
+          type: string
+        size:
+          type: number
+      type: object
+    Href:
+      example:
+        href: href
+      properties:
+        href:
+          type: string
+      required:
+      - href
+      type: object
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

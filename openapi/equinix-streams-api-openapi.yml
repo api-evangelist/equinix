@@ -1,0 +1,1224 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication Streams API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- name: Streams
+  description: Streams
+paths:
+  /fabric/v4/streams:
+    get:
+      tags:
+      - Streams
+      summary: Get Streams
+      description: This API provides capability to retrieve streams
+      operationId: getStreams
+      parameters:
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          type: integer
+        example: 1
+      - name: limit
+        in: query
+        description: number of records to fetch
+        required: false
+        schema:
+          type: integer
+        example: 10
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllStreamResponse'
+              examples:
+                Example:
+                  $ref: '#/components/examples/stream-get-all-example'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+    post:
+      tags:
+      - Streams
+      summary: Create Stream
+      description: This API provides capability to create user's stream
+      operationId: createStreams
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamPostRequest'
+            examples:
+              CreateStream:
+                $ref: '#/components/examples/StreamPostRequestExample'
+        required: true
+      responses:
+        '202':
+          description: Stream object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stream'
+              examples:
+                StreamSubscriptionResponse:
+                  $ref: '#/components/examples/StreamResponseExample'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+  /fabric/v4/streams/{streamId}:
+    get:
+      tags:
+      - Streams
+      summary: Get Stream
+      description: This API provides capability to get user's stream
+      operationId: getStreamByUuid
+      parameters:
+      - name: streamId
+        in: path
+        description: Stream UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/StreamId'
+      responses:
+        '200':
+          description: Stream object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stream'
+              examples:
+                StreamSubscriptionResponse:
+                  $ref: '#/components/examples/StreamResponseExample'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+    put:
+      tags:
+      - Streams
+      summary: Update Stream
+      description: This API provides capability to update user's stream
+      operationId: updateStreamByUuid
+      parameters:
+      - name: streamId
+        in: path
+        description: Stream UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/StreamId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamPutRequest'
+            examples:
+              UpdateStream:
+                $ref: '#/components/examples/StreamPutRequestExample'
+        required: true
+      responses:
+        '202':
+          description: Stream object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stream'
+              examples:
+                StreamResponse:
+                  $ref: '#/components/examples/StreamResponseExample'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+    delete:
+      tags:
+      - Streams
+      summary: Delete Stream
+      description: This API provides capability to delete user's stream
+      operationId: deleteStreamByUuid
+      parameters:
+      - name: streamId
+        in: path
+        description: Stream UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/StreamId'
+      responses:
+        '202':
+          description: Stream object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stream'
+              examples:
+                StreamSubscriptionResponse:
+                  $ref: '#/components/examples/StreamDeleteRequestExample'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+  /fabric/v4/streamAssets/search:
+    post:
+      tags:
+      - Streams
+      summary: Get Assets
+      description: This API provides capability to retrieve stream assets
+      operationId: getStreamsAssets
+      parameters:
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          type: integer
+        example: 1
+      - name: limit
+        in: query
+        description: number of records to fetch
+        required: false
+        schema:
+          type: integer
+        example: 10
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamAssetSearchRequest'
+            examples:
+              SearchAssets:
+                $ref: '#/components/examples/StreamAssetSearchRequestExample'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllStreamAssetResponse'
+              examples:
+                Example:
+                  $ref: '#/components/examples/stream-asset-get-all-example'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+  /fabric/v4/streams/{streamId}/{asset}/{assetId}:
+    get:
+      tags:
+      - Streams
+      summary: Get Asset
+      description: This API provides capability to get user's assets attached to a stream
+      operationId: getStreamAssetByUuid
+      parameters:
+      - name: assetId
+        in: path
+        description: asset UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/AssetId_1'
+      - name: asset
+        in: path
+        description: asset
+        required: true
+        schema:
+          $ref: '#/components/schemas/Asset'
+      - name: streamId
+        in: path
+        description: Stream UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/StreamId'
+      responses:
+        '200':
+          description: Stream asset object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamAsset'
+              examples:
+                StreamSubscriptionResponse:
+                  $ref: '#/components/examples/StreamConnectionAssetResponseExample'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+    put:
+      tags:
+      - Streams
+      summary: Attach Asset
+      description: This API provides capability to attach an asset to a stream
+      operationId: updateStreamAssetByUuid
+      parameters:
+      - name: assetId
+        in: path
+        description: asset UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/AssetId_1'
+      - name: asset
+        in: path
+        description: asset
+        required: true
+        schema:
+          $ref: '#/components/schemas/Asset'
+      - name: streamId
+        in: path
+        description: Stream UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/StreamId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamAssetPutRequest'
+            examples:
+              UpdateStream:
+                $ref: '#/components/examples/StreamAssetPutRequestExample'
+        required: true
+      responses:
+        '202':
+          description: Stream object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamAsset'
+              examples:
+                StreamAssetResponse:
+                  $ref: '#/components/examples/StreamRouterAssetAttachResponseExample'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+    delete:
+      tags:
+      - Streams
+      summary: Detach Asset
+      description: This API provides capability to detach an asset from a stream
+      operationId: deleteStreamAssetByUuid
+      parameters:
+      - name: assetId
+        in: path
+        description: asset UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/AssetId_1'
+      - name: asset
+        in: path
+        description: asset
+        required: true
+        schema:
+          $ref: '#/components/schemas/Asset'
+      - name: streamId
+        in: path
+        description: Stream UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/StreamId'
+      responses:
+        '202':
+          description: Stream object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamAsset'
+              examples:
+                StreamAssetResponse:
+                  $ref: '#/components/examples/StreamRouterAssetDetachResponseExample'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+components:
+  schemas:
+    StreamAssetSortBy:
+      type: string
+      description: Possible field names to use on sorting
+      default: /uuid
+      enum:
+      - /uuid
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    StreamAsset:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Stream Asset URI
+          format: uri
+          readOnly: true
+        uuid:
+          type: string
+          description: Equinix-assigned access point identifier
+          format: uuid
+          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        type:
+          type: string
+          description: Asset types
+          enum:
+          - XF_PORT
+          - IP_VC
+          - EVPLAN_VC
+          - EVPL_VC
+          - XF_METRO
+          - XF_ROUTER
+          - ORGANIZATION
+          - PROJECT
+        metricsEnabled:
+          type: boolean
+          description: enable metric
+          example: false
+        attachmentStatus:
+          type: string
+          description: asset status
+          enum:
+          - ATTACHING
+          - ATTACHED
+          - DETACHED
+          - DETACHING
+          - FAILED
+      description: Stream object
+    Asset:
+      type: string
+      enum:
+      - ports
+      - connections
+      - routers
+      - metros
+      - organizations
+      - projects
+      - networkEdgeDevices
+      - companyProfiles
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    StreamAssetSearchRequest:
+      required:
+      - filter
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/StreamAssetFilters'
+        pagination:
+          $ref: '#/components/schemas/PaginationRequest'
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamAssetSortCriteria'
+      description: Search requests containing criteria
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
+    Changelog:
+      type: object
+      properties:
+        createdBy:
+          type: string
+          description: Created by User Key
+          example: johnsmith
+        createdByFullName:
+          type: string
+          description: Created by User Full Name
+          example: John Smith
+        createdByEmail:
+          type: string
+          description: Created by User Email Address
+          example: john.smith@example.com
+        createdDateTime:
+          type: string
+          description: Created by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedBy:
+          type: string
+          description: Updated by User Key
+          example: johnsmith
+        updatedByFullName:
+          type: string
+          description: Updated by User Full Name
+          example: John Smith
+        updatedByEmail:
+          type: string
+          description: Updated by User Email Address
+          example: john.smith@example.com
+        updatedDateTime:
+          type: string
+          description: Updated by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        deletedBy:
+          type: string
+          description: Deleted by User Key
+          example: johnsmith
+        deletedByFullName:
+          type: string
+          description: Deleted by User Full Name
+          example: John Smith
+        deletedByEmail:
+          type: string
+          description: Deleted by User Email Address
+          example: john.smith@example.com
+        deletedDateTime:
+          type: string
+          description: Deleted by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+      description: Change log
+    StreamAssetSimpleExpression:
+      type: object
+      properties:
+        property:
+          type: string
+          description: "Possible field names to use on filters:\n * `/uuid` - Asset uuid\n * `/streamUuid` - Stream uuid\n * `/projectId` - Asset projectId\n * `/*` - all-category search\n"
+          example: /name
+        operator:
+          type: string
+          description: "Possible operators to use on filters:\n * `=` - equal\n * `!=` - not equal\n * `>` - greater than\n * `>=` - greater than or equal to\n * `<` - less than\n * `<=` - less than or equal to\n * `[NOT] BETWEEN` - (not) between\n * `[NOT] LIKE` - (not) like\n * `[NOT] IN` - (not) in\n * `ILIKE` - case-insensitive like\n"
+          example: '='
+        values:
+          type: array
+          items:
+            type: string
+            example: FabricStreamAsset-1
+    AssetId_1:
+      type: string
+      description: Stream Asset UUID
+      format: uuid
+      example: 757400f8-d360-11e9-bb65-2a2ae2dbcce6
+    StreamAssetSortDirection:
+      type: string
+      description: Sorting direction
+      default: DESC
+      enum:
+      - DESC
+      - ASC
+    StreamAssetPutRequest:
+      type: object
+      properties:
+        metricsEnabled:
+          type: boolean
+          description: enable metric
+          example: false
+          default: false
+      description: Update Stream Asset
+    StreamAssetFilter:
+      type: object
+      anyOf:
+      - $ref: '#/components/schemas/StreamAssetSimpleExpression'
+      - $ref: '#/components/schemas/StreamAssetOrFilter'
+    StreamPostRequest:
+      required:
+      - name
+      - project
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - TELEMETRY_STREAM
+        name:
+          type: string
+          description: Customer-provided stream name
+        description:
+          type: string
+          description: Customer-provided stream description
+        project:
+          $ref: '#/components/schemas/Project'
+      description: Create Stream
+    Project:
+      required:
+      - projectId
+      type: object
+      properties:
+        projectId:
+          type: string
+          description: Subscriber-assigned project ID
+          example: 44f4c4f8-2f39-494e-838c-d8e640591be5
+    StreamId:
+      type: string
+      description: Stream UUID
+      format: uuid
+      example: 657400f8-d360-11e9-bb65-2a2ae2dbcce5
+    StreamAssetSortCriteria:
+      type: object
+      properties:
+        direction:
+          $ref: '#/components/schemas/StreamAssetSortDirection'
+        property:
+          $ref: '#/components/schemas/StreamAssetSortBy'
+    StreamPutRequest:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+          description: Customer-provided stream name
+        description:
+          type: string
+          description: Customer-provided stream description
+      description: Update Stream
+    GetAllStreamResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/Stream'
+    Stream:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Stream URI
+          format: uri
+          readOnly: true
+          example: https://api.equinix.com/fabric/v4/streams/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        uuid:
+          type: string
+          description: Equinix-assigned access point identifier
+          format: uuid
+          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        type:
+          type: string
+          description: type
+          enum:
+          - TELEMETRY_STREAM
+        name:
+          type: string
+          description: Customer-provided stream name
+        description:
+          type: string
+          description: Customer-provided stream description
+        project:
+          $ref: '#/components/schemas/Project'
+        state:
+          type: string
+          description: Stream provision state
+          enum:
+          - PROVISIONING
+          - PROVISIONED
+          - REPROVISIONING
+          - DEPROVISIONING
+          - DEPROVISIONED
+          - FAILED
+        assetsCount:
+          type: integer
+          description: Stream assets count
+          example: 1
+        streamSubscriptionsCount:
+          type: integer
+          description: Stream subscriptions count
+          example: 2
+        alertRulesCount:
+          type: integer
+          description: Stream alert rules count
+          example: 3
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+      description: Stream object
+    StreamAssetFilters:
+      type: object
+      properties:
+        and:
+          maxItems: 8
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamAssetFilter'
+    GetAllStreamAssetResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/StreamAsset'
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    StreamAssetOrFilter:
+      type: object
+      properties:
+        or:
+          maxItems: 3
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamAssetSimpleExpression'
+    PaginationRequest:
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first element.
+          default: 0
+        limit:
+          minimum: 1
+          type: integer
+          description: Number of elements to be requested per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+      description: Pagination request information
+  examples:
+    StreamConnectionAssetResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/streams/e684aa26-8276-48b7-bb42-a6d9def0a419/connections/d684aa26-8276-48b7-bb42-a6d9def0a418
+        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+        type: IP_VC
+        metricsEnabled: false
+        attachmentStatus: ATTACHED
+    '415':
+      value:
+      - errorCode: EQ-3040016
+        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: contentType
+          reason: The payload format is in an unsupported format
+    '404':
+      value:
+      - errorCode: EQ-3045811
+        errorMessage: uuid not found
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: uuid not found
+    StreamResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418
+        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+        type: TELEMETRY_STREAM
+        name: stream1
+        description: stream 1
+        project:
+          projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
+        state: PROVISIONED
+        assetsCount: 1
+        streamSubscriptionsCount: 2
+        alertRulesCount: 3
+        changeLog:
+          createdDateTime: 2024-05-06 16:21:18.545214+00:00
+    StreamAssetSearchRequestExample:
+      value:
+        filter:
+          and:
+          - property: /streamUuid
+            operator: '='
+            values:
+            - e684aa26-8276-48b7-bb42-a6d9def0a419
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - direction: DESC
+          property: /uuid
+    StreamPostRequestExample:
+      value:
+        type: TELEMETRY_STREAM
+        name: splunk1
+        description: subscription-1
+        project:
+          projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
+    '403':
+      value:
+      - errorCode: EQ-3045003
+        errorMessage: Operation not allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Operation not allowed for current user
+    StreamAssetPutRequestExample:
+      value:
+        metricsEnabled: false
+    '401':
+      value:
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    '500':
+      value:
+      - errorCode: EQ-3045004
+        errorMessage: Internal Server Error
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Internal Server Error
+    stream-asset-get-all-example:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 1
+        data:
+        - href: https://api.equinix.com/fabric/v4/ports/e684aa26-8276-48b7-bb42-a6d9def0a419
+          uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+          type: XF_PORT
+          metricsEnabled: false
+          attachmentStatus: ATTACHED
+    StreamRouterAssetAttachResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/streams/e684aa26-8276-48b7-bb42-a6d9def0a419/routers/d684aa26-8276-48b7-bb42-a6d9def0a418
+        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+        type: XF_ROUTER
+        metricsEnabled: false
+        attachmentStatus: ATTACHING
+    stream-get-all-example:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 1
+        data:
+        - href: https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418
+          uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+          type: TELEMETRY_STREAM
+          name: stream 1
+          description: stream dec 1
+          project:
+            projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
+          state: PROVISIONED
+          assetsCount: 1
+          streamSubscriptionsCount: 2
+          alertRulesCount: 3
+          changeLog:
+            createdDateTime: 2024-05-06 16:21:18.545214+00:00
+    StreamRouterAssetDetachResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/streams/e684aa26-8276-48b7-bb42-a6d9def0a419/routers/d684aa26-8276-48b7-bb42-a6d9def0a418
+        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+        type: XF_ROUTER
+        metricsEnabled: false
+        attachmentStatus: DETACHING
+    StreamDeleteRequestExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418
+        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+        type: TELEMETRY_STREAM
+        name: stream1
+        description: stream 1
+        project:
+          projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
+        state: DEPROVISIONING
+        assetsCount: 1
+        streamSubscriptionsCount: 2
+        changeLog:
+          createdDateTime: 2024-05-06 16:21:18.545214+00:00
+    StreamPutRequestExample:
+      value:
+        name: splunk1
+        description: subscription 1
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

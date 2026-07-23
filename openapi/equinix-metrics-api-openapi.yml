@@ -1,0 +1,696 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication Metrics API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- name: Metrics
+  description: Metrics
+paths:
+  /fabric/v4/{asset}/{assetId}/metrics:
+    get:
+      tags:
+      - Metrics
+      summary: Get Metrics by Asset Id
+      description: This API provides capability to retrieve Metrics of an asset id
+      operationId: getMetricByAssetId
+      parameters:
+      - name: asset
+        in: path
+        description: asset
+        required: true
+        schema:
+          $ref: '#/components/schemas/MetricAssetType'
+      - name: assetId
+        in: path
+        description: asset UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/AssetId'
+      - name: name
+        in: query
+        description: "Name of the metric types: \n- `equinix.fabric.connection.bandwidth_rx.usage`\n- `equinix.fabric.connection.bandwidth_tx.usage`\n- `equinix.fabric.connection.packets_dropped_rx_aside_rateexceeded.count`\n- `equinix.fabric.connection.packets_dropped_tx_aside_rateexceeded.count`\n- `equinix.fabric.connection.packets_dropped_rx_zside_rateexceeded.count`\n- `equinix.fabric.connection.packets_dropped_tx_zside_rateexceeded.count`\n- `equinix.fabric.port.bandwidth_rx.usage`\n- `equinix.fabric.port.bandwidth_tx.usage`\n- `equinix.fabric.port.packets_dropped_rx.count`\n- `equinix.fabric.port.packets_dropped_tx.count`\n- `equinix.fabric.port.packets_erred_rx.count`\n- `equinix.fabric.port.packets_erred_tx.count`\n- `equinix.fabric.metro.{SOURCE_METRO_CODE}_{DESTINATION_METRO_CODE}.latency`\n- `equinix.fabric.metro.{SOURCE_METRO_CODE}_{DESTINATION_METRO_CODE}.jitter_avg`\n"
+        required: true
+        schema:
+          pattern: ^equinix\.fabric\.(connection|port|metro)\..+
+          type: string
+        examples:
+          connectionRxUsageExample:
+            value: equinix.fabric.connection.bandwidth_rx.usage
+          connectionTxUsageExample:
+            value: equinix.fabric.connection.bandwidth_tx.usage
+          connectionRxPacketAsideDroppedExample:
+            value: equinix.fabric.connection.packets_dropped_rx_aside_rateexceeded.count
+          connectionTxPacketAsideDroppedExample:
+            value: equinix.fabric.connection.packets_dropped_tx_aside_rateexceeded.count
+          connectionRxPacketZsideDroppedExample:
+            value: equinix.fabric.connection.packets_dropped_rx_zside_rateexceeded.count
+          connectionTxPacketZsideDroppedExample:
+            value: equinix.fabric.connection.packets_dropped_tx_zside_rateexceeded.count
+          portRxUsageExample:
+            value: equinix.fabric.port.bandwidth_rx.usage
+          portTxUsageExample:
+            value: equinix.fabric.port.bandwidth_tx.usage
+          portRxPacketDroppedExample:
+            value: equinix.fabric.port.packets_dropped_rx.count
+          portTxPacketDroppedExample:
+            value: equinix.fabric.port.packets_dropped_tx.count
+          portRxPacketErredExample:
+            value: equinix.fabric.port.packets_erred_rx.count
+          portTxPacketErredExample:
+            value: equinix.fabric.port.packets_erred_tx.count
+          metroLatencyExample:
+            value: equinix.fabric.metro.sv_dc.latency
+          metroJitterExample:
+            value: equinix.fabric.metro.sv_dc.jitter_avg
+      - name: fromDateTime
+        in: query
+        description: Start date and time
+        required: false
+        schema:
+          $ref: '#/components/schemas/StartDateTime'
+      - name: toDateTime
+        in: query
+        description: End date and time
+        required: false
+        schema:
+          $ref: '#/components/schemas/EndDateTime'
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          $ref: '#/components/schemas/Offset'
+      - name: limit
+        in: query
+        description: limit
+        required: false
+        schema:
+          $ref: '#/components/schemas/Limit_1'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMetricsByAssetResponse'
+              examples:
+                Example:
+                  $ref: '#/components/examples/get-metrics-by-asset-id'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+  /fabric/v4/metrics:
+    get:
+      tags:
+      - Metrics
+      summary: Get Metrics by Name
+      description: This API provides capability to retrieve Metrics by specific wildcard metric types
+      operationId: getMetricByName
+      parameters:
+      - name: name
+        in: query
+        description: "Name of the metric types with wildcard: \n- `equinix.fabric.metro.*.latency`\n- `equinix.fabric.metro.*.jitter_avg`\n"
+        required: true
+        schema:
+          pattern: ^equinix\.fabric\.metro\.\*\..+
+          type: string
+        examples:
+          metroLatencyExample:
+            value: equinix.fabric.metro.*.latency
+          metroJitterExample:
+            value: equinix.fabric.metro.*.jitter_avg
+      - name: value
+        in: query
+        description: value
+        required: true
+        schema:
+          $ref: '#/components/schemas/Value'
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          $ref: '#/components/schemas/Offset'
+      - name: limit
+        in: query
+        description: limit
+        required: false
+        schema:
+          $ref: '#/components/schemas/Limit_1'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMetricsByNameResponse'
+              examples:
+                Example:
+                  $ref: '#/components/examples/get-metrics-by-name'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+  /fabric/v4/metrics/search:
+    post:
+      tags:
+      - Metrics
+      summary: Search Metrics
+      description: This API provides capability to search metrics from a filtered query
+      operationId: searchMetrics
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetricsSearchRequest'
+            examples:
+              MetricSearchRequestExample:
+                $ref: '#/components/examples/search-metrics'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMetricsByAssetResponse'
+              examples:
+                Example:
+                  $ref: '#/components/examples/get-metrics-by-asset-id'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+components:
+  schemas:
+    Value:
+      type: string
+      description: Which value to retrieve
+      example: last
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    GetMetricsByNameResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/Metric'
+    EndDateTime:
+      type: string
+      description: End date and time
+      format: date-time
+      example: 2024-07-11 18:06:21+00:00
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    StartDateTime:
+      type: string
+      description: Start date and time
+      format: date-time
+      example: 2024-07-11 18:06:21+00:00
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
+    AssetId:
+      type: string
+      description: Asset UUID
+      format: uuid
+      example: 757400f8-d360-11e9-bb65-2a2ae2dbcce6
+    MetricAssetType:
+      type: string
+      enum:
+      - ports
+      - connections
+      - metros
+    GetMetricsByAssetResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/Metric'
+    MetricSimpleExpression:
+      type: object
+      properties:
+        property:
+          type: string
+          description: "Possible field names to use on filters:\n * `/subject` - Metric subject description (required and limited to 1 value)\n * `/name` - Metric names (required)\n * `/dataPoints/endDateTime` - Time of Metrics\n"
+          example: /subject
+        operator:
+          type: string
+          description: "Possible operators to use on filters:\n * `=` - equal\n * `>` - greater than\n * `>=` - greater than or equal to\n * `<` - less than\n * `<=` - less than or equal to\n * `BETWEEN` - between\n * `IN` - in\n"
+          example: '='
+        values:
+          type: array
+          items:
+            type: string
+            example: equinix.fabric.port.bandwidth_rx.usage
+    Metric_resource:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Metric resource href
+        uuid:
+          type: string
+          description: Metric resource UUID
+        type:
+          type: string
+          description: Metric resource type
+        state:
+          type: string
+          description: Metric resource state
+        name:
+          type: string
+          description: Metric resource name
+        description:
+          type: string
+          description: Metric resource description
+      description: Metric resource
+    MetricFilter:
+      type: object
+      anyOf:
+      - $ref: '#/components/schemas/MetricSimpleExpression'
+    MetricsSearchRequest:
+      required:
+      - filter
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/MetricFilters'
+        pagination:
+          $ref: '#/components/schemas/PaginationRequest'
+      description: Search requests containing criteria
+    Metric:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Equinix supported metric type
+        name:
+          type: string
+          description: Metric name
+        unit:
+          type: string
+          description: Metric unit
+        interval:
+          type: string
+          description: Metric interval (set automatically based on search range)
+        resource:
+          $ref: '#/components/schemas/Metric_resource'
+        summary:
+          type: string
+          description: Metric summary
+        datapoints:
+          type: array
+          description: Metric data points
+          items:
+            $ref: '#/components/schemas/Metric_datapoints'
+      description: Metric object
+    MetricFilters:
+      type: object
+      properties:
+        and:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricFilter'
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    Limit_1:
+      type: integer
+      description: Pagination limit
+      example: 20
+      default: 20
+    Offset:
+      type: integer
+      description: Pagination offset
+      example: 0
+      default: 0
+    Metric_datapoints:
+      type: object
+      properties:
+        endDateTime:
+          type: string
+          description: Datapoint end date and time
+          format: date-time
+        startDateTime:
+          type: string
+          description: Datapoint start date and time
+          format: date-time
+        value:
+          type: number
+          description: Datapoint value
+    PaginationRequest:
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first element.
+          default: 0
+        limit:
+          minimum: 1
+          type: integer
+          description: Number of elements to be requested per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+      description: Pagination request information
+  examples:
+    '404':
+      value:
+      - errorCode: EQ-3045811
+        errorMessage: uuid not found
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: uuid not found
+    get-metrics-by-name:
+      value:
+        pagination:
+          offset: 0
+          limit: 5000
+          total: 3
+        data:
+        - type: GAUGE
+          name: equinix.fabric.metro.at_am.latency
+          unit: ms
+          resource:
+            href: https://uatapi.equinix.com/fabric/v4/metros/AT
+            type: XF_METRO
+            code: AT
+            description: Atlanta to Amsterdam intermetro latency, average in milliseconds
+          datapoints:
+          - endDateTime: 2026-02-03 23:05:04+00:00
+            value: 94.8
+        - type: GAUGE
+          name: equinix.fabric.metro.at_ba.latency
+          unit: ms
+          resource:
+            href: https://uatapi.equinix.com/fabric/v4/metros/AT
+            type: XF_METRO
+            code: AT
+            description: Atlanta to Barcelona intermetro latency, average in milliseconds
+          datapoints:
+          - endDateTime: 2026-02-03 23:05:04+00:00
+            value: 111
+        - type: GAUGE
+          name: equinix.fabric.metro.at_bg.latency
+          unit: ms
+          resource:
+            href: https://uatapi.equinix.com/fabric/v4/metros/AT
+            type: XF_METRO
+            code: AT
+            description: Atlanta to Bogota intermetro latency, average in milliseconds
+          datapoints:
+          - endDateTime: 2026-02-03 23:05:04+00:00
+            value: 69.8
+    get-metrics-by-asset-id:
+      value:
+        pagination:
+          offset: 0
+          limit: 10
+          total: 2
+          next: null
+          previous: null
+        data:
+        - type: GAUGE
+          name: equinix.fabric.port.bandwidth_rx.usage
+          unit: bit/s
+          interval: PT5M
+          resource:
+            href: https://api.equinix.com/fabric/v4/ports/0689734d-25c6-40d1-a9ff-3e4edea07a72
+            uuid: 0689734d-25c6-40d1-a9ff-3e4edea07a72
+            type: XF_PORT
+            state: PROVISIONED
+            name: my-port-name
+          summary:
+            mean: 102.15384615384616
+            max: 107
+          datapoints:
+          - endDateTime: 2025-05-14 13:57:56+00:00
+            value: 107
+          - endDateTime: 2025-05-14 14:02:48+00:00
+            value: 97
+          - endDateTime: 2025-05-14 14:07:58+00:00
+            value: 105
+          - endDateTime: 2025-05-14 14:12:36+00:00
+            value: 102
+          - endDateTime: 2025-05-14 14:18:00+00:00
+            value: 96
+          - endDateTime: 2025-05-14 14:23:03+00:00
+            value: 106
+          - endDateTime: 2025-05-14 14:27:59+00:00
+            value: 104
+          - endDateTime: 2025-05-14 14:32:56+00:00
+            value: 104
+          - endDateTime: 2025-05-14 14:37:51+00:00
+            value: 103
+          - endDateTime: 2025-05-14 14:42:59+00:00
+            value: 100
+          - endDateTime: 2025-05-14 14:47:58+00:00
+            value: 105
+          - endDateTime: 2025-05-14 14:53:08+00:00
+            value: 94
+          - endDateTime: 2025-05-14 14:57:46+00:00
+            value: 105
+        - type: GAUGE
+          name: equinix.fabric.port.bandwidth_tx.usage
+          unit: bit/s
+          interval: PT5M
+          resource:
+            href: https://api.equinix.com/fabric/v4/ports/0689734d-25c6-40d1-a9ff-3e4edea07a72
+            uuid: 0689734d-25c6-40d1-a9ff-3e4edea07a72
+          summary:
+            mean: 255.92307692307693
+            max: 295
+          datapoints:
+          - endDateTime: 2025-05-14 13:57:56+00:00
+            value: 259
+          - endDateTime: 2025-05-14 14:02:48+00:00
+            value: 234
+          - endDateTime: 2025-05-14 14:07:58+00:00
+            value: 242
+          - endDateTime: 2025-05-14 14:12:36+00:00
+            value: 280
+          - endDateTime: 2025-05-14 14:18:00+00:00
+            value: 243
+          - endDateTime: 2025-05-14 14:23:03+00:00
+            value: 262
+          - endDateTime: 2025-05-14 14:27:59+00:00
+            value: 247
+          - endDateTime: 2025-05-14 14:32:56+00:00
+            value: 295
+          - endDateTime: 2025-05-14 14:37:51+00:00
+            value: 284
+          - endDateTime: 2025-05-14 14:42:59+00:00
+            value: 227
+          - endDateTime: 2025-05-14 14:47:58+00:00
+            value: 260
+          - endDateTime: 2025-05-14 14:53:08+00:00
+            value: 251
+          - endDateTime: 2025-05-14 14:57:46+00:00
+            value: 243
+    '403':
+      value:
+      - errorCode: EQ-3045003
+        errorMessage: Operation not allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Operation not allowed for current user
+    '401':
+      value:
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    '500':
+      value:
+      - errorCode: EQ-3045004
+        errorMessage: Internal Server Error
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Internal Server Error
+    search-metrics:
+      value:
+        filter:
+          and:
+          - property: /subject
+            operator: '='
+            values:
+            - /fabric/v4/ports/8ac8ecfe-c7cb-4def-9f77-5ce93c19d83d
+          - property: /name
+            operator: IN
+            values:
+            - equinix.fabric.port.bandwidth_rx.usage
+            - equinix.fabric.port.bandwidth_tx.usage
+            - equinix.fabric.port.operation.status
+          - property: /dataPoints/endDateTime
+            operator: BETWEEN
+            values:
+            - 2025-09-01 19:19:50+00:00
+            - 2025-09-03 19:19:50+00:00
+        pagination:
+          offset: 0
+          limit: 10
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

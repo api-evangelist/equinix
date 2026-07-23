@@ -1,0 +1,665 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication BGP API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- description: 'Manage BGP configs and sessions. See device endpoints to create and list BGP sessions for a particular device. Check out the product docs to learn more about [Local and Global BGP](https://metal.equinix.com/developers/docs/networking/local-global-bgp/).
+
+    '
+  externalDocs:
+    url: https://metal.equinix.com/developers/docs/bgp/bgp-on-equinix-metal/
+  name: BGP
+paths:
+  /bgp/sessions/{id}:
+    delete:
+      description: Deletes the BGP session.
+      operationId: deleteBgpSession
+      parameters:
+      - description: BGP session UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: no content
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Delete the BGP session
+      tags:
+      - BGP
+    get:
+      description: Returns a BGP session
+      operationId: findBgpSessionById
+      parameters:
+      - description: BGP session UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BgpSession'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Retrieve a BGP session
+      tags:
+      - BGP
+    put:
+      description: Updates the BGP session by either enabling or disabling the default route functionality.
+      operationId: updateBgpSession
+      parameters:
+      - description: BGP session UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: boolean
+        description: Default route
+        required: true
+      responses:
+        '200':
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Update the BGP session
+      tags:
+      - BGP
+  /projects/{id}/bgp-config:
+    get:
+      description: Returns a bgp config
+      operationId: findBgpConfigByProject
+      parameters:
+      - description: Project UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BgpConfig'
+          description: 'ok
+
+
+            When BGP configuration is not enabled empty structure is returned.
+
+            When BGP configuration is disabled after being enabled BGP configuration data is returned with status disabled.
+
+            '
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: 'not found
+
+
+            The project was not found.
+
+            '
+      summary: Retrieve a bgp config
+      tags:
+      - BGP
+  /projects/{id}/bgp-configs:
+    post:
+      description: Requests to enable bgp configuration for a project.
+      operationId: requestBgpConfig
+      parameters:
+      - description: Project UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BgpConfigRequestInput'
+        description: BGP config Request to create
+        required: true
+      responses:
+        '204':
+          description: no content
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Requesting bgp config
+      tags:
+      - BGP
+  /projects/{id}/bgp/sessions:
+    get:
+      description: Provides a listing of available BGP sessions for the project.
+      operationId: findProjectBgpSessions
+      parameters:
+      - description: Project UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BgpSessionList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Retrieve all BGP sessions for project
+      tags:
+      - BGP
+  /projects/{id}/global-bgp-ranges:
+    get:
+      description: Returns all global bgp ranges for a project
+      operationId: findGlobalBgpRanges
+      parameters:
+      - description: Project UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalBgpRangeList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Retrieve all global bgp ranges
+      tags:
+      - BGP
+components:
+  schemas:
+    BgpSession_address_family:
+      enum:
+      - ipv4
+      - ipv6
+      type: string
+    BgpSession:
+      example:
+        address_family: null
+        updated_at: 2000-01-23 04:56:07+00:00
+        created_at: 2000-01-23 04:56:07+00:00
+        href: href
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        default_route: true
+        device:
+          href: href
+        learned_routes:
+        - 10.32.16.0/31
+        - 10.32.16.0/31
+        status: status
+      properties:
+        address_family:
+          $ref: '#/components/schemas/BgpSession_address_family'
+        created_at:
+          format: date-time
+          type: string
+        default_route:
+          type: boolean
+        device:
+          $ref: '#/components/schemas/Href'
+        href:
+          type: string
+        id:
+          format: uuid
+          type: string
+        learned_routes:
+          items:
+            description: IPv4 or IPv6 range
+            example: 10.32.16.0/31
+            type: string
+          type: array
+        status:
+          description: ' The status of the BGP Session. Multiple status values may be reported when the device is connected to multiple switches, one value per switch. Each status will start with "unknown" and progress to "up" or "down" depending on the connected device. Subsequent "unknown" values indicate a problem acquiring status from the switch. '
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - address_family
+      type: object
+    BgpSessionList:
+      example:
+        bgp_sessions:
+        - address_family: null
+          updated_at: 2000-01-23 04:56:07+00:00
+          created_at: 2000-01-23 04:56:07+00:00
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          default_route: true
+          device:
+            href: href
+          learned_routes:
+          - 10.32.16.0/31
+          - 10.32.16.0/31
+          status: status
+        - address_family: null
+          updated_at: 2000-01-23 04:56:07+00:00
+          created_at: 2000-01-23 04:56:07+00:00
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          default_route: true
+          device:
+            href: href
+          learned_routes:
+          - 10.32.16.0/31
+          - 10.32.16.0/31
+          status: status
+      properties:
+        bgp_sessions:
+          items:
+            $ref: '#/components/schemas/BgpSession'
+          type: array
+      type: object
+    Error:
+      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
+      properties:
+        error:
+          description: A description of the error that caused the request to fail.
+          type: string
+        errors:
+          description: A list of errors that contributed to the request failing.
+          items:
+            description: An error message that contributed to the request failing.
+            type: string
+          type: array
+      type: object
+    BgpConfigRequestInput_deployment_type:
+      description: Wether the BGP deployment is local or global. Local deployments are configured immediately. Global deployments will need to be reviewed by Equinix Metal engineers.
+      enum:
+      - local
+      - global
+      example: local
+      type: string
+    BgpConfig_status:
+      description: Status of the BGP Config. Status "requested" is valid only with the "global" deployment_type.
+      enum:
+      - requested
+      - enabled
+      - disabled
+      type: string
+    BgpConfig_deployment_type:
+      description: 'In a Local BGP deployment, a customer uses an internal ASN to control routes within a single Equinix Metal datacenter. This means that the routes are never advertised to the global Internet. Global BGP, on the other hand, requires a customer to have a registered ASN and IP space.
+
+        '
+      enum:
+      - global
+      - local
+      example: local
+      type: string
+    BgpConfig:
+      example:
+        sessions:
+        - address_family: null
+          updated_at: 2000-01-23 04:56:07+00:00
+          created_at: 2000-01-23 04:56:07+00:00
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          default_route: true
+          device:
+            href: href
+          learned_routes:
+          - 10.32.16.0/31
+          - 10.32.16.0/31
+          status: status
+        - address_family: null
+          updated_at: 2000-01-23 04:56:07+00:00
+          created_at: 2000-01-23 04:56:07+00:00
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          default_route: true
+          device:
+            href: href
+          learned_routes:
+          - 10.32.16.0/31
+          - 10.32.16.0/31
+          status: status
+        ranges:
+        - address_family: 6
+          project:
+            href: href
+          range: range
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - address_family: 6
+          project:
+            href: href
+          range: range
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        created_at: 2000-01-23 04:56:07+00:00
+        max_prefix: 0
+        project:
+          href: href
+        route_object: route_object
+        deployment_type: local
+        href: href
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        asn: 65000
+        md5: md5
+        requested_at: 2000-01-23 04:56:07+00:00
+        status: null
+      properties:
+        asn:
+          description: Autonomous System Number. ASN is required with Global BGP. With Local BGP the private ASN, 65000, is assigned.
+          example: 65000
+          format: int32
+          type: integer
+        created_at:
+          format: date-time
+          type: string
+        deployment_type:
+          $ref: '#/components/schemas/BgpConfig_deployment_type'
+        href:
+          type: string
+        id:
+          format: uuid
+          type: string
+        max_prefix:
+          default: 10
+          description: The maximum number of route filters allowed per server
+          type: integer
+        md5:
+          description: (Optional) Password for BGP session in plaintext (not a checksum)
+          nullable: true
+          type: string
+        project:
+          $ref: '#/components/schemas/Href'
+        ranges:
+          description: The IP block ranges associated to the ASN (Populated in Global BGP only)
+          items:
+            $ref: '#/components/schemas/GlobalBgpRange'
+          type: array
+        requested_at:
+          format: date-time
+          type: string
+        route_object:
+          description: Specifies AS-MACRO (aka AS-SET) to use when building client route filters
+          type: string
+        sessions:
+          description: The direct connections between neighboring routers that want to exchange routing information.
+          items:
+            $ref: '#/components/schemas/BgpSession'
+          type: array
+        status:
+          $ref: '#/components/schemas/BgpConfig_status'
+      type: object
+    GlobalBgpRange:
+      example:
+        address_family: 6
+        project:
+          href: href
+        range: range
+        href: href
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        address_family:
+          type: integer
+        href:
+          type: string
+        id:
+          format: uuid
+          type: string
+        project:
+          $ref: '#/components/schemas/Href'
+        range:
+          type: string
+      type: object
+    GlobalBgpRangeList:
+      example:
+        global_bgp_ranges:
+        - address_family: 6
+          project:
+            href: href
+          range: range
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - address_family: 6
+          project:
+            href: href
+          range: range
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        global_bgp_ranges:
+          items:
+            $ref: '#/components/schemas/GlobalBgpRange'
+          type: array
+      type: object
+    BgpConfigRequestInput:
+      example:
+        use_case: use_case
+        deployment_type: local
+        asn: 65000
+        md5: md5
+      properties:
+        asn:
+          description: Autonomous System Number for local BGP deployment.
+          example: 65000
+          maximum: 4294967295
+          minimum: 0
+          type: integer
+        deployment_type:
+          $ref: '#/components/schemas/BgpConfigRequestInput_deployment_type'
+        md5:
+          description: 'The plaintext password to share between BGP neighbors as an MD5 checksum:
+
+            * must be 10-20 characters long
+
+            * may not include punctuation
+
+            * must be a combination of numbers and letters
+
+            * must contain at least one lowercase, uppercase, and digit character
+
+            '
+          pattern: ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{10,20}$
+          type: string
+        use_case:
+          description: A use case explanation (necessary for global BGP request review).
+          type: string
+      required:
+      - asn
+      - deployment_type
+      type: object
+    Href:
+      example:
+        href: href
+      properties:
+        href:
+          type: string
+      required:
+      - href
+      type: object
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

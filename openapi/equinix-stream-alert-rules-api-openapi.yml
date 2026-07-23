@@ -1,0 +1,904 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication Stream Alert Rules API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- name: Stream Alert Rules
+  description: Stream Alert Rules <font color="red"> <sup color='red'>Beta</sup></font>
+paths:
+  /fabric/v4/streams/{streamId}/alertRules:
+    get:
+      tags:
+      - Stream Alert Rules
+      summary: Get Stream Alert Rules
+      description: This API provides capability to retrieve stream alert rules
+      operationId: getStreamAlertRules
+      parameters:
+      - name: streamId
+        in: path
+        description: Stream UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/StreamId'
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          type: integer
+        example: 1
+      - name: limit
+        in: query
+        description: number of records to fetch
+        required: false
+        schema:
+          type: integer
+        example: 10
+      responses:
+        '200':
+          description: Stream Alert Rules object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllStreamAlertRuleResponse'
+              examples:
+                GetAllStreamAlertRuleResponse:
+                  $ref: '#/components/examples/stream-alert-rules-get-all-example'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+    post:
+      tags:
+      - Stream Alert Rules
+      summary: Create Stream Alert Rules
+      description: This API provides capability to create user's Stream Alert Rules
+      operationId: createStreamAlertRules
+      parameters:
+      - name: streamId
+        in: path
+        description: Stream UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/StreamId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlertRulePostRequest'
+            examples:
+              CreateStreamAlertRules:
+                $ref: '#/components/examples/StreamAlertRulePostRequestExample'
+              CreateStreamSmartAlertRules:
+                $ref: '#/components/examples/StreamSmartAlertRulePostRequestExample'
+        required: true
+      responses:
+        '202':
+          description: Stream Alert Rules object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamAlertRule'
+              examples:
+                StreamAlertRuleRequestResponse:
+                  $ref: '#/components/examples/StreamAlertRuleResponseExample'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+  /fabric/v4/streams/{streamId}/alertRules/{alertRuleId}:
+    get:
+      tags:
+      - Stream Alert Rules
+      summary: Get Stream Alert Rules
+      description: This API provides capability to get user's stream alert rules
+      operationId: getStreamAlertRuleByUuid
+      parameters:
+      - name: streamId
+        in: path
+        description: Stream UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/StreamId'
+      - name: alertRuleId
+        in: path
+        description: alert rule UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/AlertRuleId'
+      responses:
+        '200':
+          description: Stream Alert Rules object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamAlertRule'
+              examples:
+                StreamAlertRuleResponse:
+                  $ref: '#/components/examples/StreamAlertRuleResponseExample'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+    put:
+      tags:
+      - Stream Alert Rules
+      summary: Update Stream Alert Rules
+      description: This API provides capability to update a user's stream alert rule
+      operationId: updateStreamAlertRuleByUuid
+      parameters:
+      - name: streamId
+        in: path
+        description: Stream UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/StreamId'
+      - name: alertRuleId
+        in: path
+        description: alert rule UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/AlertRuleId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlertRulePutRequest'
+            examples:
+              UpdateStreamAlertRules:
+                $ref: '#/components/examples/StreamAlertRulePutRequestExample'
+        required: true
+      responses:
+        '202':
+          description: Stream Alert Rules object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamAlertRule'
+              examples:
+                StreamAlertRuleRequestResponse:
+                  $ref: '#/components/examples/StreamAlertRuleResponseExample'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+    delete:
+      tags:
+      - Stream Alert Rules
+      summary: Delete Stream Alert Rules
+      description: This API provides capability to delete a user's stream alert rule
+      operationId: deleteStreamAlertRuleByUuid
+      parameters:
+      - name: streamId
+        in: path
+        description: Stream UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/StreamId'
+      - name: alertRuleId
+        in: path
+        description: alert rule UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/AlertRuleId'
+      responses:
+        '202':
+          description: Stream Alert Rules object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamAlertRule'
+              examples:
+                StreamAlertRuleDeleteResponse:
+                  $ref: '#/components/examples/StreamAlertRuleDeleteResponseExample'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+components:
+  examples:
+    '415':
+      value:
+      - errorCode: EQ-3040016
+        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: contentType
+          reason: The payload format is in an unsupported format
+    stream-alert-rules-get-all-example:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 1
+        data:
+        - href: https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418/alertRules/0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15
+          uuid: 0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15
+          type: METRIC_ALERT
+          name: metric-alert-1
+          description: metric-alert-1
+          state: ACTIVE
+          enabled: true
+          metricSelector:
+            include:
+            - equinix.fabric.connection.bandwidth_tx.usage
+          resourceSelector:
+            include:
+            - /fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b
+          detectionMethod:
+            type: THRESHOLD
+            windowSize: PT15M
+            operand: ABOVE
+            warningThreshold: 35000000
+            criticalThreshold: 45000000
+          changeLog:
+            createdBy: user
+            createdDateTime: 2024-05-06 16:21:18.545214+00:00
+    '404':
+      value:
+      - errorCode: EQ-3045811
+        errorMessage: uuid not found
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: uuid not found
+    StreamAlertRulePutRequestExample:
+      value:
+        name: metric-alert-1
+        type: METRIC_ALERT
+        description: metric-alert-1
+        enabled: true
+        metricSelector:
+          include:
+          - equinix.fabric.connection.bandwidth_tx.usage
+        resourceSelector:
+          include:
+          - /fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b
+        detectionMethod:
+          type: THRESHOLD
+          windowSize: PT15M
+          operand: ABOVE
+          warningThreshold: 35000000
+          criticalThreshold: 45000000
+    StreamAlertRulePostRequestExample:
+      value:
+        name: metric-alert-1
+        type: METRIC_ALERT
+        description: metric-alert-1
+        enabled: true
+        metricSelector:
+          include:
+          - equinix.fabric.connection.bandwidth_tx.usage
+        resourceSelector:
+          include:
+          - /fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b
+        detectionMethod:
+          type: THRESHOLD
+          windowSize: PT15M
+          warningThreshold: 35000000
+          criticalThreshold: 45000000
+    '403':
+      value:
+      - errorCode: EQ-3045003
+        errorMessage: Operation not allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Operation not allowed for current user
+    '401':
+      value:
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    '500':
+      value:
+      - errorCode: EQ-3045004
+        errorMessage: Internal Server Error
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Internal Server Error
+    StreamAlertRuleDeleteResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418/alertRules/0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15
+        uuid: 0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15
+        type: METRIC_ALERT
+        name: metric-alert-1
+        description: metric-alert-1
+        state: INACTIVE
+        enabled: true
+        metricSelector:
+          include:
+          - equinix.fabric.connection.bandwidth_tx.usage
+        resourceSelector:
+          include:
+          - /fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b
+        detectionMethod:
+          type: THRESHOLD
+          windowSize: PT15M
+          operand: ABOVE
+          warningThreshold: 35000000
+          criticalThreshold: 45000000
+        changeLog:
+          createdBy: user
+          createdDateTime: 2024-05-06 16:21:18.545214+00:00
+          updatedBy: user
+          updatedDateTime: 2025-02-04 00:20:54.511118+00:00
+    StreamAlertRuleResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418/alertRules/0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15
+        uuid: 0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15
+        type: METRIC_ALERT
+        name: metric-alert-1
+        description: metric-alert-1
+        state: ACTIVE
+        enabled: true
+        metricSelector:
+          include:
+          - equinix.fabric.connection.bandwidth_tx.usage
+        resourceSelector:
+          include:
+          - /fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b
+        detectionMethod:
+          type: THRESHOLD
+          windowSize: PT15M
+          operand: ABOVE
+          warningThreshold: 35000000
+          criticalThreshold: 45000000
+        changeLog:
+          createdBy: user
+          createdDateTime: 2024-05-06 16:21:18.545214+00:00
+          updatedBy: user
+          updatedDateTime: 2025-02-04 00:20:54.511118+00:00
+    StreamSmartAlertRulePostRequestExample:
+      value:
+        name: metric-alert-1
+        type: METRIC_ALERT
+        description: metric-alert-1
+        enabled: true
+        metricSelector:
+          include:
+          - equinix.fabric.metro.sv_sy.latency
+        resourceSelector:
+          include:
+          - /fabric/v4/metros/SV
+        detectionMethod:
+          type: OUTLIER
+  schemas:
+    AlertRuleId:
+      type: string
+      description: Stream Alert Rule UUID
+      format: uuid
+      example: 0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    ResourceSelectorResponse:
+      type: object
+      properties:
+        include:
+          type: array
+          description: "### Supported metric names to use on filters with property /subject:\n  * `/fabric/v4/ports/<uuid>` - port metrics\n  * `/fabric/v4/connections/<uuid>` - connection metrics\n  * `/fabric/v4/metros/<metroCode>` - metro latency metrics\n"
+          items:
+            type: string
+    DetectionMethodResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          description: '* THRESHOLD - Alert when a metric crosses a defined threshold by user.
+
+            * OUTLIER - Intelligent Alert that has an outlier behavior. This option is currently supported for metro latency metric.
+
+            '
+          enum:
+          - THRESHOLD
+          - OUTLIER
+        windowSize:
+          type: string
+          description: Stream alert rule metric window size
+          example: PT15M
+        operand:
+          type: string
+          description: Stream alert rule metric operand
+          enum:
+          - ABOVE
+          - BELOW
+        warningThreshold:
+          type: string
+          description: Stream alert rule metric warning threshold
+        criticalThreshold:
+          type: string
+          description: Stream alert rule metric critical threshold
+    GetAllStreamAlertRuleResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/StreamAlertRule'
+    DetectionMethod:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          description: '* THRESHOLD - Alert when a metric crosses a defined threshold by user.
+
+            * OUTLIER - Intelligent Alert that has an outlier behavior. This option is currently supported for metro latency metric.
+
+            '
+          enum:
+          - THRESHOLD
+          - OUTLIER
+        windowSize:
+          type: string
+          description: Stream alert rule metric window size
+          example: PT15M
+        operand:
+          type: string
+          description: Stream alert rule metric operand
+          enum:
+          - ABOVE
+          - BELOW
+        warningThreshold:
+          type: string
+          description: Stream alert rule metric warning threshold
+        criticalThreshold:
+          type: string
+          description: Stream alert rule metric critical threshold
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    StreamAlertRule:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Stream Alert Rule URI
+          format: uri
+          readOnly: true
+        uuid:
+          type: string
+          description: Equinix-assigned access point identifier
+          format: uuid
+          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        type:
+          type: string
+          description: Stream subscription type
+          enum:
+          - METRIC_ALERT
+        name:
+          type: string
+          description: Customer-provided stream alert rule name
+        description:
+          type: string
+          description: Customer-provided stream alert rule description
+        state:
+          type: string
+          description: Steam subscription provision state
+          enum:
+          - ACTIVE
+          - INACTIVE
+        enabled:
+          type: boolean
+          description: Stream alert rule enabled status
+          default: true
+        metricSelector:
+          $ref: '#/components/schemas/MetricSelectorResponse'
+        resourceSelector:
+          $ref: '#/components/schemas/ResourceSelectorResponse'
+        detectionMethod:
+          $ref: '#/components/schemas/DetectionMethodResponse'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+      description: Stream object
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
+    Changelog:
+      type: object
+      properties:
+        createdBy:
+          type: string
+          description: Created by User Key
+          example: johnsmith
+        createdByFullName:
+          type: string
+          description: Created by User Full Name
+          example: John Smith
+        createdByEmail:
+          type: string
+          description: Created by User Email Address
+          example: john.smith@example.com
+        createdDateTime:
+          type: string
+          description: Created by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedBy:
+          type: string
+          description: Updated by User Key
+          example: johnsmith
+        updatedByFullName:
+          type: string
+          description: Updated by User Full Name
+          example: John Smith
+        updatedByEmail:
+          type: string
+          description: Updated by User Email Address
+          example: john.smith@example.com
+        updatedDateTime:
+          type: string
+          description: Updated by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        deletedBy:
+          type: string
+          description: Deleted by User Key
+          example: johnsmith
+        deletedByFullName:
+          type: string
+          description: Deleted by User Full Name
+          example: John Smith
+        deletedByEmail:
+          type: string
+          description: Deleted by User Email Address
+          example: john.smith@example.com
+        deletedDateTime:
+          type: string
+          description: Deleted by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+      description: Change log
+    MetricSelector:
+      required:
+      - include
+      type: object
+      properties:
+        include:
+          type: array
+          description: Stream alert rule filtered by metric name
+          items:
+            type: string
+            example: equinix.fabric.metro.sv_da.latency
+    StreamId:
+      type: string
+      description: Stream UUID
+      format: uuid
+      example: 657400f8-d360-11e9-bb65-2a2ae2dbcce5
+    AlertRulePostRequest:
+      required:
+      - detectionMethod
+      - metricSelector
+      - name
+      - resourceSelector
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - METRIC_ALERT
+        name:
+          type: string
+          description: Customer-provided stream name
+        description:
+          type: string
+          description: Customer-provided stream description
+        enabled:
+          type: boolean
+          description: Stream alert rule enabled status
+          example: true
+          default: true
+        metricSelector:
+          $ref: '#/components/schemas/MetricSelector'
+        resourceSelector:
+          $ref: '#/components/schemas/ResourceSelector'
+        detectionMethod:
+          $ref: '#/components/schemas/DetectionMethod'
+      description: Create Stream Alert Rules
+    AlertRulePutRequest:
+      required:
+      - detectionMethod
+      - metricSelector
+      - name
+      - resourceSelector
+      - type
+      type: object
+      properties:
+        name:
+          type: string
+          description: Customer-provided stream name
+        type:
+          type: string
+          enum:
+          - METRIC_ALERT
+        description:
+          type: string
+          description: Customer-provided stream description
+        enabled:
+          type: boolean
+          description: Stream alert rule enabled status
+          default: true
+        metricSelector:
+          $ref: '#/components/schemas/MetricSelector'
+        resourceSelector:
+          $ref: '#/components/schemas/ResourceSelector'
+        detectionMethod:
+          $ref: '#/components/schemas/DetectionMethod'
+      description: Create Stream Alert Rules
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    ResourceSelector:
+      required:
+      - include
+      type: object
+      properties:
+        include:
+          type: array
+          description: "### Supported metric names to use on filters with property /subject:\n  * `/fabric/v4/ports/<uuid>` - port metrics\n  * `/fabric/v4/connections/<uuid>` - connection metrics\n  * `/fabric/v4/metros/<metroCode>` - metro latency metrics\n"
+          items:
+            type: string
+    MetricSelectorResponse:
+      type: object
+      properties:
+        include:
+          type: array
+          description: Stream alert rule filtered by metric name
+          items:
+            type: string
+            example: equinix.fabric.metro.sv_da.latency
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

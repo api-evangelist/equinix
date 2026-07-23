@@ -1,0 +1,406 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication Agent Templates API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- name: Agent Templates
+paths:
+  /fabric/v4/agentTemplates:
+    get:
+      tags:
+      - Agent Templates
+      summary: Get Agent Templates
+      description: This API provides capability to retrieve agent templates
+      operationId: getAgentTemplates
+      parameters:
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          type: integer
+        example: 1
+      - name: limit
+        in: query
+        description: number of records to fetch
+        required: false
+        schema:
+          type: integer
+        example: 10
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentTemplateGetAllResponse'
+              examples:
+                Example:
+                  $ref: '#/components/examples/AgentTemplatesGetAllResponseExample'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/AgentTemplate_401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/AgentTemplate_403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/AgentTemplate_404'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/AgentTemplate_500'
+  /fabric/v4/agentTemplates/{agentTemplateId}:
+    get:
+      tags:
+      - Agent Templates
+      summary: Get Agent Template by UUID
+      description: This API provides capability to retrieve an agent template by uuid
+      operationId: getAgentTemplateByUuid
+      parameters:
+      - name: agentTemplateId
+        in: path
+        description: Agent Template UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/AgentTemplateId'
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          type: integer
+        example: 1
+      - name: limit
+        in: query
+        description: number of records to fetch
+        required: false
+        schema:
+          type: integer
+        example: 10
+      responses:
+        '200':
+          description: Agent object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentTemplates'
+              examples:
+                AgentByUuidResponse:
+                  $ref: '#/components/examples/AgentTemplatesResponseExample'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/AgentTemplate_401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/AgentTemplate_403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/AgentTemplate_404'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/AgentTemplate_500'
+components:
+  examples:
+    AgentTemplate_500:
+      value:
+      - errorCode: EQ-3164004
+        errorMessage: Internal Server Error
+        correlationId: f9018571-1001-4422-978b-bfa38ed6b92e
+        details: Internal Server Error
+    AgentTemplatesResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/agentTemplates/d684aa26-8276-48b7-bb42-a6d9def0a418
+        type: ANO_AGENT_TEMPLATE
+        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+        name: CONNECTION BANDWIDTH UPGRADER AGENT TEMPLATE
+        description: connection bandwidth upgrader agent template
+        state: PROVISIONED
+        enabled: true
+        agentDefinition:
+          url: /equinix/agent-factory/refs/heads/use_pdf_html/agent_factory_schema/equinix/fabric/v1/event_driven/upgrade-bw-primary-connection.md
+        changeLog:
+          createdBy: testuser
+          createdDateTime: 2024-05-06 16:21:18.545214
+          updatedBy: testuser
+          updatedDateTime: 2024-05-06 16:21:18.545214+00:00
+    AgentTemplate_403:
+      value:
+      - errorCode: EQ-3164013
+        errorMessage: Operation not allowed
+        correlationId: 8a72af9d-23f7-4b90-8237-0987130b42dd
+        details: Operation not allowed for current user
+    AgentTemplatesGetAllResponseExample:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 1
+        data:
+        - href: https://api.equinix.com/fabric/v4/agentTemplates/d684aa26-8276-48b7-bb42-a6d9def0a418
+          type: ANO_AGENT_TEMPLATE
+          uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+          name: CONNECTION BANDWIDTH UPGRADER AGENT TEMPLATE
+          description: connection bandwidth upgrader agent template
+          state: PROVISIONED
+          enabled: true
+          agentDefinition:
+            url: /equinix/agent-factory/refs/heads/use_pdf_html/agent_factory_schema/equinix/fabric/v1/event_driven/upgrade-bw-primary-connection.md
+          changeLog:
+            createdBy: testuser
+            createdDateTime: 2024-05-06 16:21:18.545214
+            updatedBy: testuser
+            updatedDateTime: 2024-05-06 16:21:18.545214+00:00
+    AgentTemplate_404:
+      value:
+      - errorCode: EQ-3164811
+        errorMessage: Agent Template not found or already deleted
+        correlationId: 9b6baf30-3eb0-458c-af8b-fff3fae32bc7
+        details: Agent Template not found or already deleted
+    AgentTemplate_401:
+      value:
+      - errorCode: EQ-3164013
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        additionalInfo:
+        - reason: You are unauthorized to perform this operation
+  schemas:
+    AgentDefinition:
+      type: object
+      properties:
+        url:
+          type: string
+          description: Agent Template ReadMe (.md) Definition
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    Changelog:
+      type: object
+      properties:
+        createdBy:
+          type: string
+          description: Created by User Key
+          example: johnsmith
+        createdByFullName:
+          type: string
+          description: Created by User Full Name
+          example: John Smith
+        createdByEmail:
+          type: string
+          description: Created by User Email Address
+          example: john.smith@example.com
+        createdDateTime:
+          type: string
+          description: Created by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedBy:
+          type: string
+          description: Updated by User Key
+          example: johnsmith
+        updatedByFullName:
+          type: string
+          description: Updated by User Full Name
+          example: John Smith
+        updatedByEmail:
+          type: string
+          description: Updated by User Email Address
+          example: john.smith@example.com
+        updatedDateTime:
+          type: string
+          description: Updated by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        deletedBy:
+          type: string
+          description: Deleted by User Key
+          example: johnsmith
+        deletedByFullName:
+          type: string
+          description: Deleted by User Full Name
+          example: John Smith
+        deletedByEmail:
+          type: string
+          description: Deleted by User Email Address
+          example: john.smith@example.com
+        deletedDateTime:
+          type: string
+          description: Deleted by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+      description: Change log
+    AgentTemplateId:
+      type: string
+      description: Agent Template UUID
+      format: uuid
+      example: 657400f8-d360-11e9-bb65-2a2ae2dbcce5
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    AgentTemplates:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Agent Template URI
+          format: uuid
+          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        type:
+          type: string
+          description: type
+          example: ANO_AGENT_TEMPLATE
+        uuid:
+          type: string
+          description: Equinix-assigned access point identifier
+          format: uuid
+          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        name:
+          maxLength: 50
+          minLength: 3
+          type: string
+          description: Equinix-provided agent template name
+        description:
+          type: string
+          description: Equinix-provided agent template description
+        state:
+          type: string
+          description: Agent state
+          enum:
+          - PROVISIONING
+          - PROVISIONED
+          - REPROVISIONING
+          - DEPROVISIONING
+          - DEPROVISIONED
+          - FAILED
+        enabled:
+          type: boolean
+          description: Equinix-provided agent template enabled status
+        agentDefinition:
+          $ref: '#/components/schemas/AgentDefinition'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+      description: Agent Template object
+    AgentTemplateGetAllResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/AgentTemplates'
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

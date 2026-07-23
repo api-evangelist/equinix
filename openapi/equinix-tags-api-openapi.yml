@@ -1,0 +1,245 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication Tags API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- name: Tags
+paths:
+  /fabric/v4/tags:
+    get:
+      tags:
+      - Tags
+      summary: List Tags
+      description: Get all Tags
+      operationId: listTags
+      parameters:
+      - name: type
+        in: query
+        description: Filter by tag type
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: offset
+        in: query
+        description: Offset for pagination
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: limit
+        in: query
+        description: Limit for pagination
+        required: false
+        schema:
+          maximum: 100
+          type: integer
+          format: int32
+          default: 20
+      responses:
+        '200':
+          description: Successful List operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagListResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+    post:
+      tags:
+      - Tags
+      summary: Create Tag
+      description: Create Tag for Equinix Fabric?.
+      operationId: createTag
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Create operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+components:
+  schemas:
+    TagListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      description: Equinix Fabric Tag List Response Object
+    TagResponse:
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri
+          example: https://api.equinix.com/fabric/v4/tags/18a127ad-9d0c-46e2-a66d-8ed85d1858b0
+        uuid:
+          type: string
+          format: uuid
+          example: 18a127ad-9d0c-46e2-a66d-8ed85d1858b0
+        type:
+          type: string
+          example: RESOURCE_TAG
+        name:
+          type: string
+          example: environment
+        displayName:
+          type: string
+          example: Environment
+        weight:
+          type: integer
+          example: 10000
+      description: Equinix Fabric Tag Response Object
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    TagRequest:
+      required:
+      - displayName
+      - name
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of tag
+          example: RESOURCE_TAG
+        name:
+          minLength: 1
+          type: string
+          description: Name of the Tag
+        displayName:
+          maxLength: 24
+          minLength: 1
+          type: string
+          description: Display name of the Tag
+      description: Equinix Fabric Tag Request Object
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

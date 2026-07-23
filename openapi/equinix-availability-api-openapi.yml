@@ -1,0 +1,277 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication availability API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- name: availability
+  description: Secure Cabinet availability
+paths:
+  /securecabinet/v1/availability/{accountNumber}:
+    get:
+      tags:
+      - availability
+      summary: Secure Cabinet availability.
+      description: 'Returns the availability of Secure Cabinets and recommended additional products for provided billing account.
+
+        '
+      operationId: getProductsAvailability
+      parameters:
+      - name: accountNumber
+        in: path
+        description: Billing Account Number.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/AccountNumber'
+      responses:
+        '200':
+          description: Products availability details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductsAvailabilities'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              example:
+              - errorCode: EQ-7000401
+                errorMessage: Unauthorized
+                correlationId: dd270016-e866-4146-9a53-84e5ea65ec06
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              example:
+              - errorCode: EQ-7000400
+                errorMessage: 'Account has following failed rules: [SCX_ACCOUNT_NO_MAIN_ADDRESS]'
+                correlationId: dd270016-e866-4146-9a53-84e5ea65ec06
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              example:
+              - errorCode: EQ-7000403
+                errorMessage: Forbidden
+                correlationId: dd270016-e866-4146-9a53-84e5ea65ec06
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              example:
+              - errorCode: EQ-7000404
+                errorMessage: Not Found
+                correlationId: dd270016-e866-4146-9a53-84e5ea65ec06
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+components:
+  schemas:
+    Dimensions:
+      type: object
+      required:
+      - width
+      - depth
+      - height
+      properties:
+        width:
+          $ref: '#/components/schemas/Dimension'
+        depth:
+          $ref: '#/components/schemas/Dimension'
+        height:
+          $ref: '#/components/schemas/Dimension'
+    ErrorAdditionalInfo:
+      properties:
+        property:
+          type: string
+          description: Property at which the error occurs. Can be empty.
+          example: $.info
+        reason:
+          type: string
+          description: Fallback error message in plain English.
+          example: must not be blank
+    FabricPortSpeed:
+      type: string
+      description: Port speed
+      example: SPEED_1_GBPS
+      enum:
+      - SPEED_1_GBPS
+      - SPEED_10_GBPS
+    Phase:
+      type: string
+      description: Circuit phase
+      example: SINGLE
+      enum:
+      - SINGLE
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      properties:
+        errorCode:
+          maxLength: 10
+          minLength: 10
+          pattern: ^EQ-70[0-9]{5}$
+          type: string
+          description: Application error code. Format :EQ-<error code>
+          example: EQ-7000500
+        errorMessage:
+          type: string
+          description: Application error message
+          example: Internal Server Error
+        correlationId:
+          type: string
+          description: Correlation ID without any sensitive or meaningful information.
+          example: dd270016-e866-4146-9a53-84e5ea65ec06
+        details:
+          type: string
+          description: More information on errors.
+          example: Could not connect to database
+        help:
+          type: string
+          description: Help message or URL to a help page for the corresponding errorCode.
+          example: Please check system logs.
+        additionalInfo:
+          $ref: '#/components/schemas/ErrorAdditionalInfoList'
+      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
+    Errors:
+      type: array
+      items:
+        $ref: '#/components/schemas/Error'
+    AcCircuitConfig:
+      type: object
+      required:
+      - phase
+      - receptacle
+      - soldAmperage
+      - voltage
+      properties:
+        voltage:
+          $ref: '#/components/schemas/Voltage'
+        soldAmperage:
+          $ref: '#/components/schemas/Amperage'
+        phase:
+          $ref: '#/components/schemas/Phase'
+        receptacle:
+          type: string
+          description: Receptacle type
+          example: IEC 60309 1P+N+E
+    ErrorAdditionalInfoList:
+      type: array
+      description: Contains application specific information for this error. The object inside this array can have any number of application specific properties.
+      items:
+        $ref: '#/components/schemas/ErrorAdditionalInfo'
+    AccountNumber:
+      minLength: 1
+      type: string
+      description: Identifier of a billing account, with permission to order colocation products.
+      example: '132028'
+    Dimension:
+      required:
+      - unit
+      - value
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Dimension Value
+          example: 482
+        unit:
+          type: string
+          description: Unit of measure of the product
+          example: MILLIMETER
+          enum:
+          - MILLIMETER
+          - CENTIMETER
+          - METER
+    ProductsAvailability:
+      required:
+      - ibx
+      - maximumNumberOfCabinetsToOrder
+      - minimumDrawCapacityPerCabinet
+      - maximumDrawCapacityPerCabinet
+      - cabinetDimensions
+      - acCircuitConfiguration
+      type: object
+      description: 'Information about availability of products in one ibx. Missing pdu configuration means that we don''t offer pdu
+
+        there. Missing fabric port speed means that fabric port is not available there.
+
+        '
+      properties:
+        ibx:
+          $ref: '#/components/schemas/IbxCode'
+        maximumNumberOfCabinetsToOrder:
+          type: integer
+          description: Maximum number of cabinets that can be ordered in one order in this ibx.
+          example: 2
+        minimumDrawCapacityPerCabinet:
+          type: number
+          description: The minimum power draw capacity per ordered cabinet.
+          format: double
+          example: 5
+        maximumDrawCapacityPerCabinet:
+          type: number
+          description: The maximum power draw capacity per ordered cabinet.
+          format: double
+          example: 5
+        cabinetDimensions:
+          $ref: '#/components/schemas/Dimensions'
+        acCircuitConfiguration:
+          $ref: '#/components/schemas/AcCircuitConfig'
+        pduConfiguration:
+          $ref: '#/components/schemas/PduConfig'
+        fabricPortSpeed:
+          $ref: '#/components/schemas/FabricPortSpeed'
+    ProductsAvailabilities:
+      type: array
+      description: A list of ibxs with information about product availabilities
+      items:
+        $ref: '#/components/schemas/ProductsAvailability'
+    PduConfig:
+      type: object
+      required:
+      - model
+      properties:
+        model:
+          type: string
+          description: Model Code
+          example: UU30009L
+    Voltage:
+      type: integer
+      description: Voltage numerical value
+      example: 220
+    Amperage:
+      type: number
+      description: Amperage Numerical Value
+      format: double
+      example: 8.9
+    IbxCode:
+      pattern: ^[A-Z]{2}[0-9]+x?$
+      type: string
+      description: IBX data center identifier.
+      example: CH1
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

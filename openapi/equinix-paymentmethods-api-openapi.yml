@@ -1,0 +1,279 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication PaymentMethods API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- description: 'Payment Method Management
+
+    '
+  externalDocs:
+    url: https://metal.equinix.com/developers/docs/billing/payment-methods/
+  name: PaymentMethods
+paths:
+  /payment-methods/{id}:
+    delete:
+      description: Deletes the payment method.
+      operationId: deletePaymentMethod
+      parameters:
+      - description: Payment Method UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: no content
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Delete the payment method
+      tags:
+      - PaymentMethods
+    get:
+      description: Returns a payment method
+      operationId: findPaymentMethodById
+      parameters:
+      - description: Payment Method UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethod'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Retrieve a payment method
+      tags:
+      - PaymentMethods
+    put:
+      description: Updates the payment method.
+      operationId: updatePaymentMethod
+      parameters:
+      - description: Payment Method UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentMethodUpdateInput'
+        description: Payment Method to update
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethod'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Update the payment method
+      tags:
+      - PaymentMethods
+components:
+  schemas:
+    Error:
+      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
+      properties:
+        error:
+          description: A description of the error that caused the request to fail.
+          type: string
+        errors:
+          description: A list of errors that contributed to the request failing.
+          items:
+            description: An error message that contributed to the request failing.
+            type: string
+          type: array
+      type: object
+    PaymentMethod:
+      example:
+        projects:
+        - href: href
+        - href: href
+        created_at: 2000-01-23 04:56:07+00:00
+        billing_address:
+          street_address: street_address
+          country_code_alpha2: country_code_alpha2
+          postal_code: postal_code
+        card_type: card_type
+        cardholder_name: cardholder_name
+        type: type
+        created_by_user:
+          href: href
+        expiration_year: expiration_year
+        default: true
+        updated_at: 2000-01-23 04:56:07+00:00
+        organization:
+          href: href
+        expiration_month: expiration_month
+        name: name
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        email: email
+      properties:
+        billing_address:
+          $ref: '#/components/schemas/PaymentMethodBillingAddress'
+        card_type:
+          type: string
+        cardholder_name:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        created_by_user:
+          $ref: '#/components/schemas/Href'
+        default:
+          type: boolean
+        email:
+          type: string
+        expiration_month:
+          type: string
+        expiration_year:
+          type: string
+        id:
+          format: uuid
+          type: string
+        name:
+          type: string
+        organization:
+          $ref: '#/components/schemas/Href'
+        projects:
+          items:
+            $ref: '#/components/schemas/Href'
+          type: array
+        type:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      type: object
+    PaymentMethodUpdateInput:
+      example:
+        expiration_year: 0
+        default: true
+        expiration_month: expiration_month
+        name: name
+        billing_address: '{}'
+        cardholder_name: cardholder_name
+      properties:
+        billing_address:
+          type: object
+        cardholder_name:
+          type: string
+        default:
+          type: boolean
+        expiration_month:
+          type: string
+        expiration_year:
+          type: integer
+        name:
+          type: string
+      type: object
+    PaymentMethodBillingAddress:
+      example:
+        street_address: street_address
+        country_code_alpha2: country_code_alpha2
+        postal_code: postal_code
+      properties:
+        country_code_alpha2:
+          type: string
+        postal_code:
+          type: string
+        street_address:
+          type: string
+      type: object
+    Href:
+      example:
+        href: href
+      properties:
+        href:
+          type: string
+      required:
+      - href
+      type: object
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

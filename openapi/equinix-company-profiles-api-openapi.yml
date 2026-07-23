@@ -1,0 +1,1054 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication Company Profiles API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- name: Company Profiles
+  description: Company Profiles <font color="red"> <sup color='red'>Beta</sup></font>
+paths:
+  /fabric/v4/companyProfiles:
+    post:
+      tags:
+      - Company Profiles
+      summary: Create Company Profile
+      description: Create a new company profile <font color="red"> <sup color='red'>Beta</sup></font>
+      operationId: createCompanyProfile
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyProfileRequest'
+        required: true
+      responses:
+        '201':
+          description: Company profile created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyProfileResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+  /fabric/v4/companyProfiles/{companyProfileId}:
+    get:
+      tags:
+      - Company Profiles
+      summary: Get Company Profile by UUID
+      description: Get company profile details by UUID <font color="red"> <sup color='red'>Beta</sup></font>
+      operationId: getCompanyProfile
+      parameters:
+      - name: companyProfileId
+        in: path
+        description: Company Profile UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyProfileResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+    delete:
+      tags:
+      - Company Profiles
+      summary: Delete Company Profile
+      description: Delete company profile by UUID <font color="red"> <sup color='red'>Beta</sup></font>
+      operationId: deleteCompanyProfile
+      parameters:
+      - name: companyProfileId
+        in: path
+        description: Company Profile UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyProfileResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+  /fabric/v4/companyProfiles/search:
+    post:
+      tags:
+      - Company Profiles
+      summary: Search Company Profiles
+      description: Search company profiles based on filter criteria <font color="red"> <sup color='red'>Beta</sup></font>
+      operationId: searchCompanyProfile
+      parameters:
+      - name: viewPoint
+        in: query
+        description: Viewpoint for the request, either 'aSide' or 'zSide'
+        required: false
+        schema:
+          type: string
+          default: aSide
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyProfileSearchRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyProfileSearchResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+  /fabric/v4/companyProfiles/{companyProfileId}/serviceProfiles:
+    get:
+      tags:
+      - Company Profiles
+      summary: Get Service Profiles
+      description: Get all service profiles attached to a company profile <font color="red"> <sup color='red'>Beta</sup></font>
+      operationId: getCompanyProfileServiceProfiles
+      parameters:
+      - name: companyProfileId
+        in: path
+        description: Company Profile UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceProfileListResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+  /fabric/v4/companyProfiles/{companyProfileId}/serviceProfiles/{serviceProfileId}:
+    put:
+      tags:
+      - Company Profiles
+      summary: Attach Service Profile
+      description: Attach a service profile to a company profile <font color="red"> <sup color='red'>Beta</sup></font>
+      operationId: attachServiceProfileToProfile
+      parameters:
+      - name: companyProfileId
+        in: path
+        description: Company Profile UUID
+        required: true
+        schema:
+          type: string
+      - name: serviceProfileId
+        in: path
+        description: Service Profile UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttachServiceProfileResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+    delete:
+      tags:
+      - Company Profiles
+      summary: Detach Service Profile
+      description: Detach a service profile from a company profile <font color="red"> <sup color='red'>Beta</sup></font>
+      operationId: detachServiceProfileFromProfile
+      parameters:
+      - name: companyProfileId
+        in: path
+        description: Company Profile UUID
+        required: true
+        schema:
+          type: string
+      - name: serviceProfileId
+        in: path
+        description: Service Profile UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttachServiceProfileResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+  /fabric/v4/companyProfiles/{companyProfileId}/tags:
+    get:
+      tags:
+      - Company Profiles
+      summary: Get Tags
+      description: Get all tags attached to a company profile <font color="red"> <sup color='red'>Beta</sup></font>
+      operationId: getTags
+      parameters:
+      - name: companyProfileId
+        in: path
+        description: Company Profile UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagListResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+  /fabric/v4/companyProfiles/{companyProfileId}/tags/{tagId}:
+    put:
+      tags:
+      - Company Profiles
+      summary: Attach Tag
+      description: Attach a tag to a company profile <font color="red"> <sup color='red'>Beta</sup></font>
+      operationId: attachTagToProfile
+      parameters:
+      - name: companyProfileId
+        in: path
+        description: Company Profile UUID
+        required: true
+        schema:
+          type: string
+      - name: tagId
+        in: path
+        description: Tag UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttachTagResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+    delete:
+      tags:
+      - Company Profiles
+      summary: Detach Tag
+      description: Detach a tag from a company profile <font color="red"> <sup color='red'>Beta</sup></font>
+      operationId: detachTagFromProfile
+      parameters:
+      - name: companyProfileId
+        in: path
+        description: Company Profile UUID
+        required: true
+        schema:
+          type: string
+      - name: tagId
+        in: path
+        description: Tag UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttachTagResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+  /fabric/v4/companyProfiles/{companyProfileId}/privateServices:
+    get:
+      tags:
+      - Company Profiles
+      summary: Get Private Services
+      description: Get all private services attached to a company profile <font color="red"> <sup color='red'>Beta</sup></font>
+      operationId: getCompanyProfilePrivateServices
+      parameters:
+      - name: companyProfileId
+        in: path
+        description: Company Profile UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrivateServiceListResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+  /fabric/v4/companyProfiles/{companyProfileId}/privateServices/{privateServiceId}:
+    put:
+      tags:
+      - Company Profiles
+      summary: Attach Private Service
+      description: Attach a private service to a company profile <font color="red"> <sup color='red'>Beta</sup></font>
+      operationId: attachPrivateServiceToProfile
+      parameters:
+      - name: companyProfileId
+        in: path
+        description: Company Profile UUID
+        required: true
+        schema:
+          type: string
+      - name: privateServiceId
+        in: path
+        description: Private Service UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttachPrivateServiceResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+    delete:
+      tags:
+      - Company Profiles
+      summary: Detach Private Service
+      description: Detach a private service from a company profile <font color="red"> <sup color='red'>Beta</sup></font>
+      operationId: detachPrivateServiceFromProfile
+      parameters:
+      - name: companyProfileId
+        in: path
+        description: Company Profile UUID
+        required: true
+        schema:
+          type: string
+      - name: privateServiceId
+        in: path
+        description: Private Service UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttachPrivateServiceResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+components:
+  schemas:
+    TagResponse:
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri
+          example: https://api.equinix.com/fabric/v4/tags/18a127ad-9d0c-46e2-a66d-8ed85d1858b0
+        uuid:
+          type: string
+          format: uuid
+          example: 18a127ad-9d0c-46e2-a66d-8ed85d1858b0
+        type:
+          type: string
+          example: RESOURCE_TAG
+        name:
+          type: string
+          example: environment
+        displayName:
+          type: string
+          example: Environment
+        weight:
+          type: integer
+          example: 10000
+      description: Equinix Fabric Tag Response Object
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    CompanyProfileChangeItem:
+      type: object
+    Notification:
+      type: object
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    AttachPrivateServiceResponse:
+      required:
+      - type
+      - uuid
+      type: object
+      properties:
+        href:
+          type: string
+          description: URL to the attached private service
+          example: https://api.equinix.com/fabric/v4/privateServices/460af68b-42f0-4f2e-9c5c-2fbd44b4b387
+        type:
+          type: string
+          description: Type of the private service or attachment
+          example: PRIVATE_SERVICE
+        uuid:
+          type: string
+          description: Unique identifier for the private service
+          example: 460af68b-42f0-4f2e-9c5c-2fbd44b4b387
+        attachmentStatus:
+          type: string
+          description: Status of the attachment operation
+          example: ATTACHED
+    AttachServiceProfileResponse:
+      required:
+      - type
+      - uuid
+      type: object
+      properties:
+        href:
+          type: string
+          description: URL to the attached service profile
+          example: https://api.equinix.com/fabric/v4/serviceProfiles/423af68b-42f0-4f2e-9c5c-2fbd44b4b387
+        type:
+          type: string
+          description: Type of the service or attachment
+          example: SERVICE_PROFILE
+        uuid:
+          type: string
+          description: Unique identifier for the service profile
+          example: 423af68b-42f0-4f2e-9c5c-2fbd44b4b387
+        attachmentStatus:
+          type: string
+          description: Status of the attachment operation
+          example: ATTACHED
+    PrivateServiceListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: List of private services
+          example:
+          - href: https://api.equinix.com/fabric/v4/privateServices/460af68b-42f0-4f2e-9c5c-2fbd44b4b387
+            uuid: 460af68b-42f0-4f2e-9c5c-2fbd44b4b387
+          items:
+            $ref: '#/components/schemas/PrivateService'
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
+    Changelog:
+      type: object
+      properties:
+        createdBy:
+          type: string
+          description: Created by User Key
+          example: johnsmith
+        createdByFullName:
+          type: string
+          description: Created by User Full Name
+          example: John Smith
+        createdByEmail:
+          type: string
+          description: Created by User Email Address
+          example: john.smith@example.com
+        createdDateTime:
+          type: string
+          description: Created by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedBy:
+          type: string
+          description: Updated by User Key
+          example: johnsmith
+        updatedByFullName:
+          type: string
+          description: Updated by User Full Name
+          example: John Smith
+        updatedByEmail:
+          type: string
+          description: Updated by User Email Address
+          example: john.smith@example.com
+        updatedDateTime:
+          type: string
+          description: Updated by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        deletedBy:
+          type: string
+          description: Deleted by User Key
+          example: johnsmith
+        deletedByFullName:
+          type: string
+          description: Deleted by User Full Name
+          example: John Smith
+        deletedByEmail:
+          type: string
+          description: Deleted by User Email Address
+          example: john.smith@example.com
+        deletedDateTime:
+          type: string
+          description: Deleted by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+      description: Change log
+    CompanyProfileChange:
+      type: object
+      properties:
+        uuid:
+          type: string
+        type:
+          type: string
+        status:
+          type: string
+        createdDateTime:
+          type: string
+          format: date-time
+        updatedDateTime:
+          type: string
+          format: date-time
+        data:
+          $ref: '#/components/schemas/CompanyProfileChangeItem'
+    CompanyProfileSearchResponse:
+      required:
+      - data
+      - pagination
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyProfileResponse'
+    CompanyProfileSortDirection:
+      type: string
+      description: Sorting direction
+      default: ASC
+      enum:
+      - DESC
+      - ASC
+    CompanyProfileRequest:
+      required:
+      - description
+      - name
+      - summary
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          example: COMPANY_PROFILE
+        name:
+          maxLength: 50
+          minLength: 1
+          type: string
+          example: Equinix
+        summary:
+          maxLength: 125
+          minLength: 1
+          type: string
+          example: Global interconnection and data center company
+        description:
+          maxLength: 450
+          minLength: 1
+          type: string
+          example: Equinix, Inc. connects the world's leading businesses to their customers, employees and partners inside the most interconnected data centers.
+        notifications:
+          type: array
+          example:
+          - type: CONTACT
+            emails:
+            - example@example.com
+          - type: NOTIFICATION
+            emails:
+            - example@example.com
+          items:
+            $ref: '#/components/schemas/Notification'
+        webUrl:
+          type: string
+          example: https://www.equinix.com
+        contactUrl:
+          type: string
+          example: https://www.equinix.com/contact-us
+    CompanyProfileResponse_account:
+      type: object
+      properties:
+        rootOrgId:
+          type: string
+    CompanyProfileSearchFieldName:
+      type: string
+      description: Searchable field names in company profile
+      example: /tags/name
+    CompanyProfileResponse:
+      type: object
+      properties:
+        href:
+          type: string
+          example: https://api.equinix.com/fabric/v4/companyProfiles/123e4567-e89b-12d3-a456-426614174000
+        uuid:
+          type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+        type:
+          type: string
+          example: COMPANY_PROFILE
+        name:
+          maxLength: 50
+          minLength: 1
+          type: string
+          example: Equinix
+        summary:
+          maxLength: 125
+          minLength: 1
+          type: string
+          example: Global interconnection and data center company
+        description:
+          maxLength: 450
+          minLength: 1
+          type: string
+          example: Equinix, Inc. connects the world's leading businesses to their customers, employees and partners inside the most interconnected data centers.
+        state:
+          $ref: '#/components/schemas/CompanyProfileState'
+        account:
+          $ref: '#/components/schemas/CompanyProfileResponse_account'
+        metros:
+          type: array
+          example:
+          - href: https://api.equinix.com/fabric/v4/metros/SV
+            code: SV
+            name: Silicon Valley
+          items:
+            $ref: '#/components/schemas/CompanyMetro'
+        logo:
+          $ref: '#/components/schemas/CompanyLogo'
+        tags:
+          type: array
+          example:
+          - href: https://api.equinix.com/fabric/v4/tags/260af68b-42f0-4f2e-9c5c-2fbd44b4b387
+            uuid: 260af68b-42f0-4f2e-9c5c-2fbd44b4b387
+          items:
+            $ref: '#/components/schemas/TagResponse'
+        serviceProfiles:
+          type: array
+          example:
+          - href: https://api.equinix.com/fabric/v4/serviceProfiles/423af68b-42f0-4f2e-9c5c-2fbd44b4b387
+            uuid: 423af68b-42f0-4f2e-9c5c-2fbd44b4b387
+          items:
+            $ref: '#/components/schemas/CompanyServiceProfile'
+        privateServices:
+          type: array
+          example:
+          - href: https://api.equinix.com/fabric/v4/privateServices/460af68b-42f0-4f2e-9c5c-2fbd44b4b387
+            uuid: 460af68b-42f0-4f2e-9c5c-2fbd44b4b387
+          - href: https://api.equinix.com/fabric/v4/privateServices/8a5685a6-063d-41ac-9279-d32431e8d8f6
+            uuid: 8a5685a6-063d-41ac-9279-d32431e8d8f6
+          items:
+            $ref: '#/components/schemas/PrivateService'
+        notifications:
+          type: array
+          example:
+          - type: CONTACT
+            emails:
+            - example@example.com
+          - type: NOTIFICATION
+            emails:
+            - example@example.com
+          items:
+            $ref: '#/components/schemas/Notification'
+        webUrl:
+          type: string
+          example: https://www.equinix.com
+        contactUrl:
+          type: string
+          example: https://www.equinix.com/contact-us
+        change:
+          $ref: '#/components/schemas/CompanyProfileChange'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+    CompanyProfileSearchFilter:
+      type: object
+      properties:
+        and:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyProfileSearchFilter'
+        or:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyProfileSearchFilter'
+        property:
+          $ref: '#/components/schemas/CompanyProfileSearchFieldName'
+        operator:
+          $ref: '#/components/schemas/OperatorEnum'
+        values:
+          type: array
+          description: Values to compare against
+          example:
+          - PENDING
+          - PROVISIONED
+          items:
+            type: string
+    CompanyProfileState:
+      type: object
+    PrivateService:
+      type: object
+      properties:
+        href:
+          type: string
+        uuid:
+          type: string
+    CompanyLogo:
+      type: object
+      properties:
+        href:
+          type: string
+        uuid:
+          type: string
+        extensionType:
+          type: string
+    AttachTagResponse:
+      required:
+      - type
+      - uuid
+      type: object
+      properties:
+        href:
+          type: string
+          description: URL to the attached tag
+          example: https://api.equinix.com/fabric/v4/tags/260af68b-42f0-4f2e-9c5c-2fbd44b4b387
+        type:
+          type: string
+          description: Type of the tag or attachment
+          example: TAG
+        uuid:
+          type: string
+          description: Unique identifier for the tag
+          example: 260af68b-42f0-4f2e-9c5c-2fbd44b4b387
+        attachmentStatus:
+          type: string
+          description: Status of the attachment operation
+          example: ATTACHED
+    TagListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      description: Equinix Fabric Tag List Response Object
+    OperatorEnum:
+      type: string
+      description: Comparison operators for filtering
+      example: '='
+    CompanyProfileSearchRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/CompanyProfileSearchFilter'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        sort:
+          $ref: '#/components/schemas/Sort'
+    Sort:
+      type: object
+      properties:
+        property:
+          type: string
+          description: Property to sort by((currently supports tags with filter syntax)
+          example: /tags/@name=equinix.fabric.spotlight.category.featured
+        direction:
+          $ref: '#/components/schemas/CompanyProfileSortDirection'
+    ServiceProfileListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: List of service profiles
+          example:
+          - href: https://api.equinix.com/fabric/v4/serviceProfiles/423af68b-42f0-4f2e-9c5c-2fbd44b4b387
+            uuid: 423af68b-42f0-4f2e-9c5c-2fbd44b4b387
+          items:
+            $ref: '#/components/schemas/CompanyServiceProfile'
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    CompanyServiceProfile:
+      type: object
+      properties:
+        href:
+          type: string
+        uuid:
+          type: string
+    CompanyMetro:
+      type: object
+      properties:
+        href:
+          type: string
+        metroCode:
+          type: string
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

@@ -1,0 +1,456 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication SelfServiceReservations API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- description: 'Self Service Reservations
+
+    '
+  externalDocs:
+    url: https://metal.equinix.com/developers/docs/deploy/reserved/
+  name: SelfServiceReservations
+paths:
+  /projects/{project_id}/self-service/reservations:
+    get:
+      description: Returns all reservations.
+      operationId: findSelfServiceReservations
+      parameters:
+      - description: Page to return
+        in: query
+        name: page
+        schema:
+          default: 1
+          format: int32
+          maximum: 100000
+          minimum: 1
+          type: integer
+      - description: Items returned per page
+        in: query
+        name: per_page
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+      - description: Project UUID
+        in: path
+        name: project_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: Filter reservations by items category
+        in: query
+        name: categories
+        schema:
+          items:
+            $ref: '#/components/schemas/findOrganizationDevices_categories_parameter_inner'
+          type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelfServiceReservationList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+      summary: Retrieve all reservations
+      tags:
+      - SelfServiceReservations
+    post:
+      description: Creates a reservation.
+      operationId: createSelfServiceReservation
+      parameters:
+      - description: Project UUID
+        in: path
+        name: project_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSelfServiceReservationRequest'
+        description: reservation to create
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelfServiceReservationResponse'
+          description: created
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Create a reservation
+      tags:
+      - SelfServiceReservations
+  /projects/{project_id}/self-service/reservations/{id}:
+    get:
+      description: Returns a reservation
+      operationId: findSelfServiceReservation
+      parameters:
+      - description: Reservation short_id
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: Project UUID
+        in: path
+        name: project_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelfServiceReservationResponse'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Retrieve a reservation
+      tags:
+      - SelfServiceReservations
+components:
+  schemas:
+    CreateSelfServiceReservationRequest_period_unit:
+      enum:
+      - monthly
+      type: string
+    SelfServiceReservationItemResponse:
+      example:
+        plan_slug: plan_slug
+        amount: 0.8008282
+        metro_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        quantity: 6
+        metro_code: metro_code
+        metro_name: metro_name
+        term: term
+        id: id
+        plan_categories:
+        - plan_categories
+        - plan_categories
+        plan_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        plan_name: plan_name
+      properties:
+        amount:
+          format: float
+          type: number
+        id:
+          type: string
+        metro_code:
+          type: string
+        metro_id:
+          format: uuid
+          type: string
+        metro_name:
+          type: string
+        plan_id:
+          format: uuid
+          type: string
+        plan_name:
+          type: string
+        plan_slug:
+          type: string
+        plan_categories:
+          items:
+            type: string
+          type: array
+        quantity:
+          type: integer
+        term:
+          type: string
+      type: object
+    CreateSelfServiceReservationRequest:
+      example:
+        item:
+        - amount: 0.8008282
+          metro_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity: 6
+          term: term
+          plan_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - amount: 0.8008282
+          metro_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity: 6
+          term: term
+          plan_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        period:
+          unit: null
+          count: null
+        notes: notes
+        start_date: 2000-01-23 04:56:07+00:00
+      properties:
+        item:
+          items:
+            $ref: '#/components/schemas/SelfServiceReservationItemRequest'
+          type: array
+        notes:
+          type: string
+        period:
+          $ref: '#/components/schemas/CreateSelfServiceReservationRequest_period'
+        start_date:
+          format: date-time
+          type: string
+      type: object
+    SelfServiceReservationResponse:
+      example:
+        item:
+        - plan_slug: plan_slug
+          amount: 0.8008282
+          metro_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity: 6
+          metro_code: metro_code
+          metro_name: metro_name
+          term: term
+          id: id
+          plan_categories:
+          - plan_categories
+          - plan_categories
+          plan_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          plan_name: plan_name
+        - plan_slug: plan_slug
+          amount: 0.8008282
+          metro_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity: 6
+          metro_code: metro_code
+          metro_name: metro_name
+          term: term
+          id: id
+          plan_categories:
+          - plan_categories
+          - plan_categories
+          plan_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          plan_name: plan_name
+        period:
+          unit: null
+          count: null
+        notes: notes
+        total_cost: 1
+        project_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        organization: organization
+        organization_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        created_at: 2000-01-23 04:56:07+00:00
+        project: project
+        start_date: 2000-01-23 04:56:07+00:00
+        status: status
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        item:
+          items:
+            $ref: '#/components/schemas/SelfServiceReservationItemResponse'
+          type: array
+        notes:
+          type: string
+        organization:
+          type: string
+        organization_id:
+          format: uuid
+          type: string
+        period:
+          $ref: '#/components/schemas/CreateSelfServiceReservationRequest_period'
+        project:
+          type: string
+        project_id:
+          format: uuid
+          type: string
+        start_date:
+          format: date-time
+          type: string
+        status:
+          type: string
+        total_cost:
+          type: integer
+      type: object
+    Error:
+      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
+      properties:
+        error:
+          description: A description of the error that caused the request to fail.
+          type: string
+        errors:
+          description: A list of errors that contributed to the request failing.
+          items:
+            description: An error message that contributed to the request failing.
+            type: string
+          type: array
+      type: object
+    findOrganizationDevices_categories_parameter_inner:
+      enum:
+      - compute
+      - storage
+      - vmce
+      - legacy_gen
+      - current_gen
+      example: compute
+      type: string
+    CreateSelfServiceReservationRequest_period_count:
+      enum:
+      - 12
+      - 36
+      type: integer
+    CreateSelfServiceReservationRequest_period:
+      example:
+        unit: null
+        count: null
+      properties:
+        count:
+          $ref: '#/components/schemas/CreateSelfServiceReservationRequest_period_count'
+        unit:
+          $ref: '#/components/schemas/CreateSelfServiceReservationRequest_period_unit'
+      type: object
+    SelfServiceReservationList:
+      example:
+        reservations:
+        - item:
+          - plan_slug: plan_slug
+            amount: 0.8008282
+            metro_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            quantity: 6
+            metro_code: metro_code
+            metro_name: metro_name
+            term: term
+            id: id
+            plan_categories:
+            - plan_categories
+            - plan_categories
+            plan_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            plan_name: plan_name
+          - plan_slug: plan_slug
+            amount: 0.8008282
+            metro_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            quantity: 6
+            metro_code: metro_code
+            metro_name: metro_name
+            term: term
+            id: id
+            plan_categories:
+            - plan_categories
+            - plan_categories
+            plan_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            plan_name: plan_name
+          period:
+            unit: null
+            count: null
+          notes: notes
+          total_cost: 1
+          project_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          organization: organization
+          organization_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created_at: 2000-01-23 04:56:07+00:00
+          project: project
+          start_date: 2000-01-23 04:56:07+00:00
+          status: status
+        - item:
+          - plan_slug: plan_slug
+            amount: 0.8008282
+            metro_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            quantity: 6
+            metro_code: metro_code
+            metro_name: metro_name
+            term: term
+            id: id
+            plan_categories:
+            - plan_categories
+            - plan_categories
+            plan_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            plan_name: plan_name
+          - plan_slug: plan_slug
+            amount: 0.8008282
+            metro_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            quantity: 6
+            metro_code: metro_code
+            metro_name: metro_name
+            term: term
+            id: id
+            plan_categories:
+            - plan_categories
+            - plan_categories
+            plan_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            plan_name: plan_name
+          period:
+            unit: null
+            count: null
+          notes: notes
+          total_cost: 1
+          project_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          organization: organization
+          organization_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created_at: 2000-01-23 04:56:07+00:00
+          project: project
+          start_date: 2000-01-23 04:56:07+00:00
+          status: status
+      properties:
+        reservations:
+          items:
+            $ref: '#/components/schemas/SelfServiceReservationResponse'
+          type: array
+      type: object
+    SelfServiceReservationItemRequest:
+      example:
+        amount: 0.8008282
+        metro_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        quantity: 6
+        term: term
+        plan_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        amount:
+          format: float
+          type: number
+        metro_id:
+          format: uuid
+          type: string
+        plan_id:
+          format: uuid
+          type: string
+        quantity:
+          type: integer
+        term:
+          type: string
+      type: object
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

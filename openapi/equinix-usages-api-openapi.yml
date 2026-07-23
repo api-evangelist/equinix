@@ -1,0 +1,215 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication Usages API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- description: Usage Management
+  externalDocs:
+    url: https://metal.equinix.com/developers/docs/billing/checking-usage/
+  name: Usages
+paths:
+  /devices/{id}/usages:
+    get:
+      description: Returns all usages for a device.
+      operationId: findDeviceUsages
+      parameters:
+      - description: Device UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: Filter usages created after this date
+        in: query
+        name: created[after]
+        schema:
+          format: datetime
+          type: string
+      - description: Filter usages created before this date
+        in: query
+        name: created[before]
+        schema:
+          format: datetime
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceUsageList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Retrieve all usages for device
+      tags:
+      - Usages
+  /projects/{id}/usages:
+    get:
+      description: Returns all usages for a project.
+      operationId: findProjectUsage
+      parameters:
+      - description: Project UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: Filter usages created after this date
+        in: query
+        name: created[after]
+        schema:
+          format: datetime
+          type: string
+      - description: Filter usages created before this date
+        in: query
+        name: created[before]
+        schema:
+          format: datetime
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectUsageList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Retrieve all usages for project
+      tags:
+      - Usages
+components:
+  schemas:
+    DeviceUsage:
+      example:
+        total: total
+        unit: unit
+        quantity: quantity
+      properties:
+        quantity:
+          type: string
+        total:
+          type: string
+        unit:
+          type: string
+      type: object
+    ProjectUsage:
+      example:
+        total: total
+        unit: unit
+        quantity: quantity
+        plan_version: plan_version
+        price: price
+        name: name
+        type: type
+        facility: facility
+        plan: plan
+      properties:
+        facility:
+          type: string
+        name:
+          type: string
+        plan:
+          type: string
+        plan_version:
+          type: string
+        price:
+          type: string
+        quantity:
+          type: string
+        total:
+          type: string
+        type:
+          type: string
+        unit:
+          type: string
+      type: object
+    Error:
+      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
+      properties:
+        error:
+          description: A description of the error that caused the request to fail.
+          type: string
+        errors:
+          description: A list of errors that contributed to the request failing.
+          items:
+            description: An error message that contributed to the request failing.
+            type: string
+          type: array
+      type: object
+    ProjectUsageList:
+      example:
+        usages:
+        - total: total
+          unit: unit
+          quantity: quantity
+          plan_version: plan_version
+          price: price
+          name: name
+          type: type
+          facility: facility
+          plan: plan
+        - total: total
+          unit: unit
+          quantity: quantity
+          plan_version: plan_version
+          price: price
+          name: name
+          type: type
+          facility: facility
+          plan: plan
+      properties:
+        usages:
+          items:
+            $ref: '#/components/schemas/ProjectUsage'
+          type: array
+      type: object
+    DeviceUsageList:
+      example:
+        usages:
+        - total: total
+          unit: unit
+          quantity: quantity
+        - total: total
+          unit: unit
+          quantity: quantity
+      properties:
+        usages:
+          items:
+            $ref: '#/components/schemas/DeviceUsage'
+          type: array
+      type: object
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

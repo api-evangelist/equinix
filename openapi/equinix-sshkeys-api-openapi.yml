@@ -1,0 +1,549 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication SSHKeys API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- description: 'Manage SSH keys. See project endpoints to list and create project-level SSH keys.
+
+    '
+  externalDocs:
+    url: https://metal.equinix.com/developers/docs/accounts/ssh-keys/
+  name: SSHKeys
+paths:
+  /devices/{id}/ssh-keys:
+    get:
+      description: Returns a collection of the device's ssh keys.
+      operationId: findDeviceSSHKeys
+      parameters:
+      - description: Project UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: Search by key, label, or fingerprint
+        in: query
+        name: Search string
+        schema:
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSHKeyList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+      summary: Retrieve a device's ssh keys
+      tags:
+      - SSHKeys
+  /projects/{id}/ssh-keys:
+    get:
+      description: Returns a collection of the project's ssh keys.
+      operationId: findProjectSSHKeys
+      parameters:
+      - description: Project UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: Search by key, label, or fingerprint
+        in: query
+        name: query
+        schema:
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSHKeyList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+      summary: Retrieve a project's ssh keys
+      tags:
+      - SSHKeys
+    post:
+      description: Creates a ssh key.
+      operationId: createProjectSSHKey
+      parameters:
+      - description: Project UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SSHKeyCreateInput'
+        description: ssh key to create
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSHKey'
+          description: created
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Create a ssh key for the given project
+      tags:
+      - SSHKeys
+  /ssh-keys:
+    get:
+      description: Returns a collection of the user’s ssh keys.
+      operationId: findSSHKeys
+      parameters:
+      - description: Search by key, label, or fingerprint
+        in: query
+        name: search
+        schema:
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSHKeyList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+      summary: Retrieve all ssh keys
+      tags:
+      - SSHKeys
+    post:
+      description: Creates a ssh key.
+      operationId: createSSHKey
+      parameters:
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/SSHKeyCreateInput'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSHKey'
+          description: created
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Create a ssh key for the current user
+      tags:
+      - SSHKeys
+  /ssh-keys/{id}:
+    delete:
+      description: Deletes the ssh key.
+      operationId: deleteSSHKey
+      parameters:
+      - description: ssh key UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: no content
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Delete the ssh key
+      tags:
+      - SSHKeys
+    get:
+      description: Returns a single ssh key if the user has access
+      operationId: findSSHKeyById
+      parameters:
+      - description: SSH Key UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSHKey'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Retrieve a ssh key
+      tags:
+      - SSHKeys
+    put:
+      description: Updates the ssh key.
+      operationId: updateSSHKey
+      parameters:
+      - description: SSH Key UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SSHKeyInput'
+        description: ssh key to update
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSHKey'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Update the ssh key
+      tags:
+      - SSHKeys
+components:
+  schemas:
+    SSHKeyInput:
+      example:
+        label: label
+        key: key
+        tags:
+        - tags
+        - tags
+      properties:
+        key:
+          type: string
+        label:
+          type: string
+        tags:
+          items:
+            type: string
+          type: array
+      type: object
+    SSHKey:
+      example:
+        updated_at: 2000-01-23 04:56:07+00:00
+        fingerprint: fingerprint
+        created_at: 2000-01-23 04:56:07+00:00
+        href: href
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        label: label
+        entity:
+          href: href
+        key: key
+        tags:
+        - tags
+        - tags
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        entity:
+          $ref: '#/components/schemas/Href'
+        fingerprint:
+          type: string
+        href:
+          type: string
+        id:
+          format: uuid
+          type: string
+        key:
+          type: string
+        label:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        tags:
+          items:
+            type: string
+          type: array
+      type: object
+    Error:
+      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
+      properties:
+        error:
+          description: A description of the error that caused the request to fail.
+          type: string
+        errors:
+          description: A list of errors that contributed to the request failing.
+          items:
+            description: An error message that contributed to the request failing.
+            type: string
+          type: array
+      type: object
+    SSHKeyCreateInput:
+      example:
+        label: label
+        instances_ids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        key: key
+        tags:
+        - tags
+        - tags
+      properties:
+        instances_ids:
+          description: "List of instance UUIDs to associate SSH key with, when empty array is sent all instances belonging\n      to entity will be included"
+          items:
+            format: uuid
+            type: string
+          type: array
+        key:
+          type: string
+        label:
+          type: string
+        tags:
+          items:
+            type: string
+          type: array
+      type: object
+    SSHKeyList:
+      example:
+        ssh_keys:
+        - updated_at: 2000-01-23 04:56:07+00:00
+          fingerprint: fingerprint
+          created_at: 2000-01-23 04:56:07+00:00
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          label: label
+          entity:
+            href: href
+          key: key
+          tags:
+          - tags
+          - tags
+        - updated_at: 2000-01-23 04:56:07+00:00
+          fingerprint: fingerprint
+          created_at: 2000-01-23 04:56:07+00:00
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          label: label
+          entity:
+            href: href
+          key: key
+          tags:
+          - tags
+          - tags
+      properties:
+        ssh_keys:
+          items:
+            $ref: '#/components/schemas/SSHKey'
+          type: array
+      type: object
+    Href:
+      example:
+        href: href
+      properties:
+        href:
+          type: string
+      required:
+      - href
+      type: object
+  requestBodies:
+    SSHKeyCreateInput:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SSHKeyCreateInput'
+      description: ssh key to create
+      required: true
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

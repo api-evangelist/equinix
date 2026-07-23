@@ -1,0 +1,375 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication Statistics API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- name: Statistics
+  description: Statistics
+paths:
+  /fabric/v4/ports/{portId}/stats:
+    get:
+      tags:
+      - Statistics
+      summary: Get Stats by uuid **(DEPRECATED)**
+      description: This API provides service-level traffic metrics so that you can view access and gather key information required to manage service subscription sizing and capacity.**(DEPRECATED)**
+      operationId: getPortStatsByPortUuid
+      parameters:
+      - name: portId
+        in: path
+        description: Port UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/PortUUID'
+      - name: startDateTime
+        in: query
+        description: startDateTime
+        required: true
+        schema:
+          $ref: '#/components/schemas/StartDateTime'
+        example: 2020-11-06 07:00:00+00:00
+      - name: endDateTime
+        in: query
+        description: endDateTime
+        required: true
+        schema:
+          $ref: '#/components/schemas/EndDateTime'
+        example: 2020-11-10 07:00:00+00:00
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Statistics'
+              examples:
+                statsExample:
+                  $ref: '#/components/examples/200_port'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+      deprecated: true
+  /fabric/v4/connections/{connectionId}/stats:
+    get:
+      tags:
+      - Statistics
+      summary: Get Stats by uuid **(DEPRECATED)**
+      description: This API provides service-level metrics so that you can view access and gather key information required to manage service subscription sizing and capacity **(DEPRECATED)**
+      operationId: getConnectionStatsByPortUuid
+      parameters:
+      - name: connectionId
+        in: path
+        description: Connection UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/VirtualCircuitId'
+      - name: startDateTime
+        in: query
+        description: startDateTime
+        required: true
+        schema:
+          $ref: '#/components/schemas/StartDateTime'
+        example: 2020-11-06 07:00:00+00:00
+      - name: endDateTime
+        in: query
+        description: endDateTime
+        required: true
+        schema:
+          $ref: '#/components/schemas/EndDateTime'
+        example: 2020-11-10 07:00:00+00:00
+      - name: viewPoint
+        in: query
+        description: viewPoint
+        required: true
+        schema:
+          $ref: '#/components/schemas/viewPoint'
+        example: aSide
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Statistics'
+              examples:
+                statsExample:
+                  $ref: '#/components/examples/200_vc'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+      deprecated: true
+components:
+  schemas:
+    Statistics:
+      type: object
+      properties:
+        startDateTime:
+          type: string
+          description: Start and duration of the statistical analysis interval.
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        endDateTime:
+          type: string
+          description: End and duration of the statistical analysis interval.
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        viewPoint:
+          type: string
+          description: Point of view for connection metrics - aSide or zSide
+          enum:
+          - aSide
+          - zSide
+        bandwidthUtilization:
+          $ref: '#/components/schemas/BandwidthUtilization'
+      description: This API provides service-level traffic metrics so that you can view access and gather key information required to manage service subscription sizing and capacity.
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    Metrics:
+      type: object
+      properties:
+        intervalEndTimestamp:
+          type: string
+          description: Interval end timestamp
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        max:
+          type: number
+          description: Max bandwidth within statistics object time interval, represented in units specified by response "units" field
+          format: float
+        mean:
+          type: number
+          description: Mean bandwidth within statistics object time interval, represented in units specified by response "units" field
+          format: float
+      description: Bandwidth utilization statistics for a specified interval.
+    BandwidthUtilization:
+      type: object
+      properties:
+        unit:
+          type: string
+          description: Aggregated data transfer capacity. Possible values- Mbps, megabits (1 million bits) per second; Gbps, gigabits (1 billion bits) per second.
+          enum:
+          - Mbps
+        metricInterval:
+          type: string
+          description: An interval formatted value, indicating the time-interval the metric objects within the response represent
+        inbound:
+          $ref: '#/components/schemas/Direction'
+        outbound:
+          $ref: '#/components/schemas/Direction'
+      description: Bandwidth utilization statistics (octet counters-based)
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    PortUUID:
+      type: string
+      description: Port UUID
+      format: uuid
+    EndDateTime:
+      type: string
+      description: End date and time
+      format: date-time
+      example: 2024-07-11 18:06:21+00:00
+    viewPoint:
+      type: string
+      description: viewPoint
+      enum:
+      - aSide
+      - zSide
+    Direction:
+      type: object
+      properties:
+        max:
+          type: number
+          description: Max bandwidth within request time range, represented in units specified by response "units" field
+          format: float
+        mean:
+          type: number
+          description: Mean bandwidth within request time range, represented in units specified by response "units" field
+          format: float
+        metrics:
+          type: array
+          description: Bandwidth utilization statistics for a specified interval.
+          items:
+            $ref: '#/components/schemas/Metrics'
+      description: Directional statistics
+    VirtualCircuitId:
+      type: string
+      description: Virtual Circuit UUID
+    StartDateTime:
+      type: string
+      description: Start date and time
+      format: date-time
+      example: 2024-07-11 18:06:21+00:00
+  examples:
+    '500':
+      value:
+      - errorCode: EQ-3045004
+        errorMessage: Internal Server Error
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Internal Server Error
+    200_port:
+      value:
+        href: http://api.equinix.com/fabric/v4/ports/xxxxx191-xx70-xxxx-xx04-xxxxxxxa37xx
+        type: XF_PORT
+        uuid: xxxxx191-xx70-xxxx-xx04-xxxxxxxa37xx
+        name: Equinix-EM-CX-xxx-L-Dot1q-BO-100G-PRI-xx
+        bandwidthUtilization: 10000
+        stats:
+          startDateTime: 2020-05-21 08:00:00+00:00
+          endDateTime: 2020-05-21 10:30:00+00:00
+          bandwidthUtilization:
+            unit: Mbps
+            metricInterval: PT5M
+            inbound:
+              max: 68.00905623111112
+              mean: 48.90562310112
+              lastPolled: 41.00905623111112
+              metrics:
+              - intervalEndDateTime: 2020-05-21 10:30:00+00:00
+                max: 45.5623145112009
+                mean: 31.38641687333333
+            outbound:
+              max: 41.99068261111111
+              mean: 33.70374303096296
+              lastPolled: 41.43428905111111
+              metrics:
+              - intervalEndDateTime: 2020-05-21 10:30:00+00:00
+                max: 42.01401189333334
+                mean: 39.40894303096296
+    200_vc:
+      value:
+        href: https://api.equinix.com/fabric/v4/connections/97d1850f-4df0-468c-9281-fa7b0dfa2096
+        type: EVPL_VC
+        uuid: 97d1850f-4df0-468c-9281-fa7b0dfa2096
+        name: Admin-STATS-123-Abc
+        stats:
+          startDateTime: 2021-01-10 20:05:08+00:00
+          endDateTime: 2021-01-10 21:05:08+00:00
+          viewPoint: aSide
+          bandwidthUtilization:
+            unit: Mbps
+            metricInterval: PT5M
+            inbound:
+              max: 68.38641687333333
+              mean: 39.96267986650665
+              lastPolled: 41.00905623111112
+              metrics:
+              - intervalEndDateTime: 2021-01-10 20:05:00+00:00
+                max: 41.89234537555556
+                mean: 33.62481298948148
+              - intervalEndDateTime: 2021-01-10 20:10:00+00:00
+                max: 41.86234987534256
+                mean: 36.92451598748148
+              - intervalEndDateTime: 2021-01-10 20:15:00+00:00
+                max: 41.86907222888888
+                mean: 43.98230834555556
+              - intervalEndDateTime: 2021-01-10 20:20:00+00:00
+                max: 41.91562025333334
+                mean: 41.086565260765425
+            outbound:
+              max: 67.79944363333334
+              mean: 38.116581250214345
+              lastPolled: 41.43428905111111
+              metrics:
+              - intervalEndDateTime: 2021-01-10 20:05:00+00:00
+                max: 41.99068261111111
+                mean: 33.70374303096296
+              - intervalEndDateTime: 2021-01-10 20:10:00+00:00
+                max: 42.56065261666111
+                mean: 31.52464373892222
+              - intervalEndDateTime: 2021-01-10 20:15:00+00:00
+                max: 41.96735416222222
+                mean: 44.08555118977779
+              - intervalEndDateTime: 2021-01-10 20:20:00+00:00
+                max: 42.01401189333334
+                mean: 39.40894303096296
+    '403':
+      value:
+      - errorCode: EQ-3045003
+        errorMessage: Operation not allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Operation not allowed for current user
+    '401':
+      value:
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

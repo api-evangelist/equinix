@@ -1,0 +1,100 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication Health API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- name: Health
+paths:
+  /fabric/v4/health:
+    get:
+      tags:
+      - Health
+      summary: Get service status
+      description: GET All service health statys with an option query parameter to return all Equinix Fabric customer in which the customer has a presence.
+      operationId: getStatus
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              examples:
+                metroExample:
+                  $ref: '#/components/examples/healthResponse'
+components:
+  examples:
+    healthResponse:
+      value:
+        href: null
+        version: '4.4'
+        release: 2022.4.0
+        description: Equinix Fabric Health Check API
+        state: HEALTHY
+        apiServices:
+        - route: /prices
+          status: UP
+          changedDateTime: 2022-10-03 18:37:54.760000+00:00
+        - route: /connections
+          status: UP
+          changedDateTime: 2022-10-03 18:37:56.818000+00:00
+        - route: /ports
+          status: UP
+          changedDateTime: 2022-10-03 18:37:56.886000+00:00
+        - route: /serviceTokens
+          status: UP
+          changedDateTime: 2022-10-03 18:37:56.919000+00:00
+        - route: /stats
+          status: UP
+          changedDateTime: 2022-10-03 18:37:56.951000+00:00
+        - route: /routers
+          status: UP
+          changedDateTime: 2022-10-03 18:37:57.271000+00:00
+        - route: /serviceProfiles
+          status: UP
+          changedDateTime: 2022-10-03 18:38:01.298000+00:00
+  schemas:
+    HealthResponse:
+      type: object
+      properties:
+        href:
+          type: string
+          description: The Canonical URL at which the resource resides.
+        version:
+          type: string
+          description: Indicator of a version
+        release:
+          type: string
+          description: release details.
+        state:
+          type: string
+          description: status of a service
+        apiServices:
+          $ref: '#/components/schemas/ApiServices'
+      description: GET Services Health
+    ApiServices:
+      type: object
+      properties:
+        route:
+          type: string
+          description: service routes
+        status:
+          type: string
+          description: service status
+        changedDateTime:
+          type: string
+          description: service status change date
+      description: Available services details
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

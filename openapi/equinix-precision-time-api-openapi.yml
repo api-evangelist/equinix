@@ -1,0 +1,4676 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication Precision Time API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- name: Precision Time
+  description: Precision Time
+paths:
+  /fabric/v4/timeServices:
+    post:
+      tags:
+      - Precision Time
+      summary: Create Time Service
+      description: The API provides capability to create Precision Time service
+      operationId: createTimeServices
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/precisionTimeServiceRequest'
+            examples:
+              ntpStandard:
+                $ref: '#/components/examples/ntpStandardService'
+              ptpStandard:
+                $ref: '#/components/examples/ptpStandardService'
+              ntpEnterprise:
+                $ref: '#/components/examples/ntpEnterpriseService'
+              ptpEnterprise:
+                $ref: '#/components/examples/ptpEnterpriseService'
+              ptpStandardWithAdvancedConfiguration:
+                $ref: '#/components/examples/ptpStandardWithAdvancedConfiguration'
+              ptpEnterpriseWithAdvancedConfiguration:
+                $ref: '#/components/examples/ptpEnterpriseWithAdvancedConfiguration'
+              ntpEnterpriseWithAdvancedConfiguration:
+                $ref: '#/components/examples/ntpEnterpriseWithAdvancedConfiguration'
+        required: true
+      responses:
+        '202':
+          description: Successful Accepted operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/precisionTimeServiceResponse'
+              examples:
+                ntpStandard:
+                  $ref: '#/components/examples/ntpStandardCreateResponse'
+                ntpEnterprise:
+                  $ref: '#/components/examples/ntpEnterpriseCreateResponse'
+                ptpStandard:
+                  $ref: '#/components/examples/ptpStandardCreateResponse'
+                ptpEnterprise:
+                  $ref: '#/components/examples/ptpEnterpriseCreateResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                InvalidName:
+                  $ref: '#/components/examples/400-Invalid-Name'
+                ValidateName:
+                  $ref: '#/components/examples/400-Validate-Name'
+                DuplicateName:
+                  $ref: '#/components/examples/400-Duplicate-Name'
+                MandatoryConnectionUuid:
+                  $ref: '#/components/examples/400-Mandatory-ConnectionUUid'
+                InvalidConnectionUuidFormat:
+                  $ref: '#/components/examples/400-Invalid-ConnectionUuid-Format'
+                InvalidConnectionStatus:
+                  $ref: '#/components/examples/400-Invalid-Connection-Status'
+                ValidateConnectionUuid:
+                  $ref: '#/components/examples/400-Validate-ConnectionUuid'
+                InvalidConnectionLocation:
+                  $ref: '#/components/examples/400-Invalid-Connection-Location'
+                MandatoryPackageType:
+                  $ref: '#/components/examples/400-Mandatory-PackageType'
+                InvalidPackageType:
+                  $ref: '#/components/examples/400-Invalid-PackageType'
+                InvalidConnectionPackageType:
+                  $ref: '#/components/examples/400-Invalid-Connection-PackageType'
+                MandatoryPackage:
+                  $ref: '#/components/examples/400-Mandatory-Package'
+                InvalidPackage:
+                  $ref: '#/components/examples/400-Invalid-Package'
+                InvalidConnectionPackage:
+                  $ref: '#/components/examples/400-Invalid-Connection-Package'
+                MandatoryPrimaryIP:
+                  $ref: '#/components/examples/400-Mandatory-PrimaryIP'
+                InvalidPrimaryIPFormat:
+                  $ref: '#/components/examples/400-Invalid-PrimaryIP-Format'
+                ValidatePrimaryIP:
+                  $ref: '#/components/examples/400-Validate-PrimaryIP'
+                MandatorySecondaryIP:
+                  $ref: '#/components/examples/400-Mandatory-SecondaryIP'
+                InvalidSecondaryIPFormat:
+                  $ref: '#/components/examples/400-Invalid-SecondaryIP-Format'
+                ValidateSecondaryIP:
+                  $ref: '#/components/examples/400-Validate-SecondaryIP'
+                ValidateSameSubnet:
+                  $ref: '#/components/examples/400-Validate-SameSubnet'
+                MandatoryNetworkMask:
+                  $ref: '#/components/examples/400-Mandatory-NetworkMask'
+                InvalidNetworkMaskFormat:
+                  $ref: '#/components/examples/400-Invalid-NetworkMask-Format'
+                ValidateNetworkMask:
+                  $ref: '#/components/examples/400-Validate-NetworkMask'
+                InvalidDefaultGatewayFormat:
+                  $ref: '#/components/examples/400-Invalid-DefaultGateway-Format'
+                ValidateDefaultGateway:
+                  $ref: '#/components/examples/400-Validate-DefaultGateway'
+                InvalidTimeScale:
+                  $ref: '#/components/examples/400-Invalid-TimeScale'
+                InvalidDomain:
+                  $ref: '#/components/examples/400-Invalid-Domain'
+                InvalidPriority1:
+                  $ref: '#/components/examples/400-Invalid-Priority1'
+                InvalidPriority2:
+                  $ref: '#/components/examples/400-Invalid-Priority2'
+                InvalidLogAnnounceInterval:
+                  $ref: '#/components/examples/400-Invalid-LogAnnounceInterval'
+                ValidateLogAnnounceIntervalRange:
+                  $ref: '#/components/examples/400-Validate-LogAnnounceInterval-Range'
+                InvalidLogSyncInterval:
+                  $ref: '#/components/examples/400-Invalid-LogSyncInterval'
+                ValidateLogSyncIntervalRange:
+                  $ref: '#/components/examples/400-Validate-LogSyncInterval-Range'
+                InvalidLogDelayReqInterval:
+                  $ref: '#/components/examples/400-Invalid-LogDelayReqInterval'
+                ValidateLogDelayReqIntervalRange:
+                  $ref: '#/components/examples/400-Validate-LogDelayReqInterval-Range'
+                InvalidTransportMode:
+                  $ref: '#/components/examples/400-Invalid-TransportMode'
+                InvalidGrantTime:
+                  $ref: '#/components/examples/400-Invalid-GrantTime'
+                ValidateGrantTimeRange:
+                  $ref: '#/components/examples/400-Validate-GrantTime-Range'
+                InvalidType:
+                  $ref: '#/components/examples/400-Invalid-Type'
+                InvalidId:
+                  $ref: '#/components/examples/400-Invalid-Id'
+                InvalidPassword:
+                  $ref: '#/components/examples/400-Invalid-Password'
+                ValidatePassword:
+                  $ref: '#/components/examples/400-Validate-Password'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+  /fabric/v4/timeServices/{serviceId}:
+    get:
+      tags:
+      - Precision Time
+      summary: Get Service By ID.
+      description: The API provides capability to get Precision Time Service details
+      operationId: getTimeServicesById
+      parameters:
+      - name: serviceId
+        in: path
+        description: Service UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/ServiceId'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/precisionTimeServiceResponse'
+              examples:
+                ntpStandardOriginPort:
+                  $ref: '#/components/examples/ntpStandardResponseASidePort'
+                ntpStandardOriginVirtualDevice:
+                  $ref: '#/components/examples/ntpStandardResponseASideVirtualDevice'
+                ntpStandardOriginCloudRouter:
+                  $ref: '#/components/examples/ntpStandardResponseASideCloudRouter'
+                ntpEnterpriseOriginPort:
+                  $ref: '#/components/examples/ntpEnterpriseWOMD5ResponseASidePort'
+                ntpEnterpriseWithAdvConfigOriginPort:
+                  $ref: '#/components/examples/ntpEnterpriseResponseASidePort'
+                ntpEnterpriseWithAdvConfigOriginVirtualDevice:
+                  $ref: '#/components/examples/ntpEnterpriseResponseASideVirtualDevice'
+                ntpEnterpriseWithAdvConfigOriginCloudRouter:
+                  $ref: '#/components/examples/ntpEnterpriseResponseASideCloudRouter'
+                ptpStandardOriginPort:
+                  $ref: '#/components/examples/ptpStandardResponse'
+                ptpEnterpriseOriginPort:
+                  $ref: '#/components/examples/ptpEnterpriseResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+    put:
+      tags:
+      - Precision Time
+      summary: Configure Service.
+      description: The API provides capability to Configure/Fulfill the Precision Time Service.
+      operationId: fulfillTimeServices
+      parameters:
+      - name: serviceId
+        in: path
+        description: Service UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/ServiceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/precisionTimeServiceRequest'
+            examples:
+              ntpStandard:
+                $ref: '#/components/examples/configureStandardService'
+              ptpStandard:
+                $ref: '#/components/examples/configureStandardService'
+              ntpEnterpriseWithAdvanceConfiguration:
+                $ref: '#/components/examples/configureNtpEnterpriseAdvancedConfig'
+              ptpEnterpriseWithAdvanceConfiguration:
+                $ref: '#/components/examples/configurePtpWithAdvancedConfig'
+        required: true
+      responses:
+        '202':
+          description: Successful Accepted operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/precisionTimeServiceResponse'
+              examples:
+                ntpStandard:
+                  $ref: '#/components/examples/ntpStandardConfigureResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                InvalidName:
+                  $ref: '#/components/examples/400-Invalid-Name'
+                ValidateName:
+                  $ref: '#/components/examples/400-Validate-Name'
+                DuplicateName:
+                  $ref: '#/components/examples/400-Duplicate-Name'
+                MandatoryConnectionUuid:
+                  $ref: '#/components/examples/400-Mandatory-ConnectionUUid'
+                InvalidConnectionUuidFormat:
+                  $ref: '#/components/examples/400-Invalid-ConnectionUuid-Format'
+                InvalidConnectionStatus:
+                  $ref: '#/components/examples/400-Invalid-Connection-Status'
+                ValidateConnectionUuid:
+                  $ref: '#/components/examples/400-Validate-ConnectionUuid'
+                InvalidConnectionLocation:
+                  $ref: '#/components/examples/400-Invalid-Connection-Location'
+                MandatoryPackageType:
+                  $ref: '#/components/examples/400-Mandatory-PackageType'
+                InvalidPackageType:
+                  $ref: '#/components/examples/400-Invalid-PackageType'
+                InvalidConnectionPackageType:
+                  $ref: '#/components/examples/400-Invalid-Connection-PackageType'
+                MandatoryPackage:
+                  $ref: '#/components/examples/400-Mandatory-Package'
+                InvalidPackage:
+                  $ref: '#/components/examples/400-Invalid-Package'
+                InvalidConnectionPackage:
+                  $ref: '#/components/examples/400-Invalid-Connection-Package'
+                MandatoryPrimaryIP:
+                  $ref: '#/components/examples/400-Mandatory-PrimaryIP'
+                InvalidPrimaryIPFormat:
+                  $ref: '#/components/examples/400-Invalid-PrimaryIP-Format'
+                ValidatePrimaryIP:
+                  $ref: '#/components/examples/400-Validate-PrimaryIP'
+                MandatorySecondaryIP:
+                  $ref: '#/components/examples/400-Mandatory-SecondaryIP'
+                InvalidSecondaryIPFormat:
+                  $ref: '#/components/examples/400-Invalid-SecondaryIP-Format'
+                ValidateSecondaryIP:
+                  $ref: '#/components/examples/400-Validate-SecondaryIP'
+                ValidateSameSubnet:
+                  $ref: '#/components/examples/400-Validate-SameSubnet'
+                MandatoryNetworkMask:
+                  $ref: '#/components/examples/400-Mandatory-NetworkMask'
+                InvalidNetworkMaskFormat:
+                  $ref: '#/components/examples/400-Invalid-NetworkMask-Format'
+                ValidateNetworkMask:
+                  $ref: '#/components/examples/400-Validate-NetworkMask'
+                InvalidDefaultGatewayFormat:
+                  $ref: '#/components/examples/400-Invalid-DefaultGateway-Format'
+                ValidateDefaultGateway:
+                  $ref: '#/components/examples/400-Validate-DefaultGateway'
+                InvalidTimeScale:
+                  $ref: '#/components/examples/400-Invalid-TimeScale'
+                InvalidDomain:
+                  $ref: '#/components/examples/400-Invalid-Domain'
+                InvalidPriority1:
+                  $ref: '#/components/examples/400-Invalid-Priority1'
+                InvalidPriority2:
+                  $ref: '#/components/examples/400-Invalid-Priority2'
+                InvalidLogAnnounceInterval:
+                  $ref: '#/components/examples/400-Invalid-LogAnnounceInterval'
+                ValidateLogAnnounceIntervalRange:
+                  $ref: '#/components/examples/400-Validate-LogAnnounceInterval-Range'
+                InvalidLogSyncInterval:
+                  $ref: '#/components/examples/400-Invalid-LogSyncInterval'
+                ValidateLogSyncIntervalRange:
+                  $ref: '#/components/examples/400-Validate-LogSyncInterval-Range'
+                InvalidLogDelayReqInterval:
+                  $ref: '#/components/examples/400-Invalid-LogDelayReqInterval'
+                ValidateLogDelayReqIntervalRange:
+                  $ref: '#/components/examples/400-Validate-LogDelayReqInterval-Range'
+                InvalidTransportMode:
+                  $ref: '#/components/examples/400-Invalid-TransportMode'
+                InvalidGrantTime:
+                  $ref: '#/components/examples/400-Invalid-GrantTime'
+                ValidateGrantTimeRange:
+                  $ref: '#/components/examples/400-Validate-GrantTime-Range'
+                InvalidType:
+                  $ref: '#/components/examples/400-Invalid-Type'
+                InvalidId:
+                  $ref: '#/components/examples/400-Invalid-Id'
+                InvalidPassword:
+                  $ref: '#/components/examples/400-Invalid-Password'
+                ValidatePassword:
+                  $ref: '#/components/examples/400-Validate-Password'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+    delete:
+      tags:
+      - Precision Time
+      summary: Delete by ID.
+      description: The API provides capability to delete Precision Time Service by service id.
+      operationId: deleteTimeServiceById
+      parameters:
+      - name: serviceId
+        in: path
+        description: Service UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/ServiceId'
+      responses:
+        '202':
+          description: Successful Delete
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/precisionTimeServiceResponse'
+              examples:
+                ntpStandard:
+                  $ref: '#/components/examples/ntpStandardDeletingResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+    patch:
+      tags:
+      - Precision Time
+      summary: Update By ID.
+      description: The API provides capability to update Precision Time Service by service id.
+      operationId: updateTimeServicesById
+      parameters:
+      - name: serviceId
+        in: path
+        description: Service UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/ServiceId'
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              maxItems: 1
+              minItems: 1
+              type: array
+              items:
+                $ref: '#/components/schemas/precisionTimeChangeOperation'
+            examples:
+              updateName:
+                $ref: '#/components/examples/updateName'
+              updatePackageCode:
+                $ref: '#/components/examples/updatePackageCode'
+              updateNetworkInformation:
+                $ref: '#/components/examples/updateNetworkInformation'
+              updatePtpAdvancedConfiguration:
+                $ref: '#/components/examples/updatePtpAdvancedConfiguration'
+              updateNtpAdvancedConfiguration:
+                $ref: '#/components/examples/updateNtpAdvancedConfiguration'
+        required: true
+      responses:
+        '202':
+          description: Successful Accepted operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/precisionTimeServiceResponse'
+              examples:
+                ntpStandard:
+                  $ref: '#/components/examples/ntpStandardReprovisionResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                InvalidName:
+                  $ref: '#/components/examples/400-Invalid-Name'
+                ValidateName:
+                  $ref: '#/components/examples/400-Validate-Name'
+                DuplicateName:
+                  $ref: '#/components/examples/400-Duplicate-Name'
+                MandatoryConnectionUuid:
+                  $ref: '#/components/examples/400-Mandatory-ConnectionUUid'
+                InvalidConnectionUuidFormat:
+                  $ref: '#/components/examples/400-Invalid-ConnectionUuid-Format'
+                InvalidConnectionStatus:
+                  $ref: '#/components/examples/400-Invalid-Connection-Status'
+                ValidateConnectionUuid:
+                  $ref: '#/components/examples/400-Validate-ConnectionUuid'
+                InvalidConnectionLocation:
+                  $ref: '#/components/examples/400-Invalid-Connection-Location'
+                MandatoryPackageType:
+                  $ref: '#/components/examples/400-Mandatory-PackageType'
+                InvalidPackageType:
+                  $ref: '#/components/examples/400-Invalid-PackageType'
+                InvalidConnectionPackageType:
+                  $ref: '#/components/examples/400-Invalid-Connection-PackageType'
+                MandatoryPackage:
+                  $ref: '#/components/examples/400-Mandatory-Package'
+                InvalidPackage:
+                  $ref: '#/components/examples/400-Invalid-Package'
+                InvalidConnectionPackage:
+                  $ref: '#/components/examples/400-Invalid-Connection-Package'
+                MandatoryPrimaryIP:
+                  $ref: '#/components/examples/400-Mandatory-PrimaryIP'
+                InvalidPrimaryIPFormat:
+                  $ref: '#/components/examples/400-Invalid-PrimaryIP-Format'
+                ValidatePrimaryIP:
+                  $ref: '#/components/examples/400-Validate-PrimaryIP'
+                MandatorySecondaryIP:
+                  $ref: '#/components/examples/400-Mandatory-SecondaryIP'
+                InvalidSecondaryIPFormat:
+                  $ref: '#/components/examples/400-Invalid-SecondaryIP-Format'
+                ValidateSecondaryIP:
+                  $ref: '#/components/examples/400-Validate-SecondaryIP'
+                ValidateSameSubnet:
+                  $ref: '#/components/examples/400-Validate-SameSubnet'
+                MandatoryNetworkMask:
+                  $ref: '#/components/examples/400-Mandatory-NetworkMask'
+                InvalidNetworkMaskFormat:
+                  $ref: '#/components/examples/400-Invalid-NetworkMask-Format'
+                ValidateNetworkMask:
+                  $ref: '#/components/examples/400-Validate-NetworkMask'
+                InvalidDefaultGatewayFormat:
+                  $ref: '#/components/examples/400-Invalid-DefaultGateway-Format'
+                ValidateDefaultGateway:
+                  $ref: '#/components/examples/400-Validate-DefaultGateway'
+                InvalidTimeScale:
+                  $ref: '#/components/examples/400-Invalid-TimeScale'
+                InvalidDomain:
+                  $ref: '#/components/examples/400-Invalid-Domain'
+                InvalidPriority1:
+                  $ref: '#/components/examples/400-Invalid-Priority1'
+                InvalidPriority2:
+                  $ref: '#/components/examples/400-Invalid-Priority2'
+                InvalidLogAnnounceInterval:
+                  $ref: '#/components/examples/400-Invalid-LogAnnounceInterval'
+                ValidateLogAnnounceIntervalRange:
+                  $ref: '#/components/examples/400-Validate-LogAnnounceInterval-Range'
+                InvalidLogSyncInterval:
+                  $ref: '#/components/examples/400-Invalid-LogSyncInterval'
+                ValidateLogSyncIntervalRange:
+                  $ref: '#/components/examples/400-Validate-LogSyncInterval-Range'
+                InvalidLogDelayReqInterval:
+                  $ref: '#/components/examples/400-Invalid-LogDelayReqInterval'
+                ValidateLogDelayReqIntervalRange:
+                  $ref: '#/components/examples/400-Validate-LogDelayReqInterval-Range'
+                InvalidTransportMode:
+                  $ref: '#/components/examples/400-Invalid-TransportMode'
+                InvalidGrantTime:
+                  $ref: '#/components/examples/400-Invalid-GrantTime'
+                ValidateGrantTimeRange:
+                  $ref: '#/components/examples/400-Validate-GrantTime-Range'
+                InvalidType:
+                  $ref: '#/components/examples/400-Invalid-Type'
+                InvalidId:
+                  $ref: '#/components/examples/400-Invalid-Id'
+                InvalidPassword:
+                  $ref: '#/components/examples/400-Invalid-Password'
+                ValidatePassword:
+                  $ref: '#/components/examples/400-Validate-Password'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+  /fabric/v4/timeServices/search:
+    post:
+      tags:
+      - Precision Time
+      summary: Search Time Services
+      description: The API provides capability to get list of user's Time Services using search criteria, including optional filtering, pagination and sorting
+      operationId: searchTimeServices
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeServicesSearchRequest'
+            examples:
+              SearchFilterByStatus:
+                $ref: '#/components/examples/SearchTimeServicesFilterByStatus'
+              SearchFilterByNameAndProtocol:
+                $ref: '#/components/examples/SearchTimeServicesByNameAndProtocol'
+              SearchFilterOrAnd:
+                $ref: '#/components/examples/SearchTimeServicesFilterOrAnd'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceSearchResponse'
+              examples:
+                Example:
+                  $ref: '#/components/examples/serviceSearchResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/service_400_invalid_sorting'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+  /fabric/v4/timeServices/{serviceId}/connections:
+    get:
+      tags:
+      - Precision Time
+      summary: Get Connection Links
+      description: The API provides capability to get prevision timing service's details
+      operationId: getTimeServicesConnectionsByServiceId
+      parameters:
+      - name: serviceId
+        in: path
+        description: Service UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/ServiceId'
+      responses:
+        '200':
+          description: Return Time Service Connection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/precisionTimeServiceConnectionsResponse'
+              examples:
+                example:
+                  $ref: '#/components/examples/serviceConnectionsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+  /fabric/v4/timeServicePackages:
+    get:
+      tags:
+      - Precision Time
+      summary: Get Packages
+      description: The API provides capability to get timing service's packages
+      operationId: getTimeServicesPackages
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/precisionTimeServicePackagesResponse'
+              examples:
+                example:
+                  $ref: '#/components/examples/servicePackagesResponse'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+  /fabric/v4/timeServicePackages/{packageCode}:
+    get:
+      tags:
+      - Precision Time
+      summary: Get Package By Code
+      description: The API provides capability to get timing service's package by code
+      operationId: getTimeServicesPackageByCode
+      parameters:
+      - name: packageCode
+        in: path
+        description: Package Code
+        required: true
+        schema:
+          type: string
+          enum:
+          - NTP_STANDARD
+          - NTP_ENTERPRISE
+          - PTP_STANDARD
+          - PTP_ENTERPRISE
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/precisionTimePackageResponse'
+              examples:
+                example:
+                  $ref: '#/components/examples/servicePackageResponse'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+components:
+  examples:
+    400-Mandatory-ConnectionUUid:
+      value:
+      - errorCode: EQ-4800011
+        errorMessage: Mandatory field ConnectionUUid is missing
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    serviceSearchResponse:
+      value:
+        pagination:
+          offset: 20
+          limit: 20
+          total: 100
+          next: /search?offset=40&limit=20
+          previous: /search?offset=0&limit=20
+        data:
+        - href: https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011
+          type: NTP
+          uuid: a8ba52de-faae-43b5-b0b1-6904d37ee011
+          name: EPT-NTP-STD-Service
+          state: PROVISIONING
+          connections:
+          - href: https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0
+            type: EVPL_VC
+            uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+            aSide:
+              accessPoint:
+                type: COLO
+                location:
+                  metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                  metroCode: NY
+                  ibx: NY1
+            zSide:
+              accessPoint:
+                type: SP
+                location:
+                  metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                  metroCode: NY
+          package:
+            href: https://api.equinix.com/fabric/v4/timeServicePackages/NTP_STANDARD
+            code: NTP_STANDARD
+          ipv4:
+            primary: 192.168.0.2
+            secondary: 192.168.0.3
+            networkMask: 255.255.255.255
+            defaultGateway: 192.167.0.1
+          account:
+            accountNumber: 123456
+          changeLog:
+            createdByEmail: abc@xyz.com
+            createdDateTime: 2024-08-24 06:50:46+00:00
+            updatedByEmail: abc@xyz.com
+            updatedDateTime: 2024-08-24 06:51:46+00:00
+    400-Invalid-NetworkMask-Format:
+      value:
+      - errorCode: EQ-4800023
+        errorMessage: Invalid NetworkMask format
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    ntpEnterpriseWOMD5ResponseASidePort:
+      value:
+        href: https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011
+        type: NTP
+        uuid: a8ba52de-faae-43b5-b0b1-6904d37ee011
+        name: EPT-NTP-Service
+        state: PROVISIONED
+        operation:
+          operationalStatus: UP
+        connections:
+        - href: https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          type: EVPL_VC
+          uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          aSide:
+            accessPoint:
+              type: COLO
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+                ibx: NY1
+          zSide:
+            accessPoint:
+              type: SP
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+        package:
+          href: https://api.equinix.com/fabric/v4/timeServicePackages/NTP_ENTERPRISE
+          code: NTP_ENTERPRISE
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+        order:
+          orderNumber: 1-129105284100
+        account:
+          accountNumber: 123456
+        changeLog:
+          createdByEmail: abc@xyz.com
+          createdDateTime: 2024-08-24 06:50:46+00:00
+          updatedByEmail: abc@xyz.com
+          updatedDateTime: 2024-08-24 06:51:46+00:00
+    '415':
+      value:
+      - errorCode: EQ-3040016
+        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: contentType
+          reason: The payload format is in an unsupported format
+    400-Invalid-LogDelayReqInterval:
+      value:
+      - errorCode: EQ-4800010
+        errorMessage: Invalid logDelayReqInterval
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    ntpEnterpriseService:
+      value:
+        type: NTP
+        name: EPT-NTP-Service
+        connections:
+        - uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+        package:
+          code: NTP_ENTERPRISE
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+    400-Invalid-Package:
+      value:
+      - errorCode: EQ-4800010
+        errorMessage: Invalid Package - Allowed packages are STANDARD, ENTERPRISE
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    400-Validate-DefaultGateway:
+      value:
+      - errorCode: EQ-4800110
+        errorMessage: Invalid DefaultGateway- Default Gateway cannot be same as Primary/Secondary IP
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    ptpStandardService:
+      value:
+        type: PTP
+        name: EPT-PTP-Service
+        connections:
+        - uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+        package:
+          code: PTP_STANDARD
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+        order:
+          purchaseOrderNumber: 1-129105284100
+    ptpEnterpriseCreateResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011
+        type: PTP
+        uuid: a8ba52de-faae-43b5-b0b1-6904d37ee011
+        name: EPT-PTP-Service
+        state: PROVISIONING
+        connections:
+        - href: https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          type: EVPL_VC
+          uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          aSide:
+            accessPoint:
+              type: COLO
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+                ibx: NY1
+          zSide:
+            accessPoint:
+              type: SP
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+        package:
+          href: https://api.equinix.com/fabric/v4/timeServicePackages/PTP_ENTERPRISE
+          code: PTP_ENTERPRISE
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+        ptpAdvancedConfiguration:
+          timeScale: true
+          domain: 127
+          priority1: 0
+          priority2: 1
+          logAnnounceInterval: 1
+          logSyncInterval: -4
+          logDelayReqInterval: -4
+          transportMode: UNICAST
+          grantTime: 300
+        account:
+          accountNumber: 123456
+        changeLog:
+          createdByEmail: abc@xyz.com
+          createdDateTime: 2024-08-24 06:50:46+00:00
+          updatedByEmail: abc@xyz.com
+          updatedDateTime: 2024-08-24 06:51:46+00:00
+    servicePackagesResponse:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 4
+        data:
+        - href: https://api.equinix.com/fabric/v4/timeServicePackages/NTP_STANDARD
+          type: TIME_SERVICE_PACKAGE
+          code: NTP_STANDARD
+          bandwidth: 1
+          clientsPerSecondMax: 1000
+          accuracySlaUnit: microseconds
+          accuracySla: -1
+          accuracySlaMin: 1
+          accuracySlaMax: 100
+          redundancySupported: false
+          multiSubnetSupported: false
+          changeLog:
+            createdDateTime: 2023-05-16 07:50:49.749000+00:00
+            updatedDateTime: 2023-05-17 07:50:49.749000+00:00
+        - href: https://api.equinix.com/fabric/v4/timeServicePackages/NTP_ENTERPRISE
+          type: TIME_SERVICE_PACKAGE
+          code: NTP_ENTERPRISE
+          bandwidth: 5
+          clientsPerSecondMax: 2000
+          accuracySlaUnit: microseconds
+          accuracySla: -1
+          accuracySlaMin: 1
+          accuracySlaMax: 100
+          redundancySupported: false
+          multiSubnetSupported: true
+          changeLog:
+            createdDateTime: 2023-05-16 07:50:49.749000+00:00
+            updatedDateTime: 2023-05-17 07:50:49.749000+00:00
+        - href: https://api.equinix.com/fabric/v4/timeServicePackages/PTP_STANDARD
+          type: TIME_SERVICE_PACKAGE
+          code: PTP_STANDARD
+          bandwidth: 5
+          clientsPerSecondMax: 20
+          accuracySlaUnit: microseconds
+          accuracySla: 50
+          accuracySlaMin: 1
+          accuracySlaMax: 10
+          redundancySupported: false
+          multiSubnetSupported: true
+          changeLog:
+            createdDateTime: 2023-05-16 07:50:49.749000+00:00
+            updatedDateTime: 2023-05-17 07:50:49.749000+00:00
+        - href: https://api.equinix.com/fabric/v4/timeServicePackages/PTP_ENTERPRISE
+          type: TIME_SERVICE_PACKAGE
+          code: PTP_ENTERPRISE
+          bandwidth: 10
+          clientsPerSecondMax: 100
+          accuracySlaUnit: microseconds
+          accuracySla: 50
+          accuracySlaMin: 1
+          accuracySlaMax: 10
+          redundancySupported: false
+          multiSubnetSupported: true
+          changeLog:
+            createdDateTime: 2023-05-16 07:50:49.749000+00:00
+            updatedDateTime: 2023-05-17 07:50:49.749000+00:00
+    configurePtpWithAdvancedConfig:
+      value:
+        type: PTP
+        name: EPT-PTP-Service
+        connections:
+        - uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+        package:
+          code: PTP_STANDARD
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+        ptpAdvancedConfiguration:
+          timeScale: true
+          domain: 127
+          priority1: 0
+          priority2: 1
+          logAnnounceInterval: 1
+          logSyncInterval: -4
+          logDelayReqInterval: -4
+          transportMode: UNICAST
+          grantTime: 300
+    ntpStandardService:
+      value:
+        type: NTP
+        name: EPT-NTP-Service
+        connections:
+        - uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+        package:
+          code: NTP_STANDARD
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+    400-Validate-SameSubnet:
+      value:
+      - errorCode: EQ-4800108
+        errorMessage: Primary and Secondary IPs should be in the same subnet
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    updatePtpAdvancedConfiguration:
+      value:
+      - op: replace
+        path: /ptpAdvancedConfiguration
+        value:
+          timeScale: PTP
+          domain: 20
+          priority1: 20
+          priority2: 20
+          logAnnounceInterval: 1
+          logSyncInterval: -4
+          logDelayReqInterval: -4
+          transportMode: UNICAST
+          grantTime: 300
+    SearchTimeServicesFilterOrAnd:
+      value:
+        filter:
+          and:
+          - or:
+            - property: /uuid
+              operator: LIKE
+              values:
+              - 676a0c3f-a785-4294-87bc-25fe9318a620%
+            - property: /name
+              operator: LIKE
+              values:
+              - test-time-service
+          - property: /project/projectId
+            operator: '='
+            values:
+            - '995072000433550'
+    400-Invalid-LogAnnounceInterval:
+      value:
+      - errorCode: EQ-4800010
+        errorMessage: Invalid LogAnnounceInterval
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    SearchTimeServicesFilterByStatus:
+      value:
+        filter:
+          and:
+          - property: /state
+            operator: '='
+            values:
+            - PROVISIONED
+          - property: /project/projectId
+            operator: '='
+            values:
+            - '995072000433550'
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - direction: DESC
+          property: /changeLog/createdDateTime
+    400-Mandatory-SecondaryIP:
+      value:
+      - errorCode: EQ-4800011
+        errorMessage: Mandatory field SecondaryIP is missing
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    400-Validate-Password:
+      value:
+      - errorCode: EQ-4800114
+        errorMessage: Only HEX allowed, chars value length should between 10 - 40
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    '403':
+      value:
+      - errorCode: EQ-3045003
+        errorMessage: Operation not allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Operation not allowed for current user
+    400-Validate-LogSyncInterval-Range:
+      value:
+      - errorCode: EQ-4800112
+        errorMessage: Invalid LogSyncInterval range - Allowed range is -5 to 1
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    400-Invalid-Domain:
+      value:
+      - errorCode: EQ-4800010
+        errorMessage: Invalid Domain- Allowed values are from 0 to 127
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    400-Validate-ConnectionUuid:
+      value:
+      - errorCode: EQ-4800103
+        errorMessage: Connection does not belong to this user
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    servicePackageResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/timeServicePackages/NTP_STANDARD
+        type: TIME_SERVICE_PACKAGE
+        code: NTP_STANDARD
+        bandwidth: 10
+        clientsPerSecondMax: 100
+        accuracySlaUnit: microseconds
+        accuracySla: 50
+        accuracySlaMin: 1
+        accuracySlaMax: 10
+        redundancySupported: true
+        multiSubnetSupported: true
+        changeLog:
+          createdDateTime: 2023-05-16 07:50:49.749000+00:00
+          updatedDateTime: 2023-05-17 07:50:49.749000+00:00
+    '500':
+      value:
+      - errorCode: EQ-3045004
+        errorMessage: Internal Server Error
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Internal Server Error
+    400-Invalid-Connection-Package:
+      value:
+      - errorCode: EQ-4800106
+        errorMessage: Connection Package is different
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    400-Invalid-TransportMode:
+      value:
+      - errorCode: EQ-4800010
+        errorMessage: Invalid TransportMode - Allowed values are Multicast, Unicast, Hybrid
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    ntpStandardResponseASideVirtualDevice:
+      value:
+        href: https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011
+        type: NTP
+        uuid: a8ba52de-faae-43b5-b0b1-6904d37ee011
+        name: EPT-NTP-Service
+        state: PROVISIONED
+        operation:
+          operationalStatus: UP
+        connections:
+        - href: https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          type: EVPL_VC
+          uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          aSide:
+            accessPoint:
+              type: VD
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+                ibx: NY1
+          zSide:
+            accessPoint:
+              type: SP
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+        package:
+          href: https://api.equinix.com/fabric/v4/timeServicePackages/NTP_STANDARD
+          code: NTP_STANDARD
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+        order:
+          orderNumber: 1-129105284100
+        account:
+          accountNumber: 123456
+        changeLog:
+          createdByEmail: abc@xyz.com
+          createdDateTime: 2024-08-24 06:50:46+00:00
+          updatedByEmail: abc@xyz.com
+          updatedDateTime: 2024-08-24 06:51:46+00:00
+    ptpStandardResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011
+        type: PTP
+        uuid: a8ba52de-faae-43b5-b0b1-6904d37ee011
+        name: EPT-PTP-Service
+        state: PROVISIONED
+        operation:
+          operationalStatus: UP
+        connections:
+        - href: https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          type: EVPL_VC
+          uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          aSide:
+            accessPoint:
+              type: COLO
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+                ibx: NY1
+          zSide:
+            accessPoint:
+              type: SP
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+        package:
+          href: https://api.equinix.com/fabric/v4/timeServicePackages/PTP_STANDARD
+          code: PTP_STANDARD
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+        order:
+          orderNumber: 1-129105284100
+        account:
+          accountNumber: 123456
+        changeLog:
+          createdByEmail: abc@xyz.com
+          createdDateTime: 2024-08-24 06:50:46+00:00
+          updatedByEmail: abc@xyz.com
+          updatedDateTime: 2024-08-24 06:51:46+00:00
+    400-Invalid-Password:
+      value:
+      - errorCode: EQ-4800010
+        errorMessage: Invalid Password
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    ntpStandardReprovisionResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011
+        type: NTP
+        uuid: a8ba52de-faae-43b5-b0b1-6904d37ee011
+        name: EPT-NTP-Service
+        state: REPROVISIONING
+        operation:
+          operationalStatus: UP
+        connections:
+        - href: https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          type: EVPL_VC
+          uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          aSide:
+            accessPoint:
+              type: COLO
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+                ibx: NY1
+          zSide:
+            accessPoint:
+              type: SP
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+        package:
+          href: https://api.equinix.com/fabric/v4/timeServicePackages/NTP_STANDARD
+          code: NTP_STANDARD
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+        account:
+          accountNumber: 123456
+        order:
+          orderNumber: 1-129105284100
+        changeLog:
+          createdByEmail: abc@xyz.com
+          createdDateTime: 2024-08-24 06:50:46+00:00
+          updatedByEmail: abc@xyz.com
+          updatedDateTime: 2024-08-24 06:51:46+00:00
+    SearchTimeServicesByNameAndProtocol:
+      value:
+        filter:
+          and:
+          - property: /name
+            operator: '='
+            values:
+            - test-service
+          - property: /type
+            operator: '='
+            values:
+            - NTP
+          - property: /project/projectId
+            operator: '='
+            values:
+            - '995072000433550'
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - direction: DESC
+          property: /changeLog/createdDateTime
+    ntpEnterpriseResponseASideCloudRouter:
+      value:
+        href: https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011
+        type: NTP
+        uuid: a8ba52de-faae-43b5-b0b1-6904d37ee011
+        name: EPT-NTP-Service
+        state: PROVISIONED
+        operation:
+          operationalStatus: UP
+        connections:
+        - href: https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          type: IP_VC
+          uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          aSide:
+            accessPoint:
+              type: CLOUD_ROUTER
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+          zSide:
+            accessPoint:
+              type: SP
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+        package:
+          href: https://api.equinix.com/fabric/v4/timeServicePackages/NTP_ENTERPRISE
+          code: NTP_ENTERPRISE
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+        ntpAdvancedConfiguration:
+        - type: ASCII
+          keyNumber: 65534
+          key: plain_printable_key
+        - type: HEX
+          keyNumber: 65535
+          key: a1a1a1a1a1a1a1
+        order:
+          orderNumber: 1-129105284100
+        account:
+          accountNumber: 123456
+        changeLog:
+          createdByEmail: abc@xyz.com
+          createdDateTime: 2024-08-24 06:50:46+00:00
+          updatedByEmail: abc@xyz.com
+          updatedDateTime: 2024-08-24 06:51:46+00:00
+    400-Invalid-Connection-Status:
+      value:
+      - errorCode: EQ-4800102
+        errorMessage: Connection should be in Pending Approval state
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    400-Invalid-ConnectionUuid-Format:
+      value:
+      - errorCode: EQ-4800023
+        errorMessage: Invalid connection uuid format
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    400-Invalid-GrantTime:
+      value:
+      - errorCode: EQ-4800010
+        errorMessage: Invalid GrantTime
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    configureNtpEnterpriseAdvancedConfig:
+      value:
+        type: NTP
+        name: EPT-NTP-Service
+        connections:
+        - uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+        package:
+          code: NTP_ENTERPRISE
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+        ntpAdvancedConfiguration:
+        - type: ASCII
+          keyNumber: 65534
+          key: plain_printable_key
+        - type: HEX
+          keyNumber: 65535
+          key: a1a1a1a1a1a1a1
+    ntpStandardResponseASideCloudRouter:
+      value:
+        href: https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011
+        type: NTP
+        uuid: a8ba52de-faae-43b5-b0b1-6904d37ee011
+        name: EPT-NTP-Service
+        state: PROVISIONED
+        operation:
+          operationalStatus: UP
+        connections:
+        - href: https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          type: IP_VC
+          uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          aSide:
+            accessPoint:
+              type: CLOUD_ROUTER
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+                ibx: NY1
+          zSide:
+            accessPoint:
+              type: SP
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+        package:
+          href: https://api.equinix.com/fabric/v4/timeServicePackages/NTP_STANDARD
+          code: NTP_STANDARD
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+        order:
+          orderNumber: 1-129105284100
+        account:
+          accountNumber: 123456
+        changeLog:
+          createdByEmail: abc@xyz.com
+          createdDateTime: 2024-08-24 06:50:46+00:00
+          updatedByEmail: abc@xyz.com
+          updatedDateTime: 2024-08-24 06:51:46+00:00
+    400-Invalid-Name:
+      value:
+      - errorCode: EQ-4800010
+        errorMessage: Validation Error
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        additionalInfo:
+        - property: /name
+          reason: Invalid name provided
+    ntpEnterpriseResponseASidePort:
+      value:
+        href: https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011
+        type: NTP
+        uuid: a8ba52de-faae-43b5-b0b1-6904d37ee011
+        name: EPT-NTP-Service
+        state: PROVISIONED
+        operation:
+          operationalStatus: UP
+        connections:
+        - href: https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          type: EVPL_VC
+          uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          aSide:
+            accessPoint:
+              type: COLO
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+                ibx: NY1
+          zSide:
+            accessPoint:
+              type: SP
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+        package:
+          href: https://api.equinix.com/fabric/v4/timeServicePackages/NTP_ENTERPRISE
+          code: NTP_ENTERPRISE
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+        ntpAdvancedConfiguration:
+        - type: ASCII
+          keyNumber: 65534
+          key: plain_printable_key
+        - type: HEX
+          keyNumber: 65535
+          key: a1a1a1a1a1a1a1
+        order:
+          orderNumber: 1-129105284100
+        account:
+          accountNumber: 123456
+        changeLog:
+          createdByEmail: abc@xyz.com
+          createdDateTime: 2024-08-24 06:50:46+00:00
+          updatedByEmail: abc@xyz.com
+          updatedDateTime: 2024-08-24 06:51:46+00:00
+    serviceConnectionsResponse:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 2
+        data:
+        - href: https://api.equinix.com/fabric/v4/connections/92dc376a-a932-43aa-a6a2-c806dedbd784
+          type: EVPL_VC
+          uuid: 92dc376a-a932-43aa-a6a2-c806dedbd784
+        - href: https://api.equinix.com/fabric/v4/connections/42dc376a-a932-43aa-a6a2-d806dedbd783
+          type: EVPL_VC
+          uuid: 42dc376a-a932-43aa-a6a2-d806dedbd783
+    400-Validate-LogDelayReqInterval-Range:
+      value:
+      - errorCode: EQ-4800112
+        errorMessage: Invalid logDelayReqInterval range - Allowed range is -5 to 1
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    400-Invalid-Priority1:
+      value:
+      - errorCode: EQ-4800010
+        errorMessage: Invalid Priority1 - Allowed values are 0 to 248
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    400-Invalid-Connection-Location:
+      value:
+      - errorCode: EQ-4800104
+        errorMessage: Connection location is not supported by EPT
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    configureStandardService:
+      value:
+        type: NTP
+        name: EPT-Standard-Service
+        connections:
+        - uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+        package:
+          code: NTP_STANDARD
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+    ptpStandardWithAdvancedConfiguration:
+      value:
+        type: PTP
+        name: EPT-PTP-Service
+        connections:
+        - uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+        package:
+          code: PTP_STANDARD
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+        ptpAdvancedConfiguration:
+          timeScale: true
+          domain: 127
+          priority1: 0
+          priority2: 1
+          logAnnounceInterval: 1
+          logSyncInterval: -4
+          logDelayReqInterval: -4
+          transportMode: UNICAST
+          grantTime: 300
+    400-Mandatory-PrimaryIP:
+      value:
+      - errorCode: EQ-4800011
+        errorMessage: Mandatory field PrimaryIP is missing
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    400-Validate-GrantTime-Range:
+      value:
+      - errorCode: EQ-4800113
+        errorMessage: Invalid GrantTime range - Allowed range is 30 to 7200
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    400-Invalid-LogSyncInterval:
+      value:
+      - errorCode: EQ-4800010
+        errorMessage: Invalid LogSyncInterval
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    400-Invalid-Priority2:
+      value:
+      - errorCode: EQ-4800010
+        errorMessage: Invalid Priority2 - Allowed values are 0 to 248
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    ptpEnterpriseResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011
+        type: PTP
+        uuid: a8ba52de-faae-43b5-b0b1-6904d37ee011
+        name: EPT-PTP-Service
+        state: PROVISIONED
+        operation:
+          operationalStatus: UP
+        connections:
+        - href: https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          type: EVPL_VC
+          uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          aSide:
+            accessPoint:
+              type: COLO
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+                ibx: NY1
+          zSide:
+            accessPoint:
+              type: SP
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+        package:
+          href: https://api.equinix.com/fabric/v4/timeServicePackages/PTP_ENTERPRISE
+          code: PTP_ENTERPRISE
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+        ptpAdvancedConfiguration:
+          timeScale: true
+          domain: 127
+          priority1: 0
+          priority2: 1
+          logAnnounceInterval: 1
+          logSyncInterval: -4
+          logDelayReqInterval: -4
+          transportMode: UNICAST
+          grantTime: 300
+        order:
+          orderNumber: 1-129105284100
+        account:
+          accountNumber: 123456
+        changeLog:
+          createdByEmail: abc@xyz.com
+          createdDateTime: 2024-08-24 06:50:46+00:00
+          updatedByEmail: abc@xyz.com
+          updatedDateTime: 2024-08-24 06:51:46+00:00
+    ntpEnterpriseCreateResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011
+        type: NTP
+        uuid: a8ba52de-faae-43b5-b0b1-6904d37ee011
+        name: EPT-NTP-Service
+        state: PROVISIONING
+        connections:
+        - href: https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          type: EVPL_VC
+          uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          aSide:
+            accessPoint:
+              type: COLO
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+                ibx: NY1
+          zSide:
+            accessPoint:
+              type: SP
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+        package:
+          href: https://api.equinix.com/fabric/v4/timeServicePackages/NTP_ENTERPRISE
+          code: NTP_ENTERPRISE
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+        ntpAdvancedConfiguration:
+        - type: ASCII
+          keyNumber: 65534
+          key: plain_printable_key
+        - type: HEX
+          keyNumber: 65535
+          key: a1a1a1a1a1a1a1
+        account:
+          accountNumber: 123456
+        changeLog:
+          createdByEmail: abc@xyz.com
+          createdDateTime: 2024-08-24 06:50:46+00:00
+          updatedByEmail: abc@xyz.com
+          updatedDateTime: 2024-08-24 06:51:46+00:00
+    400-Invalid-TimeScale:
+      value:
+      - errorCode: EQ-4800010
+        errorMessage: Invalid TimeScale - Allowed values are ARB, PTP
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    ntpEnterpriseResponseASideVirtualDevice:
+      value:
+        href: https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011
+        type: NTP
+        uuid: a8ba52de-faae-43b5-b0b1-6904d37ee011
+        name: EPT-NTP-Service
+        state: PROVISIONED
+        operation:
+          operationalStatus: UP
+        connections:
+        - href: https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          type: EVPL_VC
+          uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          aSide:
+            accessPoint:
+              type: VD
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+                ibx: NY1
+          zSide:
+            accessPoint:
+              type: SP
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+        package:
+          href: https://api.equinix.com/fabric/v4/timeServicePackages/NTP_ENTERPRISE
+          code: NTP_ENTERPRISE
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+        ntpAdvancedConfiguration:
+        - type: ASCII
+          keyNumber: 65534
+          key: plain_printable_key
+        - type: HEX
+          keyNumber: 65535
+          key: a1a1a1a1a1a1a1
+        order:
+          orderNumber: 1-129105284100
+        account:
+          accountNumber: 123456
+        changeLog:
+          createdByEmail: abc@xyz.com
+          createdDateTime: 2024-08-24 06:50:46+00:00
+          updatedByEmail: abc@xyz.com
+          updatedDateTime: 2024-08-24 06:51:46+00:00
+    service_400_invalid_sorting:
+      value:
+      - errorCode: EQ-3040039
+        errorMessage: Invalid value for sorting direction.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        additionalInfo:
+        - reason: Only accept DESC and ASC for sorting direction.
+    ntpStandardResponseASidePort:
+      value:
+        href: https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011
+        type: NTP
+        uuid: a8ba52de-faae-43b5-b0b1-6904d37ee011
+        name: EPT-NTP-Service
+        state: PROVISIONED
+        operation:
+          operationalStatus: UP
+        connections:
+        - href: https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          type: EVPL_VC
+          uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          aSide:
+            accessPoint:
+              type: COLO
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+                ibx: NY1
+          zSide:
+            accessPoint:
+              type: SP
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+        package:
+          href: https://api.equinix.com/fabric/v4/timeServicePackages/NTP_STANDARD
+          code: NTP_STANDARD
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+        order:
+          orderNumber: 1-129105284100
+        account:
+          accountNumber: 123456
+        changeLog:
+          createdByEmail: abc@xyz.com
+          createdDateTime: 2024-08-24 06:50:46+00:00
+          updatedByEmail: abc@xyz.com
+          updatedDateTime: 2024-08-24 06:51:46+00:00
+    400-Validate-NetworkMask:
+      value:
+      - errorCode: EQ-4800109
+        errorMessage: Invalid NetworkMask - Network mask should not exceed the allowed range of protocol and service tier
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    400-Validate-Name:
+      value:
+      - errorCode: EQ-4800100
+        errorMessage: Validation Error
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        additionalInfo:
+        - property: /name
+          reason: The name length should be 3 as minimum. The name should start with characters. Valid characters for a name include letters, numbers, dashes, and underscores
+    400-Invalid-Type:
+      value:
+      - errorCode: EQ-4800010
+        errorMessage: Invalid Type - Allowed values are ASCII, HEX
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    ptpStandardCreateResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011
+        type: PTP
+        uuid: a8ba52de-faae-43b5-b0b1-6904d37ee011
+        name: EPT-PTP-Service
+        state: PROVISIONING
+        connections:
+        - href: https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          type: EVPL_VC
+          uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          aSide:
+            accessPoint:
+              type: COLO
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+                ibx: NY1
+          zSide:
+            accessPoint:
+              type: SP
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+        package:
+          href: https://api.equinix.com/fabric/v4/timeServicePackages/PTP_STANDARD
+          code: PTP_STANDARD
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+        ptpAdvancedConfiguration:
+          timeScale: true
+          domain: 127
+          priority1: 0
+          priority2: 1
+          logAnnounceInterval: 1
+          logSyncInterval: -4
+          logDelayReqInterval: -4
+          transportMode: UNICAST
+          grantTime: 300
+        account:
+          accountNumber: 123456
+        changeLog:
+          createdByEmail: abc@xyz.com
+          createdDateTime: 2024-08-24 06:50:46+00:00
+          updatedByEmail: abc@xyz.com
+          updatedDateTime: 2024-08-24 06:51:46+00:00
+    400-Invalid-PackageType:
+      value:
+      - errorCode: EQ-4800010
+        errorMessage: Invalid Package Type - Allowed types are PTP, NTP
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    updateNtpAdvancedConfiguration:
+      value:
+      - op: replace
+        path: /ntpAdvancedConfiguration
+        value:
+        - type: ASCII
+          keyNumber: 65534
+          key: plain-text-key
+        - type: HEX
+          keyNumber: 65535
+          key: a1a1a1a1a1a1
+    ntpStandardConfigureResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011
+        type: NTP
+        uuid: a8ba52de-faae-43b5-b0b1-6904d37ee011
+        name: EPT-NTP-Service
+        state: PROVISIONING
+        connections:
+        - href: https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          type: EVPL_VC
+          uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          aSide:
+            accessPoint:
+              type: COLO
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+                ibx: NY1
+          zSide:
+            accessPoint:
+              type: SP
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+        package:
+          href: https://api.equinix.com/fabric/v4/timeServicePackages/NTP_STANDARD
+          code: NTP_STANDARD
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+        account:
+          accountNumber: 123456
+        order:
+          orderNumber: 1-129105284100
+        changeLog:
+          createdByEmail: abc@xyz.com
+          createdDateTime: 2024-08-24 06:50:46+00:00
+          updatedByEmail: abc@xyz.com
+          updatedDateTime: 2024-08-24 06:51:46+00:00
+    400-Invalid-Connection-PackageType:
+      value:
+      - errorCode: EQ-4800105
+        errorMessage: Connection Package type is different
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    400-Invalid-DefaultGateway-Format:
+      value:
+      - errorCode: EQ-4800023
+        errorMessage: Invalid DefaultGateway
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    400-Duplicate-Name:
+      value:
+      - errorCode: EQ-4800101
+        errorMessage: Service name is already in use
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    updateName:
+      value:
+      - op: replace
+        path: /name
+        value: Updated-Service-Name
+    ntpEnterpriseWithAdvancedConfiguration:
+      value:
+        type: NTP
+        name: EPT-NTP-Service
+        connections:
+        - uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+        package:
+          code: NTP_ENTERPRISE
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+        ntpAdvancedConfiguration:
+        - type: ASCII
+          keyNumber: 65534
+          key: plain_printable_key
+        - type: HEX
+          keyNumber: 65535
+          key: a1a1a1a1a1a1a1
+    '404':
+      value:
+      - errorCode: EQ-3045811
+        errorMessage: uuid not found
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: uuid not found
+    400-Validate-PrimaryIP:
+      value:
+      - errorCode: EQ-4800107
+        errorMessage: Invalid PrimaryIP - only range 10.0.0.0 to 10.255.255.255, 172.16.0.0 to 172.31.255.255, 192.168.0.0 to 192.168.255.255 is allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    ptpEnterpriseService:
+      value:
+        type: PTP
+        name: EPT-PTP-Service
+        connections:
+        - uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+        package:
+          code: PTP_ENTERPRISE
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+    ntpStandardDeletingResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011
+        type: NTP
+        uuid: a8ba52de-faae-43b5-b0b1-6904d37ee011
+        name: EPT-NTP-Service
+        state: DEPROVISIONING
+        operation:
+          operationalStatus: UP
+        connections:
+        - href: https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          type: EVPL_VC
+          uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          aSide:
+            accessPoint:
+              type: COLO
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+                ibx: NY1
+          zSide:
+            accessPoint:
+              type: SP
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+        package:
+          href: https://api.equinix.com/fabric/v4/timeServicePackages/NTP_STANDARD
+          code: NTP_STANDARD
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+        account:
+          accountNumber: 123456
+        order:
+          orderNumber: 1-216720438646
+        changeLog:
+          createdByEmail: abc@xyz.com
+          createdDateTime: 2024-08-24 06:50:46+00:00
+          updatedByEmail: abc@xyz.com
+          updatedDateTime: 2024-08-24 06:51:46+00:00
+          deletedByEmail: abc@xyz.com
+          deletedDateTime: 2024-08-24 06:52:46+00:00
+    ntpStandardCreateResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011
+        type: NTP
+        uuid: a8ba52de-faae-43b5-b0b1-6904d37ee011
+        name: EPT-NTP-Service
+        state: PROVISIONING
+        connections:
+        - href: https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          type: EVPL_VC
+          uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+          aSide:
+            accessPoint:
+              type: COLO
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+                ibx: NY1
+          zSide:
+            accessPoint:
+              type: SP
+              location:
+                metroHref: https://api.equinix.com/fabric/v4/metros/NY
+                metroCode: NY
+        package:
+          href: https://api.equinix.com/fabric/v4/timeServicePackages/NTP_STANDARD
+          code: NTP_STANDARD
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+        account:
+          accountNumber: 123456
+        changeLog:
+          createdByEmail: abc@xyz.com
+          createdDateTime: 2024-08-24 06:50:46+00:00
+          updatedByEmail: abc@xyz.com
+          updatedDateTime: 2024-08-24 06:51:46+00:00
+    400-Validate-SecondaryIP:
+      value:
+      - errorCode: EQ-4800107
+        errorMessage: Invalid SecondaryIP - only range 10.0.0.0 to 10.255.255.255, 172.16.0.0 to 172.31.255.255, 192.168.0.0 to 192.168.255.255 is allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    400-Invalid-PrimaryIP-Format:
+      value:
+      - errorCode: EQ-4800023
+        errorMessage: Invalid PrimaryIP format
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    '401':
+      value:
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    400-Mandatory-Package:
+      value:
+      - errorCode: EQ-4800011
+        errorMessage: Mandatory field Package is missing
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    400-Invalid-SecondaryIP-Format:
+      value:
+      - errorCode: EQ-4800023
+        errorMessage: Invalid SecondaryIP format
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    400-Mandatory-NetworkMask:
+      value:
+      - errorCode: EQ-4800011
+        errorMessage: Mandatory field NetworkMask is missing
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    updatePackageCode:
+      value:
+      - op: replace
+        path: /package/code
+        value: NTP_ENTERPRISE
+    updateNetworkInformation:
+      value:
+      - op: replace
+        path: /ipv4
+        value:
+          primary: 192.168.254.241
+          secondary: 192.168.254.242
+          networkMask: 255.255.255.240
+          defaultGateway: 192.168.254.254
+    400-Validate-LogAnnounceInterval-Range:
+      value:
+      - errorCode: EQ-4800111
+        errorMessage: Invalid LogAnnounceInterval range - Allowed range is -3 to 1
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    400-Invalid-Id:
+      value:
+      - errorCode: EQ-4800010
+        errorMessage: Invalid Id - Only Integers are allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    400-Mandatory-PackageType:
+      value:
+      - errorCode: EQ-4800011
+        errorMessage: Mandatory field Package Type is missing
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    ptpEnterpriseWithAdvancedConfiguration:
+      value:
+        type: PTP
+        name: EPT-PTP-Service
+        connections:
+        - uuid: 06dbb0e3-e55d-4090-8aff-fc5654abaad0
+        package:
+          code: PTP_ENTERPRISE
+        ipv4:
+          primary: 192.168.0.2
+          secondary: 192.168.0.3
+          networkMask: 255.255.255.255
+          defaultGateway: 192.167.0.1
+        ptpAdvancedConfiguration:
+          timeScale: true
+          domain: 127
+          priority1: 0
+          priority2: 1
+          logAnnounceInterval: 1
+          logSyncInterval: -4
+          logDelayReqInterval: -4
+          transportMode: UNICAST
+          grantTime: 300
+  schemas:
+    TimeServiceSimpleExpression:
+      type: object
+      properties:
+        property:
+          type: string
+          description: "Possible field names to use on filters:\n * `/project/projectId` - project id (mandatory)\n * `/name` - Precision Time Service name\n * `/uuid` - Precision Time Service uuid\n * `/type` - Precision Time Service protocol\n * `/state` - Precision Time Service status\n * `/account/accountNumber` - Precision Time Service account number\n * `/package/code` - Precision Time Service package\n * `/*` - all-category search\n"
+          example: /name
+        operator:
+          type: string
+          description: "Possible operators to use on filters:\n * `=` - equal\n * `!=` - not equal\n * `[NOT] BETWEEN` - (not) between\n * `[NOT] LIKE` - (not) like\n * `[NOT] IN` - (not) in\n * `ILIKE` - case-insensitive like\n"
+          example: '='
+        values:
+          type: array
+          items:
+            type: string
+            example: FabricPrecisionTimeService-1
+    NetworkEquinixStatus:
+      type: string
+      description: Network status
+      enum:
+      - PROVISIONING
+      - PROVISIONED
+      - NOT_PROVISIONED
+      - DEPROVISIONING
+      - DEPROVISIONED
+      - NOT_DEPROVISIONED
+    Bandwidths:
+      type: array
+      items:
+        $ref: '#/components/schemas/Bandwidth'
+    ptpAdvanceConfiguration:
+      type: object
+      properties:
+        timeScale:
+          type: string
+          description: Time Scale value, ARB denotes Arbitrary and PTP denotes Precision Time Protocol.
+          example: ARB
+          enum:
+          - ARB
+          - PTP
+        domain:
+          maximum: 127
+          minimum: 0
+          type: integer
+          description: The PTP domain value.
+          example: 0
+        priority1:
+          maximum: 248
+          minimum: 0
+          type: integer
+          description: The priority1 value determines the best primary clock, Lower value indicates higher priority.
+          example: 128
+        priority2:
+          maximum: 248
+          minimum: 0
+          type: integer
+          description: The priority2 value differentiates and prioritizes the primary clock to avoid confusion when priority1-value is the same for different primary clocks in a network.
+          example: 128
+        logAnnounceInterval:
+          type: integer
+          description: Logarithmic value that controls the rate of PTP Announce packets from the PTP time server. Default is 1 (1 packet every 2 seconds), Unit packets/second.
+          example: 1
+          enum:
+          - -3
+          - -2
+          - -1
+          - 0
+          - 1
+        logSyncInterval:
+          type: integer
+          description: Logarithmic value that controls the rate of PTP Sync packets. Default is -4 (16 packets per second), Unit packets/second..
+          example: -4
+          enum:
+          - -5
+          - -4
+          - -3
+          - -2
+          - -1
+          - 0
+          - 1
+        logDelayReqInterval:
+          type: integer
+          description: Logarithmic value that controls the rate of PTP DelayReq packets. Default is -4 (16 packets per second), Unit packets/second..
+          example: -4
+          enum:
+          - -5
+          - -4
+          - -3
+          - -2
+          - -1
+          - 0
+          - 1
+        transportMode:
+          type: string
+          enum:
+          - MULTICAST
+          - UNICAST
+          - HYBRID
+        grantTime:
+          maximum: 7200
+          minimum: 30
+          type: integer
+          description: Unicast Grant Time in seconds. For Multicast and Hybrid transport modes, grant time defaults to 300 seconds. For Unicast mode, grant time can be between 30 to 7200.
+          example: 300
+      description: PTP Advanced Configuration.
+    SimplifiedNetworkChange:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Network URI
+          format: uri
+          readOnly: true
+          example: https://api.equinix.com/fabric/v4/networks/2a4fb415-5a7f-436f-bae6-02f5e403deec/changes/4b17da68-3d6b-436d-9c8f-2105f3b950d9
+        uuid:
+          type: string
+          description: Uniquely identifies a change
+          format: uuid
+          example: 4b17da68-3d6b-436d-9c8f-2105f3b950d9
+        type:
+          $ref: '#/components/schemas/NetworkChangeType'
+      description: Current state of latest network change
+    AccessPointType:
+      type: string
+      description: Access point type
+      enum:
+      - VD
+      - VG
+      - SP
+      - IGW
+      - COLO
+      - SUBNET
+      - CLOUD_ROUTER
+      - NETWORK
+      - METAL_NETWORK
+      - VPIC_INTERFACE
+      - APP_LINK
+    PortServiceCode:
+      type: string
+      description: type of product
+      enum:
+      - CX
+      - IX
+      - IA
+      - MC
+    VirtualDevice:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Virtual Device URI
+          format: uri
+          readOnly: true
+        uuid:
+          type: string
+          description: Equinix-assigned Virtual Device identifier
+          format: uuid
+        name:
+          type: string
+          description: Customer-assigned Virtual Device name
+        type:
+          type: string
+          description: Virtual Device type
+          enum:
+          - EDGE
+        account:
+          $ref: '#/components/schemas/SimplifiedAccount'
+        cluster:
+          type: string
+          description: Virtual Device Cluster Information
+      description: Virtual Device AccessPoint Information
+    AccessPoint:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AccessPointType'
+        account:
+          $ref: '#/components/schemas/SimplifiedAccount'
+        location:
+          $ref: '#/components/schemas/SimplifiedLocation'
+        port:
+          $ref: '#/components/schemas/SimplifiedPort'
+        profile:
+          $ref: '#/components/schemas/SimplifiedServiceProfile'
+        router:
+          $ref: '#/components/schemas/CloudRouter'
+        linkProtocol:
+          $ref: '#/components/schemas/SimplifiedLinkProtocol'
+        virtualDevice:
+          $ref: '#/components/schemas/VirtualDevice'
+        interface:
+          $ref: '#/components/schemas/Interface'
+        network:
+          $ref: '#/components/schemas/SimplifiedNetwork'
+        sellerRegion:
+          type: string
+          description: Access point seller region
+        peeringType:
+          $ref: '#/components/schemas/PeeringType'
+        authenticationKey:
+          type: string
+          description: Access point authentication key
+        providerConnectionId:
+          type: string
+          description: Provider assigned Connection Id
+        virtualNetwork:
+          $ref: '#/components/schemas/VirtualNetwork'
+        interconnection:
+          $ref: '#/components/schemas/MetalInterconnection'
+        role:
+          type: string
+          description: E-Tree network connection role
+          enum:
+          - LEAF
+          - ROOT
+      description: Access point object
+    precisionTimeChangeOperation:
+      required:
+      - op
+      - path
+      - value
+      type: object
+      properties:
+        op:
+          type: string
+          description: Handy shortcut for operation name
+          enum:
+          - replace
+          - add
+          - remove
+        path:
+          type: string
+          description: path inside document leading to updated parameter
+          enum:
+          - /name
+          - /package/code
+          - /ipv4
+          - /ntpAdvancedConfiguration
+          - /ptpAdvancedConfiguration
+        value:
+          description: new value for updated parameter
+      description: Fabric Precision Timing change operation data
+    precisionTimeServicePackagesResponse:
+      title: precisionTimeServicePackagesResponse
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call
+          items:
+            $ref: '#/components/schemas/precisionTimePackageResponse'
+      description: Precision Packages
+    connectionLink:
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri
+          example: https://api.equinix.com/fabric/v4/timeServices/92dc376a-a932-43aa-a6a2-c806dedbd784/connections
+        type:
+          type: string
+          enum:
+          - EVPL_VC
+        uuid:
+          type: string
+          format: uuid
+    PortState:
+      type: string
+      description: Port lifecycle state
+      enum:
+      - PENDING
+      - PROVISIONING
+      - REPROVISIONING
+      - PENDING_CROSS_CONNECT
+      - PROVISIONED
+      - ACTIVE
+      - DEPROVISIONING
+      - DEPROVISIONED
+      - INACTIVE
+      - FAILED
+      - ADDED
+      - DELETED
+      - TO_BE_ADDED
+      - TO_BE_DELETED
+    Interface:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Interface URI
+          format: uri
+          readOnly: true
+        uuid:
+          type: string
+          description: Equinix-assigned Interface identifier
+          format: uuid
+        id:
+          type: integer
+          description: Interface id
+        type:
+          type: string
+          description: Interface type
+          enum:
+          - CLOUD
+          - NETWORK
+        projectId:
+          type: string
+          description: Interface Project ID
+      description: Interface Information
+    ProcessStep:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Service profile custom step title
+        subTitle:
+          type: string
+          description: Service profile custom step sub title
+        description:
+          type: string
+          description: Service profile custom step description
+      description: Definition of customized step while making connection
+    PortPriority:
+      type: string
+      description: Port priority in redundancy group
+      enum:
+      - PRIMARY
+      - SECONDARY
+    CloudRouterPostRequestPackage:
+      required:
+      - code
+      type: object
+      properties:
+        href:
+          type: string
+          description: Fabric Cloud Router URI
+          format: uri
+          example: https://api.equinix.com/fabric/v4/routerPackages/LAB
+        type:
+          type: string
+          description: Cloud Router package type
+          example: ROUTER_PACKAGE
+          enum:
+          - ROUTER_PACKAGE
+        code:
+          type: string
+          description: Cloud Router package code
+          example: LAB
+          enum:
+          - LAB
+          - BASIC
+          - STANDARD
+          - ADVANCED
+          - PREMIUM
+      description: Fabric Cloud Router Package Type
+    ServiceProfileTypeEnum:
+      type: string
+      description: Service profile type
+      example: L2_PROFILE
+      enum:
+      - L2_PROFILE
+      - L3_PROFILE
+      - IA_PROFILE
+      - IX_PROFILE
+      x-eqx-api-linter-skip-rules:
+      - 40
+    precisionTimeOrder:
+      title: precisionTimeOrder
+      type: object
+      properties:
+        purchaseOrderNumber:
+          type: string
+          description: Purchase order number
+        customerReferenceNumber:
+          type: string
+          description: Customer reference number
+        orderNumber:
+          type: string
+          description: Order Reference Number
+      description: Precision Time Order
+    PortInterface:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Port interface type
+      description: Port interface
+    ApiConfig:
+      type: object
+      properties:
+        apiAvailable:
+          type: boolean
+          description: Setting indicating whether the API is available (true) or not (false).
+          example: true
+          default: false
+        integrationId:
+          type: string
+        equinixManagedPort:
+          type: boolean
+          description: Setting indicating that the port is managed by Equinix (true) or not (false).
+          example: true
+          default: false
+        equinixManagedVlan:
+          type: boolean
+          description: Setting indicating that the VLAN is managed by Equinix (true) or not (false).
+          example: true
+          default: false
+        allowOverSubscription:
+          type: boolean
+          description: 'Setting showing that oversubscription support is available (true) or not (false). The default is false.
+
+            Oversubscription is the sale of more than the available network bandwidth. This practice is common
+
+            and legitimate. After all, many customers use less bandwidth than they''ve purchased.
+
+            And network users don''t consume bandwidth all at the same time. The leftover bandwidth can be sold to
+
+            other customers. When demand surges, operational and engineering resources can be shifted to
+
+            accommodate the load.
+
+            '
+          example: false
+          default: false
+        overSubscriptionLimit:
+          maximum: 20
+          minimum: 1
+          type: integer
+          description: A cap on oversubscription.
+          example: 1
+          default: 1
+        bandwidthFromApi:
+          type: boolean
+          default: false
+      description: Configuration for API based Integration for Service Profile
+    PeeringType:
+      type: string
+      description: Access point peering type
+      enum:
+      - PRIVATE
+      - MICROSOFT
+      - PUBLIC
+      - MANUAL
+    LinkProtocolType:
+      type: string
+      description: Type of Link Protocol
+      enum:
+      - UNTAGGED
+      - DOT1Q
+      - QINQ
+      - EVPN_VXLAN
+      - VXLAN
+    ServiceProfileAccessPointTypeVD:
+      required:
+      - type
+      type: object
+      properties:
+        uuid:
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceProfileAccessPointTypeEnum'
+        supportedBandwidths:
+          $ref: '#/components/schemas/Bandwidths'
+        allowRemoteConnections:
+          type: boolean
+          description: Allow remote connections to Service Profile
+          example: true
+        allowCustomBandwidth:
+          type: boolean
+          example: true
+      additionalProperties: false
+      description: VirtualDevice Access Point Type
+    NetworkType:
+      type: string
+      description: Network type
+      enum:
+      - EVPLAN
+      - EPLAN
+      - IPWAN
+      - EVPTREE
+      - EPTREE
+    NetworkState:
+      type: string
+      description: Network status
+      example: ACTIVE
+      enum:
+      - ACTIVE
+      - INACTIVE
+      - DELETED
+    ServiceProfileLinkProtocolConfig:
+      type: object
+      properties:
+        encapsulationStrategy:
+          type: string
+          description: was tagType - missing on wiki
+          enum:
+          - CTAGED
+          - BOTH
+          - NAMED
+        namedTags:
+          maxItems: 64
+          type: array
+          items:
+            type: string
+        vlanCTagLabel:
+          type: string
+          description: was ctagLabel
+        reuseVlanSTag:
+          type: boolean
+          example: true
+          default: false
+        encapsulation:
+          type: string
+          description: Port encapsulation - Derived response attribute. Ignored on request payloads.
+          enum:
+          - QINQ
+          - DOT1Q
+          - UNTAGGED
+      description: Configuration for dot1q to qinq translation support
+    PhysicalPortType:
+      type: string
+      description: Type of Port
+      enum:
+      - XF_PHYSICAL_PORT
+    ipv4:
+      title: ipv4
+      required:
+      - networkMask
+      - primary
+      - secondary
+      type: object
+      properties:
+        primary:
+          type: string
+          description: Primary Timing Server IP Address
+          format: ipv4
+        secondary:
+          type: string
+          description: Secondary Timing Server IP Address
+          format: ipv4
+        networkMask:
+          type: string
+          description: Network Mask
+          format: ipv4
+        defaultGateway:
+          type: string
+          description: Gateway Interface IP address
+          format: ipv4
+      description: EPT service network information
+      example:
+        primary: 10.0.0.1
+        secondary: 10.0.0.2
+        networkMask: 255.255.255.240
+        defaultGateway: 10.0.0.3
+    PaginationRequest:
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first element.
+          default: 0
+        limit:
+          minimum: 1
+          type: integer
+          description: Number of elements to be requested per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+      description: Pagination request information
+    ServiceMetro:
+      type: object
+      properties:
+        code:
+          type: string
+          description: metro code
+        name:
+          type: string
+          description: metro name
+        vcBandwidthMax:
+          type: integer
+          description: max VC speed supported in Mbps
+        ibxs:
+          type: array
+          items:
+            type: string
+            description: ibx codes
+        inTrail:
+          type: boolean
+        displayName:
+          type: string
+          description: service metro display name
+        sellerRegions:
+          type: object
+          additionalProperties:
+            type: string
+    NetworkChangeType:
+      type: string
+      description: Type of change
+      enum:
+      - NETWORK_CREATION
+      - NETWORK_UPDATE
+      - NETWORK_DELETION
+    PortType:
+      type: string
+      description: Type of Port
+      enum:
+      - XF_PORT
+    ServiceProfileMetadata:
+      type: object
+      properties:
+        props:
+          type: string
+        regEx:
+          type: string
+        regExMsg:
+          type: string
+        vlanRangeMaxValue:
+          type: integer
+        vlanRangeMinValue:
+          type: integer
+        maxQinq:
+          type: string
+        maxDot1q:
+          type: integer
+        variableBilling:
+          type: boolean
+        globalOrganization:
+          type: string
+        limitAuthKeyConn:
+          type: boolean
+        allowSecondaryLocation:
+          type: boolean
+        redundantProfileId:
+          type: string
+        allowVcMigration:
+          type: boolean
+        connectionEditable:
+          type: boolean
+        releaseVlan:
+          type: boolean
+        maxConnectionsOnPort:
+          type: integer
+        portAssignmentStrategy:
+          type: string
+        eqxManagedPort:
+          type: boolean
+        connectionNameEditable:
+          type: boolean
+      description: Metadata. Response attribute. Ignored on request payload.
+    ServiceProfileVisibilityEnum:
+      type: string
+      enum:
+      - PRIVATE
+      - PUBLIC
+    PortEncapsulation:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Port encapsulation protocol type
+          enum:
+          - 'NULL'
+          - DOT1Q
+          - QINQ
+          - UNTAGGED
+        tagProtocolId:
+          type: string
+          description: Port encapsulation tag protocol identifier
+      description: Port encapsulation configuration
+    PortOperation:
+      type: object
+      properties:
+        operationalStatus:
+          type: string
+          description: Availability of a given physical port.
+          enum:
+          - UP
+          - DOWN
+          - PARTIAL
+        connectionCount:
+          type: integer
+          description: Total number of connections.
+          format: int64
+        evplVCCount:
+          type: integer
+          description: Total number of connections.
+          format: int64
+        fgVCCount:
+          type: integer
+          description: Total number of connections.
+          format: int64
+        accessVCCount:
+          type: integer
+          description: Total number of connections.
+          format: int64
+        opStatusChangedAt:
+          type: string
+          description: Date and time at which port availability changed.
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+      description: Operational specifications for ports.
+    Changelog:
+      type: object
+      properties:
+        createdBy:
+          type: string
+          description: Created by User Key
+          example: johnsmith
+        createdByFullName:
+          type: string
+          description: Created by User Full Name
+          example: John Smith
+        createdByEmail:
+          type: string
+          description: Created by User Email Address
+          example: john.smith@example.com
+        createdDateTime:
+          type: string
+          description: Created by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedBy:
+          type: string
+          description: Updated by User Key
+          example: johnsmith
+        updatedByFullName:
+          type: string
+          description: Updated by User Full Name
+          example: John Smith
+        updatedByEmail:
+          type: string
+          description: Updated by User Email Address
+          example: john.smith@example.com
+        updatedDateTime:
+          type: string
+          description: Updated by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        deletedBy:
+          type: string
+          description: Deleted by User Key
+          example: johnsmith
+        deletedByFullName:
+          type: string
+          description: Deleted by User Full Name
+          example: John Smith
+        deletedByEmail:
+          type: string
+          description: Deleted by User Email Address
+          example: john.smith@example.com
+        deletedDateTime:
+          type: string
+          description: Deleted by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+      description: Change log
+    PortSettings:
+      type: object
+      properties:
+        buyout:
+          type: boolean
+          deprecated: true
+        viewPortPermission:
+          type: boolean
+          deprecated: true
+        placeVcOrderPermission:
+          type: boolean
+          deprecated: true
+        layer3Enabled:
+          type: boolean
+          deprecated: true
+        sharedPortType:
+          type: boolean
+        sharedPortProduct:
+          type: string
+          enum:
+          - NETWORK_EDGE
+          - VIRTUAL_GATEWAY
+          - SMARTKEY
+          - EDGE_METAL
+        packageType:
+          type: string
+          description: Type of Port Package
+          deprecated: true
+          enum:
+          - STANDARD
+          - UNLIMITED
+          - UNLIMITED_PLUS
+      description: Port configuration settings
+    ServiceProfileAccessPointVD:
+      required:
+      - type
+      - uuid
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - VD
+        uuid:
+          type: string
+          format: uuid
+          example: 94662143-e21b-4098-bfcf-e9416f47eae1
+        location:
+          $ref: '#/components/schemas/SimplifiedLocation'
+        interfaceUuid:
+          type: string
+          format: uuid
+          example: 94662143-e21b-4098-bfcf-e9416f47eae1
+      description: Virtual Device Point
+    marketplaceSubscription:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Marketplace Subscription URI
+          format: uri
+          readOnly: true
+          example: https://api.equinix.com/fabric/v4/marketplaceSubscriptions/20d32a80-0d61-4333-bc03-707b591ae2f5
+        type:
+          type: string
+          description: Marketplace Subscription type
+          example: AWS_MARKETPLACE_SUBSCRIPTION
+          enum:
+          - AWS_MARKETPLACE_SUBSCRIPTION
+          - GCP_MARKETPLACE_SUBSCRIPTION
+          - AZURE_MARKETPLACE_SUBSCRIPTION
+        uuid:
+          type: string
+          description: Equinix-assigned Marketplace Subscription identifier
+          example: 20d32a80-0d61-4333-bc03-707b591ae2f5
+      description: Equinix Fabric Entity for Marketplace Subscription
+    precisionTimePackageRequest:
+      title: precisionTimePackageRequest
+      required:
+      - code
+      type: object
+      properties:
+        code:
+          type: string
+          description: Precision Time Service Level
+          enum:
+          - NTP_STANDARD
+          - NTP_ENTERPRISE
+          - PTP_STANDARD
+          - PTP_ENTERPRISE
+      description: Precision Time Service Level Request
+      example:
+        code: NTP_STANDARD
+    PortTether:
+      type: object
+      properties:
+        crossConnectId:
+          type: string
+          description: Port cross connect identifier
+        cabinetNumber:
+          type: string
+          description: Port cabinet number
+        systemName:
+          type: string
+          description: Port system name
+        patchPanel:
+          type: string
+          description: Port patch panel
+        patchPanelPortA:
+          type: string
+          description: Port patch panel port A
+        patchPanelPortB:
+          type: string
+          description: Port patch panel port B
+        ibx:
+          type: string
+          description: z-side/Equinix IBX
+      description: Port physical connection
+    PriceCharge:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Price charge type
+          enum:
+          - MONTHLY_RECURRING
+          - NON_RECURRING
+        price:
+          minimum: 0
+          type: number
+          description: Offering price
+          format: double
+      description: Price  Charge
+    PhysicalPort:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Equinix assigned response attribute for an absolute URL that is the subject of the link's context.
+          format: uri
+          readOnly: true
+        type:
+          $ref: '#/components/schemas/PhysicalPortType'
+        id:
+          type: integer
+          description: Equinix assigned response attribute for Physical Port Id
+          deprecated: true
+        state:
+          $ref: '#/components/schemas/PortState'
+        account:
+          $ref: '#/components/schemas/SimplifiedAccount'
+        interfaceSpeed:
+          minimum: 0
+          type: integer
+          description: Physical Port Speed in Mbps
+        interfaceType:
+          type: string
+          description: Physical Port Interface Type
+        uuid:
+          type: string
+          description: Equinix assigned response attribute for physical port identifier
+          format: uuid
+        tether:
+          $ref: '#/components/schemas/PortTether'
+        demarcationPoint:
+          $ref: '#/components/schemas/PortDemarcationPoint'
+        settings:
+          $ref: '#/components/schemas/PhysicalPortSettings'
+        interface:
+          $ref: '#/components/schemas/PortInterface'
+        notifications:
+          type: array
+          description: Notification preferences
+          items:
+            $ref: '#/components/schemas/PortNotification'
+        additionalInfo:
+          type: array
+          description: Physical Port additional information
+          items:
+            $ref: '#/components/schemas/PortAdditionalInfo'
+        order:
+          $ref: '#/components/schemas/PortOrder'
+        operation:
+          $ref: '#/components/schemas/PortOperation'
+        loas:
+          type: array
+          description: Port Loas
+          items:
+            $ref: '#/components/schemas/PortLoa'
+      description: Physical Port specification
+    precisionTimePackagePostResponse:
+      title: precisionTimePackagePostResponse
+      required:
+      - code
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri
+        code:
+          type: string
+          enum:
+          - NTP_STANDARD
+          - NTP_ENTERPRISE
+          - PTP_STANDARD
+          - PTP_ENTERPRISE
+      example:
+        href: https://api.equinix.com/fabric/v4/timeServicePackage/NTP_STANDARD
+        code: NTP_STANDARD
+    virtualConnectionUuid:
+      title: fabricConnectionUuid
+      required:
+      - uuid
+      type: object
+      properties:
+        href:
+          type: string
+          description: Connection URI
+          format: uri
+          readOnly: true
+        type:
+          type: string
+          description: Connection Type
+        uuid:
+          type: string
+          description: Connection UUID.
+          format: uuid
+      description: UUID of the Fabric Connection Instance
+      example:
+        uuid: 095be615-a8ad-4c33-8e9c-c7612fbf6c9f
+    PortAdditionalInfo:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Key
+        value:
+          type: string
+          description: Value
+      description: Additional information
+    CloudRouter:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Cloud Routers URI
+          format: uri
+          readOnly: true
+          example: https://api.equinix.com/fabric/v4/routers/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        uuid:
+          type: string
+          description: Equinix-assigned access point identifier
+          format: uuid
+          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        name:
+          type: string
+          description: Customer-provided Cloud Router name
+          format: string
+          example: test-fg-1
+        state:
+          $ref: '#/components/schemas/CloudRouterAccessPointState'
+        equinixAsn:
+          type: integer
+          description: Equinix ASN
+          format: int64
+          example: 30000
+        connectionsCount:
+          minimum: 0
+          type: integer
+          description: Number of connections associated with this Access point
+        marketplaceSubscription:
+          $ref: '#/components/schemas/marketplaceSubscription'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+        change:
+          $ref: '#/components/schemas/CloudRouterChange'
+      description: Fabric Cloud Router object
+      allOf:
+      - $ref: '#/components/schemas/CloudRouterPostRequestBase'
+    ntpAdvanceConfiguration:
+      type: array
+      description: NTP Advanced configuration - MD5 Authentication.
+      items:
+        $ref: '#/components/schemas/md5'
+    Tags:
+      type: array
+      items:
+        type: string
+    ServiceSearchResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/precisionTimeServiceResponse'
+    ServiceProfileAccessPointTypeEnum:
+      type: string
+      description: Access point type
+      enum:
+      - VD
+      - COLO
+    SimplifiedNotification:
+      required:
+      - emails
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          description: Notification Type
+          example: BANDWIDTH_ALERT
+          enum:
+          - NOTIFICATION
+          - BANDWIDTH_ALERT
+          - CONNECTION_APPROVAL
+          - PROFILE_LIFECYCLE
+          - ALL
+          - SALES_REP_NOTIFICATIONS
+          - TECHNICAL
+          - ORDERING
+        sendInterval:
+          type: string
+        emails:
+          type: array
+          description: Array of contact emails
+          items:
+            type: string
+            format: email
+        registeredUsers:
+          type: array
+          description: Array of registered users
+          items:
+            type: string
+    md5:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - ASCII
+          - HEX
+        keyNumber:
+          maximum: 65535
+          minimum: 1
+          type: integer
+          description: The authentication Key ID.
+          example: 10
+        key:
+          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+          type: string
+          description: The plaintext authentication key. Must be Base64 encoded. For ASCII type, the key must contain printable ASCII characters, range 10-20 characters. For HEX type, range should be 10-40 characters.
+          format: byte
+    SimplifiedLocation:
+      type: object
+      properties:
+        metroHref:
+          type: string
+          example: https://api.equinix.com/fabric/v4/metros/AM
+        region:
+          type: string
+          example: AMER, APAC, EMEA
+        metroName:
+          type: string
+          example: Amsterdam
+        metroCode:
+          type: string
+          example: AM
+        ibx:
+          type: string
+          example: AM1
+          deprecated: true
+    PhysicalPortSettings:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        packageType:
+          type: string
+          deprecated: true
+      description: Physical Port configuration settings
+    Bandwidth:
+      type: integer
+      description: speed in Mbps
+      example: 50
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Resource URI
+          format: uri
+          readOnly: true
+        rel:
+          type: string
+          description: OperationId from Swagger hub spec
+        method:
+          type: string
+          description: Http method type
+        contentType:
+          type: string
+          description: Content type for the response
+        authenticate:
+          type: boolean
+          description: Authentication required or not
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    NetworkScope:
+      type: string
+      description: Network scope
+      enum:
+      - REGIONAL
+      - GLOBAL
+      - LOCAL
+    virtualConnectionSide:
+      title: fabricConnectionAccessPoint
+      type: object
+      properties:
+        accessPoint:
+          $ref: '#/components/schemas/AccessPoint'
+      description: Fabric Connection access point object.
+    PortLoa:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: uuid
+        type:
+          type: string
+          description: Loa type
+          example: DIGITAL_LOA
+      description: Port Loas
+    PortDevice:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Device name
+          deprecated: true
+        redundancy:
+          $ref: '#/components/schemas/PortDeviceRedundancy'
+        vcBandwidthMax:
+          type: integer
+          description: Maximum bandwidth allowed for connection.
+          format: int64
+      description: Port device
+    CloudRouterChangeOperation:
+      required:
+      - op
+      - path
+      - value
+      type: object
+      properties:
+        op:
+          type: string
+          description: Handy shortcut for operation name
+          enum:
+          - replace
+          - add
+          - remove
+        path:
+          type: string
+          description: path inside document leading to updated parameter
+        value:
+          description: new value for updated parameter
+      description: Fabric Cloud Router change operation data
+    TimeServicesSearchRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/TimeServiceFilters'
+        pagination:
+          $ref: '#/components/schemas/PaginationRequest'
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeServiceSortCriteria'
+      description: Search requests containing criteria
+    NetworkOperation:
+      type: object
+      properties:
+        equinixStatus:
+          $ref: '#/components/schemas/NetworkEquinixStatus'
+      description: Network operational data
+    PortOrder:
+      type: object
+      properties:
+        purchaseOrder:
+          $ref: '#/components/schemas/PortOrderPurchaseOrder'
+        orderId:
+          type: string
+          description: Order Identification
+        customerReferenceId:
+          type: string
+          description: Customer order reference Id
+        orderNumber:
+          type: string
+          description: Order Reference Number
+        uuid:
+          type: string
+          description: Equinix-assigned order identifier, this is a derived response atrribute
+          format: uuid
+          deprecated: true
+        signature:
+          $ref: '#/components/schemas/PortOrderSignature'
+    precisionTimeServiceResponse:
+      title: precisionTimeServiceResponse
+      required:
+      - href
+      - package
+      - state
+      - type
+      - uuid
+      type: object
+      properties:
+        href:
+          type: string
+          description: Precision Time Service URI.
+          format: uri
+        type:
+          type: string
+          description: Precision Time Service type refers to the corresponding protocol.
+          enum:
+          - NTP
+          - PTP
+        name:
+          type: string
+          description: Precision Time Service Name.
+        uuid:
+          type: string
+          description: Precision Time Service UUID.
+          format: uuid
+        state:
+          type: string
+          description: Precision Time Service Status.
+          enum:
+          - CANCELLED
+          - CANCELLING
+          - CONFIGURING
+          - CONFIGURING_FAILED
+          - DRAFT
+          - DEPROVISIONING
+          - DEPROVISIONING_FAILED
+          - DEPROVISIONED
+          - PROVISIONED
+          - PROVISIONING
+          - PROVISIONING_FAILED
+          - REPROVISIONING
+          - REPROVISIONING_FAILED
+        operation:
+          $ref: '#/components/schemas/timeServiceOperation'
+        package:
+          $ref: '#/components/schemas/precisionTimePackagePostResponse'
+        connections:
+          maxItems: 2
+          minItems: 1
+          uniqueItems: true
+          type: array
+          description: Fabric Connections associated with Precision Time Service.
+          items:
+            $ref: '#/components/schemas/virtualConnectionTimeServiceResponse'
+        ipv4:
+          $ref: '#/components/schemas/ipv4'
+        ntpAdvancedConfiguration:
+          $ref: '#/components/schemas/ntpAdvanceConfiguration'
+        ptpAdvancedConfiguration:
+          $ref: '#/components/schemas/ptpAdvanceConfiguration'
+        project:
+          $ref: '#/components/schemas/Project'
+        account:
+          $ref: '#/components/schemas/SimplifiedAccount'
+        order:
+          $ref: '#/components/schemas/precisionTimeOrder'
+        pricing:
+          $ref: '#/components/schemas/precisionTimePrice'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+      description: Precision Time Service Response Schema.
+    SimplifiedNetwork:
+      required:
+      - uuid
+      type: object
+      properties:
+        href:
+          type: string
+          description: Network URI
+          format: uri
+          readOnly: true
+          example: https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784
+        uuid:
+          type: string
+          description: Equinix-assigned network identifier
+          format: uuid
+          example: 92dc376a-a932-43aa-a6a2-c806dedbd784
+        name:
+          type: string
+          description: Customer-assigned network name
+          example: My EVPLAN Network
+        state:
+          $ref: '#/components/schemas/NetworkState'
+        account:
+          $ref: '#/components/schemas/SimplifiedAccount'
+        change:
+          $ref: '#/components/schemas/SimplifiedNetworkChange'
+        operation:
+          $ref: '#/components/schemas/NetworkOperation'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+        links:
+          type: array
+          description: Network sub-resources links
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/Link'
+        type:
+          $ref: '#/components/schemas/NetworkType'
+        scope:
+          $ref: '#/components/schemas/NetworkScope'
+        location:
+          $ref: '#/components/schemas/SimplifiedLocation'
+      description: Network specification
+    ServiceProfileAccessPointCOLO:
+      required:
+      - type
+      - uuid
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - XF_PORT
+          - IX_PORT
+        uuid:
+          type: string
+          format: uuid
+          example: 94662143-e21b-4098-bfcf-e9416f47eae1
+        location:
+          $ref: '#/components/schemas/SimplifiedLocation'
+        sellerRegion:
+          type: string
+        sellerRegionDescription:
+          type: string
+        crossConnectId:
+          type: string
+      description: Colo Access Point
+    timeServiceOperation:
+      type: object
+      properties:
+        operationalStatus:
+          type: string
+          description: time service operational status
+          enum:
+          - UP
+          - DOWN
+          - DEGRADED
+      description: time service operational data
+    SimplifiedLinkProtocol:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/LinkProtocolType'
+        vlanTag:
+          maximum: 4092
+          minimum: 2
+          type: integer
+          description: vlanTag value specified for DOT1Q connections
+        vlanSTag:
+          maximum: 4092
+          minimum: 2
+          type: integer
+          description: vlanSTag value specified for QINQ connections
+        vlanCTag:
+          maximum: 4092
+          minimum: 2
+          type: integer
+          description: vlanCTag value specified for QINQ connections
+      description: Connection link protocol Configuration
+    VirtualNetwork:
+      type: object
+      properties:
+        href:
+          type: string
+          description: The Canonical URL at which the resource resides.
+          format: uri
+          readOnly: true
+        uuid:
+          type: string
+          description: Equinix-assigned Virtual Network identifier
+          format: uuid
+      description: Virtual Network Information
+    CloudRouterChange:
+      required:
+      - type
+      - updatedDateTime
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Uniquely identifies a change
+        type:
+          type: string
+          description: Type of change
+          enum:
+          - ROUTER_UPDATE
+        status:
+          type: string
+          description: Current outcome of the change flow
+          enum:
+          - COMPLETED
+          - FAILED
+          - REQUESTED
+        createdDateTime:
+          type: string
+          description: Set when change flow starts
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedDateTime:
+          type: string
+          description: Set when change object is updated
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        information:
+          type: string
+          description: Additional information
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CloudRouterChangeOperation'
+      description: Current state of latest CloudRouter change
+    ServiceProfileAccessPointType:
+      type: object
+      description: Access Point Type
+      oneOf:
+      - $ref: '#/components/schemas/ServiceProfileAccessPointTypeCOLO'
+      - $ref: '#/components/schemas/ServiceProfileAccessPointTypeVD'
+    TimeServiceSortCriteria:
+      type: object
+      properties:
+        direction:
+          $ref: '#/components/schemas/TimeServiceSortDirection'
+        property:
+          $ref: '#/components/schemas/TimeServiceSortBy'
+    TimeServiceFilter:
+      type: object
+      anyOf:
+      - $ref: '#/components/schemas/TimeServiceSimpleExpression'
+      - $ref: '#/components/schemas/TimeServiceOrFilter'
+    PortOrderSignatureDelegate:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: first name of delegate
+        lastName:
+          type: string
+          description: last Name of delegate
+        email:
+          type: string
+          description: email of delegate
+      description: order delegate details
+    CustomField:
+      required:
+      - dataType
+      - isRequired
+      - label
+      properties:
+        label:
+          type: string
+          example: Account Number
+        description:
+          type: string
+          example: Provide a valid account number
+        required:
+          type: boolean
+          example: true
+        dataType:
+          type: string
+          enum:
+          - STRING
+          - LIST
+          - NUMBER
+        options:
+          type: array
+          items:
+            type: string
+        captureInEmail:
+          type: boolean
+          description: capture this field as a part of email notification
+      description: Define Custom Attributes
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    ServiceId:
+      type: string
+      description: Precision Time Service UUID
+      format: uuid
+      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+    SimplifiedServiceProfile:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Service Profile URI response attribute
+          format: uri
+          readOnly: true
+        type:
+          $ref: '#/components/schemas/ServiceProfileTypeEnum'
+        name:
+          maxLength: 50
+          type: string
+          description: Customer-assigned service profile name
+          example: Sample Service Profile
+        uuid:
+          type: string
+          description: Equinix-assigned service profile identifier
+          format: uuid
+        description:
+          type: string
+          description: User-provided service description should be of maximum length 375
+          example: offering connectivity to my-network
+        notifications:
+          type: array
+          description: Recipients of notifications on service profile change
+          items:
+            $ref: '#/components/schemas/SimplifiedNotification'
+        tags:
+          $ref: '#/components/schemas/Tags'
+        visibility:
+          $ref: '#/components/schemas/ServiceProfileVisibilityEnum'
+        allowedEmails:
+          type: array
+          items:
+            type: string
+            format: email
+        accessPointTypeConfigs:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceProfileAccessPointType'
+        customFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomField'
+        marketingInfo:
+          $ref: '#/components/schemas/MarketingInfo'
+        ports:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceProfileAccessPointCOLO'
+        virtualDevices:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceProfileAccessPointVD'
+        metros:
+          type: array
+          description: Derived response attribute.
+          items:
+            $ref: '#/components/schemas/ServiceMetro'
+        selfProfile:
+          type: boolean
+          description: response attribute indicates whether the profile belongs to the same organization as the api-invoker.
+        projectId:
+          type: string
+      description: 'Service Profile is a software definition for a named provider service and it''s network connectivity requirements.
+
+        This includes the basic marketing information and one
+
+        or more sets of access points (a set per each access point type) fulfilling the provider service.
+
+        '
+    TimeServiceOrFilter:
+      type: object
+      properties:
+        or:
+          maxItems: 3
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeServiceSimpleExpression'
+    precisionTimePrice:
+      title: precisionTimePrice
+      type: object
+      properties:
+        currency:
+          type: string
+          description: offering price currency
+        charges:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceCharge'
+      description: Precision Time Price
+    precisionTimeServiceConnectionsResponse:
+      title: precisionTimeServiceConnectionResponse
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call
+          items:
+            $ref: '#/components/schemas/connectionLink'
+      description: EPT service instance's L2 connections
+    MarketingInfo:
+      type: object
+      properties:
+        logo:
+          type: string
+          description: Logo file name
+        promotion:
+          type: boolean
+          description: Profile promotion on marketplace
+        processSteps:
+          maxItems: 3
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessStep'
+    precisionTimeServiceRequest:
+      title: precisionTimeServiceRequest
+      required:
+      - connections
+      - ipv4
+      - name
+      - package
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          description: Precision Time Service Type refers to the corresponding Protocol.
+          enum:
+          - NTP
+          - PTP
+        name:
+          type: string
+          description: Precision Time Service name.
+        package:
+          $ref: '#/components/schemas/precisionTimePackageRequest'
+        connections:
+          type: array
+          items:
+            $ref: '#/components/schemas/virtualConnectionUuid'
+        ipv4:
+          $ref: '#/components/schemas/ipv4'
+        ntpAdvancedConfiguration:
+          $ref: '#/components/schemas/ntpAdvanceConfiguration'
+        ptpAdvancedConfiguration:
+          $ref: '#/components/schemas/ptpAdvanceConfiguration'
+        project:
+          $ref: '#/components/schemas/Project'
+        order:
+          $ref: '#/components/schemas/precisionTimeOrder'
+      description: Create Precision Time Service Request Schema.
+    ServiceProfileAccessPointTypeCOLO:
+      required:
+      - type
+      type: object
+      properties:
+        uuid:
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceProfileAccessPointTypeEnum'
+        supportedBandwidths:
+          $ref: '#/components/schemas/Bandwidths'
+        allowRemoteConnections:
+          type: boolean
+          description: Setting to allow or prohibit remote connections to the service profile.
+          example: true
+          default: false
+        allowCustomBandwidth:
+          type: boolean
+          description: Setting to enable or disable the ability of the buyer to customize the bandwidth.
+          example: true
+          default: false
+        bandwidthAlertThreshold:
+          type: number
+          description: percentage of port bandwidth at which an allocation alert is generated - missing on wiki.
+        allowBandwidthAutoApproval:
+          type: boolean
+          description: Setting to enable or disable the ability of the buyer to change connection bandwidth without approval of the seller.
+          default: false
+        allowBandwidthUpgrade:
+          type: boolean
+          description: Availability of a bandwidth upgrade. The default is false.
+        linkProtocolConfig:
+          $ref: '#/components/schemas/ServiceProfileLinkProtocolConfig'
+        enableAutoGenerateServiceKey:
+          type: boolean
+          description: for verizon only.
+        connectionRedundancyRequired:
+          type: boolean
+          description: Mandate redundant connections
+          example: true
+          default: false
+        selectiveRedundancy:
+          type: boolean
+          description: Optional redundant connections
+          example: true
+          default: false
+        apiConfig:
+          $ref: '#/components/schemas/ApiConfig'
+        connectionLabel:
+          type: string
+          description: custom name for "Connection"
+        authenticationKey:
+          $ref: '#/components/schemas/AuthenticationKey'
+        metadata:
+          $ref: '#/components/schemas/ServiceProfileMetadata'
+      description: Colo Access Point Type
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
+    MetalInterconnection:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Equinix Metal Interconnection
+          format: uuid
+      description: Metal Interconnection
+    TimeServiceSortDirection:
+      type: string
+      description: Sorting direction
+      default: DESC
+      enum:
+      - DESC
+      - ASC
+    TimeServiceSortBy:
+      type: string
+      description: Possible field names to use on sorting
+      default: /changeLog/updatedDateTime
+      enum:
+      - /name
+      - /uuid
+      - /state
+      - /type
+      - /package/code
+      - /changeLog/createdDateTime
+      - /changeLog/updatedDateTime
+    CloudRouterAccessPointState:
+      type: string
+      description: Access point lifecycle state
+      enum:
+      - PROVISIONED
+      - PROVISIONING
+      - DEPROVISIONING
+      - DEPROVISIONED
+      - REPROVISIONING
+      - NOT_PROVISIONED
+      - NOT_DEPROVISIONED
+    PortOrderSignature:
+      type: object
+      properties:
+        signatory:
+          type: string
+          description: Port signature Type
+          enum:
+          - DELEGATE
+          - SELF
+          - ACCOUNT_SUPPORT
+        delegate:
+          $ref: '#/components/schemas/PortOrderSignatureDelegate'
+      description: Port signature details
+    PortDeviceRedundancy:
+      type: object
+      properties:
+        group:
+          type: string
+          description: Device redundancy group
+        priority:
+          type: string
+          description: Device redundancy priority
+          enum:
+          - PRIMARY
+          - SECONDARY
+      description: Device redundancy
+    Order:
+      type: object
+      properties:
+        purchaseOrderNumber:
+          type: string
+          description: Purchase order number
+        customerReferenceNumber:
+          type: string
+          description: Customer reference number
+        billingTier:
+          type: string
+          description: Billing tier for connection bandwidth
+        orderId:
+          type: string
+          description: Order Identification
+        orderNumber:
+          type: string
+          description: Order Reference Number
+        termLength:
+          maximum: 36
+          minimum: 1
+          type: integer
+          description: Term length in months, valid values are 1, 12, 24, 36 where 1 is the default value (for on-demand case).
+          default: 1
+        contractedBandwidth:
+          type: integer
+          description: Contracted bandwidth
+    SimplifiedAccount:
+      type: object
+      properties:
+        accountNumber:
+          type: integer
+          description: Account number
+          format: int64
+        accountName:
+          type: string
+          description: Account name
+        orgId:
+          type: integer
+          description: Customer organization identifier
+          format: int64
+        organizationName:
+          type: string
+          description: Customer organization name
+        globalOrgId:
+          type: string
+          description: Global organization identifier
+        globalOrganizationName:
+          type: string
+          description: Global organization name
+        ucmId:
+          type: string
+          description: Account ucmId
+        globalCustId:
+          type: string
+          description: Account name
+        resellerAccountNumber:
+          type: integer
+          description: Reseller account number
+          format: int64
+        resellerAccountName:
+          type: string
+          description: Reseller account name
+        resellerUcmId:
+          type: string
+          description: Reseller account ucmId
+        resellerOrgId:
+          type: integer
+          description: Reseller customer organization identifier
+          format: int64
+    Project:
+      required:
+      - projectId
+      type: object
+      properties:
+        projectId:
+          type: string
+          description: Subscriber-assigned project ID
+          example: 44f4c4f8-2f39-494e-838c-d8e640591be5
+    PortNotification:
+      required:
+      - registeredUsers
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          description: Notification Type
+          enum:
+          - NOTIFICATION
+          - TECHNICAL
+          - PEERING
+          - ESCALATION
+        registeredUsers:
+          type: array
+          description: Array of registered users
+          items:
+            type: string
+    virtualConnectionTimeServiceResponse:
+      title: fabricConnectionResponse
+      type: object
+      properties:
+        href:
+          type: string
+          description: Connection URI
+          format: uri
+          readOnly: true
+        type:
+          type: string
+          description: Connection Type.
+        uuid:
+          type: string
+          description: Connection UUID.
+          format: uuid
+        aSide:
+          $ref: '#/components/schemas/virtualConnectionSide'
+        zSide:
+          $ref: '#/components/schemas/virtualConnectionSide'
+      description: Fabric Connection Precision Time Service Response Object
+    PortRedundancy:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Access point redundancy
+        group:
+          type: string
+          description: Port UUID of respective primary port
+          deprecated: true
+        priority:
+          $ref: '#/components/schemas/PortPriority'
+      description: Port redundancy configuration
+    SimplifiedLocationWithoutIBX:
+      required:
+      - metroCode
+      type: object
+      properties:
+        metroHref:
+          type: string
+          description: The Canonical URL at which the resource resides.
+          example: https://api.equinix.com/fabric/v4/metros/AM
+        region:
+          type: string
+          example: AMER, APAC, EMEA
+        metroName:
+          type: string
+          example: Amsterdam
+        metroCode:
+          type: string
+          example: AM
+    CloudRouterPostRequestBase:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - XF_ROUTER
+        name:
+          type: string
+          description: Customer-provided Cloud Router name
+        location:
+          $ref: '#/components/schemas/SimplifiedLocationWithoutIBX'
+        package:
+          $ref: '#/components/schemas/CloudRouterPostRequestPackage'
+        order:
+          $ref: '#/components/schemas/Order'
+        project:
+          $ref: '#/components/schemas/Project'
+        account:
+          $ref: '#/components/schemas/SimplifiedAccount'
+        notifications:
+          type: array
+          description: Preferences for notifications on connection configuration or status changes
+          items:
+            $ref: '#/components/schemas/SimplifiedNotification'
+        marketplaceSubscription:
+          $ref: '#/components/schemas/marketplaceSubscription'
+      description: Create Cloud Router
+    precisionTimePackageResponse:
+      title: precisionTimePackageRespose
+      required:
+      - bandwidth
+      - code
+      - type
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri
+        type:
+          type: string
+          enum:
+          - TIME_SERVICE_PACKAGE
+        code:
+          type: string
+          enum:
+          - NTP_STANDARD
+          - NTP_ENTERPRISE
+          - PTP_STANDARD
+          - PTP_ENTERPRISE
+        bandwidth:
+          type: integer
+          description: Connection bandwidth in Mbps.
+          example: 10
+        clientsPerSecondMax:
+          minimum: 0
+          type: integer
+          description: Max. number of clients that can be synchronized per second at a packet rate of 1 per second.
+          example: 100
+        redundancySupported:
+          type: boolean
+          description: Is Redundant virtual connection supported for the package code.
+          example: false
+        multiSubnetSupported:
+          type: boolean
+          description: Is Multiple subnet supported for the package code.
+          example: true
+        accuracySlaUnit:
+          type: string
+          description: Accuracy SLA unit.
+          example: microseconds
+        accuracySla:
+          type: integer
+          description: Accuracy SLA for the package code, -1 value denotes the accuracySla is not published.
+          example: 50
+        accuracySlaMin:
+          minimum: 1
+          type: integer
+          description: Typical minimum Accuracy for the package code.
+          example: 1
+        accuracySlaMax:
+          minimum: 1
+          type: integer
+          description: Typical maximum Accuracy for the package code.
+          example: 10
+        changelog:
+          $ref: '#/components/schemas/Changelog'
+      description: EPT Service Package Information
+      example:
+        href: https://api.equinix.com/fabric/v4/timeServicePackage/NTP_STANDARD
+        type: TIME_SERVICE_PACKAGE
+        code: NTP_STANDARD
+        bandwidth: 10
+        accuracySlaUnit: microseconds
+        accuracySla: 50
+        accuracySlaMin: 1
+        accuracySlaMax: 10
+        clientsPerSecondMax: 100
+        redundancySupported: true
+        multiSubnetSupported: true
+        changeLog:
+          createdDateTime: 2023-05-16 07:50:49.749000+00:00
+          updatedDateTime: 2023-05-17 07:50:49.749000+00:00
+    TimeServiceFilters:
+      type: object
+      properties:
+        and:
+          maxItems: 8
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeServiceFilter'
+    PortDemarcationPoint:
+      type: object
+      properties:
+        cabinetUniqueSpaceId:
+          type: string
+          description: Port cabinet unique space id
+        cageUniqueSpaceId:
+          type: string
+          description: Port cage unique space id
+        patchPanel:
+          type: string
+          description: Port patch panel
+        patchPanelName:
+          type: string
+          description: Port patch panel
+          deprecated: true
+        patchPanelPortA:
+          type: string
+          description: Port patch panel port A
+        patchPanelPortB:
+          type: string
+          description: Port patch panel port B
+        connectorType:
+          type: string
+          description: Port connector type
+        ibx:
+          type: string
+          description: Port ibx identifier
+      description: Customer physical Port
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    PortOrderPurchaseOrder:
+      type: object
+      properties:
+        number:
+          type: string
+          description: purchase order number
+        amount:
+          type: string
+          description: purchase order amount
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        attachmentId:
+          type: string
+          format: uuid
+        selectionType:
+          type: string
+          deprecated: true
+          enum:
+          - EXEMPTION
+          - EXISTING
+          - NEW
+          - BLANKET
+        type:
+          type: string
+          enum:
+          - EXEMPTION
+          - EXISTING
+          - NEW
+          - BLANKET
+      description: purchase order
+    SimplifiedPort:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Equinix assigned response attribute for an absolute URL that is the subject of the link's context.
+          format: uri
+          readOnly: true
+        type:
+          $ref: '#/components/schemas/PortType'
+        id:
+          type: integer
+          description: Equinix assigned response attribute for Port Id
+        uuid:
+          type: string
+          description: Equinix assigned response attribute for  port identifier
+          format: uuid
+        name:
+          type: string
+          description: Equinix assigned response attribute for Port name
+        description:
+          type: string
+          description: Equinix assigned response attribute for Port description
+        physicalPortsSpeed:
+          minimum: 0
+          type: integer
+          description: Physical Ports Speed in Mbps
+        connectionsCount:
+          minimum: 0
+          type: integer
+          description: Equinix assigned response attribute for Connection count
+        project:
+          $ref: '#/components/schemas/Project'
+        state:
+          $ref: '#/components/schemas/PortState'
+        operation:
+          $ref: '#/components/schemas/PortOperation'
+        account:
+          $ref: '#/components/schemas/SimplifiedAccount'
+        serviceType:
+          type: string
+          description: Port service Type
+          deprecated: true
+          enum:
+          - EPL
+          - MSP
+        serviceCode:
+          $ref: '#/components/schemas/PortServiceCode'
+        bandwidth:
+          minimum: 0
+          type: integer
+          description: Equinix assigned response attribute for Port bandwidth in Mbps
+          format: int64
+        availableBandwidth:
+          minimum: 0
+          type: integer
+          description: Equinix assigned response attribute for Port available bandwidth in Mbps
+          format: int64
+        usedBandwidth:
+          minimum: 0
+          type: integer
+          description: Equinix assigned response attribute for Port used bandwidth in Mbps
+          format: int64
+        location:
+          $ref: '#/components/schemas/SimplifiedLocation'
+        device:
+          $ref: '#/components/schemas/PortDevice'
+        interface:
+          $ref: '#/components/schemas/PortInterface'
+        tether:
+          $ref: '#/components/schemas/PortTether'
+        demarcationPoint:
+          $ref: '#/components/schemas/PortDemarcationPoint'
+        redundancy:
+          $ref: '#/components/schemas/PortRedundancy'
+        encapsulation:
+          $ref: '#/components/schemas/PortEncapsulation'
+        lagEnabled:
+          type: boolean
+          description: If LAG enabled
+        package:
+          $ref: '#/components/schemas/Package'
+        settings:
+          $ref: '#/components/schemas/PortSettings'
+        physicalPortQuantity:
+          type: integer
+          description: Number of physical ports
+        additionalInfo:
+          type: array
+          description: Port additional information
+          items:
+            $ref: '#/components/schemas/PortAdditionalInfo'
+        physicalPorts:
+          type: array
+          description: Physical ports that implement this port
+          items:
+            $ref: '#/components/schemas/PhysicalPort'
+      description: Port specification
+    Package:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Type of Port Package
+          enum:
+          - STANDARD
+          - UNLIMITED
+          - UNLIMITED_PLUS
+        type:
+          type: string
+          description: Port service Type
+          enum:
+          - EPL
+          - MSP
+      description: Package settings for port
+    AuthenticationKey:
+      type: object
+      properties:
+        required:
+          type: boolean
+          example: true
+          default: false
+        label:
+          type: string
+          example: Service Key
+        description:
+          type: string
+          example: description for the authentication key
+      description: Authentication Key Support and Customization
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

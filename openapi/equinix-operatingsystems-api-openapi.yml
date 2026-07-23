@@ -1,0 +1,161 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication OperatingSystems API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- description: 'Operating System Management. Check out the product docs to learn more about [Operating Systems choices](https://metal.equinix.com/developers/docs/operating-systems/).
+
+    '
+  externalDocs:
+    url: https://metal.equinix.com/developers/docs/operating-systems/supported/
+  name: OperatingSystems
+paths:
+  /operating-system-versions:
+    get:
+      description: Provides a listing of available operating system versions.
+      operationId: findOperatingSystemVersion
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperatingSystemList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+      summary: Retrieve all operating system versions
+      tags:
+      - OperatingSystems
+  /operating-systems:
+    get:
+      description: Provides a listing of available operating systems to provision your new device with.
+      operationId: findOperatingSystems
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperatingSystemList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+      summary: Retrieve all operating systems
+      tags:
+      - OperatingSystems
+components:
+  schemas:
+    Error:
+      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
+      properties:
+        error:
+          description: A description of the error that caused the request to fail.
+          type: string
+        errors:
+          description: A list of errors that contributed to the request failing.
+          items:
+            description: An error message that contributed to the request failing.
+            type: string
+          type: array
+      type: object
+    OperatingSystem:
+      example:
+        default_operating_system: true
+        distro: distro
+        preinstallable: true
+        licensed: true
+        name: name
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        provisionable_on:
+        - provisionable_on
+        - provisionable_on
+        version: version
+        pricing: '{}'
+        slug: slug
+        distro_label: distro_label
+      properties:
+        distro:
+          type: string
+        distro_label:
+          type: string
+        id:
+          format: uuid
+          type: string
+        licensed:
+          description: Licenced OS is priced according to pricing property
+          type: boolean
+        name:
+          type: string
+        preinstallable:
+          description: Servers can be already preinstalled with OS in order to shorten provision time.
+          type: boolean
+        pricing:
+          description: This object contains price per time unit and optional multiplier value if licence price depends on hardware plan or components (e.g. number of cores)
+          type: object
+        provisionable_on:
+          items:
+            type: string
+          type: array
+        slug:
+          type: string
+        version:
+          type: string
+        default_operating_system:
+          description: Default operating system for the distro.
+          readOnly: true
+          type: boolean
+      type: object
+    OperatingSystemList:
+      example:
+        operating_systems:
+        - default_operating_system: true
+          distro: distro
+          preinstallable: true
+          licensed: true
+          name: name
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          provisionable_on:
+          - provisionable_on
+          - provisionable_on
+          version: version
+          pricing: '{}'
+          slug: slug
+          distro_label: distro_label
+        - default_operating_system: true
+          distro: distro
+          preinstallable: true
+          licensed: true
+          name: name
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          provisionable_on:
+          - provisionable_on
+          - provisionable_on
+          version: version
+          pricing: '{}'
+          slug: slug
+          distro_label: distro_label
+      properties:
+        operating_systems:
+          items:
+            $ref: '#/components/schemas/OperatingSystem'
+          type: array
+      type: object
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

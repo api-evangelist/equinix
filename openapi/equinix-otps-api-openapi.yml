@@ -1,0 +1,176 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication OTPs API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- description: 'OTP Management. Check out the product docs to learn more about [OTP](https://metal.equinix.com/developers/docs/accounts/two-factor-authentication/).
+
+    '
+  externalDocs:
+    url: https://metal.equinix.com/developers/docs/accounts/two-factor-authentication/
+  name: OTPs
+paths:
+  /user/otp/recovery-codes:
+    get:
+      description: Returns my recovery codes.
+      operationId: findRecoveryCodes
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecoveryCodeList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Retrieve my recovery codes
+      tags:
+      - OTPs
+    post:
+      description: Generate a new set of recovery codes.
+      operationId: regenerateCodes
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecoveryCodeList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Generate new recovery codes
+      tags:
+      - OTPs
+  /user/otp/sms/receive:
+    post:
+      description: Sends an OTP to the user's mobile phone.
+      operationId: receiveCodes
+      responses:
+        '204':
+          description: no content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: internal server error
+      summary: Receive an OTP per sms
+      tags:
+      - OTPs
+  /user/otp/verify/{otp}:
+    post:
+      description: It verifies the user once a valid OTP is provided. It gives back a session token, essentially logging in the user.
+      operationId: findEnsureOtp
+      parameters:
+      - description: OTP
+        in: path
+        name: otp
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: no content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+      summary: Verify user by providing an OTP
+      tags:
+      - OTPs
+components:
+  schemas:
+    RecoveryCodeList:
+      example:
+        recovery_codes:
+        - recovery_codes
+        - recovery_codes
+      properties:
+        recovery_codes:
+          items:
+            type: string
+          type: array
+      type: object
+    Error:
+      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
+      properties:
+        error:
+          description: A description of the error that caused the request to fail.
+          type: string
+        errors:
+          description: A list of errors that contributed to the request failing.
+          items:
+            description: An error message that contributed to the request failing.
+            type: string
+          type: array
+      type: object
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

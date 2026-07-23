@@ -1,0 +1,2005 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication Route Filter Rules API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- name: Route Filter Rules
+  description: Route Filter Rules
+paths:
+  /fabric/v4/routeFilters/{routeFilterId}/routeFilterRules:
+    get:
+      tags:
+      - Route Filter Rules
+      summary: Get Route Filter Rules
+      description: This API provides capability to get all Route Filters Rules for Fabric
+      operationId: getRouteFilterRules
+      parameters:
+      - name: routeFilterId
+        in: path
+        description: Route Filters Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RouteFilterId'
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          type: integer
+        example: 1
+      - name: limit
+        in: query
+        description: number of records to fetch
+        required: false
+        schema:
+          type: integer
+        example: 10
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRouteFilterRulesResponse'
+              examples:
+                getAllRouteFilterRules:
+                  $ref: '#/components/examples/RouteFilterRulesGetAll'
+        '400':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404_invalid_id'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Route Filter Rule ID Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+    post:
+      tags:
+      - Route Filter Rules
+      summary: Create Route Filter Rule
+      description: This API provides capability to create a Route Filter Rule
+      operationId: createRouteFilterRule
+      parameters:
+      - name: routeFilterId
+        in: path
+        description: Route Filters Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RouteFilterId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouteFilterRulesBase'
+            examples:
+              RouteFilterRuleBgpIpv4Prefix:
+                $ref: '#/components/examples/RouteFilterRuleCreateBgpIpv4Prefix'
+              RouteFilterRuleBgpIpv6Prefix:
+                $ref: '#/components/examples/RouteFilterRuleCreateBgpIpv6Prefix'
+        required: true
+      responses:
+        '202':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteFilterRulesData'
+              examples:
+                GetSpecificRouteFilterRuleIpv4Response:
+                  $ref: '#/components/examples/RouteFilterRuleCreateBgpIpv4PrefixResponse'
+                GetSpecificRouteFilterRuleIpv6Response:
+                  $ref: '#/components/examples/RouteFilterRuleCreateBgpIpv6PrefixResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                InvalidType:
+                  $ref: '#/components/examples/400_bad_request'
+                InvalidId:
+                  $ref: '#/components/examples/404_invalid_id'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Route Filter Rule ID Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+  /fabric/v4/routeFilters/{routeFilterId}/routeFilterRules/{routeFilterRuleId}:
+    get:
+      tags:
+      - Route Filter Rules
+      summary: Get Route Filter Rule By UUID
+      description: This API provides capability to view a Route Filter Rule by UUID
+      operationId: getRouteFilterRuleByUuid
+      parameters:
+      - name: routeFilterId
+        in: path
+        description: Route Filters Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RouteFilterId'
+      - name: routeFilterRuleId
+        in: path
+        description: Route  Filter  Rules Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RouteFilterRuleId'
+      responses:
+        '202':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteFilterRulesData'
+              examples:
+                GetSpecificRouteFilterRuleIpv4Response:
+                  $ref: '#/components/examples/RouteFilterRuleCreateBgpIpv4PrefixResponse'
+                GetSpecificRouteFilterRuleIpv6Response:
+                  $ref: '#/components/examples/RouteFilterRuleCreateBgpIpv6PrefixResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                InvalidType:
+                  $ref: '#/components/examples/400_bad_request'
+                InvalidId:
+                  $ref: '#/components/examples/404_invalid_id'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Route Filter ID Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404_invalid_id'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+    put:
+      tags:
+      - Route Filter Rules
+      summary: Replace Route Filter Rule
+      description: This API provides capability to replace a Route Filter Rule completely
+      operationId: replaceRouteFilterRuleByUuid
+      parameters:
+      - name: routeFilterId
+        in: path
+        description: Route Filters Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RouteFilterId'
+      - name: routeFilterRuleId
+        in: path
+        description: Route  Filter  Rules Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RouteFilterRuleId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouteFilterRulesBase'
+            examples:
+              RouteFilterIpv4ReplaceExample:
+                $ref: '#/components/examples/UpdateRouteFilterRuleIPv4'
+              RouteFilterIpv6ReplaceExample:
+                $ref: '#/components/examples/UpdateRouteFilterRuleIPv6'
+        required: true
+      responses:
+        '202':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteFilterRulesData'
+              examples:
+                RouteFilterRuleIpv4ReplaceResponse:
+                  $ref: '#/components/examples/RouteFilterRuleReplaceIpv4Response'
+                routeFilterRuleIpv6ReplaceResponse:
+                  $ref: '#/components/examples/RouteFilterRuleReplaceIpv6Response'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                InvalidType:
+                  $ref: '#/components/examples/400_bad_request'
+                InvalidId:
+                  $ref: '#/components/examples/404_invalid_id'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Route Filter ID Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404_invalid_id'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+    delete:
+      tags:
+      - Route Filter Rules
+      summary: Delete Route Filter Rule
+      description: This API provides capability to delete a Route Filter Rule
+      operationId: deleteRouteFilterRuleByUuid
+      parameters:
+      - name: routeFilterId
+        in: path
+        description: Route Filters Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RouteFilterId'
+      - name: routeFilterRuleId
+        in: path
+        description: Route  Filter  Rules Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RouteFilterRuleId'
+      responses:
+        '202':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteFilterRulesData'
+              examples:
+                RouteFilterDeleteBgpIpv4PrefixResponse:
+                  $ref: '#/components/examples/RouteFilterRuleDeleteBgpIpv4PrefixResponse'
+                routeFilterDeleteBgpIpv6PrefixResponse:
+                  $ref: '#/components/examples/RouteFilterRuleDeleteBgpIpv6PrefixResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400_transient_filter'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Route Filter ID Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404_invalid_id'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+    patch:
+      tags:
+      - Route Filter Rules
+      summary: Patch Route Filter Rule
+      description: This API provides capability to partially update a Route Filter Rule
+      operationId: patchRouteFilterRuleByUuid
+      parameters:
+      - name: routeFilterId
+        in: path
+        description: Route Filters Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RouteFilterId'
+      - name: routeFilterRuleId
+        in: path
+        description: Route  Filter  Rules Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RouteFilterRuleId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouteFilterRulesPatchRequest'
+            examples:
+              RouteFilterRuleName:
+                $ref: '#/components/examples/PatchRouteFilterRuleName'
+              RouteFilterRulePrefix:
+                $ref: '#/components/examples/PatchRouteFilterRulePrefix'
+              RouteFilterRulePrefixMatch:
+                $ref: '#/components/examples/PatchRouteFilterRulePrefixMatch'
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/RouteFilterRulesPatchRequest'
+            examples:
+              RouteFilterRuleName:
+                $ref: '#/components/examples/PatchRouteFilterRuleName'
+              RouteFilterRulePrefix:
+                $ref: '#/components/examples/PatchRouteFilterRulePrefix'
+              RouteFilterRulePrefixMatch:
+                $ref: '#/components/examples/PatchRouteFilterRulePrefixMatch'
+        required: true
+      responses:
+        '202':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteFilterRulesData'
+              examples:
+                RouteFilterRuleIpv4ReplaceResponse:
+                  $ref: '#/components/examples/RouteFilterRuleReplaceIpv4Response'
+                routeFilterRuleIpv6ReplaceResponse:
+                  $ref: '#/components/examples/RouteFilterRuleReplaceIpv6Response'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                InvalidType:
+                  $ref: '#/components/examples/400_bad_request'
+                InvalidId:
+                  $ref: '#/components/examples/404_invalid_id'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Route Filter ID Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404_invalid_id'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+  /fabric/v4/routeFilters/{routeFilterId}/routeFilterRules/{routeFilterRuleId}/changes:
+    get:
+      tags:
+      - Route Filter Rules
+      summary: Get All Changes
+      description: This API provides capability to retrieve all of a Route Filter Rule's Changes
+      operationId: getRouteFilterRuleChanges
+      parameters:
+      - name: routeFilterId
+        in: path
+        description: Route Filters Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RouteFilterId'
+      - name: routeFilterRuleId
+        in: path
+        description: Route  Filter  Rules Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RouteFilterRuleId'
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          type: integer
+        example: 1
+      - name: limit
+        in: query
+        description: number of records to fetch
+        required: false
+        schema:
+          type: integer
+        example: 10
+      responses:
+        '200':
+          description: Fabric Route Filter Rule Change object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteFilterRulesChangeDataResponse'
+              examples:
+                RouteFilterRuleChangesResponse:
+                  $ref: '#/components/examples/RouteFilterRulesGetAllChangesResponseExample'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                InvalidInput:
+                  $ref: '#/components/examples/400_invalid_input'
+                InvalidId:
+                  $ref: '#/components/examples/400_Invalid_id'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Route Filter ID Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404_invalid_id'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+  /fabric/v4/routeFilters/{routeFilterId}/routeFilterRules/{routeFilterRuleId}/changes/{changeId}:
+    get:
+      tags:
+      - Route Filter Rules
+      summary: Get Change By ID
+      description: This API provides capability to retrieve a specific Route Filter Rule's Changes
+      operationId: getRouteFilterRuleChangeByUuid
+      parameters:
+      - name: routeFilterId
+        in: path
+        description: Route Filters Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RouteFilterId'
+      - name: routeFilterRuleId
+        in: path
+        description: Route  Filter  Rules Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RouteFilterRuleId'
+      - name: changeId
+        in: path
+        description: Route Filter Rule Change UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChangeId_2'
+      responses:
+        '200':
+          description: Fabric Route Filter Change object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteFilterRulesChangeData'
+              examples:
+                RouteFilterChangeResponse:
+                  $ref: '#/components/examples/RouteFilterRuleGetChangeResponseExample'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                InvalidInput:
+                  $ref: '#/components/examples/400_invalid_input'
+                InvalidId:
+                  $ref: '#/components/examples/400_Invalid_id'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Route Filter ID Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404_invalid_id'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+  /fabric/v4/routeFilters/{routeFilterId}/routeFilterRules/bulk:
+    post:
+      tags:
+      - Route Filter Rules
+      summary: Bulk Create Route Filter Rules
+      description: This API provides capability to create bulk route filter rules
+      operationId: createRouteFilterRulesInBulk
+      parameters:
+      - name: routeFilterId
+        in: path
+        description: Route Filters Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RouteFilterId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouteFilterRulesPostRequest'
+        required: true
+      responses:
+        '202':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRouteFilterRulesResponse'
+              examples:
+                getAllRouteFilterRules:
+                  $ref: '#/components/examples/RouteFilterRulesBulkResponse'
+        '400':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404_invalid_id'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+  /fabric/v4/routeFilters/{routeFilterId}/routeFilterRules/search:
+    post:
+      tags:
+      - Route Filter Rules
+      summary: Search Route Filter Rules
+      description: This API provides capability to search Route Filter Rules
+      operationId: searchRouteFilterRules
+      parameters:
+      - name: routeFilterId
+        in: path
+        description: Route Filters Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RouteFilterId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouteFilterRulesSearchRequest'
+            examples:
+              SearchRouteFilterRulesAndRequest:
+                $ref: '#/components/examples/SearchRouteFilterRulesAndRequest'
+              SearchRouteFilterRulesOrRequest:
+                $ref: '#/components/examples/SearchRouteFilterRulesOrRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteFilterRulesSearchResponse'
+              examples:
+                SearchRouteFilterRulesResponse:
+                  $ref: '#/components/examples/SearchRouteFilterRulesResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Route Filter Rule ID Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+components:
+  examples:
+    PatchRouteFilterRulePrefixMatch:
+      value:
+      - op: replace
+        path: /prefixMatch
+        value: orlonger
+    SearchRouteFilterRulesResponse:
+      value:
+        pagination:
+          offset: 1
+          limit: 2
+          total: 10
+          next: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/search?offset=3&limit=2
+          previous: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/search?offset=0&limit=2
+        data:
+        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/65b025ef-022b-4180-85cf-82cfc1ab655b
+          type: BGP_IPv4_PREFIX_FILTER_RULE
+          uuid: 65b025ef-022b-4180-85cf-82cfc1ab655b
+          name: Route_Filter_Rule_Demo1
+          description: Test rule1
+          prefixMatch: exact
+          action: PERMIT
+          prefix: 192.168.10.0/24
+          state: PROVISIONED
+          changeLog:
+            createdBy: testuser
+            createdByEmail: testuser@equinix.com
+            createdByFullName: testuser testuser
+            createdDateTime: 2020-05-21 10:30:00+00:00
+        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/ea48337b-fe04-4164-a3f0-48d81abf575b
+          type: BGP_IPv4_PREFIX_FILTER_RULE
+          uuid: ea48337b-fe04-4164-a3f0-48d81abf575b
+          name: Route_Filter_Rule_Demo2
+          description: Test rule2
+          prefixMatch: orlonger
+          action: PERMIT
+          prefix: 192.168.20.0/24
+          state: PROVISIONED
+          changeLog:
+            createdBy: testuser
+            createdByEmail: testuser@equinix.com
+            createdByFullName: testuser testuser
+            createdDateTime: 2020-05-21 10:30:00+00:00
+    400_transient_filter:
+      value:
+      - errorCode: EQ-3044215
+        errorMessage: Cannot delete route filter rule in transient state
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Cannot delete route filter rule in transient state
+    404_invalid_id:
+      value:
+      - errorCode: EQ-3041120
+        errorMessage: The connection ID was not found or was already deleted.
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+    400_Invalid_id:
+      value:
+      - errorCode: EQ-3142519
+        errorMessage: Connection does not exist or do not belong to user,Please check connection Id
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+    '415':
+      value:
+      - errorCode: EQ-3040016
+        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: contentType
+          reason: The payload format is in an unsupported format
+    RouteFilterRuleGetChangeResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/ff9653dc-88c5-47b5-b552-8a08d2f73f7e
+        type: BGP_IPv4_PREFIX_FILTER_RULE_CREATION
+        uuid: ff9653dc-88c5-47b5-b552-8a08d2f73f7e
+        status: COMPLETED
+        createdBy: testuser
+        createdByEmail: testuser@equinix.com
+        createdByFullName: testuser testuser
+        createdDateTime: 2020-05-21 10:30:00+00:00
+        updatedBy: _system
+        updatedByEmail: null
+        updatedByFullName: null
+        updatedDateTime: 2020-05-21 10:30:00+00:00
+        data:
+          type: BGP_IPv4_PREFIX_FILTER_RULE
+          name: Private-subnet-filter
+          description: Test rule
+          prefix: 192.168.0.0/25
+          prefixMatch: exact
+          action: PERMIT
+    400_bad_request:
+      value:
+      - errorCode: EQ-3044013
+        errorMessage: Invalid argument value passed
+        property: prefixMatch
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+    RouteFilterRuleCreateBgpIpv6PrefixResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403
+        type: BGP_IPv6_PREFIX_FILTER_RULE
+        uuid: 9890d520-1579-4489-8003-154b34b8f403
+        name: Private-subnet-filter
+        description: Test rule
+        state: PROVISIONING
+        change:
+          href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/ff9653dc-88c5-47b5-b552-8a08d2f73f7e
+          type: BGP_IPv6_PREFIX_FILTER_RULE_CREATION
+          uuid: ff9653dc-88c5-47b5-b552-8a08d2f73f7e
+        action: PERMIT
+        prefix: 2001:7a9::34f4:0:f3dd:1/126
+        prefixMatch: exact
+        changeLog:
+          createdBy: testuser
+          createdByEmail: testuser@equinix.com
+          createdByFullName: testuser testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: testuser
+          updatedByEmail: testuser@equinix.com
+          updatedByFullName: testuser testuser
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+    UpdateRouteFilterRuleIPv6:
+      value:
+        name: Private-subnet-filter-update
+        description: Test rule
+        prefix: 2001:7a9::34f4:0:f3dd:1/126
+        prefixMatch: exact
+    RouteFilterRuleCreateBgpIpv4PrefixResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403
+        type: BGP_IPv4_PREFIX_FILTER_RULE
+        uuid: 9890d520-1579-4489-8003-154b34b8f403
+        name: Private-subnet-filter
+        state: PROVISIONING
+        description: Test rule
+        change:
+          href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/ff9653dc-88c5-47b5-b552-8a08d2f73f7e
+          type: BGP_IPv4_PREFIX_FILTER_RULE_CREATION
+          uuid: ff9653dc-88c5-47b5-b552-8a08d2f73f7e
+        action: PERMIT
+        prefix: 192.168.0.0/24
+        prefixMatch: exact
+        changeLog:
+          createdBy: testuser
+          createdByEmail: testuser@equinix.com
+          createdByFullName: testuser testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: testuser
+          updatedByEmail: testuser@equinix.com
+          updatedByFullName: testuser testuser
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+    RouteFilterRuleDeleteBgpIpv4PrefixResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403
+        type: BGP_IPv4_PREFIX_FILTER_RULE
+        uuid: 9890d520-1579-4489-8003-154b34b8f403
+        name: Private-subnet-filter
+        description: Test rule
+        state: DEPROVISIONING
+        change:
+          href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/e8528788-14d3-4a7b-a740-99b702067485
+          type: BGP_IPv4_PREFIX_FILTER_RULE_DELETION
+          uuid: e8528788-14d3-4a7b-a740-99b702067485
+        action: PERMIT
+        prefix: 192.168.0.0/24
+        prefixMatch: exact
+        changeLog:
+          createdBy: testuser
+          createdByEmail: testuser@equinix.com
+          createdByFullName: testuser testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: testuser1
+          updatedByEmail: testuser@equinix.com
+          updatedByFullName: testuser testuser
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+          deletedBy: testuser1
+          deletedByEmail: testuser@equinix.com
+          deletedByFullName: testuser testuser
+          deletedDateTime: 2020-05-21 10:30:00+00:00
+    RouteFilterRulesGetAllChangesResponseExample:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 3
+          next: null
+          previous: null
+        data:
+        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/ff9653dc-88c5-47b5-b552-8a08d2f73f7e
+          type: BGP_IPv4_PREFIX_FILTER_RULE_CREATION
+          uuid: ff9653dc-88c5-47b5-b552-8a08d2f73f7e
+          status: COMPLETED
+          createdBy: testuser
+          createdByEmail: testuser@equinix.com
+          createdByFullName: testuser testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: _system
+          updatedByEmail: null
+          updatedByFullName: null
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+          data:
+            type: BGP_IPv4_PREFIX_FILTER_RULE
+            name: Private-subnet-filter
+            description: Test rule
+            prefix: 192.168.0.0/25
+            prefixMatch: exact
+            action: PERMIT
+        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/a40085a4-f0cc-416c-af01-286f7f7ec736
+          type: BGP_IPv4_PREFIX_FILTER_RULE_UPDATE
+          uuid: a40085a4-f0cc-416c-af01-286f7f7ec736
+          status: COMPLETED
+          createdBy: testuser
+          createdByEmail: testuser@equinix.com
+          createdByFullName: testuser testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: _system
+          updatedByEmail: null
+          updatedByFullName: null
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+          data:
+          - op: replace
+            path: /prefixMatch
+            value: orlonger
+            previousValue: exact
+        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/a25ca469-721a-4614-89a9-cdef287aa628
+          type: BGP_IPv4_PREFIX_FILTER_RULE_UPDATE
+          uuid: a25ca469-721a-4614-89a9-cdef287aa628
+          status: COMPLETED
+          createdBy: testuser
+          createdByEmail: testuser@equinix.com
+          createdByFullName: testuser testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: _system
+          updatedByEmail: null
+          updatedByFullName: null
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+          data:
+          - op: replace
+            path: /prefixMatch
+            value: exact
+            previousValue: orlonger
+    '403':
+      value:
+      - errorCode: EQ-3045003
+        errorMessage: Operation not allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Operation not allowed for current user
+    '401':
+      value:
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    RouteFilterRuleCreateBgpIpv4Prefix:
+      value:
+        name: Private-subnet-filter
+        description: Test rule
+        prefix: 192.168.0.0/24
+        prefixMatch: exact
+    '400':
+      value:
+      - errorCode: EQ-3142102
+        errorMessage: Connection has duplicate buyer-side VLAN ID for port or the same VLAN ID is in the process of being deleted and should be freed up soon
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: /aSide/accessPoint/linkProtocol
+      - errorCode: EQ-3142535
+        errorMessage: The connection bandwidth provided in the connection request exceeds the bandwidth Limit on ServiceToken
+        details: Please enter bandwidth less than the Speed limit on ServiceToken
+        correlationId: test
+        additionalInfo:
+        - property: /aSide/serviceToken/uuid
+      - errorCode: EQ-3142536
+        errorMessage: Remote connection cannot be created with the provided ServiceToken
+        details: Only local Connection can be created using this ServiceToken
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/port/uuid
+      - errorCode: EQ-3142701
+        errorMessage: The connection bandwidth provided in the connection request exceeds the bandwidth Limit on ServiceToken
+        details: not an authorized user
+        correlationId: test
+      - errorCode: EQ-3142501
+        errorMessage: Invalid input
+        correlationId: 20d32a80-0d61-4333-bc03-707b591ae2f5
+        additionalInfo:
+        - property: aSide/accessPoint/port/uuid
+      - errorCode: EQ-3142509
+        errorMessage: Connection already deleted
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: uuid
+      - errorCode: EQ-3142510
+        errorMessage: Connection is in transient state
+        correlationId: 20d32a80-0d61-4333-bc03-707b591ae2f5
+        additionalInfo:
+        - property: uuid
+      - errorCode: EQ-3142221
+        errorMessage: The primary and secondary token provided have different bandwidth tiers. Please use two tokens that support the same bandwidth tiers
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/serviceToken/uuid
+      - errorCode: EQ-3142222
+        errorMessage: The primary and secondary tokens have different encapsulation types (Dot1Q or QinQ). Please use two tokens that support the same encapsulation type
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/serviceToken/uuid
+      - errorCode: EQ-3142223
+        errorMessage: The primary and secondary tokens belong to different projects. Please use two tokens that belong to the same project
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/serviceToken/uuid
+      - errorCode: EQ-3142224
+        errorMessage: The primary and secondary ports have different port speeds (bandwidth). Please use two tokens that support the same port speed
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/serviceToken/uuid
+      - errorCode: EQ-3142225
+        errorMessage: The primary and secondary tokens provided are the same. Please provide a different token
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/serviceToken/uuid
+      - errorCode: EQ-3142514
+        errorMessage: Redundancy group is required
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/group
+      - errorCode: EQ-3142515
+        errorMessage: Redundancy priority is required
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/priority
+      - errorCode: EQ-3142516
+        errorMessage: Invalid redundancy group
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/group
+      - errorCode: EQ-3142517
+        errorMessage: Invalid redundancy priority
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/priority
+      - errorCode: EQ-3142303
+        errorMessage: Only Primary connection allowed for this CSP
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/priority
+      - errorCode: EQ-3142320
+        errorMessage: For redundant connection, Service Profile should be the same
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/profile/uuid
+      - errorCode: EQ-3142021
+        errorMessage: For redundant connection, Fabric Cloud Router should be the same
+        correlationId: test
+        additionalInfo:
+        - property: /aSide/accessPoint/router/uuid
+      - errorCode: EQ-3142012
+        errorMessage: Fabric Cloud Router is not in PROVISIONED state
+        correlationId: test
+        additionalInfo:
+        - property: /aSide/accessPoint/router/uuid
+      - errorCode: EQ-3142301
+        errorMessage: Given profile does not exist
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/profile/uuid
+      - errorCode: EQ-3142302
+        errorMessage: Service provider does not exist in required zSide metro
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/location/metroCode
+      - errorCode: EQ-3142013
+        errorMessage: Invalid metro for Cloud Router connection
+        correlationId: test
+        additionalInfo:
+        - property: /aSide/accessPoint/router/uuid
+      - errorCode: EQ-3142304
+        errorMessage: Private connections are not allowed on public profiles
+        correlationId: test
+        additionalInfo:
+        - property: visibility
+      - errorCode: EQ-3142306
+        errorMessage: Requested bandwidth is not supported by service profile
+        correlationId: test
+        additionalInfo:
+        - property: /bandwidth
+      - errorCode: EQ-3142308
+        errorMessage: Authentication key is required
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/authenticationKey
+    RouteFilterRuleDeleteBgpIpv6PrefixResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403
+        type: BGP_IPv6_PREFIX_FILTER_RULE
+        uuid: 9890d520-1579-4489-8003-154b34b8f403
+        name: Private-subnet-filter
+        description: Test rule
+        state: REPROVISIONING
+        change:
+          href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/e8528788-14d3-4a7b-a740-99b702067485
+          type: BGP_IPv6_PREFIX_FILTER_RULE_DELETION
+          uuid: e8528788-14d3-4a7b-a740-99b702067485
+        action: PERMIT
+        prefix: 2001:7a9::34f4:0:f3dd:1/126
+        prefixMatch: exact
+        changeLog:
+          createdBy: testuser
+          createdByEmail: testuser@equinix.com
+          createdByFullName: testuser testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: testuser1
+          updatedByEmail: testuser@equinix.com
+          updatedByFullName: testuser testuser
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+          deletedBy: testuser1
+          deletedByEmail: testuser@equinix.com
+          deletedByFullName: testuser testuser
+          deletedDateTime: 2020-05-21 10:30:00+00:00
+    RouteFilterRulesBulkResponse:
+      value:
+        pagination:
+          offset: 0
+          limit: 32
+          total: 2
+          next: null
+          previous: null
+        data:
+        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/65b025ef-022b-4180-85cf-82cfc1ab655b
+          type: BGP_IPv4_PREFIX_FILTER_RULE
+          uuid: 65b025ef-022b-4180-85cf-82cfc1ab655b
+          name: Private-subnet-filter-2
+          description: Test rule
+          prefixMatch: exact
+          action: PERMIT
+          prefix: 192.168.10.0/24
+          state: PROVISIONING
+          change:
+            href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/9397f111-19aa-489c-b3c7-349c86818f2d
+            type: IPv4_BGP_PREFIX_FILTER_RULE_CREATION
+            uuid: 9397f111-19aa-489c-b3c7-349c86818f2d
+          changeLog:
+            createdBy: testuser
+            createdByEmail: testuser@equinix.com
+            createdByFullName: testuser testuser
+            createdDateTime: 2020-05-21 10:30:00+00:00
+        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/ea48337b-fe04-4164-a3f0-48d81abf575b
+          type: BGP_IPv4_PREFIX_FILTER_RULE
+          uuid: ea48337b-fe04-4164-a3f0-48d81abf575b
+          name: Private-subnet-filter-2
+          description: Test rule
+          prefixMatch: orlonger
+          action: PERMIT
+          prefix: 192.168.20.0/24
+          state: PROVISIONING
+          change:
+            href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/9397f111-19aa-489c-b3c7-349c86818f2d
+            type: IPv4_BGP_PREFIX_FILTER_RULE_CREATION
+            uuid: 9397f111-19aa-489c-b3c7-349c86818f2d
+          changeLog:
+            createdBy: testuser
+            createdByEmail: testuser@equinix.com
+            createdByFullName: testuser testuser
+            createdDateTime: 2020-05-21 10:30:00+00:00
+    SearchRouteFilterRulesAndRequest:
+      value:
+        filter:
+          and:
+          - property: /type
+            operator: '='
+            values:
+            - BGP_IPv4_PREFIX_FILTER_RULE
+          - property: /state
+            operator: '='
+            values:
+            - PROVISIONED
+          - or:
+            - property: /name
+              operator: LIKE
+              values:
+              - '%Demo%'
+            - property: /name
+              operator: LIKE
+              values:
+              - '%Production%'
+          - or:
+            - property: /state
+              operator: '='
+              values:
+              - PROVISIONED
+            - and:
+              - property: /prefix
+                operator: '='
+                values:
+                - 192.168.2.0/24
+              - property: /prefixMatch
+                operator: '='
+                values:
+                - exact
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - property: /changeLog/updatedDateTime
+          direction: DESC
+    400_invalid_input:
+      value:
+      - errorCode: EQ-3044305
+        errorMessage: Invalid input
+        correlationId: 20d32a80-0d61-4333-bc03-707b591ae2f5
+        additionalInfo:
+        - property: type
+    RouteFilterRuleReplaceIpv4Response:
+      value:
+        href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403
+        type: BGP_IPv4_PREFIX_FILTER_RULE
+        uuid: 9890d520-1579-4489-8003-154b34b8f403
+        name: Private-subnet-filter-update
+        description: Test rule
+        prefixMatch: exact
+        state: REPROVISIONING
+        action: PERMIT
+        change:
+          href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/a25ca469-721a-4614-89a9-cdef287aa628
+          type: BGP_IPv4_PREFIX_FILTER_RULE_UPDATE
+          uuid: a25ca469-721a-4614-89a9-cdef287aa628
+        prefix: 192.168.0.0/24
+        changeLog:
+          createdBy: testuser
+          createdByEmail: testuser@equinix.com
+          createdByFullName: testuser testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: testuser1
+          updatedByEmail: testuser@equinix.com
+          updatedByFullName: testuser testuser
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+    PatchRouteFilterRuleName:
+      value:
+      - op: replace
+        path: /name
+        value: test-route-filter-name-patch
+    RouteFilterRulesGetAll:
+      value:
+        pagination:
+          offset: 0
+          limit: 32
+          total: 2
+          next: null
+          previous: null
+        data:
+        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/65b025ef-022b-4180-85cf-82cfc1ab655b
+          type: BGP_IPv4_PREFIX_FILTER_RULE
+          uuid: 65b025ef-022b-4180-85cf-82cfc1ab655b
+          name: Private-subnet-filter-2
+          description: Test rule
+          prefixMatch: exact
+          action: PERMIT
+          prefix: 192.168.10.0/24
+          state: PROVISIONED
+          change:
+            href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/9397f111-19aa-489c-b3c7-349c86818f2d
+            type: IPv4_BGP_PREFIX_FILTER_RULE_CREATION
+            uuid: 9397f111-19aa-489c-b3c7-349c86818f2d
+          changeLog:
+            createdBy: testuser
+            createdByEmail: testuser@equinix.com
+            createdByFullName: testuser testuser
+            createdDateTime: 2020-05-21 10:30:00+00:00
+        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/ea48337b-fe04-4164-a3f0-48d81abf575b
+          type: BGP_IPv4_PREFIX_FILTER_RULE
+          uuid: ea48337b-fe04-4164-a3f0-48d81abf575b
+          name: Private-subnet-filter-2
+          description: Test rule
+          prefixMatch: orlonger
+          action: PERMIT
+          prefix: 192.168.20.0/24
+          state: PROVISIONED
+          change:
+            href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/9397f111-19aa-489c-b3c7-349c86818f2d
+            type: IPv4_BGP_PREFIX_FILTER_RULE_CREATION
+            uuid: 9397f111-19aa-489c-b3c7-349c86818f2d
+          changeLog:
+            createdBy: testuser
+            createdByEmail: testuser@equinix.com
+            createdByFullName: testuser testuser
+            createdDateTime: 2020-05-21 10:30:00+00:00
+    UpdateRouteFilterRuleIPv4:
+      value:
+        name: Private-subnet-filter-update
+        description: Test rule
+        prefix: 192.168.0.0/24
+        prefixMatch: exact
+    RouteFilterRuleReplaceIpv6Response:
+      value:
+        href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403
+        type: BGP_IPv6_PREFIX_FILTER_RULE
+        uuid: 9890d520-1579-4489-8003-154b34b8f403
+        name: Private-subnet-filter-update
+        description: Test rule
+        prefixMatch: exact
+        state: REPROVISIONING
+        action: PERMIT
+        change:
+          href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/a25ca469-721a-4614-89a9-cdef287aa628
+          type: BGP_IPv6_PREFIX_FILTER_RULE_UPDATE
+          uuid: a25ca469-721a-4614-89a9-cdef287aa628
+        prefix: 2001:7a9::34f4:0:f3dd:1/128
+        changeLog:
+          createdBy: testuser
+          createdByEmail: testuser@equinix.com
+          createdByFullName: testuser testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: testuser1
+          updatedByEmail: testuser@equinix.com
+          updatedByFullName: testuser testuser
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+    PatchRouteFilterRulePrefix:
+      value:
+      - op: replace
+        path: /prefix
+        value: 192.168.0.0/30
+    SearchRouteFilterRulesOrRequest:
+      value:
+        filter:
+          or:
+          - property: /type
+            operator: '='
+            values:
+            - BGP_IPv4_PREFIX_FILTER_RULE
+          - property: /state
+            operator: '='
+            values:
+            - PROVISIONED
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - property: /changeLog/updatedDateTime
+          direction: DESC
+    500_internal_error:
+      value:
+      - errorCode: EQ-3041011
+        errorMessage: Bad request - Internal Server Error. Please check the request payload and submit again.
+        details: Please contact support@equinix.com for more info
+        correlationId: 9048796775044a60-39cb-4ccc-b272-b80f126e5408
+        additionalInfo:
+        - reason: Please contact support@equinix.com for more info
+    RouteFilterRuleCreateBgpIpv6Prefix:
+      value:
+        name: Private-subnet-filter
+        description: Test rule
+        prefix: 2001:7a9::34f4:0:f3dd:1/126
+        prefixMatch: orlonger
+  schemas:
+    RouteFilterRulesPatchRequest:
+      minItems: 1
+      type: array
+      description: Patch Route Filters Rule request
+      items:
+        $ref: '#/components/schemas/RouteFilterRulesPatchRequestItem'
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    RouteFilterRuleState:
+      type: string
+      description: Route filter rule status
+      enum:
+      - PROVISIONING
+      - REPROVISIONING
+      - DEPROVISIONING
+      - PROVISIONED
+      - DEPROVISIONED
+      - NOT_PROVISIONED
+      - NOT_DEPROVISIONED
+    RouteFilterRulesPostRequest:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Route Filter Rule configuration
+          items:
+            $ref: '#/components/schemas/RouteFilterRulesBase'
+      description: Create Route Filter Rule POST request
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    RouteFilterRulesSearchResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: List of route filter rules
+          items:
+            $ref: '#/components/schemas/RouteFilterRulesData'
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
+    Changelog:
+      type: object
+      properties:
+        createdBy:
+          type: string
+          description: Created by User Key
+          example: johnsmith
+        createdByFullName:
+          type: string
+          description: Created by User Full Name
+          example: John Smith
+        createdByEmail:
+          type: string
+          description: Created by User Email Address
+          example: john.smith@example.com
+        createdDateTime:
+          type: string
+          description: Created by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedBy:
+          type: string
+          description: Updated by User Key
+          example: johnsmith
+        updatedByFullName:
+          type: string
+          description: Updated by User Full Name
+          example: John Smith
+        updatedByEmail:
+          type: string
+          description: Updated by User Email Address
+          example: john.smith@example.com
+        updatedDateTime:
+          type: string
+          description: Updated by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        deletedBy:
+          type: string
+          description: Deleted by User Key
+          example: johnsmith
+        deletedByFullName:
+          type: string
+          description: Deleted by User Full Name
+          example: John Smith
+        deletedByEmail:
+          type: string
+          description: Deleted by User Email Address
+          example: john.smith@example.com
+        deletedDateTime:
+          type: string
+          description: Deleted by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+      description: Change log
+    RouteFilterRulesChangeOperation:
+      required:
+      - op
+      - path
+      - value
+      type: object
+      properties:
+        op:
+          type: string
+          description: Handy shortcut for operation name
+          enum:
+          - add
+          - replace
+          - remove
+        path:
+          type: string
+          description: path inside document leading to updated parameter
+          example: /
+        value:
+          $ref: '#/components/schemas/RouteFilterRulesBase'
+      description: Route filter rule change operation data
+    RouteFilterRulesBase:
+      required:
+      - prefix
+      type: object
+      properties:
+        name:
+          type: string
+          example: Private-subnet-filter
+        description:
+          type: string
+          description: Customer-provided Route Filter Rule description
+        prefix:
+          type: string
+          example: 192.168.0.0/24
+        prefixMatch:
+          type: string
+          example: orlonger, exact
+          default: orlonger
+    ChangeId_2:
+      type: string
+      description: Route Filter Rule Change UUID
+      format: uuid
+      example: 6d500177-9404-41f2-99e8-2bf1a84d8db5
+    RouteFilterRuleId:
+      type: string
+      description: Route Filter Rule UUID
+      example: 65b025ef-022b-4180-85cf-82cfc1ab655b
+    GetRouteFilterRulesResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: List of Route Filter Rules
+          items:
+            $ref: '#/components/schemas/RouteFilterRulesData'
+    RouteFilterRulesPatchRequestItem:
+      required:
+      - op
+      - path
+      - value
+      type: object
+      properties:
+        op:
+          type: string
+          description: Handy shortcut for operation name
+          example: replace
+        path:
+          type: string
+          description: path to change
+          example: /prefixMatch
+        value:
+          description: new value for updated parameter
+      description: Route filter rule change operation data
+    RouteFilterRuleOrExpression:
+      type: object
+      properties:
+        or:
+          maxItems: 8
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteFilterRuleExpression'
+      description: OR expression containing multiple filter expressions
+    RouteFilterRuleExpression:
+      description: Filter expression that can be AND, OR, or a simple expression
+      anyOf:
+      - $ref: '#/components/schemas/RouteFilterRuleAndExpression'
+      - $ref: '#/components/schemas/RouteFilterRuleOrExpression'
+      - $ref: '#/components/schemas/RouteFilterRuleSimpleExpression'
+    RouteFilterRuleSortCriteria:
+      type: object
+      properties:
+        direction:
+          $ref: '#/components/schemas/RouteFilterRuleSortDirection'
+        property:
+          $ref: '#/components/schemas/RouteFilterRuleSortBy'
+    RouteFilterRulesFilter:
+      description: Top-level filter that can be either an AND expression or OR expression
+      anyOf:
+      - $ref: '#/components/schemas/RouteFilterRuleAndExpression'
+      - $ref: '#/components/schemas/RouteFilterRuleOrExpression'
+    RouteFilterRuleAndExpression:
+      type: object
+      properties:
+        and:
+          maxItems: 8
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteFilterRuleExpression'
+      description: AND expression containing multiple filter expressions
+    RouteFilterRulesChangeDataResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteFilterRulesChangeData'
+      description: List of route filter rule changes
+    RouteFilterRulesChangeData:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Current outcome of the change flow
+          enum:
+          - COMPLETED
+          - FAILED
+          - REQUESTED
+        createdBy:
+          type: string
+          description: Created by User Key
+        createdDateTime:
+          type: string
+          description: Set when change flow starts
+          format: date-time
+        updatedBy:
+          type: string
+          description: Updated by User Key
+        updatedDateTime:
+          type: string
+          description: Set when change object is updated
+          format: date-time
+        data:
+          $ref: '#/components/schemas/RouteFilterRulesChangeOperation'
+      description: Current state of latest route filter rules change
+      allOf:
+      - $ref: '#/components/schemas/RouteFilterRulesChange'
+    RouteFilterRulesData:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Route Filter Rules URI
+          format: uri
+          example: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/65b025ef-022b-4180-85cf-82cfc1ab655b
+        type:
+          type: string
+          description: Route filter type
+          enum:
+          - BGP_IPv4_PREFIX_FILTER_RULE
+          - BGP_IPv6_PREFIX_FILTER_RULE
+        uuid:
+          type: string
+          description: Route Filter Rule identifier
+          format: uuid
+          example: 65b025ef-022b-4180-85cf-82cfc1ab655b
+        name:
+          type: string
+          example: Private-subnet-filter-2
+        description:
+          type: string
+          description: Customer-provided Route Filter Rule description
+        state:
+          $ref: '#/components/schemas/RouteFilterRuleState'
+        prefixMatch:
+          type: string
+          description: prefix matching operator
+          example: exact
+          default: orlonger
+        change:
+          $ref: '#/components/schemas/RouteFilterRulesChange'
+        action:
+          type: string
+          enum:
+          - PERMIT
+          - DENY
+        prefix:
+          type: string
+          example: 192.168.0.0/24
+        changelog:
+          $ref: '#/components/schemas/Changelog'
+    RouteFilterId:
+      type: string
+      description: Route Filters UUID
+      example: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
+    RouteFilterRuleSortDirection:
+      type: string
+      description: Sorting direction
+      default: DESC
+      enum:
+      - DESC
+      - ASC
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    RouteFilterRuleSimpleExpression:
+      type: object
+      properties:
+        property:
+          type: string
+          description: "Possible field names to use on filters:\n * `/type` - Route Filter Rules Type\n * `/name` - Route Filter Rules Name\n * `/uuid` - Route Filter Rules uuid\n * `/state` - Route Filter Rules status\n * `/prefix` - Route Filter Rule Prefix\n * `/prefixMatch` - Route Filter Rule Prefix Match\n"
+          example: /name
+        operator:
+          type: string
+          description: "Possible operators to use on filters:\n * `=` - equal\n * `!=` - not equal\n * `[NOT] LIKE` - (not) like\n * `[NOT] IN` - (not) in\n * `ILIKE` - case-insensitive like\n"
+          example: '='
+        values:
+          maxItems: 8
+          minItems: 1
+          type: array
+          items:
+            type: string
+            example: Route_Filter_Rule_Demo
+      description: Simple filter expression with property, operator, and values
+    RouteFilterRulesSearchRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/RouteFilterRulesFilter'
+        pagination:
+          $ref: '#/components/schemas/PaginationRequest'
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteFilterRuleSortCriteria'
+      description: Search route filter rules
+    RouteFilterRuleSortBy:
+      type: string
+      description: Possible field names to use on sorting
+      default: /changeLog/updatedDateTime
+      enum:
+      - /type
+      - /uuid
+      - /name
+      - /state
+      - /prefix
+      - /prefixMatch
+      - /changeLog/createdDateTime
+      - /changeLog/updatedDateTime
+    RouteFilterRulesChange:
+      required:
+      - type
+      - uuid
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Uniquely identifies a change
+        type:
+          type: string
+          description: Type of change
+          enum:
+          - BGP_IPv4_PREFIX_FILTER_RULE_UPDATE
+          - BGP_IPv4_PREFIX_FILTER_RULE_CREATION
+          - BGP_IPv4_PREFIX_FILTER_RULE_DELETION
+          - BGP_IPv6_PREFIX_FILTER_RULE_UPDATE
+          - BGP_IPv6_PREFIX_FILTER_RULE_CREATION
+          - BGP_IPv6_PREFIX_FILTER_RULE_DELETION
+        href:
+          type: string
+          description: Route Filter Change URI
+          format: uri
+      description: Current state of latest route filter rule change
+    PaginationRequest:
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first element.
+          default: 0
+        limit:
+          minimum: 1
+          type: integer
+          description: Number of elements to be requested per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+      description: Pagination request information
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

@@ -1,0 +1,233 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication Port Packages API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- name: Port Packages
+  description: Port Packages <font color="red"> <sup color='red'>Beta</sup></font>
+paths:
+  /fabric/v4/portPackages:
+    get:
+      tags:
+      - Port Packages
+      summary: Get All Port Packages
+      description: Get All Port Packages returns details of all available port packages for the specified user credentials.
+      operationId: getPortPackages
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllPortPackagesResponse'
+              examples:
+                portPackagesExample:
+                  $ref: '#/components/examples/port-packages'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                portPackagesInternalErrorExample:
+                  $ref: '#/components/examples/port-packages-500'
+components:
+  schemas:
+    PortPackageSourceType:
+      type: string
+      description: Port Package Source Type
+      enum:
+      - COLO
+      - REMOTE
+      - BMMR
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    AllPortPackagesResponse:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          type: array
+          description: List of Port Packages
+          items:
+            $ref: '#/components/schemas/PortPackage'
+      description: Port Packages response
+    PortPackage:
+      required:
+      - code
+      - type
+      type: object
+      properties:
+        href:
+          type: string
+          description: Port Package URI
+          readOnly: true
+        type:
+          type: string
+          description: Port Package Type
+          enum:
+          - PORT_PACKAGE
+        code:
+          type: string
+          description: Port Package code
+        vcBandwidthMax:
+          type: integer
+          description: Maximum virtual connection bandwidth in Mbps
+        vcRemoteSupported:
+          type: boolean
+          description: Indicates if remote virtual connections are supported
+        supportedServiceTypes:
+          type: array
+          description: List of supported service types
+          items:
+            type: string
+            description: Port Package Service Type
+            enum:
+            - MSP
+        supportedSourceTypes:
+          type: array
+          description: List of supported source types
+          items:
+            $ref: '#/components/schemas/PortPackageSourceType'
+        supportedMetros:
+          type: array
+          description: List of supported metros
+          items:
+            type: string
+      description: Port Package details
+  examples:
+    port-packages-500:
+      value:
+      - errorCode: EQ-3143001
+        errorMessage: Internal Error
+        details: Internal system error
+        correlationId: 80066c00-0f20-11f0-8367-d5075ee362a7
+    '415':
+      value:
+      - errorCode: EQ-3040016
+        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: contentType
+          reason: The payload format is in an unsupported format
+    port-packages:
+      value:
+        data:
+        - href: /fabric/v4/portPackages/XF_UNLIMITED_PLUS
+          type: PORT_PACKAGE
+          code: XF_UNLIMITED_PLUS
+          vcBandwidthMax: 100000
+          vcRemoteSupported: true
+          supportedServiceTypes:
+          - MSP
+          supportedSourceTypes:
+          - COLO
+          supportedMetros:
+          - SV
+          - DA
+        - href: /fabric/v4/portPackages/XF_UNLIMITED
+          type: PORT_PACKAGE
+          code: XF_UNLIMITED
+          vcBandwidthMax: 100000
+          vcRemoteSupported: false
+          supportedServiceTypes:
+          - MSP
+          supportedSourceTypes:
+          - REMOTE
+          - COLO
+        - href: /fabric/v4/portPackages/XF_STANDARD
+          type: PORT_PACKAGE
+          code: XF_STANDARD
+          vcBandwidthMax: 100000
+          vcRemoteSupported: false
+          supportedServiceTypes:
+          - MSP
+          supportedSourceTypes:
+          - BMMR
+          - REMOTE
+          - COLO
+    '403':
+      value:
+      - errorCode: EQ-3045003
+        errorMessage: Operation not allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Operation not allowed for current user
+    '401':
+      value:
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

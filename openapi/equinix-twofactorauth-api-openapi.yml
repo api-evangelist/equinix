@@ -1,0 +1,113 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication TwoFactorAuth API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- description: 'Two Factor Authentication Management. Check out the product docs to learn more about [2FA](https://metal.equinix.com/developers/docs/accounts/two-factor-authentication/).
+
+    '
+  externalDocs:
+    url: https://metal.equinix.com/developers/docs/accounts/two-factor-authentication/
+  name: TwoFactorAuth
+paths:
+  /user/otp/app:
+    delete:
+      description: Disables two factor authentication.
+      operationId: disableTfaApp
+      responses:
+        '204':
+          description: no content
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Disable two factor authentication
+      tags:
+      - TwoFactorAuth
+    post:
+      description: Enables two factor authentication using authenticator app.
+      operationId: enableTfaApp
+      responses:
+        '200':
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+      summary: Enable two factor auth using app
+      tags:
+      - TwoFactorAuth
+  /user/otp/sms:
+    delete:
+      description: Disables two factor authentication.
+      operationId: disableTfaSms
+      responses:
+        '204':
+          description: no content
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Disable two factor authentication
+      tags:
+      - TwoFactorAuth
+    post:
+      description: Enables two factor authentication with sms.
+      operationId: enableTfaSms
+      responses:
+        '200':
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+      summary: Enable two factor auth using sms
+      tags:
+      - TwoFactorAuth
+components:
+  schemas:
+    Error:
+      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
+      properties:
+        error:
+          description: A description of the error that caused the request to fail.
+          type: string
+        errors:
+          description: A list of errors that contributed to the request failing.
+          items:
+            description: An error message that contributed to the request failing.
+            type: string
+          type: array
+      type: object
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

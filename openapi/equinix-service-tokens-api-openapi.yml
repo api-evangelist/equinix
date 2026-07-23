@@ -1,0 +1,2085 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication Service Tokens API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- name: Service Tokens
+  description: Service Tokens
+paths:
+  /fabric/v4/serviceTokens/{serviceTokenId}:
+    get:
+      tags:
+      - Service Tokens
+      summary: Get Token by uuid
+      description: Get Specified Service Tokens uses the uuid of an Equinix Fabric service token to return details about the token's type, state, location, bandwidth, and other key properties.
+      operationId: getServiceTokenByUuid
+      parameters:
+      - name: serviceTokenId
+        in: path
+        description: Service Token UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/ServiceTokenUUID'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceToken'
+              examples:
+                tokenExample:
+                  $ref: '#/components/examples/getServiceToken'
+                tokenVDExample:
+                  $ref: '#/components/examples/getServiceToken-VD'
+                tokenNetworkExample:
+                  $ref: '#/components/examples/getServiceToken-Network'
+                tokenDryRunExample:
+                  $ref: '#/components/examples/getServiceToken-DryRun'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400_UUID'
+                dryRunExample:
+                  $ref: '#/components/examples/400_dry_run'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+    delete:
+      tags:
+      - Service Tokens
+      summary: Delete Token by uuid
+      description: Delete Service Tokens removes an Equinix Fabric service token corresponding to the specified uuid which are in INACTIVE state.
+      operationId: deleteServiceTokenByUuid
+      parameters:
+      - name: serviceTokenId
+        in: path
+        description: Service Token UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/ServiceTokenUUID'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceToken'
+              examples:
+                tokenExample:
+                  $ref: '#/components/examples/getServiceToken'
+                tokenVDExample:
+                  $ref: '#/components/examples/getServiceToken-VD'
+                tokenNetworkExample:
+                  $ref: '#/components/examples/getServiceToken-Network'
+                tokenDryRunExample:
+                  $ref: '#/components/examples/getServiceToken-DryRun'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400_UUID'
+                dryRunExample:
+                  $ref: '#/components/examples/400_dry_run'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+    patch:
+      tags:
+      - Service Tokens
+      summary: Update Token By ID
+      description: This API provides capability to update user's Service Token
+      operationId: updateServiceTokenByUuid
+      parameters:
+      - name: serviceTokenId
+        in: path
+        description: Service Token UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/ServiceTokenUUID'
+      - name: dryRun
+        in: query
+        description: option to verify that API calls will succeed
+        required: false
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ServiceTokenUpdateRequest'
+            examples:
+              UpdateExpirationDate:
+                $ref: '#/components/examples/UpdateExpirationDate'
+              UpdateTokenName:
+                $ref: '#/components/examples/UpdateTokenName'
+              UpdateTokenDescription:
+                $ref: '#/components/examples/UpdateTokenDescription'
+              UpdateNotificationEmail:
+                $ref: '#/components/examples/UpdateNotificationEmail'
+              UpdateAsideTokenBandwidth:
+                $ref: '#/components/examples/UpdateAsideTokenBandwidth'
+              UpdateZsideTokenBandwidth:
+                $ref: '#/components/examples/UpdateZsideTokenBandwidth'
+              UpdateAsideTokenBandwidthDryRun:
+                $ref: '#/components/examples/UpdateAsideTokenBandwidth'
+              UpdateZsideTokenBandwidthDryRun:
+                $ref: '#/components/examples/UpdateZsideTokenBandwidth'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceToken'
+              examples:
+                tokenExample:
+                  $ref: '#/components/examples/getServiceToken'
+                tokenVDExample:
+                  $ref: '#/components/examples/getServiceToken-VD'
+                tokenNetworkExample:
+                  $ref: '#/components/examples/getServiceToken-Network'
+                tokenDryRunExample:
+                  $ref: '#/components/examples/getServiceToken-DryRun'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400_UUID'
+                dryRunExample:
+                  $ref: '#/components/examples/400_dry_run'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+  /fabric/v4/serviceTokens:
+    get:
+      tags:
+      - Service Tokens
+      summary: Get All Tokens
+      description: Get All ServiceTokens creates a list of all Equinix Fabric service tokens associated with the subscriber's account.
+      operationId: getServiceTokens
+      parameters:
+      - name: offset
+        in: query
+        description: offset
+        schema:
+          type: number
+      - name: limit
+        in: query
+        description: number of records to fetch
+        schema:
+          type: number
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceTokens'
+              examples:
+                tokenExample:
+                  $ref: '#/components/examples/getServiceTokens'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+    post:
+      tags:
+      - Service Tokens
+      summary: Create Service Token
+      description: Create Service Tokens generates Equinix Fabric? service tokens. These tokens authorize users to access protected resources and services.
+      operationId: createServiceToken
+      parameters:
+      - name: dryRun
+        in: query
+        description: option to verify that API calls will succeed
+        required: false
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceToken'
+            examples:
+              AsideTokenWithQnQ:
+                $ref: '#/components/examples/createServiceTokenWithQnQ'
+              AsideTokenWithDot1Q:
+                $ref: '#/components/examples/createServiceTokenWithDot1Q'
+              AsideTokenWithVxlan:
+                $ref: '#/components/examples/createServiceTokenWithVxlan'
+              ZsideTokenWithQnQ:
+                $ref: '#/components/examples/createZsideServiceTokenWithQnQ'
+              ZsideTokenWithDot1Q:
+                $ref: '#/components/examples/createZsideServiceTokenWithDot1Q'
+              ZsideTokenWithVxlan:
+                $ref: '#/components/examples/createZsideServiceTokenWithVxlan'
+              ZsideTokenWithVD:
+                $ref: '#/components/examples/createZsideServiceTokenWithVD'
+              ZsideTokenForEVPLAN-Network:
+                $ref: '#/components/examples/createZsideServiceTokenWithNetworkEvplan'
+              ZsideTokenForEPLAN-Network:
+                $ref: '#/components/examples/createZsideServiceTokenWithNetworkEplan'
+              ZsideTokenForEVPTree-Network:
+                $ref: '#/components/examples/createZsideServiceTokenWithNetworkEvptree'
+              ZsideTokenForEPTree-Network:
+                $ref: '#/components/examples/createZsideServiceTokenWithNetworkEptree'
+              AsideTokenWithDot1QDryRunCreate:
+                $ref: '#/components/examples/createServiceTokenDryRunRequest'
+              AsideFCRWithZsidePortBasedToken:
+                $ref: '#/components/examples/createZsideServiceTokenWithAsideFCR'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceToken'
+              examples:
+                ServiceTokenDryRun:
+                  $ref: '#/components/examples/createServiceTokenDryRunResponse'
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceToken'
+              examples:
+                tokenExample:
+                  $ref: '#/components/examples/getServiceToken'
+                ZsideTokenForEVPLANNetwork:
+                  $ref: '#/components/examples/createZsideServiceTokenWithNetworkEvplan-Response'
+                ZsideTokenForEVPTreeNetwork:
+                  $ref: '#/components/examples/createZsideServiceTokenWithNetworkEvptree-Response'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400'
+                dryRunExample:
+                  $ref: '#/components/examples/400_dry_run'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+  /fabric/v4/serviceTokens/{serviceTokenId}/actions:
+    post:
+      tags:
+      - Service Tokens
+      summary: ServiceToken Actions
+      description: This API provides capability to accept/reject user's servicetokens
+      operationId: createServiceTokenAction
+      parameters:
+      - name: serviceTokenId
+        in: path
+        description: Service Token UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/ServiceTokenUUID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceTokenActionRequest'
+            examples:
+              ResendServiceToken:
+                $ref: '#/components/examples/Resend_Service_Token'
+        required: true
+      responses:
+        '202':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceToken'
+              examples:
+                connectionActionExample:
+                  $ref: '#/components/examples/postServiceTokenActionResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400'
+                dryRunExample:
+                  $ref: '#/components/examples/400_dry_run'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+  /fabric/v4/serviceTokens/search:
+    post:
+      tags:
+      - Service Tokens
+      summary: Search servicetokens
+      description: The API provides capability to get list of user's servicetokens using search criteria, including optional filtering, pagination and sorting
+      operationId: searchServiceTokens
+      parameters:
+      - name: offset
+        in: query
+        description: offset
+        schema:
+          type: number
+      - name: limit
+        in: query
+        description: number of records to fetch
+        schema:
+          type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceTokenSearchRequest'
+            examples:
+              ServiceTokenRequest:
+                $ref: '#/components/examples/postServiceTokenSearchUuid'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceTokens'
+              examples:
+                servicetokenSearchExample:
+                  $ref: '#/components/examples/getServiceTokens'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400'
+                dryRunExample:
+                  $ref: '#/components/examples/400_dry_run'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+components:
+  schemas:
+    ServiceTokenActionRequest:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ServiceTokenActions'
+      description: Service Token action request
+    SimplifiedTokenNetwork:
+      type: object
+      properties:
+        href:
+          type: string
+          description: url to entity
+          format: uri
+        uuid:
+          type: string
+          description: Network Identifier
+          format: uuid
+        type:
+          type: string
+          description: Type of Network
+          enum:
+          - EVPLAN
+          - EPLAN
+          - IPWAN
+          - EVPTREE
+          - EPTREE
+        name:
+          type: string
+          description: Network Name
+        scope:
+          type: string
+          description: scope of Network
+          enum:
+          - LOCAL
+          - REGIONAL
+          - GLOBAL
+        location:
+          $ref: '#/components/schemas/SimplifiedLocation'
+    VirtualDeviceInterface:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of interface
+          enum:
+          - NETWORK
+        id:
+          type: integer
+          description: Network Edge assigned identifier
+        uuid:
+          type: string
+          description: Interface identifier
+          format: uuid
+      description: Virtual Device Interface Information
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    SimplifiedNotification:
+      required:
+      - emails
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          description: Notification Type
+          example: BANDWIDTH_ALERT
+          enum:
+          - NOTIFICATION
+          - BANDWIDTH_ALERT
+          - CONNECTION_APPROVAL
+          - PROFILE_LIFECYCLE
+          - ALL
+          - SALES_REP_NOTIFICATIONS
+          - TECHNICAL
+          - ORDERING
+        sendInterval:
+          type: string
+        emails:
+          type: array
+          description: Array of contact emails
+          items:
+            type: string
+            format: email
+        registeredUsers:
+          type: array
+          description: Array of registered users
+          items:
+            type: string
+    SimplifiedLocation:
+      type: object
+      properties:
+        metroHref:
+          type: string
+          example: https://api.equinix.com/fabric/v4/metros/AM
+        region:
+          type: string
+          example: AMER, APAC, EMEA
+        metroName:
+          type: string
+          example: Amsterdam
+        metroCode:
+          type: string
+          example: AM
+        ibx:
+          type: string
+          example: AM1
+          deprecated: true
+    ServiceTokens:
+      type: object
+      properties:
+        data:
+          type: array
+          description: List of Service Tokens
+          items:
+            $ref: '#/components/schemas/ServiceToken'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      description: Service tokens authorize a user to access protected resources and services available on the Equinix Fabric network. The owner of the resources can distribute service tokens to third-party users (trusted partners and vendors), allowing them to directly access and work with the resources on the network without involving the resource owners.
+    ServiceTokenState:
+      type: string
+      description: Service token state
+      enum:
+      - ACTIVE
+      - INACTIVE
+      - EXPIRED
+      - DELETED
+    ServiceTokenUUID:
+      type: string
+      description: Service Token UUID
+      format: uuid
+    ServiceToken:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ServiceTokenType'
+        href:
+          type: string
+          description: An absolute URL that is the subject of the link's context.
+          format: uri
+          readOnly: true
+        expiry:
+          type: integer
+          deprecated: true
+        uuid:
+          type: string
+          description: Equinix-assigned service token identifier
+          format: uuid
+        issuerSide:
+          type: string
+          description: information about token side
+          deprecated: true
+        name:
+          type: string
+          description: Customer-provided service token name
+        description:
+          type: string
+          description: Customer-provided service token description
+        expirationDateTime:
+          type: string
+          description: Expiration date and time of the service token.
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        connection:
+          $ref: '#/components/schemas/ServiceTokenConnection'
+        state:
+          $ref: '#/components/schemas/ServiceTokenState'
+        notifications:
+          type: array
+          description: Service token related notifications
+          items:
+            $ref: '#/components/schemas/SimplifiedNotification'
+        account:
+          $ref: '#/components/schemas/SimplifiedAccount'
+        changelog:
+          $ref: '#/components/schemas/Changelog'
+        project:
+          $ref: '#/components/schemas/Project'
+      description: Create Service Tokens (v4) generates Equinix Fabric service tokens. These tokens authorize users to access protected resources and services. The tokens remove sensitive content from the environment, rather than just masking it, making the protected data impossible to unencrypt or decrypt. Resource owners can distribute the tokens to trusted partners and vendors, allowing selected third parties to work directly with Equinix network assets.
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    ServiceTokenSearchExpressions:
+      type: array
+      items:
+        $ref: '#/components/schemas/ServiceTokenSearchExpression'
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
+    Changelog:
+      type: object
+      properties:
+        createdBy:
+          type: string
+          description: Created by User Key
+          example: johnsmith
+        createdByFullName:
+          type: string
+          description: Created by User Full Name
+          example: John Smith
+        createdByEmail:
+          type: string
+          description: Created by User Email Address
+          example: john.smith@example.com
+        createdDateTime:
+          type: string
+          description: Created by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedBy:
+          type: string
+          description: Updated by User Key
+          example: johnsmith
+        updatedByFullName:
+          type: string
+          description: Updated by User Full Name
+          example: John Smith
+        updatedByEmail:
+          type: string
+          description: Updated by User Email Address
+          example: john.smith@example.com
+        updatedDateTime:
+          type: string
+          description: Updated by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        deletedBy:
+          type: string
+          description: Deleted by User Key
+          example: johnsmith
+        deletedByFullName:
+          type: string
+          description: Deleted by User Full Name
+          example: John Smith
+        deletedByEmail:
+          type: string
+          description: Deleted by User Email Address
+          example: john.smith@example.com
+        deletedDateTime:
+          type: string
+          description: Deleted by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+      description: Change log
+    AccessPointSelector:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of Access point
+          enum:
+          - COLO
+          - VD
+          - NETWORK
+        hideAssetInfo:
+          type: boolean
+          deprecated: true
+        port:
+          $ref: '#/components/schemas/SimplifiedMetadataEntity'
+        linkProtocol:
+          $ref: '#/components/schemas/SimplifiedLinkProtocol'
+        virtualDevice:
+          $ref: '#/components/schemas/SimplifiedVirtualDevice'
+        interface:
+          $ref: '#/components/schemas/VirtualDeviceInterface'
+        network:
+          $ref: '#/components/schemas/SimplifiedTokenNetwork'
+      description: List of criteria for selecting network access points with optimal efficiency, security, compatibility, and availability.
+    ServiceTokenChangeOperation:
+      required:
+      - op
+      - path
+      - value
+      type: object
+      properties:
+        op:
+          type: string
+          description: Handy shortcut for operation name
+          enum:
+          - replace
+          - add
+          - remove
+        path:
+          type: string
+          description: path inside document leading to updated parameter
+          example: /expirationDateTime
+        value:
+          description: new value for updated parameter
+      description: Service Token change operation data
+    SimplifiedVirtualDevice:
+      type: object
+      properties:
+        href:
+          type: string
+          description: url to entity
+          format: uri
+        uuid:
+          type: string
+          description: Network Edge assigned Virtual Device Identifier
+          format: uuid
+        name:
+          type: string
+          description: Customer-assigned Virtual Device name
+        type:
+          type: string
+          description: Type of Virtual Device
+          enum:
+          - EDGE
+        account:
+          $ref: '#/components/schemas/SimplifiedAccount'
+        cluster:
+          type: string
+          description: Virtual Device Cluster Information
+    ServiceTokenSearchExpression:
+      type: object
+      properties:
+        and:
+          $ref: '#/components/schemas/ServiceTokenSearchExpressions'
+        or:
+          $ref: '#/components/schemas/ServiceTokenSearchExpressions'
+        property:
+          $ref: '#/components/schemas/ServiceTokenSearchFieldName'
+        operator:
+          type: string
+          enum:
+          - '='
+        values:
+          type: array
+          items:
+            type: string
+    ServiceTokenSide:
+      type: object
+      properties:
+        accessPointSelectors:
+          type: array
+          description: List of AccessPointSelectors
+          items:
+            $ref: '#/components/schemas/AccessPointSelector'
+      description: Connection link protocol,virtual device or network configuration
+    SimplifiedAccount:
+      type: object
+      properties:
+        accountNumber:
+          type: integer
+          description: Account number
+          format: int64
+        accountName:
+          type: string
+          description: Account name
+        orgId:
+          type: integer
+          description: Customer organization identifier
+          format: int64
+        organizationName:
+          type: string
+          description: Customer organization name
+        globalOrgId:
+          type: string
+          description: Global organization identifier
+        globalOrganizationName:
+          type: string
+          description: Global organization name
+        ucmId:
+          type: string
+          description: Account ucmId
+        globalCustId:
+          type: string
+          description: Account name
+        resellerAccountNumber:
+          type: integer
+          description: Reseller account number
+          format: int64
+        resellerAccountName:
+          type: string
+          description: Reseller account name
+        resellerUcmId:
+          type: string
+          description: Reseller account ucmId
+        resellerOrgId:
+          type: integer
+          description: Reseller customer organization identifier
+          format: int64
+    ServiceTokenSearchRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/ServiceTokenSearchExpression'
+        pagination:
+          $ref: '#/components/schemas/PaginationRequest'
+      description: Search requests containing criteria
+    Project:
+      required:
+      - projectId
+      type: object
+      properties:
+        projectId:
+          type: string
+          description: Subscriber-assigned project ID
+          example: 44f4c4f8-2f39-494e-838c-d8e640591be5
+    ServiceTokenActions:
+      type: string
+      description: Service Token action type
+      enum:
+      - RESEND_EMAIL_NOTIFICATION
+    ServiceTokenSearchFieldName:
+      type: string
+      description: Possible field names to use on filters
+      enum:
+      - /uuid
+      - /state
+      - /name
+      - /project/projectId
+    SimplifiedLinkProtocol:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/LinkProtocolType'
+        vlanTag:
+          maximum: 4092
+          minimum: 2
+          type: integer
+          description: vlanTag value specified for DOT1Q connections
+        vlanSTag:
+          maximum: 4092
+          minimum: 2
+          type: integer
+          description: vlanSTag value specified for QINQ connections
+        vlanCTag:
+          maximum: 4092
+          minimum: 2
+          type: integer
+          description: vlanCTag value specified for QINQ connections
+      description: Connection link protocol Configuration
+    ServiceTokenConnection:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of Connection
+          enum:
+          - EVPL_VC
+          - EPL_VC
+          - EVPLAN_VC
+          - EPLAN_VC
+          - IPWAN_VC
+          - IP_VC
+          - EVPTREE_VC
+          - EPTREE_VC
+        href:
+          type: string
+          description: An absolute URL that is the subject of the link's context.
+          format: uri
+          readOnly: true
+        uuid:
+          type: string
+          description: Equinix-assigned connection identifier
+          format: uuid
+        allowRemoteConnection:
+          type: boolean
+          description: Authorization to connect remotely
+          default: false
+        allowCustomBandwidth:
+          type: boolean
+          description: Allow custom bandwidth value
+          default: false
+        bandwidthLimit:
+          maximum: 100000
+          minimum: 0
+          type: integer
+          description: Connection bandwidth limit in Mbps
+        supportedBandwidths:
+          type: array
+          description: List of permitted bandwidths.
+          items:
+            type: integer
+        aSide:
+          $ref: '#/components/schemas/ServiceTokenSide'
+        zSide:
+          $ref: '#/components/schemas/ServiceTokenSide'
+      description: Service Token Connection Type Information
+    LinkProtocolType:
+      type: string
+      description: Type of Link Protocol
+      enum:
+      - UNTAGGED
+      - DOT1Q
+      - QINQ
+      - EVPN_VXLAN
+      - VXLAN
+    ServiceTokenType:
+      type: string
+      description: Type of Service Token
+      enum:
+      - VC_TOKEN
+      - EPL_TOKEN
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    SimplifiedMetadataEntity:
+      type: object
+      properties:
+        href:
+          type: string
+          description: url to entity
+          format: uri
+        uuid:
+          type: string
+          description: Equinix assigned Identifier
+          format: uuid
+        type:
+          type: string
+          description: Type of Port
+        cvpId:
+          type: integer
+          description: Customer virtual port Id
+        bandwidth:
+          type: number
+          description: Port Bandwidth
+        portName:
+          type: string
+          description: Port Name
+        encapsulationProtocolType:
+          type: string
+          description: Port Encapsulation
+        accountName:
+          type: string
+          description: Account Name
+        priority:
+          type: string
+          description: Port Priority
+        location:
+          $ref: '#/components/schemas/SimplifiedLocation'
+      description: Configuration details for port used at the access point.
+    PaginationRequest:
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first element.
+          default: 0
+        limit:
+          minimum: 1
+          type: integer
+          description: Number of elements to be requested per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+      description: Pagination request information
+    ServiceTokenUpdateRequest:
+      minItems: 1
+      type: array
+      description: Service Token Update Request
+      items:
+        $ref: '#/components/schemas/ServiceTokenChangeOperation'
+  examples:
+    postServiceTokenSearchUuid:
+      value:
+        filter:
+          and:
+          - property: /uuid
+            operator: '='
+            values:
+            - 407f8239-254c-4fe2-a378-458f197e17c4
+    createZsideServiceTokenWithAsideFCR:
+      value:
+        type: VC_TOKEN
+        name: FCRa_Zside_ServiceToken_SV
+        description: FCRa_Zside_ServiceToken_SV_Description
+        connection:
+          allowRemoteConnection: true
+          allowCustomBandwidth: false
+          supportedBandwidths:
+          - 10
+          - 50
+          zSide:
+            accessPointSelectors:
+            - type: COLO
+              hideAssetInfo: false
+              port:
+                uuid: b840a1db-5413-413f-97e0-328a5c00a874
+              linkProtocol:
+                type: QINQ
+                vlanCTag: 1399
+                vlanSTag: 1388
+        account:
+          accountNumber: 272010
+        project:
+          projectId: 30ad25e2-53dc-11ed-bdc3-0242ac120002
+        expirationDateTime: 2021-03-18 06:43:49.980000+00:00
+        notifications:
+        - type: NOTIFICATION
+          emails:
+          - abc@company.com
+    '404':
+      value:
+      - errorCode: EQ-3045811
+        errorMessage: uuid not found
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: uuid not found
+    UpdateTokenName:
+      value:
+      - op: replace
+        path: /name
+        value: Az_Aside_Dot1Q_NewName
+    createZsideServiceTokenWithQnQ:
+      value:
+        type: VC_TOKEN
+        name: Az_Zside_Dot1Q_Pri_SV
+        description: Az_Zside_Dot1Q_Pri_SV_Description
+        connection:
+          type: EVPL_VC
+          allowRemoteConnection: true
+          allowCustomBandwidth: false
+          supportedBandwidths:
+          - 10
+          - 50
+          - 200
+          - 500
+          - 1000
+          - 2000
+          - 5000
+          - 10000
+          - 25000
+          - 50000
+          zSide:
+            accessPointSelectors:
+            - type: COLO
+              port:
+                uuid: b840a1db-5413-413f-97e0-328a5c00a874
+              linkProtocol:
+                type: QINQ
+                vlanCTag: 1399
+                vlanSTag: 1388
+        account:
+          accountNumber: 272010
+        project:
+          projectId: 30ad25e2-53dc-11ed-bdc3-0242ac120002
+        expirationDateTime: 2021-03-18 06:43:49.980000+00:00
+        notifications:
+        - type: NOTIFICATION
+          emails:
+          - abc@company.com
+    createZsideServiceTokenWithNetworkEptree:
+      value:
+        type: VC_TOKEN
+        name: zside_Network_token
+        description: Zside_Network_token
+        connection:
+          type: EPTREE_VC
+          allowRemoteConnection: true
+          supportedBandwidths:
+          - 10
+          - 50
+          - 200
+          zSide:
+            accessPointSelectors:
+            - type: NETWORK
+              network:
+                type: EPTREE
+                uuid: 20d32a80-0d61-4333-bc03-707b591ae2f4
+        project:
+          projectId: 30ad25e2-53dc-11ed-bdc3-0242ac120002
+        expirationDateTime: 2021-03-18 06:43:49.980000+00:00
+        notifications:
+        - type: NOTIFICATION
+          emails:
+          - abc@company.com
+    createServiceTokenWithQnQ:
+      value:
+        type: VC_TOKEN
+        name: Az_Aside_Dot1Q_Pri_SV
+        description: Az_Aside_Dot1Q_Pri_SV_Description
+        expirationDateTime: 2021-03-18 06:43:49.980000+00:00
+        connection:
+          type: EVPL_VC
+          allowRemoteConnection: false
+          bandwidthLimit: 50
+          allowCustomBandwidth: false
+          aSide:
+            accessPointSelectors:
+            - type: COLO
+              port:
+                uuid: b840a1db-5758-758f-97e0-328a5c00a874
+              linkProtocol:
+                type: QINQ
+                vlanCTag: 1399
+                vlanSTag: 1388
+        notifications:
+        - type: NOTIFICATION
+          emails:
+          - abc@company.com
+          - provider@company.com
+    createServiceTokenWithVxlan:
+      value:
+        type: VC_TOKEN
+        name: Az_Aside_VxLAN_Pri_SV
+        description: Az_Aside_VxLAN_Pri_SV_Description
+        expirationDateTime: 2021-03-18 06:43:49.980000+00:00
+        connection:
+          type: EVPL_VC
+          allowRemoteConnection: true
+          bandwidthLimit: 50
+          allowCustomBandwidth: false
+          aSide:
+            accessPointSelectors:
+            - type: COLO
+              port:
+                uuid: b840a1db-5758-758f-97e0-328a5c00a874
+              linkProtocol:
+                type: VXLAN
+                vlanTag: 510000
+        notifications:
+        - type: NOTIFICATION
+          emails:
+          - abc@company.com
+          - provider@company.com
+    createZsideServiceTokenWithDot1Q:
+      value:
+        type: VC_TOKEN
+        name: Az_Zside_Dot1Q_Pri_SV
+        description: Az_Zside_Dot1Q_Pri_SV_Description
+        connection:
+          type: EVPL_VC
+          allowRemoteConnection: true
+          allowCustomBandwidth: false
+          supportedBandwidths:
+          - 10
+          - 50
+          - 200
+          - 500
+          - 1000
+          - 2000
+          - 5000
+          - 10000
+          - 25000
+          - 50000
+          zSide:
+            accessPointSelectors:
+            - type: COLO
+              port:
+                uuid: b840a1db-5413-413f-97e0-328a5c00a874
+              linkProtocol:
+                type: DOT1Q
+                vlanTag: '3332'
+        expirationDateTime: 2021-03-18 06:43:49.980000+00:00
+        notifications:
+        - type: NOTIFICATION
+          emails:
+          - abc@company.com
+    UpdateExpirationDate:
+      value:
+      - op: replace
+        path: /expirationDateTime
+        value: 2023-01-20 18:50:34.696000+00:00
+    getServiceToken-VD:
+      value:
+        href: http://api.equinix.com/fabric/v4/serviceTokens/ea40918e-9b39-4045-8be8-0beaa7eb5ce1
+        type: VC_TOKEN
+        name: Zside_Virtual_Device_token
+        uuid: ea40918e-9b39-4045-8be8-0beaa7eb5ce1
+        description: Zside vd token
+        state: INACTIVE
+        connection:
+          type: EVPL_VC
+          allowRemoteConnection: true
+          allowCustomBandwidth: false
+          supportedBandwidths:
+          - 10
+          - 50
+          - 200
+          zSide:
+            accessPointSelectors:
+            - type: VD
+              virtualDevice:
+                name: testVirtualDeviceName
+                type: EDGE
+                uuid: 20d32a80-0d61-4333-bc03-707b591ae2f4
+              interface:
+                type: NETWORK
+                uuid: 20d32a80-0d61-4333-bc03-707b591ae2f4
+                id: 45645
+        project:
+          projectId: 30ad25e2-53dc-11ed-bdc3-0242ac120002
+        expirationDateTime: 2021-03-18 06:43:49.980000+00:00
+        notifications:
+        - type: NOTIFICATION
+          emails:
+          - abc@company.com
+        account:
+          orgId: 111437
+        changeLog:
+          createdBy: '843577'
+          createdDateTime: 2021-03-18 06:43:49.980000+00:00
+          updatedBy: '843577'
+          updatedDateTime: 2021-03-18 06:44:14.206000+00:00
+    UpdateZsideTokenBandwidth:
+      value:
+      - op: replace
+        path: /connection/supportedBandwidths
+        value:
+        - 50
+        - 1000
+    createZsideServiceTokenWithVD:
+      value:
+        type: VC_TOKEN
+        name: Zside_VD_token
+        description: zside vd token
+        connection:
+          type: EVPL_VC
+          allowRemoteConnection: true
+          allowCustomBandwidth: false
+          supportedBandwidths:
+          - 10
+          - 50
+          - 200
+          - 10000
+          zSide:
+            accessPointSelectors:
+            - type: VD
+              virtualDevice:
+                type: EDGE
+                uuid: 20d32a80-0d61-4333-bc03-707b591ae2f4
+              interface:
+                type: NETWORK
+                id: 45645
+        project:
+          projectId: 30ad25e2-53dc-11ed-bdc3-0242ac120002
+        expirationDateTime: 2021-03-18 06:43:49.980000+00:00
+        notifications:
+        - type: NOTIFICATION
+          emails:
+          - abc@company.com
+    400_dry_run:
+      value:
+      - errorCode: EQ-3142411
+        errorMessage: Dry run is not supported for this connection type
+        correlationId: 1012536-0000-108258589231-api
+        additionalInfo:
+        - reason: queryParam:dryRun
+    createZsideServiceTokenWithNetworkEvplan:
+      value:
+        type: VC_TOKEN
+        name: zside_Network_token
+        description: Zside_Network_token
+        connection:
+          type: EVPLAN_VC
+          allowRemoteConnection: true
+          supportedBandwidths:
+          - 10
+          - 50
+          - 200
+          zSide:
+            accessPointSelectors:
+            - type: NETWORK
+              network:
+                type: EVPLAN
+                uuid: 20d32a80-0d61-4333-bc03-707b591ae2f4
+        project:
+          projectId: 30ad25e2-53dc-11ed-bdc3-0242ac120002
+        expirationDateTime: 2021-03-18 06:43:49.980000+00:00
+        notifications:
+        - type: NOTIFICATION
+          emails:
+          - abc@company.com
+    '403':
+      value:
+      - errorCode: EQ-3045003
+        errorMessage: Operation not allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Operation not allowed for current user
+    '401':
+      value:
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    getServiceTokens:
+      value:
+        pagination:
+          offset: 0
+          limit: 75
+          total: 2
+        data:
+        - href: https://api.equinix.com/fabric/v4/serviceTokens/ea40918e-9b39-4045-8be8-0beaa7eb5ce1
+          type: VC_TOKEN
+          name: zside_network_token
+          uuid: ea40918e-9b39-4045-8be8-0beaa7eb5ce1
+          description: zside_Network_token
+          connection:
+            type: EVPLAN_VC
+            allowRemoteConnection: true
+            allowCustomBandwidth: false
+            bandwidthLimit: 20000
+            zSide:
+              accessPointSelectors:
+              - type: NETWORK
+                network:
+                  href: https://api.equinix.com/fabric/v4/networks/20d32a80-0d61-4333-bc03-707b591ae2f4
+                  type: EVPLAN
+                  uuid: 20d32a80-0d61-4333-bc03-707b591ae2f4
+                  scope: REGIONAL
+          project:
+            projectId: 30ad25e2-53dc-11ed-bdc3-0242ac120002
+          expirationDateTime: 2021-03-18 06:43:49.980000+00:00
+          notifications:
+          - type: NOTIFICATION
+            emails:
+            - abc@company.com
+        - href: https://api.equinix.com/fabric/v4/serviceTokens/ea40918e-9b39-4045-8be8-0beaa7eb5ce1
+          type: VC_TOKEN
+          name: zside_vd_token
+          uuid: ea40918e-9b39-4045-8be8-0beaa7eb5ce1
+          description: zside vd token
+          connection:
+            type: EVPL_VC
+            allowRemoteConnection: true
+            allowCustomBandwidth: false
+            supportedBandwidths:
+            - 10
+            - 50
+            - 200
+            zSide:
+              accessPointSelectors:
+              - type: VD
+                virtualDevice:
+                  type: EDGE
+                  uuid: 20d32a80-0d61-4333-bc03-707b591ae2f4
+                interface:
+                  type: NETWORK
+                  id: 45645
+          project:
+            projectId: 30ad25e2-53dc-11ed-bdc3-0242ac120002
+          expirationDateTime: 2021-03-18 06:43:49.980000+00:00
+          notifications:
+          - type: NOTIFICATION
+            emails:
+            - abc@company.com
+        - href: http://api.equinix.com/fabric/v4/serviceTokens/13ab7dc7-c18e-4f73-aa35-fc3a83966e79
+          type: VC_TOKEN
+          uuid: 13ab7dc7-c18e-4f73-aa35-fc3a83966e79
+          name: Az_Aside_Dot1Q_Pri_SV
+          description: Az_Aside_Dot1Q_Pri_SV_Description
+          state: INACTIVE
+          expirationDateTime: 2021-03-18 06:43:49.980000+00:00
+          project:
+            projectId: 30ad25e2-53dc-11ed-bdc3-0242ac120002
+          connection:
+            type: EVPL_VC
+            allowRemoteConnection: false
+            bandwidthLimit: 50
+            allowCustomBandwidth: false
+            aSide:
+              accessPointSelectors:
+              - type: COLO
+                port:
+                  href: http://api.equinix.com/fabric/v4/ports/b840a1db-5758-758f-97e0-328a5c00a874
+                  type: XF_PORT
+                  uuid: b840a1db-5758-758f-97e0-328a5c00a874
+                linkProtocol:
+                  type: QINQ
+                  vlanCTag: 1399
+                  vlanSTag: 1388
+          notifications:
+          - type: NOTIFICATION
+            emails:
+            - abc@company.com
+            - provider@company.com
+          account:
+            orgId: 111437
+          changeLog:
+            createdBy: '843577'
+            createdDateTime: 2021-03-18 06:43:49.980000+00:00
+            updatedBy: '843577'
+            updatedDateTime: 2021-03-18 06:44:14.206000+00:00
+    getServiceToken-Network:
+      value:
+        href: https://api.equinix.com/fabric/v4/serviceTokens/ea40918e-9b39-4045-8be8-0beaa7eb5ce1
+        type: VC_TOKEN
+        name: Zside_network_token
+        uuid: ea40918e-9b39-4045-8be8-0beaa7eb5ce1
+        description: Zside Network token
+        state: INACTIVE
+        connection:
+          type: EVPLAN_VC
+          allowRemoteConnection: true
+          allowCustomBandwidth: false
+          bandwidthLimit: 20000
+          zSide:
+            accessPointSelectors:
+            - type: NETWORK
+              network:
+                href: https://api.equinix.com/fabric/v4/networks/20d32a80-0d61-4333-bc03-707b591ae2f4
+                type: EVPLAN
+                uuid: 20d32a80-0d61-4333-bc03-707b591ae2f4
+                scope: REGIONAL
+        project:
+          projectId: 30ad25e2-53dc-11ed-bdc3-0242ac120002
+        expirationDateTime: 2021-03-18 06:43:49.980000+00:00
+        notifications:
+        - type: NOTIFICATION
+          emails:
+          - abc@company.com
+        account:
+          orgId: 111437
+        changeLog:
+          createdBy: '843577'
+          createdDateTime: 2021-03-18 06:43:49.980000+00:00
+          updatedBy: '843577'
+          updatedDateTime: 2021-03-18 06:44:14.206000+00:00
+    '500':
+      value:
+      - errorCode: EQ-3045004
+        errorMessage: Internal Server Error
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Internal Server Error
+    '400':
+      value:
+      - errorCode: EQ-3142102
+        errorMessage: Connection has duplicate buyer-side VLAN ID for port or the same VLAN ID is in the process of being deleted and should be freed up soon
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: /aSide/accessPoint/linkProtocol
+      - errorCode: EQ-3142535
+        errorMessage: The connection bandwidth provided in the connection request exceeds the bandwidth Limit on ServiceToken
+        details: Please enter bandwidth less than the Speed limit on ServiceToken
+        correlationId: test
+        additionalInfo:
+        - property: /aSide/serviceToken/uuid
+      - errorCode: EQ-3142536
+        errorMessage: Remote connection cannot be created with the provided ServiceToken
+        details: Only local Connection can be created using this ServiceToken
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/port/uuid
+      - errorCode: EQ-3142701
+        errorMessage: The connection bandwidth provided in the connection request exceeds the bandwidth Limit on ServiceToken
+        details: not an authorized user
+        correlationId: test
+      - errorCode: EQ-3142501
+        errorMessage: Invalid input
+        correlationId: 20d32a80-0d61-4333-bc03-707b591ae2f5
+        additionalInfo:
+        - property: aSide/accessPoint/port/uuid
+      - errorCode: EQ-3142509
+        errorMessage: Connection already deleted
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: uuid
+      - errorCode: EQ-3142510
+        errorMessage: Connection is in transient state
+        correlationId: 20d32a80-0d61-4333-bc03-707b591ae2f5
+        additionalInfo:
+        - property: uuid
+      - errorCode: EQ-3142221
+        errorMessage: The primary and secondary token provided have different bandwidth tiers. Please use two tokens that support the same bandwidth tiers
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/serviceToken/uuid
+      - errorCode: EQ-3142222
+        errorMessage: The primary and secondary tokens have different encapsulation types (Dot1Q or QinQ). Please use two tokens that support the same encapsulation type
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/serviceToken/uuid
+      - errorCode: EQ-3142223
+        errorMessage: The primary and secondary tokens belong to different projects. Please use two tokens that belong to the same project
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/serviceToken/uuid
+      - errorCode: EQ-3142224
+        errorMessage: The primary and secondary ports have different port speeds (bandwidth). Please use two tokens that support the same port speed
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/serviceToken/uuid
+      - errorCode: EQ-3142225
+        errorMessage: The primary and secondary tokens provided are the same. Please provide a different token
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/serviceToken/uuid
+      - errorCode: EQ-3142514
+        errorMessage: Redundancy group is required
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/group
+      - errorCode: EQ-3142515
+        errorMessage: Redundancy priority is required
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/priority
+      - errorCode: EQ-3142516
+        errorMessage: Invalid redundancy group
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/group
+      - errorCode: EQ-3142517
+        errorMessage: Invalid redundancy priority
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/priority
+      - errorCode: EQ-3142303
+        errorMessage: Only Primary connection allowed for this CSP
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/priority
+      - errorCode: EQ-3142320
+        errorMessage: For redundant connection, Service Profile should be the same
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/profile/uuid
+      - errorCode: EQ-3142021
+        errorMessage: For redundant connection, Fabric Cloud Router should be the same
+        correlationId: test
+        additionalInfo:
+        - property: /aSide/accessPoint/router/uuid
+      - errorCode: EQ-3142012
+        errorMessage: Fabric Cloud Router is not in PROVISIONED state
+        correlationId: test
+        additionalInfo:
+        - property: /aSide/accessPoint/router/uuid
+      - errorCode: EQ-3142301
+        errorMessage: Given profile does not exist
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/profile/uuid
+      - errorCode: EQ-3142302
+        errorMessage: Service provider does not exist in required zSide metro
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/location/metroCode
+      - errorCode: EQ-3142013
+        errorMessage: Invalid metro for Cloud Router connection
+        correlationId: test
+        additionalInfo:
+        - property: /aSide/accessPoint/router/uuid
+      - errorCode: EQ-3142304
+        errorMessage: Private connections are not allowed on public profiles
+        correlationId: test
+        additionalInfo:
+        - property: visibility
+      - errorCode: EQ-3142306
+        errorMessage: Requested bandwidth is not supported by service profile
+        correlationId: test
+        additionalInfo:
+        - property: /bandwidth
+      - errorCode: EQ-3142308
+        errorMessage: Authentication key is required
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/authenticationKey
+    UpdateNotificationEmail:
+      value:
+      - op: replace
+        path: /notifications/emails
+        value:
+        - test1@equinix.com
+        - test2@equinix.com
+    createZsideServiceTokenWithNetworkEvptree:
+      value:
+        type: VC_TOKEN
+        name: zside_Network_token
+        description: Zside_Network_token
+        connection:
+          type: EVPTREE_VC
+          allowRemoteConnection: true
+          supportedBandwidths:
+          - 10
+          - 50
+          - 200
+          zSide:
+            accessPointSelectors:
+            - type: NETWORK
+              network:
+                type: EVPTREE
+                uuid: 20d32a80-0d61-4333-bc03-707b591ae2f4
+        project:
+          projectId: 30ad25e2-53dc-11ed-bdc3-0242ac120002
+        expirationDateTime: 2021-03-18 06:43:49.980000+00:00
+        notifications:
+        - type: NOTIFICATION
+          emails:
+          - abc@company.com
+    createZsideServiceTokenWithVxlan:
+      value:
+        type: VC_TOKEN
+        name: Az_Zside_VxLAN_Pri_SV
+        description: Az_Zside_VxLAN_Pri_SV_Description
+        connection:
+          type: EVPL_VC
+          allowRemoteConnection: true
+          allowCustombandwidth: false
+          supportedBandwidths:
+          - 10
+          - 50
+          - 200
+          - 500
+          - 1000
+          - 2000
+          - 5000
+          - 10000
+          - 25000
+          - 50000
+          zSide:
+            accessPointSelectors:
+            - type: COLO
+              port:
+                uuid: b840a1db-5413-413f-97e0-328a5c00a874
+              linkProtocol:
+                type: VXLAN
+                vlanTag: '520000'
+        expirationDateTime: 2021-03-18 06:43:49.980000+00:00
+        notifications:
+        - type: NOTIFICATION
+          emails:
+          - abc@company.com
+    UpdateTokenDescription:
+      value:
+      - op: replace
+        path: /description
+        value: Az_Aside_Dot1Q_Pri_SV_NewDescription
+    getServiceToken:
+      value:
+        href: http://api.equinix.com/fabric/v4/serviceTokens/13ab7dc7-c18e-4f73-aa35-fc3a83966e79
+        type: VC_TOKEN
+        uuid: 13ab7dc7-c18e-4f73-aa35-fc3a83966e79
+        name: Az_Aside_Dot1Q_Pri_SV
+        description: Az_Aside_Dot1Q_Pri_SV_Description
+        state: INACTIVE
+        expirationDateTime: 2021-03-18 06:43:49.980000+00:00
+        connection:
+          type: EVPL_VC
+          allowRemoteConnection: false
+          bandwidthLimit: 50
+          allowCustomBandwidth: false
+          aSide:
+            accessPointSelectors:
+            - type: COLO
+              port:
+                href: http://api.equinix.com/fabric/v4/ports/b840a1db-5758-758f-97e0-328a5c00a874
+                type: XF_PORT
+                uuid: b840a1db-5758-758f-97e0-328a5c00a874
+              linkProtocol:
+                type: QINQ
+                vlanCTag: 1399
+                vlanSTag: 1388
+        notifications:
+        - type: NOTIFICATION
+          emails:
+          - abc@company.com
+          - provider@company.com
+        account:
+          orgId: 111437
+        changeLog:
+          createdBy: '843577'
+          createdDateTime: 2021-03-18 06:43:49.980000+00:00
+          updatedBy: '843577'
+          updatedDateTime: 2021-03-18 06:44:14.206000+00:00
+        project:
+          projectId: '995072000433550'
+    createZsideServiceTokenWithNetworkEvptree-Response:
+      value:
+        href: https://api.equinix.com/fabric/v4/serviceTokens/543b869e-a9ba-4492-860b-44927ce619f9
+        type: VC_TOKEN
+        uuid: 543b869e-a9ba-4492-860b-44927ce619f9
+        expirationDateTime: 2025-09-09 00:00:00+00:00
+        connection:
+          type: EVPTREE_VC
+          allowRemoteConnection: true
+          allowCustomBandwidth: false
+          supportedBandwidths:
+          - 10
+          - 50
+          - 200
+          - 500
+          - 1000
+          zSide:
+            accessPointSelectors:
+              type: NETWORK
+              network:
+                href: https://api.equinix.com/fabric/v4/networks/a3536780-6118-4374-ab65-23b17fc4cbbb
+                uuid: a3536780-6118-4374-ab65-23b17fc4cbbb
+                type: EVPTREE
+                name: EVPTREE-AMER-01
+                scope: REGIONAL
+                location:
+                  region: AMER
+        state: INACTIVE
+        notifications:
+          type: NOTIFICATION
+          emails:
+          - test@equinix.com
+          - user01@equinix.com
+        account:
+          orgId: 90837
+        changelog:
+          createdBy: 890742
+          createdDateTime: 2025-06-11 15:54:33.007000+00:00
+        project:
+          projectId: ac4d34ca-0d9c-4bc2-9aab-195743fee962
+    createZsideServiceTokenWithNetworkEvplan-Response:
+      value:
+        href: https://api.equinix.com/fabric/v4/serviceTokens/7cf92aa3-18b8-435c-b3fc-55e45b1ce964
+        type: VC_TOKEN
+        uuid: 7cf92aa3-18b8-435c-b3fc-55e45b1ce964
+        expirationDateTime: 2025-09-09 00:00:00+00:00
+        connection:
+          type: EVPLAN_VC
+          allowRemoteConnection: true
+          allowCustomBandwidth: false
+          supportedBandwidths:
+          - 10
+          - 50
+          - 200
+          - 500
+          zSide:
+            accessPointSelectors:
+              type: NETWORK
+              network:
+                href: https://api.equinix.com/fabric/v4/networks/5e17244a-b3e6-4830-aea3-5269d61efd8c
+                uuid: 5e17244a-b3e6-4830-aea3-5269d61efd8c
+                type: EVPLAN
+                name: AUTO-EVPLAN-939087546
+                scope: GLOBAL
+        state: INACTIVE
+        notifications:
+          type: NOTIFICATION
+          emails:
+          - test@equinix.com
+          - user01@equinix.com
+        account:
+          orgId: 90837
+        changelog:
+          createdBy: 890742
+          createdDateTime: 2025-06-11 15:23:19.237000+00:00
+        project:
+          projectId: ac4d34ca-0d9c-4bc2-9aab-195743fee962
+    400_UUID:
+      value:
+      - errorCode: EQ-3034016
+        errorMessage: Token not found
+        correlationId: 0963d003-ecda-4391-b166-8ccbf31d2d82
+        additionalInfo:
+        - property: tokenUuid
+          reason: Token not found
+    postServiceTokenActionResponse:
+      value:
+        href: http://api.equinix.com/fabric/v4/serviceTokens/13ab7dc7-c18e-4f73-aa35-fc3a83966e79
+        type: VC_TOKEN
+        uuid: 13ab7dc7-c18e-4f73-aa35-fc3a83966e79
+        name: Az_Aside_Dot1Q_Pri_SV
+        description: Az_Aside_Dot1Q_Pri_SV_Description
+        state: INACTIVE
+        expiry: 0
+        expirationDateTime: 2021-03-18 06:43:49.980000+00:00
+        connection:
+          type: EVPL_VC
+          allowRemoteConnection: false
+          bandwidthLimit: 50
+          allowCustomBandwidth: false
+          aSide:
+            accessPointSelectors:
+            - type: COLO
+              port:
+                href: http://api.equinix.com/fabric/v4/ports/b840a1db-5758-758f-97e0-328a5c00a874
+                type: XF_PORT
+                uuid: b840a1db-5758-758f-97e0-328a5c00a874
+              linkProtocol:
+                type: QINQ
+                vlanCTag: 1399
+                vlanSTag: 1388
+        notifications:
+        - type: NOTIFICATION
+          emails:
+          - abc@company.com
+          - provider@company.com
+        account:
+          orgId: 111437
+        changeLog:
+          createdBy: '843577'
+          createdDateTime: 2021-03-18 06:43:49.980000+00:00
+          updatedBy: '843577'
+          updatedDateTime: 2021-03-18 06:44:14.206000+00:00
+        project:
+          projectId: '995072000433550'
+    createServiceTokenDryRunResponse:
+      value:
+        type: VC_TOKEN
+        name: Aside_Dot1Q_Service_Token
+        description: Az_Aside_Dot1Q_DryRun_Description
+        expirationDateTime: 2024-12-18 06:43:49.980000+00:00
+        connection:
+          type: EVPL_VC
+          allowRemoteConnection: false
+          bandwidthLimit: 50
+          allowCustomBandwidth: false
+          aSide:
+            accessPointSelectors:
+            - type: COLO
+              port:
+                href: http://api.equinix.com/fabric/v4/ports/b840a1db-5758-758f-97e0-328a5c00a874
+                uuid: b840a1db-5758-758f-97e0-328a5c00a874
+              linkProtocol:
+                type: DOT1Q
+                vlanTag: 1399
+        notifications:
+        - type: NOTIFICATION
+          emails:
+          - abc@company.com
+          - provider@company.com
+    createServiceTokenWithDot1Q:
+      value:
+        type: VC_TOKEN
+        name: Az_Aside_Dot1Q_Pri_SV
+        description: Az_Aside_Dot1Q_Pri_SV_Description
+        expirationDateTime: 2021-03-18 06:43:49.980000+00:00
+        connection:
+          type: EVPL_VC
+          allowRemoteConnection: false
+          bandwidthLimit: 50
+          allowCustomBandwidth: false
+          aSide:
+            accessPointSelectors:
+            - type: COLO
+              port:
+                uuid: b840a1db-5758-758f-97e0-328a5c00a874
+              linkProtocol:
+                type: DOT1Q
+                vlanTag: 1399
+        notifications:
+        - type: NOTIFICATION
+          emails:
+          - abc@company.com
+          - provider@company.com
+    createZsideServiceTokenWithNetworkEplan:
+      value:
+        type: VC_TOKEN
+        name: zside_Network_token
+        description: Zside_Network_token
+        connection:
+          type: EPLAN_VC
+          allowRemoteConnection: true
+          supportedBandwidths:
+          - 10
+          - 50
+          - 200
+          zSide:
+            accessPointSelectors:
+            - type: NETWORK
+              network:
+                type: EPLAN
+                uuid: 20d32a80-0d61-4333-bc03-707b591ae2f4
+        project:
+          projectId: 30ad25e2-53dc-11ed-bdc3-0242ac120002
+        expirationDateTime: 2021-03-18 06:43:49.980000+00:00
+        notifications:
+        - type: NOTIFICATION
+          emails:
+          - abc@company.com
+    getServiceToken-DryRun:
+      value:
+        href: https://api.equinix.com/fabric/v4/serviceTokens/ea40918e-9b39-4045-8be8-0beaa7eb5ce1
+        type: VC_TOKEN
+        uuid: ea40918e-9b39-4045-8be8-0beaa7eb5ce1
+        name: My-Token
+        state: INACTIVE
+        expiryDateTime: 2020-05-31 10:30:00+00:00
+        connection:
+          type: EVPL_VC
+          bandwidthLimit: 100
+          allowRemoteConnection: false
+          allowCustomBandwidth: false
+          aSide:
+            accessPointSelectors:
+            - type: COLO
+              port:
+                href: http://api.equinix.com/fabric/v4/ports/b840a1db-5758-758f-97e0-328a5c00a874
+                type: XF_PORT
+                uuid: b840a1db-5758-758f-97e0-328a5c00a874
+              linkProtocol:
+                type: QINQ
+                vlanCTag: 1399
+                vlanSTag: 1388
+        account:
+          orgId: 111437
+        notifications:
+        - type: NOTIFICATION
+          emails:
+          - user1@example.com
+          - user2@example.com
+        changeLog:
+          createdBy: 843577
+          createdDateTime: 2020-05-21 10:30:00+00:00
+    Resend_Service_Token:
+      value:
+        type: RESEND_EMAIL_NOTIFICATION
+    createServiceTokenDryRunRequest:
+      value:
+        type: VC_TOKEN
+        name: Aside_Dot1Q_Service_Token
+        description: Az_Aside_Dot1Q_DryRun_Description
+        expirationDateTime: 2024-12-18 06:43:49.980000+00:00
+        connection:
+          type: EVPL_VC
+          allowRemoteConnection: false
+          bandwidthLimit: 50
+          allowCustomBandwidth: false
+          aSide:
+            accessPointSelectors:
+            - type: COLO
+              port:
+                uuid: b840a1db-5758-758f-97e0-328a5c00a874
+              linkProtocol:
+                type: DOT1Q
+                vlanTag: 1399
+        notifications:
+        - type: NOTIFICATION
+          emails:
+          - abc@company.com
+          - provider@company.com
+    500_internal_error:
+      value:
+      - errorCode: EQ-3041011
+        errorMessage: Bad request - Internal Server Error. Please check the request payload and submit again.
+        details: Please contact support@equinix.com for more info
+        correlationId: 9048796775044a60-39cb-4ccc-b272-b80f126e5408
+        additionalInfo:
+        - reason: Please contact support@equinix.com for more info
+    UpdateAsideTokenBandwidth:
+      value:
+      - op: replace
+        path: /connection/bandwidthLimit
+        value: 100
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

@@ -1,0 +1,897 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication Events API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- description: Event Management
+  name: Events
+paths:
+  /connections/{connection_id}/events:
+    get:
+      description: Returns a list of the interconnection events
+      operationId: findInterconnectionEvents
+      parameters:
+      - description: Interconnection UUID
+        in: path
+        name: connection_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: 'Nested attributes to exclude. Excluded objects will return only the href
+
+          attribute. Attribute names can be dotted (up to 3 levels) to exclude deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: exclude
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Page to return
+        in: query
+        name: page
+        schema:
+          default: 1
+          format: int32
+          maximum: 100000
+          minimum: 1
+          type: integer
+      - description: Items returned per page
+        in: query
+        name: per_page
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Retrieve interconnection events
+      tags:
+      - Events
+      x-equinix-metal-paginated-property: Events
+  /connections/{connection_id}/ports/{id}/events:
+    get:
+      description: Returns a list of the interconnection port events
+      operationId: findInterconnectionPortEvents
+      parameters:
+      - description: Interconnection UUID
+        in: path
+        name: connection_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: Interconnection Port UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: 'Nested attributes to exclude. Excluded objects will return only the href
+
+          attribute. Attribute names can be dotted (up to 3 levels) to exclude deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: exclude
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Page to return
+        in: query
+        name: page
+        schema:
+          default: 1
+          format: int32
+          maximum: 100000
+          minimum: 1
+          type: integer
+      - description: Items returned per page
+        in: query
+        name: per_page
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Retrieve interconnection port events
+      tags:
+      - Events
+  /devices/{id}/events:
+    get:
+      description: Returns a list of events pertaining to a specific device
+      operationId: findDeviceEvents
+      parameters:
+      - description: Device UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: 'Nested attributes to exclude. Excluded objects will return only the href
+
+          attribute. Attribute names can be dotted (up to 3 levels) to exclude deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: exclude
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Page to return
+        in: query
+        name: page
+        schema:
+          default: 1
+          format: int32
+          maximum: 100000
+          minimum: 1
+          type: integer
+      - description: Items returned per page
+        in: query
+        name: per_page
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Retrieve device's events
+      tags:
+      - Events
+      x-equinix-metal-paginated-property: Events
+  /events:
+    get:
+      description: Returns a list of the current user’s events
+      operationId: findEvents
+      parameters:
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: 'Nested attributes to exclude. Excluded objects will return only the href
+
+          attribute. Attribute names can be dotted (up to 3 levels) to exclude deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: exclude
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Page to return
+        in: query
+        name: page
+        schema:
+          default: 1
+          format: int32
+          maximum: 100000
+          minimum: 1
+          type: integer
+      - description: Items returned per page
+        in: query
+        name: per_page
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+      summary: Retrieve current user's events
+      tags:
+      - Events
+      x-equinix-metal-paginated-property: Events
+  /events/{id}:
+    get:
+      description: Returns a single event if the user has access
+      operationId: findEventById
+      parameters:
+      - description: Event UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: 'Nested attributes to exclude. Excluded objects will return only the href
+
+          attribute. Attribute names can be dotted (up to 3 levels) to exclude deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: exclude
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Retrieve an event
+      tags:
+      - Events
+  /organizations/{id}/events:
+    get:
+      description: Returns a list of events for a single organization
+      operationId: findOrganizationEvents
+      parameters:
+      - description: Organization UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: 'Nested attributes to exclude. Excluded objects will return only the href
+
+          attribute. Attribute names can be dotted (up to 3 levels) to exclude deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: exclude
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Page to return
+        in: query
+        name: page
+        schema:
+          default: 1
+          format: int32
+          maximum: 100000
+          minimum: 1
+          type: integer
+      - description: Items returned per page
+        in: query
+        name: per_page
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Retrieve organization's events
+      tags:
+      - Events
+      x-equinix-metal-paginated-property: Events
+  /projects/{id}/events:
+    get:
+      description: Returns a list of events for a single project
+      operationId: findProjectEvents
+      parameters:
+      - description: Project UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: 'Nested attributes to exclude. Excluded objects will return only the href
+
+          attribute. Attribute names can be dotted (up to 3 levels) to exclude deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: exclude
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Page to return
+        in: query
+        name: page
+        schema:
+          default: 1
+          format: int32
+          maximum: 100000
+          minimum: 1
+          type: integer
+      - description: Items returned per page
+        in: query
+        name: per_page
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Retrieve project's events
+      tags:
+      - Events
+      x-equinix-metal-paginated-property: Events
+  /routes/{id}/events:
+    get:
+      description: Returns a list of the VRF route events
+      operationId: findVrfRouteEvents
+      parameters:
+      - description: VRF Route UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: 'Nested attributes to exclude. Excluded objects will return only the href
+
+          attribute. Attribute names can be dotted (up to 3 levels) to exclude deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: exclude
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Page to return
+        in: query
+        name: page
+        schema:
+          default: 1
+          format: int32
+          maximum: 100000
+          minimum: 1
+          type: integer
+      - description: Items returned per page
+        in: query
+        name: per_page
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Retrieve VRF route events
+      tags:
+      - Events
+  /virtual-circuits/{id}/events:
+    get:
+      description: Returns a list of the virtual circuit events
+      operationId: findVirtualCircuitEvents
+      parameters:
+      - description: Virtual Circuit UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: 'Nested attributes to exclude. Excluded objects will return only the href
+
+          attribute. Attribute names can be dotted (up to 3 levels) to exclude deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: exclude
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Page to return
+        in: query
+        name: page
+        schema:
+          default: 1
+          format: int32
+          maximum: 100000
+          minimum: 1
+          type: integer
+      - description: Items returned per page
+        in: query
+        name: per_page
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Retrieve virtual circuit events
+      tags:
+      - Events
+components:
+  schemas:
+    EventList:
+      example:
+        meta:
+          next:
+            href: href
+          total: 0
+          last:
+            href: href
+          previous:
+            href: href
+          last_page: 1
+          self:
+            href: href
+          first:
+            href: href
+          current_page: 6
+        events:
+        - interpolated: interpolated
+          relationships:
+          - href: href
+          - href: href
+          ip: ip
+          modified_by: '{}'
+          created_at: 2000-01-23 04:56:07+00:00
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          state: state
+          body: body
+          type: type
+        - interpolated: interpolated
+          relationships:
+          - href: href
+          - href: href
+          ip: ip
+          modified_by: '{}'
+          created_at: 2000-01-23 04:56:07+00:00
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          state: state
+          body: body
+          type: type
+      properties:
+        events:
+          items:
+            $ref: '#/components/schemas/Event'
+          type: array
+        meta:
+          $ref: '#/components/schemas/Meta'
+      type: object
+    Meta:
+      example:
+        next:
+          href: href
+        total: 0
+        last:
+          href: href
+        previous:
+          href: href
+        last_page: 1
+        self:
+          href: href
+        first:
+          href: href
+        current_page: 6
+      properties:
+        first:
+          $ref: '#/components/schemas/Href'
+        last:
+          $ref: '#/components/schemas/Href'
+        next:
+          $ref: '#/components/schemas/Href'
+        previous:
+          $ref: '#/components/schemas/Href'
+        self:
+          $ref: '#/components/schemas/Href'
+        total:
+          type: integer
+        current_page:
+          type: integer
+        last_page:
+          type: integer
+      type: object
+    Event:
+      example:
+        interpolated: interpolated
+        relationships:
+        - href: href
+        - href: href
+        ip: ip
+        modified_by: '{}'
+        created_at: 2000-01-23 04:56:07+00:00
+        href: href
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        state: state
+        body: body
+        type: type
+      properties:
+        body:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        href:
+          type: string
+        id:
+          format: uuid
+          type: string
+        interpolated:
+          type: string
+        relationships:
+          items:
+            $ref: '#/components/schemas/Href'
+          type: array
+        state:
+          type: string
+        type:
+          type: string
+        modified_by:
+          type: object
+        ip:
+          type: string
+      type: object
+    Error:
+      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
+      properties:
+        error:
+          description: A description of the error that caused the request to fail.
+          type: string
+        errors:
+          description: A list of errors that contributed to the request failing.
+          items:
+            description: An error message that contributed to the request failing.
+            type: string
+          type: array
+      type: object
+    Href:
+      example:
+        href: href
+      properties:
+        href:
+          type: string
+      required:
+      - href
+      type: object
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

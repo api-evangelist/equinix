@@ -1,0 +1,583 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication Metros API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- description: Metro Management. Check out the product docs to learn more about [Metros](https://metal.equinix.com/developers/docs/locations/metros/).
+  externalDocs:
+    url: https://metal.equinix.com/developers/docs/locations/metros/
+  name: Metros
+paths:
+  /locations/metros:
+    get:
+      description: Provides a listing of available metros
+      operationId: findMetros
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetroList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+      summary: Retrieve all metros
+      tags:
+      - Metros
+  /locations/metros/{id}:
+    get:
+      description: Show the details for a metro, including name, code, and country.
+      operationId: getMetro
+      parameters:
+      - description: Metro UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metro'
+          description: ok
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Retrieve a specific Metro's details
+      tags:
+      - Metros
+  /fabric/v4/metros:
+    get:
+      tags:
+      - Metros
+      summary: Get all Metros
+      description: GET All Subscriber Metros with an option query parameter to return all Equinix Fabric metros in which the customer has a presence, as well as latency data for each location.
+      operationId: getMetros
+      parameters:
+      - name: presence
+        in: query
+        description: User On Boarded Metros based on Fabric resource availability
+        required: false
+        schema:
+          $ref: '#/components/schemas/Presence'
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          type: integer
+        example: 1
+      - name: limit
+        in: query
+        description: number of records to fetch
+        required: false
+        schema:
+          type: integer
+        example: 10
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetroResponse'
+              examples:
+                metroExample:
+                  $ref: '#/components/examples/metro'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetroErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400_metros'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetroErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401_metros'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetroErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_metros'
+  /fabric/v4/metros/{metroCode}:
+    get:
+      tags:
+      - Metros
+      summary: Get Metro by Code
+      description: GET Metros retrieves all Equinix Fabric metros, as well as latency data between each metro location.
+      operationId: getMetroByCode
+      parameters:
+      - name: metroCode
+        in: path
+        description: Metro Code
+        required: true
+        schema:
+          $ref: '#/components/schemas/MetroCode'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metro_2'
+              examples:
+                metroExample:
+                  $ref: '#/components/examples/metroByCode'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetroErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400_metroCode'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetroErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401_metros'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetroErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_metros'
+components:
+  schemas:
+    MetroList:
+      example:
+        metros:
+        - country: country
+          code: code
+          name: name
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - country: country
+          code: code
+          name: name
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        metros:
+          items:
+            $ref: '#/components/schemas/Metro'
+          type: array
+      type: object
+    Error:
+      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
+      properties:
+        error:
+          description: A description of the error that caused the request to fail.
+          type: string
+        errors:
+          description: A list of errors that contributed to the request failing.
+          items:
+            description: An error message that contributed to the request failing.
+            type: string
+          type: array
+      type: object
+    Metro:
+      example:
+        country: country
+        code: code
+        name: name
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        code:
+          type: string
+        country:
+          type: string
+        id:
+          format: uuid
+          type: string
+        name:
+          type: string
+      type: object
+    Metro_2:
+      type: object
+      properties:
+        href:
+          type: string
+          description: The Canonical URL at which the resource resides.
+        type:
+          type: string
+          description: Indicator of a Fabric Metro
+        code:
+          type: string
+          description: Code Assigned to an Equinix IBX data center in a specified metropolitan area.
+        region:
+          type: string
+          description: Board geographic area in which the data center is located
+        name:
+          type: string
+          description: Name of the region in which the data center is located.
+        country:
+          type: string
+          description: Country code in which the data center is located.
+        equinixAsn:
+          type: integer
+          description: Autonomous system number (ASN) for a specified Fabric metro. The ASN is a unique identifier that carries the network routing protocol and exchanges that data with other internal systems via border gateway protocol.
+          format: int64
+        localVCBandwidthMax:
+          type: integer
+          description: This field holds Max Connection speed with in the metro
+          format: int64
+        geoCoordinates:
+          $ref: '#/components/schemas/GeoCoordinates'
+        connectedMetros:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConnectedMetro'
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/services'
+        geoScopes:
+          type: array
+          description: List of supported geographic boundaries of a Fabric Metro.
+          items:
+            $ref: '#/components/schemas/GeoScopeType'
+      description: GET Metros retrieves all Equinix? Fabric? metros, as well as latency data for each location.This performance data helps network planning engineers and administrators make strategic decisions about port locations and traffic routes.
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    GeoScopeType:
+      type: string
+      description: Geographic boundary types
+      enum:
+      - CANADA
+      - CONUS
+      - JAPAN
+      - UK
+      - AUSTRALIA
+      - BRAZIL
+      - SWITZERLAND
+    GeoCoordinates:
+      type: object
+      properties:
+        latitude:
+          type: number
+          description: Latitude of a Fabric Metro
+          format: double
+        longitude:
+          type: number
+          description: Longitude of a Fabric Metro
+          format: double
+      description: Geographic location data of Fabric Metro
+    Presence:
+      type: string
+      description: Presence
+      enum:
+      - MY_PORTS
+    MetroErrorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetroError'
+    MetroResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: List of Fabric Metros.
+          items:
+            $ref: '#/components/schemas/Metro_2'
+      description: GET Metros retrieves all Equinix? Fabric? metros, as well as latency data for each location.This performance data helps network planning engineers and administrators make strategic decisions about port locations and traffic routes.
+    MetroCode:
+      type: string
+      description: Metro Code
+    ConnectedMetro:
+      type: object
+      properties:
+        href:
+          type: string
+          description: The Canonical URL at which the resource resides.
+        code:
+          type: string
+          description: Code assigned to an Equinix International Business Exchange (IBX) data center in a specified metropolitan area.
+        avgLatency:
+          type: number
+          description: Average latency (in milliseconds[ms]) between two specified metros.
+        remoteVCBandwidthMax:
+          type: integer
+          description: This field holds the Max Connection speed with connected metros
+          format: int64
+      description: Arrays of objects containing latency data for the specified metros
+    MetroError:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          type: string
+          enum:
+          - EQ-3036001
+          - EQ-3036013
+          - EQ-3036030
+          - EQ-3036100
+        errorMessage:
+          type: string
+          enum:
+          - Unauthorized
+          - Invalid Query Parameter
+          - Invalid Path Parameter
+          - Invalid Query or Path Parameter
+          - Internal Server Error
+          - Metro Not Found
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error with details
+      discriminator:
+        propertyName: errorCode
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    services:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of Service
+      description: Arrays of objects containing type of services supported in the specified metros
+  examples:
+    500_metros:
+      value:
+      - errorCode: EQ-3036030
+        errorMessage: Internal Server Error
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        additionalInfo:
+        - reason: An Internal Server Error occured
+    401_metros:
+      value:
+      - errorCode: EQ-3036001
+        errorMessage: Unauthorized
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        additionalInfo:
+        - reason: You are unauthorized to perform this operation
+    metro:
+      value:
+        pagination:
+          offset: 0
+          limit: 75
+          total: 1
+        data:
+        - href: https://api.equinix.com/v4/fabric/metros/AM
+          type: XF_METRO
+          code: AM
+          name: Amsterdam
+          region: EMEA
+          equinixAsn: 60000
+          localVCBandwidthMax: 10000
+          geoCoordinates:
+            latitude: 52.30049
+            longitude: 4.942603
+          connectedMetros:
+          - href: https://api.equinix.com/v4/fabric/metros/MX
+            code: MX
+            avgLatency: 132
+            remoteVCBandwidthMax: 10000
+          - href: https://api.equinix.com/v4/fabric/metros/AM
+            code: HH
+            avgLatency: 8.62
+            remoteVCBandwidthMax: 10000
+          - href: https://api.equinix.com/v4/fabric/metros/SL
+            code: SL
+            avgLatency: 229
+            remoteVCBandwidthMax: 10000
+          - href: https://api.equinix.com/v4/fabric/metros/SO
+            code: SO
+            avgLatency: 36.3
+            remoteVCBandwidthMax: 50000
+          - href: https://api.equinix.com/v4/fabric/metros/IL
+            code: IL
+            avgLatency: 44.8
+            remoteVCBandwidthMax: 50000
+          - href: https://api.equinix.com/v4/fabric/metros/LS
+            code: LS
+            avgLatency: 36.6
+            remoteVCBandwidthMax: 50000
+          - href: https://api.equinix.com/v4/fabric/metros/BA
+            code: BA
+            avgLatency: 32.6
+            remoteVCBandwidthMax: 50000
+          - href: https://api.equinix.com/v4/fabric/metros/BL
+            code: BL
+            avgLatency: 3.28
+            remoteVCBandwidthMax: 50000
+          - href: https://api.equinix.com/v4/fabric/metros/GV
+            code: GV
+            avgLatency: 15.3
+            remoteVCBandwidthMax: 50000
+          - href: https://api.equinix.com/v4/fabric/metros/LD
+            code: LD
+            avgLatency: 5.85
+            remoteVCBandwidthMax: 50000
+          services:
+          - type: ETHERNET_IP_SERVICE
+          - type: TIME_SERVICE
+          geoScopes:
+          - CANADA
+          - CONUS
+          - JAPAN
+          - UK
+          - AUSTRALIA
+          - BRAZIL
+          - SWITZERLAND
+    400_metros:
+      value:
+      - errorCode: EQ-3036013
+        errorMessage: Invalid Query Parameter
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        additionalInfo:
+        - property: presence
+          reason: Allowed value for presence is MY_PORTS
+    400_metroCode:
+      value:
+      - errorCode: EQ-3036013
+        errorMessage: Invalid Path Parameter
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        additionalInfo:
+        - property: pathparameter-metroCode
+          reason: Provide valid metro code
+    metroByCode:
+      value:
+        href: https://api.equinix.com/v4/fabric/metros/AM
+        type: XF_METRO
+        code: AM
+        region: EMEA
+        name: Amsterdam
+        equinixAsn: 60000
+        localVCBandwidthMax: 50000
+        geoCoordinates:
+          latitude: 52.30049
+          longitude: 4.942603
+        connectedMetros:
+        - href: https://api.equinix.com/v4/fabric/metros/MX
+          code: MX
+          avgLatency: 132
+          remoteVCBandwidthMax: 50000
+        - href: https://api.equinix.com/v4/fabric/metros/HH
+          code: HH
+          avgLatency: 8.62
+          remoteVCBandwidthMax: 50000
+        - href: https://api.equinix.com/v4/fabric/metros/SL
+          code: SL
+          avgLatency: 229
+          remoteVCBandwidthMax: 50000
+        - href: https://api.equinix.com/v4/fabric/metros/SO
+          code: SO
+          avgLatency: 36.3
+          remoteVCBandwidthMax: 10000
+        - href: https://api.equinix.com/v4/fabric/metros/IL
+          code: IL
+          avgLatency: 44.8
+          remoteVCBandwidthMax: 10000
+        - href: https://api.equinix.com/v4/fabric/metros/LS
+          code: LS
+          avgLatency: 36.6
+          remoteVCBandwidthMax: 10000
+        - href: https://api.equinix.com/v4/fabric/metros/AM
+          code: BA
+          avgLatency: 32.6
+          remoteVCBandwidthMax: 10000
+        - href: https://api.equinix.com/v4/fabric/metros/BL
+          code: BL
+          avgLatency: 3.28
+          remoteVCBandwidthMax: 10000
+        - href: https://api.equinix.com/v4/fabric/metros/GV
+          code: GV
+          avgLatency: 15.3
+          remoteVCBandwidthMax: 10000
+        - href: https://api.equinix.com/v4/fabric/metros/LD
+          code: LD
+          avgLatency: 5.85
+          remoteVCBandwidthMax: 10000
+        services:
+        - type: ETHERNET_IP_SERVICE
+        - type: TIME_SERVICE
+        geoScopes:
+        - CANADA
+        - CONUS
+        - JAPAN
+        - UK
+        - AUSTRALIA
+        - BRAZIL
+        - SWITZERLAND
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

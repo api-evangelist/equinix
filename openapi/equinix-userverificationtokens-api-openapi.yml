@@ -1,0 +1,134 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication UserVerificationTokens API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- description: 'User Verification Token Management
+
+    '
+  externalDocs:
+    url: https://metal.equinix.com/developers/docs/accounts/organizations/#managing-team-members
+  name: UserVerificationTokens
+paths:
+  /verify-email:
+    post:
+      description: Creates an email verification request
+      operationId: createValidationRequest
+      parameters:
+      - description: Email for verification request
+        in: query
+        name: login
+        required: true
+        schema:
+          type: string
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        '201':
+          description: created
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Create an email verification request
+      tags:
+      - UserVerificationTokens
+    put:
+      description: Consumes an email verification token and verifies the user associated with it.
+      operationId: consumeVerificationRequest
+      parameters:
+      - description: 'Nested attributes to include. Included objects will return their full
+
+          attributes. Attribute names can be dotted (up to 3 levels) to included deeply
+
+          nested objects.'
+        explode: false
+        in: query
+        name: include
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyEmail'
+        description: Email to create
+        required: true
+      responses:
+        '200':
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Verify a user using an email verification token
+      tags:
+      - UserVerificationTokens
+components:
+  schemas:
+    VerifyEmail:
+      example:
+        user_token: user_token
+      properties:
+        user_token:
+          description: User verification token
+          type: string
+          writeOnly: true
+      required:
+      - user_token
+      type: object
+    Error:
+      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
+      properties:
+        error:
+          description: A description of the error that caused the request to fail.
+          type: string
+        errors:
+          description: A list of errors that contributed to the request failing.
+          items:
+            description: An error message that contributed to the request failing.
+            type: string
+          type: array
+      type: object
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

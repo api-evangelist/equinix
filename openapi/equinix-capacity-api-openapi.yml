@@ -1,0 +1,408 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication Capacity API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- description: 'Capacity Management. Check out the product docs to learn more about [Capacity](https://metal.equinix.com/developers/docs/locations/capacity/).
+
+    '
+  externalDocs:
+    url: https://metal.equinix.com/developers/docs/locations/capacity/
+  name: Capacity
+paths:
+  /capacity:
+    get:
+      description: Returns a list of facilities and plans with their current capacity.
+      operationId: findCapacityForFacility
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                capacity:
+                  am6:
+                    c2.medium.x86:
+                      level: string
+                    m2.xlarge.x86:
+                      level: string
+                  da11:
+                    c2.medium.x86:
+                      level: string
+                    m2.xlarge.x86:
+                      level: string
+                  sv15:
+                    c2.medium.x86:
+                      level: string
+                    m2.xlarge.x86:
+                      level: string
+              schema:
+                $ref: '#/components/schemas/CapacityList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+      summary: View capacity
+      tags:
+      - Capacity
+    post:
+      deprecated: true
+      description: Validates if a deploy can be fulfilled.
+      operationId: checkCapacityForFacility
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CapacityInput'
+        description: Facility to check capacity in
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CapacityCheckPerFacilityList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Check capacity
+      tags:
+      - Capacity
+  /capacity/metros:
+    get:
+      description: Returns a list of metros and plans with their current capacity.
+      operationId: findCapacityForMetro
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                capacity:
+                  am:
+                    c2.medium.x86:
+                      level: string
+                    m2.xlarge.x86:
+                      level: string
+                  da:
+                    c2.medium.x86:
+                      level: string
+                    m2.xlarge.x86:
+                      level: string
+                  dc:
+                    c2.medium.x86:
+                      level: string
+                    m2.xlarge.x86:
+                      level: string
+              schema:
+                $ref: '#/components/schemas/CapacityList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+      summary: View capacity for metros
+      tags:
+      - Capacity
+    post:
+      description: Validates if a deploy can be fulfilled in a metro.
+      operationId: checkCapacityForMetro
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CapacityInput'
+        description: Metro to check capacity in
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CapacityCheckPerMetroList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unprocessable entity
+      summary: Check capacity for a metro
+      tags:
+      - Capacity
+  /organizations/{id}/capacity:
+    get:
+      description: Returns a list of facilities and plans with their current capacity.
+      operationId: findOrganizationCapacityPerFacility
+      parameters:
+      - description: Organization UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                capacity:
+                  am6:
+                    c2.medium.x86:
+                      level: string
+                    m2.xlarge.x86:
+                      level: string
+                  da11:
+                    c2.medium.x86:
+                      level: string
+                    m2.xlarge.x86:
+                      level: string
+                  sv15:
+                    c2.medium.x86:
+                      level: string
+                    m2.xlarge.x86:
+                      level: string
+              schema:
+                $ref: '#/components/schemas/CapacityList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+      summary: View available hardware plans per Facility for given organization
+      tags:
+      - Capacity
+  /organizations/{id}/capacity/metros:
+    get:
+      description: Returns a list of metros and plans with their current capacity.
+      operationId: findOrganizationCapacityPerMetro
+      parameters:
+      - description: Organization UUID
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                capacity:
+                  am:
+                    c2.medium.x86:
+                      level: string
+                    m2.xlarge.x86:
+                      level: string
+                  da:
+                    c2.medium.x86:
+                      level: string
+                    m2.xlarge.x86:
+                      level: string
+                  dc:
+                    c2.medium.x86:
+                      level: string
+                    m2.xlarge.x86:
+                      level: string
+              schema:
+                $ref: '#/components/schemas/CapacityList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: forbidden
+      summary: View available hardware plans per Metro for given organization
+      tags:
+      - Capacity
+components:
+  schemas:
+    CapacityLevelPerBaremetal:
+      example:
+        level: level
+      properties:
+        level:
+          type: string
+      type: object
+    ServerInfo:
+      example:
+        quantity: quantity
+        metro: metro
+        facility: facility
+        plan: plan
+      properties:
+        facility:
+          deprecated: true
+          type: string
+        metro:
+          description: The metro ID or code to check the capacity in.
+          type: string
+        plan:
+          description: The plan ID or slug to check the capacity of.
+          type: string
+        quantity:
+          description: The number of servers to check the capacity of.
+          type: string
+      type: object
+    CapacityCheckPerMetroInfo:
+      example:
+        quantity: quantity
+        metro: metro
+        available: true
+        plan: plan
+      properties:
+        available:
+          description: Returns true if there is enough capacity in the metro to fulfill the quantity set. Returns false if there is not enough.
+          type: boolean
+        metro:
+          description: The metro ID or code sent to check capacity.
+          type: string
+        plan:
+          description: The plan ID or slug sent to check capacity.
+          type: string
+        quantity:
+          description: The number of servers sent to check capacity.
+          type: string
+      type: object
+    Error:
+      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
+      properties:
+        error:
+          description: A description of the error that caused the request to fail.
+          type: string
+        errors:
+          description: A list of errors that contributed to the request failing.
+          items:
+            description: An error message that contributed to the request failing.
+            type: string
+          type: array
+      type: object
+    CapacityList:
+      example:
+        capacity:
+          key:
+            key:
+              level: level
+      properties:
+        capacity:
+          additionalProperties:
+            additionalProperties:
+              $ref: '#/components/schemas/CapacityLevelPerBaremetal'
+            type: object
+          type: object
+      type: object
+    CapacityCheckPerFacilityInfo:
+      example:
+        quantity: quantity
+        available: true
+        facility: facility
+        plan: plan
+      properties:
+        available:
+          type: boolean
+        facility:
+          type: string
+        plan:
+          type: string
+        quantity:
+          type: string
+      type: object
+    CapacityCheckPerFacilityList:
+      example:
+        servers:
+        - quantity: quantity
+          available: true
+          facility: facility
+          plan: plan
+        - quantity: quantity
+          available: true
+          facility: facility
+          plan: plan
+      properties:
+        servers:
+          items:
+            $ref: '#/components/schemas/CapacityCheckPerFacilityInfo'
+          type: array
+      type: object
+    CapacityCheckPerMetroList:
+      example:
+        servers:
+        - quantity: quantity
+          metro: metro
+          available: true
+          plan: plan
+        - quantity: quantity
+          metro: metro
+          available: true
+          plan: plan
+      properties:
+        servers:
+          items:
+            $ref: '#/components/schemas/CapacityCheckPerMetroInfo'
+          type: array
+      type: object
+    CapacityInput:
+      example:
+        servers:
+        - quantity: quantity
+          metro: metro
+          facility: facility
+          plan: plan
+        - quantity: quantity
+          metro: metro
+          facility: facility
+          plan: plan
+      properties:
+        servers:
+          items:
+            $ref: '#/components/schemas/ServerInfo'
+          type: array
+      type: object
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

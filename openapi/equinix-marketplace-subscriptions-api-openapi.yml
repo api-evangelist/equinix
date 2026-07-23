@@ -1,0 +1,356 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication Marketplace Subscriptions API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- name: Marketplace Subscriptions
+paths:
+  /fabric/v4/marketplaceSubscriptions/{subscriptionId}:
+    get:
+      tags:
+      - Marketplace Subscriptions
+      summary: Get Subscription
+      description: The API provides capability to get subscription
+      operationId: getSubscriptionById
+      parameters:
+      - name: subscriptionId
+        in: path
+        description: Subscription UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/SubscriptionId'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionResponse'
+              examples:
+                example:
+                  $ref: '#/components/examples/subscription-response'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500'
+components:
+  schemas:
+    SubscriptionRouterPackageType:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Cloud Router package code
+      description: Cloud Router Package Type
+    SubscriptionId:
+      type: string
+      description: Subscription Id
+      format: uuid
+      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+    SubscriptionTrial:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Free Trial Enabled
+        expiryDateTime:
+          type: string
+          description: Free Trial Expiry Date
+          format: date-time
+      description: Free Trial Subscription
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
+    Changelog:
+      type: object
+      properties:
+        createdBy:
+          type: string
+          description: Created by User Key
+          example: johnsmith
+        createdByFullName:
+          type: string
+          description: Created by User Full Name
+          example: John Smith
+        createdByEmail:
+          type: string
+          description: Created by User Email Address
+          example: john.smith@example.com
+        createdDateTime:
+          type: string
+          description: Created by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedBy:
+          type: string
+          description: Updated by User Key
+          example: johnsmith
+        updatedByFullName:
+          type: string
+          description: Updated by User Full Name
+          example: John Smith
+        updatedByEmail:
+          type: string
+          description: Updated by User Email Address
+          example: john.smith@example.com
+        updatedDateTime:
+          type: string
+          description: Updated by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        deletedBy:
+          type: string
+          description: Deleted by User Key
+          example: johnsmith
+        deletedByFullName:
+          type: string
+          description: Deleted by User Full Name
+          example: John Smith
+        deletedByEmail:
+          type: string
+          description: Deleted by User Email Address
+          example: john.smith@example.com
+        deletedDateTime:
+          type: string
+          description: Deleted by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+      description: Change log
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    SubscriptionEntitlementResponse:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Subscription Entitlement Id
+          format: uuid
+        quantityEntitled:
+          minimum: 0
+          type: integer
+          description: Quantity entitled for the subscription
+        quantityConsumed:
+          minimum: 0
+          type: integer
+          description: Quantity consumed from the entitlement
+        quantityAvailable:
+          minimum: 0
+          type: integer
+          description: Quantity available from the entitlement
+        asset:
+          $ref: '#/components/schemas/SubscriptionAsset'
+      description: Subscription entitlement
+    SubscriptionState:
+      type: string
+      description: Subscription State
+      enum:
+      - ACTIVE
+      - EXPIRED
+      - CANCELLED
+      - GRACE_PERIOD
+    SubscriptionAsset:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of the subscription asset ( XF_ROUTER ,IP_VC, IPWAN_VC )
+        package:
+          $ref: '#/components/schemas/SubscriptionRouterPackageType'
+        bandwidth:
+          type: integer
+          description: Bandwidth of the asset in Mbps
+      description: Asset information
+    SubscriptionResponse:
+      required:
+      - entitlements
+      - marketplace
+      - state
+      type: object
+      properties:
+        href:
+          type: string
+          description: Subscription URL
+          format: uri
+        uuid:
+          type: string
+          description: Unique identifier of the Subscription
+          format: uuid
+        state:
+          $ref: '#/components/schemas/SubscriptionState'
+        marketplace:
+          type: string
+          description: Marketplace Type
+          enum:
+          - AWS
+          - GCP
+          - AZURE
+          - REDHAT
+        offerType:
+          type: string
+          description: Marketplace Offer Type
+          enum:
+          - PUBLIC
+          - PRIVATE_OFFER
+        isAutoRenew:
+          type: boolean
+          description: Is Auto Renewal Enabled
+          example: true
+        offerId:
+          type: string
+          description: Marketplace Offer Id
+        trial:
+          $ref: '#/components/schemas/SubscriptionTrial'
+        metroCodes:
+          type: array
+          description: List of available metro
+          items:
+            type: string
+        entitlements:
+          type: array
+          description: List of entitlements associated with the subscription
+          items:
+            $ref: '#/components/schemas/SubscriptionEntitlementResponse'
+        changelog:
+          $ref: '#/components/schemas/Changelog'
+      description: Subscription Response
+  examples:
+    '500':
+      value:
+      - errorCode: EQ-3045004
+        errorMessage: Internal Server Error
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Internal Server Error
+    '415':
+      value:
+      - errorCode: EQ-3040016
+        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: contentType
+          reason: The payload format is in an unsupported format
+    subscription-response:
+      value:
+        href: https://api.equinix.com/fabric/v4/marketplaceSubscriptions/c5557b51-7938-4f7d-afaa-41b930903a5e
+        uuid: c5557b51-7938-4f7d-afaa-41b930903a5e
+        state: ACTIVE
+        marketplace: AWS
+        offerType: PRIVATE_OFFER
+        isAutoRenew: false
+        offerId: offer-wqquayy2jy25o
+        trial:
+          enabled: true
+        metroCodes:
+        - SV
+        - DC
+        entitlements:
+        - uuid: a15b6b20-b765-4bf7-a661-a3e9372d5435
+          quantityEntitled: 1
+          quantityConsumed: 0
+          quantityAvailable: 1
+          asset:
+            type: XF_ROUTER
+            package:
+              code: STANDARD
+        - uuid: 2e3a9041-19ce-4c80-add3-3e3a069fc5e9
+          quantityEntitled: 1
+          quantityConsumed: 0
+          quantityAvailable: 1
+          asset:
+            type: IP_VC
+            bandwidth: 500
+        - uuid: 9e30f661-d92e-4083-812f-db359807806e
+          quantityEntitled: 1
+          quantityConsumed: 0
+          quantityAvailable: 1
+          asset:
+            type: IPWAN_VC
+            bandwidth: 200
+        changeLog:
+          createdBy: adminuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: adminuser
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+    '403':
+      value:
+      - errorCode: EQ-3045003
+        errorMessage: Operation not allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Operation not allowed for current user
+    '401':
+      value:
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

@@ -1,0 +1,964 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication Agents API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- name: Agents
+paths:
+  /fabric/v4/agents:
+    get:
+      tags:
+      - Agents
+      summary: Get Agents
+      description: This API provides capability to retrieve agents
+      operationId: getAgents
+      parameters:
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          type: integer
+        example: 1
+      - name: limit
+        in: query
+        description: number of records to fetch
+        required: false
+        schema:
+          type: integer
+        example: 10
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentGetAllResponse'
+              examples:
+                Example:
+                  $ref: '#/components/examples/AgentGetAllResponseExample'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_404'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_500'
+    post:
+      tags:
+      - Agents
+      summary: Create Agent
+      description: This API provides capability to create user's agent
+      operationId: createAgent
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentPostRequest'
+            examples:
+              CreateAgent:
+                $ref: '#/components/examples/AgentPostRequestExample'
+        required: true
+      responses:
+        '202':
+          description: Agent object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agents'
+              examples:
+                AgentPostResponse:
+                  $ref: '#/components/examples/AgentPostResponseExample'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_403'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_500'
+  /fabric/v4/agents/{agentId}:
+    get:
+      tags:
+      - Agents
+      summary: Get Agent by UUID
+      description: This API provides capability to retrieve an agent by uuid
+      operationId: getAgentByUuid
+      parameters:
+      - name: agentId
+        in: path
+        description: Agent UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/AgentId'
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          type: integer
+        example: 1
+      - name: limit
+        in: query
+        description: number of records to fetch
+        required: false
+        schema:
+          type: integer
+        example: 10
+      responses:
+        '200':
+          description: Agent object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agents'
+              examples:
+                AgentByUuidResponse:
+                  $ref: '#/components/examples/AgentResponseExample'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_404'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_500'
+    delete:
+      tags:
+      - Agents
+      summary: Delete Agent by UUID
+      description: This API provides capability to delete an agent by uuid
+      operationId: deleteAgentByUuid
+      parameters:
+      - name: agentId
+        in: path
+        description: Agent UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/AgentId'
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          type: integer
+        example: 1
+      - name: limit
+        in: query
+        description: number of records to fetch
+        required: false
+        schema:
+          type: integer
+        example: 10
+      responses:
+        '202':
+          description: Agent object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agents'
+              examples:
+                AgentDeleteResponse:
+                  $ref: '#/components/examples/AgentDeleteResponseExample'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_404'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_500'
+    patch:
+      tags:
+      - Agents
+      summary: Update Agent by UUID
+      description: This API provides capability to update an agent by uuid
+      operationId: patchAgentByUuid
+      parameters:
+      - name: agentId
+        in: path
+        description: Agent UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/AgentId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentPatchRequest'
+            examples:
+              PatchAgent:
+                $ref: '#/components/examples/AgentPatchRequestExample'
+        required: true
+      responses:
+        '202':
+          description: Agent object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agents'
+              examples:
+                AgentPostResponse:
+                  $ref: '#/components/examples/AgentPatchResponseExample'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_404'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_500'
+  /fabric/v4/agents/{agentId}/activities:
+    get:
+      tags:
+      - Agents
+      summary: Get Agent Activities
+      description: This API provides capability to retrieve an agent activities
+      operationId: getAgentActivities
+      parameters:
+      - name: agentId
+        in: path
+        description: Agent UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/AgentId'
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          type: integer
+        example: 1
+      - name: limit
+        in: query
+        description: number of records to fetch
+        required: false
+        schema:
+          type: integer
+        example: 10
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentGetActivities'
+              examples:
+                Example:
+                  $ref: '#/components/examples/AgentActivitiesResponseExample'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_403'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_404'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/Agent_500'
+components:
+  schemas:
+    AgentGetAllResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/Agents'
+    AgentActivities:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Agent Activities URI
+          format: uuid
+        type:
+          type: string
+          description: type
+          example: AGENT_ACTIVITY
+        uuid:
+          type: string
+          description: Equinix-assigned agent operation identifier
+          format: uuid
+          readOnly: true
+        agent:
+          $ref: '#/components/schemas/Agent'
+        status:
+          type: string
+          description: Agent activities state COMPLETED, PENDING, PENDING_USER_INPUT, FAILED
+          example: COMPLETED
+        metadata:
+          $ref: '#/components/schemas/AgentActivities_metadata'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+      description: Agent Activities object
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    Messages:
+      type: array
+      description: List of chat messages
+      items:
+        $ref: '#/components/schemas/Messages_inner'
+    ToolCallInformation_inner:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of tools called
+        input:
+          type: string
+          description: Content of the tool request
+        response:
+          type: string
+          description: Content of the tool response
+    AgentTemplate:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Agent Template Uuid
+    AgentPatchRequest:
+      required:
+      - op
+      - path
+      - value
+      type: object
+      properties:
+        path:
+          type: string
+          description: path inside document leading to updated parameters for /name, /description, /enabled, and /configration/prompt
+          example: /name
+        op:
+          type: string
+          description: Handy shortcut for operation name
+          example: replace
+        value:
+          description: new value for updated parameter
+      description: Update Agent
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    AgentConfiguration:
+      type: object
+      properties:
+        prompt:
+          type: string
+          description: Agent configuration prompt to be used for agent specification
+    AgentId:
+      type: string
+      description: Agent UUID
+      format: uuid
+      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
+    Changelog:
+      type: object
+      properties:
+        createdBy:
+          type: string
+          description: Created by User Key
+          example: johnsmith
+        createdByFullName:
+          type: string
+          description: Created by User Full Name
+          example: John Smith
+        createdByEmail:
+          type: string
+          description: Created by User Email Address
+          example: john.smith@example.com
+        createdDateTime:
+          type: string
+          description: Created by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedBy:
+          type: string
+          description: Updated by User Key
+          example: johnsmith
+        updatedByFullName:
+          type: string
+          description: Updated by User Full Name
+          example: John Smith
+        updatedByEmail:
+          type: string
+          description: Updated by User Email Address
+          example: john.smith@example.com
+        updatedDateTime:
+          type: string
+          description: Updated by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        deletedBy:
+          type: string
+          description: Deleted by User Key
+          example: johnsmith
+        deletedByFullName:
+          type: string
+          description: Deleted by User Full Name
+          example: John Smith
+        deletedByEmail:
+          type: string
+          description: Deleted by User Email Address
+          example: john.smith@example.com
+        deletedDateTime:
+          type: string
+          description: Deleted by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+      description: Change log
+    AgentPostRequest:
+      required:
+      - agentTemplate
+      - name
+      - project
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          example: ANO_AGENT
+        name:
+          maxLength: 50
+          minLength: 3
+          type: string
+          description: Customer-provided agent name
+        description:
+          maxLength: 500
+          minLength: 0
+          type: string
+          description: Customer-provided agent description
+        enabled:
+          type: boolean
+          description: Customer-provided agent enabled status
+        project:
+          $ref: '#/components/schemas/Project'
+        agentTemplate:
+          $ref: '#/components/schemas/AgentTemplate'
+        configuration:
+          $ref: '#/components/schemas/AgentConfiguration'
+      description: Create Agent
+    ToolCallInformation:
+      type: array
+      description: List of tools called during the agent operation
+      items:
+        $ref: '#/components/schemas/ToolCallInformation_inner'
+    Project:
+      required:
+      - projectId
+      type: object
+      properties:
+        projectId:
+          type: string
+          description: Subscriber-assigned project ID
+          example: 44f4c4f8-2f39-494e-838c-d8e640591be5
+    AgentActivities_metadata:
+      type: object
+      properties:
+        chatMessage:
+          $ref: '#/components/schemas/ChatMessage'
+        toolCallInformation:
+          $ref: '#/components/schemas/ToolCallInformation'
+    AgentGetActivities:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/AgentActivities'
+    ChatMessage:
+      type: object
+      properties:
+        messages:
+          $ref: '#/components/schemas/Messages'
+      description: Chat message and tool call information during the agent operation
+    Agents:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Agent URI
+          format: uri
+          readOnly: true
+          example: https://api.equinix.com/fabric/v4/agents/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        type:
+          type: string
+          description: type
+          example: ANO_AGENT
+        uuid:
+          type: string
+          description: Equinix-assigned access point identifier
+          format: uuid
+          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        name:
+          type: string
+          description: Customer-provided agent name
+        description:
+          type: string
+          description: Customer-provided agent description
+        state:
+          type: string
+          description: Agent state
+          enum:
+          - PROVISIONING
+          - PROVISIONED
+          - REPROVISIONING
+          - DEPROVISIONING
+          - DEPROVISIONED
+          - FAILED
+        enabled:
+          type: boolean
+          description: Customer-provided agent enabled status
+        project:
+          $ref: '#/components/schemas/Project'
+        agentTemplate:
+          $ref: '#/components/schemas/AgentTemplate'
+        configuration:
+          $ref: '#/components/schemas/AgentConfiguration'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+      description: Agent object
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    Messages_inner:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Role of the message sender user or assistant
+          example: user
+        content:
+          type: string
+          description: Content of the chat message
+    Agent:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Agent Uuid
+          format: uuid
+        type:
+          type: string
+          example: ANO_AGENT
+  examples:
+    Agent_404:
+      value:
+      - errorCode: EQ-3164811
+        errorMessage: Agent not found or already deleted
+        correlationId: 9b6baf30-3eb0-458c-af8b-fff3fae32bc7
+        details: Agent not found or already deleted
+    Agent_401:
+      value:
+      - errorCode: EQ-3164013
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        additionalInfo:
+        - reason: You are unauthorized to perform this operation
+    AgentActivitiesResponseExample:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 1
+        data:
+        - href: https://api.equinix.com/fabric/v4/agents/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170/activities
+          type: AGENT_ACTIVITY
+          uuid: 123e4567-e89b-12d3-a456-426614174000
+          agent:
+            uuid: 3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+            type: ANO_AGENT
+          status: COMPLETED
+          metadata:
+            chatMessage:
+              messages:
+              - type: user
+                content: "Here are additional parameters: json\n{\n  \"connection_uuid\": \"456e4567-e89b-12d3-a456-426614174000\",\n  \"operand\": \"ABOVE\",\n  \"critical_threshold\": 400000,\n  \"stream_uuid\": 789e4567-e89b-12d3-a456-426614174000\n}. Follow the instructions step by step and complete all the operations."
+              - type: assistant
+                content: The agent is setup process has been successfully completed.
+              toolCallInformation:
+              - name: search_connections
+                input: '{"query":{"filter":{"and":[{"property":"/uuid","operator":"=","values":["456e4567-e89b-12d3-a456-426614174000"]}]},"pagination":{"limit":5}}}'
+                response: '{"results":[{"uuid":"456e4567-e89b-12d3-a456-426614174000","name":"Primary Connection","bandwidth":"1Gbps"}]}'
+          changeLog:
+            createdBy: testuser
+            createdDateTime: 2024-05-06 16:21:18.545214+00:00
+    Agent_415:
+      value:
+      - errorCode: EQ-3164009
+        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        additionalInfo:
+        - property: contentType
+          reason: The payload format is in an unsupported format
+    AgentPostResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/agents/d684aa26-8276-48b7-bb42-a6d9def0a418
+        type: ANO_AGENT
+        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+        name: bandwidth-upgrader-agent
+        description: connection bandwidth upgrader agent
+        state: PROVISIONING
+        enabled: true
+        project:
+          projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
+        agentTemplate:
+          uuid: 657400f8-c0af-430c-8216-43d44f08c1c5
+        configuration:
+          prompt: Connection uuid is <connection_uuid>. Alert rule is <alert_rule_uuid>. Upgrade bandwidth to 10GB.
+        changeLog:
+          createdBy: testuser
+          createdDateTime: 2024-05-06 16:21:18.545214+00:00
+          deletedBy: testuser
+          deletedDateTime: 2024-05-010T16:21:18.545214Z
+    Agent_500:
+      value:
+      - errorCode: EQ-3164004
+        errorMessage: Internal Server Error
+        correlationId: f9018571-1001-4422-978b-bfa38ed6b92e
+        details: Internal Server Error
+    AgentResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/agents/d684aa26-8276-48b7-bb42-a6d9def0a418
+        type: ANO_AGENT
+        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+        name: bandwidth-upgrader-agent
+        description: connection bandwidth upgrader agent
+        state: PROVISIONING
+        enabled: true
+        project:
+          projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
+        agentTemplate:
+          uuid: 657400f8-c0af-430c-8216-43d44f08c1c5
+        configuration:
+          prompt: Connection uuid is <connection_uuid>. Alert rule is <alert_rule_uuid>. Upgrade bandwidth to 10GB.
+        changeLog:
+          createdBy: testuser
+          createdDateTime: 2024-05-06 16:21:18.545214+00:00
+    AgentDeleteResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/agents/d684aa26-8276-48b7-bb42-a6d9def0a418
+        type: ANO_AGENT
+        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+        name: bandwidth-upgrader-agent
+        description: connection bandwidth upgrader agent
+        state: DEPROVISIONING
+        enabled: true
+        project:
+          projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
+        agentTemplate:
+          uuid: 657400f8-c0af-430c-8216-43d44f08c1c5
+        configuration:
+          prompt: Connection uuid is <connection_uuid>. Alert rule is <alert_rule_uuid>. Upgrade bandwidth to 10GB.
+        changeLog:
+          createdBy: testuser
+          createdDateTime: 2024-05-06 16:21:18.545214+00:00
+          deletedBy: testuser
+          deletedDateTime: 2024-05-010T16:21:18.545214Z
+    AgentPostRequestExample:
+      value:
+        type: ANO_AGENT
+        name: bandwidth-upgrader-agent
+        description: connection bandwidth upgrader agent
+        project:
+          projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
+        agentTemplate:
+          uuid: 657400f8-c0af-430c-8216-43d44f08c1c5
+        configuration:
+          prompt: Connection uuid is <connection_uuid>. Alert rule is <alert_rule_uuid>. Upgrade bandwidth to 10GB.
+    AgentPatchResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/agents/d684aa26-8276-48b7-bb42-a6d9def0a418
+        type: ANO_AGENT
+        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+        name: bandwidth-upgrader-agent-updated
+        description: connection bandwidth upgrader agent updated
+        state: PROVISIONING
+        enabled: true
+        project:
+          projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
+        agentTemplate:
+          uuid: 657400f8-c0af-430c-8216-43d44f08c1c5
+        configuration:
+          prompt: Connection uuid is <connection_uuid>. Alert rule is <alert_rule_uuid>. Upgrade bandwidth to 10GB.
+        changeLog:
+          createdBy: testuser
+          createdDateTime: 2024-05-06 16:21:18.545214+00:00
+          updatedBy: testuser
+          updatedDateTime: 2024-05-06 16:21:18.545214+00:00
+    AgentPatchRequestExample:
+      value:
+      - name: /name
+        op: /replace
+        value: bandwidth-upgrader-agent-updated
+    Agent_403:
+      value:
+      - errorCode: EQ-3164013
+        errorMessage: Operation not allowed
+        correlationId: 8a72af9d-23f7-4b90-8237-0987130b42dd
+        details: Operation not allowed for current user
+    AgentGetAllResponseExample:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 1
+        data:
+        - href: https://api.equinix.com/fabric/v4/agents/d684aa26-8276-48b7-bb42-a6d9def0a418
+          type: ANO_AGENT
+          uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+          name: bandwidth-upgrader-agent
+          description: connection bandwidth upgrader agent
+          state: PROVISIONED
+          enabled: true
+          project:
+            projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
+          agentTemplate:
+            uuid: 657400f8-c0af-430c-8216-43d44f08c1c5
+          configuration:
+            prompt: Connection uuid is <connection_uuid>. Alert rule is <alert_rule_uuid>. Upgrade bandwidth to 10GB.
+          changeLog:
+            createdBy: testuser
+            createdDateTime: 2024-05-06 16:21:18.545214+00:00
+x-eqx-api-linter-skip-rules:
+- 3
+- 38

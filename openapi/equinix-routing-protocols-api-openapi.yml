@@ -1,0 +1,2723 @@
+openapi: 3.0.1
+info:
+  title: Equinix API Authentication Routing Protocols API
+  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
+
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  termsOfService: https://www.equinix.com/about/legal/terms
+  contact:
+    name: Equinix API Support
+    url: https://docs.equinix.com/api-support.htm
+  version: '1.2'
+servers:
+- url: https://api.equinix.com
+tags:
+- name: Routing Protocols
+  description: Routing Protocols
+paths:
+  /fabric/v4/connections/{connectionId}/routingProtocols:
+    get:
+      tags:
+      - Routing Protocols
+      summary: GetRoutingProtocols
+      description: This API provides capability to get Routing Protocols for connections
+      operationId: getConnectionRoutingProtocols
+      parameters:
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          type: integer
+        example: 1
+      - name: limit
+        in: query
+        description: number of records to fetch
+        required: false
+        schema:
+          type: integer
+        example: 10
+      - name: connectionId
+        in: path
+        description: Connection Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ConnectionId'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetResponse'
+              examples:
+                getAllRoutingProtocols:
+                  $ref: '#/components/examples/RoutingProtocolGetAll'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400'
+                dryRun:
+                  $ref: '#/components/examples/400_dry_run'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Connection ID Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404_invalid_id'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+    post:
+      tags:
+      - Routing Protocols
+      summary: Create Protocol
+      description: This API provides capability to create Routing Protocol for connections
+      operationId: createConnectionRoutingProtocol
+      parameters:
+      - name: connectionId
+        in: path
+        description: Connection Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ConnectionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoutingProtocolBase'
+            examples:
+              Fcr2ColoDirectRoutingOnly:
+                $ref: '#/components/examples/Fcr2ColoCreateDirect'
+              Fcr2ColoBGPRoutingOnly:
+                $ref: '#/components/examples/Fcr2ColoCreateBGP'
+              Fcr2GcpDirectRoutingOnly:
+                $ref: '#/components/examples/Fcr2GcpCreateDirect'
+              Fcr2GcpBGPRoutingOnly:
+                $ref: '#/components/examples/Fcr2GcpCreateBGP'
+        required: true
+      responses:
+        '202':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoutingProtocolData'
+              examples:
+                bgpCreateResponse:
+                  $ref: '#/components/examples/RoutingProtocolCreateBGPResponse'
+                directCreateResponse:
+                  $ref: '#/components/examples/RoutingProtocolCreateDirectResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400'
+                dryRun:
+                  $ref: '#/components/examples/400_dry_run'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Connection ID Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404_invalid_id'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+  /fabric/v4/connections/{connectionId}/routingProtocols/bulk:
+    post:
+      tags:
+      - Routing Protocols
+      summary: Bulk Create Protocol
+      description: This API provides capability to create Routing Protocol for connections
+      operationId: createConnectionRoutingProtocolsInBulk
+      parameters:
+      - name: connectionId
+        in: path
+        description: Connection Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ConnectionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectionRoutingProtocolPostRequest'
+            examples:
+              DirectRoutingOnly:
+                $ref: '#/components/examples/CreateRoutingWithDirectOnly'
+              BGPRoutingOnly:
+                $ref: '#/components/examples/CreateRoutingWithBGPOnly'
+              DirectAndBGPRouting:
+                $ref: '#/components/examples/CreateRoutingWithDirectAndBGP'
+        required: true
+      responses:
+        '202':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetResponse'
+              examples:
+                getAllRoutingProtocols:
+                  $ref: '#/components/examples/RoutingProtocolGetAll'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400_routing_protocol'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Connection ID Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404_invalid_id'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+  /fabric/v4/connections/{connectionId}/routingProtocols/{routingProtocolId}:
+    get:
+      tags:
+      - Routing Protocols
+      summary: Get Protocol
+      description: This API provides capability to accept/reject user's virtual connection
+      operationId: getConnectionRoutingProtocolByUuid
+      parameters:
+      - name: routingProtocolId
+        in: path
+        description: Routing Protocol Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoutingProtocolId'
+      - name: connectionId
+        in: path
+        description: Connection Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ConnectionId'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoutingProtocolData'
+              examples:
+                bgpCreateResponse:
+                  $ref: '#/components/examples/RoutingProtocolCreateBGPResponse'
+                directCreateResponse:
+                  $ref: '#/components/examples/RoutingProtocolCreateDirectResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400'
+                dryRun:
+                  $ref: '#/components/examples/400_dry_run'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Connection ID Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404_invalid_id'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+    put:
+      tags:
+      - Routing Protocols
+      summary: Replace Protocol
+      description: This API provides capability to replace complete Routing Protocols on a virtual connection
+      operationId: replaceConnectionRoutingProtocolByUuid
+      parameters:
+      - name: routingProtocolId
+        in: path
+        description: Routing Protocol Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoutingProtocolId'
+      - name: connectionId
+        in: path
+        description: Connection Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ConnectionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoutingProtocolBase'
+            examples:
+              DirectRoutingReplaceExample:
+                $ref: '#/components/examples/UpdateRoutingWithDirectOnly'
+              BGPRoutingReplaceExample:
+                $ref: '#/components/examples/UpdateRoutingWithBGPOnly'
+        required: true
+      responses:
+        '202':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoutingProtocolData'
+              examples:
+                bgpReplaceResponse:
+                  $ref: '#/components/examples/RoutingProtocolReplaceBGPResponse'
+                directReplaceResponse:
+                  $ref: '#/components/examples/RoutingProtocolReplaceDirectResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400'
+                dryRun:
+                  $ref: '#/components/examples/400_dry_run'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Connection ID Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404_invalid_id'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+    delete:
+      tags:
+      - Routing Protocols
+      summary: Delete Protocol
+      description: This API provides capability to delete Routing Protocols on virtual connection
+      operationId: deleteConnectionRoutingProtocolByUuid
+      parameters:
+      - name: routingProtocolId
+        in: path
+        description: Routing Protocol Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoutingProtocolId'
+      - name: connectionId
+        in: path
+        description: Connection Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ConnectionId'
+      responses:
+        '202':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoutingProtocolData'
+              examples:
+                directDeleteResponse:
+                  $ref: '#/components/examples/RoutingProtocolDeleteDirectResponse'
+                bgpDeleteResponse:
+                  $ref: '#/components/examples/RoutingProtocolDeleteBGPResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400'
+                dryRun:
+                  $ref: '#/components/examples/400_dry_run'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Connection ID Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404_invalid_id'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+    patch:
+      tags:
+      - Routing Protocols
+      summary: Patch Protocol
+      description: This API provides capability to partially update Routing Protocols on a virtual connection
+      operationId: patchConnectionRoutingProtocolByUuid
+      parameters:
+      - name: routingProtocolId
+        in: path
+        description: Routing Protocol Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoutingProtocolId'
+      - name: connectionId
+        in: path
+        description: Connection Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ConnectionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectionRoutingProtocolPatchRequest'
+            examples:
+              EnableIPv4PatchExample:
+                $ref: '#/components/examples/PatchRoutingProtocolEnableIPv4'
+              EnableIPv6PatchExample:
+                $ref: '#/components/examples/PatchRoutingProtocolEnableIPv6'
+              DisableIPv4PatchExample:
+                $ref: '#/components/examples/PatchRoutingProtocolDisableIPv4'
+              DisableIPv6PatchExample:
+                $ref: '#/components/examples/PatchRoutingProtocolDisableIPv6'
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ConnectionRoutingProtocolPatchRequest'
+            examples:
+              EnableIPv4PatchExample:
+                $ref: '#/components/examples/PatchRoutingProtocolEnableIPv4'
+              EnableIPv6PatchExample:
+                $ref: '#/components/examples/PatchRoutingProtocolEnableIPv6'
+              DisableIPv4PatchExample:
+                $ref: '#/components/examples/PatchRoutingProtocolDisableIPv4'
+              DisableIPv6PatchExample:
+                $ref: '#/components/examples/PatchRoutingProtocolDisableIPv6'
+        required: true
+      responses:
+        '202':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoutingProtocolData'
+              examples:
+                EnableBGPResponse:
+                  $ref: '#/components/examples/RoutingProtocolEnableBGPResponse'
+                DisableBGPResponse:
+                  $ref: '#/components/examples/RoutingProtocolDisableBGPResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400'
+                dryRun:
+                  $ref: '#/components/examples/400_dry_run'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Connection ID Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404_invalid_id'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+  /fabric/v4/connections/{connectionId}/routingProtocols/{routingProtocolId}/actions:
+    get:
+      tags:
+      - Routing Protocols
+      summary: Get BGP Actions
+      description: This API provides capability to get all BGP actions status
+      operationId: getConnectionRoutingProtocolAllBgpActions
+      parameters:
+      - name: routingProtocolId
+        in: path
+        description: Routing Protocol Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoutingProtocolId'
+      - name: connectionId
+        in: path
+        description: Connection Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ConnectionId'
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          type: integer
+        example: 1
+      - name: limit
+        in: query
+        description: number of records to fetch
+        required: false
+        schema:
+          type: integer
+        example: 10
+      responses:
+        '200':
+          description: Fabric BGP Action object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BGPActionsBulkData'
+              examples:
+                BGPActionsAllResponse:
+                  $ref: '#/components/examples/BGPActionsBulkDataResponseExample'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400'
+                dryRun:
+                  $ref: '#/components/examples/400_dry_run'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Connection ID Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404_invalid_id'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+    post:
+      tags:
+      - Routing Protocols
+      summary: Clear/Reset BGP
+      description: This API provides capability to clear/reset Routing Protocols BGP session
+      operationId: postConnectionRoutingProtocolBgpActionByUuid
+      parameters:
+      - name: routingProtocolId
+        in: path
+        description: Routing Protocol Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoutingProtocolId'
+      - name: connectionId
+        in: path
+        description: Connection Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ConnectionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BGPActionRequest'
+            examples:
+              BGPSoftClearInAndOutBoundIPv4:
+                $ref: '#/components/examples/BGPSoftClearInAndOutBoundIPv4'
+              BGPSoftClearInAndOutBoundIPv6:
+                $ref: '#/components/examples/BGPSoftClearInAndOutBoundIPv6'
+              BGPSoftClearInBoundIPv4:
+                $ref: '#/components/examples/BGPSoftClearInBoundIPv4'
+              BGPSoftClearInBoundIPv6:
+                $ref: '#/components/examples/BGPSoftClearInBoundIPv6'
+              BGPHardResetIPv4:
+                $ref: '#/components/examples/BGPHardResetIPv4'
+              BGPHardResetIPv6:
+                $ref: '#/components/examples/BGPHardResetIPv6'
+        required: true
+      responses:
+        '202':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BGPActionData'
+              examples:
+                BGPActionHardResetIpV4:
+                  $ref: '#/components/examples/BGPHardResetIPv4Response'
+                BGPActionHardResetIpV6:
+                  $ref: '#/components/examples/BGPHardResetIPv6Response'
+                BGPActionSoftClearInAndOutIpV4:
+                  $ref: '#/components/examples/BGPSoftClearInAndOutBoundIPv4Response'
+                BGPActionSoftClearInAndOutIpV6:
+                  $ref: '#/components/examples/BGPSoftClearInAndOutBoundIPv6Response'
+                BGPActionSoftClearInIpV4:
+                  $ref: '#/components/examples/BGPSoftClearInBoundIPv4Response'
+                BGPActionSoftClearInIpV6:
+                  $ref: '#/components/examples/BGPSoftClearInBoundIPv6Response'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400'
+                dryRun:
+                  $ref: '#/components/examples/400_dry_run'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Connection ID Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404_invalid_id'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/415'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+  /fabric/v4/connections/{connectionId}/routingProtocols/{routingProtocolId}/actions/{actionId}:
+    get:
+      tags:
+      - Routing Protocols
+      summary: Get BGP Action
+      description: This API provides capability to retrieve specific BGP action
+      operationId: getConnectionRoutingProtocolsBgpActionByUuid
+      parameters:
+      - name: connectionId
+        in: path
+        description: Connection Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ConnectionId'
+      - name: routingProtocolId
+        in: path
+        description: Routing Protocol Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoutingProtocolId'
+      - name: actionId
+        in: path
+        description: BGP Action UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/ActionId'
+      responses:
+        '200':
+          description: Fabric BGP Action object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BGPActionData'
+              examples:
+                BGPActionResponse:
+                  $ref: '#/components/examples/BGPActionDataResponseExample'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400_Invalid_id'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Connection ID Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404_invalid_id'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+  /fabric/v4/connections/{connectionId}/routingProtocols/{routingProtocolId}/changes/{changeId}:
+    get:
+      tags:
+      - Routing Protocols
+      summary: Get Change By ID
+      description: This API provides capability to retrieve specific Routing Protocol Change
+      operationId: getConnectionRoutingProtocolsChangeByUuid
+      parameters:
+      - name: connectionId
+        in: path
+        description: Connection Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ConnectionId'
+      - name: routingProtocolId
+        in: path
+        description: Routing Protocol Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoutingProtocolId'
+      - name: changeId
+        in: path
+        description: Routing Protocol Change UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChangeId'
+      responses:
+        '200':
+          description: Fabric Routing Protocol Change object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoutingProtocolChangeData'
+              examples:
+                RoutingProtocolChangeResponse:
+                  $ref: '#/components/examples/RoutingProtocolGetChangeResponseExample'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400_Invalid_id'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Connection ID Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404_invalid_id'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+  /fabric/v4/connections/{connectionId}/routingProtocols/{routingProtocolId}/changes:
+    get:
+      tags:
+      - Routing Protocols
+      summary: Get Changes
+      description: This API provides capability to retrieve user's Routing Protocol Changes
+      operationId: getConnectionRoutingProtocolsChanges
+      parameters:
+      - name: connectionId
+        in: path
+        description: Connection Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ConnectionId'
+      - name: routingProtocolId
+        in: path
+        description: Routing Protocol Id
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoutingProtocolId'
+      - name: offset
+        in: query
+        description: offset
+        required: false
+        schema:
+          type: integer
+        example: 1
+      - name: limit
+        in: query
+        description: number of records to fetch
+        required: false
+        schema:
+          type: integer
+        example: 10
+      responses:
+        '200':
+          description: Fabric Routing Protocol Change object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoutingProtocolChangeDataResponse'
+              examples:
+                RoutingProtocolChangesResponse:
+                  $ref: '#/components/examples/RoutingProtocolGetAllChangesResponseExample'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/400_Invalid_id'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/401'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/403'
+        '404':
+          description: Connection ID Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/404_invalid_id'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                example:
+                  $ref: '#/components/examples/500_internal_error'
+  /fabric/v4/routers/{routerId}/validate:
+    post:
+      tags:
+      - Routing Protocols
+      summary: Validate Subnet
+      description: This API provides capability to validate all subnets associated with any connection in the given FCR
+      operationId: validateRoutingProtocol
+      parameters:
+      - name: routerId
+        in: path
+        description: Cloud Router UUID
+        required: true
+        schema:
+          $ref: '#/components/schemas/RouterId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateRequest'
+            examples:
+              ValidateDirectIpv4:
+                $ref: '#/components/examples/Request-direct-ipv4'
+              ValidateDirectIpv6:
+                $ref: '#/components/examples/Request-direct-ipv6'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateSubnetResponse'
+              examples:
+                ValidateSubnet:
+                  $ref: '#/components/examples/Response-200'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              examples:
+                Bad Request:
+                  $ref: '#/components/examples/error-400'
+                Subnet Overlapping:
+                  $ref: '#/components/examples/error-400-overlappingSubnet'
+components:
+  examples:
+    BGPHardResetIPv6Response:
+      value:
+        href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routingProtocols/3f5ed98a-8dba-4651-a317-8ad0234dd157/actions/123ed98a-92ba-9951-bb17-17d0234dd096
+        uuid: 123ed98a-92ba-9951-bb17-17d0234dd096
+        type: RESET_BGPIPV6
+        description: hard reset bgp ipv6 session
+        state: PENDING
+        changeLog:
+          createdBy: adminuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+    BGPSoftClearInBoundIPv6Response:
+      value:
+        href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routingProtocols/3f5ed98a-8dba-4651-a317-8ad0234dd157/actions/123ed98a-92ba-9951-bb17-17d0234dd096
+        uuid: 123ed98a-92ba-9951-bb17-17d0234dd096
+        type: CLEAR_BGPIPV6_INBOUND
+        description: soft clear bgp ipv6 inbound session
+        state: PENDING
+        changeLog:
+          createdBy: adminuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+    '415':
+      value:
+      - errorCode: EQ-3040016
+        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: contentType
+          reason: The payload format is in an unsupported format
+    400_Invalid_id:
+      value:
+      - errorCode: EQ-3142519
+        errorMessage: Connection does not exist or do not belong to user,Please check connection Id
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+    RoutingProtocolCreateBGPResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/connections/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170/routingProtocols/557400f8-d360-11e9-bb65-2a2ae2dbcce4
+        uuid: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+        state: PROVISIONING
+        change:
+          href: https://api.equinix.com/fabric/v4/connections/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170/routingProtocols/557400f8-d360-11e9-bb65-2a2ae2dbcce4/changes/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          uuid: 3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          type: ROUTING_PROTOCOL_CREATION
+        changelog:
+          createdBy: fabric
+          createdDateTime: 2021-10-30 07:21:39+00:00
+          updatedBy: fabric
+          updatedDateTime: 2021-10-30 07:21:39+00:00
+        type: BGP
+        bgpIpv4:
+          customerPeerIp: 10.1.1.3
+          enabled: true
+          outboundASPrependCount: 3
+          inboundMED: 1000
+          outboundMED: 2000
+          routesMax: 40
+          operation:
+            operationalStatus: UNKNOWN
+        customerAsn: 10000
+        equinixAsn: 10001
+        asOverrideEnabled: true
+    Fcr2ColoCreateDirect:
+      value:
+        type: DIRECT
+        directIpv4:
+          equinixIfaceIp: 192.168.100.1/30
+        directIpv6:
+          equinixIfaceIp: 2001:7a9::34f4:0:f3dd:1/126
+    RoutingProtocolDisableBGPResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/connections/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170/routingProtocols/557400f8-d360-11e9-bb65-2a2ae2dbcce4
+        uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        state: REPROVISIONING
+        change:
+          uuid: 3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          href: https://api.equinix.com/fabric/v4/connections/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170/routingProtocols/557400f8-d360-11e9-bb65-2a2ae2dbcce4/changes/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          type: ROUTING_PROTOCOL_UPDATE
+        changelog:
+          createdBy: fabric
+          createdDateTime: 2021-10-30 07:21:39+00:00
+          updatedBy: fabric
+          updatedDateTime: 2021-10-30 07:21:39+00:00
+        type: BGP
+        bgpIpv4:
+          enabled: false
+          customerPeerIp: 10.1.1.3
+          outboundASPrependCount: 3
+          operation:
+            operationalStatus: UNKNOWN
+        customerAsn: 10000
+        equinixAsn: 10001
+    BGPHardResetIPv4:
+      value:
+        type: RESET_BGPIPV4
+    '400':
+      value:
+      - errorCode: EQ-3142102
+        errorMessage: Connection has duplicate buyer-side VLAN ID for port or the same VLAN ID is in the process of being deleted and should be freed up soon
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: /aSide/accessPoint/linkProtocol
+      - errorCode: EQ-3142535
+        errorMessage: The connection bandwidth provided in the connection request exceeds the bandwidth Limit on ServiceToken
+        details: Please enter bandwidth less than the Speed limit on ServiceToken
+        correlationId: test
+        additionalInfo:
+        - property: /aSide/serviceToken/uuid
+      - errorCode: EQ-3142536
+        errorMessage: Remote connection cannot be created with the provided ServiceToken
+        details: Only local Connection can be created using this ServiceToken
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/port/uuid
+      - errorCode: EQ-3142701
+        errorMessage: The connection bandwidth provided in the connection request exceeds the bandwidth Limit on ServiceToken
+        details: not an authorized user
+        correlationId: test
+      - errorCode: EQ-3142501
+        errorMessage: Invalid input
+        correlationId: 20d32a80-0d61-4333-bc03-707b591ae2f5
+        additionalInfo:
+        - property: aSide/accessPoint/port/uuid
+      - errorCode: EQ-3142509
+        errorMessage: Connection already deleted
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: uuid
+      - errorCode: EQ-3142510
+        errorMessage: Connection is in transient state
+        correlationId: 20d32a80-0d61-4333-bc03-707b591ae2f5
+        additionalInfo:
+        - property: uuid
+      - errorCode: EQ-3142221
+        errorMessage: The primary and secondary token provided have different bandwidth tiers. Please use two tokens that support the same bandwidth tiers
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/serviceToken/uuid
+      - errorCode: EQ-3142222
+        errorMessage: The primary and secondary tokens have different encapsulation types (Dot1Q or QinQ). Please use two tokens that support the same encapsulation type
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/serviceToken/uuid
+      - errorCode: EQ-3142223
+        errorMessage: The primary and secondary tokens belong to different projects. Please use two tokens that belong to the same project
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/serviceToken/uuid
+      - errorCode: EQ-3142224
+        errorMessage: The primary and secondary ports have different port speeds (bandwidth). Please use two tokens that support the same port speed
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/serviceToken/uuid
+      - errorCode: EQ-3142225
+        errorMessage: The primary and secondary tokens provided are the same. Please provide a different token
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/serviceToken/uuid
+      - errorCode: EQ-3142514
+        errorMessage: Redundancy group is required
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/group
+      - errorCode: EQ-3142515
+        errorMessage: Redundancy priority is required
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/priority
+      - errorCode: EQ-3142516
+        errorMessage: Invalid redundancy group
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/group
+      - errorCode: EQ-3142517
+        errorMessage: Invalid redundancy priority
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/priority
+      - errorCode: EQ-3142303
+        errorMessage: Only Primary connection allowed for this CSP
+        correlationId: test
+        additionalInfo:
+        - property: /redundancy/priority
+      - errorCode: EQ-3142320
+        errorMessage: For redundant connection, Service Profile should be the same
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/profile/uuid
+      - errorCode: EQ-3142021
+        errorMessage: For redundant connection, Fabric Cloud Router should be the same
+        correlationId: test
+        additionalInfo:
+        - property: /aSide/accessPoint/router/uuid
+      - errorCode: EQ-3142012
+        errorMessage: Fabric Cloud Router is not in PROVISIONED state
+        correlationId: test
+        additionalInfo:
+        - property: /aSide/accessPoint/router/uuid
+      - errorCode: EQ-3142301
+        errorMessage: Given profile does not exist
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/profile/uuid
+      - errorCode: EQ-3142302
+        errorMessage: Service provider does not exist in required zSide metro
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/location/metroCode
+      - errorCode: EQ-3142013
+        errorMessage: Invalid metro for Cloud Router connection
+        correlationId: test
+        additionalInfo:
+        - property: /aSide/accessPoint/router/uuid
+      - errorCode: EQ-3142304
+        errorMessage: Private connections are not allowed on public profiles
+        correlationId: test
+        additionalInfo:
+        - property: visibility
+      - errorCode: EQ-3142306
+        errorMessage: Requested bandwidth is not supported by service profile
+        correlationId: test
+        additionalInfo:
+        - property: /bandwidth
+      - errorCode: EQ-3142308
+        errorMessage: Authentication key is required
+        correlationId: test
+        additionalInfo:
+        - property: /zSide/accessPoint/authenticationKey
+    Fcr2GcpCreateDirect:
+      value:
+        type: DIRECT
+        directIpv4:
+          equinixIfaceIp: 169.254.100.1/30
+    Request-direct-ipv4:
+      value:
+        filter:
+          and:
+          - property: /directIpv4/equinixIfaceIp
+            operator: '='
+            values:
+            - 10.1.1.1/30
+          - property: /connection/uuid
+            operator: '='
+            values:
+            - a96f16d3-e504-44a7-a628-4916b5750008
+    PatchRoutingProtocolEnableIPv4:
+      value:
+      - op: replace
+        path: /bgpIpv4/enabled
+        value: true
+    RoutingProtocolReplaceBGPResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/connections/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170/routingProtocols/557400f8-d360-11e9-bb65-2a2ae2dbcce4
+        uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        state: REPROVISIONING
+        change:
+          uuid: 3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          href: https://api.equinix.com/fabric/v4/connections/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170/routingProtocols/557400f8-d360-11e9-bb65-2a2ae2dbcce4/changes/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          type: ROUTING_PROTOCOL_UPDATE
+        changelog:
+          createdBy: fabric
+          createdDateTime: 2021-10-30 07:21:39+00:00
+          updatedBy: fabric
+          updatedDateTime: 2021-10-30 07:21:39+00:00
+        type: BGP
+        bgpIpv4:
+          customerPeerIp: 10.1.1.3
+          enabled: true
+          outboundASPrependCount: 3
+          inboundMED: 1000
+          outboundMED: 2000
+          routesMax: 40
+          operation:
+            operationalStatus: UNKNOWN
+        customerAsn: 10000
+        equinixAsn: 10001
+        asOverrideEnabled: true
+    CreateRoutingWithDirectOnly:
+      value:
+        data:
+        - type: DIRECT
+          directIpv4:
+            equinixIfaceIp: 192.168.100.1/30
+          directIpv6:
+            equinixIfaceIp: 2001:7a9::34f4:0:f3dd:1/126
+    RoutingProtocolGetAllChangesResponseExample:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 1
+        data:
+        - href: https://api.equinix.com/fabric/v4/connections/2a4fb415-5a7f-436f-bae6-02f5e403deec/routingProtocols/2a4fb415-5a7f-436f-bae6-02f5e403deec/changes/4b17da68-3d6b-436d-9c8f-2105f3b950d9
+          type: ROUTING_PROTOCOL_UPDATE
+          uuid: 4b17da68-3d6b-436d-9c8f-2105f3b950d9
+          status: COMPLETED
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedDateTime: 2020-05-21 10:30:50+00:00
+          data:
+            op: replace
+            path: /
+            value:
+              type: BGP
+              name: My-BGP-route-1
+              bgpIpv4:
+                customerPeerIp: 10.1.1.2
+                equinixPeerIp: 10.1.1.3
+                outboundASPrependCount: 3
+                inboundMED: 1000
+                outboundMED: 2000
+                routesMax: 40
+                operation:
+                  operationalStatus: UP
+                  opStatusChangedAt: 2021-10-30 07:21:39+00:00
+              bgpIpv6:
+                customerPeerIp: 2001:db8:c59b::1
+                equinixPeerIp: 2001:db8:c59b::1
+                outboundASPrependCount: 3
+                inboundMED: 1000
+                outboundMED: 2000
+                routesMax: 40
+                operation:
+                  operationalStatus: UP
+                  opStatusChangedAt: 2021-10-30 07:21:39+00:00
+              customerAsn: 0
+              equinixAsn: 0
+              bgpAuthKey: string
+              asOverrideEnabled: true
+              bfd:
+                enabled: true
+                interval: '100'
+        - href: https://api.equinix.com/fabric/v4/connections/2a4fb415-5a7f-436f-bae6-02f5e403deec/routingProtocols/2a4fb415-5a7f-436f-bae6-02f5e403deec/changes/4b17da68-3d6b-436d-9c8f-2105f3b950d9
+          type: ROUTING_PROTOCOL_CREATION
+          uuid: 4b17da68-3d6b-436d-9c8f-2105f3b950d9
+          status: COMPLETED
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedDateTime: 2020-05-21 10:30:50+00:00
+          data:
+            op: add
+            path: /
+            value:
+              type: BGP
+              name: My-BGP-route-1
+              bgpIpv4:
+                customerPeerIp: 10.1.1.3
+                equinixPeerIp: 10.1.1.4
+                operation:
+                  operationalStatus: UP
+                  opStatusChangedAt: 2021-10-30 07:21:39+00:00
+              bgpIpv6:
+                customerPeerIp: 2001:db8:c59b::1
+                equinixPeerIp: 2001:db8:c59b::1
+                operation:
+                  operationalStatus: UP
+                  opStatusChangedAt: 2021-10-30 07:21:39+00:00
+              customerAsn: 0
+              equinixAsn: 0
+              bgpAuthKey: string
+              bfd:
+                enabled: true
+                interval: '100'
+    BGPSoftClearInAndOutBoundIPv6Response:
+      value:
+        href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routingProtocols/3f5ed98a-8dba-4651-a317-8ad0234dd157/actions/123ed98a-92ba-9951-bb17-17d0234dd096
+        uuid: 123ed98a-92ba-9951-bb17-17d0234dd096
+        type: CLEAR_BGPIPV6
+        description: soft clear bgp ipv6 inbound and outbound session
+        state: PENDING
+        changeLog:
+          createdBy: adminuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+    error-400-overlappingSubnet:
+      value:
+      - errorCode: EQ-2041022
+        errorMessage: The provided subnet is not valid.
+        details: The provided subnet is overlapping with other connections in the same Fabric Cloud Router.
+        correlationId: 5f9f9ab9-a6cb-4e8a-aa34-105cd4cb6cc8
+    BGPHardResetIPv6:
+      value:
+        type: RESET_BGPIPV6
+    BGPActionDataResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routingProtocols/3f5ed98a-8dba-4651-a317-8ad0234dd157/actions/4e5ed00a-3dca-5652-b319-aad0234dd934
+        uuid: 4e5ed00a-3dca-5652-b319-aad0234dd934
+        type: CLEAR_BGPIPV6_INBOUND
+        description: soft clear bgp ipv6 inbound session
+        state: SUCCEEDED
+        changeLog:
+          createdBy: adminuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: adminuser
+          updatedDateTime: 2020-05-21 10:35:00+00:00
+    404_invalid_id:
+      value:
+      - errorCode: EQ-3041120
+        errorMessage: The connection ID was not found or was already deleted.
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+    BGPSoftClearInBoundIPv4Response:
+      value:
+        href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routingProtocols/3f5ed98a-8dba-4651-a317-8ad0234dd157/actions/123ed98a-92ba-9951-bb17-17d0234dd096
+        uuid: 123ed98a-92ba-9951-bb17-17d0234dd096
+        type: CLEAR_BGPIPV4_INBOUND
+        description: soft clear bgp ipv4 inbound session
+        state: PENDING
+        changeLog:
+          createdBy: adminuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+    BGPSoftClearInAndOutBoundIPv4:
+      value:
+        type: CLEAR_BGPIPV4
+    RoutingProtocolCreateDirectResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/connections/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170/routingProtocols/557400f8-d360-11e9-bb65-2a2ae2dbcce4
+        uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        state: PROVISIONING
+        change:
+          uuid: 3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          href: https://api.equinix.com/fabric/v4/connections/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170/routingProtocols/557400f8-d360-11e9-bb65-2a2ae2dbcce4/changes/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          type: ROUTING_PROTOCOL_CREATION
+        changelog:
+          createdBy: fabric
+          createdDateTime: 2021-10-30 07:21:39+00:00
+          updatedBy: fabric
+          updatedDateTime: 2021-10-30 07:21:39+00:00
+        type: DIRECT
+        directIpv4:
+          equinixIfaceIp: 192.168.100.1/30
+    BGPHardResetIPv4Response:
+      value:
+        href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routingProtocols/3f5ed98a-8dba-4651-a317-8ad0234dd157/actions/123ed98a-92ba-9951-bb17-17d0234dd096
+        uuid: 123ed98a-92ba-9951-bb17-17d0234dd096
+        type: RESET_BGPIPV4
+        description: hard reset bgp ipv4 session
+        state: PENDING
+        changeLog:
+          createdBy: adminuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+    '403':
+      value:
+      - errorCode: EQ-3045003
+        errorMessage: Operation not allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Operation not allowed for current user
+    PatchRoutingProtocolDisableIPv6:
+      value:
+      - op: replace
+        path: /bgpIpv6/enabled
+        value: false
+    UpdateRoutingWithBGPOnly:
+      value:
+        type: BGP
+        bgpIpv4:
+          customerPeerIp: 192.168.100.2
+          equinixPeerIp: 192.168.100.1
+          outboundASPrependCount: 3
+          inboundMED: 1000
+          outboundMED: 2000
+        bgpIpv6:
+          customerPeerIp: 2001:db8:c59b::2
+          equinixPeerIp: 2001:db8:c59b::1
+          outboundASPrependCount: 3
+        customerAsn: 0
+        bgpAuthKey: string
+        asOverrideEnabled: true
+        bfd:
+          enabled: true
+          interval: 100
+    PatchRoutingProtocolDisableIPv4:
+      value:
+      - op: replace
+        path: /bgpIpv4/enabled
+        value: false
+    Response-200:
+      value:
+        additionalInfo:
+        - key: message
+          value: The provided subnet is valid.
+    RoutingProtocolDeleteBGPResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/connections/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170/routingProtocols/557400f8-d360-11e9-bb65-2a2ae2dbcce4
+        uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        state: DEPROVISIONING
+        change:
+          uuid: 3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          href: https://api.equinix.com/fabric/v4/connections/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170/routingProtocols/557400f8-d360-11e9-bb65-2a2ae2dbcce4/changes/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          type: ROUTING_PROTOCOL_DELETION
+        changelog:
+          createdBy: fabric
+          createdDateTime: 2021-10-30 07:21:39+00:00
+          updatedBy: fabric
+          updatedDateTime: 2021-10-30 07:21:39+00:00
+        type: BGP
+        bgpIpv4:
+          customerPeerIp: 10.1.1.3
+          enabled: true
+          outboundASPrependCount: 3
+          inboundMED: 1000
+          outboundMED: 2000
+          routesMax: 40
+          operation:
+            operationalStatus: UP
+            opStatusChangedAt: 2021-10-30 07:21:39+00:00
+        customerAsn: 10000
+        equinixAsn: 10001
+        asOverrideEnabled: true
+    Fcr2GcpCreateBGP:
+      value:
+        type: BGP
+        bgpIpv4:
+          customerPeerIp: 169.254.100.2
+          equinixPeerIp: 169.254.100.1
+          outboundASPrependCount: 3
+        customerAsn: 100
+    RoutingProtocolEnableBGPResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/connections/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170/routingProtocols/557400f8-d360-11e9-bb65-2a2ae2dbcce4
+        uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        state: REPROVISIONING
+        change:
+          uuid: 3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          href: https://api.equinix.com/fabric/v4/connections/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170/routingProtocols/557400f8-d360-11e9-bb65-2a2ae2dbcce4/changes/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          type: ROUTING_PROTOCOL_UPDATE
+        changelog:
+          createdBy: fabric
+          createdDateTime: 2021-10-30 07:21:39+00:00
+          updatedBy: fabric
+          updatedDateTime: 2021-10-30 07:21:39+00:00
+        type: BGP
+        bgpIpv4:
+          enabled: true
+          customerPeerIp: 10.1.1.3
+          outboundASPrependCount: 3
+          operation:
+            operationalStatus: UNKNOWN
+        customerAsn: 10000
+        equinixAsn: 10001
+    CreateRoutingWithDirectAndBGP:
+      value:
+        data:
+        - type: BGP
+          bgpIpv4:
+            customerPeerIp: 192.168.100.2
+            equinixPeerIp: 192.168.100.1
+            outboundASPrependCount: 3
+            inboundMED: 1000
+            outboundMED: 2000
+          bgpIpv6:
+            customerPeerIp: 2001:db8:c59b::2
+            equinixPeerIp: 2001:db8:c59b::1
+            outboundASPrependCount: 3
+            inboundMED: 1000
+            outboundMED: 2000
+          customerAsn: 0
+          bgpAuthKey: string
+          asOverrideEnabled: true
+          bfd:
+            enabled: true
+            interval: 100
+        - type: DIRECT
+          name: My-Direct-route-1
+          directIpv4:
+            equinixIfaceIp: 192.168.100.1/30
+          directIpv6:
+            equinixIfaceIp: 2001:db8:c59b::1/125
+    RoutingProtocolGetChangeResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/connections/2a4fb415-5a7f-436f-bae6-02f5e403deec/routingProtocols/2a4fb415-5a7f-436f-bae6-02f5e403deec/changes/4b17da68-3d6b-436d-9c8f-2105f3b950d9
+        type: ROUTING_PROTOCOL_UPDATE
+        uuid: 4b17da68-3d6b-436d-9c8f-2105f3b950d9
+        status: COMPLETED
+        createdDateTime: 2020-05-21 10:30:00+00:00
+        updatedDateTime: 2020-05-21 10:30:50+00:00
+        data:
+          op: replace
+          path: /
+          value:
+            type: BGP
+            name: My-BGP-route-1
+            bgpIpv4:
+              customerPeerIp: 10.1.1.2
+              equinixPeerIp: 10.1.1.3
+              outboundASPrependCount: 3
+              inboundMED: 1000
+              outboundMED: 2000
+              routesMax: 40
+              operation:
+                operationalStatus: UP
+                opStatusChangedAt: 2021-10-30 07:21:39+00:00
+            bgpIpv6:
+              customerPeerIp: 2001:db8:c59b::1
+              equinixPeerIp: 2001:db8:c59b::1
+              outboundASPrependCount: 3
+              inboundMED: 1000
+              outboundMED: 2000
+              routesMax: 40
+              operation:
+                operationalStatus: UP
+                opStatusChangedAt: 2021-10-30 07:21:39+00:00
+            customerAsn: 0
+            equinixAsn: 0
+            asOverrideEnabled: true
+            bgpAuthKey: string
+            bfd:
+              enabled: true
+              interval: '100'
+    400_routing_protocol:
+      value:
+      - errorCode: EQ-3041022
+        errorMessage: Invalid argument value passed
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        details: There are no available RFC3279 subnets on the same Fabric Cloud Router.
+      - errorCode: EQ-3041023
+        errorMessage: Invalid pagination parameter.
+        correlationId: test
+        additionalInfo:
+        - property: offset
+        - reason: The offset parameter must be a Nonnegative Integer.
+      - errorCode: EQ-3041012
+        errorMessage: The system is unable to process your request.
+        details: The routing protocol associated with this Connection is in the transient state.
+        correlationId: test
+        additionalInfo:
+        - reason: Routing protocol creation or deletion is not allowed if the routing protocol associated with connection is in the transient state.
+      - errorCode: EQ-3041016
+        errorMessage: The system is unable to process your request.
+        details: The BGP routing protocol should be deleted before deleting the DIRECT routing protocol for the same Connection.
+        correlationId: test
+      - errorCode: EQ-3041001
+        errorMessage: Invalid argument passed.
+        correlationId: test
+      - errorCode: EQ-3041002
+        errorMessage: Invalid argument value passed.
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: type
+          reason: The type must be one of the following [DIRECT, BGP].
+      - errorCode: EQ-3041013
+        errorMessage: Required field.
+        correlationId: 20d32a80-0d61-4333-bc03-707b591ae2f5
+        additionalInfo:
+        - property: $.type
+          reason: Type is mandatory field.
+      - errorCode: EQ-3041014
+        errorMessage: Json syntax error. Please check the request body.
+        details: Json syntax error. Please check the request body.
+        correlationId: test
+      - errorCode: EQ-3041015
+        errorMessage: Invalid request.
+        details: Value must not be null.
+        correlationId: test
+        additionalInfo:
+        - property: data[0].directIpv6.equinixIfaceIp
+    CreateRoutingWithBGPOnly:
+      value:
+        data:
+        - type: BGP
+          bgpIpv4:
+            customerPeerIp: 10.1.1.2
+            equinixPeerIp: 192.168.100.1
+            outboundASPrependCount: 3
+            inboundMED: 1000
+            outboundMED: 2000
+          bgpIpv6:
+            customerPeerIp: 2001:db8:c59b::2
+            equinixPeerIp: 2001:db8:c59b::1
+            outboundASPrependCount: 3
+            inboundMED: 1000
+            outboundMED: 2000
+          customerAsn: 0
+          asOverrideEnabled: true
+          bgpAuthKey: string
+          bfd:
+            enabled: true
+            interval: 100
+    BGPSoftClearInBoundIPv4:
+      value:
+        type: CLEAR_BGPIPV4_INBOUND
+    RoutingProtocolReplaceDirectResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/connections/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170/routingProtocols/557400f8-d360-11e9-bb65-2a2ae2dbcce4
+        uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        state: REPROVISIONING
+        change:
+          uuid: 3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          href: https://api.equinix.com/fabric/v4/connections/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170/routingProtocols/557400f8-d360-11e9-bb65-2a2ae2dbcce4/changes/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          type: ROUTING_PROTOCOL_UPDATE
+        changelog:
+          createdBy: fabric
+          createdDateTime: 2021-10-30 07:21:39+00:00
+          updatedBy: fabric
+          updatedDateTime: 2021-10-30 07:21:39+00:00
+        type: DIRECT
+        directIpv4:
+          equinixIfaceIp: 192.168.100.1/30
+    BGPActionsBulkDataResponseExample:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 2
+        data:
+        - href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routingProtocols/3f5ed98a-8dba-4651-a317-8ad0234dd157/actions/835ed234-1dbb-5634-c320-25d0234dd117
+          uuid: 835ed234-1dbb-5634-c320-25d0234dd117
+          type: CLEAR_BGPIPV6_INBOUND
+          description: soft clear bgp ipv6 inbound session
+          state: SUCCEEDED
+          changeLog:
+            createdBy: testuser
+            createdDateTime: 2020-05-21 10:30:00+00:00
+            updatedBy: testuser
+            updatedDateTime: 2020-05-21 10:35:00+00:00
+        - href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routingProtocols/4d5ed98a-8dba-4651-a317-8ad0234dd157/actions/995ed98b-1db9-6653-c323-19d0234dd999
+          uuid: 995ed98b-1db9-6653-c323-19d0234dd999
+          type: CLEAR_BGPIPV4_INBOUND
+          description: soft clear bgp ipv4 inbound session
+          state: FAILED
+          changeLog:
+            createdBy: testuser
+            createdDateTime: 2020-05-21 10:20:00+00:00
+            updatedBy: testuser
+            updatedDateTime: 2020-05-21 10:25:00+00:00
+    BGPSoftClearInAndOutBoundIPv4Response:
+      value:
+        href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routingProtocols/3f5ed98a-8dba-4651-a317-8ad0234dd157/actions/123ed98a-92ba-9951-bb17-17d0234dd096
+        uuid: 123ed98a-92ba-9951-bb17-17d0234dd096
+        type: CLEAR_BGPIPV4
+        description: soft clear bgp ipv4 inbound and outbound session
+        state: PENDING
+        changeLog:
+          createdBy: adminuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+    UpdateRoutingWithDirectOnly:
+      value:
+        type: DIRECT
+        directIpv4:
+          equinixIfaceIp: 192.168.100.1/30
+        directIpv6:
+          equinixIfaceIp: 2001:7a9::34f4:0:f3dd:1/126
+    Fcr2ColoCreateBGP:
+      value:
+        type: BGP
+        bgpIpv4:
+          customerPeerIp: 10.1.1.2
+          equinixPeerIp: 192.168.100.1
+        bgpIpv6:
+          customerPeerIp: 2001:db8:c59b::1
+          equinixPeerIp: 2001:db8:c59b::1
+          outboundASPrependCount: 3
+        customerAsn: 100
+        bfd:
+          enabled: true
+          interval: 100
+    PatchRoutingProtocolEnableIPv6:
+      value:
+      - op: replace
+        path: /bgpIpv6/enabled
+        value: true
+    BGPSoftClearInBoundIPv6:
+      value:
+        type: CLEAR_BGPIPV6_INBOUND
+    BGPSoftClearInAndOutBoundIPv6:
+      value:
+        type: CLEAR_BGPIPV6
+    error-400:
+      value:
+      - errorCode: EQ-2041022
+        errorMessage: Invalid argument value passed.
+        correlationId: 5f9f9ab9-a6cb-4e8a-aa34-105cd4cb6cc8
+    Request-direct-ipv6:
+      value:
+        filter:
+          and:
+          - property: /directIpv6/equinixIfaceIp
+            operator: '='
+            values:
+            - 1202:ABCD::20:1::11/30
+          - property: /connection/uuid
+            operator: '='
+            values:
+            - a96f16d3-e504-44a7-a628-4916b5750008
+    400_dry_run:
+      value:
+      - errorCode: EQ-3142411
+        errorMessage: Dry run is not supported for this connection type
+        correlationId: 1012536-0000-108258589231-api
+        additionalInfo:
+        - reason: queryParam:dryRun
+    RoutingProtocolGetAll:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 2
+        data:
+        - href: https://api.equinix.com/fabric/v4/connections/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170/routingProtocols/557400f8-d360-11e9-bb65-2a2ae2dbcce4
+          uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          state: PROVISIONING
+          change:
+            uuid: 3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+            href: https://api.equinix.com/fabric/v4/connections/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170/routingProtocols/557400f8-d360-11e9-bb65-2a2ae2dbcce4/changes/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+            type: ROUTING_PROTOCOL_CREATION
+          changelog:
+            createdBy: fabric
+            createdDateTime: 2021-10-30 07:21:39+00:00
+            updatedBy: fabric
+            updatedDateTime: 2021-10-30 07:21:39+00:00
+          type: BGP
+          bgpIpv4:
+            customerPeerIp: 192.168.100.2
+            enabled: true
+            outboundASPrependCount: 3
+            inboundMED: 1000
+            outboundMED: 2000
+            routesMax: 40
+            operation:
+              operationalStatus: UNKNOWN
+          customerAsn: 10000
+          equinixAsn: 10001
+          asOverrideEnabled: true
+        - href: https://api.equinix.com/fabric/v4/connections/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170/routingProtocols/557400f8-d360-11e9-bb65-2a2ae2dbcce4
+          uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          state: PROVISIONING
+          change:
+            uuid: 3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+            href: https://api.equinix.com/fabric/v4/connections/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170/routingProtocols/557400f8-d360-11e9-bb65-2a2ae2dbcce4/changes/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+            type: ROUTING_PROTOCOL_CREATION
+          changelog:
+            createdBy: fabric
+            createdDateTime: 2021-10-30 07:21:39+00:00
+            updatedBy: fabric
+            updatedDateTime: 2021-10-30 07:21:39+00:00
+          type: DIRECT
+          directIpv4:
+            equinixIfaceIp: 192.168.100.1/30
+    '401':
+      value:
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    RoutingProtocolDeleteDirectResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/connections/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170/routingProtocols/557400f8-d360-11e9-bb65-2a2ae2dbcce4
+        uuid: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        state: DEPROVISIONING
+        change:
+          uuid: 3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          href: https://api.equinix.com/fabric/v4/connections/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170/routingProtocols/557400f8-d360-11e9-bb65-2a2ae2dbcce4/changes/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          type: ROUTING_PROTOCOL_DELETION
+        changelog:
+          createdBy: fabric
+          createdDateTime: 2021-10-30 07:21:39+00:00
+          updatedBy: fabric
+          updatedDateTime: 2021-10-30 07:21:39+00:00
+          deletedBy: fabric
+          deletedDateTime: 2021-10-30 07:21:39+00:00
+        type: DIRECT
+        directIpv4:
+          equinixIfaceIp: 192.168.100.1/30
+    500_internal_error:
+      value:
+      - errorCode: EQ-3041011
+        errorMessage: Bad request - Internal Server Error. Please check the request payload and submit again.
+        details: Please contact support@equinix.com for more info
+        correlationId: 9048796775044a60-39cb-4ccc-b272-b80f126e5408
+        additionalInfo:
+        - reason: Please contact support@equinix.com for more info
+  schemas:
+    ValidateRequest_filter:
+      type: object
+      properties:
+        and:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidateRequest_filter_and'
+      description: Filters
+    RoutingProtocolDirectData:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Routing protocol type
+          enum:
+          - DIRECT
+        name:
+          type: string
+          example: My-direct-route-1
+        directIpv4:
+          $ref: '#/components/schemas/DirectConnectionIpv4'
+        directIpv6:
+          $ref: '#/components/schemas/DirectConnectionIpv6'
+        href:
+          type: string
+          description: Routing Protocol URI
+          format: uri
+          example: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routingProtocols/69762051-85ed-4d13-b6b4-e32e93c672b5
+        uuid:
+          type: string
+          description: Routing protocol identifier
+          format: uuid
+          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        state:
+          type: string
+          enum:
+          - PROVISIONED
+          - DEPROVISIONED
+          - PROVISIONING
+          - DEPROVISIONING
+          - REPROVISIONING
+          - FAILED
+        operation:
+          $ref: '#/components/schemas/RoutingProtocolOperation'
+        change:
+          $ref: '#/components/schemas/RoutingProtocolChange'
+        changelog:
+          $ref: '#/components/schemas/Changelog'
+    BGPActionStates:
+      type: string
+      description: BGP action state
+      enum:
+      - PENDING
+      - FAILED
+      - SUCCEEDED
+    BGPConnectionOperation:
+      type: object
+      properties:
+        operationalStatus:
+          type: string
+          description: BGP IPv4 or IPv6 Connection State operational status
+          enum:
+          - UP
+          - DOWN
+          - UNKNOWN
+        opStatusChangedAt:
+          type: string
+          description: Last BGP State Update by Date and Time
+          format: date-time
+          example: 2021-10-30 07:21:39+00:00
+      description: BGP IPv4 or IPv6 Connection State operational data
+    ConnectionChangeOperation:
+      required:
+      - op
+      - path
+      - value
+      type: object
+      properties:
+        op:
+          type: string
+          description: Handy shortcut for operation name
+          example: add
+        path:
+          type: string
+          description: path inside document leading to updated parameter
+          example: /ipv6
+        value:
+          description: new value for updated parameter
+      description: Connection change operation data
+    BGPActionData:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Routing Protocol URI
+          format: uri
+          example: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routingProtocols/69762051-85ed-4d13-b6b4-e32e93c672b5/actions
+        uuid:
+          type: string
+          description: Routing protocol identifier
+          format: uuid
+          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        type:
+          $ref: '#/components/schemas/BGPActions'
+        description:
+          type: string
+          description: BGP action description
+        state:
+          $ref: '#/components/schemas/BGPActionStates'
+        changelog:
+          $ref: '#/components/schemas/Changelog'
+    ValidateRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/ValidateRequest_filter'
+      description: Validate connection auth api key or vlan
+    ConnectionRoutingProtocolPatchRequest:
+      minItems: 1
+      type: array
+      description: Patch connection routing protocol request
+      items:
+        $ref: '#/components/schemas/ConnectionChangeOperation'
+    RoutingProtocolDirectType:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          description: Routing protocol type
+          enum:
+          - DIRECT
+        name:
+          type: string
+          example: My-direct-route-1
+        directIpv4:
+          $ref: '#/components/schemas/DirectConnectionIpv4'
+        directIpv6:
+          $ref: '#/components/schemas/DirectConnectionIpv6'
+    ActionId:
+      type: string
+      description: BGP Action UUID
+      format: uuid
+      example: 86534014-34b4-53f6-45d6-4b94a92d8623
+    ValidateRequest_filter_and:
+      properties:
+        property:
+          type: string
+          description: Path to property
+        operator:
+          type: string
+          description: Type of operation
+        values:
+          type: array
+          description: Values for the given property
+          items:
+            type: string
+    GetResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: List of Routing Protocols
+          items:
+            $ref: '#/components/schemas/RoutingProtocolData'
+    Changelog:
+      type: object
+      properties:
+        createdBy:
+          type: string
+          description: Created by User Key
+          example: johnsmith
+        createdByFullName:
+          type: string
+          description: Created by User Full Name
+          example: John Smith
+        createdByEmail:
+          type: string
+          description: Created by User Email Address
+          example: john.smith@example.com
+        createdDateTime:
+          type: string
+          description: Created by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedBy:
+          type: string
+          description: Updated by User Key
+          example: johnsmith
+        updatedByFullName:
+          type: string
+          description: Updated by User Full Name
+          example: John Smith
+        updatedByEmail:
+          type: string
+          description: Updated by User Email Address
+          example: john.smith@example.com
+        updatedDateTime:
+          type: string
+          description: Updated by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        deletedBy:
+          type: string
+          description: Deleted by User Key
+          example: johnsmith
+        deletedByFullName:
+          type: string
+          description: Deleted by User Full Name
+          example: John Smith
+        deletedByEmail:
+          type: string
+          description: Deleted by User Email Address
+          example: john.smith@example.com
+        deletedDateTime:
+          type: string
+          description: Deleted by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+      description: Change log
+    BGPActionRequest:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/BGPActions'
+      description: BGP action request
+    ConnectionSideAdditionalInfo:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Key
+        value:
+          type: string
+          description: Value
+      description: Additional information
+    RoutingProtocolChange:
+      required:
+      - type
+      - uuid
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Uniquely identifies a change
+        type:
+          type: string
+          description: Type of change
+          enum:
+          - ROUTING_PROTOCOL_UPDATE
+          - ROUTING_PROTOCOL_CREATION
+          - ROUTING_PROTOCOL_DELETION
+        href:
+          type: string
+          description: Routing Protocol Change URI
+          format: uri
+      description: Current state of latest Routing Protocol change
+    RoutingProtocolBase:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Routing protocol type
+          enum:
+          - BGP
+          - DIRECT
+      oneOf:
+      - $ref: '#/components/schemas/RoutingProtocolBGPType'
+      - $ref: '#/components/schemas/RoutingProtocolDirectType'
+    BGPActions:
+      type: string
+      description: BGP action type
+      enum:
+      - CLEAR_BGPIPV4
+      - CLEAR_BGPIPV6
+      - CLEAR_BGPIPV4_INBOUND
+      - CLEAR_BGPIPV6_INBOUND
+      - RESET_BGPIPV4
+      - RESET_BGPIPV6
+    RoutingProtocolChangeOperation:
+      required:
+      - op
+      - path
+      - value
+      type: object
+      properties:
+        op:
+          type: string
+          description: Handy shortcut for operation name
+          enum:
+          - add
+          - replace
+          - remove
+        path:
+          type: string
+          description: path inside document leading to updated parameter
+          example: /
+        value:
+          $ref: '#/components/schemas/RoutingProtocolBase'
+      description: Routing Protocol change operation data
+    ConnectionRoutingProtocolPostRequest:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Connection routing protocol configuration
+          items:
+            $ref: '#/components/schemas/RoutingProtocolBase'
+      description: Create connection routing protocolpost request
+    BGPActionsBulkData:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BGPActionData'
+      description: List of BGP Actions
+    RoutingProtocolBGPType:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          description: Routing protocol type
+          enum:
+          - BGP
+        name:
+          type: string
+          example: My-BGP-route-1
+        bgpIpv4:
+          $ref: '#/components/schemas/BGPConnectionIpv4'
+        bgpIpv6:
+          $ref: '#/components/schemas/BGPConnectionIpv6'
+        customerAsn:
+          type: integer
+          description: Customer asn
+          format: int64
+        bgpAuthKey:
+          type: string
+          description: BGP authorization key
+        asOverrideEnabled:
+          type: boolean
+          description: Enable AS number override
+        bfd:
+          $ref: '#/components/schemas/RoutingProtocolBFD'
+    RoutingProtocolOperation:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    RoutingProtocolData:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Routing protocol type
+          enum:
+          - BGP
+          - DIRECT
+      oneOf:
+      - $ref: '#/components/schemas/RoutingProtocolBGPData'
+      - $ref: '#/components/schemas/RoutingProtocolDirectData'
+    RoutingProtocolChangeDataResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoutingProtocolChangeData'
+      description: List of network changes
+    ConnectionId:
+      type: string
+      description: Connection UUID
+      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+    ChangeId:
+      type: string
+      description: Routing Protocol Change UUID
+      format: uuid
+      example: 6d500177-9404-41f2-99e8-2bf1a84d8db5
+    BGPConnectionIpv4:
+      required:
+      - customerPeerIp
+      - enabled
+      type: object
+      properties:
+        customerPeerIp:
+          type: string
+          description: Customer side peering ip
+          example: 10.1.1.2
+        equinixPeerIp:
+          type: string
+          description: Equinix side peering ip
+          example: 10.1.1.3
+        enabled:
+          type: boolean
+          description: Admin status for the BGP session
+        outboundASPrependCount:
+          type: integer
+          description: AS path prepend count
+          format: int64
+          example: 3
+        inboundMED:
+          type: integer
+          description: Inbound Multi Exit Discriminator attribute
+          format: int64
+          example: 1000
+        outboundMED:
+          type: integer
+          description: Outbound Multi Exit Discriminator attribute
+          format: int64
+          example: 2000
+        routesMax:
+          type: integer
+          description: Maximum learnt prefixes limit
+          format: int64
+          example: 1000
+        operation:
+          $ref: '#/components/schemas/BGPConnectionOperation'
+    RoutingProtocolBGPData:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Routing protocol type
+          enum:
+          - BGP
+        name:
+          type: string
+          example: My-BGP-route-1
+        bgpIpv4:
+          $ref: '#/components/schemas/BGPConnectionIpv4'
+        bgpIpv6:
+          $ref: '#/components/schemas/BGPConnectionIpv6'
+        customerAsn:
+          type: integer
+          description: Customer asn
+          format: int64
+          example: 65002
+        equinixAsn:
+          type: integer
+          description: Equinix asn
+          format: int64
+          example: 65002
+        bgpAuthKey:
+          type: string
+          description: BGP authorization key
+          example: testAuthKey
+        asOverrideEnabled:
+          type: boolean
+          description: Enable AS number override
+        bfd:
+          $ref: '#/components/schemas/RoutingProtocolBFD'
+        href:
+          type: string
+          description: Routing Protocol URI
+          format: uri
+          example: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routingProtocols/69762051-85ed-4d13-b6b4-e32e93c672b5
+        uuid:
+          type: string
+          description: Routing protocol identifier
+          format: uuid
+          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        state:
+          type: string
+          enum:
+          - PROVISIONED
+          - DEPROVISIONED
+          - PROVISIONING
+          - DEPROVISIONING
+          - REPROVISIONING
+          - FAILED
+        operation:
+          $ref: '#/components/schemas/RoutingProtocolOperation'
+        change:
+          $ref: '#/components/schemas/RoutingProtocolChange'
+        changelog:
+          $ref: '#/components/schemas/Changelog'
+    DirectConnectionIpv6:
+      required:
+      - equinixIfaceIp
+      type: object
+      properties:
+        equinixIfaceIp:
+          type: string
+          description: Equinix side Interface IP address
+          example: 2001:db8:c59b::/1
+    BGPConnectionIpv6:
+      required:
+      - customerPeerIp
+      - enabled
+      type: object
+      properties:
+        customerPeerIp:
+          type: string
+          description: Customer side peering ip
+          example: 2001:db8:c59b::1
+        equinixPeerIp:
+          type: string
+          description: Equinix side peering ip
+          example: 2001:db8:c59b::1
+        enabled:
+          type: boolean
+          description: Admin status for the BGP session
+        outboundASPrependCount:
+          type: integer
+          description: AS path prepend count
+          format: int64
+          example: 3
+        inboundMED:
+          type: integer
+          description: Inbound Multi Exit Discriminator attribute
+          format: int64
+          example: 1000
+        outboundMED:
+          type: integer
+          description: Outbound Multi Exit Discriminator attribute
+          format: int64
+          example: 2000
+        routesMax:
+          type: integer
+          description: Maximum learnt prefixes limit
+          format: int64
+          example: 1000
+        operation:
+          $ref: '#/components/schemas/BGPConnectionOperation'
+    RouterId:
+      type: string
+      description: Cloud Router UUID
+      format: uuid
+      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    RoutingProtocolChangeData:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Current outcome of the change flow
+          enum:
+          - COMPLETED
+          - FAILED
+          - REQUESTED
+        createdBy:
+          type: string
+          description: Created by User Key
+        createdDateTime:
+          type: string
+          description: Set when change flow starts
+          format: date-time
+        updatedBy:
+          type: string
+          description: Updated by User Key
+        updatedDateTime:
+          type: string
+          description: Set when change object is updated
+          format: date-time
+        information:
+          type: string
+          description: Additional information
+        data:
+          $ref: '#/components/schemas/RoutingProtocolChangeOperation'
+      description: Current state of latest Routing Protocol change
+      allOf:
+      - $ref: '#/components/schemas/RoutingProtocolChange'
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
+    RoutingProtocolBFD:
+      required:
+      - enabled
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        interval:
+          type: string
+          example: '100'
+    ValidateSubnetResponse:
+      type: object
+      properties:
+        additionalInfo:
+          type: array
+          description: Additional information
+          items:
+            $ref: '#/components/schemas/ConnectionSideAdditionalInfo'
+      description: ValidateResponse
+    DirectConnectionIpv4:
+      type: object
+      properties:
+        equinixIfaceIp:
+          type: string
+          description: Equinix side Interface IP address
+          example: 192.168.100.0/30
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    RoutingProtocolId:
+      type: string
+      description: Routing Protocol UUID
+      format: uuid
+      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+x-eqx-api-linter-skip-rules:
+- 3
+- 38
