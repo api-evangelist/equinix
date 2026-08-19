@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Equinix API Authentication Metrics API",
+    "version": "1.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Metrics by Asset Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/:asset/:assetId/metrics",
+            "params": [
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path",
+                "description": "asset"
+              },
+              {
+                "name": "assetId",
+                "value": "",
+                "type": "path",
+                "description": "asset UUID"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the metric types: \n- `equinix.fabric.connection.bandwidth_rx.usage`\n- `equinix.fabric.connection.bandwidth_tx.usage`\n- `equinix.fabric.connection.packets_dropped_rx_aside_rateexceeded.count`\n- `equinix.fabric.connection.packets_dropped_tx_aside_rateexceeded.count`\n- `equinix.fabric.connection.packets_dropped_rx_zside_rateexceeded.count`\n- `equinix.fabric.connection.packets_dropped_tx_zside_rateexceeded.count`\n- `equinix.fabric.port.bandwidth_rx.usage`\n- `equinix.fabric.port.bandwidth_tx.usage`\n- `equinix.fabric.port.packets_dropped_rx.count`\n- `equinix.fabric.port.packets_dropped_tx.count`\n- `equinix.fabric.port.packets_erred_rx.count`\n- `equinix.fabric.port.packets_erred_tx.count`\n- `equinix.fabric.metro.{SOURCE_METRO_CODE}_{DESTINATION_METRO_CODE}.latency`\n- `equinix.fabric.metro.{SOURCE_METRO_CODE}_{DESTINATION_METRO_CODE}.jitter_avg`\n"
+              },
+              {
+                "name": "fromDateTime",
+                "value": "",
+                "type": "query",
+                "description": "Start date and time"
+              },
+              {
+                "name": "toDateTime",
+                "value": "",
+                "type": "query",
+                "description": "End date and time"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit"
+              }
+            ]
+          },
+          "docs": "This API provides capability to retrieve Metrics of an asset id"
+        },
+        {
+          "info": {
+            "name": "Get Metrics by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/metrics",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the metric types with wildcard: \n- `equinix.fabric.metro.*.latency`\n- `equinix.fabric.metro.*.jitter_avg`\n"
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "value"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit"
+              }
+            ]
+          },
+          "docs": "This API provides capability to retrieve Metrics by specific wildcard metric types"
+        },
+        {
+          "info": {
+            "name": "Search Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/metrics/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API provides capability to search metrics from a filtered query"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

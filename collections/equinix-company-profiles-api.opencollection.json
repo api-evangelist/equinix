@@ -1,0 +1,301 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Equinix API Authentication Company Profiles API",
+    "version": "1.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Company Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Company Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/companyProfiles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new company profile <font color=\"red\"> <sup color='red'>Beta</sup></font>"
+        },
+        {
+          "info": {
+            "name": "Get Company Profile by UUID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/companyProfiles/:companyProfileId",
+            "params": [
+              {
+                "name": "companyProfileId",
+                "value": "",
+                "type": "path",
+                "description": "Company Profile UUID"
+              }
+            ]
+          },
+          "docs": "Get company profile details by UUID <font color=\"red\"> <sup color='red'>Beta</sup></font>"
+        },
+        {
+          "info": {
+            "name": "Delete Company Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.equinix.com/fabric/v4/companyProfiles/:companyProfileId",
+            "params": [
+              {
+                "name": "companyProfileId",
+                "value": "",
+                "type": "path",
+                "description": "Company Profile UUID"
+              }
+            ]
+          },
+          "docs": "Delete company profile by UUID <font color=\"red\"> <sup color='red'>Beta</sup></font>"
+        },
+        {
+          "info": {
+            "name": "Search Company Profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/companyProfiles/search",
+            "params": [
+              {
+                "name": "viewPoint",
+                "value": "",
+                "type": "query",
+                "description": "Viewpoint for the request, either 'aSide' or 'zSide'"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search company profiles based on filter criteria <font color=\"red\"> <sup color='red'>Beta</sup></font>"
+        },
+        {
+          "info": {
+            "name": "Get Service Profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/companyProfiles/:companyProfileId/serviceProfiles",
+            "params": [
+              {
+                "name": "companyProfileId",
+                "value": "",
+                "type": "path",
+                "description": "Company Profile UUID"
+              }
+            ]
+          },
+          "docs": "Get all service profiles attached to a company profile <font color=\"red\"> <sup color='red'>Beta</sup></font>"
+        },
+        {
+          "info": {
+            "name": "Attach Service Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.equinix.com/fabric/v4/companyProfiles/:companyProfileId/serviceProfiles/:serviceProfileId",
+            "params": [
+              {
+                "name": "companyProfileId",
+                "value": "",
+                "type": "path",
+                "description": "Company Profile UUID"
+              },
+              {
+                "name": "serviceProfileId",
+                "value": "",
+                "type": "path",
+                "description": "Service Profile UUID"
+              }
+            ]
+          },
+          "docs": "Attach a service profile to a company profile <font color=\"red\"> <sup color='red'>Beta</sup></font>"
+        },
+        {
+          "info": {
+            "name": "Detach Service Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.equinix.com/fabric/v4/companyProfiles/:companyProfileId/serviceProfiles/:serviceProfileId",
+            "params": [
+              {
+                "name": "companyProfileId",
+                "value": "",
+                "type": "path",
+                "description": "Company Profile UUID"
+              },
+              {
+                "name": "serviceProfileId",
+                "value": "",
+                "type": "path",
+                "description": "Service Profile UUID"
+              }
+            ]
+          },
+          "docs": "Detach a service profile from a company profile <font color=\"red\"> <sup color='red'>Beta</sup></font>"
+        },
+        {
+          "info": {
+            "name": "Get Tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/companyProfiles/:companyProfileId/tags",
+            "params": [
+              {
+                "name": "companyProfileId",
+                "value": "",
+                "type": "path",
+                "description": "Company Profile UUID"
+              }
+            ]
+          },
+          "docs": "Get all tags attached to a company profile <font color=\"red\"> <sup color='red'>Beta</sup></font>"
+        },
+        {
+          "info": {
+            "name": "Attach Tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.equinix.com/fabric/v4/companyProfiles/:companyProfileId/tags/:tagId",
+            "params": [
+              {
+                "name": "companyProfileId",
+                "value": "",
+                "type": "path",
+                "description": "Company Profile UUID"
+              },
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "path",
+                "description": "Tag UUID"
+              }
+            ]
+          },
+          "docs": "Attach a tag to a company profile <font color=\"red\"> <sup color='red'>Beta</sup></font>"
+        },
+        {
+          "info": {
+            "name": "Detach Tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.equinix.com/fabric/v4/companyProfiles/:companyProfileId/tags/:tagId",
+            "params": [
+              {
+                "name": "companyProfileId",
+                "value": "",
+                "type": "path",
+                "description": "Company Profile UUID"
+              },
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "path",
+                "description": "Tag UUID"
+              }
+            ]
+          },
+          "docs": "Detach a tag from a company profile <font color=\"red\"> <sup color='red'>Beta</sup></font>"
+        },
+        {
+          "info": {
+            "name": "Get Private Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/companyProfiles/:companyProfileId/privateServices",
+            "params": [
+              {
+                "name": "companyProfileId",
+                "value": "",
+                "type": "path",
+                "description": "Company Profile UUID"
+              }
+            ]
+          },
+          "docs": "Get all private services attached to a company profile <font color=\"red\"> <sup color='red'>Beta</sup></font>"
+        },
+        {
+          "info": {
+            "name": "Attach Private Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.equinix.com/fabric/v4/companyProfiles/:companyProfileId/privateServices/:privateServiceId",
+            "params": [
+              {
+                "name": "companyProfileId",
+                "value": "",
+                "type": "path",
+                "description": "Company Profile UUID"
+              },
+              {
+                "name": "privateServiceId",
+                "value": "",
+                "type": "path",
+                "description": "Private Service UUID"
+              }
+            ]
+          },
+          "docs": "Attach a private service to a company profile <font color=\"red\"> <sup color='red'>Beta</sup></font>"
+        },
+        {
+          "info": {
+            "name": "Detach Private Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.equinix.com/fabric/v4/companyProfiles/:companyProfileId/privateServices/:privateServiceId",
+            "params": [
+              {
+                "name": "companyProfileId",
+                "value": "",
+                "type": "path",
+                "description": "Company Profile UUID"
+              },
+              {
+                "name": "privateServiceId",
+                "value": "",
+                "type": "path",
+                "description": "Private Service UUID"
+              }
+            ]
+          },
+          "docs": "Detach a private service from a company profile <font color=\"red\"> <sup color='red'>Beta</sup></font>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

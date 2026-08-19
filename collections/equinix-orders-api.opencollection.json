@@ -1,0 +1,146 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Equinix API Authentication Orders API",
+    "version": "1.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/colocations/v2/orders/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the Order"
+              },
+              {
+                "name": "ibxs",
+                "value": "SG1",
+                "type": "query",
+                "description": "List of IBXs to be filtered"
+              }
+            ]
+          },
+          "docs": "This method retrieves an order by its ID for a user with permission to view this request."
+        },
+        {
+          "info": {
+            "name": "Retrieve order negotiations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/colocations/v2/orders/:orderId/negotiations",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "{orderId}",
+                "type": "path",
+                "description": "Identifier of the order"
+              }
+            ]
+          },
+          "docs": "This method retrieves order negotiations by its ID for a user with permission to view this request."
+        },
+        {
+          "info": {
+            "name": "Reply to an order negotiation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/colocations/v2/orders/:orderId/negotiations",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the order"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This method approves or rejects an order negotiation for a user with permission to view this request."
+        },
+        {
+          "info": {
+            "name": "Add notes to an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/colocations/v2/orders/:orderId/notes",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the order"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This method adds notes to an order by its ID for a user with permission to view this request."
+        },
+        {
+          "info": {
+            "name": "Cancel an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/colocations/v2/orders/:orderId/cancel",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the order"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This method cancels an order by its ID for a user with permission to view this request."
+        },
+        {
+          "info": {
+            "name": "Order a new Secure Cabinet deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/securecabinet/v1/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Order a new Secure Cabinet deployment and recommended additional products at IBX data centers worldwide.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

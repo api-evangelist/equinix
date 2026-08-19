@@ -1,0 +1,245 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Equinix API Authentication Streams API",
+    "version": "1.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Streams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Streams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/streams",
+            "params": [
+              {
+                "name": "offset",
+                "value": "1",
+                "type": "query",
+                "description": "offset"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "number of records to fetch"
+              }
+            ]
+          },
+          "docs": "This API provides capability to retrieve streams"
+        },
+        {
+          "info": {
+            "name": "Create Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/streams",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API provides capability to create user's stream"
+        },
+        {
+          "info": {
+            "name": "Get Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/streams/:streamId",
+            "params": [
+              {
+                "name": "streamId",
+                "value": "",
+                "type": "path",
+                "description": "Stream UUID"
+              }
+            ]
+          },
+          "docs": "This API provides capability to get user's stream"
+        },
+        {
+          "info": {
+            "name": "Update Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.equinix.com/fabric/v4/streams/:streamId",
+            "params": [
+              {
+                "name": "streamId",
+                "value": "",
+                "type": "path",
+                "description": "Stream UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API provides capability to update user's stream"
+        },
+        {
+          "info": {
+            "name": "Delete Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.equinix.com/fabric/v4/streams/:streamId",
+            "params": [
+              {
+                "name": "streamId",
+                "value": "",
+                "type": "path",
+                "description": "Stream UUID"
+              }
+            ]
+          },
+          "docs": "This API provides capability to delete user's stream"
+        },
+        {
+          "info": {
+            "name": "Get Assets",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/streamAssets/search",
+            "params": [
+              {
+                "name": "offset",
+                "value": "1",
+                "type": "query",
+                "description": "offset"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "number of records to fetch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API provides capability to retrieve stream assets"
+        },
+        {
+          "info": {
+            "name": "Get Asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/streams/:streamId/:asset/:assetId",
+            "params": [
+              {
+                "name": "assetId",
+                "value": "",
+                "type": "path",
+                "description": "asset UUID"
+              },
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path",
+                "description": "asset"
+              },
+              {
+                "name": "streamId",
+                "value": "",
+                "type": "path",
+                "description": "Stream UUID"
+              }
+            ]
+          },
+          "docs": "This API provides capability to get user's assets attached to a stream"
+        },
+        {
+          "info": {
+            "name": "Attach Asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.equinix.com/fabric/v4/streams/:streamId/:asset/:assetId",
+            "params": [
+              {
+                "name": "assetId",
+                "value": "",
+                "type": "path",
+                "description": "asset UUID"
+              },
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path",
+                "description": "asset"
+              },
+              {
+                "name": "streamId",
+                "value": "",
+                "type": "path",
+                "description": "Stream UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API provides capability to attach an asset to a stream"
+        },
+        {
+          "info": {
+            "name": "Detach Asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.equinix.com/fabric/v4/streams/:streamId/:asset/:assetId",
+            "params": [
+              {
+                "name": "assetId",
+                "value": "",
+                "type": "path",
+                "description": "asset UUID"
+              },
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path",
+                "description": "asset"
+              },
+              {
+                "name": "streamId",
+                "value": "",
+                "type": "path",
+                "description": "Stream UUID"
+              }
+            ]
+          },
+          "docs": "This API provides capability to detach an asset from a stream"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,447 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Equinix API Authentication Cloud Routers API",
+    "version": "1.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cloud Routers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Advertised Routes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/connections/:connectionId/advertisedRoutes/search",
+            "params": [
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Connection Id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The API provides capability to get list of user's advertised routes using search criteria, including optional filtering, pagination and sorting"
+        },
+        {
+          "info": {
+            "name": "Search Received Routes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/connections/:connectionId/receivedRoutes/search",
+            "params": [
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Connection Id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The API provides capability to get list of received routes using search criteria, including optional filtering, pagination and sorting"
+        },
+        {
+          "info": {
+            "name": "Create Routers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/routers",
+            "params": [
+              {
+                "name": "dryRun",
+                "value": "",
+                "type": "query",
+                "description": "option to verify that API calls will succeed"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API provides capability to create user's Cloud Routers"
+        },
+        {
+          "info": {
+            "name": "Get Routers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/routers/:routerId",
+            "params": [
+              {
+                "name": "routerId",
+                "value": "",
+                "type": "path",
+                "description": "Cloud Router UUID"
+              }
+            ]
+          },
+          "docs": "This API provides capability to retrieve user's Cloud Routers"
+        },
+        {
+          "info": {
+            "name": "Update Routers",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.equinix.com/fabric/v4/routers/:routerId",
+            "params": [
+              {
+                "name": "routerId",
+                "value": "",
+                "type": "path",
+                "description": "Cloud Router UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API provides capability to update user's Cloud Routers"
+        },
+        {
+          "info": {
+            "name": "Delete Routers",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.equinix.com/fabric/v4/routers/:routerId",
+            "params": [
+              {
+                "name": "routerId",
+                "value": "",
+                "type": "path",
+                "description": "Cloud Router UUID"
+              }
+            ]
+          },
+          "docs": "This API provides capability to delete user's Cloud Routers"
+        },
+        {
+          "info": {
+            "name": "Get Route Table Actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/routers/:routerId/actions",
+            "params": [
+              {
+                "name": "routerId",
+                "value": "",
+                "type": "path",
+                "description": "Router UUID"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Action state"
+              }
+            ]
+          },
+          "docs": "This API provides capability to fetch all actions for a given cloud router"
+        },
+        {
+          "info": {
+            "name": "Create Route Table Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/routers/:routerId/actions",
+            "params": [
+              {
+                "name": "routerId",
+                "value": "",
+                "type": "path",
+                "description": "Router UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API provides capability to refresh route table and bgp session summary information"
+        },
+        {
+          "info": {
+            "name": "Search Route Table Actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/routers/:routerId/actions/search",
+            "params": [
+              {
+                "name": "routerId",
+                "value": "",
+                "type": "path",
+                "description": "Router UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API provides capability to search route table actions for a given cloud router"
+        },
+        {
+          "info": {
+            "name": "Get Route Table Action by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/routers/:routerId/actions/:actionId",
+            "params": [
+              {
+                "name": "routerId",
+                "value": "",
+                "type": "path",
+                "description": "Router UUID"
+              },
+              {
+                "name": "actionId",
+                "value": "",
+                "type": "path",
+                "description": "Action UUID"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Action state"
+              }
+            ]
+          },
+          "docs": "This API provides capability to fetch action status"
+        },
+        {
+          "info": {
+            "name": "Get Commands",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/routers/:routerId/commands",
+            "params": [
+              {
+                "name": "routerId",
+                "value": "",
+                "type": "path",
+                "description": "Router UUID"
+              }
+            ]
+          },
+          "docs": "This API provides capability to fetch all commands"
+        },
+        {
+          "info": {
+            "name": "Initiate Command",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/routers/:routerId/commands",
+            "params": [
+              {
+                "name": "routerId",
+                "value": "",
+                "type": "path",
+                "description": "Router UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API provides capability to initiate Command"
+        },
+        {
+          "info": {
+            "name": "Search Commands",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/routers/:routerId/commands/search",
+            "params": [
+              {
+                "name": "routerId",
+                "value": "",
+                "type": "path",
+                "description": "Router UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API provides capability to search commands"
+        },
+        {
+          "info": {
+            "name": "Get Command",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/routers/:routerId/commands/:commandId",
+            "params": [
+              {
+                "name": "routerId",
+                "value": "",
+                "type": "path",
+                "description": "Router UUID"
+              },
+              {
+                "name": "commandId",
+                "value": "",
+                "type": "path",
+                "description": "Command UUID"
+              }
+            ]
+          },
+          "docs": "This API provides capability to fetch command using command Id"
+        },
+        {
+          "info": {
+            "name": "Delete Command",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.equinix.com/fabric/v4/routers/:routerId/commands/:commandId",
+            "params": [
+              {
+                "name": "routerId",
+                "value": "",
+                "type": "path",
+                "description": "Router UUID"
+              },
+              {
+                "name": "commandId",
+                "value": "",
+                "type": "path",
+                "description": "Command UUID"
+              }
+            ]
+          },
+          "docs": "This API provides capability to delete command based on command Id"
+        },
+        {
+          "info": {
+            "name": "Search Route Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/routers/:routerId/routes/search",
+            "params": [
+              {
+                "name": "routerId",
+                "value": "",
+                "type": "path",
+                "description": "Router UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The API provides capability to get list of user's Fabric Cloud Router route table entries using search criteria, including optional filtering, pagination and sorting"
+        },
+        {
+          "info": {
+            "name": "Search Routers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/routers/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The API provides capability to get list of user's Cloud Routers using search criteria, including optional filtering, pagination and sorting"
+        },
+        {
+          "info": {
+            "name": "List Packages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/routerPackages",
+            "params": [
+              {
+                "name": "offset",
+                "value": "1",
+                "type": "query",
+                "description": "offset"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "number of records to fetch"
+              }
+            ]
+          },
+          "docs": "This API provides capability to retrieve user's Cloud Routers Packages"
+        },
+        {
+          "info": {
+            "name": "Get Package Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/routerPackages/:routerPackageCode",
+            "params": [
+              {
+                "name": "routerPackageCode",
+                "value": "",
+                "type": "path",
+                "description": "Equinix-assigned Cloud Router package identifier"
+              }
+            ]
+          },
+          "docs": "This API provides capability to retrieve user's Cloud Routers Package Details"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

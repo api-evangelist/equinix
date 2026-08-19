@@ -1,0 +1,2503 @@
+{
+  "item": [
+    {
+      "id": "23cbfe72-cafe-452d-88d4-362b3fdf8b67",
+      "name": "Networks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7dddbb29-5ef2-452f-95dc-7ec76374efc6",
+          "name": "Create Network",
+          "request": {
+            "name": "Create Network",
+            "description": {
+              "content": "This API provides capability to create user's Fabric Network",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "networks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dryRun",
+                  "value": "false",
+                  "description": "option to verify that API calls will succeed"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"notifications\": [\n    {\n      \"emails\": [\n        \"<email>\",\n        \"<email>\"\n      ],\n      \"type\": \"<string>\",\n      \"sendInterval\": \"<string>\",\n      \"registeredUsers\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"emails\": [\n        \"<email>\",\n        \"<email>\"\n      ],\n      \"type\": \"<string>\",\n      \"sendInterval\": \"<string>\",\n      \"registeredUsers\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"scope\": \"<string>\",\n  \"type\": \"<string>\",\n  \"location\": {\n    \"metroHref\": \"<string>\",\n    \"region\": \"<string>\",\n    \"metroName\": \"<string>\",\n    \"metroCode\": \"<string>\",\n    \"ibx\": \"<string>\"\n  },\n  \"project\": {\n    \"projectId\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5719e153-673d-4c01-bde6-206a5d4671a9",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryRun",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"EVPLAN\",\n  \"name\": \"My-Network-1\",\n  \"scope\": \"GLOBAL\",\n  \"project\": {\n    \"projectId\": \"d64fa54a-cfcb-4fb0-82ee-86cf47007fa2\"\n  },\n  \"notifications\": [\n    {\n      \"type\": \"ALL\",\n      \"emails\": [\n        \"test@equinix.com\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"http://api.corp.equinix.com/fabric/v4/networks/0633e83f-116f-481d-b86f-c472271d1a8c\",\n  \"uuid\": \"0633e83f-116f-481d-b86f-c472271d1a8c\",\n  \"type\": \"EVPLAN\",\n  \"name\": \"My-evplan-network-1\",\n  \"scope\": \"GLOBAL\",\n  \"state\": \"INACTIVE\",\n  \"connectionsCount\": 0,\n  \"account\": {\n    \"orgId\": 14510,\n    \"organizationName\": \"fabric\",\n    \"globalCustId\": \"0026u00000595sBAAM\"\n  },\n  \"change\": {\n    \"href\": \"http://api.corp.equinix.com/fabric/v4/networks/0633e83f-116f-481d-b86f-c472271d1a8c/changes/ce7c0bbc-7bd2-431f-903f-de796ea9e858\",\n    \"uuid\": \"ce7c0bbc-7bd2-431f-903f-de796ea9e858\",\n    \"type\": \"NETWORK_CREATION\"\n  },\n  \"operation\": {\n    \"equinixStatus\": \"PROVISIONING\"\n  },\n  \"changeLog\": {\n    \"createdBy\": \"fabric\",\n    \"createdDateTime\": \"2025-03-03 19:37:29.326000+00:00\"\n  },\n  \"links\": {\n    \"href\": \"http://api.corp.equinix.com/fabric/v4/networks/0633e83f-116f-481d-b86f-c472271d1a8c/connections\",\n    \"rel\": \"getConnectionsByNetworkUuid\",\n    \"method\": \"GET\",\n    \"contentType\": \"application/json\",\n    \"authenticate\": true\n  },\n  \"project\": {\n    \"projectId\": \"d64fa54a-cfcb-4fb0-82ee-86cf47007fa2\"\n  },\n  \"notifications\": [\n    {\n      \"type\": \"ALL\",\n      \"emails\": [\n        \"fabric@gmail.com\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1c73ac0-c0c8-4ce6-a15a-a12dad095fff",
+              "name": "Fabric Network Access point object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryRun",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"EVPLAN\",\n  \"name\": \"My-Network-1\",\n  \"scope\": \"GLOBAL\",\n  \"project\": {\n    \"projectId\": \"d64fa54a-cfcb-4fb0-82ee-86cf47007fa2\"\n  },\n  \"notifications\": [\n    {\n      \"type\": \"ALL\",\n      \"emails\": [\n        \"test@equinix.com\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784\",\n  \"type\": \"EVPLAN\",\n  \"uuid\": \"92dc376a-a932-43aa-a6a2-c806dedbd784\",\n  \"name\": \"My-EVPLAN-1\",\n  \"state\": \"INACTIVE\",\n  \"change\": {\n    \"href\": \"https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784/changes/6d500177-9404-41f2-99e8-2bf1a84d8db5\",\n    \"uuid\": \"6d500177-9404-41f2-99e8-2bf1a84d8db5\",\n    \"type\": \"NETWORK_CREATION\"\n  },\n  \"location\": {\n    \"region\": \"EMEA\"\n  },\n  \"scope\": \"REGIONAL\",\n  \"connectionsCount\": 0,\n  \"project\": {\n    \"projectId\": \"123456\"\n  },\n  \"notifications\": [\n    {\n      \"type\": \"ALL\",\n      \"emails\": [\n        \"test@equinix.com\"\n      ]\n    }\n  ],\n  \"operation\": {\n    \"equinixStatus\": \"PROVISIONING\"\n  },\n  \"changeLog\": {\n    \"createdBy\": \"testuser\",\n    \"createdDateTime\": \"2020-05-21 10:30:00+00:00\",\n    \"updatedBy\": \"testuser\",\n    \"updatedDateTime\": \"2020-05-21 10:30:00+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "353ec556-0d18-43ed-b1fd-3d1b522c0dab",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryRun",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"EVPLAN\",\n  \"name\": \"My-Network-1\",\n  \"scope\": \"GLOBAL\",\n  \"project\": {\n    \"projectId\": \"d64fa54a-cfcb-4fb0-82ee-86cf47007fa2\"\n  },\n  \"notifications\": [\n    {\n      \"type\": \"ALL\",\n      \"emails\": [\n        \"test@equinix.com\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3142102\",\n    \"errorMessage\": \"Connection has duplicate buyer-side VLAN ID for port or the same VLAN ID is in the process of being deleted and should be freed up soon\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/aSide/accessPoint/linkProtocol\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142535\",\n    \"errorMessage\": \"The connection bandwidth provided in the connection request exceeds the bandwidth Limit on ServiceToken\",\n    \"details\": \"Please enter bandwidth less than the Speed limit on ServiceToken\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/aSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142536\",\n    \"errorMessage\": \"Remote connection cannot be created with the provided ServiceToken\",\n    \"details\": \"Only local Connection can be created using this ServiceToken\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/accessPoint/port/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142701\",\n    \"errorMessage\": \"The connection bandwidth provided in the connection request exceeds the bandwidth Limit on ServiceToken\",\n    \"details\": \"not an authorized user\",\n    \"correlationId\": \"test\"\n  },\n  {\n    \"errorCode\": \"EQ-3142501\",\n    \"errorMessage\": \"Invalid input\",\n    \"correlationId\": \"20d32a80-0d61-4333-bc03-707b591ae2f5\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"aSide/accessPoint/port/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142509\",\n    \"errorMessage\": \"Connection already deleted\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142510\",\n    \"errorMessage\": \"Connection is in transient state\",\n    \"correlationId\": \"20d32a80-0d61-4333-bc03-707b591ae2f5\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142221\",\n    \"errorMessage\": \"The primary and secondary token provided have different bandwidth tiers. Please use two tokens that support the same bandwidth tiers\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142222\",\n    \"errorMessage\": \"The primary and secondary tokens have different encapsulation types (Dot1Q or QinQ). Please use two tokens that support the same encapsulation type\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142223\",\n    \"errorMessage\": \"The primary and secondary tokens belong to different projects. Please use two tokens that belong to the same project\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142224\",\n    \"errorMessage\": \"The primary and secondary ports have different port speeds (bandwidth). Please use two tokens that support the same port speed\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142225\",\n    \"errorMessage\": \"The primary and secondary tokens provided are the same. Please provide a different token\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142514\",\n    \"errorMessage\": \"Redundancy group is required\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/redundancy/group\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142515\",\n    \"errorMessage\": \"Redundancy priority is required\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/redundancy/priority\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142516\",\n    \"errorMessage\": \"Invalid redundancy group\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/redundancy/group\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142517\",\n    \"errorMessage\": \"Invalid redundancy priority\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/redundancy/priority\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142303\",\n    \"errorMessage\": \"Only Primary connection allowed for this CSP\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/redundancy/priority\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142320\",\n    \"errorMessage\": \"For redundant connection, Service Profile should be the same\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/accessPoint/profile/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142021\",\n    \"errorMessage\": \"For redundant connection, Fabric Cloud Router should be the same\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/aSide/accessPoint/router/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142012\",\n    \"errorMessage\": \"Fabric Cloud Router is not in PROVISIONED state\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/aSide/accessPoint/router/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142301\",\n    \"errorMessage\": \"Given profile does not exist\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/accessPoint/profile/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142302\",\n    \"errorMessage\": \"Service provider does not exist in required zSide metro\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/accessPoint/location/metroCode\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142013\",\n    \"errorMessage\": \"Invalid metro for Cloud Router connection\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/aSide/accessPoint/router/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142304\",\n    \"errorMessage\": \"Private connections are not allowed on public profiles\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"visibility\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142306\",\n    \"errorMessage\": \"Requested bandwidth is not supported by service profile\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/bandwidth\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142308\",\n    \"errorMessage\": \"Authentication key is required\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/accessPoint/authenticationKey\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c351e79-e99e-4bd3-a720-edf9b1da7fca",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryRun",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"EVPLAN\",\n  \"name\": \"My-Network-1\",\n  \"scope\": \"GLOBAL\",\n  \"project\": {\n    \"projectId\": \"d64fa54a-cfcb-4fb0-82ee-86cf47007fa2\"\n  },\n  \"notifications\": [\n    {\n      \"type\": \"ALL\",\n      \"emails\": [\n        \"test@equinix.com\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2abb96ee-e58d-4ce0-9e4d-955cfa5103e2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryRun",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"EVPLAN\",\n  \"name\": \"My-Network-1\",\n  \"scope\": \"GLOBAL\",\n  \"project\": {\n    \"projectId\": \"d64fa54a-cfcb-4fb0-82ee-86cf47007fa2\"\n  },\n  \"notifications\": [\n    {\n      \"type\": \"ALL\",\n      \"emails\": [\n        \"test@equinix.com\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc08aa3a-03a8-49d1-9b4b-694e4e689c3a",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryRun",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"EVPLAN\",\n  \"name\": \"My-Network-1\",\n  \"scope\": \"GLOBAL\",\n  \"project\": {\n    \"projectId\": \"d64fa54a-cfcb-4fb0-82ee-86cf47007fa2\"\n  },\n  \"notifications\": [\n    {\n      \"type\": \"ALL\",\n      \"emails\": [\n        \"test@equinix.com\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040016\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efca2515-6630-43a0-84de-dda6220d8528",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryRun",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"EVPLAN\",\n  \"name\": \"My-Network-1\",\n  \"scope\": \"GLOBAL\",\n  \"project\": {\n    \"projectId\": \"d64fa54a-cfcb-4fb0-82ee-86cf47007fa2\"\n  },\n  \"notifications\": [\n    {\n      \"type\": \"ALL\",\n      \"emails\": [\n        \"test@equinix.com\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e689a1c-6732-4dcd-a428-18e75a4ae378",
+          "name": "Get Network By ID",
+          "request": {
+            "name": "Get Network By ID",
+            "description": {
+              "content": "This API provides capability to retrieve user's Fabric Network",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "networks",
+                ":networkId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "networkId",
+                  "description": "(Required) Network UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "44b1162b-52ec-4019-b686-2cd1621da5c9",
+              "name": "Fabric Network Access point object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784\",\n  \"type\": \"EVPLAN\",\n  \"uuid\": \"92dc376a-a932-43aa-a6a2-c806dedbd784\",\n  \"name\": \"My-EVPLAN-1\",\n  \"state\": \"ACTIVE\",\n  \"location\": {\n    \"region\": \"EMEA\"\n  },\n  \"scope\": \"REGIONAL\",\n  \"connectionsCount\": 0,\n  \"project\": {\n    \"projectId\": \"123456\"\n  },\n  \"notifications\": [\n    {\n      \"type\": \"ALL\",\n      \"emails\": [\n        \"test@equinix.com\"\n      ]\n    }\n  ],\n  \"operation\": {\n    \"equinixStatus\": \"PROVISIONED\"\n  },\n  \"changeLog\": {\n    \"createdBy\": \"testuser\",\n    \"createdDateTime\": \"2020-05-21 10:30:00+00:00\",\n    \"updatedBy\": \"testuser\",\n    \"updatedDateTime\": \"2020-05-21 10:30:00+00:00\"\n  },\n  \"links\": [\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784/connections\",\n      \"rel\": \"getConnectionsByNetworkUuid\",\n      \"method\": \"GET\",\n      \"contentType\": \"application/json\",\n      \"authenticate\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b350cd57-4dcd-4937-a275-58cf8ea83deb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e65f2c6a-ff78-4db2-b54d-77ff1beb1662",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03d3c43c-fd3e-4a61-abe1-da3ee89ce0da",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6cc1d89d-4bbf-4f8a-9045-122d3591d4cd",
+          "name": "Delete Network By ID",
+          "request": {
+            "name": "Delete Network By ID",
+            "description": {
+              "content": "This API provides capability to delete user's Fabric Network",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "networks",
+                ":networkId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "networkId",
+                  "description": "(Required) Network UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4e72de5-ed24-4eba-8f30-3f7b1ae7a23b",
+              "name": "Fabric Network Access point object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784\",\n  \"type\": \"EVPLAN\",\n  \"uuid\": \"92dc376a-a932-43aa-a6a2-c806dedbd784\",\n  \"name\": \"My-EVPLAN-1\",\n  \"state\": \"INACTIVE\",\n  \"change\": {\n    \"href\": \"https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784/changes/6d500177-9404-41f2-99e8-2bf1a84d8db5\",\n    \"uuid\": \"6d500177-9404-41f2-99e8-2bf1a84d8db5\",\n    \"type\": \"NETWORK_DELETION\"\n  },\n  \"location\": {\n    \"region\": \"EMEA\"\n  },\n  \"scope\": \"REGIONAL\",\n  \"project\": {\n    \"projectId\": \"123456\"\n  },\n  \"notifications\": [\n    {\n      \"type\": \"ALL\",\n      \"emails\": [\n        \"test@equinix.com\"\n      ]\n    }\n  ],\n  \"operation\": {\n    \"equinixStatus\": \"DEPROVISIONING\"\n  },\n  \"changeLog\": {\n    \"createdBy\": \"testuser\",\n    \"createdDateTime\": \"2020-05-21 10:30:00+00:00\",\n    \"updatedBy\": \"testuser1\",\n    \"updatedDateTime\": \"2020-05-21 10:30:00+00:00\",\n    \"deletedBy\": \"testuser1\",\n    \"deletedDateTime\": \"2020-05-21 10:30:00+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90b77c3e-cf97-4bad-b531-ea148e11d614",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040030\",\n    \"errorMessage\": \"Cannot delete Fabric Cloud Router in transient state\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Cannot delete Fabric Cloud Router in transient state.\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d0fca5e-451e-41da-b0a0-834aab68c7ef",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40861b35-4ad0-4efd-badd-a3ab5267860b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e06829be-3866-4a46-9460-a958a9021885",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f89e938f-3bc4-42ae-8d55-a3282d095dfe",
+          "name": "Update Network By ID",
+          "request": {
+            "name": "Update Network By ID",
+            "description": {
+              "content": "This API provides capability to update user's Fabric Network",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "networks",
+                ":networkId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "networkId",
+                  "description": "(Required) Network UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json-patch+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"op\": \"<string>\",\n    \"path\": \"<string>\",\n    \"value\": {}\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3f210b52-aa6d-446a-b589-8568896db01e",
+              "name": "Fabric Network Access point object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/name\",\n    \"value\": \"NewName\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784\",\n  \"type\": \"EVPLAN\",\n  \"uuid\": \"92dc376a-a932-43aa-a6a2-c806dedbd784\",\n  \"name\": \"My-EVPLAN-1\",\n  \"state\": \"ACTIVE\",\n  \"change\": {\n    \"href\": \"https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784/changes/6d500177-9404-41f2-99e8-2bf1a84d8db5\",\n    \"uuid\": \"6d500177-9404-41f2-99e8-2bf1a84d8db5\",\n    \"type\": \"NETWORK_UPDATE\"\n  },\n  \"location\": {\n    \"region\": \"EMEA\"\n  },\n  \"scope\": \"REGIONAL\",\n  \"connectionsCount\": 0,\n  \"project\": {\n    \"projectId\": \"123456\"\n  },\n  \"notifications\": [\n    {\n      \"type\": \"ALL\",\n      \"emails\": [\n        \"test@equinix.com\"\n      ]\n    }\n  ],\n  \"operation\": {\n    \"equinixStatus\": \"PROVISIONED\"\n  },\n  \"changeLog\": {\n    \"createdBy\": \"testuser\",\n    \"createdDateTime\": \"2020-05-21 10:30:00+00:00\",\n    \"updatedBy\": \"testuser\",\n    \"updatedDateTime\": \"2020-05-21 10:30:00+00:00\"\n  },\n  \"links\": [\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784/connections\",\n      \"rel\": \"getConnectionsByNetworkUuid\",\n      \"method\": \"GET\",\n      \"contentType\": \"application/json\",\n      \"authenticate\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec90d05f-6ba3-447d-8916-e4560b990e46",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/name\",\n    \"value\": \"NewName\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040030\",\n    \"errorMessage\": \"Cannot delete Fabric Cloud Router in transient state\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Cannot delete Fabric Cloud Router in transient state.\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fe4ac70-cc8c-4333-9965-e7cbacb843a7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/name\",\n    \"value\": \"NewName\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "495dcf7c-47c5-447e-af1b-e60d9e02821b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/name\",\n    \"value\": \"NewName\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20014b1f-bd31-45cc-8c2b-cd7addd8c9c3",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/name\",\n    \"value\": \"NewName\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c964e9d1-d024-4eb7-b8d7-89e2594c3484",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/name\",\n    \"value\": \"NewName\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040016\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "57d2ec81-044e-40f7-8026-a105f7406d6f",
+          "name": "Search Network",
+          "request": {
+            "name": "Search Network",
+            "description": {
+              "content": "The API provides capability to get list of user's Fabric Network using search criteria, including optional filtering, pagination and sorting",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "networks",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/NetworkFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/NetworkFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/NetworkFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/NetworkFilter detected>\"\n      }\n    ],\n    \"property\": \"<string>\",\n    \"operator\": \"<string>\",\n    \"values\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/changeLog/updatedDateTime\"\n    },\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/changeLog/updatedDateTime\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4a9fbfca-fd54-471b-b2ad-efd836b98684",
+              "name": "Fabric Network Access point object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/state\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"ACTIVE\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/changeLog/createdDateTime\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20,\n    \"total\": 1\n  },\n  \"data\": [\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784\",\n      \"type\": \"EVPLAN\",\n      \"uuid\": \"92dc376a-a932-43aa-a6a2-c806dedbd784\",\n      \"platformUuid\": \"19dc376a-a932-43aa-a6a2-c806dedbd730\",\n      \"name\": \"My-EVPLAN-1\",\n      \"state\": \"ACTIVE\",\n      \"location\": {\n        \"region\": \"EMEA\"\n      },\n      \"scope\": \"REGIONAL\",\n      \"connectionsCount\": 0,\n      \"project\": {\n        \"projectId\": \"567\"\n      },\n      \"notifications\": [\n        {\n          \"type\": \"ALL\",\n          \"emails\": [\n            \"test@equinix.com\"\n          ]\n        }\n      ],\n      \"operation\": {\n        \"equinixStatus\": \"PROVISIONED\"\n      },\n      \"changeLog\": {\n        \"createdBy\": \"testuser\",\n        \"createdDateTime\": \"2020-05-21 10:30:00+00:00\",\n        \"updatedBy\": \"testuser1\",\n        \"updatedDateTime\": \"2020-05-21 10:30:00+00:00\"\n      },\n      \"links\": [\n        {\n          \"href\": \"https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784/connections\",\n          \"rel\": \"getConnectionsByNetworkUuid\",\n          \"method\": \"GET\",\n          \"contentType\": \"application/json\",\n          \"authenticate\": true\n        }\n      ]\n    }\n  ],\n  \"sort\": [\n    {\n      \"property\": \"/changeLog/updatedDateTime\",\n      \"direction\": \"DESC\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b32189b2-a5af-4d20-9160-ac860cf94e27",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/state\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"ACTIVE\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/changeLog/createdDateTime\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3043015\",\n    \"errorMessage\": \"Invalid value for sorting direction.\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"reason\": \"Only accept DESC and ASC for sorting direction.\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd7fa699-44d3-4682-b78a-6553dd31f492",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/state\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"ACTIVE\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/changeLog/createdDateTime\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1981be9-84b3-4bb0-81a5-a6feb7e2dd03",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/state\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"ACTIVE\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/changeLog/createdDateTime\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30d7e893-294e-4d9c-9779-6656a2ff55fd",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/state\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"ACTIVE\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/changeLog/createdDateTime\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040016\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "264a1b52-934d-47c3-8457-05899911c671",
+          "name": "Get Connections",
+          "request": {
+            "name": "Get Connections",
+            "description": {
+              "content": "The API provides capability to get list of user's Fabric Network connections",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "networks",
+                ":networkId",
+                "connections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "networkId",
+                  "description": "(Required) Network UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f2cacd6-a0bd-4548-ac9a-76b62b447003",
+              "name": "Fabric Network Access point object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId",
+                    "connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20,\n    \"total\": 2\n  },\n  \"data\": [\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/connections/92dc376a-a932-43aa-a6a2-c806dedbd784\",\n      \"type\": \"IP_VC\",\n      \"uuid\": \"9b8c5042-b553-4d5e-a2ac-c73bf6d4fd81\"\n    },\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/connections/38a1eb68-4daf-4ef0-bd7f-6970727b6fc1\",\n      \"type\": \"IP_VC\",\n      \"uuid\": \"38a1eb68-4daf-4ef0-bd7f-6970727b6fc1\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e9e46a5-915d-48c5-9d3d-ed51bd85de65",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId",
+                    "connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3152004\",\n    \"errorMessage\": \"Invalid inlput\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Network does not exists with gievn uuid\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2af3a15c-19db-44f1-b79b-5f6b842e8960",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId",
+                    "connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd268c56-a640-43ee-b97c-58e2d23891d4",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId",
+                    "connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0eb3aa9e-5062-4872-af09-c1b2ed22c269",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId",
+                    "connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040016\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "077c0a6a-2b0b-40fd-a442-9bf08d50dc7b",
+          "name": "Get Network Changes",
+          "request": {
+            "name": "Get Network Changes",
+            "description": {
+              "content": "The API provides capability to get list of user's Fabric Network changes",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "networks",
+                ":networkId",
+                "changes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "networkId",
+                  "description": "(Required) Network UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5230318e-514c-4f1c-9f19-15061a37ec1b",
+              "name": "Fabric Network Access point object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20,\n    \"total\": 1\n  },\n  \"data\": [\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/networks/2a4fb415-5a7f-436f-bae6-02f5e403deec/changes/4b17da68-3d6b-436d-9c8f-2105f3b950d9\",\n      \"type\": \"NETWORK_CREATION\",\n      \"uuid\": \"4b17da68-3d6b-436d-9c8f-2105f3b950d9\",\n      \"status\": \"COMPLETED\",\n      \"createdDateTime\": \"2020-05-21 10:30:00+00:00\",\n      \"updatedDateTime\": \"2020-05-21 10:30:50+00:00\"\n    },\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/networks/2a4fb415-5a7f-436f-bae6-02f5e403deec/changes/da2a2f1b-9ba0-415b-85d6-234bd4c737ec\",\n      \"type\": \"NETWORK_DELETION\",\n      \"uuid\": \"da2a2f1b-9ba0-415b-85d6-234bd4c737ec\",\n      \"status\": \"REQUESTED\",\n      \"createdDateTime\": \"2020-05-21 10:30:00+00:00\",\n      \"updatedDateTime\": \"2020-05-21 10:30:00+00:00\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b08ed004-a668-4075-81d0-216b1c9ab2dc",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3152004\",\n    \"errorMessage\": \"Invalid inlput\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Network does not exists with gievn uuid\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20ac7a37-fa9e-4673-ba9c-656c6e8d5ed6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6004610-3872-4c0b-9446-4318c6126541",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dca281c8-5f31-462d-ae9b-362b3c7b848a",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId",
+                    "changes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040016\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bfbb59b5-fbc7-4760-b754-172159e7ba59",
+          "name": "Get Change By ID",
+          "request": {
+            "name": "Get Change By ID",
+            "description": {
+              "content": "This API provides capability to retrieve user's Fabric Network Change",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "networks",
+                ":networkId",
+                "changes",
+                ":changeId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "networkId",
+                  "description": "(Required) Network UUID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "changeId",
+                  "description": "(Required) Network Change UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ffdbc98e-543f-486d-bcd9-f159aa685f77",
+              "name": "Fabric Network Access point object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId",
+                    "changes",
+                    ":changeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "changeId",
+                      "description": "(Required) Network Change UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/networks/2a4fb415-5a7f-436f-bae6-02f5e403deec/changes/4b17da68-3d6b-436d-9c8f-2105f3b950d9\",\n  \"type\": \"NETWORK_CREATION\",\n  \"uuid\": \"4b17da68-3d6b-436d-9c8f-2105f3b950d9\",\n  \"status\": \"COMPLETED\",\n  \"createdDateTime\": \"2020-05-21 10:30:00+00:00\",\n  \"updatedDateTime\": \"2020-05-21 10:30:50+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80e4e6b2-df09-4f02-8e49-5e642dfb0da4",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId",
+                    "changes",
+                    ":changeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "changeId",
+                      "description": "(Required) Network Change UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3152004\",\n    \"errorMessage\": \"Invalid inlput\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Network does not exists with gievn uuid\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2a624c2-167b-47b9-955b-65e2e338eb93",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId",
+                    "changes",
+                    ":changeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "changeId",
+                      "description": "(Required) Network Change UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ac26faa-367f-48a9-84f2-6da4b63fe606",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId",
+                    "changes",
+                    ":changeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "changeId",
+                      "description": "(Required) Network Change UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1cc88187-bcd7-4747-b070-c56922e00770",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "networks",
+                    ":networkId",
+                    "changes",
+                    ":changeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "networkId",
+                      "description": "(Required) Network UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "changeId",
+                      "description": "(Required) Network Change UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "63cd8dfb-72f9-4763-b5fe-a34cf9ff3136",
+    "name": "Equinix API Authentication Networks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}

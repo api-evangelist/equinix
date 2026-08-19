@@ -1,0 +1,3073 @@
+{
+  "item": [
+    {
+      "id": "89f5690c-bc26-411f-b03d-ff9696fb38c8",
+      "name": "Service Profiles",
+      "description": {
+        "content": "Service Profiles",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "00f062f2-9b0f-4864-9724-e44a7fa474c7",
+          "name": "Get all Profiles",
+          "request": {
+            "name": "Get all Profiles",
+            "description": {
+              "content": "The API request returns all Equinix Fabric Service Profiles in accordance with the view point requested.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "serviceProfiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "number of records to fetch"
+                },
+                {
+                  "disabled": false,
+                  "key": "viewPoint",
+                  "value": "aSide",
+                  "description": "flips view between buyer and seller representation"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "89eada07-9e82-46e2-a41d-2b9ed2472bb3",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "viewPoint",
+                      "value": "aSide"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"state\": \"ACTIVE\",\n      \"account\": {\n        \"organizationName\": \"testSeller-270010\"\n      },\n      \"changeLog\": {\n        \"createdBy\": \"fusiontestseller\",\n        \"createdByFullName\": \"fusiontestSeller fusiontestSeller\",\n        \"createdByEmail\": \"fusiontestSeller@equinix.com\",\n        \"createdDateTime\": \"2022-04-12 19:06:57.940000+00:00\",\n        \"updatedBy\": \"fusiontestseller\",\n        \"updatedByFullName\": \"fusiontestSeller fusiontestSeller\",\n        \"updatedByEmail\": \"fusiontestSeller@equinix.com\",\n        \"updatedDateTime\": \"2022-04-12 19:11:04.017000+00:00\"\n      },\n      \"href\": \"https://api.equinix.com/fabric/v4/serviceProfiles/ea4b5141-e4d2-49f1-9768-4ea6e215b37f?viewPoint=aSide\",\n      \"type\": \"L2_PROFILE\",\n      \"name\": \"Service Profile 2\",\n      \"uuid\": \"ea4b5141-e4d2-49f1-9768-4ea6e215b37f\",\n      \"description\": \"Sample_description\",\n      \"visibility\": \"PUBLIC\",\n      \"allowedEmails\": [\n        \"test@equinix.com\",\n        \"testagain@equinix.com\"\n      ],\n      \"accessPointTypeConfigs\": [\n        {\n          \"type\": \"COLO\",\n          \"uuid\": \"f20c49cd-b022-4aeb-b3e4-49db4389aff3\",\n          \"supportedBandwidths\": [\n            100,\n            500\n          ],\n          \"allowRemoteConnections\": false,\n          \"allowCustomBandwidth\": true,\n          \"allowBandwidthAutoApproval\": false,\n          \"linkProtocolConfig\": {\n            \"encapsulationStrategy\": \"CTAGED\",\n            \"reuseVlanSTag\": false,\n            \"encapsulation\": \"DOT1Q\"\n          },\n          \"enableAutoGenerateServiceKey\": false,\n          \"connectionRedundancyRequired\": false,\n          \"selectiveRedundancy\": false,\n          \"apiConfig\": {\n            \"apiAvailable\": false,\n            \"bandwidthFromApi\": false\n          },\n          \"connectionLabel\": \"true1\",\n          \"authenticationKey\": {\n            \"required\": false,\n            \"label\": \"Service Key\"\n          }\n        }\n      ],\n      \"marketingInfo\": {\n        \"promotion\": true\n      },\n      \"metros\": [\n        {\n          \"code\": \"SY\",\n          \"name\": \"Sydney\",\n          \"ibxs\": [\n            \"SY4\"\n          ],\n          \"displayName\": \"Sydney\"\n        }\n      ],\n      \"selfProfile\": true\n    }\n  ],\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 1,\n    \"total\": 52,\n    \"next\": \"/serviceProfiles?offset=1&limit=1\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f462c6b8-1ee5-44b2-a497-9cce25edb1d4",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "viewPoint",
+                      "value": "aSide"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001015\",\n    \"errorMessage\": \"Access point is not accessible\"\n  },\n  {\n    \"errorCode\": \"EQ-3001014\",\n    \"errorMessage\": \"Redundant Service Profile requires at least one primary port and one secondary port in a metro\"\n  },\n  {\n    \"errorCode\": \"EQ-3001013\",\n    \"errorMessage\": \"Some of the access point are duplicate\"\n  },\n  {\n    \"errorCode\": \"EQ-3001012\",\n    \"errorMessage\": \"access point with same port encapsulation will be allowed in service profile request\"\n  },\n  {\n    \"errorCode\": \"EQ-3001019\",\n    \"errorMessage\": \"If apiAvailable, then integrationId is mandatory\"\n  },\n  {\n    \"errorCode\": \"EQ-3001020\",\n    \"errorMessage\": \"Speed from api required\"\n  },\n  {\n    \"errorCode\": \"EQ-3001021\",\n    \"errorMessage\": \"Speedbands not allowed\"\n  },\n  {\n    \"errorCode\": \"EQ-3001112\",\n    \"errorMessage\": \"API Integration should be enabled with Integration ID for deriving speed from API\"\n  },\n  {\n    \"errorCode\": \"EQ-3001023\",\n    \"errorMessage\": \"Speed band length is invalid\"\n  },\n  {\n    \"errorCode\": \"EQ-3001024\",\n    \"errorMessage\": \"Invalid api available\"\n  },\n  {\n    \"errorCode\": \"EQ-3001025\",\n    \"errorMessage\": \"Seller port encapsulation cannot be DOT1Q if Auto generate service key is True\"\n  },\n  {\n    \"errorCode\": \"EQ-3001026\",\n    \"errorMessage\": \"customFields[].options : must have values for customField with dataType=LIST\"\n  },\n  {\n    \"errorCode\": \"EQ-3001027\",\n    \"errorMessage\": \"Duplicate custom field lables\"\n  },\n  {\n    \"errorCode\": \"EQ-3001113\",\n    \"errorMessage\": \"Service profile can be updated to ACTIVE or REJECTED\"\n  },\n  {\n    \"errorCode\": \"EQ-3001114\",\n    \"errorMessage\": \"Some of the profile with the given id either not in valid state  or not exist in database\"\n  },\n  {\n    \"errorCode\": \"EQ-3001115\",\n    \"errorMessage\": \"Unable to delete some of the profile because it does not exist\"\n  },\n  {\n    \"errorCode\": \"EQ-3001116\",\n    \"errorMessage\": \"get metros call failed\"\n  },\n  {\n    \"errorCode\": \"EQ-3001028\",\n    \"errorMessage\": \"Cannot change service profile type\"\n  },\n  {\n    \"errorCode\": \"EQ-3001029\",\n    \"errorMessage\": \"Cannot change state if not admin user\"\n  },\n  {\n    \"errorCode\": \"EQ-3001030\",\n    \"errorMessage\": \"Invalid Custom Field dataType\"\n  },\n  {\n    \"errorCode\": \"EQ-3001031\",\n    \"errorMessage\": \"Invalid notification.type value\"\n  },\n  {\n    \"errorCode\": \"EQ-3001032\",\n    \"errorMessage\": \"serviceProfile.type : unsupported value\"\n  },\n  {\n    \"errorCode\": \"EQ-3001022\",\n    \"errorMessage\": \"Only alphanumeric, hyphen(-) and underscore(_) characters are allowed in service profile name. Other special characters are not allowed\"\n  },\n  {\n    \"errorCode\": \"EQ-3001204\",\n    \"errorMessage\": \"EPL ports are not supported\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba1ab05b-b21f-45bc-a5d4-2050fff7fbbf",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "viewPoint",
+                      "value": "aSide"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001207\",\n    \"errorMessage\": \"Unauthorized user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "956e0c22-d319-45be-b8b7-3091c76562c5",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "viewPoint",
+                      "value": "aSide"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001033\",\n    \"errorMessage\": \"You are not authorized to execute the requested action on the resource\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea27af37-f385-4ebf-ba8a-72a03a58af9f",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "viewPoint",
+                      "value": "aSide"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001206\",\n    \"errorMessage\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e28bdcf-f65a-442e-a8da-097135e2f23a",
+          "name": "Create Profile",
+          "request": {
+            "name": "Create Profile",
+            "description": {
+              "content": "Create Service Profile creates Equinix Fabric? Service Profile.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "serviceProfiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"project\": {\n    \"projectId\": \"<string>\"\n  },\n  \"uuid\": \"<uuid>\",\n  \"notifications\": [\n    {\n      \"emails\": [\n        \"<email>\",\n        \"<email>\"\n      ],\n      \"type\": \"<string>\",\n      \"sendInterval\": \"<string>\",\n      \"registeredUsers\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"emails\": [\n        \"<email>\",\n        \"<email>\"\n      ],\n      \"type\": \"<string>\",\n      \"sendInterval\": \"<string>\",\n      \"registeredUsers\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"visibility\": \"<string>\",\n  \"allowedEmails\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"accessPointTypeConfigs\": [\n    {\n      \"type\": \"<string>\",\n      \"uuid\": \"<string>\",\n      \"supportedBandwidths\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"allowRemoteConnections\": false,\n      \"allowCustomBandwidth\": false,\n      \"bandwidthAlertThreshold\": \"<number>\",\n      \"allowBandwidthAutoApproval\": false,\n      \"allowBandwidthUpgrade\": \"<boolean>\",\n      \"linkProtocolConfig\": {\n        \"encapsulationStrategy\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"namedTags\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"vlanCTagLabel\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"reuseVlanSTag\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"encapsulation\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"enableAutoGenerateServiceKey\": \"<boolean>\",\n      \"connectionRedundancyRequired\": false,\n      \"selectiveRedundancy\": false,\n      \"apiConfig\": {\n        \"apiAvailable\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"integrationId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"equinixManagedPort\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"equinixManagedVlan\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"allowOverSubscription\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"overSubscriptionLimit\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"bandwidthFromApi\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"connectionLabel\": \"<string>\",\n      \"authenticationKey\": {\n        \"required\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"label\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"description\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"metadata\": {\n        \"props\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"regEx\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"regExMsg\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"vlanRangeMaxValue\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"vlanRangeMinValue\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"maxQinq\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"maxDot1q\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"variableBilling\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"globalOrganization\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"limitAuthKeyConn\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"allowSecondaryLocation\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"redundantProfileId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"allowVcMigration\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"connectionEditable\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"releaseVlan\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"maxConnectionsOnPort\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"portAssignmentStrategy\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"eqxManagedPort\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"connectionNameEditable\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"customFields\": [\n    {\n      \"dataType\": \"<string>\",\n      \"label\": \"<string>\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"options\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"captureInEmail\": \"<boolean>\"\n    },\n    {\n      \"dataType\": \"<string>\",\n      \"label\": \"<string>\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"options\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"captureInEmail\": \"<boolean>\"\n    }\n  ],\n  \"marketingInfo\": {\n    \"logo\": \"<string>\",\n    \"promotion\": \"<boolean>\",\n    \"processSteps\": [\n      {\n        \"title\": \"<string>\",\n        \"subTitle\": \"<string>\",\n        \"description\": \"<string>\"\n      },\n      {\n        \"title\": \"<string>\",\n        \"subTitle\": \"<string>\",\n        \"description\": \"<string>\"\n      }\n    ]\n  },\n  \"ports\": [\n    {\n      \"type\": \"<string>\",\n      \"uuid\": \"<uuid>\",\n      \"location\": {\n        \"metroHref\": \"<string>\",\n        \"region\": \"<string>\",\n        \"metroName\": \"<string>\",\n        \"metroCode\": \"<string>\",\n        \"ibx\": \"<string>\"\n      },\n      \"sellerRegion\": \"<string>\",\n      \"sellerRegionDescription\": \"<string>\",\n      \"crossConnectId\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"uuid\": \"<uuid>\",\n      \"location\": {\n        \"metroHref\": \"<string>\",\n        \"region\": \"<string>\",\n        \"metroName\": \"<string>\",\n        \"metroCode\": \"<string>\",\n        \"ibx\": \"<string>\"\n      },\n      \"sellerRegion\": \"<string>\",\n      \"sellerRegionDescription\": \"<string>\",\n      \"crossConnectId\": \"<string>\"\n    }\n  ],\n  \"virtualDevices\": [\n    {\n      \"type\": \"<string>\",\n      \"uuid\": \"<uuid>\",\n      \"location\": {\n        \"metroHref\": \"<string>\",\n        \"region\": \"<string>\",\n        \"metroName\": \"<string>\",\n        \"metroCode\": \"<string>\",\n        \"ibx\": \"<string>\"\n      },\n      \"interfaceUuid\": \"<uuid>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"uuid\": \"<uuid>\",\n      \"location\": {\n        \"metroHref\": \"<string>\",\n        \"region\": \"<string>\",\n        \"metroName\": \"<string>\",\n        \"metroCode\": \"<string>\",\n        \"ibx\": \"<string>\"\n      },\n      \"interfaceUuid\": \"<uuid>\"\n    }\n  ],\n  \"metros\": [\n    {\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"vcBandwidthMax\": \"<integer>\",\n      \"ibxs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"inTrail\": \"<boolean>\",\n      \"displayName\": \"<string>\",\n      \"sellerRegions\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"vcBandwidthMax\": \"<integer>\",\n      \"ibxs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"inTrail\": \"<boolean>\",\n      \"displayName\": \"<string>\",\n      \"sellerRegions\": {\n        \"key_0\": \"<string>\"\n      }\n    }\n  ],\n  \"selfProfile\": \"<boolean>\",\n  \"projectId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "95e22015-8c30-4683-a6d2-7a46d78a908b",
+              "name": "Successful Create operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Service Profile 1\",\n  \"description\": \"Sample_description\",\n  \"type\": \"L2_PROFILE\",\n  \"notifications\": [\n    {\n      \"emails\": [\n        \"someone@sample.com\"\n      ],\n      \"type\": \"BANDWIDTH_ALERT\"\n    }\n  ],\n  \"visibility\": \"PUBLIC\",\n  \"allowedEmails\": [\n    \"test@equinix.com\",\n    \"testagain@equinix.com\"\n  ],\n  \"ports\": [\n    {\n      \"uuid\": \"c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee\",\n      \"type\": \"XF_PORT\",\n      \"location\": {\n        \"metroCode\": \"SY\"\n      }\n    }\n  ],\n  \"marketingInfo\": {\n    \"promotion\": true\n  },\n  \"accessPointTypeConfigs\": [\n    {\n      \"type\": \"COLO\",\n      \"connectionRedundancyRequired\": false,\n      \"selectiveRedundancy\": false,\n      \"allowBandwidthAutoApproval\": false,\n      \"allowRemoteConnections\": true,\n      \"connectionLabel\": \"Service Profile 1\",\n      \"enableAutoGenerateServiceKey\": false,\n      \"bandwidthAlertThreshold\": 10,\n      \"allowCustomBandwidth\": true,\n      \"apiConfig\": {\n        \"apiAvailable\": false,\n        \"equinixManagedVlan\": false,\n        \"bandwidthFromApi\": false,\n        \"integrationId\": null,\n        \"equinixManagedPort\": false\n      },\n      \"authenticationKey\": {\n        \"required\": false,\n        \"label\": \"Service Key\",\n        \"description\": \"XYZ\"\n      },\n      \"supportedBandwidths\": [\n        100,\n        500\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "response header - identifier for a specific version of a resource.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"state\": \"PENDING_APPROVAL\",\n  \"account\": {\n    \"orgId\": 91785,\n    \"globalOrgId\": \"0016u000003JZ4tAAG\"\n  },\n  \"changeLog\": {\n    \"createdDateTime\": \"2022-04-12 19:06:57.940000+00:00\"\n  },\n  \"href\": \"https://api.equinix.com/fabric/v4/serviceProfiles/ea4b5141-e4d2-49f1-9768-4ea6e215b37f\",\n  \"type\": \"L2_PROFILE\",\n  \"name\": \"Service Profile 1\",\n  \"uuid\": \"ea4b5141-e4d2-49f1-9768-4ea6e215b37f\",\n  \"description\": \"Sample_description\",\n  \"notifications\": [\n    {\n      \"type\": \"BANDWIDTH_ALERT\",\n      \"emails\": [\n        \"someone@sample.com\"\n      ]\n    },\n    {\n      \"type\": \"CONNECTION_APPROVAL\",\n      \"emails\": [\n        \"someone@sample.com\"\n      ]\n    },\n    {\n      \"type\": \"PROFILE_LIFECYCLE\",\n      \"emails\": [\n        \"someone@sample.com\"\n      ]\n    }\n  ],\n  \"visibility\": \"PUBLIC\",\n  \"allowedEmails\": [\n    \"test@equinix.com\",\n    \"testagain@equinix.com\"\n  ],\n  \"accessPointTypeConfigs\": [\n    {\n      \"type\": \"COLO\",\n      \"uuid\": \"f20c49cd-b022-4aeb-b3e4-49db4389aff3\",\n      \"supportedBandwidths\": [\n        100,\n        500\n      ],\n      \"allowRemoteConnections\": false,\n      \"allowCustomBandwidth\": true,\n      \"bandwidthAlertThreshold\": 10,\n      \"allowBandwidthAutoApproval\": false,\n      \"linkProtocolConfig\": {\n        \"encapsulationStrategy\": \"CTAGED\",\n        \"reuseVlanSTag\": false,\n        \"encapsulation\": \"DOT1Q\"\n      },\n      \"enableAutoGenerateServiceKey\": false,\n      \"connectionRedundancyRequired\": false,\n      \"selectiveRedundancy\": false,\n      \"apiConfig\": {\n        \"apiAvailable\": false,\n        \"equinixManagedPort\": true,\n        \"equinixManagedVlan\": true,\n        \"allowOverSubscription\": false,\n        \"overSubscriptionLimit\": 1,\n        \"bandwidthFromApi\": false\n      },\n      \"connectionLabel\": \"true1\",\n      \"authenticationKey\": {\n        \"required\": false,\n        \"label\": \"Service Key\"\n      }\n    }\n  ],\n  \"marketingInfo\": {\n    \"promotion\": true\n  },\n  \"ports\": [\n    {\n      \"type\": \"XF_PORT\",\n      \"uuid\": \"c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee\",\n      \"location\": {\n        \"metroCode\": \"SY\"\n      }\n    }\n  ],\n  \"metros\": [\n    {\n      \"code\": \"SY\",\n      \"ibxs\": [\n        \"SY4\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d94561d8-e3cc-4782-96b8-993c0f4d90db",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Service Profile 1\",\n  \"description\": \"Sample_description\",\n  \"type\": \"L2_PROFILE\",\n  \"notifications\": [\n    {\n      \"emails\": [\n        \"someone@sample.com\"\n      ],\n      \"type\": \"BANDWIDTH_ALERT\"\n    }\n  ],\n  \"visibility\": \"PUBLIC\",\n  \"allowedEmails\": [\n    \"test@equinix.com\",\n    \"testagain@equinix.com\"\n  ],\n  \"ports\": [\n    {\n      \"uuid\": \"c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee\",\n      \"type\": \"XF_PORT\",\n      \"location\": {\n        \"metroCode\": \"SY\"\n      }\n    }\n  ],\n  \"marketingInfo\": {\n    \"promotion\": true\n  },\n  \"accessPointTypeConfigs\": [\n    {\n      \"type\": \"COLO\",\n      \"connectionRedundancyRequired\": false,\n      \"selectiveRedundancy\": false,\n      \"allowBandwidthAutoApproval\": false,\n      \"allowRemoteConnections\": true,\n      \"connectionLabel\": \"Service Profile 1\",\n      \"enableAutoGenerateServiceKey\": false,\n      \"bandwidthAlertThreshold\": 10,\n      \"allowCustomBandwidth\": true,\n      \"apiConfig\": {\n        \"apiAvailable\": false,\n        \"equinixManagedVlan\": false,\n        \"bandwidthFromApi\": false,\n        \"integrationId\": null,\n        \"equinixManagedPort\": false\n      },\n      \"authenticationKey\": {\n        \"required\": false,\n        \"label\": \"Service Key\",\n        \"description\": \"XYZ\"\n      },\n      \"supportedBandwidths\": [\n        100,\n        500\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001015\",\n    \"errorMessage\": \"Access point is not accessible\"\n  },\n  {\n    \"errorCode\": \"EQ-3001014\",\n    \"errorMessage\": \"Redundant Service Profile requires at least one primary port and one secondary port in a metro\"\n  },\n  {\n    \"errorCode\": \"EQ-3001013\",\n    \"errorMessage\": \"Some of the access point are duplicate\"\n  },\n  {\n    \"errorCode\": \"EQ-3001012\",\n    \"errorMessage\": \"access point with same port encapsulation will be allowed in service profile request\"\n  },\n  {\n    \"errorCode\": \"EQ-3001019\",\n    \"errorMessage\": \"If apiAvailable, then integrationId is mandatory\"\n  },\n  {\n    \"errorCode\": \"EQ-3001020\",\n    \"errorMessage\": \"Speed from api required\"\n  },\n  {\n    \"errorCode\": \"EQ-3001021\",\n    \"errorMessage\": \"Speedbands not allowed\"\n  },\n  {\n    \"errorCode\": \"EQ-3001112\",\n    \"errorMessage\": \"API Integration should be enabled with Integration ID for deriving speed from API\"\n  },\n  {\n    \"errorCode\": \"EQ-3001023\",\n    \"errorMessage\": \"Speed band length is invalid\"\n  },\n  {\n    \"errorCode\": \"EQ-3001024\",\n    \"errorMessage\": \"Invalid api available\"\n  },\n  {\n    \"errorCode\": \"EQ-3001025\",\n    \"errorMessage\": \"Seller port encapsulation cannot be DOT1Q if Auto generate service key is True\"\n  },\n  {\n    \"errorCode\": \"EQ-3001026\",\n    \"errorMessage\": \"customFields[].options : must have values for customField with dataType=LIST\"\n  },\n  {\n    \"errorCode\": \"EQ-3001027\",\n    \"errorMessage\": \"Duplicate custom field lables\"\n  },\n  {\n    \"errorCode\": \"EQ-3001113\",\n    \"errorMessage\": \"Service profile can be updated to ACTIVE or REJECTED\"\n  },\n  {\n    \"errorCode\": \"EQ-3001114\",\n    \"errorMessage\": \"Some of the profile with the given id either not in valid state  or not exist in database\"\n  },\n  {\n    \"errorCode\": \"EQ-3001115\",\n    \"errorMessage\": \"Unable to delete some of the profile because it does not exist\"\n  },\n  {\n    \"errorCode\": \"EQ-3001116\",\n    \"errorMessage\": \"get metros call failed\"\n  },\n  {\n    \"errorCode\": \"EQ-3001028\",\n    \"errorMessage\": \"Cannot change service profile type\"\n  },\n  {\n    \"errorCode\": \"EQ-3001029\",\n    \"errorMessage\": \"Cannot change state if not admin user\"\n  },\n  {\n    \"errorCode\": \"EQ-3001030\",\n    \"errorMessage\": \"Invalid Custom Field dataType\"\n  },\n  {\n    \"errorCode\": \"EQ-3001031\",\n    \"errorMessage\": \"Invalid notification.type value\"\n  },\n  {\n    \"errorCode\": \"EQ-3001032\",\n    \"errorMessage\": \"serviceProfile.type : unsupported value\"\n  },\n  {\n    \"errorCode\": \"EQ-3001022\",\n    \"errorMessage\": \"Only alphanumeric, hyphen(-) and underscore(_) characters are allowed in service profile name. Other special characters are not allowed\"\n  },\n  {\n    \"errorCode\": \"EQ-3001204\",\n    \"errorMessage\": \"EPL ports are not supported\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68490f84-8cd8-493e-b947-3c61ebce0616",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Service Profile 1\",\n  \"description\": \"Sample_description\",\n  \"type\": \"L2_PROFILE\",\n  \"notifications\": [\n    {\n      \"emails\": [\n        \"someone@sample.com\"\n      ],\n      \"type\": \"BANDWIDTH_ALERT\"\n    }\n  ],\n  \"visibility\": \"PUBLIC\",\n  \"allowedEmails\": [\n    \"test@equinix.com\",\n    \"testagain@equinix.com\"\n  ],\n  \"ports\": [\n    {\n      \"uuid\": \"c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee\",\n      \"type\": \"XF_PORT\",\n      \"location\": {\n        \"metroCode\": \"SY\"\n      }\n    }\n  ],\n  \"marketingInfo\": {\n    \"promotion\": true\n  },\n  \"accessPointTypeConfigs\": [\n    {\n      \"type\": \"COLO\",\n      \"connectionRedundancyRequired\": false,\n      \"selectiveRedundancy\": false,\n      \"allowBandwidthAutoApproval\": false,\n      \"allowRemoteConnections\": true,\n      \"connectionLabel\": \"Service Profile 1\",\n      \"enableAutoGenerateServiceKey\": false,\n      \"bandwidthAlertThreshold\": 10,\n      \"allowCustomBandwidth\": true,\n      \"apiConfig\": {\n        \"apiAvailable\": false,\n        \"equinixManagedVlan\": false,\n        \"bandwidthFromApi\": false,\n        \"integrationId\": null,\n        \"equinixManagedPort\": false\n      },\n      \"authenticationKey\": {\n        \"required\": false,\n        \"label\": \"Service Key\",\n        \"description\": \"XYZ\"\n      },\n      \"supportedBandwidths\": [\n        100,\n        500\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001207\",\n    \"errorMessage\": \"Unauthorized user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10a444bc-d6b4-4f05-9e27-e3f62ef9db50",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Service Profile 1\",\n  \"description\": \"Sample_description\",\n  \"type\": \"L2_PROFILE\",\n  \"notifications\": [\n    {\n      \"emails\": [\n        \"someone@sample.com\"\n      ],\n      \"type\": \"BANDWIDTH_ALERT\"\n    }\n  ],\n  \"visibility\": \"PUBLIC\",\n  \"allowedEmails\": [\n    \"test@equinix.com\",\n    \"testagain@equinix.com\"\n  ],\n  \"ports\": [\n    {\n      \"uuid\": \"c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee\",\n      \"type\": \"XF_PORT\",\n      \"location\": {\n        \"metroCode\": \"SY\"\n      }\n    }\n  ],\n  \"marketingInfo\": {\n    \"promotion\": true\n  },\n  \"accessPointTypeConfigs\": [\n    {\n      \"type\": \"COLO\",\n      \"connectionRedundancyRequired\": false,\n      \"selectiveRedundancy\": false,\n      \"allowBandwidthAutoApproval\": false,\n      \"allowRemoteConnections\": true,\n      \"connectionLabel\": \"Service Profile 1\",\n      \"enableAutoGenerateServiceKey\": false,\n      \"bandwidthAlertThreshold\": 10,\n      \"allowCustomBandwidth\": true,\n      \"apiConfig\": {\n        \"apiAvailable\": false,\n        \"equinixManagedVlan\": false,\n        \"bandwidthFromApi\": false,\n        \"integrationId\": null,\n        \"equinixManagedPort\": false\n      },\n      \"authenticationKey\": {\n        \"required\": false,\n        \"label\": \"Service Key\",\n        \"description\": \"XYZ\"\n      },\n      \"supportedBandwidths\": [\n        100,\n        500\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001036\",\n    \"errorMessage\": \"You are not authorized to execute the requested action on the resource\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66a1f179-dd2f-4e2e-901c-acc3c69383fe",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Service Profile 1\",\n  \"description\": \"Sample_description\",\n  \"type\": \"L2_PROFILE\",\n  \"notifications\": [\n    {\n      \"emails\": [\n        \"someone@sample.com\"\n      ],\n      \"type\": \"BANDWIDTH_ALERT\"\n    }\n  ],\n  \"visibility\": \"PUBLIC\",\n  \"allowedEmails\": [\n    \"test@equinix.com\",\n    \"testagain@equinix.com\"\n  ],\n  \"ports\": [\n    {\n      \"uuid\": \"c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee\",\n      \"type\": \"XF_PORT\",\n      \"location\": {\n        \"metroCode\": \"SY\"\n      }\n    }\n  ],\n  \"marketingInfo\": {\n    \"promotion\": true\n  },\n  \"accessPointTypeConfigs\": [\n    {\n      \"type\": \"COLO\",\n      \"connectionRedundancyRequired\": false,\n      \"selectiveRedundancy\": false,\n      \"allowBandwidthAutoApproval\": false,\n      \"allowRemoteConnections\": true,\n      \"connectionLabel\": \"Service Profile 1\",\n      \"enableAutoGenerateServiceKey\": false,\n      \"bandwidthAlertThreshold\": 10,\n      \"allowCustomBandwidth\": true,\n      \"apiConfig\": {\n        \"apiAvailable\": false,\n        \"equinixManagedVlan\": false,\n        \"bandwidthFromApi\": false,\n        \"integrationId\": null,\n        \"equinixManagedPort\": false\n      },\n      \"authenticationKey\": {\n        \"required\": false,\n        \"label\": \"Service Key\",\n        \"description\": \"XYZ\"\n      },\n      \"supportedBandwidths\": [\n        100,\n        500\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001206\",\n    \"errorMessage\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10953740-90bf-4362-9036-90f930321a38",
+          "name": "Profile Search",
+          "request": {
+            "name": "Profile Search",
+            "description": {
+              "content": "Search service profiles by search criteria",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "serviceProfiles",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "viewPoint",
+                  "value": "aSide",
+                  "description": "flips view between buyer and seller representation"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"property\": \"<string>\",\n    \"operator\": \"<string>\",\n    \"values\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/changeLog/updatedDateTime\"\n    },\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/changeLog/updatedDateTime\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9f677793-a077-4aec-bd4f-d7bd47e847af",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "viewPoint",
+                      "value": "aSide"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"property\": \"/uuid\",\n    \"operator\": \"=\",\n    \"values\": [\n      \"13100b2d-234f-4425-ab5c-1449d4b806be\"\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/changeLog/updatedDateTime\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"state\": \"ACTIVE\",\n      \"account\": {\n        \"organizationName\": \"testSeller-270010\"\n      },\n      \"changeLog\": {\n        \"createdBy\": \"fusiontestseller\",\n        \"createdByFullName\": \"fusiontestSeller fusiontestSeller\",\n        \"createdByEmail\": \"fusiontestSeller@equinix.com\",\n        \"createdDateTime\": \"2022-04-12 19:06:57.940000+00:00\",\n        \"updatedBy\": \"fusiontestseller\",\n        \"updatedByFullName\": \"fusiontestSeller fusiontestSeller\",\n        \"updatedByEmail\": \"fusiontestSeller@equinix.com\",\n        \"updatedDateTime\": \"2022-04-12 19:11:04.017000+00:00\"\n      },\n      \"href\": \"https://api.equinix.com/fabric/v4/serviceProfiles/ea4b5141-e4d2-49f1-9768-4ea6e215b37f?viewPoint=aSide\",\n      \"type\": \"L2_PROFILE\",\n      \"name\": \"Service Profile 2\",\n      \"uuid\": \"ea4b5141-e4d2-49f1-9768-4ea6e215b37f\",\n      \"description\": \"Sample_description\",\n      \"visibility\": \"PUBLIC\",\n      \"allowedEmails\": [\n        \"test@equinix.com\",\n        \"testagain@equinix.com\"\n      ],\n      \"accessPointTypeConfigs\": [\n        {\n          \"type\": \"COLO\",\n          \"uuid\": \"f20c49cd-b022-4aeb-b3e4-49db4389aff3\",\n          \"supportedBandwidths\": [\n            100,\n            500\n          ],\n          \"allowRemoteConnections\": false,\n          \"allowCustomBandwidth\": true,\n          \"allowBandwidthAutoApproval\": false,\n          \"linkProtocolConfig\": {\n            \"encapsulationStrategy\": \"CTAGED\",\n            \"reuseVlanSTag\": false,\n            \"encapsulation\": \"DOT1Q\"\n          },\n          \"enableAutoGenerateServiceKey\": false,\n          \"connectionRedundancyRequired\": false,\n          \"selectiveRedundancy\": false,\n          \"apiConfig\": {\n            \"apiAvailable\": false,\n            \"bandwidthFromApi\": false\n          },\n          \"connectionLabel\": \"true1\",\n          \"authenticationKey\": {\n            \"required\": false,\n            \"label\": \"Service Key\"\n          }\n        }\n      ],\n      \"marketingInfo\": {\n        \"promotion\": true\n      },\n      \"metros\": [\n        {\n          \"code\": \"SY\",\n          \"name\": \"Sydney\",\n          \"ibxs\": [\n            \"SY4\"\n          ],\n          \"displayName\": \"Sydney\"\n        }\n      ],\n      \"selfProfile\": true\n    }\n  ],\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 1,\n    \"total\": 52,\n    \"next\": \"/serviceProfiles?offset=1&limit=1\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f4d54e6-1efb-4a08-ba4b-fa8dfa547ca8",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "viewPoint",
+                      "value": "aSide"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"property\": \"/uuid\",\n    \"operator\": \"=\",\n    \"values\": [\n      \"13100b2d-234f-4425-ab5c-1449d4b806be\"\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/changeLog/updatedDateTime\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001022\",\n    \"errorMessage\": \"INVALID_VALUE\"\n  },\n  {\n    \"errorCode\": \"EQ-3001202\",\n    \"errorMessage\": \"Unsupported search property\",\n    \"details\": \"Supported search properties are : /name,/uuid,/state,/metros/code,/visibility,/type\"\n  },\n  {\n    \"errorCode\": \"EQ-3001202\",\n    \"errorMessage\": \"Unsupported search property\",\n    \"details\": \"Supported search operator is : =\"\n  },\n  {\n    \"errorCode\": \"EQ-3001022\",\n    \"errorMessage\": \"pagination.limit : must be greater than or equal to 1\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"pagination.limit\",\n        \"reason\": \"must be greater than or equal to 1\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3001022\",\n    \"errorMessage\": \"pagination.offset : must be greater than or equal to 0\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"pagination.offset\",\n        \"reason\": \"must be greater than or equal to 0\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3001022\",\n    \"errorMessage\": \"Unexpected value\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7289a209-2b14-40ef-b01c-959b4a9e9bae",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "viewPoint",
+                      "value": "aSide"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"property\": \"/uuid\",\n    \"operator\": \"=\",\n    \"values\": [\n      \"13100b2d-234f-4425-ab5c-1449d4b806be\"\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/changeLog/updatedDateTime\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001207\",\n    \"errorMessage\": \"Unauthorized user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "293427f1-4007-44c3-8867-aafa5adc0ca0",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "viewPoint",
+                      "value": "aSide"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"property\": \"/uuid\",\n    \"operator\": \"=\",\n    \"values\": [\n      \"13100b2d-234f-4425-ab5c-1449d4b806be\"\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/changeLog/updatedDateTime\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001206\",\n    \"errorMessage\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "467152da-7074-4566-9988-b9e0d2986d9c",
+          "name": "Get Profile",
+          "request": {
+            "name": "Get Profile",
+            "description": {
+              "content": "Get service profile by UUID. View Point parameter if set to zSide will give seller's view of the profile otherwise buyer's view.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "serviceProfiles",
+                ":serviceProfileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "viewPoint",
+                  "value": "aSide",
+                  "description": "flips view between buyer and seller representation"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "serviceProfileId",
+                  "description": "(Required) Service Profile UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "54961786-2e2c-42d9-b5b0-687ffff65dc4",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "viewPoint",
+                      "value": "aSide"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "response header - identifier for a specific version of a resource.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"state\": \"ACTIVE\",\n  \"account\": {\n    \"organizationName\": \"testSeller-270010\"\n  },\n  \"changeLog\": {\n    \"createdBy\": \"fusiontestseller\",\n    \"createdByFullName\": \"fusiontestSeller fusiontestSeller\",\n    \"createdByEmail\": \"fusiontestSeller@equinix.com\",\n    \"createdDateTime\": \"2022-04-12 19:06:57.940000+00:00\",\n    \"updatedBy\": \"fusiontestseller\",\n    \"updatedByFullName\": \"fusiontestSeller fusiontestSeller\",\n    \"updatedByEmail\": \"fusiontestSeller@equinix.com\",\n    \"updatedDateTime\": \"2022-04-12 19:11:04.017000+00:00\"\n  },\n  \"href\": \"https://api.equinix.com/fabric/v4/serviceProfiles/ea4b5141-e4d2-49f1-9768-4ea6e215b37f?viewPoint=aSide\",\n  \"type\": \"L2_PROFILE\",\n  \"name\": \"Service Profile 2\",\n  \"uuid\": \"ea4b5141-e4d2-49f1-9768-4ea6e215b37f\",\n  \"description\": \"Sample_description\",\n  \"visibility\": \"PUBLIC\",\n  \"allowedEmails\": [\n    \"test@equinix.com\",\n    \"testagain@equinix.com\"\n  ],\n  \"accessPointTypeConfigs\": [\n    {\n      \"type\": \"COLO\",\n      \"uuid\": \"f20c49cd-b022-4aeb-b3e4-49db4389aff3\",\n      \"supportedBandwidths\": [\n        100,\n        500\n      ],\n      \"allowRemoteConnections\": false,\n      \"allowCustomBandwidth\": true,\n      \"allowBandwidthAutoApproval\": false,\n      \"linkProtocolConfig\": {\n        \"encapsulationStrategy\": \"CTAGED\",\n        \"reuseVlanSTag\": false,\n        \"encapsulation\": \"DOT1Q\"\n      },\n      \"enableAutoGenerateServiceKey\": false,\n      \"connectionRedundancyRequired\": false,\n      \"selectiveRedundancy\": false,\n      \"apiConfig\": {\n        \"apiAvailable\": false,\n        \"bandwidthFromApi\": false\n      },\n      \"connectionLabel\": \"true1\",\n      \"authenticationKey\": {\n        \"required\": false,\n        \"label\": \"Service Key\"\n      }\n    }\n  ],\n  \"marketingInfo\": {\n    \"promotion\": true\n  },\n  \"metros\": [\n    {\n      \"code\": \"SY\",\n      \"name\": \"Sydney\",\n      \"ibxs\": [\n        \"SY4\"\n      ],\n      \"displayName\": \"Sydney\"\n    }\n  ],\n  \"selfProfile\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d177ae2-1780-4d23-a124-fcbebbd2a0d8",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "viewPoint",
+                      "value": "aSide"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001015\",\n    \"errorMessage\": \"Access point is not accessible\"\n  },\n  {\n    \"errorCode\": \"EQ-3001014\",\n    \"errorMessage\": \"Redundant Service Profile requires at least one primary port and one secondary port in a metro\"\n  },\n  {\n    \"errorCode\": \"EQ-3001013\",\n    \"errorMessage\": \"Some of the access point are duplicate\"\n  },\n  {\n    \"errorCode\": \"EQ-3001012\",\n    \"errorMessage\": \"access point with same port encapsulation will be allowed in service profile request\"\n  },\n  {\n    \"errorCode\": \"EQ-3001019\",\n    \"errorMessage\": \"If apiAvailable, then integrationId is mandatory\"\n  },\n  {\n    \"errorCode\": \"EQ-3001020\",\n    \"errorMessage\": \"Speed from api required\"\n  },\n  {\n    \"errorCode\": \"EQ-3001021\",\n    \"errorMessage\": \"Speedbands not allowed\"\n  },\n  {\n    \"errorCode\": \"EQ-3001112\",\n    \"errorMessage\": \"API Integration should be enabled with Integration ID for deriving speed from API\"\n  },\n  {\n    \"errorCode\": \"EQ-3001023\",\n    \"errorMessage\": \"Speed band length is invalid\"\n  },\n  {\n    \"errorCode\": \"EQ-3001024\",\n    \"errorMessage\": \"Invalid api available\"\n  },\n  {\n    \"errorCode\": \"EQ-3001025\",\n    \"errorMessage\": \"Seller port encapsulation cannot be DOT1Q if Auto generate service key is True\"\n  },\n  {\n    \"errorCode\": \"EQ-3001026\",\n    \"errorMessage\": \"customFields[].options : must have values for customField with dataType=LIST\"\n  },\n  {\n    \"errorCode\": \"EQ-3001027\",\n    \"errorMessage\": \"Duplicate custom field lables\"\n  },\n  {\n    \"errorCode\": \"EQ-3001113\",\n    \"errorMessage\": \"Service profile can be updated to ACTIVE or REJECTED\"\n  },\n  {\n    \"errorCode\": \"EQ-3001114\",\n    \"errorMessage\": \"Some of the profile with the given id either not in valid state  or not exist in database\"\n  },\n  {\n    \"errorCode\": \"EQ-3001115\",\n    \"errorMessage\": \"Unable to delete some of the profile because it does not exist\"\n  },\n  {\n    \"errorCode\": \"EQ-3001116\",\n    \"errorMessage\": \"get metros call failed\"\n  },\n  {\n    \"errorCode\": \"EQ-3001028\",\n    \"errorMessage\": \"Cannot change service profile type\"\n  },\n  {\n    \"errorCode\": \"EQ-3001029\",\n    \"errorMessage\": \"Cannot change state if not admin user\"\n  },\n  {\n    \"errorCode\": \"EQ-3001030\",\n    \"errorMessage\": \"Invalid Custom Field dataType\"\n  },\n  {\n    \"errorCode\": \"EQ-3001031\",\n    \"errorMessage\": \"Invalid notification.type value\"\n  },\n  {\n    \"errorCode\": \"EQ-3001032\",\n    \"errorMessage\": \"serviceProfile.type : unsupported value\"\n  },\n  {\n    \"errorCode\": \"EQ-3001022\",\n    \"errorMessage\": \"Only alphanumeric, hyphen(-) and underscore(_) characters are allowed in service profile name. Other special characters are not allowed\"\n  },\n  {\n    \"errorCode\": \"EQ-3001204\",\n    \"errorMessage\": \"EPL ports are not supported\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16377686-5abb-43e8-ae4e-ad24bedaf575",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "viewPoint",
+                      "value": "aSide"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001207\",\n    \"errorMessage\": \"Unauthorized user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0d8d042-e8a7-4ead-b007-3c10536f7247",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "viewPoint",
+                      "value": "aSide"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001033\",\n    \"errorMessage\": \"You are not authorized to execute the requested action on the resource\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2cce5ed8-1276-40a6-b7df-595dc92e1cdd",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "viewPoint",
+                      "value": "aSide"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001206\",\n    \"errorMessage\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82481b66-abf8-47a7-a122-9280ba5123ec",
+          "name": "Replace Profile",
+          "request": {
+            "name": "Replace Profile",
+            "description": {
+              "content": "This API request replaces a service profile definition",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "serviceProfiles",
+                ":serviceProfileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "serviceProfileId",
+                  "description": "(Required) Service Profile UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) conditional request",
+                "key": "If-Match",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"project\": {\n    \"projectId\": \"<string>\"\n  },\n  \"uuid\": \"<uuid>\",\n  \"notifications\": [\n    {\n      \"emails\": [\n        \"<email>\",\n        \"<email>\"\n      ],\n      \"type\": \"<string>\",\n      \"sendInterval\": \"<string>\",\n      \"registeredUsers\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"emails\": [\n        \"<email>\",\n        \"<email>\"\n      ],\n      \"type\": \"<string>\",\n      \"sendInterval\": \"<string>\",\n      \"registeredUsers\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"visibility\": \"<string>\",\n  \"allowedEmails\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"accessPointTypeConfigs\": [\n    {\n      \"type\": \"<string>\",\n      \"uuid\": \"<string>\",\n      \"supportedBandwidths\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"allowRemoteConnections\": false,\n      \"allowCustomBandwidth\": false,\n      \"bandwidthAlertThreshold\": \"<number>\",\n      \"allowBandwidthAutoApproval\": false,\n      \"allowBandwidthUpgrade\": \"<boolean>\",\n      \"linkProtocolConfig\": {\n        \"encapsulationStrategy\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"namedTags\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"vlanCTagLabel\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"reuseVlanSTag\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"encapsulation\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"enableAutoGenerateServiceKey\": \"<boolean>\",\n      \"connectionRedundancyRequired\": false,\n      \"selectiveRedundancy\": false,\n      \"apiConfig\": {\n        \"apiAvailable\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"integrationId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"equinixManagedPort\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"equinixManagedVlan\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"allowOverSubscription\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"overSubscriptionLimit\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"bandwidthFromApi\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"connectionLabel\": \"<string>\",\n      \"authenticationKey\": {\n        \"required\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"label\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"description\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"metadata\": {\n        \"props\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"regEx\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"regExMsg\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"vlanRangeMaxValue\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"vlanRangeMinValue\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"maxQinq\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"maxDot1q\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"variableBilling\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"globalOrganization\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"limitAuthKeyConn\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"allowSecondaryLocation\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"redundantProfileId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"allowVcMigration\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"connectionEditable\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"releaseVlan\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"maxConnectionsOnPort\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"portAssignmentStrategy\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"eqxManagedPort\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"connectionNameEditable\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"customFields\": [\n    {\n      \"dataType\": \"<string>\",\n      \"label\": \"<string>\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"options\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"captureInEmail\": \"<boolean>\"\n    },\n    {\n      \"dataType\": \"<string>\",\n      \"label\": \"<string>\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\",\n      \"options\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"captureInEmail\": \"<boolean>\"\n    }\n  ],\n  \"marketingInfo\": {\n    \"logo\": \"<string>\",\n    \"promotion\": \"<boolean>\",\n    \"processSteps\": [\n      {\n        \"title\": \"<string>\",\n        \"subTitle\": \"<string>\",\n        \"description\": \"<string>\"\n      },\n      {\n        \"title\": \"<string>\",\n        \"subTitle\": \"<string>\",\n        \"description\": \"<string>\"\n      }\n    ]\n  },\n  \"ports\": [\n    {\n      \"type\": \"<string>\",\n      \"uuid\": \"<uuid>\",\n      \"location\": {\n        \"metroHref\": \"<string>\",\n        \"region\": \"<string>\",\n        \"metroName\": \"<string>\",\n        \"metroCode\": \"<string>\",\n        \"ibx\": \"<string>\"\n      },\n      \"sellerRegion\": \"<string>\",\n      \"sellerRegionDescription\": \"<string>\",\n      \"crossConnectId\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"uuid\": \"<uuid>\",\n      \"location\": {\n        \"metroHref\": \"<string>\",\n        \"region\": \"<string>\",\n        \"metroName\": \"<string>\",\n        \"metroCode\": \"<string>\",\n        \"ibx\": \"<string>\"\n      },\n      \"sellerRegion\": \"<string>\",\n      \"sellerRegionDescription\": \"<string>\",\n      \"crossConnectId\": \"<string>\"\n    }\n  ],\n  \"virtualDevices\": [\n    {\n      \"type\": \"<string>\",\n      \"uuid\": \"<uuid>\",\n      \"location\": {\n        \"metroHref\": \"<string>\",\n        \"region\": \"<string>\",\n        \"metroName\": \"<string>\",\n        \"metroCode\": \"<string>\",\n        \"ibx\": \"<string>\"\n      },\n      \"interfaceUuid\": \"<uuid>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"uuid\": \"<uuid>\",\n      \"location\": {\n        \"metroHref\": \"<string>\",\n        \"region\": \"<string>\",\n        \"metroName\": \"<string>\",\n        \"metroCode\": \"<string>\",\n        \"ibx\": \"<string>\"\n      },\n      \"interfaceUuid\": \"<uuid>\"\n    }\n  ],\n  \"metros\": [\n    {\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"vcBandwidthMax\": \"<integer>\",\n      \"ibxs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"inTrail\": \"<boolean>\",\n      \"displayName\": \"<string>\",\n      \"sellerRegions\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"vcBandwidthMax\": \"<integer>\",\n      \"ibxs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"inTrail\": \"<boolean>\",\n      \"displayName\": \"<string>\",\n      \"sellerRegions\": {\n        \"key_0\": \"<string>\"\n      }\n    }\n  ],\n  \"selfProfile\": \"<boolean>\",\n  \"projectId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9fb5efa9-7246-4c61-b600-dd08d2ce2793",
+              "name": "Successful Put operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) conditional request",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Service Profile 2\",\n  \"description\": \"Sample_description\",\n  \"type\": \"L2_PROFILE\",\n  \"notifications\": [\n    {\n      \"emails\": [\n        \"someone@sample.com\"\n      ],\n      \"type\": \"BANDWIDTH_ALERT\"\n    }\n  ],\n  \"visibility\": \"PUBLIC\",\n  \"allowedEmails\": [\n    \"test@equinix.com\",\n    \"testagain@equinix.com\"\n  ],\n  \"ports\": [\n    {\n      \"uuid\": \"c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee\",\n      \"type\": \"XF_PORT\",\n      \"location\": {\n        \"metroCode\": \"SY\"\n      }\n    }\n  ],\n  \"marketingInfo\": {\n    \"promotion\": true\n  },\n  \"accessPointTypeConfigs\": [\n    {\n      \"type\": \"COLO\",\n      \"connectionRedundancyRequired\": false,\n      \"selectiveRedundancy\": false,\n      \"allowBandwidthAutoApproval\": false,\n      \"allowRemoteConnections\": false,\n      \"connectionLabel\": \"true1\",\n      \"enableAutoGenerateServiceKey\": false,\n      \"bandwidthAlertThreshold\": 10,\n      \"allowCustomBandwidth\": true,\n      \"apiConfig\": {\n        \"apiAvailable\": false,\n        \"equinixManagedVlan\": true,\n        \"bandwidthFromApi\": false,\n        \"integrationId\": null,\n        \"equinixManagedPort\": true\n      },\n      \"authenticationKey\": {\n        \"required\": false,\n        \"label\": \"Service Key\",\n        \"description\": \"XYZ\"\n      },\n      \"supportedBandwidths\": [\n        100,\n        500\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "response header - identifier for a specific version of a resource.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"state\": \"ACTIVE\",\n  \"account\": {\n    \"orgId\": 91785,\n    \"organizationName\": \"testSeller-270010\",\n    \"globalOrgId\": \"0016u000003JZ4tAAG\"\n  },\n  \"changeLog\": {\n    \"createdBy\": \"fusiontestseller\",\n    \"createdByFullName\": \"fusiontestSeller fusiontestSeller\",\n    \"createdByEmail\": \"fusiontestSeller@equinix.com\",\n    \"createdDateTime\": \"2022-04-12 19:06:57.940000+00:00\",\n    \"updatedDateTime\": \"2022-04-12 19:11:04.017000+00:00\"\n  },\n  \"href\": \"https://api.equinix.com/fabric/v4/serviceProfiles/ea4b5141-e4d2-49f1-9768-4ea6e215b37f\",\n  \"type\": \"L2_PROFILE\",\n  \"name\": \"Service Profile 2\",\n  \"uuid\": \"ea4b5141-e4d2-49f1-9768-4ea6e215b37f\",\n  \"description\": \"Sample_description\",\n  \"notifications\": [\n    {\n      \"type\": \"BANDWIDTH_ALERT\",\n      \"emails\": [\n        \"someone@sample.com\"\n      ]\n    },\n    {\n      \"type\": \"CONNECTION_APPROVAL\",\n      \"emails\": [\n        \"someone@sample.com\"\n      ]\n    },\n    {\n      \"type\": \"PROFILE_LIFECYCLE\",\n      \"emails\": [\n        \"someone@sample.com\"\n      ]\n    }\n  ],\n  \"visibility\": \"PUBLIC\",\n  \"allowedEmails\": [\n    \"test@equinix.com\",\n    \"testagain@equinix.com\"\n  ],\n  \"accessPointTypeConfigs\": [\n    {\n      \"type\": \"COLO\",\n      \"uuid\": \"f20c49cd-b022-4aeb-b3e4-49db4389aff3\",\n      \"supportedBandwidths\": [\n        100,\n        500\n      ],\n      \"allowRemoteConnections\": false,\n      \"allowCustomBandwidth\": true,\n      \"bandwidthAlertThreshold\": 10,\n      \"allowBandwidthAutoApproval\": false,\n      \"linkProtocolConfig\": {\n        \"encapsulationStrategy\": \"CTAGED\",\n        \"reuseVlanSTag\": false,\n        \"encapsulation\": \"DOT1Q\"\n      },\n      \"enableAutoGenerateServiceKey\": false,\n      \"connectionRedundancyRequired\": false,\n      \"selectiveRedundancy\": false,\n      \"apiConfig\": {\n        \"apiAvailable\": false,\n        \"equinixManagedPort\": true,\n        \"equinixManagedVlan\": true,\n        \"allowOverSubscription\": false,\n        \"overSubscriptionLimit\": 1,\n        \"bandwidthFromApi\": false\n      },\n      \"connectionLabel\": \"true1\",\n      \"authenticationKey\": {\n        \"required\": false,\n        \"label\": \"Service Key\"\n      }\n    }\n  ],\n  \"marketingInfo\": {\n    \"promotion\": true\n  },\n  \"ports\": [\n    {\n      \"type\": \"XF_PORT\",\n      \"uuid\": \"c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee\",\n      \"location\": {\n        \"metroCode\": \"SY\"\n      }\n    }\n  ],\n  \"metros\": [\n    {\n      \"code\": \"SY\",\n      \"name\": \"Sydney\",\n      \"ibxs\": [\n        \"SY4\"\n      ],\n      \"displayName\": \"Sydney\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0847f3c0-ddc5-4895-a70a-10e0bb4fc1bd",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) conditional request",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Service Profile 2\",\n  \"description\": \"Sample_description\",\n  \"type\": \"L2_PROFILE\",\n  \"notifications\": [\n    {\n      \"emails\": [\n        \"someone@sample.com\"\n      ],\n      \"type\": \"BANDWIDTH_ALERT\"\n    }\n  ],\n  \"visibility\": \"PUBLIC\",\n  \"allowedEmails\": [\n    \"test@equinix.com\",\n    \"testagain@equinix.com\"\n  ],\n  \"ports\": [\n    {\n      \"uuid\": \"c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee\",\n      \"type\": \"XF_PORT\",\n      \"location\": {\n        \"metroCode\": \"SY\"\n      }\n    }\n  ],\n  \"marketingInfo\": {\n    \"promotion\": true\n  },\n  \"accessPointTypeConfigs\": [\n    {\n      \"type\": \"COLO\",\n      \"connectionRedundancyRequired\": false,\n      \"selectiveRedundancy\": false,\n      \"allowBandwidthAutoApproval\": false,\n      \"allowRemoteConnections\": false,\n      \"connectionLabel\": \"true1\",\n      \"enableAutoGenerateServiceKey\": false,\n      \"bandwidthAlertThreshold\": 10,\n      \"allowCustomBandwidth\": true,\n      \"apiConfig\": {\n        \"apiAvailable\": false,\n        \"equinixManagedVlan\": true,\n        \"bandwidthFromApi\": false,\n        \"integrationId\": null,\n        \"equinixManagedPort\": true\n      },\n      \"authenticationKey\": {\n        \"required\": false,\n        \"label\": \"Service Key\",\n        \"description\": \"XYZ\"\n      },\n      \"supportedBandwidths\": [\n        100,\n        500\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001015\",\n    \"errorMessage\": \"Access point is not accessible\"\n  },\n  {\n    \"errorCode\": \"EQ-3001014\",\n    \"errorMessage\": \"Redundant Service Profile requires at least one primary port and one secondary port in a metro\"\n  },\n  {\n    \"errorCode\": \"EQ-3001013\",\n    \"errorMessage\": \"Some of the access point are duplicate\"\n  },\n  {\n    \"errorCode\": \"EQ-3001012\",\n    \"errorMessage\": \"access point with same port encapsulation will be allowed in service profile request\"\n  },\n  {\n    \"errorCode\": \"EQ-3001019\",\n    \"errorMessage\": \"If apiAvailable, then integrationId is mandatory\"\n  },\n  {\n    \"errorCode\": \"EQ-3001020\",\n    \"errorMessage\": \"Speed from api required\"\n  },\n  {\n    \"errorCode\": \"EQ-3001021\",\n    \"errorMessage\": \"Speedbands not allowed\"\n  },\n  {\n    \"errorCode\": \"EQ-3001112\",\n    \"errorMessage\": \"API Integration should be enabled with Integration ID for deriving speed from API\"\n  },\n  {\n    \"errorCode\": \"EQ-3001023\",\n    \"errorMessage\": \"Speed band length is invalid\"\n  },\n  {\n    \"errorCode\": \"EQ-3001024\",\n    \"errorMessage\": \"Invalid api available\"\n  },\n  {\n    \"errorCode\": \"EQ-3001025\",\n    \"errorMessage\": \"Seller port encapsulation cannot be DOT1Q if Auto generate service key is True\"\n  },\n  {\n    \"errorCode\": \"EQ-3001026\",\n    \"errorMessage\": \"customFields[].options : must have values for customField with dataType=LIST\"\n  },\n  {\n    \"errorCode\": \"EQ-3001027\",\n    \"errorMessage\": \"Duplicate custom field lables\"\n  },\n  {\n    \"errorCode\": \"EQ-3001113\",\n    \"errorMessage\": \"Service profile can be updated to ACTIVE or REJECTED\"\n  },\n  {\n    \"errorCode\": \"EQ-3001114\",\n    \"errorMessage\": \"Some of the profile with the given id either not in valid state  or not exist in database\"\n  },\n  {\n    \"errorCode\": \"EQ-3001115\",\n    \"errorMessage\": \"Unable to delete some of the profile because it does not exist\"\n  },\n  {\n    \"errorCode\": \"EQ-3001116\",\n    \"errorMessage\": \"get metros call failed\"\n  },\n  {\n    \"errorCode\": \"EQ-3001028\",\n    \"errorMessage\": \"Cannot change service profile type\"\n  },\n  {\n    \"errorCode\": \"EQ-3001029\",\n    \"errorMessage\": \"Cannot change state if not admin user\"\n  },\n  {\n    \"errorCode\": \"EQ-3001030\",\n    \"errorMessage\": \"Invalid Custom Field dataType\"\n  },\n  {\n    \"errorCode\": \"EQ-3001031\",\n    \"errorMessage\": \"Invalid notification.type value\"\n  },\n  {\n    \"errorCode\": \"EQ-3001032\",\n    \"errorMessage\": \"serviceProfile.type : unsupported value\"\n  },\n  {\n    \"errorCode\": \"EQ-3001022\",\n    \"errorMessage\": \"Only alphanumeric, hyphen(-) and underscore(_) characters are allowed in service profile name. Other special characters are not allowed\"\n  },\n  {\n    \"errorCode\": \"EQ-3001204\",\n    \"errorMessage\": \"EPL ports are not supported\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c0c0f2c-e78c-4ec0-bdbe-d2ff8d52ed49",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) conditional request",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Service Profile 2\",\n  \"description\": \"Sample_description\",\n  \"type\": \"L2_PROFILE\",\n  \"notifications\": [\n    {\n      \"emails\": [\n        \"someone@sample.com\"\n      ],\n      \"type\": \"BANDWIDTH_ALERT\"\n    }\n  ],\n  \"visibility\": \"PUBLIC\",\n  \"allowedEmails\": [\n    \"test@equinix.com\",\n    \"testagain@equinix.com\"\n  ],\n  \"ports\": [\n    {\n      \"uuid\": \"c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee\",\n      \"type\": \"XF_PORT\",\n      \"location\": {\n        \"metroCode\": \"SY\"\n      }\n    }\n  ],\n  \"marketingInfo\": {\n    \"promotion\": true\n  },\n  \"accessPointTypeConfigs\": [\n    {\n      \"type\": \"COLO\",\n      \"connectionRedundancyRequired\": false,\n      \"selectiveRedundancy\": false,\n      \"allowBandwidthAutoApproval\": false,\n      \"allowRemoteConnections\": false,\n      \"connectionLabel\": \"true1\",\n      \"enableAutoGenerateServiceKey\": false,\n      \"bandwidthAlertThreshold\": 10,\n      \"allowCustomBandwidth\": true,\n      \"apiConfig\": {\n        \"apiAvailable\": false,\n        \"equinixManagedVlan\": true,\n        \"bandwidthFromApi\": false,\n        \"integrationId\": null,\n        \"equinixManagedPort\": true\n      },\n      \"authenticationKey\": {\n        \"required\": false,\n        \"label\": \"Service Key\",\n        \"description\": \"XYZ\"\n      },\n      \"supportedBandwidths\": [\n        100,\n        500\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001207\",\n    \"errorMessage\": \"Unauthorized user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0982d473-4e0f-4560-bac2-dcce7e990942",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) conditional request",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Service Profile 2\",\n  \"description\": \"Sample_description\",\n  \"type\": \"L2_PROFILE\",\n  \"notifications\": [\n    {\n      \"emails\": [\n        \"someone@sample.com\"\n      ],\n      \"type\": \"BANDWIDTH_ALERT\"\n    }\n  ],\n  \"visibility\": \"PUBLIC\",\n  \"allowedEmails\": [\n    \"test@equinix.com\",\n    \"testagain@equinix.com\"\n  ],\n  \"ports\": [\n    {\n      \"uuid\": \"c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee\",\n      \"type\": \"XF_PORT\",\n      \"location\": {\n        \"metroCode\": \"SY\"\n      }\n    }\n  ],\n  \"marketingInfo\": {\n    \"promotion\": true\n  },\n  \"accessPointTypeConfigs\": [\n    {\n      \"type\": \"COLO\",\n      \"connectionRedundancyRequired\": false,\n      \"selectiveRedundancy\": false,\n      \"allowBandwidthAutoApproval\": false,\n      \"allowRemoteConnections\": false,\n      \"connectionLabel\": \"true1\",\n      \"enableAutoGenerateServiceKey\": false,\n      \"bandwidthAlertThreshold\": 10,\n      \"allowCustomBandwidth\": true,\n      \"apiConfig\": {\n        \"apiAvailable\": false,\n        \"equinixManagedVlan\": true,\n        \"bandwidthFromApi\": false,\n        \"integrationId\": null,\n        \"equinixManagedPort\": true\n      },\n      \"authenticationKey\": {\n        \"required\": false,\n        \"label\": \"Service Key\",\n        \"description\": \"XYZ\"\n      },\n      \"supportedBandwidths\": [\n        100,\n        500\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001035\",\n    \"errorMessage\": \"You are not authorized to execute the requested action on the resource\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41458da0-7cbb-4478-9675-ccaf5db5104e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) conditional request",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Service Profile 2\",\n  \"description\": \"Sample_description\",\n  \"type\": \"L2_PROFILE\",\n  \"notifications\": [\n    {\n      \"emails\": [\n        \"someone@sample.com\"\n      ],\n      \"type\": \"BANDWIDTH_ALERT\"\n    }\n  ],\n  \"visibility\": \"PUBLIC\",\n  \"allowedEmails\": [\n    \"test@equinix.com\",\n    \"testagain@equinix.com\"\n  ],\n  \"ports\": [\n    {\n      \"uuid\": \"c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee\",\n      \"type\": \"XF_PORT\",\n      \"location\": {\n        \"metroCode\": \"SY\"\n      }\n    }\n  ],\n  \"marketingInfo\": {\n    \"promotion\": true\n  },\n  \"accessPointTypeConfigs\": [\n    {\n      \"type\": \"COLO\",\n      \"connectionRedundancyRequired\": false,\n      \"selectiveRedundancy\": false,\n      \"allowBandwidthAutoApproval\": false,\n      \"allowRemoteConnections\": false,\n      \"connectionLabel\": \"true1\",\n      \"enableAutoGenerateServiceKey\": false,\n      \"bandwidthAlertThreshold\": 10,\n      \"allowCustomBandwidth\": true,\n      \"apiConfig\": {\n        \"apiAvailable\": false,\n        \"equinixManagedVlan\": true,\n        \"bandwidthFromApi\": false,\n        \"integrationId\": null,\n        \"equinixManagedPort\": true\n      },\n      \"authenticationKey\": {\n        \"required\": false,\n        \"label\": \"Service Key\",\n        \"description\": \"XYZ\"\n      },\n      \"supportedBandwidths\": [\n        100,\n        500\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001011\",\n    \"errorMessage\": \"Invalid uuid\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67a94995-463f-4792-89c8-fa9810929cc5",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) conditional request",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Service Profile 2\",\n  \"description\": \"Sample_description\",\n  \"type\": \"L2_PROFILE\",\n  \"notifications\": [\n    {\n      \"emails\": [\n        \"someone@sample.com\"\n      ],\n      \"type\": \"BANDWIDTH_ALERT\"\n    }\n  ],\n  \"visibility\": \"PUBLIC\",\n  \"allowedEmails\": [\n    \"test@equinix.com\",\n    \"testagain@equinix.com\"\n  ],\n  \"ports\": [\n    {\n      \"uuid\": \"c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee\",\n      \"type\": \"XF_PORT\",\n      \"location\": {\n        \"metroCode\": \"SY\"\n      }\n    }\n  ],\n  \"marketingInfo\": {\n    \"promotion\": true\n  },\n  \"accessPointTypeConfigs\": [\n    {\n      \"type\": \"COLO\",\n      \"connectionRedundancyRequired\": false,\n      \"selectiveRedundancy\": false,\n      \"allowBandwidthAutoApproval\": false,\n      \"allowRemoteConnections\": false,\n      \"connectionLabel\": \"true1\",\n      \"enableAutoGenerateServiceKey\": false,\n      \"bandwidthAlertThreshold\": 10,\n      \"allowCustomBandwidth\": true,\n      \"apiConfig\": {\n        \"apiAvailable\": false,\n        \"equinixManagedVlan\": true,\n        \"bandwidthFromApi\": false,\n        \"integrationId\": null,\n        \"equinixManagedPort\": true\n      },\n      \"authenticationKey\": {\n        \"required\": false,\n        \"label\": \"Service Key\",\n        \"description\": \"XYZ\"\n      },\n      \"supportedBandwidths\": [\n        100,\n        500\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001206\",\n    \"errorMessage\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a4d96c7-873a-43e6-b8a5-a36e55e6689b",
+          "name": "Delete Profile",
+          "request": {
+            "name": "Delete Profile",
+            "description": {
+              "content": "delete Service Profile by UUID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "serviceProfiles",
+                ":serviceProfileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "serviceProfileId",
+                  "description": "(Required) Service Profile UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9983d23d-cb7f-487a-be6d-b7989e3de700",
+              "name": "Successful Delete operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "response header - identifier for a specific version of a resource.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"state\": \"DELETED\",\n  \"account\": {\n    \"orgId\": 91785,\n    \"organizationName\": \"testSeller-270010\",\n    \"globalOrgId\": \"0016u000003JZ4tAAG\"\n  },\n  \"changeLog\": {\n    \"createdBy\": \"fusiontestseller\",\n    \"createdByFullName\": \"fusiontestSeller fusiontestSeller\",\n    \"createdByEmail\": \"fusiontestSeller@equinix.com\",\n    \"createdDateTime\": \"2022-04-12 19:06:57.940000+00:00\",\n    \"updatedBy\": \"fusiontestseller\",\n    \"updatedByFullName\": \"fusiontestSeller fusiontestSeller\",\n    \"updatedByEmail\": \"fusiontestSeller@equinix.com\",\n    \"updatedDateTime\": \"2022-04-12 21:53:57.816000+00:00\"\n  },\n  \"href\": \"https://api.equinix.com/fabric/v4/serviceProfiles/ea4b5141-e4d2-49f1-9768-4ea6e215b37f\",\n  \"type\": \"L2_PROFILE\",\n  \"name\": \"Service Profile 2\",\n  \"uuid\": \"ea4b5141-e4d2-49f1-9768-4ea6e215b37f\",\n  \"description\": \"Sample_description\",\n  \"notifications\": [\n    {\n      \"type\": \"BANDWIDTH_ALERT\",\n      \"emails\": [\n        \"someone@sample.com\"\n      ]\n    },\n    {\n      \"type\": \"CONNECTION_APPROVAL\",\n      \"emails\": [\n        \"someone@sample.com\"\n      ]\n    },\n    {\n      \"type\": \"PROFILE_LIFECYCLE\",\n      \"emails\": [\n        \"someone@sample.com\"\n      ]\n    }\n  ],\n  \"tags\": [\n    \"sample_tag\"\n  ],\n  \"visibility\": \"PUBLIC\",\n  \"allowedEmails\": [\n    \"test@equinix.com\",\n    \"testagain@equinix.com\"\n  ],\n  \"accessPointTypeConfigs\": [\n    {\n      \"type\": \"COLO\",\n      \"uuid\": \"f20c49cd-b022-4aeb-b3e4-49db4389aff3\",\n      \"supportedBandwidths\": [\n        100,\n        500\n      ],\n      \"allowRemoteConnections\": false,\n      \"allowCustomBandwidth\": true,\n      \"bandwidthAlertThreshold\": 10,\n      \"allowBandwidthAutoApproval\": false,\n      \"linkProtocolConfig\": {\n        \"encapsulationStrategy\": \"CTAGED\",\n        \"reuseVlanSTag\": false,\n        \"encapsulation\": \"DOT1Q\"\n      },\n      \"enableAutoGenerateServiceKey\": false,\n      \"connectionRedundancyRequired\": false,\n      \"selectiveRedundancy\": false,\n      \"apiConfig\": {\n        \"apiAvailable\": false,\n        \"equinixManagedPort\": true,\n        \"equinixManagedVlan\": true,\n        \"allowOverSubscription\": false,\n        \"overSubscriptionLimit\": 1,\n        \"bandwidthFromApi\": false\n      },\n      \"connectionLabel\": \"true1\",\n      \"authenticationKey\": {\n        \"required\": false,\n        \"label\": \"Service Key\"\n      }\n    }\n  ],\n  \"marketingInfo\": {\n    \"promotion\": true\n  },\n  \"ports\": [\n    {\n      \"type\": \"XF_PORT\",\n      \"uuid\": \"c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee\",\n      \"location\": {\n        \"metroCode\": \"SY\"\n      }\n    }\n  ],\n  \"metros\": [\n    {\n      \"code\": \"SY\",\n      \"name\": \"Sydney\",\n      \"ibxs\": [\n        \"SY4\"\n      ],\n      \"displayName\": \"Sydney\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05e2099d-31b6-4dbe-9ccd-24f7d50f2e27",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001115\",\n    \"errorMessage\": \"Unable to delete some of the profile because it does not exist\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0890034c-aef7-42d2-84ee-55958e0de23e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001207\",\n    \"errorMessage\": \"Unauthorized user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf5a48f3-4aba-487a-9fb0-64601c36a848",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001034\",\n    \"errorMessage\": \"You are not authorized to execute the requested action on the resource\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69ff5d7c-5104-4d03-91fe-8119523e0e7b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001011\",\n    \"errorMessage\": \"Invalid uuid\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80ef4187-2aaf-40a9-a82f-61dbdc28bb48",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001206\",\n    \"errorMessage\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c1b2c7f3-aae9-46de-bb51-9eaa222d865f",
+          "name": "Update Profile",
+          "request": {
+            "name": "Update Profile",
+            "description": {
+              "content": "Update Service Profile by UUID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "serviceProfiles",
+                ":serviceProfileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "serviceProfileId",
+                  "description": "(Required) Service Profile UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json-patch+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"op\": \"<string>\",\n    \"path\": \"<string>\",\n    \"value\": \"<object>\"\n  },\n  {\n    \"op\": \"<string>\",\n    \"path\": \"<string>\",\n    \"value\": \"<object>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9aad920c-80e2-431d-aba1-61742ae6002d",
+              "name": "Successful Patch operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"add\",\n    \"path\": \"/tags\",\n    \"value\": [\n      \"sample_tag\"\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "response header - identifier for a specific version of a resource.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"state\": \"ACTIVE\",\n  \"account\": {\n    \"orgId\": 91785,\n    \"organizationName\": \"testSeller-270010\",\n    \"globalOrgId\": \"0016u000003JZ4tAAG\"\n  },\n  \"changeLog\": {\n    \"createdBy\": \"fusiontestseller\",\n    \"createdByFullName\": \"fusiontestSeller fusiontestSeller\",\n    \"createdByEmail\": \"fusiontestSeller@equinix.com\",\n    \"createdDateTime\": \"2022-04-12 19:06:57.940000+00:00\",\n    \"updatedDateTime\": \"2022-04-12 19:11:04.017000+00:00\"\n  },\n  \"href\": \"https://api.equinix.com/fabric/v4/serviceProfiles/ea4b5141-e4d2-49f1-9768-4ea6e215b37f\",\n  \"type\": \"L2_PROFILE\",\n  \"name\": \"Service Profile 2\",\n  \"uuid\": \"ea4b5141-e4d2-49f1-9768-4ea6e215b37f\",\n  \"description\": \"Sample_description\",\n  \"notifications\": [\n    {\n      \"type\": \"BANDWIDTH_ALERT\",\n      \"emails\": [\n        \"someone@sample.com\"\n      ]\n    },\n    {\n      \"type\": \"CONNECTION_APPROVAL\",\n      \"emails\": [\n        \"someone@sample.com\"\n      ]\n    },\n    {\n      \"type\": \"PROFILE_LIFECYCLE\",\n      \"emails\": [\n        \"someone@sample.com\"\n      ]\n    }\n  ],\n  \"visibility\": \"PUBLIC\",\n  \"tags\": [\n    \"sample_tag\"\n  ],\n  \"allowedEmails\": [\n    \"test@equinix.com\",\n    \"testagain@equinix.com\"\n  ],\n  \"accessPointTypeConfigs\": [\n    {\n      \"type\": \"COLO\",\n      \"uuid\": \"f20c49cd-b022-4aeb-b3e4-49db4389aff3\",\n      \"supportedBandwidths\": [\n        100,\n        500\n      ],\n      \"allowRemoteConnections\": false,\n      \"allowCustomBandwidth\": true,\n      \"bandwidthAlertThreshold\": 10,\n      \"allowBandwidthAutoApproval\": false,\n      \"linkProtocolConfig\": {\n        \"encapsulationStrategy\": \"CTAGED\",\n        \"reuseVlanSTag\": false,\n        \"encapsulation\": \"DOT1Q\"\n      },\n      \"enableAutoGenerateServiceKey\": false,\n      \"connectionRedundancyRequired\": false,\n      \"selectiveRedundancy\": false,\n      \"apiConfig\": {\n        \"apiAvailable\": false,\n        \"equinixManagedPort\": true,\n        \"equinixManagedVlan\": true,\n        \"allowOverSubscription\": false,\n        \"overSubscriptionLimit\": 1,\n        \"bandwidthFromApi\": false\n      },\n      \"connectionLabel\": \"true1\",\n      \"authenticationKey\": {\n        \"required\": false,\n        \"label\": \"Service Key\"\n      }\n    }\n  ],\n  \"marketingInfo\": {\n    \"promotion\": true\n  },\n  \"ports\": [\n    {\n      \"type\": \"XF_PORT\",\n      \"uuid\": \"c791f8cb-5cc9-cc90-8ce0-306a5c00a4ee\",\n      \"location\": {\n        \"metroCode\": \"SY\"\n      }\n    }\n  ],\n  \"metros\": [\n    {\n      \"code\": \"SY\",\n      \"name\": \"Sydney\",\n      \"ibxs\": [\n        \"SY4\"\n      ],\n      \"displayName\": \"Sydney\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26b7fa56-4f9e-451c-a23a-ccc1195ce927",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"add\",\n    \"path\": \"/tags\",\n    \"value\": [\n      \"sample_tag\"\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001015\",\n    \"errorMessage\": \"Access point is not accessible\"\n  },\n  {\n    \"errorCode\": \"EQ-3001014\",\n    \"errorMessage\": \"Redundant Service Profile requires at least one primary port and one secondary port in a metro\"\n  },\n  {\n    \"errorCode\": \"EQ-3001013\",\n    \"errorMessage\": \"Some of the access point are duplicate\"\n  },\n  {\n    \"errorCode\": \"EQ-3001012\",\n    \"errorMessage\": \"access point with same port encapsulation will be allowed in service profile request\"\n  },\n  {\n    \"errorCode\": \"EQ-3001019\",\n    \"errorMessage\": \"If apiAvailable, then integrationId is mandatory\"\n  },\n  {\n    \"errorCode\": \"EQ-3001020\",\n    \"errorMessage\": \"Speed from api required\"\n  },\n  {\n    \"errorCode\": \"EQ-3001021\",\n    \"errorMessage\": \"Speedbands not allowed\"\n  },\n  {\n    \"errorCode\": \"EQ-3001112\",\n    \"errorMessage\": \"API Integration should be enabled with Integration ID for deriving speed from API\"\n  },\n  {\n    \"errorCode\": \"EQ-3001023\",\n    \"errorMessage\": \"Speed band length is invalid\"\n  },\n  {\n    \"errorCode\": \"EQ-3001024\",\n    \"errorMessage\": \"Invalid api available\"\n  },\n  {\n    \"errorCode\": \"EQ-3001025\",\n    \"errorMessage\": \"Seller port encapsulation cannot be DOT1Q if Auto generate service key is True\"\n  },\n  {\n    \"errorCode\": \"EQ-3001026\",\n    \"errorMessage\": \"customFields[].options : must have values for customField with dataType=LIST\"\n  },\n  {\n    \"errorCode\": \"EQ-3001027\",\n    \"errorMessage\": \"Duplicate custom field lables\"\n  },\n  {\n    \"errorCode\": \"EQ-3001113\",\n    \"errorMessage\": \"Service profile can be updated to ACTIVE or REJECTED\"\n  },\n  {\n    \"errorCode\": \"EQ-3001114\",\n    \"errorMessage\": \"Some of the profile with the given id either not in valid state  or not exist in database\"\n  },\n  {\n    \"errorCode\": \"EQ-3001115\",\n    \"errorMessage\": \"Unable to delete some of the profile because it does not exist\"\n  },\n  {\n    \"errorCode\": \"EQ-3001116\",\n    \"errorMessage\": \"get metros call failed\"\n  },\n  {\n    \"errorCode\": \"EQ-3001028\",\n    \"errorMessage\": \"Cannot change service profile type\"\n  },\n  {\n    \"errorCode\": \"EQ-3001029\",\n    \"errorMessage\": \"Cannot change state if not admin user\"\n  },\n  {\n    \"errorCode\": \"EQ-3001030\",\n    \"errorMessage\": \"Invalid Custom Field dataType\"\n  },\n  {\n    \"errorCode\": \"EQ-3001031\",\n    \"errorMessage\": \"Invalid notification.type value\"\n  },\n  {\n    \"errorCode\": \"EQ-3001032\",\n    \"errorMessage\": \"serviceProfile.type : unsupported value\"\n  },\n  {\n    \"errorCode\": \"EQ-3001022\",\n    \"errorMessage\": \"Only alphanumeric, hyphen(-) and underscore(_) characters are allowed in service profile name. Other special characters are not allowed\"\n  },\n  {\n    \"errorCode\": \"EQ-3001204\",\n    \"errorMessage\": \"EPL ports are not supported\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6a7e9cc-6290-4794-817d-89c9891c4e5d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"add\",\n    \"path\": \"/tags\",\n    \"value\": [\n      \"sample_tag\"\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001207\",\n    \"errorMessage\": \"Unauthorized user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84442f8f-6779-4f56-81f0-bea41a9abade",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"add\",\n    \"path\": \"/tags\",\n    \"value\": [\n      \"sample_tag\"\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001035\",\n    \"errorMessage\": \"You are not authorized to execute the requested action on the resource\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ef522a7-a72a-4180-94ee-d615f939feef",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"add\",\n    \"path\": \"/tags\",\n    \"value\": [\n      \"sample_tag\"\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001011\",\n    \"errorMessage\": \"Invalid uuid\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca6a6d7a-4eac-4d4d-9ca2-b71661e6c229",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"add\",\n    \"path\": \"/tags\",\n    \"value\": [\n      \"sample_tag\"\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001206\",\n    \"errorMessage\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69b88d59-ec3f-4625-871c-a8db22a178e2",
+          "name": "Profile Actions",
+          "request": {
+            "name": "Profile Actions",
+            "description": {
+              "content": "This API provides capability to accept/reject service profile update requests",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "serviceProfiles",
+                ":serviceProfileId",
+                "actions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "serviceProfileId",
+                  "description": "(Required) Service Profile UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7610430c-0d6a-454a-ba28-25c0400bd0e8",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"PROFILE_UPDATE_ACCEPTANCE\",\n  \"description\": \"Approved to migrate to public\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/serviceProfiles/f30a9de3-c79e-443e-b65d-0a0692c6f3e0/actions/ac2a3233-23d9-423c-b375-0e78717bd348\",\n  \"type\": \"PROFILE_UPDATE_ACCEPTANCE\",\n  \"uuid\": \"ac2a3233-23d9-423c-b375-0e78717bd348\",\n  \"comments\": \"Approved to migrate to public\",\n  \"changeLog\": {\n    \"createdBy\": \"adminuser\",\n    \"createdDateTime\": \"2026-03-04 10:30:00+00:00\",\n    \"updatedBy\": \"adminuser\",\n    \"updatedDateTime\": \"2026-03-04 10:35:00+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "587ab627-8f48-4ac5-8647-fee96cbb63eb",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"PROFILE_UPDATE_ACCEPTANCE\",\n  \"description\": \"Approved to migrate to public\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001015\",\n    \"errorMessage\": \"Access point is not accessible\"\n  },\n  {\n    \"errorCode\": \"EQ-3001014\",\n    \"errorMessage\": \"Redundant Service Profile requires at least one primary port and one secondary port in a metro\"\n  },\n  {\n    \"errorCode\": \"EQ-3001013\",\n    \"errorMessage\": \"Some of the access point are duplicate\"\n  },\n  {\n    \"errorCode\": \"EQ-3001012\",\n    \"errorMessage\": \"access point with same port encapsulation will be allowed in service profile request\"\n  },\n  {\n    \"errorCode\": \"EQ-3001019\",\n    \"errorMessage\": \"If apiAvailable, then integrationId is mandatory\"\n  },\n  {\n    \"errorCode\": \"EQ-3001020\",\n    \"errorMessage\": \"Speed from api required\"\n  },\n  {\n    \"errorCode\": \"EQ-3001021\",\n    \"errorMessage\": \"Speedbands not allowed\"\n  },\n  {\n    \"errorCode\": \"EQ-3001112\",\n    \"errorMessage\": \"API Integration should be enabled with Integration ID for deriving speed from API\"\n  },\n  {\n    \"errorCode\": \"EQ-3001023\",\n    \"errorMessage\": \"Speed band length is invalid\"\n  },\n  {\n    \"errorCode\": \"EQ-3001024\",\n    \"errorMessage\": \"Invalid api available\"\n  },\n  {\n    \"errorCode\": \"EQ-3001025\",\n    \"errorMessage\": \"Seller port encapsulation cannot be DOT1Q if Auto generate service key is True\"\n  },\n  {\n    \"errorCode\": \"EQ-3001026\",\n    \"errorMessage\": \"customFields[].options : must have values for customField with dataType=LIST\"\n  },\n  {\n    \"errorCode\": \"EQ-3001027\",\n    \"errorMessage\": \"Duplicate custom field lables\"\n  },\n  {\n    \"errorCode\": \"EQ-3001113\",\n    \"errorMessage\": \"Service profile can be updated to ACTIVE or REJECTED\"\n  },\n  {\n    \"errorCode\": \"EQ-3001114\",\n    \"errorMessage\": \"Some of the profile with the given id either not in valid state  or not exist in database\"\n  },\n  {\n    \"errorCode\": \"EQ-3001115\",\n    \"errorMessage\": \"Unable to delete some of the profile because it does not exist\"\n  },\n  {\n    \"errorCode\": \"EQ-3001116\",\n    \"errorMessage\": \"get metros call failed\"\n  },\n  {\n    \"errorCode\": \"EQ-3001028\",\n    \"errorMessage\": \"Cannot change service profile type\"\n  },\n  {\n    \"errorCode\": \"EQ-3001029\",\n    \"errorMessage\": \"Cannot change state if not admin user\"\n  },\n  {\n    \"errorCode\": \"EQ-3001030\",\n    \"errorMessage\": \"Invalid Custom Field dataType\"\n  },\n  {\n    \"errorCode\": \"EQ-3001031\",\n    \"errorMessage\": \"Invalid notification.type value\"\n  },\n  {\n    \"errorCode\": \"EQ-3001032\",\n    \"errorMessage\": \"serviceProfile.type : unsupported value\"\n  },\n  {\n    \"errorCode\": \"EQ-3001022\",\n    \"errorMessage\": \"Only alphanumeric, hyphen(-) and underscore(_) characters are allowed in service profile name. Other special characters are not allowed\"\n  },\n  {\n    \"errorCode\": \"EQ-3001204\",\n    \"errorMessage\": \"EPL ports are not supported\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a772cca6-d977-49ff-a0cd-b72cfce63f24",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"PROFILE_UPDATE_ACCEPTANCE\",\n  \"description\": \"Approved to migrate to public\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001207\",\n    \"errorMessage\": \"Unauthorized user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f56f18d-a6c1-4585-aac7-0eeade856a0e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"PROFILE_UPDATE_ACCEPTANCE\",\n  \"description\": \"Approved to migrate to public\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001035\",\n    \"errorMessage\": \"You are not authorized to execute the requested action on the resource\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7816a66f-f0a4-4067-9613-1a0e41c3fb0f",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"PROFILE_UPDATE_ACCEPTANCE\",\n  \"description\": \"Approved to migrate to public\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001011\",\n    \"errorMessage\": \"Invalid uuid\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12e217a9-09f3-4450-aec4-ca13ad1615a8",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"PROFILE_UPDATE_ACCEPTANCE\",\n  \"description\": \"Approved to migrate to public\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001206\",\n    \"errorMessage\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c1de123-50e7-469f-bce1-f5ebb13f0672",
+          "name": "Get Profile Metros",
+          "request": {
+            "name": "Get Profile Metros",
+            "description": {
+              "content": "Get service profile metros by UUID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "serviceProfiles",
+                ":serviceProfileId",
+                "metros"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "number of records to fetch"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "serviceProfileId",
+                  "description": "(Required) Service Profile UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json; charset=UTF-8"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d5ec462d-2f95-4a57-8ee6-23e618aa43f7",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId",
+                    "metros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json; charset=UTF-8"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"state\": \"ACTIVE\",\n      \"account\": {\n        \"organizationName\": \"testSeller-270010\"\n      },\n      \"changeLog\": {\n        \"createdBy\": \"fusiontestseller\",\n        \"createdByFullName\": \"fusiontestSeller fusiontestSeller\",\n        \"createdByEmail\": \"fusiontestSeller@equinix.com\",\n        \"createdDateTime\": \"2022-04-12 19:06:57.940000+00:00\",\n        \"updatedBy\": \"fusiontestseller\",\n        \"updatedByFullName\": \"fusiontestSeller fusiontestSeller\",\n        \"updatedByEmail\": \"fusiontestSeller@equinix.com\",\n        \"updatedDateTime\": \"2022-04-12 19:11:04.017000+00:00\"\n      },\n      \"href\": \"https://api.equinix.com/fabric/v4/serviceProfiles/ea4b5141-e4d2-49f1-9768-4ea6e215b37f?viewPoint=aSide\",\n      \"type\": \"L2_PROFILE\",\n      \"name\": \"Service Profile 2\",\n      \"uuid\": \"ea4b5141-e4d2-49f1-9768-4ea6e215b37f\",\n      \"description\": \"Sample_description\",\n      \"visibility\": \"PUBLIC\",\n      \"allowedEmails\": [\n        \"test@equinix.com\",\n        \"testagain@equinix.com\"\n      ],\n      \"accessPointTypeConfigs\": [\n        {\n          \"type\": \"COLO\",\n          \"uuid\": \"f20c49cd-b022-4aeb-b3e4-49db4389aff3\",\n          \"supportedBandwidths\": [\n            100,\n            500\n          ],\n          \"allowRemoteConnections\": false,\n          \"allowCustomBandwidth\": true,\n          \"allowBandwidthAutoApproval\": false,\n          \"linkProtocolConfig\": {\n            \"encapsulationStrategy\": \"CTAGED\",\n            \"reuseVlanSTag\": false,\n            \"encapsulation\": \"DOT1Q\"\n          },\n          \"enableAutoGenerateServiceKey\": false,\n          \"connectionRedundancyRequired\": false,\n          \"selectiveRedundancy\": false,\n          \"apiConfig\": {\n            \"apiAvailable\": false,\n            \"bandwidthFromApi\": false\n          },\n          \"connectionLabel\": \"true1\",\n          \"authenticationKey\": {\n            \"required\": false,\n            \"label\": \"Service Key\"\n          }\n        }\n      ],\n      \"marketingInfo\": {\n        \"promotion\": true\n      },\n      \"metros\": [\n        {\n          \"code\": \"SY\",\n          \"name\": \"Sydney\",\n          \"ibxs\": [\n            \"SY4\"\n          ],\n          \"displayName\": \"Sydney\"\n        }\n      ],\n      \"selfProfile\": true\n    }\n  ],\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 1,\n    \"total\": 52,\n    \"next\": \"/serviceProfiles?offset=1&limit=1\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1abc408-1820-4475-ba5c-a01fcc8f5664",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId",
+                    "metros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001015\",\n    \"errorMessage\": \"Access point is not accessible\"\n  },\n  {\n    \"errorCode\": \"EQ-3001014\",\n    \"errorMessage\": \"Redundant Service Profile requires at least one primary port and one secondary port in a metro\"\n  },\n  {\n    \"errorCode\": \"EQ-3001013\",\n    \"errorMessage\": \"Some of the access point are duplicate\"\n  },\n  {\n    \"errorCode\": \"EQ-3001012\",\n    \"errorMessage\": \"access point with same port encapsulation will be allowed in service profile request\"\n  },\n  {\n    \"errorCode\": \"EQ-3001019\",\n    \"errorMessage\": \"If apiAvailable, then integrationId is mandatory\"\n  },\n  {\n    \"errorCode\": \"EQ-3001020\",\n    \"errorMessage\": \"Speed from api required\"\n  },\n  {\n    \"errorCode\": \"EQ-3001021\",\n    \"errorMessage\": \"Speedbands not allowed\"\n  },\n  {\n    \"errorCode\": \"EQ-3001112\",\n    \"errorMessage\": \"API Integration should be enabled with Integration ID for deriving speed from API\"\n  },\n  {\n    \"errorCode\": \"EQ-3001023\",\n    \"errorMessage\": \"Speed band length is invalid\"\n  },\n  {\n    \"errorCode\": \"EQ-3001024\",\n    \"errorMessage\": \"Invalid api available\"\n  },\n  {\n    \"errorCode\": \"EQ-3001025\",\n    \"errorMessage\": \"Seller port encapsulation cannot be DOT1Q if Auto generate service key is True\"\n  },\n  {\n    \"errorCode\": \"EQ-3001026\",\n    \"errorMessage\": \"customFields[].options : must have values for customField with dataType=LIST\"\n  },\n  {\n    \"errorCode\": \"EQ-3001027\",\n    \"errorMessage\": \"Duplicate custom field lables\"\n  },\n  {\n    \"errorCode\": \"EQ-3001113\",\n    \"errorMessage\": \"Service profile can be updated to ACTIVE or REJECTED\"\n  },\n  {\n    \"errorCode\": \"EQ-3001114\",\n    \"errorMessage\": \"Some of the profile with the given id either not in valid state  or not exist in database\"\n  },\n  {\n    \"errorCode\": \"EQ-3001115\",\n    \"errorMessage\": \"Unable to delete some of the profile because it does not exist\"\n  },\n  {\n    \"errorCode\": \"EQ-3001116\",\n    \"errorMessage\": \"get metros call failed\"\n  },\n  {\n    \"errorCode\": \"EQ-3001028\",\n    \"errorMessage\": \"Cannot change service profile type\"\n  },\n  {\n    \"errorCode\": \"EQ-3001029\",\n    \"errorMessage\": \"Cannot change state if not admin user\"\n  },\n  {\n    \"errorCode\": \"EQ-3001030\",\n    \"errorMessage\": \"Invalid Custom Field dataType\"\n  },\n  {\n    \"errorCode\": \"EQ-3001031\",\n    \"errorMessage\": \"Invalid notification.type value\"\n  },\n  {\n    \"errorCode\": \"EQ-3001032\",\n    \"errorMessage\": \"serviceProfile.type : unsupported value\"\n  },\n  {\n    \"errorCode\": \"EQ-3001022\",\n    \"errorMessage\": \"Only alphanumeric, hyphen(-) and underscore(_) characters are allowed in service profile name. Other special characters are not allowed\"\n  },\n  {\n    \"errorCode\": \"EQ-3001204\",\n    \"errorMessage\": \"EPL ports are not supported\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a0e4d50-3846-4858-a361-28f92fa942bf",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId",
+                    "metros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001207\",\n    \"errorMessage\": \"Unauthorized user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e928a93-6896-44a0-afa7-13245fc0b6c2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId",
+                    "metros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001033\",\n    \"errorMessage\": \"You are not authorized to execute the requested action on the resource\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a81974e-5a31-4ff0-ba1e-acc844f9ae47",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceProfiles",
+                    ":serviceProfileId",
+                    "metros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceProfileId",
+                      "description": "(Required) Service Profile UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3001206\",\n    \"errorMessage\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8333d09f-9ffa-401e-851f-f653f823a54b",
+    "name": "Equinix API Authentication Service Profiles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}

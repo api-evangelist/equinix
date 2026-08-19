@@ -1,0 +1,1375 @@
+{
+  "item": [
+    {
+      "id": "c9c21c6c-2a25-4065-9126-ded1f65f6a4e",
+      "name": "VLANs",
+      "description": {
+        "content": "Manage virtual networks (VLANs). See project endpoints to list and create virtual networks. Check out the product docs to learn more about [VLANs](https://metal.equinix.com/developers/docs/networking/layer2/).\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "54c1db31-48e9-4edf-9620-bd6dc12ba355",
+          "name": "Retrieve all virtual networks",
+          "request": {
+            "name": "Retrieve all virtual networks",
+            "description": {
+              "content": "Provides a list of virtual networks for a single project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":id",
+                "virtual-networks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to include. Included objects will return their full\nattributes. Attribute names can be dotted (up to 3 levels) to included deeply\nnested objects."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to exclude. Excluded objects will return only the href\nattribute. Attribute names can be dotted (up to 3 levels) to exclude deeply\nnested objects."
+                },
+                {
+                  "disabled": false,
+                  "key": "facility",
+                  "value": "<string>",
+                  "description": "Filter by Facility ID (uuid) or Facility Code"
+                },
+                {
+                  "disabled": false,
+                  "key": "metro",
+                  "value": "<string>",
+                  "description": "Filter by Metro ID (uuid) or Metro Code"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Project UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5f40abf2-2837-4f05-85fa-3009d89e9a39",
+              "name": "ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "virtual-networks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "facility",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metro",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"virtual_networks\": [\n    {\n      \"assigned_to\": {\n        \"href\": \"href\"\n      },\n      \"assigned_to_virtual_circuit\": true,\n      \"description\": \"string\",\n      \"facility\": {\n        \"href\": \"href\"\n      },\n      \"href\": \"string\",\n      \"created_at\": \"1978-06-23T12:33:33.413Z\",\n      \"id\": \"a5eba1b0-4c19-e566-5c43-fe57ba523e98\",\n      \"instances\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"metal_gateways\": [\n        {\n          \"created_at\": \"2012-02-18T15:45:37.372Z\",\n          \"gateway_address\": \"10.1.2.1/27\",\n          \"href\": \"string\",\n          \"id\": \"a1ab88b9-e44a-fe0c-84a3-a990bad2b43a\",\n          \"state\": \"active\",\n          \"updated_at\": \"2005-04-05T19:22:28.644Z\",\n          \"vlan\": 1001\n        },\n        {\n          \"created_at\": \"1968-06-11T06:43:43.438Z\",\n          \"gateway_address\": \"10.1.2.1/27\",\n          \"href\": \"string\",\n          \"id\": \"9a1cd3fb-f333-61d7-9022-d297d44ead10\",\n          \"state\": \"ready\",\n          \"updated_at\": \"1977-12-02T18:33:13.042Z\",\n          \"vlan\": 1001\n        }\n      ],\n      \"metro\": {\n        \"href\": \"href\"\n      },\n      \"metro_code\": \"string\",\n      \"vxlan\": 9234,\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"assigned_to\": {\n        \"href\": \"href\"\n      },\n      \"assigned_to_virtual_circuit\": false,\n      \"description\": \"string\",\n      \"facility\": {\n        \"href\": \"href\"\n      },\n      \"href\": \"string\",\n      \"created_at\": \"1954-08-30T11:09:17.224Z\",\n      \"id\": \"9948e88f-06e6-ab7f-86c6-d65a64920a0a\",\n      \"instances\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"metal_gateways\": [\n        {\n          \"created_at\": \"2019-07-21T04:05:51.008Z\",\n          \"gateway_address\": \"10.1.2.1/27\",\n          \"href\": \"string\",\n          \"id\": \"fc830a27-2015-02b2-8cf1-7847eded4f52\",\n          \"state\": \"ready\",\n          \"updated_at\": \"1997-03-18T07:42:11.014Z\",\n          \"vlan\": 1001\n        },\n        {\n          \"created_at\": \"2008-09-27T04:04:25.531Z\",\n          \"gateway_address\": \"10.1.2.1/27\",\n          \"href\": \"string\",\n          \"id\": \"a9a65d7b-1742-f3e2-90cf-3420763b1d32\",\n          \"state\": \"deleting\",\n          \"updated_at\": \"2013-04-28T22:23:47.805Z\",\n          \"vlan\": 1001\n        }\n      ],\n      \"metro\": {\n        \"href\": \"href\"\n      },\n      \"metro_code\": \"string\",\n      \"vxlan\": 8801,\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02ef3e40-e920-4abf-b567-634d21a62ed9",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "virtual-networks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "facility",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metro",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2903d22c-104b-4606-8bec-3f67ee52320b",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "virtual-networks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "facility",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metro",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4005eab-688c-4560-b769-0c6129fc109a",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "virtual-networks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "facility",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metro",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ce56190-302f-4a72-90d8-5662bd526bf9",
+          "name": "Create a virtual network",
+          "request": {
+            "name": "Create a virtual network",
+            "description": {
+              "content": "Creates an virtual network.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":id",
+                "virtual-networks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to include. Included objects will return their full\nattributes. Attribute names can be dotted (up to 3 levels) to included deeply\nnested objects."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to exclude. Excluded objects will return only the href\nattribute. Attribute names can be dotted (up to 3 levels) to exclude deeply\nnested objects."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Project UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"facility\": \"<string>\",\n  \"metro\": \"<string>\",\n  \"vxlan\": \"<integer>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b7b83bec-eb01-4272-b75b-c8ce634100d1",
+              "name": "created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "virtual-networks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vxlan\": 1099,\n  \"metro\": \"metro\",\n  \"description\": \"description\",\n  \"facility\": \"facility\",\n  \"tags\": [\n    \"tags\",\n    \"tags\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assigned_to\": {\n    \"href\": \"href\"\n  },\n  \"assigned_to_virtual_circuit\": false,\n  \"description\": \"string\",\n  \"facility\": {\n    \"href\": \"href\"\n  },\n  \"href\": \"string\",\n  \"created_at\": \"2006-12-16T06:31:19.039Z\",\n  \"id\": \"71d569c6-d831-bf9a-d46c-305d7f608657\",\n  \"instances\": [\n    {\n      \"href\": \"href\"\n    },\n    {\n      \"href\": \"href\"\n    }\n  ],\n  \"metal_gateways\": [\n    {\n      \"created_at\": \"1988-01-05T19:47:01.956Z\",\n      \"gateway_address\": \"10.1.2.1/27\",\n      \"href\": \"string\",\n      \"id\": \"3ca2d485-d8af-4552-8b57-42f669da73c5\",\n      \"state\": \"ready\",\n      \"updated_at\": \"1984-10-29T18:01:43.899Z\",\n      \"vlan\": 1001\n    },\n    {\n      \"created_at\": \"2013-03-06T06:26:33.957Z\",\n      \"gateway_address\": \"10.1.2.1/27\",\n      \"href\": \"string\",\n      \"id\": \"ede7592d-4232-6284-ed4f-53b7ac7e7052\",\n      \"state\": \"deleting\",\n      \"updated_at\": \"2019-11-02T08:31:06.673Z\",\n      \"vlan\": 1001\n    }\n  ],\n  \"metro\": {\n    \"href\": \"href\"\n  },\n  \"metro_code\": \"string\",\n  \"vxlan\": 6641,\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f71a9d4-f804-4729-90e3-e1f16c58f80d",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "virtual-networks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vxlan\": 1099,\n  \"metro\": \"metro\",\n  \"description\": \"description\",\n  \"facility\": \"facility\",\n  \"tags\": [\n    \"tags\",\n    \"tags\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f87eff5-6b59-423e-84cc-3d1be48b88f1",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "virtual-networks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vxlan\": 1099,\n  \"metro\": \"metro\",\n  \"description\": \"description\",\n  \"facility\": \"facility\",\n  \"tags\": [\n    \"tags\",\n    \"tags\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5fc664d-40b3-4199-999a-14659b8ee205",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "virtual-networks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vxlan\": 1099,\n  \"metro\": \"metro\",\n  \"description\": \"description\",\n  \"facility\": \"facility\",\n  \"tags\": [\n    \"tags\",\n    \"tags\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75e9285c-7d50-4489-878f-1a2189436bbe",
+              "name": "unprocessable entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "virtual-networks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vxlan\": 1099,\n  \"metro\": \"metro\",\n  \"description\": \"description\",\n  \"facility\": \"facility\",\n  \"tags\": [\n    \"tags\",\n    \"tags\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1fa2638e-1abb-4e05-9a4f-dbe46e4a75df",
+          "name": "Delete a virtual network",
+          "request": {
+            "name": "Delete a virtual network",
+            "description": {
+              "content": "Deletes a virtual network.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "virtual-networks",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to include. Included objects will return their full\nattributes. Attribute names can be dotted (up to 3 levels) to included deeply\nnested objects."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to exclude. Excluded objects will return only the href\nattribute. Attribute names can be dotted (up to 3 levels) to exclude deeply\nnested objects."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Virtual Network UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "40e22019-3da7-40d6-8ec3-c50edffea14d",
+              "name": "ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "virtual-networks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Virtual Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assigned_to\": {\n    \"href\": \"href\"\n  },\n  \"assigned_to_virtual_circuit\": false,\n  \"description\": \"string\",\n  \"facility\": {\n    \"href\": \"href\"\n  },\n  \"href\": \"string\",\n  \"created_at\": \"2006-12-16T06:31:19.039Z\",\n  \"id\": \"71d569c6-d831-bf9a-d46c-305d7f608657\",\n  \"instances\": [\n    {\n      \"href\": \"href\"\n    },\n    {\n      \"href\": \"href\"\n    }\n  ],\n  \"metal_gateways\": [\n    {\n      \"created_at\": \"1988-01-05T19:47:01.956Z\",\n      \"gateway_address\": \"10.1.2.1/27\",\n      \"href\": \"string\",\n      \"id\": \"3ca2d485-d8af-4552-8b57-42f669da73c5\",\n      \"state\": \"ready\",\n      \"updated_at\": \"1984-10-29T18:01:43.899Z\",\n      \"vlan\": 1001\n    },\n    {\n      \"created_at\": \"2013-03-06T06:26:33.957Z\",\n      \"gateway_address\": \"10.1.2.1/27\",\n      \"href\": \"string\",\n      \"id\": \"ede7592d-4232-6284-ed4f-53b7ac7e7052\",\n      \"state\": \"deleting\",\n      \"updated_at\": \"2019-11-02T08:31:06.673Z\",\n      \"vlan\": 1001\n    }\n  ],\n  \"metro\": {\n    \"href\": \"href\"\n  },\n  \"metro_code\": \"string\",\n  \"vxlan\": 6641,\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c64215d-c039-4d83-832d-218ae32345cc",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "virtual-networks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Virtual Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed94a4b5-8cf4-4dc7-933f-98f7288c26c4",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "virtual-networks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Virtual Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31d111d1-1640-4204-a13a-172377343332",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "virtual-networks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Virtual Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e816b0c-59c1-4976-b9c6-c69a04b4126d",
+              "name": "unprocessable entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "virtual-networks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Virtual Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ab038d7-77f6-4573-981f-edcd24bf8369",
+          "name": "Get a virtual network",
+          "request": {
+            "name": "Get a virtual network",
+            "description": {
+              "content": "Get a virtual network.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "virtual-networks",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to include. Included objects will return their full\nattributes. Attribute names can be dotted (up to 3 levels) to included deeply\nnested objects."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to exclude. Excluded objects will return only the href\nattribute. Attribute names can be dotted (up to 3 levels) to exclude deeply\nnested objects."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Virtual Network UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "000cdb7f-c8b5-4305-99c3-8435c5cb4d94",
+              "name": "ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "virtual-networks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Virtual Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assigned_to\": {\n    \"href\": \"href\"\n  },\n  \"assigned_to_virtual_circuit\": false,\n  \"description\": \"string\",\n  \"facility\": {\n    \"href\": \"href\"\n  },\n  \"href\": \"string\",\n  \"created_at\": \"2006-12-16T06:31:19.039Z\",\n  \"id\": \"71d569c6-d831-bf9a-d46c-305d7f608657\",\n  \"instances\": [\n    {\n      \"href\": \"href\"\n    },\n    {\n      \"href\": \"href\"\n    }\n  ],\n  \"metal_gateways\": [\n    {\n      \"created_at\": \"1988-01-05T19:47:01.956Z\",\n      \"gateway_address\": \"10.1.2.1/27\",\n      \"href\": \"string\",\n      \"id\": \"3ca2d485-d8af-4552-8b57-42f669da73c5\",\n      \"state\": \"ready\",\n      \"updated_at\": \"1984-10-29T18:01:43.899Z\",\n      \"vlan\": 1001\n    },\n    {\n      \"created_at\": \"2013-03-06T06:26:33.957Z\",\n      \"gateway_address\": \"10.1.2.1/27\",\n      \"href\": \"string\",\n      \"id\": \"ede7592d-4232-6284-ed4f-53b7ac7e7052\",\n      \"state\": \"deleting\",\n      \"updated_at\": \"2019-11-02T08:31:06.673Z\",\n      \"vlan\": 1001\n    }\n  ],\n  \"metro\": {\n    \"href\": \"href\"\n  },\n  \"metro_code\": \"string\",\n  \"vxlan\": 6641,\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c5e8e7d-07ea-4623-8f28-76bb46325a11",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "virtual-networks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Virtual Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00f49874-7d4d-4ad8-84f8-19fce05a783d",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "virtual-networks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Virtual Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cda6e176-a05b-4aa7-a3ca-b0958e6b8825",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "virtual-networks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Virtual Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10398a28-5adc-464f-9ce8-48dc840bd0aa",
+              "name": "unprocessable entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "virtual-networks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Virtual Network UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "85256e64-c2e2-4792-847b-4d427417235f",
+    "name": "Equinix API Authentication VLANs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,312 @@
+{
+  "item": [
+    {
+      "id": "2097e2c7-eea6-456b-b719-208a4e2df868",
+      "name": "OAuth2 Token",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8ce91e7a-6b71-49b9-a386-2237954c74b7",
+          "name": "Renew Access Tokens",
+          "request": {
+            "name": "Renew Access Tokens",
+            "description": {
+              "content": "Use this API to refresh an access token using its refresh token. A valid refresh token is needed to retrieve a new access_token.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "oauth2",
+                "v1",
+                "refreshaccesstoken"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"refresh_token\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f94f54e7-0a8a-40e0-b59f-e872290b67c9",
+              "name": "Successful refresh Oauth2 token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oauth2",
+                    "v1",
+                    "refreshaccesstoken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"refresh_token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_token\": \"string\",\n  \"token_timeout\": \"3599 (60 minutes)\",\n  \"token_type\": \"Bearer\",\n  \"user_name\": \"string\",\n  \"refresh_token\": \"string\",\n  \"refresh_token_timeout\": \"5182560 (60 days)\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "301394bc-3dcc-4d7c-9ccf-9e04c79d277e",
+              "name": "Please enter valid client id/client secrent/refresh token and try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oauth2",
+                    "v1",
+                    "refreshaccesstoken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"refresh_token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"developer_message\": \"string\",\n  \"error_code\": \"string\",\n  \"error_domain\": \"string\",\n  \"error_message\": \"string\",\n  \"error_title\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b909db21-877e-41b8-a478-dfd7ce9b743a",
+          "name": "Generate New Access Token",
+          "request": {
+            "name": "Generate New Access Token",
+            "description": {
+              "content": "This API handles authentication and authorization of the API developer. It returns an access_token which would be valid for 60 minutes. The user account will get locked after 5 successive invalid attempts.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "oauth2",
+                "v1",
+                "token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"user_name\": \"<string>\",\n  \"user_password\": \"<string>\",\n  \"grant_type\": \"<string>\",\n  \"password_encoding\": \"none\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "702470b5-5993-41b8-b2a1-50952e833547",
+              "name": "Successful Oauth2 token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oauth2",
+                    "v1",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"user_name\": \"<string>\",\n  \"user_password\": \"<string>\",\n  \"grant_type\": \"<string>\",\n  \"password_encoding\": \"none\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_token\": \"string\",\n  \"token_timeout\": \"3599 (60 minutes)\",\n  \"token_type\": \"Bearer\",\n  \"user_name\": \"string\",\n  \"refresh_token\": \"string\",\n  \"refresh_token_timeout\": \"5182560 (60 days)\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "740d9112-8ca2-4fe2-af2f-30272d23dbcf",
+              "name": "Please enter a valid client id/client secret/username/password and try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oauth2",
+                    "v1",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"user_name\": \"<string>\",\n  \"user_password\": \"<string>\",\n  \"grant_type\": \"<string>\",\n  \"password_encoding\": \"none\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"developer_message\": \"string\",\n  \"error_code\": \"string\",\n  \"error_domain\": \"string\",\n  \"error_message\": \"string\",\n  \"error_title\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1e25a76b-b5e2-4231-b247-a1023f4406a4",
+    "name": "Equinix API Authentication OAuth2 Token API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}

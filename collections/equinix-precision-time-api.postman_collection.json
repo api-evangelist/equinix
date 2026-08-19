@@ -1,0 +1,2857 @@
+{
+  "item": [
+    {
+      "id": "e0354d1d-7c21-4484-b964-bcd6a7f2215a",
+      "name": "Precision Time",
+      "description": {
+        "content": "Precision Time",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c8745756-8095-43c4-8f47-26c338a09c91",
+          "name": "Create Time Service",
+          "request": {
+            "name": "Create Time Service",
+            "description": {
+              "content": "The API provides capability to create Precision Time service",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "timeServices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"connections\": [\n    {\n      \"uuid\": \"<uuid>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<uuid>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"ipv4\": {\n    \"networkMask\": \"<ipv4>\",\n    \"primary\": \"<ipv4>\",\n    \"secondary\": \"<ipv4>\",\n    \"defaultGateway\": \"<ipv4>\"\n  },\n  \"name\": \"<string>\",\n  \"package\": {\n    \"code\": \"<string>\"\n  },\n  \"type\": \"<string>\",\n  \"ntpAdvancedConfiguration\": [\n    {\n      \"type\": \"<string>\",\n      \"keyNumber\": \"<integer>\",\n      \"key\": \"<byte>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"keyNumber\": \"<integer>\",\n      \"key\": \"<byte>\"\n    }\n  ],\n  \"ptpAdvancedConfiguration\": {\n    \"timeScale\": \"<string>\",\n    \"domain\": \"<integer>\",\n    \"priority1\": \"<integer>\",\n    \"priority2\": \"<integer>\",\n    \"logAnnounceInterval\": \"<integer>\",\n    \"logSyncInterval\": \"<integer>\",\n    \"logDelayReqInterval\": \"<integer>\",\n    \"transportMode\": \"<string>\",\n    \"grantTime\": \"<integer>\"\n  },\n  \"project\": {\n    \"projectId\": \"<string>\"\n  },\n  \"order\": {\n    \"purchaseOrderNumber\": \"<string>\",\n    \"customerReferenceNumber\": \"<string>\",\n    \"orderNumber\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4c7d69fc-013d-49a4-8768-324e45fcfea2",
+              "name": "Successful Accepted operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"NTP\",\n  \"name\": \"EPT-NTP-Service\",\n  \"connections\": [\n    {\n      \"uuid\": \"06dbb0e3-e55d-4090-8aff-fc5654abaad0\"\n    }\n  ],\n  \"package\": {\n    \"code\": \"NTP_STANDARD\"\n  },\n  \"ipv4\": {\n    \"primary\": \"192.168.0.2\",\n    \"secondary\": \"192.168.0.3\",\n    \"networkMask\": \"255.255.255.255\",\n    \"defaultGateway\": \"192.167.0.1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011\",\n  \"type\": \"NTP\",\n  \"uuid\": \"a8ba52de-faae-43b5-b0b1-6904d37ee011\",\n  \"name\": \"EPT-NTP-Service\",\n  \"state\": \"PROVISIONING\",\n  \"connections\": [\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0\",\n      \"type\": \"EVPL_VC\",\n      \"uuid\": \"06dbb0e3-e55d-4090-8aff-fc5654abaad0\",\n      \"aSide\": {\n        \"accessPoint\": {\n          \"type\": \"COLO\",\n          \"location\": {\n            \"metroHref\": \"https://api.equinix.com/fabric/v4/metros/NY\",\n            \"metroCode\": \"NY\",\n            \"ibx\": \"NY1\"\n          }\n        }\n      },\n      \"zSide\": {\n        \"accessPoint\": {\n          \"type\": \"SP\",\n          \"location\": {\n            \"metroHref\": \"https://api.equinix.com/fabric/v4/metros/NY\",\n            \"metroCode\": \"NY\"\n          }\n        }\n      }\n    }\n  ],\n  \"package\": {\n    \"href\": \"https://api.equinix.com/fabric/v4/timeServicePackages/NTP_STANDARD\",\n    \"code\": \"NTP_STANDARD\"\n  },\n  \"ipv4\": {\n    \"primary\": \"192.168.0.2\",\n    \"secondary\": \"192.168.0.3\",\n    \"networkMask\": \"255.255.255.255\",\n    \"defaultGateway\": \"192.167.0.1\"\n  },\n  \"account\": {\n    \"accountNumber\": 123456\n  },\n  \"changeLog\": {\n    \"createdByEmail\": \"abc@xyz.com\",\n    \"createdDateTime\": \"2024-08-24 06:50:46+00:00\",\n    \"updatedByEmail\": \"abc@xyz.com\",\n    \"updatedDateTime\": \"2024-08-24 06:51:46+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4593708-4724-482a-ab50-a2278435c2a7",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"NTP\",\n  \"name\": \"EPT-NTP-Service\",\n  \"connections\": [\n    {\n      \"uuid\": \"06dbb0e3-e55d-4090-8aff-fc5654abaad0\"\n    }\n  ],\n  \"package\": {\n    \"code\": \"NTP_STANDARD\"\n  },\n  \"ipv4\": {\n    \"primary\": \"192.168.0.2\",\n    \"secondary\": \"192.168.0.3\",\n    \"networkMask\": \"255.255.255.255\",\n    \"defaultGateway\": \"192.167.0.1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-4800010\",\n    \"errorMessage\": \"Validation Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/name\",\n        \"reason\": \"Invalid name provided\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6dcff2f7-bdd9-4bf4-8d4a-446b19019538",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"NTP\",\n  \"name\": \"EPT-NTP-Service\",\n  \"connections\": [\n    {\n      \"uuid\": \"06dbb0e3-e55d-4090-8aff-fc5654abaad0\"\n    }\n  ],\n  \"package\": {\n    \"code\": \"NTP_STANDARD\"\n  },\n  \"ipv4\": {\n    \"primary\": \"192.168.0.2\",\n    \"secondary\": \"192.168.0.3\",\n    \"networkMask\": \"255.255.255.255\",\n    \"defaultGateway\": \"192.167.0.1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94a7d3cd-b170-4fba-8b2a-2253ab4ae417",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"NTP\",\n  \"name\": \"EPT-NTP-Service\",\n  \"connections\": [\n    {\n      \"uuid\": \"06dbb0e3-e55d-4090-8aff-fc5654abaad0\"\n    }\n  ],\n  \"package\": {\n    \"code\": \"NTP_STANDARD\"\n  },\n  \"ipv4\": {\n    \"primary\": \"192.168.0.2\",\n    \"secondary\": \"192.168.0.3\",\n    \"networkMask\": \"255.255.255.255\",\n    \"defaultGateway\": \"192.167.0.1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb8e618f-a6c3-4bd4-97d2-89ea93dde7c1",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"NTP\",\n  \"name\": \"EPT-NTP-Service\",\n  \"connections\": [\n    {\n      \"uuid\": \"06dbb0e3-e55d-4090-8aff-fc5654abaad0\"\n    }\n  ],\n  \"package\": {\n    \"code\": \"NTP_STANDARD\"\n  },\n  \"ipv4\": {\n    \"primary\": \"192.168.0.2\",\n    \"secondary\": \"192.168.0.3\",\n    \"networkMask\": \"255.255.255.255\",\n    \"defaultGateway\": \"192.167.0.1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040016\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "511cf576-af12-4ead-9880-ecbee8442eee",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"NTP\",\n  \"name\": \"EPT-NTP-Service\",\n  \"connections\": [\n    {\n      \"uuid\": \"06dbb0e3-e55d-4090-8aff-fc5654abaad0\"\n    }\n  ],\n  \"package\": {\n    \"code\": \"NTP_STANDARD\"\n  },\n  \"ipv4\": {\n    \"primary\": \"192.168.0.2\",\n    \"secondary\": \"192.168.0.3\",\n    \"networkMask\": \"255.255.255.255\",\n    \"defaultGateway\": \"192.167.0.1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb5ba0e6-362e-4328-8c64-f58aeaad09fb",
+          "name": "Get Service By ID.",
+          "request": {
+            "name": "Get Service By ID.",
+            "description": {
+              "content": "The API provides capability to get Precision Time Service details",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "timeServices",
+                ":serviceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "serviceId",
+                  "description": "(Required) Service UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "906024d3-bcd3-4bc9-879c-03c5d48de531",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011\",\n  \"type\": \"NTP\",\n  \"uuid\": \"a8ba52de-faae-43b5-b0b1-6904d37ee011\",\n  \"name\": \"EPT-NTP-Service\",\n  \"state\": \"PROVISIONED\",\n  \"operation\": {\n    \"operationalStatus\": \"UP\"\n  },\n  \"connections\": [\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0\",\n      \"type\": \"EVPL_VC\",\n      \"uuid\": \"06dbb0e3-e55d-4090-8aff-fc5654abaad0\",\n      \"aSide\": {\n        \"accessPoint\": {\n          \"type\": \"COLO\",\n          \"location\": {\n            \"metroHref\": \"https://api.equinix.com/fabric/v4/metros/NY\",\n            \"metroCode\": \"NY\",\n            \"ibx\": \"NY1\"\n          }\n        }\n      },\n      \"zSide\": {\n        \"accessPoint\": {\n          \"type\": \"SP\",\n          \"location\": {\n            \"metroHref\": \"https://api.equinix.com/fabric/v4/metros/NY\",\n            \"metroCode\": \"NY\"\n          }\n        }\n      }\n    }\n  ],\n  \"package\": {\n    \"href\": \"https://api.equinix.com/fabric/v4/timeServicePackages/NTP_STANDARD\",\n    \"code\": \"NTP_STANDARD\"\n  },\n  \"ipv4\": {\n    \"primary\": \"192.168.0.2\",\n    \"secondary\": \"192.168.0.3\",\n    \"networkMask\": \"255.255.255.255\",\n    \"defaultGateway\": \"192.167.0.1\"\n  },\n  \"order\": {\n    \"orderNumber\": \"1-129105284100\"\n  },\n  \"account\": {\n    \"accountNumber\": 123456\n  },\n  \"changeLog\": {\n    \"createdByEmail\": \"abc@xyz.com\",\n    \"createdDateTime\": \"2024-08-24 06:50:46+00:00\",\n    \"updatedByEmail\": \"abc@xyz.com\",\n    \"updatedDateTime\": \"2024-08-24 06:51:46+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ad91ab0-da8a-4c66-8d71-616f307508b7",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-1310758\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-4847521\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b6844bd-7782-4a35-bcbd-433100d09ad2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "582fb5f6-d973-453f-a412-29eea70266be",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83a82acf-cc17-497d-ac76-e5bc616f6b18",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "859d8fb7-7f99-42f9-a56d-3d474412bdb4",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040016\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84b7db79-7ae4-45bd-a77f-1c665b586fb2",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f6a68968-bb03-4af0-9076-3ee183e6d6f9",
+          "name": "Configure Service.",
+          "request": {
+            "name": "Configure Service.",
+            "description": {
+              "content": "The API provides capability to Configure/Fulfill the Precision Time Service.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "timeServices",
+                ":serviceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "serviceId",
+                  "description": "(Required) Service UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"connections\": [\n    {\n      \"uuid\": \"<uuid>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"uuid\": \"<uuid>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"ipv4\": {\n    \"networkMask\": \"<ipv4>\",\n    \"primary\": \"<ipv4>\",\n    \"secondary\": \"<ipv4>\",\n    \"defaultGateway\": \"<ipv4>\"\n  },\n  \"name\": \"<string>\",\n  \"package\": {\n    \"code\": \"<string>\"\n  },\n  \"type\": \"<string>\",\n  \"ntpAdvancedConfiguration\": [\n    {\n      \"type\": \"<string>\",\n      \"keyNumber\": \"<integer>\",\n      \"key\": \"<byte>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"keyNumber\": \"<integer>\",\n      \"key\": \"<byte>\"\n    }\n  ],\n  \"ptpAdvancedConfiguration\": {\n    \"timeScale\": \"<string>\",\n    \"domain\": \"<integer>\",\n    \"priority1\": \"<integer>\",\n    \"priority2\": \"<integer>\",\n    \"logAnnounceInterval\": \"<integer>\",\n    \"logSyncInterval\": \"<integer>\",\n    \"logDelayReqInterval\": \"<integer>\",\n    \"transportMode\": \"<string>\",\n    \"grantTime\": \"<integer>\"\n  },\n  \"project\": {\n    \"projectId\": \"<string>\"\n  },\n  \"order\": {\n    \"purchaseOrderNumber\": \"<string>\",\n    \"customerReferenceNumber\": \"<string>\",\n    \"orderNumber\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "24430666-40f3-4d97-8eb2-5afe9c96b61d",
+              "name": "Successful Accepted operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"NTP\",\n  \"name\": \"EPT-Standard-Service\",\n  \"connections\": [\n    {\n      \"uuid\": \"06dbb0e3-e55d-4090-8aff-fc5654abaad0\"\n    }\n  ],\n  \"package\": {\n    \"code\": \"NTP_STANDARD\"\n  },\n  \"ipv4\": {\n    \"primary\": \"192.168.0.2\",\n    \"secondary\": \"192.168.0.3\",\n    \"networkMask\": \"255.255.255.255\",\n    \"defaultGateway\": \"192.167.0.1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011\",\n  \"type\": \"NTP\",\n  \"uuid\": \"a8ba52de-faae-43b5-b0b1-6904d37ee011\",\n  \"name\": \"EPT-NTP-Service\",\n  \"state\": \"PROVISIONING\",\n  \"connections\": [\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0\",\n      \"type\": \"EVPL_VC\",\n      \"uuid\": \"06dbb0e3-e55d-4090-8aff-fc5654abaad0\",\n      \"aSide\": {\n        \"accessPoint\": {\n          \"type\": \"COLO\",\n          \"location\": {\n            \"metroHref\": \"https://api.equinix.com/fabric/v4/metros/NY\",\n            \"metroCode\": \"NY\",\n            \"ibx\": \"NY1\"\n          }\n        }\n      },\n      \"zSide\": {\n        \"accessPoint\": {\n          \"type\": \"SP\",\n          \"location\": {\n            \"metroHref\": \"https://api.equinix.com/fabric/v4/metros/NY\",\n            \"metroCode\": \"NY\"\n          }\n        }\n      }\n    }\n  ],\n  \"package\": {\n    \"href\": \"https://api.equinix.com/fabric/v4/timeServicePackages/NTP_STANDARD\",\n    \"code\": \"NTP_STANDARD\"\n  },\n  \"ipv4\": {\n    \"primary\": \"192.168.0.2\",\n    \"secondary\": \"192.168.0.3\",\n    \"networkMask\": \"255.255.255.255\",\n    \"defaultGateway\": \"192.167.0.1\"\n  },\n  \"account\": {\n    \"accountNumber\": 123456\n  },\n  \"order\": {\n    \"orderNumber\": \"1-129105284100\"\n  },\n  \"changeLog\": {\n    \"createdByEmail\": \"abc@xyz.com\",\n    \"createdDateTime\": \"2024-08-24 06:50:46+00:00\",\n    \"updatedByEmail\": \"abc@xyz.com\",\n    \"updatedDateTime\": \"2024-08-24 06:51:46+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab79d7ad-2501-4088-a484-f59d223d7f0c",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"NTP\",\n  \"name\": \"EPT-Standard-Service\",\n  \"connections\": [\n    {\n      \"uuid\": \"06dbb0e3-e55d-4090-8aff-fc5654abaad0\"\n    }\n  ],\n  \"package\": {\n    \"code\": \"NTP_STANDARD\"\n  },\n  \"ipv4\": {\n    \"primary\": \"192.168.0.2\",\n    \"secondary\": \"192.168.0.3\",\n    \"networkMask\": \"255.255.255.255\",\n    \"defaultGateway\": \"192.167.0.1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-4800010\",\n    \"errorMessage\": \"Validation Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/name\",\n        \"reason\": \"Invalid name provided\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e916f999-8b18-4579-8a82-d29f4c407860",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"NTP\",\n  \"name\": \"EPT-Standard-Service\",\n  \"connections\": [\n    {\n      \"uuid\": \"06dbb0e3-e55d-4090-8aff-fc5654abaad0\"\n    }\n  ],\n  \"package\": {\n    \"code\": \"NTP_STANDARD\"\n  },\n  \"ipv4\": {\n    \"primary\": \"192.168.0.2\",\n    \"secondary\": \"192.168.0.3\",\n    \"networkMask\": \"255.255.255.255\",\n    \"defaultGateway\": \"192.167.0.1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1fe0de5-1615-406b-808c-3e2122eb9d4f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"NTP\",\n  \"name\": \"EPT-Standard-Service\",\n  \"connections\": [\n    {\n      \"uuid\": \"06dbb0e3-e55d-4090-8aff-fc5654abaad0\"\n    }\n  ],\n  \"package\": {\n    \"code\": \"NTP_STANDARD\"\n  },\n  \"ipv4\": {\n    \"primary\": \"192.168.0.2\",\n    \"secondary\": \"192.168.0.3\",\n    \"networkMask\": \"255.255.255.255\",\n    \"defaultGateway\": \"192.167.0.1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8bd629cc-c23b-4ef9-81a5-29c01eccc46d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"NTP\",\n  \"name\": \"EPT-Standard-Service\",\n  \"connections\": [\n    {\n      \"uuid\": \"06dbb0e3-e55d-4090-8aff-fc5654abaad0\"\n    }\n  ],\n  \"package\": {\n    \"code\": \"NTP_STANDARD\"\n  },\n  \"ipv4\": {\n    \"primary\": \"192.168.0.2\",\n    \"secondary\": \"192.168.0.3\",\n    \"networkMask\": \"255.255.255.255\",\n    \"defaultGateway\": \"192.167.0.1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7546bfdf-65d0-4c36-bb7c-e74e5ffa82b7",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"NTP\",\n  \"name\": \"EPT-Standard-Service\",\n  \"connections\": [\n    {\n      \"uuid\": \"06dbb0e3-e55d-4090-8aff-fc5654abaad0\"\n    }\n  ],\n  \"package\": {\n    \"code\": \"NTP_STANDARD\"\n  },\n  \"ipv4\": {\n    \"primary\": \"192.168.0.2\",\n    \"secondary\": \"192.168.0.3\",\n    \"networkMask\": \"255.255.255.255\",\n    \"defaultGateway\": \"192.167.0.1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040016\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d83428ca-74f3-489f-9254-73b791173cbe",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"NTP\",\n  \"name\": \"EPT-Standard-Service\",\n  \"connections\": [\n    {\n      \"uuid\": \"06dbb0e3-e55d-4090-8aff-fc5654abaad0\"\n    }\n  ],\n  \"package\": {\n    \"code\": \"NTP_STANDARD\"\n  },\n  \"ipv4\": {\n    \"primary\": \"192.168.0.2\",\n    \"secondary\": \"192.168.0.3\",\n    \"networkMask\": \"255.255.255.255\",\n    \"defaultGateway\": \"192.167.0.1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d2c276fb-2312-49db-b4f8-6cc6ef50695c",
+          "name": "Delete by ID.",
+          "request": {
+            "name": "Delete by ID.",
+            "description": {
+              "content": "The API provides capability to delete Precision Time Service by service id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "timeServices",
+                ":serviceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "serviceId",
+                  "description": "(Required) Service UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f1329075-1e33-4ae3-b4b1-e2c59142cb79",
+              "name": "Successful Delete",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011\",\n  \"type\": \"NTP\",\n  \"uuid\": \"a8ba52de-faae-43b5-b0b1-6904d37ee011\",\n  \"name\": \"EPT-NTP-Service\",\n  \"state\": \"DEPROVISIONING\",\n  \"operation\": {\n    \"operationalStatus\": \"UP\"\n  },\n  \"connections\": [\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0\",\n      \"type\": \"EVPL_VC\",\n      \"uuid\": \"06dbb0e3-e55d-4090-8aff-fc5654abaad0\",\n      \"aSide\": {\n        \"accessPoint\": {\n          \"type\": \"COLO\",\n          \"location\": {\n            \"metroHref\": \"https://api.equinix.com/fabric/v4/metros/NY\",\n            \"metroCode\": \"NY\",\n            \"ibx\": \"NY1\"\n          }\n        }\n      },\n      \"zSide\": {\n        \"accessPoint\": {\n          \"type\": \"SP\",\n          \"location\": {\n            \"metroHref\": \"https://api.equinix.com/fabric/v4/metros/NY\",\n            \"metroCode\": \"NY\"\n          }\n        }\n      }\n    }\n  ],\n  \"package\": {\n    \"href\": \"https://api.equinix.com/fabric/v4/timeServicePackages/NTP_STANDARD\",\n    \"code\": \"NTP_STANDARD\"\n  },\n  \"ipv4\": {\n    \"primary\": \"192.168.0.2\",\n    \"secondary\": \"192.168.0.3\",\n    \"networkMask\": \"255.255.255.255\",\n    \"defaultGateway\": \"192.167.0.1\"\n  },\n  \"account\": {\n    \"accountNumber\": 123456\n  },\n  \"order\": {\n    \"orderNumber\": \"1-216720438646\"\n  },\n  \"changeLog\": {\n    \"createdByEmail\": \"abc@xyz.com\",\n    \"createdDateTime\": \"2024-08-24 06:50:46+00:00\",\n    \"updatedByEmail\": \"abc@xyz.com\",\n    \"updatedDateTime\": \"2024-08-24 06:51:46+00:00\",\n    \"deletedByEmail\": \"abc@xyz.com\",\n    \"deletedDateTime\": \"2024-08-24 06:52:46+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4eb3f441-f18b-46cc-b437-6218950a0038",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4445caf4-e295-44a7-a12d-894c81e2c291",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12c47b99-c948-45e1-830f-ef615d3a311a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af8b27e2-e8a9-4010-b0b2-5d409c15663b",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040016\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "510d49cf-b861-4c47-93d7-55c0125379d5",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a94d8b73-0a37-4c98-a6c5-78e0c9c90009",
+          "name": "Update By ID.",
+          "request": {
+            "name": "Update By ID.",
+            "description": {
+              "content": "The API provides capability to update Precision Time Service by service id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "timeServices",
+                ":serviceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "serviceId",
+                  "description": "(Required) Service UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json-patch+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"op\": \"<string>\",\n    \"path\": \"<string>\",\n    \"value\": {}\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "47cf0568-d959-4d7d-9397-dd741215e99a",
+              "name": "Successful Accepted operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/name\",\n    \"value\": \"Updated-Service-Name\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011\",\n  \"type\": \"NTP\",\n  \"uuid\": \"a8ba52de-faae-43b5-b0b1-6904d37ee011\",\n  \"name\": \"EPT-NTP-Service\",\n  \"state\": \"REPROVISIONING\",\n  \"operation\": {\n    \"operationalStatus\": \"UP\"\n  },\n  \"connections\": [\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0\",\n      \"type\": \"EVPL_VC\",\n      \"uuid\": \"06dbb0e3-e55d-4090-8aff-fc5654abaad0\",\n      \"aSide\": {\n        \"accessPoint\": {\n          \"type\": \"COLO\",\n          \"location\": {\n            \"metroHref\": \"https://api.equinix.com/fabric/v4/metros/NY\",\n            \"metroCode\": \"NY\",\n            \"ibx\": \"NY1\"\n          }\n        }\n      },\n      \"zSide\": {\n        \"accessPoint\": {\n          \"type\": \"SP\",\n          \"location\": {\n            \"metroHref\": \"https://api.equinix.com/fabric/v4/metros/NY\",\n            \"metroCode\": \"NY\"\n          }\n        }\n      }\n    }\n  ],\n  \"package\": {\n    \"href\": \"https://api.equinix.com/fabric/v4/timeServicePackages/NTP_STANDARD\",\n    \"code\": \"NTP_STANDARD\"\n  },\n  \"ipv4\": {\n    \"primary\": \"192.168.0.2\",\n    \"secondary\": \"192.168.0.3\",\n    \"networkMask\": \"255.255.255.255\",\n    \"defaultGateway\": \"192.167.0.1\"\n  },\n  \"account\": {\n    \"accountNumber\": 123456\n  },\n  \"order\": {\n    \"orderNumber\": \"1-129105284100\"\n  },\n  \"changeLog\": {\n    \"createdByEmail\": \"abc@xyz.com\",\n    \"createdDateTime\": \"2024-08-24 06:50:46+00:00\",\n    \"updatedByEmail\": \"abc@xyz.com\",\n    \"updatedDateTime\": \"2024-08-24 06:51:46+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ea39d77-e400-48a6-bfb1-9c7f55d0fa92",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/name\",\n    \"value\": \"Updated-Service-Name\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-4800010\",\n    \"errorMessage\": \"Validation Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/name\",\n        \"reason\": \"Invalid name provided\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ee9c76e-d5e2-4759-9a67-b8b89307290f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/name\",\n    \"value\": \"Updated-Service-Name\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "297b32ba-d51f-4764-a8fa-1c1dd2215d68",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/name\",\n    \"value\": \"Updated-Service-Name\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6a2cca5-7edc-40f1-8dcf-f15fd55e069f",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/name\",\n    \"value\": \"Updated-Service-Name\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5067e327-549d-4136-af4d-5e6b2b38acb8",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/name\",\n    \"value\": \"Updated-Service-Name\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040016\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c31eaeb-b60e-4d17-9d30-62cccf7356cd",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/name\",\n    \"value\": \"Updated-Service-Name\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad2d7343-71c9-4ebd-b6ca-16b1300c6253",
+          "name": "Search Time Services",
+          "request": {
+            "name": "Search Time Services",
+            "description": {
+              "content": "The API provides capability to get list of user's Time Services using search criteria, including optional filtering, pagination and sorting",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "timeServices",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"<string>\",\n        \"operator\": \"<string>\",\n        \"values\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"property\": \"<string>\",\n        \"operator\": \"<string>\",\n        \"values\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/changeLog/updatedDateTime\"\n    },\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/changeLog/updatedDateTime\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7890947a-7eb1-4f82-9cc8-20504d1c2392",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/state\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"PROVISIONED\"\n        ]\n      },\n      {\n        \"property\": \"/project/projectId\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"995072000433550\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/changeLog/createdDateTime\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"offset\": 20,\n    \"limit\": 20,\n    \"total\": 100,\n    \"next\": \"/search?offset=40&limit=20\",\n    \"previous\": \"/search?offset=0&limit=20\"\n  },\n  \"data\": [\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/timeServices/a8ba52de-faae-43b5-b0b1-6904d37ee011\",\n      \"type\": \"NTP\",\n      \"uuid\": \"a8ba52de-faae-43b5-b0b1-6904d37ee011\",\n      \"name\": \"EPT-NTP-STD-Service\",\n      \"state\": \"PROVISIONING\",\n      \"connections\": [\n        {\n          \"href\": \"https://api.equinix.com/fabric/v4/connections/06dbb0e3-e55d-4090-8aff-fc5654abaad0\",\n          \"type\": \"EVPL_VC\",\n          \"uuid\": \"06dbb0e3-e55d-4090-8aff-fc5654abaad0\",\n          \"aSide\": {\n            \"accessPoint\": {\n              \"type\": \"COLO\",\n              \"location\": {\n                \"metroHref\": \"https://api.equinix.com/fabric/v4/metros/NY\",\n                \"metroCode\": \"NY\",\n                \"ibx\": \"NY1\"\n              }\n            }\n          },\n          \"zSide\": {\n            \"accessPoint\": {\n              \"type\": \"SP\",\n              \"location\": {\n                \"metroHref\": \"https://api.equinix.com/fabric/v4/metros/NY\",\n                \"metroCode\": \"NY\"\n              }\n            }\n          }\n        }\n      ],\n      \"package\": {\n        \"href\": \"https://api.equinix.com/fabric/v4/timeServicePackages/NTP_STANDARD\",\n        \"code\": \"NTP_STANDARD\"\n      },\n      \"ipv4\": {\n        \"primary\": \"192.168.0.2\",\n        \"secondary\": \"192.168.0.3\",\n        \"networkMask\": \"255.255.255.255\",\n        \"defaultGateway\": \"192.167.0.1\"\n      },\n      \"account\": {\n        \"accountNumber\": 123456\n      },\n      \"changeLog\": {\n        \"createdByEmail\": \"abc@xyz.com\",\n        \"createdDateTime\": \"2024-08-24 06:50:46+00:00\",\n        \"updatedByEmail\": \"abc@xyz.com\",\n        \"updatedDateTime\": \"2024-08-24 06:51:46+00:00\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66f89c69-1604-4b24-862f-8639c091bdfd",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/state\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"PROVISIONED\"\n        ]\n      },\n      {\n        \"property\": \"/project/projectId\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"995072000433550\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/changeLog/createdDateTime\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040039\",\n    \"errorMessage\": \"Invalid value for sorting direction.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"additionalInfo\": [\n      {\n        \"reason\": \"Only accept DESC and ASC for sorting direction.\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52c74bca-23ab-4552-ac54-1ef0650d418e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/state\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"PROVISIONED\"\n        ]\n      },\n      {\n        \"property\": \"/project/projectId\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"995072000433550\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/changeLog/createdDateTime\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe86f7a4-ffed-4e31-b146-3b732a37bb22",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/state\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"PROVISIONED\"\n        ]\n      },\n      {\n        \"property\": \"/project/projectId\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"995072000433550\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/changeLog/createdDateTime\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81d9abbc-a503-4798-8634-ea9dac2115e5",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/state\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"PROVISIONED\"\n        ]\n      },\n      {\n        \"property\": \"/project/projectId\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"995072000433550\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/changeLog/createdDateTime\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040016\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2fc166cc-68ea-49b2-9c2a-f259b6eb94a6",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/state\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"PROVISIONED\"\n        ]\n      },\n      {\n        \"property\": \"/project/projectId\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"995072000433550\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/changeLog/createdDateTime\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4e437f6-8f4f-47bb-a9a4-72fb6220e7aa",
+          "name": "Get Connection Links",
+          "request": {
+            "name": "Get Connection Links",
+            "description": {
+              "content": "The API provides capability to get prevision timing service's details",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "timeServices",
+                ":serviceId",
+                "connections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "serviceId",
+                  "description": "(Required) Service UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6319300f-ecbe-4d94-966a-688362de9294",
+              "name": "Return Time Service Connection",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId",
+                    "connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20,\n    \"total\": 2\n  },\n  \"data\": [\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/connections/92dc376a-a932-43aa-a6a2-c806dedbd784\",\n      \"type\": \"EVPL_VC\",\n      \"uuid\": \"92dc376a-a932-43aa-a6a2-c806dedbd784\"\n    },\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/connections/42dc376a-a932-43aa-a6a2-d806dedbd783\",\n      \"type\": \"EVPL_VC\",\n      \"uuid\": \"42dc376a-a932-43aa-a6a2-d806dedbd783\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2d46859-daca-495e-af15-31a77cf70921",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId",
+                    "connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16244a6c-d02b-4980-a5f9-0ec5ce7d256f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId",
+                    "connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b8d79cb-f928-4bd5-8d76-5df9880b1f33",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId",
+                    "connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040016\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0042bce-dad6-49ee-9dc0-8cc28aa0b43e",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServices",
+                    ":serviceId",
+                    "connections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceId",
+                      "description": "(Required) Service UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "30300fc1-fdc5-413a-b385-48a456f75377",
+          "name": "Get Packages",
+          "request": {
+            "name": "Get Packages",
+            "description": {
+              "content": "The API provides capability to get timing service's packages",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "timeServicePackages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "937fe597-0adb-4dea-9b77-94564c24398f",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServicePackages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20,\n    \"total\": 4\n  },\n  \"data\": [\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/timeServicePackages/NTP_STANDARD\",\n      \"type\": \"TIME_SERVICE_PACKAGE\",\n      \"code\": \"NTP_STANDARD\",\n      \"bandwidth\": 1,\n      \"clientsPerSecondMax\": 1000,\n      \"accuracySlaUnit\": \"microseconds\",\n      \"accuracySla\": -1,\n      \"accuracySlaMin\": 1,\n      \"accuracySlaMax\": 100,\n      \"redundancySupported\": false,\n      \"multiSubnetSupported\": false,\n      \"changeLog\": {\n        \"createdDateTime\": \"2023-05-16 07:50:49.749000+00:00\",\n        \"updatedDateTime\": \"2023-05-17 07:50:49.749000+00:00\"\n      }\n    },\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/timeServicePackages/NTP_ENTERPRISE\",\n      \"type\": \"TIME_SERVICE_PACKAGE\",\n      \"code\": \"NTP_ENTERPRISE\",\n      \"bandwidth\": 5,\n      \"clientsPerSecondMax\": 2000,\n      \"accuracySlaUnit\": \"microseconds\",\n      \"accuracySla\": -1,\n      \"accuracySlaMin\": 1,\n      \"accuracySlaMax\": 100,\n      \"redundancySupported\": false,\n      \"multiSubnetSupported\": true,\n      \"changeLog\": {\n        \"createdDateTime\": \"2023-05-16 07:50:49.749000+00:00\",\n        \"updatedDateTime\": \"2023-05-17 07:50:49.749000+00:00\"\n      }\n    },\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/timeServicePackages/PTP_STANDARD\",\n      \"type\": \"TIME_SERVICE_PACKAGE\",\n      \"code\": \"PTP_STANDARD\",\n      \"bandwidth\": 5,\n      \"clientsPerSecondMax\": 20,\n      \"accuracySlaUnit\": \"microseconds\",\n      \"accuracySla\": 50,\n      \"accuracySlaMin\": 1,\n      \"accuracySlaMax\": 10,\n      \"redundancySupported\": false,\n      \"multiSubnetSupported\": true,\n      \"changeLog\": {\n        \"createdDateTime\": \"2023-05-16 07:50:49.749000+00:00\",\n        \"updatedDateTime\": \"2023-05-17 07:50:49.749000+00:00\"\n      }\n    },\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/timeServicePackages/PTP_ENTERPRISE\",\n      \"type\": \"TIME_SERVICE_PACKAGE\",\n      \"code\": \"PTP_ENTERPRISE\",\n      \"bandwidth\": 10,\n      \"clientsPerSecondMax\": 100,\n      \"accuracySlaUnit\": \"microseconds\",\n      \"accuracySla\": 50,\n      \"accuracySlaMin\": 1,\n      \"accuracySlaMax\": 10,\n      \"redundancySupported\": false,\n      \"multiSubnetSupported\": true,\n      \"changeLog\": {\n        \"createdDateTime\": \"2023-05-16 07:50:49.749000+00:00\",\n        \"updatedDateTime\": \"2023-05-17 07:50:49.749000+00:00\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2d9d266-7115-4478-a368-7f6c5e2b4d2a",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServicePackages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040016\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c70dfbc-95b9-42d2-8dfa-479d5c1e242e",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServicePackages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de2a1f05-e530-4773-9669-bce6ca25a2f1",
+          "name": "Get Package By Code",
+          "request": {
+            "name": "Get Package By Code",
+            "description": {
+              "content": "The API provides capability to get timing service's package by code",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "timeServicePackages",
+                ":packageCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "packageCode",
+                  "description": "(Required) Package Code"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ccd2d002-b8fd-4f7f-9398-b9fbed04b336",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServicePackages",
+                    ":packageCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "packageCode",
+                      "description": "(Required) Package Code"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/timeServicePackages/NTP_STANDARD\",\n  \"type\": \"TIME_SERVICE_PACKAGE\",\n  \"code\": \"NTP_STANDARD\",\n  \"bandwidth\": 10,\n  \"clientsPerSecondMax\": 100,\n  \"accuracySlaUnit\": \"microseconds\",\n  \"accuracySla\": 50,\n  \"accuracySlaMin\": 1,\n  \"accuracySlaMax\": 10,\n  \"redundancySupported\": true,\n  \"multiSubnetSupported\": true,\n  \"changeLog\": {\n    \"createdDateTime\": \"2023-05-16 07:50:49.749000+00:00\",\n    \"updatedDateTime\": \"2023-05-17 07:50:49.749000+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a18a9d1b-7485-4123-baef-631e752026c8",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServicePackages",
+                    ":packageCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "packageCode",
+                      "description": "(Required) Package Code"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040016\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18eec4fb-2d8d-471a-bf23-df53fa05bc3f",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "timeServicePackages",
+                    ":packageCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "packageCode",
+                      "description": "(Required) Package Code"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bfd0d0c6-9ec0-4383-9ce0-825257c9e267",
+    "name": "Equinix API Authentication Precision Time API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}

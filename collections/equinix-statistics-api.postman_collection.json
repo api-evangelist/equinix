@@ -1,0 +1,562 @@
+{
+  "item": [
+    {
+      "id": "d7d3dd9f-ec1c-41a7-9e9d-212a17154ad7",
+      "name": "Statistics",
+      "description": {
+        "content": "Statistics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "41f64ac8-1fdc-498c-ae4b-10c11850b5a8",
+          "name": "Get Stats by uuid **(DEPRECATED)**",
+          "request": {
+            "name": "Get Stats by uuid **(DEPRECATED)**",
+            "description": {
+              "content": "This API provides service-level traffic metrics so that you can view access and gather key information required to manage service subscription sizing and capacity.**(DEPRECATED)**",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "ports",
+                ":portId",
+                "stats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDateTime",
+                  "value": "<dateTime>",
+                  "description": "(Required) startDateTime"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDateTime",
+                  "value": "<dateTime>",
+                  "description": "(Required) endDateTime"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "portId",
+                  "description": "(Required) Port UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d6e19e75-3cf8-4036-8166-3507d1e91f89",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "ports",
+                    ":portId",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDateTime",
+                      "value": "2020-11-06 07:00:00+00:00"
+                    },
+                    {
+                      "key": "endDateTime",
+                      "value": "2020-11-10 07:00:00+00:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "portId",
+                      "description": "(Required) Port UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"http://api.equinix.com/fabric/v4/ports/xxxxx191-xx70-xxxx-xx04-xxxxxxxa37xx\",\n  \"type\": \"XF_PORT\",\n  \"uuid\": \"xxxxx191-xx70-xxxx-xx04-xxxxxxxa37xx\",\n  \"name\": \"Equinix-EM-CX-xxx-L-Dot1q-BO-100G-PRI-xx\",\n  \"bandwidthUtilization\": 10000,\n  \"stats\": {\n    \"startDateTime\": \"2020-05-21 08:00:00+00:00\",\n    \"endDateTime\": \"2020-05-21 10:30:00+00:00\",\n    \"bandwidthUtilization\": {\n      \"unit\": \"Mbps\",\n      \"metricInterval\": \"PT5M\",\n      \"inbound\": {\n        \"max\": 68.00905623111112,\n        \"mean\": 48.90562310112,\n        \"lastPolled\": 41.00905623111112,\n        \"metrics\": [\n          {\n            \"intervalEndDateTime\": \"2020-05-21 10:30:00+00:00\",\n            \"max\": 45.5623145112009,\n            \"mean\": 31.38641687333333\n          }\n        ]\n      },\n      \"outbound\": {\n        \"max\": 41.99068261111111,\n        \"mean\": 33.70374303096296,\n        \"lastPolled\": 41.43428905111111,\n        \"metrics\": [\n          {\n            \"intervalEndDateTime\": \"2020-05-21 10:30:00+00:00\",\n            \"max\": 42.01401189333334,\n            \"mean\": 39.40894303096296\n          }\n        ]\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a52773a5-22c3-4ab1-b64a-5420eb62e37c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "ports",
+                    ":portId",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDateTime",
+                      "value": "2020-11-06 07:00:00+00:00"
+                    },
+                    {
+                      "key": "endDateTime",
+                      "value": "2020-11-10 07:00:00+00:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "portId",
+                      "description": "(Required) Port UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46dc6935-38a4-4ff0-a39e-cb04885510fa",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "ports",
+                    ":portId",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDateTime",
+                      "value": "2020-11-06 07:00:00+00:00"
+                    },
+                    {
+                      "key": "endDateTime",
+                      "value": "2020-11-10 07:00:00+00:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "portId",
+                      "description": "(Required) Port UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e7c93a5-d3a2-4e84-a631-259df5f7816d",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "ports",
+                    ":portId",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDateTime",
+                      "value": "2020-11-06 07:00:00+00:00"
+                    },
+                    {
+                      "key": "endDateTime",
+                      "value": "2020-11-10 07:00:00+00:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "portId",
+                      "description": "(Required) Port UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a535554-a79e-4088-976d-cb803c580242",
+          "name": "Get Stats by uuid **(DEPRECATED)**",
+          "request": {
+            "name": "Get Stats by uuid **(DEPRECATED)**",
+            "description": {
+              "content": "This API provides service-level metrics so that you can view access and gather key information required to manage service subscription sizing and capacity **(DEPRECATED)**",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "connections",
+                ":connectionId",
+                "stats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDateTime",
+                  "value": "<dateTime>",
+                  "description": "(Required) startDateTime"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDateTime",
+                  "value": "<dateTime>",
+                  "description": "(Required) endDateTime"
+                },
+                {
+                  "disabled": false,
+                  "key": "viewPoint",
+                  "value": "<string>",
+                  "description": "(Required) viewPoint"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "connectionId",
+                  "description": "(Required) Connection UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "28c79b5a-7c93-4f5c-a36e-3bb305d3df4a",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "connections",
+                    ":connectionId",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDateTime",
+                      "value": "2020-11-06 07:00:00+00:00"
+                    },
+                    {
+                      "key": "endDateTime",
+                      "value": "2020-11-10 07:00:00+00:00"
+                    },
+                    {
+                      "key": "viewPoint",
+                      "value": "aSide"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "connectionId",
+                      "description": "(Required) Connection UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/connections/97d1850f-4df0-468c-9281-fa7b0dfa2096\",\n  \"type\": \"EVPL_VC\",\n  \"uuid\": \"97d1850f-4df0-468c-9281-fa7b0dfa2096\",\n  \"name\": \"Admin-STATS-123-Abc\",\n  \"stats\": {\n    \"startDateTime\": \"2021-01-10 20:05:08+00:00\",\n    \"endDateTime\": \"2021-01-10 21:05:08+00:00\",\n    \"viewPoint\": \"aSide\",\n    \"bandwidthUtilization\": {\n      \"unit\": \"Mbps\",\n      \"metricInterval\": \"PT5M\",\n      \"inbound\": {\n        \"max\": 68.38641687333333,\n        \"mean\": 39.96267986650665,\n        \"lastPolled\": 41.00905623111112,\n        \"metrics\": [\n          {\n            \"intervalEndDateTime\": \"2021-01-10 20:05:00+00:00\",\n            \"max\": 41.89234537555556,\n            \"mean\": 33.62481298948148\n          },\n          {\n            \"intervalEndDateTime\": \"2021-01-10 20:10:00+00:00\",\n            \"max\": 41.86234987534256,\n            \"mean\": 36.92451598748148\n          },\n          {\n            \"intervalEndDateTime\": \"2021-01-10 20:15:00+00:00\",\n            \"max\": 41.86907222888888,\n            \"mean\": 43.98230834555556\n          },\n          {\n            \"intervalEndDateTime\": \"2021-01-10 20:20:00+00:00\",\n            \"max\": 41.91562025333334,\n            \"mean\": 41.086565260765425\n          }\n        ]\n      },\n      \"outbound\": {\n        \"max\": 67.79944363333334,\n        \"mean\": 38.116581250214345,\n        \"lastPolled\": 41.43428905111111,\n        \"metrics\": [\n          {\n            \"intervalEndDateTime\": \"2021-01-10 20:05:00+00:00\",\n            \"max\": 41.99068261111111,\n            \"mean\": 33.70374303096296\n          },\n          {\n            \"intervalEndDateTime\": \"2021-01-10 20:10:00+00:00\",\n            \"max\": 42.56065261666111,\n            \"mean\": 31.52464373892222\n          },\n          {\n            \"intervalEndDateTime\": \"2021-01-10 20:15:00+00:00\",\n            \"max\": 41.96735416222222,\n            \"mean\": 44.08555118977779\n          },\n          {\n            \"intervalEndDateTime\": \"2021-01-10 20:20:00+00:00\",\n            \"max\": 42.01401189333334,\n            \"mean\": 39.40894303096296\n          }\n        ]\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a515850f-4d3c-49b0-af8d-d241b76aa873",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "connections",
+                    ":connectionId",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDateTime",
+                      "value": "2020-11-06 07:00:00+00:00"
+                    },
+                    {
+                      "key": "endDateTime",
+                      "value": "2020-11-10 07:00:00+00:00"
+                    },
+                    {
+                      "key": "viewPoint",
+                      "value": "aSide"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "connectionId",
+                      "description": "(Required) Connection UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be007c39-c4da-49e0-b3b4-5f36a0c46bcc",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "connections",
+                    ":connectionId",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDateTime",
+                      "value": "2020-11-06 07:00:00+00:00"
+                    },
+                    {
+                      "key": "endDateTime",
+                      "value": "2020-11-10 07:00:00+00:00"
+                    },
+                    {
+                      "key": "viewPoint",
+                      "value": "aSide"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "connectionId",
+                      "description": "(Required) Connection UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "43539af2-3283-4b56-8b80-1b33827a865e",
+    "name": "Equinix API Authentication Statistics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}

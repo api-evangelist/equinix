@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Equinix API Authentication Agent Templates API",
+    "version": "1.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Agent Templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Agent Templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/agentTemplates",
+            "params": [
+              {
+                "name": "offset",
+                "value": "1",
+                "type": "query",
+                "description": "offset"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "number of records to fetch"
+              }
+            ]
+          },
+          "docs": "This API provides capability to retrieve agent templates"
+        },
+        {
+          "info": {
+            "name": "Get Agent Template by UUID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/agentTemplates/:agentTemplateId",
+            "params": [
+              {
+                "name": "agentTemplateId",
+                "value": "",
+                "type": "path",
+                "description": "Agent Template UUID"
+              },
+              {
+                "name": "offset",
+                "value": "1",
+                "type": "query",
+                "description": "offset"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "number of records to fetch"
+              }
+            ]
+          },
+          "docs": "This API provides capability to retrieve an agent template by uuid"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

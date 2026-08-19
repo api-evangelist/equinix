@@ -1,0 +1,2021 @@
+{
+  "item": [
+    {
+      "id": "1e729c75-1071-494f-9b68-b1e2d3e21e36",
+      "name": "IPAddresses",
+      "description": {
+        "content": "Manage IP addresses. See device and project endpoints to list and create IP assignments for a particular project or device. Check out the product docs to learn more about [the basic networking features](https://metal.equinix.com/developers/docs/networking/standard-ips/).\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2170aed7-8667-4ca2-96e3-1107df143baa",
+          "name": "Unassign an ip address",
+          "request": {
+            "name": "Unassign an ip address",
+            "description": {
+              "content": "This call can be used to un-assign an IP assignment or delete\nan IP reservation.\n\nUn-assign an IP address record.\nUse the assignment UUID you\nget after attaching the IP. This will remove the relationship between an IP and the device or metal gateway and will make the IP address available to be assigned to another device, once the IP has been un-configured from the network.\n\nDelete an IP reservation.\nUse the reservation UUID you get after adding the IP to the project. This will permanently delete the IP block reservation from the project.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ips",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) IP Address UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c75126b5-f36d-452a-8b04-071463c869be",
+              "name": "no content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) IP Address UUID"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6506d17e-3db0-4e7b-9669-c273f52b6ee3",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) IP Address UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e82bc63e-be32-4cab-a909-f392833b2ec3",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) IP Address UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8595648-2285-4308-b014-534bf401e45a",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) IP Address UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ffd8557-77f5-4fca-9fa6-de91e9b724a6",
+          "name": "Retrieve an ip address",
+          "request": {
+            "name": "Retrieve an ip address",
+            "description": {
+              "content": "Returns a single ip address if the user has access.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ips",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to include. Included objects will return their full\nattributes. Attribute names can be dotted (up to 3 levels) to included deeply\nnested objects."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to exclude. Excluded objects will return only the href\nattribute. Attribute names can be dotted (up to 3 levels) to exclude deeply\nnested objects."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) IP Address UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "20bc3ca3-e9f8-4729-b1b2-ff1cd13c0153",
+              "name": "ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) IP Address UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"address\": \"string\",\n  \"address_family\": 9509,\n  \"assigned_to\": {\n    \"href\": \"href\"\n  },\n  \"cidr\": 4289,\n  \"created_at\": \"2009-02-04T04:15:50.874Z\",\n  \"enabled\": false,\n  \"gateway\": \"string\",\n  \"global_ip\": false,\n  \"href\": \"string\",\n  \"id\": \"db95d2ee-31b0-dff1-e140-83ffd6b0db12\",\n  \"manageable\": false,\n  \"management\": true,\n  \"metro\": {\n    \"country\": \"country\",\n    \"code\": \"code\",\n    \"name\": \"name\"\n  },\n  \"netmask\": \"string\",\n  \"network\": \"string\",\n  \"parent_block\": {\n    \"netmask\": \"netmask\",\n    \"cidr\": 2,\n    \"href\": \"href\",\n    \"network\": \"network\"\n  },\n  \"public\": false,\n  \"state\": \"deleting\",\n  \"next_hop\": \"30.158.137.229\",\n  \"type\": \"IPAssignment\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3648cb9a-475d-4141-a63f-23b335e78c79",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) IP Address UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b44b0743-b2c5-4c4d-ab03-0a1f9c639823",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) IP Address UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68a9f698-486e-4890-9b1f-ca4d36f790c7",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) IP Address UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8759fbb7-33f5-4553-b7a5-e6b1e9331b9b",
+          "name": "Update an ip address",
+          "request": {
+            "name": "Update an ip address",
+            "description": {
+              "content": "Update details about an ip address",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ips",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to include. Included objects will return their full\nattributes. Attribute names can be dotted (up to 3 levels) to included deeply\nnested objects."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to exclude. Excluded objects will return only the href\nattribute. Attribute names can be dotted (up to 3 levels) to exclude deeply\nnested objects."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) IP Address UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"details\": \"<string>\",\n  \"customdata\": \"<object>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "06fe8d82-442a-4179-9a2a-2bf13f1b3269",
+              "name": "ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) IP Address UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"details\": \"<string>\",\n  \"customdata\": \"<object>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"address\": \"string\",\n  \"address_family\": 9509,\n  \"assigned_to\": {\n    \"href\": \"href\"\n  },\n  \"cidr\": 4289,\n  \"created_at\": \"2009-02-04T04:15:50.874Z\",\n  \"enabled\": false,\n  \"gateway\": \"string\",\n  \"global_ip\": false,\n  \"href\": \"string\",\n  \"id\": \"db95d2ee-31b0-dff1-e140-83ffd6b0db12\",\n  \"manageable\": false,\n  \"management\": true,\n  \"metro\": {\n    \"country\": \"country\",\n    \"code\": \"code\",\n    \"name\": \"name\"\n  },\n  \"netmask\": \"string\",\n  \"network\": \"string\",\n  \"parent_block\": {\n    \"netmask\": \"netmask\",\n    \"cidr\": 2,\n    \"href\": \"href\",\n    \"network\": \"network\"\n  },\n  \"public\": false,\n  \"state\": \"deleting\",\n  \"next_hop\": \"30.158.137.229\",\n  \"type\": \"IPAssignment\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87328651-b986-42f4-bc8f-bcdc99dc4e14",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) IP Address UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"details\": \"<string>\",\n  \"customdata\": \"<object>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed815ac4-0832-4bcc-815b-2355e18aa8ea",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) IP Address UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"details\": \"<string>\",\n  \"customdata\": \"<object>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5320ac97-24d9-43e5-b03e-f7da9ce1f68d",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) IP Address UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"details\": \"<string>\",\n  \"customdata\": \"<object>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f690585-64db-40bd-9083-a64146217117",
+          "name": "Retrieve all available subnets of a particular reservation",
+          "request": {
+            "name": "Retrieve all available subnets of a particular reservation",
+            "description": {
+              "content": "Provides a list of IP resevations for a single project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ips",
+                ":id",
+                "available"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cidr",
+                  "value": "<string>",
+                  "description": "(Required) Size of subnets in bits"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) IP Reservation UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e779d8a7-4509-4db3-a83d-fd1862598e5a",
+              "name": "ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips",
+                    ":id",
+                    "available"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cidr",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) IP Reservation UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"available\": [\n    \"available\",\n    \"available\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cba8f01d-0cf7-46da-8261-a6ff702ad1d3",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips",
+                    ":id",
+                    "available"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cidr",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) IP Reservation UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f4a1e58-0a7a-4906-9e1a-e26eedc3f69d",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips",
+                    ":id",
+                    "available"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cidr",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) IP Reservation UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a89b5b9-1b46-40c1-ab4b-8b858acdc14f",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips",
+                    ":id",
+                    "available"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cidr",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) IP Reservation UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad83c00d-1a88-4b13-90ce-19eb24a82c39",
+          "name": "Retrieve the custom metadata of an IP Reservation or IP Assignment",
+          "request": {
+            "name": "Retrieve the custom metadata of an IP Reservation or IP Assignment",
+            "description": {
+              "content": "Provides the custom metadata stored for this IP Reservation or IP Assignment in json format",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ips",
+                ":id",
+                "customdata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Ip Reservation UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "91e843fa-2aa0-430c-a6cf-680b22a09bc1",
+              "name": "ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips",
+                    ":id",
+                    "customdata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Ip Reservation UUID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ec3fbe5c-a950-4d13-ae56-e2cdaa2bab2e",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips",
+                    ":id",
+                    "customdata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Ip Reservation UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7dc9251b-eeb9-4615-b4ed-153eb1a26d56",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips",
+                    ":id",
+                    "customdata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Ip Reservation UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bac8ac6b-048c-414e-b56f-25adda9a2180",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ips",
+                    ":id",
+                    "customdata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Ip Reservation UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca7bad39-ef74-4379-8bc9-28752aab9292",
+          "name": "Retrieve all ip reservations",
+          "request": {
+            "name": "Retrieve all ip reservations",
+            "description": {
+              "content": "Provides a paginated list of IP reservations for a single project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":id",
+                "ips"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "types",
+                  "value": "<string>",
+                  "description": "Filter project IP reservations by reservation type"
+                },
+                {
+                  "disabled": false,
+                  "key": "types",
+                  "value": "<string>",
+                  "description": "Filter project IP reservations by reservation type"
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to include. Included objects will return their full\nattributes. Attribute names can be dotted (up to 3 levels) to included deeply\nnested objects."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to exclude. Excluded objects will return only the href\nattribute. Attribute names can be dotted (up to 3 levels) to exclude deeply\nnested objects."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "250",
+                  "description": "Items returned per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Project UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b11f3a9b-a39a-4032-ba5f-6273f9946c75",
+              "name": "ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "250"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ip_addresses\": [\n    {\n      \"type\": \"public_ipv4\",\n      \"addon\": true,\n      \"address\": \"string\",\n      \"address_family\": 753,\n      \"assignments\": [\n        {\n          \"address\": \"string\",\n          \"address_family\": 3153,\n          \"assigned_to\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"cidr\": 5830,\n          \"created_at\": \"1981-03-09T09:39:31.922Z\",\n          \"enabled\": true,\n          \"gateway\": \"string\",\n          \"global_ip\": false,\n          \"href\": \"string\",\n          \"id\": \"6236d2f3-39c5-a9dd-bebd-0297527ff355\",\n          \"manageable\": false,\n          \"management\": true,\n          \"metro\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"netmask\": \"string\",\n          \"network\": \"string\",\n          \"parent_block\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"public\": true,\n          \"state\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"next_hop\": \"115.79.211.126\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"address\": \"string\",\n          \"address_family\": 7745,\n          \"assigned_to\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"cidr\": 835,\n          \"created_at\": \"1952-01-04T14:33:33.228Z\",\n          \"enabled\": true,\n          \"gateway\": \"string\",\n          \"global_ip\": true,\n          \"href\": \"string\",\n          \"id\": \"2683c3e3-afca-e1d3-c7c3-42d26db879ca\",\n          \"manageable\": false,\n          \"management\": false,\n          \"metro\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"netmask\": \"string\",\n          \"network\": \"string\",\n          \"parent_block\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"public\": true,\n          \"state\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"next_hop\": \"156.58.193.78\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"available\": \"string\",\n      \"bill\": true,\n      \"cidr\": 7160,\n      \"created_at\": \"1992-03-26T20:04:50.490Z\",\n      \"customdata\": {},\n      \"enabled\": false,\n      \"details\": \"string\",\n      \"facility\": {\n        \"features\": [\n          \"baremetal\",\n          \"backend_transfer\",\n          \"global_ipv4\"\n        ],\n        \"address\": {\n          \"country\": \"country\",\n          \"address\": \"address\",\n          \"address2\": \"address2\",\n          \"city\": \"city\",\n          \"coordinates\": {\n            \"latitude\": \"latitude\",\n            \"longitude\": \"longitude\"\n          },\n          \"state\": \"state\",\n          \"zip_code\": \"zip_code\"\n        },\n        \"code\": \"code\",\n        \"ip_ranges\": [\n          \"2604:1380::/36\",\n          \"147.75.192.0/21\"\n        ],\n        \"metro\": null,\n        \"name\": \"name\"\n      },\n      \"gateway\": \"string\",\n      \"global_ip\": true,\n      \"href\": \"string\",\n      \"id\": \"d713c7e5-38de-cd4b-732c-532bc4d97113\",\n      \"manageable\": true,\n      \"management\": false,\n      \"metal_gateway\": {\n        \"created_at\": \"2002-06-26T16:20:36.449Z\",\n        \"gateway_address\": \"10.1.2.1/27\",\n        \"href\": \"string\",\n        \"id\": \"d538f7d8-0576-390a-8912-b507e07004a1\",\n        \"state\": \"ready\",\n        \"updated_at\": \"1965-10-02T12:44:21.548Z\",\n        \"vlan\": 1001\n      },\n      \"metro\": {\n        \"country\": \"country\",\n        \"code\": \"code\",\n        \"name\": \"name\"\n      },\n      \"netmask\": \"string\",\n      \"network\": \"string\",\n      \"project\": {\n        \"bgp_config\": {\n          \"href\": \"href\"\n        },\n        \"created_at\": \"1971-09-17T12:51:38.564Z\",\n        \"customdata\": {},\n        \"devices\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"href\": \"string\",\n        \"id\": \"30fb9a03-30cd-b557-38e1-ecdbeea035b8\",\n        \"invitations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"max_devices\": {},\n        \"members\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"memberships\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"name\": \"string\",\n        \"network_status\": {},\n        \"organization\": {\n          \"website\": \"website\",\n          \"address\": {\n            \"country\": \"country\",\n            \"address\": \"address\",\n            \"address2\": \"address2\",\n            \"city\": \"city\",\n            \"coordinates\": {\n              \"latitude\": \"latitude\",\n              \"longitude\": \"longitude\"\n            },\n            \"state\": \"state\",\n            \"zip_code\": \"zip_code\"\n          },\n          \"projects\": [\n            {\n              \"href\": \"href\"\n            },\n            {\n              \"href\": \"href\"\n            }\n          ],\n          \"credit_amount\": 1.4658129,\n          \"created_at\": \"2000-01-23 04:56:07+00:00\",\n          \"description\": \"description\",\n          \"billing_address\": {\n            \"country\": \"country\",\n            \"address\": \"address\",\n            \"address2\": \"address2\",\n            \"city\": \"city\",\n            \"coordinates\": {\n              \"latitude\": \"latitude\",\n              \"longitude\": \"longitude\"\n            },\n            \"state\": \"state\",\n            \"zip_code\": \"zip_code\"\n          },\n          \"memberships\": [\n            {\n              \"href\": \"href\"\n            },\n            {\n              \"href\": \"href\"\n            }\n          ],\n          \"enforce_2fa_at\": \"2000-01-23 04:56:07+00:00\",\n          \"twitter\": \"twitter\",\n          \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n          \"terms\": 5,\n          \"members\": [\n            {\n              \"href\": \"href\"\n            },\n            {\n              \"href\": \"href\"\n            }\n          ],\n          \"name\": \"name\",\n          \"logo\": \"logo\",\n          \"customdata\": \"{}\"\n        },\n        \"payment_method\": {\n          \"href\": \"href\"\n        },\n        \"ssh_keys\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"updated_at\": \"1957-03-06T09:06:28.123Z\",\n        \"volumes\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"type\": \"vmce\",\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"project_lite\": {\n        \"href\": \"href\"\n      },\n      \"requested_by\": {\n        \"href\": \"href\"\n      },\n      \"public\": true,\n      \"state\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"type\": \"public_ipv4\",\n      \"addon\": true,\n      \"address\": \"string\",\n      \"address_family\": 4319,\n      \"assignments\": [\n        {\n          \"address\": \"string\",\n          \"address_family\": 2668,\n          \"assigned_to\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"cidr\": 4696,\n          \"created_at\": \"1957-08-17T03:36:16.154Z\",\n          \"enabled\": false,\n          \"gateway\": \"string\",\n          \"global_ip\": true,\n          \"href\": \"string\",\n          \"id\": \"7e5897ee-d725-4eb5-7f9d-7da44bfb2917\",\n          \"manageable\": false,\n          \"management\": true,\n          \"metro\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"netmask\": \"string\",\n          \"network\": \"string\",\n          \"parent_block\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"public\": false,\n          \"state\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"next_hop\": \"200.159.118.115\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"address\": \"string\",\n          \"address_family\": 945,\n          \"assigned_to\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"cidr\": 7041,\n          \"created_at\": \"1957-03-09T09:44:31.632Z\",\n          \"enabled\": false,\n          \"gateway\": \"string\",\n          \"global_ip\": true,\n          \"href\": \"string\",\n          \"id\": \"9b3de32a-c0d0-7be0-81af-d475f6374533\",\n          \"manageable\": true,\n          \"management\": true,\n          \"metro\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"netmask\": \"string\",\n          \"network\": \"string\",\n          \"parent_block\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"public\": false,\n          \"state\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"next_hop\": \"87.199.140.185\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"available\": \"string\",\n      \"bill\": true,\n      \"cidr\": 112,\n      \"created_at\": \"2014-07-03T16:15:55.514Z\",\n      \"customdata\": {},\n      \"enabled\": true,\n      \"details\": \"string\",\n      \"facility\": {\n        \"features\": [\n          \"baremetal\",\n          \"backend_transfer\",\n          \"global_ipv4\"\n        ],\n        \"address\": {\n          \"country\": \"country\",\n          \"address\": \"address\",\n          \"address2\": \"address2\",\n          \"city\": \"city\",\n          \"coordinates\": {\n            \"latitude\": \"latitude\",\n            \"longitude\": \"longitude\"\n          },\n          \"state\": \"state\",\n          \"zip_code\": \"zip_code\"\n        },\n        \"code\": \"code\",\n        \"ip_ranges\": [\n          \"2604:1380::/36\",\n          \"147.75.192.0/21\"\n        ],\n        \"metro\": null,\n        \"name\": \"name\"\n      },\n      \"gateway\": \"string\",\n      \"global_ip\": false,\n      \"href\": \"string\",\n      \"id\": \"f44ffd47-dd1b-ee58-ce0a-9ed9ebd1acf6\",\n      \"manageable\": false,\n      \"management\": false,\n      \"metal_gateway\": {\n        \"created_at\": \"1954-07-14T13:20:46.099Z\",\n        \"gateway_address\": \"10.1.2.1/27\",\n        \"href\": \"string\",\n        \"id\": \"378015aa-3d96-3832-2242-cbe849e1657e\",\n        \"state\": \"active\",\n        \"updated_at\": \"2019-12-02T06:33:26.003Z\",\n        \"vlan\": 1001\n      },\n      \"metro\": {\n        \"country\": \"country\",\n        \"code\": \"code\",\n        \"name\": \"name\"\n      },\n      \"netmask\": \"string\",\n      \"network\": \"string\",\n      \"project\": {\n        \"bgp_config\": {\n          \"href\": \"href\"\n        },\n        \"created_at\": \"2019-07-05T11:49:37.076Z\",\n        \"customdata\": {},\n        \"devices\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"href\": \"string\",\n        \"id\": \"3eb261bf-c5c8-60a7-93b8-b3d9307dca77\",\n        \"invitations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"max_devices\": {},\n        \"members\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"memberships\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"name\": \"string\",\n        \"network_status\": {},\n        \"organization\": {\n          \"website\": \"website\",\n          \"address\": {\n            \"country\": \"country\",\n            \"address\": \"address\",\n            \"address2\": \"address2\",\n            \"city\": \"city\",\n            \"coordinates\": {\n              \"latitude\": \"latitude\",\n              \"longitude\": \"longitude\"\n            },\n            \"state\": \"state\",\n            \"zip_code\": \"zip_code\"\n          },\n          \"projects\": [\n            {\n              \"href\": \"href\"\n            },\n            {\n              \"href\": \"href\"\n            }\n          ],\n          \"credit_amount\": 1.4658129,\n          \"created_at\": \"2000-01-23 04:56:07+00:00\",\n          \"description\": \"description\",\n          \"billing_address\": {\n            \"country\": \"country\",\n            \"address\": \"address\",\n            \"address2\": \"address2\",\n            \"city\": \"city\",\n            \"coordinates\": {\n              \"latitude\": \"latitude\",\n              \"longitude\": \"longitude\"\n            },\n            \"state\": \"state\",\n            \"zip_code\": \"zip_code\"\n          },\n          \"memberships\": [\n            {\n              \"href\": \"href\"\n            },\n            {\n              \"href\": \"href\"\n            }\n          ],\n          \"enforce_2fa_at\": \"2000-01-23 04:56:07+00:00\",\n          \"twitter\": \"twitter\",\n          \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n          \"terms\": 5,\n          \"members\": [\n            {\n              \"href\": \"href\"\n            },\n            {\n              \"href\": \"href\"\n            }\n          ],\n          \"name\": \"name\",\n          \"logo\": \"logo\",\n          \"customdata\": \"{}\"\n        },\n        \"payment_method\": {\n          \"href\": \"href\"\n        },\n        \"ssh_keys\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"updated_at\": \"2024-09-13T21:49:43.373Z\",\n        \"volumes\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"type\": \"default\",\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"project_lite\": {\n        \"href\": \"href\"\n      },\n      \"requested_by\": {\n        \"href\": \"href\"\n      },\n      \"public\": true,\n      \"state\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"meta\": {\n    \"next\": {\n      \"href\": \"href\"\n    },\n    \"total\": 0,\n    \"last\": {\n      \"href\": \"href\"\n    },\n    \"previous\": {\n      \"href\": \"href\"\n    },\n    \"last_page\": 1,\n    \"self\": {\n      \"href\": \"href\"\n    },\n    \"first\": {\n      \"href\": \"href\"\n    },\n    \"current_page\": 6\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de6ef65a-ad95-4bb8-b08d-261b7bd4527f",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "250"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76afb02a-ac18-49c9-9560-a162d7ca2fc6",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "250"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac3c1237-8924-44f6-996f-c01ff10024da",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "250"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d00483c-d0d0-4cb7-884f-dc55c850c30a",
+          "name": "Requesting IP reservations",
+          "request": {
+            "name": "Requesting IP reservations",
+            "description": {
+              "content": "Request more IP space for a project in order to have additional IP addresses to assign to devices.  If the request is within the max quota, an IP reservation will be created. If the project will exceed its IP quota, a request will be submitted for review, and will return an IP Reservation with a `state` of `pending`. You can automatically have the request fail with HTTP status 422 instead of triggering the review process by providing the `fail_on_approval_required` parameter set to `true` in the request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":id",
+                "ips"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to include. Included objects will return their full\nattributes. Attribute names can be dotted (up to 3 levels) to included deeply\nnested objects."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to exclude. Excluded objects will return only the href\nattribute. Attribute names can be dotted (up to 3 levels) to exclude deeply\nnested objects."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Project UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quantity\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"comments\": \"<string>\",\n  \"customdata\": \"<object>\",\n  \"details\": \"<string>\",\n  \"facility\": \"<string>\",\n  \"fail_on_approval_required\": \"<boolean>\",\n  \"metro\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9ec8eea5-03ee-46ae-8807-f84281c09e69",
+              "name": "created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quantity\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"comments\": \"<string>\",\n  \"customdata\": \"<object>\",\n  \"details\": \"<string>\",\n  \"facility\": \"<string>\",\n  \"fail_on_approval_required\": \"<boolean>\",\n  \"metro\": \"SV\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"global_ipv4\",\n  \"addon\": false,\n  \"address\": \"string\",\n  \"address_family\": 1962,\n  \"assignments\": [\n    {\n      \"address\": \"string\",\n      \"address_family\": 501,\n      \"assigned_to\": {\n        \"href\": \"href\"\n      },\n      \"cidr\": 7412,\n      \"created_at\": \"1975-03-01T13:38:29.004Z\",\n      \"enabled\": false,\n      \"gateway\": \"string\",\n      \"global_ip\": false,\n      \"href\": \"string\",\n      \"id\": \"353cfbc3-7bba-baaa-1c8d-3f34083374ab\",\n      \"manageable\": true,\n      \"management\": true,\n      \"metro\": {\n        \"country\": \"country\",\n        \"code\": \"code\",\n        \"name\": \"name\"\n      },\n      \"netmask\": \"string\",\n      \"network\": \"string\",\n      \"parent_block\": {\n        \"netmask\": \"netmask\",\n        \"cidr\": 2,\n        \"href\": \"href\",\n        \"network\": \"network\"\n      },\n      \"public\": true,\n      \"state\": \"active\",\n      \"next_hop\": \"227.23.73.178\",\n      \"type\": \"IPAssignment\"\n    },\n    {\n      \"address\": \"string\",\n      \"address_family\": 9497,\n      \"assigned_to\": {\n        \"href\": \"href\"\n      },\n      \"cidr\": 2630,\n      \"created_at\": \"1961-12-16T23:50:00.625Z\",\n      \"enabled\": true,\n      \"gateway\": \"string\",\n      \"global_ip\": false,\n      \"href\": \"string\",\n      \"id\": \"9eabb56a-3b91-4d76-dcfd-e8a14c10c1be\",\n      \"manageable\": true,\n      \"management\": true,\n      \"metro\": {\n        \"country\": \"country\",\n        \"code\": \"code\",\n        \"name\": \"name\"\n      },\n      \"netmask\": \"string\",\n      \"network\": \"string\",\n      \"parent_block\": {\n        \"netmask\": \"netmask\",\n        \"cidr\": 2,\n        \"href\": \"href\",\n        \"network\": \"network\"\n      },\n      \"public\": false,\n      \"state\": \"active\",\n      \"next_hop\": \"207.45.20.32\",\n      \"type\": \"IPAssignment\"\n    }\n  ],\n  \"available\": \"string\",\n  \"bill\": true,\n  \"cidr\": 3080,\n  \"created_at\": \"1992-10-09T14:49:16.949Z\",\n  \"customdata\": {},\n  \"enabled\": true,\n  \"details\": \"string\",\n  \"facility\": {\n    \"address\": {\n      \"country\": \"country\",\n      \"address\": \"address\",\n      \"address2\": \"address2\",\n      \"city\": \"city\",\n      \"coordinates\": {\n        \"latitude\": \"latitude\",\n        \"longitude\": \"longitude\"\n      },\n      \"state\": \"state\",\n      \"zip_code\": \"zip_code\"\n    },\n    \"code\": \"string\",\n    \"features\": [\n      \"baremetal\",\n      \"backend_transfer\",\n      \"global_ipv4\"\n    ],\n    \"id\": \"9d506c92-90de-b9eb-7505-c5ee38c85aab\",\n    \"ip_ranges\": [\n      \"2604:1380::/36\",\n      \"147.75.192.0/21\"\n    ],\n    \"metro\": {},\n    \"name\": \"string\"\n  },\n  \"gateway\": \"string\",\n  \"global_ip\": true,\n  \"href\": \"string\",\n  \"id\": \"28f7c065-132c-b2f0-e590-347fa3da0b37\",\n  \"manageable\": false,\n  \"management\": true,\n  \"metal_gateway\": {\n    \"created_at\": \"1981-05-30T16:47:31.976Z\",\n    \"gateway_address\": \"10.1.2.1/27\",\n    \"href\": \"string\",\n    \"id\": \"be35789d-1677-2b3a-5a8d-2c734745744a\",\n    \"state\": \"active\",\n    \"updated_at\": \"1973-09-03T07:47:30.456Z\",\n    \"vlan\": 1001\n  },\n  \"metro\": {\n    \"country\": \"country\",\n    \"code\": \"code\",\n    \"name\": \"name\"\n  },\n  \"netmask\": \"string\",\n  \"network\": \"string\",\n  \"project\": {\n    \"bgp_config\": {\n      \"href\": \"href\"\n    },\n    \"created_at\": \"1980-08-02T20:38:12.211Z\",\n    \"customdata\": {},\n    \"devices\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"href\": \"string\",\n    \"id\": \"354c66c2-7b1d-5be9-fa9f-9361f78b01c7\",\n    \"invitations\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"max_devices\": {},\n    \"members\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"memberships\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"name\": \"str\",\n    \"network_status\": {},\n    \"organization\": {\n      \"address\": {\n        \"country\": \"country\",\n        \"address\": \"address\",\n        \"address2\": \"address2\",\n        \"city\": \"city\",\n        \"coordinates\": {\n          \"latitude\": \"latitude\",\n          \"longitude\": \"longitude\"\n        },\n        \"state\": \"state\",\n        \"zip_code\": \"zip_code\"\n      },\n      \"billing_address\": {\n        \"country\": \"country\",\n        \"address\": \"address\",\n        \"address2\": \"address2\",\n        \"city\": \"city\",\n        \"coordinates\": {\n          \"latitude\": \"latitude\",\n          \"longitude\": \"longitude\"\n        },\n        \"state\": \"state\",\n        \"zip_code\": \"zip_code\"\n      },\n      \"created_at\": \"2003-12-23T03:55:12.343Z\",\n      \"credit_amount\": 4993.598967235797,\n      \"customdata\": {},\n      \"description\": \"string\",\n      \"enforce_2fa_at\": \"1991-03-01T07:14:35.817Z\",\n      \"id\": \"76c83c87-625b-baef-9826-f40d086e43b1\",\n      \"logo\": \"string\",\n      \"members\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"memberships\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"name\": \"string\",\n      \"projects\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"terms\": 6425,\n      \"twitter\": \"string\",\n      \"updated_at\": \"1985-12-04T19:26:02.619Z\",\n      \"website\": \"string\"\n    },\n    \"payment_method\": {\n      \"href\": \"href\"\n    },\n    \"ssh_keys\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"updated_at\": \"1989-01-22T00:59:33.412Z\",\n    \"volumes\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"type\": \"default\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"project_lite\": {\n    \"href\": \"href\"\n  },\n  \"requested_by\": {\n    \"href\": \"href\"\n  },\n  \"public\": true,\n  \"state\": \"string\",\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9f8a23d-d03a-479d-9079-cc89fbc341b7",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quantity\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"comments\": \"<string>\",\n  \"customdata\": \"<object>\",\n  \"details\": \"<string>\",\n  \"facility\": \"<string>\",\n  \"fail_on_approval_required\": \"<boolean>\",\n  \"metro\": \"SV\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49585a71-569f-4a5f-94a8-bc335ead7ad3",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quantity\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"comments\": \"<string>\",\n  \"customdata\": \"<object>\",\n  \"details\": \"<string>\",\n  \"facility\": \"<string>\",\n  \"fail_on_approval_required\": \"<boolean>\",\n  \"metro\": \"SV\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5c22a5e-ce8c-4130-b4fd-cc906f6cd0d9",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quantity\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"comments\": \"<string>\",\n  \"customdata\": \"<object>\",\n  \"details\": \"<string>\",\n  \"facility\": \"<string>\",\n  \"fail_on_approval_required\": \"<boolean>\",\n  \"metro\": \"SV\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a851a81d-d3a4-4343-b4e2-18d47bb76094",
+              "name": "unprocessable entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "ips"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quantity\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"comments\": \"<string>\",\n  \"customdata\": \"<object>\",\n  \"details\": \"<string>\",\n  \"facility\": \"<string>\",\n  \"fail_on_approval_required\": \"<boolean>\",\n  \"metro\": \"SV\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4faf5f3b-a2d1-4d52-8daa-fdddc7bb1f07",
+    "name": "Equinix API Authentication IPAddresses API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}

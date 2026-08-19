@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Equinix API Authentication OTPs API",
+    "version": "1.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OTPs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve my recovery codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/user/otp/recovery-codes"
+          },
+          "docs": "Returns my recovery codes."
+        },
+        {
+          "info": {
+            "name": "Generate new recovery codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/user/otp/recovery-codes"
+          },
+          "docs": "Generate a new set of recovery codes."
+        },
+        {
+          "info": {
+            "name": "Receive an OTP per sms",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/user/otp/sms/receive"
+          },
+          "docs": "Sends an OTP to the user's mobile phone."
+        },
+        {
+          "info": {
+            "name": "Verify user by providing an OTP",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/user/otp/verify/:otp",
+            "params": [
+              {
+                "name": "otp",
+                "value": "",
+                "type": "path",
+                "description": "OTP"
+              }
+            ]
+          },
+          "docs": "It verifies the user once a valid OTP is provided. It gives back a session token, essentially logging in the user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

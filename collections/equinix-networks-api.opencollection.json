@@ -1,0 +1,180 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Equinix API Authentication Networks API",
+    "version": "1.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Networks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Network",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/networks",
+            "params": [
+              {
+                "name": "dryRun",
+                "value": "",
+                "type": "query",
+                "description": "option to verify that API calls will succeed"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API provides capability to create user's Fabric Network"
+        },
+        {
+          "info": {
+            "name": "Get Network By ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/networks/:networkId",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "Network UUID"
+              }
+            ]
+          },
+          "docs": "This API provides capability to retrieve user's Fabric Network"
+        },
+        {
+          "info": {
+            "name": "Update Network By ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.equinix.com/fabric/v4/networks/:networkId",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "Network UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API provides capability to update user's Fabric Network"
+        },
+        {
+          "info": {
+            "name": "Delete Network By ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.equinix.com/fabric/v4/networks/:networkId",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "Network UUID"
+              }
+            ]
+          },
+          "docs": "This API provides capability to delete user's Fabric Network"
+        },
+        {
+          "info": {
+            "name": "Search Network",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/networks/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The API provides capability to get list of user's Fabric Network using search criteria, including optional filtering, pagination and sorting"
+        },
+        {
+          "info": {
+            "name": "Get Connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/networks/:networkId/connections",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "Network UUID"
+              }
+            ]
+          },
+          "docs": "The API provides capability to get list of user's Fabric Network connections"
+        },
+        {
+          "info": {
+            "name": "Get Network Changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/networks/:networkId/changes",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "Network UUID"
+              }
+            ]
+          },
+          "docs": "The API provides capability to get list of user's Fabric Network changes"
+        },
+        {
+          "info": {
+            "name": "Get Change By ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/networks/:networkId/changes/:changeId",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "Network UUID"
+              },
+              {
+                "name": "changeId",
+                "value": "",
+                "type": "path",
+                "description": "Network Change UUID"
+              }
+            ]
+          },
+          "docs": "This API provides capability to retrieve user's Fabric Network Change"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

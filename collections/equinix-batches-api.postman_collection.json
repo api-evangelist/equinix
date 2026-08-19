@@ -1,0 +1,1003 @@
+{
+  "item": [
+    {
+      "id": "e5da50ad-aa04-403f-99ad-717452e7c611",
+      "name": "Batches",
+      "description": {
+        "content": "Manage device batches. See project endpoints to list batches for a particular project. Check out the product docs to learn more about [Batch Deployment](https://metal.equinix.com/developers/docs/deploy/batch-deployment/).\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c3538d5f-3e4c-4335-ac83-8f3e417359d6",
+          "name": "Delete the Batch",
+          "request": {
+            "name": "Delete the Batch",
+            "description": {
+              "content": "Deletes the Batch.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "batches",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "remove_associated_instances",
+                  "value": "false",
+                  "description": "Delete all instances created from this batch"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Batch UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c035450-fc82-43b0-8c52-effe5771847a",
+              "name": "no content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batches",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "remove_associated_instances",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Batch UUID"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d4b47b0a-ca62-40b8-a6a8-5a62c8c26289",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batches",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "remove_associated_instances",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Batch UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "252cd0b4-3da8-4399-8371-f611bbfdc9eb",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batches",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "remove_associated_instances",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Batch UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "604de60b-997d-4640-8c6d-4b977f1dea70",
+          "name": "Retrieve a Batch",
+          "request": {
+            "name": "Retrieve a Batch",
+            "description": {
+              "content": "Returns a Batch",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "batches",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to include. Included objects will return their full\nattributes. Attribute names can be dotted (up to 3 levels) to included deeply\nnested objects."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Batch UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "faf9d4dd-aa38-46f8-8181-1fa3f5b5684f",
+              "name": "ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batches",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Batch UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"quantity\": 0,\n  \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n  \"devices\": [\n    {\n      \"href\": \"href\"\n    },\n    {\n      \"href\": \"href\"\n    }\n  ],\n  \"created_at\": \"2000-01-23 04:56:07+00:00\",\n  \"project\": {\n    \"href\": \"href\"\n  },\n  \"state\": \"state\",\n  \"error_messages\": [\n    \"error_messages\",\n    \"error_messages\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a92c50b-4bcd-4249-9b10-a776da492a92",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batches",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Batch UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6d6c416-22dd-47a9-b2ad-863f79588bb0",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batches",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Batch UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2ff168f-be58-4f19-9fc6-b73c1939981e",
+          "name": "Retrieve all batches by project",
+          "request": {
+            "name": "Retrieve all batches by project",
+            "description": {
+              "content": "Returns all batches for the given project",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":id",
+                "batches"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to include. Included objects will return their full\nattributes. Attribute names can be dotted (up to 3 levels) to included deeply\nnested objects."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Project UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "86c323d5-70dd-4e08-8140-5fc76d7b160f",
+              "name": "ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "batches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"batches\": [\n    {\n      \"quantity\": 0,\n      \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n      \"devices\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"created_at\": \"2000-01-23 04:56:07+00:00\",\n      \"project\": {\n        \"href\": \"href\"\n      },\n      \"state\": \"state\",\n      \"error_messages\": [\n        \"error_messages\",\n        \"error_messages\"\n      ]\n    },\n    {\n      \"quantity\": 0,\n      \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n      \"devices\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"created_at\": \"2000-01-23 04:56:07+00:00\",\n      \"project\": {\n        \"href\": \"href\"\n      },\n      \"state\": \"state\",\n      \"error_messages\": [\n        \"error_messages\",\n        \"error_messages\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d6abc13-78e8-41ad-b205-cbfb014cec59",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "batches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea43f7d8-011c-43c9-be0b-4514bf7aede1",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "batches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "411fed9a-a6b4-4eaa-97c0-05c754d57d34",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "batches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0b0a08e-22f0-434d-9fe2-43948124e96f",
+          "name": "Create a devices batch",
+          "request": {
+            "name": "Create a devices batch",
+            "description": {
+              "content": "Creates new devices in batch and provisions them in our datacenter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":id",
+                "devices",
+                "batch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Project UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"batches\": [\n    {\n      \"metro\": \"<string>\",\n      \"operating_system\": \"<string>\",\n      \"plan\": \"<string>\",\n      \"hostnames\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"quantity\": \"<integer>\",\n      \"always_pxe\": false,\n      \"billing_cycle\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"customdata\": {},\n      \"description\": \"<string>\",\n      \"features\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"hardware_reservation_id\": \"\",\n      \"hostname\": \"<string>\",\n      \"ip_addresses\": [\n        {\n          \"address_family\": 4,\n          \"public\": true\n        },\n        {\n          \"address_family\": 4,\n          \"public\": false\n        },\n        {\n          \"address_family\": 6,\n          \"public\": true\n        }\n      ],\n      \"ipxe_script_url\": \"<string>\",\n      \"locked\": false,\n      \"network_frozen\": \"<boolean>\",\n      \"no_ssh_keys\": false,\n      \"private_ipv4_subnet_size\": 28,\n      \"project_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"public_ipv4_subnet_size\": 31,\n      \"spot_instance\": \"<boolean>\",\n      \"spot_price_max\": \"<float>\",\n      \"ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"storage\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"tags\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"termination_time\": \"<dateTime>\",\n      \"user_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"userdata\": \"<string>\"\n    },\n    {\n      \"metro\": \"<string>\",\n      \"operating_system\": \"<string>\",\n      \"plan\": \"<string>\",\n      \"hostnames\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"quantity\": \"<integer>\",\n      \"always_pxe\": false,\n      \"billing_cycle\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"customdata\": {},\n      \"description\": \"<string>\",\n      \"features\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"hardware_reservation_id\": \"\",\n      \"hostname\": \"<string>\",\n      \"ip_addresses\": [\n        {\n          \"address_family\": 4,\n          \"public\": true\n        },\n        {\n          \"address_family\": 4,\n          \"public\": false\n        },\n        {\n          \"address_family\": 6,\n          \"public\": true\n        }\n      ],\n      \"ipxe_script_url\": \"<string>\",\n      \"locked\": false,\n      \"network_frozen\": \"<boolean>\",\n      \"no_ssh_keys\": false,\n      \"private_ipv4_subnet_size\": 28,\n      \"project_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"public_ipv4_subnet_size\": 31,\n      \"spot_instance\": \"<boolean>\",\n      \"spot_price_max\": \"<float>\",\n      \"ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"storage\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"tags\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"termination_time\": \"<dateTime>\",\n      \"user_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"userdata\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dbb259ad-69a7-49d6-b321-498d06afaca5",
+              "name": "created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "devices",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batches\": [\n    {\n      \"metro\": \"sv\",\n      \"operating_system\": \"<string>\",\n      \"plan\": \"c3.large.x86\",\n      \"hostnames\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"quantity\": \"<integer>\",\n      \"always_pxe\": false,\n      \"billing_cycle\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"customdata\": {},\n      \"description\": \"<string>\",\n      \"features\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"hardware_reservation_id\": \"next-available\",\n      \"hostname\": \"<string>\",\n      \"ip_addresses\": [\n        {\n          \"address_family\": 4,\n          \"public\": true\n        },\n        {\n          \"address_family\": 4,\n          \"public\": false\n        },\n        {\n          \"address_family\": 6,\n          \"public\": true\n        }\n      ],\n      \"ipxe_script_url\": \"<string>\",\n      \"locked\": false,\n      \"network_frozen\": \"<boolean>\",\n      \"no_ssh_keys\": false,\n      \"private_ipv4_subnet_size\": 28,\n      \"project_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"public_ipv4_subnet_size\": 31,\n      \"spot_instance\": \"<boolean>\",\n      \"spot_price_max\": 1.23,\n      \"ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"storage\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"tags\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"termination_time\": \"2021-09-03 16:32:00+03:00\",\n      \"user_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"userdata\": \"<string>\"\n    },\n    {\n      \"metro\": \"sv\",\n      \"operating_system\": \"<string>\",\n      \"plan\": \"c3.large.x86\",\n      \"hostnames\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"quantity\": \"<integer>\",\n      \"always_pxe\": false,\n      \"billing_cycle\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"customdata\": {},\n      \"description\": \"<string>\",\n      \"features\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"hardware_reservation_id\": \"next-available\",\n      \"hostname\": \"<string>\",\n      \"ip_addresses\": [\n        {\n          \"address_family\": 4,\n          \"public\": true\n        },\n        {\n          \"address_family\": 4,\n          \"public\": false\n        },\n        {\n          \"address_family\": 6,\n          \"public\": true\n        }\n      ],\n      \"ipxe_script_url\": \"<string>\",\n      \"locked\": false,\n      \"network_frozen\": \"<boolean>\",\n      \"no_ssh_keys\": false,\n      \"private_ipv4_subnet_size\": 28,\n      \"project_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"public_ipv4_subnet_size\": 31,\n      \"spot_instance\": \"<boolean>\",\n      \"spot_price_max\": 1.23,\n      \"ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"storage\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"tags\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"termination_time\": \"2021-09-03 16:32:00+03:00\",\n      \"user_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"userdata\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"batches\": [\n    {\n      \"quantity\": 0,\n      \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n      \"devices\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"created_at\": \"2000-01-23 04:56:07+00:00\",\n      \"project\": {\n        \"href\": \"href\"\n      },\n      \"state\": \"state\",\n      \"error_messages\": [\n        \"error_messages\",\n        \"error_messages\"\n      ]\n    },\n    {\n      \"quantity\": 0,\n      \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n      \"devices\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"created_at\": \"2000-01-23 04:56:07+00:00\",\n      \"project\": {\n        \"href\": \"href\"\n      },\n      \"state\": \"state\",\n      \"error_messages\": [\n        \"error_messages\",\n        \"error_messages\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e317ce7-b1b4-49e0-9abb-c6c6ef3ae001",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "devices",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batches\": [\n    {\n      \"metro\": \"sv\",\n      \"operating_system\": \"<string>\",\n      \"plan\": \"c3.large.x86\",\n      \"hostnames\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"quantity\": \"<integer>\",\n      \"always_pxe\": false,\n      \"billing_cycle\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"customdata\": {},\n      \"description\": \"<string>\",\n      \"features\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"hardware_reservation_id\": \"next-available\",\n      \"hostname\": \"<string>\",\n      \"ip_addresses\": [\n        {\n          \"address_family\": 4,\n          \"public\": true\n        },\n        {\n          \"address_family\": 4,\n          \"public\": false\n        },\n        {\n          \"address_family\": 6,\n          \"public\": true\n        }\n      ],\n      \"ipxe_script_url\": \"<string>\",\n      \"locked\": false,\n      \"network_frozen\": \"<boolean>\",\n      \"no_ssh_keys\": false,\n      \"private_ipv4_subnet_size\": 28,\n      \"project_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"public_ipv4_subnet_size\": 31,\n      \"spot_instance\": \"<boolean>\",\n      \"spot_price_max\": 1.23,\n      \"ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"storage\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"tags\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"termination_time\": \"2021-09-03 16:32:00+03:00\",\n      \"user_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"userdata\": \"<string>\"\n    },\n    {\n      \"metro\": \"sv\",\n      \"operating_system\": \"<string>\",\n      \"plan\": \"c3.large.x86\",\n      \"hostnames\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"quantity\": \"<integer>\",\n      \"always_pxe\": false,\n      \"billing_cycle\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"customdata\": {},\n      \"description\": \"<string>\",\n      \"features\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"hardware_reservation_id\": \"next-available\",\n      \"hostname\": \"<string>\",\n      \"ip_addresses\": [\n        {\n          \"address_family\": 4,\n          \"public\": true\n        },\n        {\n          \"address_family\": 4,\n          \"public\": false\n        },\n        {\n          \"address_family\": 6,\n          \"public\": true\n        }\n      ],\n      \"ipxe_script_url\": \"<string>\",\n      \"locked\": false,\n      \"network_frozen\": \"<boolean>\",\n      \"no_ssh_keys\": false,\n      \"private_ipv4_subnet_size\": 28,\n      \"project_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"public_ipv4_subnet_size\": 31,\n      \"spot_instance\": \"<boolean>\",\n      \"spot_price_max\": 1.23,\n      \"ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"storage\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"tags\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"termination_time\": \"2021-09-03 16:32:00+03:00\",\n      \"user_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"userdata\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94c12bf4-df33-468d-b6e6-a00a71d1077d",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "devices",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batches\": [\n    {\n      \"metro\": \"sv\",\n      \"operating_system\": \"<string>\",\n      \"plan\": \"c3.large.x86\",\n      \"hostnames\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"quantity\": \"<integer>\",\n      \"always_pxe\": false,\n      \"billing_cycle\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"customdata\": {},\n      \"description\": \"<string>\",\n      \"features\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"hardware_reservation_id\": \"next-available\",\n      \"hostname\": \"<string>\",\n      \"ip_addresses\": [\n        {\n          \"address_family\": 4,\n          \"public\": true\n        },\n        {\n          \"address_family\": 4,\n          \"public\": false\n        },\n        {\n          \"address_family\": 6,\n          \"public\": true\n        }\n      ],\n      \"ipxe_script_url\": \"<string>\",\n      \"locked\": false,\n      \"network_frozen\": \"<boolean>\",\n      \"no_ssh_keys\": false,\n      \"private_ipv4_subnet_size\": 28,\n      \"project_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"public_ipv4_subnet_size\": 31,\n      \"spot_instance\": \"<boolean>\",\n      \"spot_price_max\": 1.23,\n      \"ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"storage\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"tags\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"termination_time\": \"2021-09-03 16:32:00+03:00\",\n      \"user_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"userdata\": \"<string>\"\n    },\n    {\n      \"metro\": \"sv\",\n      \"operating_system\": \"<string>\",\n      \"plan\": \"c3.large.x86\",\n      \"hostnames\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"quantity\": \"<integer>\",\n      \"always_pxe\": false,\n      \"billing_cycle\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"customdata\": {},\n      \"description\": \"<string>\",\n      \"features\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"hardware_reservation_id\": \"next-available\",\n      \"hostname\": \"<string>\",\n      \"ip_addresses\": [\n        {\n          \"address_family\": 4,\n          \"public\": true\n        },\n        {\n          \"address_family\": 4,\n          \"public\": false\n        },\n        {\n          \"address_family\": 6,\n          \"public\": true\n        }\n      ],\n      \"ipxe_script_url\": \"<string>\",\n      \"locked\": false,\n      \"network_frozen\": \"<boolean>\",\n      \"no_ssh_keys\": false,\n      \"private_ipv4_subnet_size\": 28,\n      \"project_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"public_ipv4_subnet_size\": 31,\n      \"spot_instance\": \"<boolean>\",\n      \"spot_price_max\": 1.23,\n      \"ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"storage\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"tags\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"termination_time\": \"2021-09-03 16:32:00+03:00\",\n      \"user_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"userdata\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48c89bbc-930d-423e-abd6-0423863a744e",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "devices",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batches\": [\n    {\n      \"metro\": \"sv\",\n      \"operating_system\": \"<string>\",\n      \"plan\": \"c3.large.x86\",\n      \"hostnames\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"quantity\": \"<integer>\",\n      \"always_pxe\": false,\n      \"billing_cycle\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"customdata\": {},\n      \"description\": \"<string>\",\n      \"features\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"hardware_reservation_id\": \"next-available\",\n      \"hostname\": \"<string>\",\n      \"ip_addresses\": [\n        {\n          \"address_family\": 4,\n          \"public\": true\n        },\n        {\n          \"address_family\": 4,\n          \"public\": false\n        },\n        {\n          \"address_family\": 6,\n          \"public\": true\n        }\n      ],\n      \"ipxe_script_url\": \"<string>\",\n      \"locked\": false,\n      \"network_frozen\": \"<boolean>\",\n      \"no_ssh_keys\": false,\n      \"private_ipv4_subnet_size\": 28,\n      \"project_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"public_ipv4_subnet_size\": 31,\n      \"spot_instance\": \"<boolean>\",\n      \"spot_price_max\": 1.23,\n      \"ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"storage\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"tags\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"termination_time\": \"2021-09-03 16:32:00+03:00\",\n      \"user_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"userdata\": \"<string>\"\n    },\n    {\n      \"metro\": \"sv\",\n      \"operating_system\": \"<string>\",\n      \"plan\": \"c3.large.x86\",\n      \"hostnames\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"quantity\": \"<integer>\",\n      \"always_pxe\": false,\n      \"billing_cycle\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"customdata\": {},\n      \"description\": \"<string>\",\n      \"features\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"hardware_reservation_id\": \"next-available\",\n      \"hostname\": \"<string>\",\n      \"ip_addresses\": [\n        {\n          \"address_family\": 4,\n          \"public\": true\n        },\n        {\n          \"address_family\": 4,\n          \"public\": false\n        },\n        {\n          \"address_family\": 6,\n          \"public\": true\n        }\n      ],\n      \"ipxe_script_url\": \"<string>\",\n      \"locked\": false,\n      \"network_frozen\": \"<boolean>\",\n      \"no_ssh_keys\": false,\n      \"private_ipv4_subnet_size\": 28,\n      \"project_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"public_ipv4_subnet_size\": 31,\n      \"spot_instance\": \"<boolean>\",\n      \"spot_price_max\": 1.23,\n      \"ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"storage\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"tags\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"termination_time\": \"2021-09-03 16:32:00+03:00\",\n      \"user_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"userdata\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b851be07-a5b5-4fd8-9feb-8e7ae6e6d73b",
+              "name": "unprocessable entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "devices",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batches\": [\n    {\n      \"metro\": \"sv\",\n      \"operating_system\": \"<string>\",\n      \"plan\": \"c3.large.x86\",\n      \"hostnames\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"quantity\": \"<integer>\",\n      \"always_pxe\": false,\n      \"billing_cycle\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"customdata\": {},\n      \"description\": \"<string>\",\n      \"features\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"hardware_reservation_id\": \"next-available\",\n      \"hostname\": \"<string>\",\n      \"ip_addresses\": [\n        {\n          \"address_family\": 4,\n          \"public\": true\n        },\n        {\n          \"address_family\": 4,\n          \"public\": false\n        },\n        {\n          \"address_family\": 6,\n          \"public\": true\n        }\n      ],\n      \"ipxe_script_url\": \"<string>\",\n      \"locked\": false,\n      \"network_frozen\": \"<boolean>\",\n      \"no_ssh_keys\": false,\n      \"private_ipv4_subnet_size\": 28,\n      \"project_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"public_ipv4_subnet_size\": 31,\n      \"spot_instance\": \"<boolean>\",\n      \"spot_price_max\": 1.23,\n      \"ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"storage\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"tags\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"termination_time\": \"2021-09-03 16:32:00+03:00\",\n      \"user_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"userdata\": \"<string>\"\n    },\n    {\n      \"metro\": \"sv\",\n      \"operating_system\": \"<string>\",\n      \"plan\": \"c3.large.x86\",\n      \"hostnames\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"quantity\": \"<integer>\",\n      \"always_pxe\": false,\n      \"billing_cycle\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"customdata\": {},\n      \"description\": \"<string>\",\n      \"features\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"hardware_reservation_id\": \"next-available\",\n      \"hostname\": \"<string>\",\n      \"ip_addresses\": [\n        {\n          \"address_family\": 4,\n          \"public\": true\n        },\n        {\n          \"address_family\": 4,\n          \"public\": false\n        },\n        {\n          \"address_family\": 6,\n          \"public\": true\n        }\n      ],\n      \"ipxe_script_url\": \"<string>\",\n      \"locked\": false,\n      \"network_frozen\": \"<boolean>\",\n      \"no_ssh_keys\": false,\n      \"private_ipv4_subnet_size\": 28,\n      \"project_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"public_ipv4_subnet_size\": 31,\n      \"spot_instance\": \"<boolean>\",\n      \"spot_price_max\": 1.23,\n      \"ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"storage\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"tags\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"termination_time\": \"2021-09-03 16:32:00+03:00\",\n      \"user_ssh_keys\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"userdata\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "379448ac-497a-425e-a75e-a9eaa6e4e9c9",
+    "name": "Equinix API Authentication Batches API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}

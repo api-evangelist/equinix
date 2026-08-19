@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Equinix API Authentication OAuth2 Token API",
+    "version": "1.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OAuth2 Token",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Renew Access Tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/oauth2/v1/refreshaccesstoken",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this API to refresh an access token using its refresh token. A valid refresh token is needed to retrieve a new access_token.\n"
+        },
+        {
+          "info": {
+            "name": "Generate New Access Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/oauth2/v1/token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API handles authentication and authorization of the API developer. It returns an access_token which would be valid for 60 minutes. The user account will get locked after 5 successive invalid attempts.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

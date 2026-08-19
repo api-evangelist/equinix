@@ -1,0 +1,1323 @@
+{
+  "item": [
+    {
+      "id": "cc3df93f-808e-46de-af61-a34b1a0c4a05",
+      "name": "HardwareReservations",
+      "description": {
+        "content": "Hardware Reservation Management. Check out the product docs to learn more about [Reserved Hardware](https://metal.equinix.com/developers/docs/deploy/reserved/).\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ee0aa05e-2d13-42dd-b266-e49bc136762b",
+          "name": "Retrieve a hardware reservation",
+          "request": {
+            "name": "Retrieve a hardware reservation",
+            "description": {
+              "content": "Returns a single hardware reservation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hardware-reservations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to include. Included objects will return their full\nattributes. Attribute names can be dotted (up to 3 levels) to included deeply\nnested objects."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to exclude. Excluded objects will return only the href\nattribute. Attribute names can be dotted (up to 3 levels) to exclude deeply\nnested objects."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) HardwareReservation UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "431d6feb-f6b8-4432-851f-0f0dcb28f737",
+              "name": "ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hardware-reservations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) HardwareReservation UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created_at\": \"1966-04-03T22:27:31.233Z\",\n  \"custom_rate\": 1050.5,\n  \"device\": {\n    \"always_pxe\": false,\n    \"billing_cycle\": \"string\",\n    \"bonding_mode\": 9483,\n    \"created_at\": \"2004-12-23T23:27:30.662Z\",\n    \"created_by\": {\n      \"id\": \"697c5216-0cce-0677-4838-7b7ad372e8f2\",\n      \"short_id\": \"string\",\n      \"avatar_thumb_url\": \"string\",\n      \"created_at\": \"2013-01-25T08:38:31.287Z\",\n      \"email\": \"string\",\n      \"first_name\": \"string\",\n      \"full_name\": \"string\",\n      \"href\": \"string\",\n      \"last_name\": \"string\",\n      \"updated_at\": \"1992-07-31T05:35:30.101Z\"\n    },\n    \"customdata\": {},\n    \"description\": \"string\",\n    \"facility\": {\n      \"address\": {\n        \"country\": \"country\",\n        \"address\": \"address\",\n        \"address2\": \"address2\",\n        \"city\": \"city\",\n        \"coordinates\": {\n          \"latitude\": \"latitude\",\n          \"longitude\": \"longitude\"\n        },\n        \"state\": \"state\",\n        \"zip_code\": \"zip_code\"\n      },\n      \"code\": \"string\",\n      \"features\": [\n        \"baremetal\",\n        \"backend_transfer\",\n        \"global_ipv4\"\n      ],\n      \"id\": \"7e53a2fa-b1ed-840c-c487-16c7da139c8d\",\n      \"ip_ranges\": [\n        \"2604:1380::/36\",\n        \"147.75.192.0/21\"\n      ],\n      \"metro\": {\n        \"country\": \"country\",\n        \"code\": \"code\",\n        \"name\": \"name\"\n      },\n      \"name\": \"string\"\n    },\n    \"firmware_set_id\": \"8f455ebc-717d-7225-c55b-bdcb3ff83356\",\n    \"hardware_reservation\": {\n      \"created_at\": \"2021-07-14T10:14:11.922Z\",\n      \"custom_rate\": 1050.5,\n      \"device\": {\n        \"value\": \"<Circular reference to #/components/schemas/Device detected>\"\n      },\n      \"facility\": {\n        \"address\": {\n          \"country\": \"country\",\n          \"address\": \"address\",\n          \"address2\": \"address2\",\n          \"city\": \"city\",\n          \"coordinates\": {\n            \"latitude\": \"latitude\",\n            \"longitude\": \"longitude\"\n          },\n          \"state\": \"state\",\n          \"zip_code\": \"zip_code\"\n        },\n        \"code\": \"string\",\n        \"features\": [\n          \"baremetal\",\n          \"backend_transfer\",\n          \"global_ipv4\"\n        ],\n        \"id\": \"e17947b6-4734-5678-b70a-7a047a8e101d\",\n        \"ip_ranges\": [\n          \"2604:1380::/36\",\n          \"147.75.192.0/21\"\n        ],\n        \"metro\": {},\n        \"name\": \"string\"\n      },\n      \"href\": \"string\",\n      \"id\": \"027958cd-3477-4d69-4a96-93b201d3e7d0\",\n      \"need_of_service\": true,\n      \"plan\": {\n        \"available_in\": [\n          {\n            \"price\": {\n              \"hour\": 1.23\n            },\n            \"href\": \"href\"\n          },\n          {\n            \"price\": {\n              \"hour\": 1.23\n            },\n            \"href\": \"href\"\n          }\n        ],\n        \"available_in_metros\": [\n          {\n            \"price\": {\n              \"hour\": 1.23\n            },\n            \"href\": \"href\"\n          },\n          {\n            \"price\": {\n              \"hour\": 1.23\n            },\n            \"href\": \"href\"\n          }\n        ],\n        \"categories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"class\": \"m3.large.x86\",\n        \"description\": \"string\",\n        \"deployment_types\": [\n          \"spot_market\",\n          \"on_demand\"\n        ],\n        \"id\": \"3b4322f1-67fd-f971-599f-5c64a218d3e8\",\n        \"legacy\": false,\n        \"line\": \"string\",\n        \"name\": \"string\",\n        \"pricing\": {},\n        \"slug\": \"m3.large.x86\",\n        \"specs\": {\n          \"features\": {\n            \"txt\": true,\n            \"uefi\": true,\n            \"raid\": true\n          },\n          \"memory\": {\n            \"total\": \"total\"\n          },\n          \"cpus\": [\n            {\n              \"count\": 6,\n              \"type\": \"type\"\n            },\n            {\n              \"count\": 6,\n              \"type\": \"type\"\n            }\n          ],\n          \"drives\": [\n            {\n              \"size\": \"3.84TB\",\n              \"count\": 1,\n              \"type\": \"type\",\n              \"category\": null\n            },\n            {\n              \"size\": \"3.84TB\",\n              \"count\": 1,\n              \"type\": \"type\",\n              \"category\": null\n            }\n          ],\n          \"nics\": [\n            {\n              \"count\": 2,\n              \"type\": \"type\"\n            },\n            {\n              \"count\": 2,\n              \"type\": \"type\"\n            }\n          ]\n        },\n        \"type\": \"custom\"\n      },\n      \"project\": {\n        \"bgp_config\": {\n          \"href\": \"href\"\n        },\n        \"created_at\": \"1965-06-16T23:49:04.046Z\",\n        \"customdata\": {},\n        \"devices\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"href\": \"string\",\n        \"id\": \"4cd2a77a-d8cd-e1d6-a055-45d82ba0f4c7\",\n        \"invitations\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"max_devices\": {},\n        \"members\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"memberships\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"name\": \"string\",\n        \"network_status\": {},\n        \"organization\": {\n          \"address\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"billing_address\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created_at\": \"2002-09-09T07:06:05.496Z\",\n          \"credit_amount\": 9548.641031017933,\n          \"customdata\": {},\n          \"description\": \"string\",\n          \"enforce_2fa_at\": \"2007-08-31T22:41:24.095Z\",\n          \"id\": \"6dfa32f5-949b-bb63-3728-e8229f085f38\",\n          \"logo\": \"string\",\n          \"members\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"memberships\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"name\": \"string\",\n          \"projects\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"terms\": 3894,\n          \"twitter\": \"string\",\n          \"updated_at\": \"2015-11-08T06:49:43.624Z\",\n          \"website\": \"string\"\n        },\n        \"payment_method\": {\n          \"href\": \"href\"\n        },\n        \"ssh_keys\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"updated_at\": \"2019-03-23T11:10:58.530Z\",\n        \"volumes\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"type\": \"vmce\",\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"provisionable\": true,\n      \"short_id\": \"string\",\n      \"spare\": false,\n      \"switch_uuid\": \"string\",\n      \"termination_time\": \"1956-09-28T14:47:51.398Z\"\n    },\n    \"hostname\": \"string\",\n    \"href\": \"string\",\n    \"id\": \"ea42bcd4-727d-2d4a-8d00-3b895d00da47\",\n    \"image_url\": \"string\",\n    \"ip_addresses\": [\n      {\n        \"address\": \"string\",\n        \"address_family\": 9177,\n        \"assigned_to\": {\n          \"href\": \"href\"\n        },\n        \"cidr\": 1667,\n        \"created_at\": \"2014-11-04T04:20:32.595Z\",\n        \"enabled\": false,\n        \"gateway\": \"string\",\n        \"global_ip\": true,\n        \"href\": \"string\",\n        \"id\": \"235f6dd1-96c7-1827-7b3c-7bf2ce6649c1\",\n        \"manageable\": true,\n        \"management\": true,\n        \"metro\": {\n          \"country\": \"country\",\n          \"code\": \"code\",\n          \"name\": \"name\"\n        },\n        \"netmask\": \"string\",\n        \"network\": \"string\",\n        \"parent_block\": {\n          \"netmask\": \"netmask\",\n          \"cidr\": 2,\n          \"href\": \"href\",\n          \"network\": \"network\"\n        },\n        \"public\": true,\n        \"state\": \"active\",\n        \"next_hop\": \"92.99.94.78\",\n        \"type\": \"IPAssignment\"\n      },\n      {\n        \"address\": \"string\",\n        \"address_family\": 6743,\n        \"assigned_to\": {\n          \"href\": \"href\"\n        },\n        \"cidr\": 6851,\n        \"created_at\": \"1973-12-28T10:37:55.498Z\",\n        \"enabled\": true,\n        \"gateway\": \"string\",\n        \"global_ip\": true,\n        \"href\": \"string\",\n        \"id\": \"802c8578-ab00-12b4-9615-963ad39843b6\",\n        \"manageable\": false,\n        \"management\": true,\n        \"metro\": {\n          \"country\": \"country\",\n          \"code\": \"code\",\n          \"name\": \"name\"\n        },\n        \"netmask\": \"string\",\n        \"network\": \"string\",\n        \"parent_block\": {\n          \"netmask\": \"netmask\",\n          \"cidr\": 2,\n          \"href\": \"href\",\n          \"network\": \"network\"\n        },\n        \"public\": true,\n        \"state\": \"active\",\n        \"next_hop\": \"65.47.114.130\",\n        \"type\": \"IPAssignment\"\n      }\n    ],\n    \"ipxe_script_url\": \"string\",\n    \"iqn\": \"string\",\n    \"locked\": true,\n    \"metro\": {\n      \"country\": \"country\",\n      \"code\": \"code\",\n      \"name\": \"name\"\n    },\n    \"network_frozen\": false,\n    \"network_ports\": [\n      {\n        \"bond\": {\n          \"name\": \"name\"\n        },\n        \"data\": {\n          \"bonded\": true,\n          \"mac\": \"mac\"\n        },\n        \"disbond_operation_supported\": true,\n        \"href\": \"string\",\n        \"id\": \"8919b748-bf64-c1f7-bb87-f7ac4c2cfbf9\",\n        \"name\": \"bond0\",\n        \"type\": \"NetworkBondPort\",\n        \"network_type\": \"layer2-individual\",\n        \"native_virtual_network\": {\n          \"vxlan\": 4,\n          \"instances\": [\n            {\n              \"href\": \"href\"\n            },\n            {\n              \"href\": \"href\"\n            }\n          ],\n          \"description\": \"description\",\n          \"created_at\": \"2000-01-23 04:56:07+00:00\",\n          \"assigned_to_virtual_circuit\": true,\n          \"tags\": [\n            \"tags\",\n            \"tags\"\n          ],\n          \"metal_gateways\": [\n            {\n              \"gateway_address\": \"10.1.2.1/27\",\n              \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n              \"vlan\": 1001,\n              \"created_at\": \"2000-01-23 04:56:07+00:00\",\n              \"href\": \"href\",\n              \"state\": null\n            },\n            {\n              \"gateway_address\": \"10.1.2.1/27\",\n              \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n              \"vlan\": 1001,\n              \"created_at\": \"2000-01-23 04:56:07+00:00\",\n              \"href\": \"href\",\n              \"state\": null\n            }\n          ],\n          \"metro_code\": \"metro_code\",\n          \"metro\": {\n            \"href\": \"href\"\n          },\n          \"href\": \"href\",\n          \"facility\": {\n            \"href\": \"href\"\n          },\n          \"assigned_to\": {\n            \"href\": \"href\"\n          }\n        },\n        \"virtual_networks\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ]\n      },\n      {\n        \"bond\": {\n          \"name\": \"name\"\n        },\n        \"data\": {\n          \"bonded\": true,\n          \"mac\": \"mac\"\n        },\n        \"disbond_operation_supported\": false,\n        \"href\": \"string\",\n        \"id\": \"7ad91042-7120-275b-cd4a-454b57a716e2\",\n        \"name\": \"bond0\",\n        \"type\": \"NetworkBondPort\",\n        \"network_type\": \"hybrid\",\n        \"native_virtual_network\": {\n          \"vxlan\": 4,\n          \"instances\": [\n            {\n              \"href\": \"href\"\n            },\n            {\n              \"href\": \"href\"\n            }\n          ],\n          \"description\": \"description\",\n          \"created_at\": \"2000-01-23 04:56:07+00:00\",\n          \"assigned_to_virtual_circuit\": true,\n          \"tags\": [\n            \"tags\",\n            \"tags\"\n          ],\n          \"metal_gateways\": [\n            {\n              \"gateway_address\": \"10.1.2.1/27\",\n              \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n              \"vlan\": 1001,\n              \"created_at\": \"2000-01-23 04:56:07+00:00\",\n              \"href\": \"href\",\n              \"state\": null\n            },\n            {\n              \"gateway_address\": \"10.1.2.1/27\",\n              \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n              \"vlan\": 1001,\n              \"created_at\": \"2000-01-23 04:56:07+00:00\",\n              \"href\": \"href\",\n              \"state\": null\n            }\n          ],\n          \"metro_code\": \"metro_code\",\n          \"metro\": {\n            \"href\": \"href\"\n          },\n          \"href\": \"href\",\n          \"facility\": {\n            \"href\": \"href\"\n          },\n          \"assigned_to\": {\n            \"href\": \"href\"\n          }\n        },\n        \"virtual_networks\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ]\n      }\n    ],\n    \"operating_system\": {\n      \"distro\": \"string\",\n      \"distro_label\": \"string\",\n      \"id\": \"39cc85d1-8a59-3738-a629-370488b11b11\",\n      \"licensed\": false,\n      \"name\": \"string\",\n      \"preinstallable\": false,\n      \"pricing\": {},\n      \"provisionable_on\": [\n        \"string\",\n        \"string\"\n      ],\n      \"slug\": \"string\",\n      \"version\": \"string\",\n      \"default_operating_system\": true\n    },\n    \"actions\": [\n      {\n        \"name\": \"name\",\n        \"type\": \"type\"\n      },\n      {\n        \"name\": \"name\",\n        \"type\": \"type\"\n      }\n    ],\n    \"plan\": {\n      \"available_in\": [\n        {\n          \"price\": {\n            \"hour\": 1.23\n          },\n          \"href\": \"href\"\n        },\n        {\n          \"price\": {\n            \"hour\": 1.23\n          },\n          \"href\": \"href\"\n        }\n      ],\n      \"available_in_metros\": [\n        {\n          \"price\": {\n            \"hour\": 1.23\n          },\n          \"href\": \"href\"\n        },\n        {\n          \"price\": {\n            \"hour\": 1.23\n          },\n          \"href\": \"href\"\n        }\n      ],\n      \"categories\": [\n        \"string\",\n        \"string\"\n      ],\n      \"class\": \"m3.large.x86\",\n      \"description\": \"string\",\n      \"deployment_types\": [\n        \"spot_market\",\n        \"on_demand\"\n      ],\n      \"id\": \"428192d0-393e-7ea1-8e3d-a27809c2010e\",\n      \"legacy\": true,\n      \"line\": \"string\",\n      \"name\": \"string\",\n      \"pricing\": {},\n      \"slug\": \"m3.large.x86\",\n      \"specs\": {\n        \"features\": {\n          \"txt\": true,\n          \"uefi\": true,\n          \"raid\": true\n        },\n        \"memory\": {\n          \"total\": \"total\"\n        },\n        \"cpus\": [\n          {\n            \"count\": 6,\n            \"type\": \"type\"\n          },\n          {\n            \"count\": 6,\n            \"type\": \"type\"\n          }\n        ],\n        \"drives\": [\n          {\n            \"size\": \"3.84TB\",\n            \"count\": 1,\n            \"type\": \"type\",\n            \"category\": null\n          },\n          {\n            \"size\": \"3.84TB\",\n            \"count\": 1,\n            \"type\": \"type\",\n            \"category\": null\n          }\n        ],\n        \"nics\": [\n          {\n            \"count\": 2,\n            \"type\": \"type\"\n          },\n          {\n            \"count\": 2,\n            \"type\": \"type\"\n          }\n        ]\n      },\n      \"type\": \"workload_optimized\"\n    },\n    \"project\": {\n      \"bgp_config\": {\n        \"href\": \"href\"\n      },\n      \"created_at\": \"1988-07-21T00:17:44.723Z\",\n      \"customdata\": {},\n      \"devices\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"href\": \"string\",\n      \"id\": \"9b5e08a5-8711-9eeb-4e14-803c00a1c31e\",\n      \"invitations\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"max_devices\": {},\n      \"members\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"memberships\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"name\": \"string\",\n      \"network_status\": {},\n      \"organization\": {\n        \"address\": {\n          \"country\": \"country\",\n          \"address\": \"address\",\n          \"address2\": \"address2\",\n          \"city\": \"city\",\n          \"coordinates\": {\n            \"latitude\": \"latitude\",\n            \"longitude\": \"longitude\"\n          },\n          \"state\": \"state\",\n          \"zip_code\": \"zip_code\"\n        },\n        \"billing_address\": {\n          \"country\": \"country\",\n          \"address\": \"address\",\n          \"address2\": \"address2\",\n          \"city\": \"city\",\n          \"coordinates\": {\n            \"latitude\": \"latitude\",\n            \"longitude\": \"longitude\"\n          },\n          \"state\": \"state\",\n          \"zip_code\": \"zip_code\"\n        },\n        \"created_at\": \"1979-04-13T02:42:50.458Z\",\n        \"credit_amount\": 6602.138815282839,\n        \"customdata\": {},\n        \"description\": \"string\",\n        \"enforce_2fa_at\": \"1972-05-15T20:04:33.896Z\",\n        \"id\": \"2decadf4-6eaa-fb2d-5371-5705cacf6052\",\n        \"logo\": \"string\",\n        \"members\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"memberships\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"name\": \"string\",\n        \"projects\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"terms\": 4203,\n        \"twitter\": \"string\",\n        \"updated_at\": \"1997-04-16T12:21:47.492Z\",\n        \"website\": \"string\"\n      },\n      \"payment_method\": {\n        \"href\": \"href\"\n      },\n      \"ssh_keys\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"updated_at\": \"2000-04-19T10:05:01.148Z\",\n      \"volumes\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"type\": \"vmce\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"project_lite\": {\n      \"href\": \"href\"\n    },\n    \"provisioning_events\": [\n      {\n        \"body\": \"string\",\n        \"created_at\": \"1964-11-03T18:06:31.572Z\",\n        \"href\": \"string\",\n        \"id\": \"707ee459-4427-8c38-ad5c-6b96f9a1c95f\",\n        \"interpolated\": \"string\",\n        \"relationships\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"state\": \"string\",\n        \"type\": \"string\",\n        \"modified_by\": {},\n        \"ip\": \"string\"\n      },\n      {\n        \"body\": \"string\",\n        \"created_at\": \"1991-11-09T00:51:53.732Z\",\n        \"href\": \"string\",\n        \"id\": \"a0705501-286c-d83a-edbc-e3c0d457d9e5\",\n        \"interpolated\": \"string\",\n        \"relationships\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"state\": \"string\",\n        \"type\": \"string\",\n        \"modified_by\": {},\n        \"ip\": \"string\"\n      }\n    ],\n    \"provisioning_percentage\": 3395.9208468023603,\n    \"root_password\": \"string\",\n    \"short_id\": \"string\",\n    \"spot_instance\": false,\n    \"spot_price_max\": 8238.922178557354,\n    \"ssh_keys\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"state\": \"provisioning\",\n    \"storage\": {\n      \"disks\": [\n        {\n          \"partitions\": [\n            {\n              \"number\": 3,\n              \"size\": \"size\",\n              \"label\": \"label\"\n            },\n            {\n              \"number\": 3,\n              \"size\": \"size\",\n              \"label\": \"label\"\n            }\n          ],\n          \"wipeTable\": true,\n          \"device\": \"device\"\n        },\n        {\n          \"partitions\": [\n            {\n              \"number\": 3,\n              \"size\": \"size\",\n              \"label\": \"label\"\n            },\n            {\n              \"number\": 3,\n              \"size\": \"size\",\n              \"label\": \"label\"\n            }\n          ],\n          \"wipeTable\": true,\n          \"device\": \"device\"\n        }\n      ],\n      \"filesystems\": [\n        {\n          \"mount\": {\n            \"format\": \"format\",\n            \"options\": [\n              \"options\",\n              \"options\"\n            ],\n            \"device\": \"device\",\n            \"point\": \"point\"\n          }\n        },\n        {\n          \"mount\": {\n            \"format\": \"format\",\n            \"options\": [\n              \"options\",\n              \"options\"\n            ],\n            \"device\": \"device\",\n            \"point\": \"point\"\n          }\n        }\n      ],\n      \"raid\": [\n        {\n          \"devices\": [\n            \"devices\",\n            \"devices\"\n          ],\n          \"level\": \"level\",\n          \"name\": \"name\"\n        },\n        {\n          \"devices\": [\n            \"devices\",\n            \"devices\"\n          ],\n          \"level\": \"level\",\n          \"name\": \"name\"\n        }\n      ]\n    },\n    \"switch_uuid\": \"string\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"termination_time\": \"2021-09-03 16:32:00+03:00\",\n    \"updated_at\": \"1968-09-30T23:20:02.564Z\",\n    \"user\": \"string\",\n    \"userdata\": \"string\",\n    \"volumes\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"sos\": \"string\"\n  },\n  \"facility\": {\n    \"address\": {\n      \"country\": \"country\",\n      \"address\": \"address\",\n      \"address2\": \"address2\",\n      \"city\": \"city\",\n      \"coordinates\": {\n        \"latitude\": \"latitude\",\n        \"longitude\": \"longitude\"\n      },\n      \"state\": \"state\",\n      \"zip_code\": \"zip_code\"\n    },\n    \"code\": \"string\",\n    \"features\": [\n      \"baremetal\",\n      \"backend_transfer\",\n      \"global_ipv4\"\n    ],\n    \"id\": \"7e372b38-9303-98d2-ec46-716ce1d40b46\",\n    \"ip_ranges\": [\n      \"2604:1380::/36\",\n      \"147.75.192.0/21\"\n    ],\n    \"metro\": {\n      \"country\": \"country\",\n      \"code\": \"code\",\n      \"name\": \"name\"\n    },\n    \"name\": \"string\"\n  },\n  \"href\": \"string\",\n  \"id\": \"ee3265f5-c3a5-956e-6caf-822fc911dfb1\",\n  \"need_of_service\": true,\n  \"plan\": {\n    \"available_in\": [\n      {\n        \"price\": {\n          \"hour\": 1.23\n        },\n        \"href\": \"href\"\n      },\n      {\n        \"price\": {\n          \"hour\": 1.23\n        },\n        \"href\": \"href\"\n      }\n    ],\n    \"available_in_metros\": [\n      {\n        \"price\": {\n          \"hour\": 1.23\n        },\n        \"href\": \"href\"\n      },\n      {\n        \"price\": {\n          \"hour\": 1.23\n        },\n        \"href\": \"href\"\n      }\n    ],\n    \"categories\": [\n      \"string\",\n      \"string\"\n    ],\n    \"class\": \"m3.large.x86\",\n    \"description\": \"string\",\n    \"deployment_types\": [\n      \"spot_market\",\n      \"on_demand\"\n    ],\n    \"id\": \"ba22159a-062c-b807-f453-d76b2d75f010\",\n    \"legacy\": false,\n    \"line\": \"string\",\n    \"name\": \"string\",\n    \"pricing\": {},\n    \"slug\": \"m3.large.x86\",\n    \"specs\": {\n      \"cpus\": [\n        {\n          \"count\": 6,\n          \"type\": \"type\"\n        },\n        {\n          \"count\": 6,\n          \"type\": \"type\"\n        }\n      ],\n      \"memory\": {\n        \"total\": \"total\"\n      },\n      \"drives\": [\n        {\n          \"count\": 5930,\n          \"type\": \"string\",\n          \"size\": \"3.84TB\",\n          \"category\": \"storage\"\n        },\n        {\n          \"count\": 1429,\n          \"type\": \"string\",\n          \"size\": \"3.84TB\",\n          \"category\": \"storage\"\n        }\n      ],\n      \"nics\": [\n        {\n          \"count\": 2,\n          \"type\": \"type\"\n        },\n        {\n          \"count\": 2,\n          \"type\": \"type\"\n        }\n      ],\n      \"features\": {\n        \"txt\": true,\n        \"uefi\": true,\n        \"raid\": true\n      }\n    },\n    \"type\": \"custom\"\n  },\n  \"project\": {\n    \"bgp_config\": {\n      \"href\": \"href\"\n    },\n    \"created_at\": \"2011-12-02T18:29:17.148Z\",\n    \"customdata\": {},\n    \"devices\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"href\": \"string\",\n    \"id\": \"c8020e13-b726-9ea0-50e8-d49a5823be18\",\n    \"invitations\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"max_devices\": {},\n    \"members\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"memberships\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"name\": \"string\",\n    \"network_status\": {},\n    \"organization\": {\n      \"address\": {\n        \"country\": \"country\",\n        \"address\": \"address\",\n        \"address2\": \"address2\",\n        \"city\": \"city\",\n        \"coordinates\": {\n          \"latitude\": \"latitude\",\n          \"longitude\": \"longitude\"\n        },\n        \"state\": \"state\",\n        \"zip_code\": \"zip_code\"\n      },\n      \"billing_address\": {\n        \"country\": \"country\",\n        \"address\": \"address\",\n        \"address2\": \"address2\",\n        \"city\": \"city\",\n        \"coordinates\": {\n          \"latitude\": \"latitude\",\n          \"longitude\": \"longitude\"\n        },\n        \"state\": \"state\",\n        \"zip_code\": \"zip_code\"\n      },\n      \"created_at\": \"1981-06-08T06:43:44.613Z\",\n      \"credit_amount\": 8754.203704974769,\n      \"customdata\": {},\n      \"description\": \"string\",\n      \"enforce_2fa_at\": \"1972-10-05T21:14:16.784Z\",\n      \"id\": \"436c9462-354f-839f-d351-2098c8f35fa8\",\n      \"logo\": \"string\",\n      \"members\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"memberships\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"name\": \"string\",\n      \"projects\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"terms\": 6933,\n      \"twitter\": \"string\",\n      \"updated_at\": \"1966-04-01T11:26:44.293Z\",\n      \"website\": \"string\"\n    },\n    \"payment_method\": {\n      \"href\": \"href\"\n    },\n    \"ssh_keys\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"updated_at\": \"1967-11-17T19:23:43.322Z\",\n    \"volumes\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"type\": \"default\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"provisionable\": true,\n  \"short_id\": \"string\",\n  \"spare\": false,\n  \"switch_uuid\": \"string\",\n  \"termination_time\": \"1996-10-30T06:02:10.307Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17670273-a1de-4b73-af66-3f5be7391b1d",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hardware-reservations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) HardwareReservation UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d22aca7a-be03-4b97-85b3-916d84fc5c34",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hardware-reservations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) HardwareReservation UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a550005f-5bd7-4b7e-bf4f-b5e77aa7c0f2",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hardware-reservations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) HardwareReservation UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4dd0fc79-b3b3-479c-a8df-e7f2ff4b8d6a",
+          "name": "Activate a spare hardware reservation",
+          "request": {
+            "name": "Activate a spare hardware reservation",
+            "description": {
+              "content": "Activate a spare hardware reservation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hardware-reservations",
+                ":id",
+                "activate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to include. Included objects will return their full\nattributes. Attribute names can be dotted (up to 3 levels) to included deeply\nnested objects."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to exclude. Excluded objects will return only the href\nattribute. Attribute names can be dotted (up to 3 levels) to exclude deeply\nnested objects."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Hardware Reservation UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9d6e54a6-adb8-4807-8f0a-f36da77a2092",
+              "name": "ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hardware-reservations",
+                    ":id",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Hardware Reservation UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created_at\": \"1988-11-11T11:40:58.388Z\",\n  \"custom_rate\": 1050.5,\n  \"device\": {\n    \"always_pxe\": false,\n    \"billing_cycle\": \"string\",\n    \"bonding_mode\": 3975,\n    \"created_at\": \"1992-03-22T04:14:56.480Z\",\n    \"created_by\": {\n      \"id\": \"be615f74-7381-c862-2620-d50e13d59bdf\",\n      \"short_id\": \"string\",\n      \"avatar_thumb_url\": \"string\",\n      \"created_at\": \"1953-09-19T20:40:18.417Z\",\n      \"email\": \"string\",\n      \"first_name\": \"string\",\n      \"full_name\": \"string\",\n      \"href\": \"string\",\n      \"last_name\": \"string\",\n      \"updated_at\": \"1984-03-01T10:53:15.020Z\"\n    },\n    \"customdata\": {},\n    \"description\": \"string\",\n    \"facility\": {\n      \"address\": {\n        \"country\": \"country\",\n        \"address\": \"address\",\n        \"address2\": \"address2\",\n        \"city\": \"city\",\n        \"coordinates\": {\n          \"latitude\": \"latitude\",\n          \"longitude\": \"longitude\"\n        },\n        \"state\": \"state\",\n        \"zip_code\": \"zip_code\"\n      },\n      \"code\": \"string\",\n      \"features\": [\n        \"baremetal\",\n        \"backend_transfer\",\n        \"global_ipv4\"\n      ],\n      \"id\": \"3499cd8f-1100-3321-ee41-0be7fdf40ba8\",\n      \"ip_ranges\": [\n        \"2604:1380::/36\",\n        \"147.75.192.0/21\"\n      ],\n      \"metro\": {\n        \"country\": \"country\",\n        \"code\": \"code\",\n        \"name\": \"name\"\n      },\n      \"name\": \"string\"\n    },\n    \"firmware_set_id\": \"3d53cb88-b682-0d34-d56d-a46c6116ee25\",\n    \"hardware_reservation\": {\n      \"created_at\": \"1971-02-18T10:30:40.834Z\",\n      \"custom_rate\": 1050.5,\n      \"device\": {\n        \"value\": \"<Circular reference to #/components/schemas/Device detected>\"\n      },\n      \"facility\": {\n        \"address\": {\n          \"country\": \"country\",\n          \"address\": \"address\",\n          \"address2\": \"address2\",\n          \"city\": \"city\",\n          \"coordinates\": {\n            \"latitude\": \"latitude\",\n            \"longitude\": \"longitude\"\n          },\n          \"state\": \"state\",\n          \"zip_code\": \"zip_code\"\n        },\n        \"code\": \"string\",\n        \"features\": [\n          \"baremetal\",\n          \"backend_transfer\",\n          \"global_ipv4\"\n        ],\n        \"id\": \"6c179841-d754-b917-9c59-b60b9e2411b8\",\n        \"ip_ranges\": [\n          \"2604:1380::/36\",\n          \"147.75.192.0/21\"\n        ],\n        \"metro\": {},\n        \"name\": \"string\"\n      },\n      \"href\": \"string\",\n      \"id\": \"0d4385f2-8f36-c488-7c92-ff0f64f887a1\",\n      \"need_of_service\": false,\n      \"plan\": {\n        \"available_in\": [\n          {\n            \"price\": {\n              \"hour\": 1.23\n            },\n            \"href\": \"href\"\n          },\n          {\n            \"price\": {\n              \"hour\": 1.23\n            },\n            \"href\": \"href\"\n          }\n        ],\n        \"available_in_metros\": [\n          {\n            \"price\": {\n              \"hour\": 1.23\n            },\n            \"href\": \"href\"\n          },\n          {\n            \"price\": {\n              \"hour\": 1.23\n            },\n            \"href\": \"href\"\n          }\n        ],\n        \"categories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"class\": \"m3.large.x86\",\n        \"description\": \"string\",\n        \"deployment_types\": [\n          \"spot_market\",\n          \"on_demand\"\n        ],\n        \"id\": \"1844e513-f4a0-cd11-024a-094b04ab9e0d\",\n        \"legacy\": false,\n        \"line\": \"string\",\n        \"name\": \"string\",\n        \"pricing\": {},\n        \"slug\": \"m3.large.x86\",\n        \"specs\": {\n          \"features\": {\n            \"txt\": true,\n            \"uefi\": true,\n            \"raid\": true\n          },\n          \"memory\": {\n            \"total\": \"total\"\n          },\n          \"cpus\": [\n            {\n              \"count\": 6,\n              \"type\": \"type\"\n            },\n            {\n              \"count\": 6,\n              \"type\": \"type\"\n            }\n          ],\n          \"drives\": [\n            {\n              \"size\": \"3.84TB\",\n              \"count\": 1,\n              \"type\": \"type\",\n              \"category\": null\n            },\n            {\n              \"size\": \"3.84TB\",\n              \"count\": 1,\n              \"type\": \"type\",\n              \"category\": null\n            }\n          ],\n          \"nics\": [\n            {\n              \"count\": 2,\n              \"type\": \"type\"\n            },\n            {\n              \"count\": 2,\n              \"type\": \"type\"\n            }\n          ]\n        },\n        \"type\": \"custom\"\n      },\n      \"project\": {\n        \"bgp_config\": {\n          \"href\": \"href\"\n        },\n        \"created_at\": \"1957-11-22T20:08:53.157Z\",\n        \"customdata\": {},\n        \"devices\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"href\": \"string\",\n        \"id\": \"31ed7461-8bbc-a9b2-ed70-71a750997506\",\n        \"invitations\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"max_devices\": {},\n        \"members\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"memberships\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"name\": \"string\",\n        \"network_status\": {},\n        \"organization\": {\n          \"address\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"billing_address\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created_at\": \"1964-03-16T13:57:26.397Z\",\n          \"credit_amount\": 508.20079325864407,\n          \"customdata\": {},\n          \"description\": \"string\",\n          \"enforce_2fa_at\": \"2001-09-04T23:08:37.380Z\",\n          \"id\": \"b6b5016e-a857-76e8-e234-69c57054b937\",\n          \"logo\": \"string\",\n          \"members\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"memberships\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"name\": \"string\",\n          \"projects\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"terms\": 7127,\n          \"twitter\": \"string\",\n          \"updated_at\": \"1980-12-10T06:37:40.470Z\",\n          \"website\": \"string\"\n        },\n        \"payment_method\": {\n          \"href\": \"href\"\n        },\n        \"ssh_keys\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"updated_at\": \"2011-04-21T02:39:50.640Z\",\n        \"volumes\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"type\": \"vmce\",\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"provisionable\": false,\n      \"short_id\": \"string\",\n      \"spare\": false,\n      \"switch_uuid\": \"string\",\n      \"termination_time\": \"1980-03-25T04:35:07.524Z\"\n    },\n    \"hostname\": \"string\",\n    \"href\": \"string\",\n    \"id\": \"f605d6a4-69d8-3165-efb0-5912e82fa7a7\",\n    \"image_url\": \"string\",\n    \"ip_addresses\": [\n      {\n        \"address\": \"string\",\n        \"address_family\": 1982,\n        \"assigned_to\": {\n          \"href\": \"href\"\n        },\n        \"cidr\": 4722,\n        \"created_at\": \"1978-06-22T19:57:54.595Z\",\n        \"enabled\": false,\n        \"gateway\": \"string\",\n        \"global_ip\": true,\n        \"href\": \"string\",\n        \"id\": \"121e58e6-7013-33d9-3723-a05e68d34817\",\n        \"manageable\": true,\n        \"management\": true,\n        \"metro\": {\n          \"country\": \"country\",\n          \"code\": \"code\",\n          \"name\": \"name\"\n        },\n        \"netmask\": \"string\",\n        \"network\": \"string\",\n        \"parent_block\": {\n          \"netmask\": \"netmask\",\n          \"cidr\": 2,\n          \"href\": \"href\",\n          \"network\": \"network\"\n        },\n        \"public\": true,\n        \"state\": \"active\",\n        \"next_hop\": \"3.92.222.57\",\n        \"type\": \"IPAssignment\"\n      },\n      {\n        \"address\": \"string\",\n        \"address_family\": 6158,\n        \"assigned_to\": {\n          \"href\": \"href\"\n        },\n        \"cidr\": 226,\n        \"created_at\": \"1983-09-22T23:08:51.907Z\",\n        \"enabled\": false,\n        \"gateway\": \"string\",\n        \"global_ip\": true,\n        \"href\": \"string\",\n        \"id\": \"a0d6817c-e673-08a1-640e-0405b64fe05e\",\n        \"manageable\": false,\n        \"management\": false,\n        \"metro\": {\n          \"country\": \"country\",\n          \"code\": \"code\",\n          \"name\": \"name\"\n        },\n        \"netmask\": \"string\",\n        \"network\": \"string\",\n        \"parent_block\": {\n          \"netmask\": \"netmask\",\n          \"cidr\": 2,\n          \"href\": \"href\",\n          \"network\": \"network\"\n        },\n        \"public\": true,\n        \"state\": \"deleting\",\n        \"next_hop\": \"247.132.251.125\",\n        \"type\": \"IPAssignment\"\n      }\n    ],\n    \"ipxe_script_url\": \"string\",\n    \"iqn\": \"string\",\n    \"locked\": false,\n    \"metro\": {\n      \"country\": \"country\",\n      \"code\": \"code\",\n      \"name\": \"name\"\n    },\n    \"network_frozen\": false,\n    \"network_ports\": [\n      {\n        \"bond\": {\n          \"name\": \"name\"\n        },\n        \"data\": {\n          \"bonded\": true,\n          \"mac\": \"mac\"\n        },\n        \"disbond_operation_supported\": false,\n        \"href\": \"string\",\n        \"id\": \"a68962a6-9557-77a5-b29f-b0456893bbee\",\n        \"name\": \"bond0\",\n        \"type\": \"NetworkPort\",\n        \"network_type\": \"hybrid-bonded\",\n        \"native_virtual_network\": {\n          \"vxlan\": 4,\n          \"instances\": [\n            {\n              \"href\": \"href\"\n            },\n            {\n              \"href\": \"href\"\n            }\n          ],\n          \"description\": \"description\",\n          \"created_at\": \"2000-01-23 04:56:07+00:00\",\n          \"assigned_to_virtual_circuit\": true,\n          \"tags\": [\n            \"tags\",\n            \"tags\"\n          ],\n          \"metal_gateways\": [\n            {\n              \"gateway_address\": \"10.1.2.1/27\",\n              \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n              \"vlan\": 1001,\n              \"created_at\": \"2000-01-23 04:56:07+00:00\",\n              \"href\": \"href\",\n              \"state\": null\n            },\n            {\n              \"gateway_address\": \"10.1.2.1/27\",\n              \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n              \"vlan\": 1001,\n              \"created_at\": \"2000-01-23 04:56:07+00:00\",\n              \"href\": \"href\",\n              \"state\": null\n            }\n          ],\n          \"metro_code\": \"metro_code\",\n          \"metro\": {\n            \"href\": \"href\"\n          },\n          \"href\": \"href\",\n          \"facility\": {\n            \"href\": \"href\"\n          },\n          \"assigned_to\": {\n            \"href\": \"href\"\n          }\n        },\n        \"virtual_networks\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ]\n      },\n      {\n        \"bond\": {\n          \"name\": \"name\"\n        },\n        \"data\": {\n          \"bonded\": true,\n          \"mac\": \"mac\"\n        },\n        \"disbond_operation_supported\": true,\n        \"href\": \"string\",\n        \"id\": \"907dc9e3-bb47-dd8d-e650-aab8847d1632\",\n        \"name\": \"bond0\",\n        \"type\": \"NetworkBondPort\",\n        \"network_type\": \"layer3\",\n        \"native_virtual_network\": {\n          \"vxlan\": 4,\n          \"instances\": [\n            {\n              \"href\": \"href\"\n            },\n            {\n              \"href\": \"href\"\n            }\n          ],\n          \"description\": \"description\",\n          \"created_at\": \"2000-01-23 04:56:07+00:00\",\n          \"assigned_to_virtual_circuit\": true,\n          \"tags\": [\n            \"tags\",\n            \"tags\"\n          ],\n          \"metal_gateways\": [\n            {\n              \"gateway_address\": \"10.1.2.1/27\",\n              \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n              \"vlan\": 1001,\n              \"created_at\": \"2000-01-23 04:56:07+00:00\",\n              \"href\": \"href\",\n              \"state\": null\n            },\n            {\n              \"gateway_address\": \"10.1.2.1/27\",\n              \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n              \"vlan\": 1001,\n              \"created_at\": \"2000-01-23 04:56:07+00:00\",\n              \"href\": \"href\",\n              \"state\": null\n            }\n          ],\n          \"metro_code\": \"metro_code\",\n          \"metro\": {\n            \"href\": \"href\"\n          },\n          \"href\": \"href\",\n          \"facility\": {\n            \"href\": \"href\"\n          },\n          \"assigned_to\": {\n            \"href\": \"href\"\n          }\n        },\n        \"virtual_networks\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ]\n      }\n    ],\n    \"operating_system\": {\n      \"distro\": \"string\",\n      \"distro_label\": \"string\",\n      \"id\": \"714046a7-1ee5-ad57-1e9d-d9925354f7ad\",\n      \"licensed\": true,\n      \"name\": \"string\",\n      \"preinstallable\": false,\n      \"pricing\": {},\n      \"provisionable_on\": [\n        \"string\",\n        \"string\"\n      ],\n      \"slug\": \"string\",\n      \"version\": \"string\",\n      \"default_operating_system\": true\n    },\n    \"actions\": [\n      {\n        \"name\": \"name\",\n        \"type\": \"type\"\n      },\n      {\n        \"name\": \"name\",\n        \"type\": \"type\"\n      }\n    ],\n    \"plan\": {\n      \"available_in\": [\n        {\n          \"price\": {\n            \"hour\": 1.23\n          },\n          \"href\": \"href\"\n        },\n        {\n          \"price\": {\n            \"hour\": 1.23\n          },\n          \"href\": \"href\"\n        }\n      ],\n      \"available_in_metros\": [\n        {\n          \"price\": {\n            \"hour\": 1.23\n          },\n          \"href\": \"href\"\n        },\n        {\n          \"price\": {\n            \"hour\": 1.23\n          },\n          \"href\": \"href\"\n        }\n      ],\n      \"categories\": [\n        \"string\",\n        \"string\"\n      ],\n      \"class\": \"m3.large.x86\",\n      \"description\": \"string\",\n      \"deployment_types\": [\n        \"spot_market\",\n        \"on_demand\"\n      ],\n      \"id\": \"f03b0684-5b27-eb19-e886-047f9390dc94\",\n      \"legacy\": false,\n      \"line\": \"string\",\n      \"name\": \"string\",\n      \"pricing\": {},\n      \"slug\": \"m3.large.x86\",\n      \"specs\": {\n        \"features\": {\n          \"txt\": true,\n          \"uefi\": true,\n          \"raid\": true\n        },\n        \"memory\": {\n          \"total\": \"total\"\n        },\n        \"cpus\": [\n          {\n            \"count\": 6,\n            \"type\": \"type\"\n          },\n          {\n            \"count\": 6,\n            \"type\": \"type\"\n          }\n        ],\n        \"drives\": [\n          {\n            \"size\": \"3.84TB\",\n            \"count\": 1,\n            \"type\": \"type\",\n            \"category\": null\n          },\n          {\n            \"size\": \"3.84TB\",\n            \"count\": 1,\n            \"type\": \"type\",\n            \"category\": null\n          }\n        ],\n        \"nics\": [\n          {\n            \"count\": 2,\n            \"type\": \"type\"\n          },\n          {\n            \"count\": 2,\n            \"type\": \"type\"\n          }\n        ]\n      },\n      \"type\": \"custom\"\n    },\n    \"project\": {\n      \"bgp_config\": {\n        \"href\": \"href\"\n      },\n      \"created_at\": \"2025-09-20T22:13:48.860Z\",\n      \"customdata\": {},\n      \"devices\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"href\": \"string\",\n      \"id\": \"c8a3dc66-7a55-0bdf-1eac-f1aa89afa6d3\",\n      \"invitations\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"max_devices\": {},\n      \"members\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"memberships\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"name\": \"string\",\n      \"network_status\": {},\n      \"organization\": {\n        \"address\": {\n          \"country\": \"country\",\n          \"address\": \"address\",\n          \"address2\": \"address2\",\n          \"city\": \"city\",\n          \"coordinates\": {\n            \"latitude\": \"latitude\",\n            \"longitude\": \"longitude\"\n          },\n          \"state\": \"state\",\n          \"zip_code\": \"zip_code\"\n        },\n        \"billing_address\": {\n          \"country\": \"country\",\n          \"address\": \"address\",\n          \"address2\": \"address2\",\n          \"city\": \"city\",\n          \"coordinates\": {\n            \"latitude\": \"latitude\",\n            \"longitude\": \"longitude\"\n          },\n          \"state\": \"state\",\n          \"zip_code\": \"zip_code\"\n        },\n        \"created_at\": \"1953-11-20T01:59:01.664Z\",\n        \"credit_amount\": 2161.8012549530654,\n        \"customdata\": {},\n        \"description\": \"string\",\n        \"enforce_2fa_at\": \"2004-04-14T18:12:48.300Z\",\n        \"id\": \"aa17413f-fd8f-9376-88f3-26cdfbf9e2e6\",\n        \"logo\": \"string\",\n        \"members\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"memberships\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"name\": \"string\",\n        \"projects\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"terms\": 889,\n        \"twitter\": \"string\",\n        \"updated_at\": \"2003-10-22T21:09:08.448Z\",\n        \"website\": \"string\"\n      },\n      \"payment_method\": {\n        \"href\": \"href\"\n      },\n      \"ssh_keys\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"updated_at\": \"2020-03-29T20:42:04.522Z\",\n      \"volumes\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"type\": \"default\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"project_lite\": {\n      \"href\": \"href\"\n    },\n    \"provisioning_events\": [\n      {\n        \"body\": \"string\",\n        \"created_at\": \"1980-10-27T13:33:30.015Z\",\n        \"href\": \"string\",\n        \"id\": \"03c1cfc0-d1da-f65b-7236-9d07e07b8c22\",\n        \"interpolated\": \"string\",\n        \"relationships\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"state\": \"string\",\n        \"type\": \"string\",\n        \"modified_by\": {},\n        \"ip\": \"string\"\n      },\n      {\n        \"body\": \"string\",\n        \"created_at\": \"1967-02-14T19:31:37.834Z\",\n        \"href\": \"string\",\n        \"id\": \"f8380399-a49c-b4e2-b38a-c052e1ae0b7e\",\n        \"interpolated\": \"string\",\n        \"relationships\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"state\": \"string\",\n        \"type\": \"string\",\n        \"modified_by\": {},\n        \"ip\": \"string\"\n      }\n    ],\n    \"provisioning_percentage\": 7250.630348317023,\n    \"root_password\": \"string\",\n    \"short_id\": \"string\",\n    \"spot_instance\": false,\n    \"spot_price_max\": 6914.898044626253,\n    \"ssh_keys\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"state\": \"active\",\n    \"storage\": {\n      \"disks\": [\n        {\n          \"partitions\": [\n            {\n              \"number\": 3,\n              \"size\": \"size\",\n              \"label\": \"label\"\n            },\n            {\n              \"number\": 3,\n              \"size\": \"size\",\n              \"label\": \"label\"\n            }\n          ],\n          \"wipeTable\": true,\n          \"device\": \"device\"\n        },\n        {\n          \"partitions\": [\n            {\n              \"number\": 3,\n              \"size\": \"size\",\n              \"label\": \"label\"\n            },\n            {\n              \"number\": 3,\n              \"size\": \"size\",\n              \"label\": \"label\"\n            }\n          ],\n          \"wipeTable\": true,\n          \"device\": \"device\"\n        }\n      ],\n      \"filesystems\": [\n        {\n          \"mount\": {\n            \"format\": \"format\",\n            \"options\": [\n              \"options\",\n              \"options\"\n            ],\n            \"device\": \"device\",\n            \"point\": \"point\"\n          }\n        },\n        {\n          \"mount\": {\n            \"format\": \"format\",\n            \"options\": [\n              \"options\",\n              \"options\"\n            ],\n            \"device\": \"device\",\n            \"point\": \"point\"\n          }\n        }\n      ],\n      \"raid\": [\n        {\n          \"devices\": [\n            \"devices\",\n            \"devices\"\n          ],\n          \"level\": \"level\",\n          \"name\": \"name\"\n        },\n        {\n          \"devices\": [\n            \"devices\",\n            \"devices\"\n          ],\n          \"level\": \"level\",\n          \"name\": \"name\"\n        }\n      ]\n    },\n    \"switch_uuid\": \"string\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"termination_time\": \"2021-09-03 16:32:00+03:00\",\n    \"updated_at\": \"1957-11-27T01:06:57.605Z\",\n    \"user\": \"string\",\n    \"userdata\": \"string\",\n    \"volumes\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"sos\": \"string\"\n  },\n  \"facility\": {\n    \"address\": {\n      \"country\": \"country\",\n      \"address\": \"address\",\n      \"address2\": \"address2\",\n      \"city\": \"city\",\n      \"coordinates\": {\n        \"latitude\": \"latitude\",\n        \"longitude\": \"longitude\"\n      },\n      \"state\": \"state\",\n      \"zip_code\": \"zip_code\"\n    },\n    \"code\": \"string\",\n    \"features\": [\n      \"baremetal\",\n      \"backend_transfer\",\n      \"global_ipv4\"\n    ],\n    \"id\": \"56ffa06f-d218-d73a-ef5d-c8b390a95913\",\n    \"ip_ranges\": [\n      \"2604:1380::/36\",\n      \"147.75.192.0/21\"\n    ],\n    \"metro\": {\n      \"country\": \"country\",\n      \"code\": \"code\",\n      \"name\": \"name\"\n    },\n    \"name\": \"string\"\n  },\n  \"href\": \"string\",\n  \"id\": \"0ce7c5ce-fd71-a24b-6092-f5e51e6e56ac\",\n  \"need_of_service\": false,\n  \"plan\": {\n    \"available_in\": [\n      {\n        \"price\": {\n          \"hour\": 1.23\n        },\n        \"href\": \"href\"\n      },\n      {\n        \"price\": {\n          \"hour\": 1.23\n        },\n        \"href\": \"href\"\n      }\n    ],\n    \"available_in_metros\": [\n      {\n        \"price\": {\n          \"hour\": 1.23\n        },\n        \"href\": \"href\"\n      },\n      {\n        \"price\": {\n          \"hour\": 1.23\n        },\n        \"href\": \"href\"\n      }\n    ],\n    \"categories\": [\n      \"string\",\n      \"string\"\n    ],\n    \"class\": \"m3.large.x86\",\n    \"description\": \"string\",\n    \"deployment_types\": [\n      \"spot_market\",\n      \"on_demand\"\n    ],\n    \"id\": \"479cedff-04fe-9ee3-0f76-9b6a3aa0f9df\",\n    \"legacy\": true,\n    \"line\": \"string\",\n    \"name\": \"string\",\n    \"pricing\": {},\n    \"slug\": \"m3.large.x86\",\n    \"specs\": {\n      \"cpus\": [\n        {\n          \"count\": 6,\n          \"type\": \"type\"\n        },\n        {\n          \"count\": 6,\n          \"type\": \"type\"\n        }\n      ],\n      \"memory\": {\n        \"total\": \"total\"\n      },\n      \"drives\": [\n        {\n          \"count\": 1747,\n          \"type\": \"string\",\n          \"size\": \"3.84TB\",\n          \"category\": \"boot\"\n        },\n        {\n          \"count\": 6799,\n          \"type\": \"string\",\n          \"size\": \"3.84TB\",\n          \"category\": \"boot\"\n        }\n      ],\n      \"nics\": [\n        {\n          \"count\": 2,\n          \"type\": \"type\"\n        },\n        {\n          \"count\": 2,\n          \"type\": \"type\"\n        }\n      ],\n      \"features\": {\n        \"txt\": true,\n        \"uefi\": true,\n        \"raid\": true\n      }\n    },\n    \"type\": \"custom\"\n  },\n  \"project\": {\n    \"bgp_config\": {\n      \"href\": \"href\"\n    },\n    \"created_at\": \"2013-01-28T08:36:02.612Z\",\n    \"customdata\": {},\n    \"devices\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"href\": \"string\",\n    \"id\": \"4abe58d2-9045-31a4-d450-5a9e5163ebc8\",\n    \"invitations\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"max_devices\": {},\n    \"members\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"memberships\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"name\": \"string\",\n    \"network_status\": {},\n    \"organization\": {\n      \"address\": {\n        \"country\": \"country\",\n        \"address\": \"address\",\n        \"address2\": \"address2\",\n        \"city\": \"city\",\n        \"coordinates\": {\n          \"latitude\": \"latitude\",\n          \"longitude\": \"longitude\"\n        },\n        \"state\": \"state\",\n        \"zip_code\": \"zip_code\"\n      },\n      \"billing_address\": {\n        \"country\": \"country\",\n        \"address\": \"address\",\n        \"address2\": \"address2\",\n        \"city\": \"city\",\n        \"coordinates\": {\n          \"latitude\": \"latitude\",\n          \"longitude\": \"longitude\"\n        },\n        \"state\": \"state\",\n        \"zip_code\": \"zip_code\"\n      },\n      \"created_at\": \"1947-10-01T18:04:19.254Z\",\n      \"credit_amount\": 1453.905623563415,\n      \"customdata\": {},\n      \"description\": \"string\",\n      \"enforce_2fa_at\": \"1953-09-03T12:00:54.489Z\",\n      \"id\": \"0b2143a0-5ab0-0a45-6ddf-90e32661c9b5\",\n      \"logo\": \"string\",\n      \"members\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"memberships\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"name\": \"string\",\n      \"projects\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"terms\": 7343,\n      \"twitter\": \"string\",\n      \"updated_at\": \"1981-11-21T23:34:22.315Z\",\n      \"website\": \"string\"\n    },\n    \"payment_method\": {\n      \"href\": \"href\"\n    },\n    \"ssh_keys\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"updated_at\": \"1955-11-23T18:38:25.925Z\",\n    \"volumes\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"type\": \"vmce\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"provisionable\": true,\n  \"short_id\": \"string\",\n  \"spare\": true,\n  \"switch_uuid\": \"string\",\n  \"termination_time\": \"2009-06-12T02:02:16.138Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "797cba9e-9fe5-421a-bdc3-dbc2df9271b0",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hardware-reservations",
+                    ":id",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Hardware Reservation UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1196b383-3d27-49c9-9f57-1dc02e3e2cdb",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hardware-reservations",
+                    ":id",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Hardware Reservation UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7df75cc6-da8a-4ee8-a228-9e35e3a14fa3",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hardware-reservations",
+                    ":id",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Hardware Reservation UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6dc3514b-9b6e-46c2-8ef2-adab16faf242",
+          "name": "Move a hardware reservation",
+          "request": {
+            "name": "Move a hardware reservation",
+            "description": {
+              "content": "Move a hardware reservation to another project",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hardware-reservations",
+                ":id",
+                "move"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to include. Included objects will return their full\nattributes. Attribute names can be dotted (up to 3 levels) to included deeply\nnested objects."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to exclude. Excluded objects will return only the href\nattribute. Attribute names can be dotted (up to 3 levels) to exclude deeply\nnested objects."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Hardware Reservation UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"project_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "15026492-5819-4498-90c3-c360f8753805",
+              "name": "ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hardware-reservations",
+                    ":id",
+                    "move"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Hardware Reservation UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created_at\": \"1988-11-11T11:40:58.388Z\",\n  \"custom_rate\": 1050.5,\n  \"device\": {\n    \"always_pxe\": false,\n    \"billing_cycle\": \"string\",\n    \"bonding_mode\": 3975,\n    \"created_at\": \"1992-03-22T04:14:56.480Z\",\n    \"created_by\": {\n      \"id\": \"be615f74-7381-c862-2620-d50e13d59bdf\",\n      \"short_id\": \"string\",\n      \"avatar_thumb_url\": \"string\",\n      \"created_at\": \"1953-09-19T20:40:18.417Z\",\n      \"email\": \"string\",\n      \"first_name\": \"string\",\n      \"full_name\": \"string\",\n      \"href\": \"string\",\n      \"last_name\": \"string\",\n      \"updated_at\": \"1984-03-01T10:53:15.020Z\"\n    },\n    \"customdata\": {},\n    \"description\": \"string\",\n    \"facility\": {\n      \"address\": {\n        \"country\": \"country\",\n        \"address\": \"address\",\n        \"address2\": \"address2\",\n        \"city\": \"city\",\n        \"coordinates\": {\n          \"latitude\": \"latitude\",\n          \"longitude\": \"longitude\"\n        },\n        \"state\": \"state\",\n        \"zip_code\": \"zip_code\"\n      },\n      \"code\": \"string\",\n      \"features\": [\n        \"baremetal\",\n        \"backend_transfer\",\n        \"global_ipv4\"\n      ],\n      \"id\": \"3499cd8f-1100-3321-ee41-0be7fdf40ba8\",\n      \"ip_ranges\": [\n        \"2604:1380::/36\",\n        \"147.75.192.0/21\"\n      ],\n      \"metro\": {\n        \"country\": \"country\",\n        \"code\": \"code\",\n        \"name\": \"name\"\n      },\n      \"name\": \"string\"\n    },\n    \"firmware_set_id\": \"3d53cb88-b682-0d34-d56d-a46c6116ee25\",\n    \"hardware_reservation\": {\n      \"created_at\": \"1971-02-18T10:30:40.834Z\",\n      \"custom_rate\": 1050.5,\n      \"device\": {\n        \"value\": \"<Circular reference to #/components/schemas/Device detected>\"\n      },\n      \"facility\": {\n        \"address\": {\n          \"country\": \"country\",\n          \"address\": \"address\",\n          \"address2\": \"address2\",\n          \"city\": \"city\",\n          \"coordinates\": {\n            \"latitude\": \"latitude\",\n            \"longitude\": \"longitude\"\n          },\n          \"state\": \"state\",\n          \"zip_code\": \"zip_code\"\n        },\n        \"code\": \"string\",\n        \"features\": [\n          \"baremetal\",\n          \"backend_transfer\",\n          \"global_ipv4\"\n        ],\n        \"id\": \"6c179841-d754-b917-9c59-b60b9e2411b8\",\n        \"ip_ranges\": [\n          \"2604:1380::/36\",\n          \"147.75.192.0/21\"\n        ],\n        \"metro\": {},\n        \"name\": \"string\"\n      },\n      \"href\": \"string\",\n      \"id\": \"0d4385f2-8f36-c488-7c92-ff0f64f887a1\",\n      \"need_of_service\": false,\n      \"plan\": {\n        \"available_in\": [\n          {\n            \"price\": {\n              \"hour\": 1.23\n            },\n            \"href\": \"href\"\n          },\n          {\n            \"price\": {\n              \"hour\": 1.23\n            },\n            \"href\": \"href\"\n          }\n        ],\n        \"available_in_metros\": [\n          {\n            \"price\": {\n              \"hour\": 1.23\n            },\n            \"href\": \"href\"\n          },\n          {\n            \"price\": {\n              \"hour\": 1.23\n            },\n            \"href\": \"href\"\n          }\n        ],\n        \"categories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"class\": \"m3.large.x86\",\n        \"description\": \"string\",\n        \"deployment_types\": [\n          \"spot_market\",\n          \"on_demand\"\n        ],\n        \"id\": \"1844e513-f4a0-cd11-024a-094b04ab9e0d\",\n        \"legacy\": false,\n        \"line\": \"string\",\n        \"name\": \"string\",\n        \"pricing\": {},\n        \"slug\": \"m3.large.x86\",\n        \"specs\": {\n          \"features\": {\n            \"txt\": true,\n            \"uefi\": true,\n            \"raid\": true\n          },\n          \"memory\": {\n            \"total\": \"total\"\n          },\n          \"cpus\": [\n            {\n              \"count\": 6,\n              \"type\": \"type\"\n            },\n            {\n              \"count\": 6,\n              \"type\": \"type\"\n            }\n          ],\n          \"drives\": [\n            {\n              \"size\": \"3.84TB\",\n              \"count\": 1,\n              \"type\": \"type\",\n              \"category\": null\n            },\n            {\n              \"size\": \"3.84TB\",\n              \"count\": 1,\n              \"type\": \"type\",\n              \"category\": null\n            }\n          ],\n          \"nics\": [\n            {\n              \"count\": 2,\n              \"type\": \"type\"\n            },\n            {\n              \"count\": 2,\n              \"type\": \"type\"\n            }\n          ]\n        },\n        \"type\": \"custom\"\n      },\n      \"project\": {\n        \"bgp_config\": {\n          \"href\": \"href\"\n        },\n        \"created_at\": \"1957-11-22T20:08:53.157Z\",\n        \"customdata\": {},\n        \"devices\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"href\": \"string\",\n        \"id\": \"31ed7461-8bbc-a9b2-ed70-71a750997506\",\n        \"invitations\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"max_devices\": {},\n        \"members\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"memberships\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"name\": \"string\",\n        \"network_status\": {},\n        \"organization\": {\n          \"address\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"billing_address\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created_at\": \"1964-03-16T13:57:26.397Z\",\n          \"credit_amount\": 508.20079325864407,\n          \"customdata\": {},\n          \"description\": \"string\",\n          \"enforce_2fa_at\": \"2001-09-04T23:08:37.380Z\",\n          \"id\": \"b6b5016e-a857-76e8-e234-69c57054b937\",\n          \"logo\": \"string\",\n          \"members\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"memberships\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"name\": \"string\",\n          \"projects\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"terms\": 7127,\n          \"twitter\": \"string\",\n          \"updated_at\": \"1980-12-10T06:37:40.470Z\",\n          \"website\": \"string\"\n        },\n        \"payment_method\": {\n          \"href\": \"href\"\n        },\n        \"ssh_keys\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"updated_at\": \"2011-04-21T02:39:50.640Z\",\n        \"volumes\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"type\": \"vmce\",\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"provisionable\": false,\n      \"short_id\": \"string\",\n      \"spare\": false,\n      \"switch_uuid\": \"string\",\n      \"termination_time\": \"1980-03-25T04:35:07.524Z\"\n    },\n    \"hostname\": \"string\",\n    \"href\": \"string\",\n    \"id\": \"f605d6a4-69d8-3165-efb0-5912e82fa7a7\",\n    \"image_url\": \"string\",\n    \"ip_addresses\": [\n      {\n        \"address\": \"string\",\n        \"address_family\": 1982,\n        \"assigned_to\": {\n          \"href\": \"href\"\n        },\n        \"cidr\": 4722,\n        \"created_at\": \"1978-06-22T19:57:54.595Z\",\n        \"enabled\": false,\n        \"gateway\": \"string\",\n        \"global_ip\": true,\n        \"href\": \"string\",\n        \"id\": \"121e58e6-7013-33d9-3723-a05e68d34817\",\n        \"manageable\": true,\n        \"management\": true,\n        \"metro\": {\n          \"country\": \"country\",\n          \"code\": \"code\",\n          \"name\": \"name\"\n        },\n        \"netmask\": \"string\",\n        \"network\": \"string\",\n        \"parent_block\": {\n          \"netmask\": \"netmask\",\n          \"cidr\": 2,\n          \"href\": \"href\",\n          \"network\": \"network\"\n        },\n        \"public\": true,\n        \"state\": \"active\",\n        \"next_hop\": \"3.92.222.57\",\n        \"type\": \"IPAssignment\"\n      },\n      {\n        \"address\": \"string\",\n        \"address_family\": 6158,\n        \"assigned_to\": {\n          \"href\": \"href\"\n        },\n        \"cidr\": 226,\n        \"created_at\": \"1983-09-22T23:08:51.907Z\",\n        \"enabled\": false,\n        \"gateway\": \"string\",\n        \"global_ip\": true,\n        \"href\": \"string\",\n        \"id\": \"a0d6817c-e673-08a1-640e-0405b64fe05e\",\n        \"manageable\": false,\n        \"management\": false,\n        \"metro\": {\n          \"country\": \"country\",\n          \"code\": \"code\",\n          \"name\": \"name\"\n        },\n        \"netmask\": \"string\",\n        \"network\": \"string\",\n        \"parent_block\": {\n          \"netmask\": \"netmask\",\n          \"cidr\": 2,\n          \"href\": \"href\",\n          \"network\": \"network\"\n        },\n        \"public\": true,\n        \"state\": \"deleting\",\n        \"next_hop\": \"247.132.251.125\",\n        \"type\": \"IPAssignment\"\n      }\n    ],\n    \"ipxe_script_url\": \"string\",\n    \"iqn\": \"string\",\n    \"locked\": false,\n    \"metro\": {\n      \"country\": \"country\",\n      \"code\": \"code\",\n      \"name\": \"name\"\n    },\n    \"network_frozen\": false,\n    \"network_ports\": [\n      {\n        \"bond\": {\n          \"name\": \"name\"\n        },\n        \"data\": {\n          \"bonded\": true,\n          \"mac\": \"mac\"\n        },\n        \"disbond_operation_supported\": false,\n        \"href\": \"string\",\n        \"id\": \"a68962a6-9557-77a5-b29f-b0456893bbee\",\n        \"name\": \"bond0\",\n        \"type\": \"NetworkPort\",\n        \"network_type\": \"hybrid-bonded\",\n        \"native_virtual_network\": {\n          \"vxlan\": 4,\n          \"instances\": [\n            {\n              \"href\": \"href\"\n            },\n            {\n              \"href\": \"href\"\n            }\n          ],\n          \"description\": \"description\",\n          \"created_at\": \"2000-01-23 04:56:07+00:00\",\n          \"assigned_to_virtual_circuit\": true,\n          \"tags\": [\n            \"tags\",\n            \"tags\"\n          ],\n          \"metal_gateways\": [\n            {\n              \"gateway_address\": \"10.1.2.1/27\",\n              \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n              \"vlan\": 1001,\n              \"created_at\": \"2000-01-23 04:56:07+00:00\",\n              \"href\": \"href\",\n              \"state\": null\n            },\n            {\n              \"gateway_address\": \"10.1.2.1/27\",\n              \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n              \"vlan\": 1001,\n              \"created_at\": \"2000-01-23 04:56:07+00:00\",\n              \"href\": \"href\",\n              \"state\": null\n            }\n          ],\n          \"metro_code\": \"metro_code\",\n          \"metro\": {\n            \"href\": \"href\"\n          },\n          \"href\": \"href\",\n          \"facility\": {\n            \"href\": \"href\"\n          },\n          \"assigned_to\": {\n            \"href\": \"href\"\n          }\n        },\n        \"virtual_networks\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ]\n      },\n      {\n        \"bond\": {\n          \"name\": \"name\"\n        },\n        \"data\": {\n          \"bonded\": true,\n          \"mac\": \"mac\"\n        },\n        \"disbond_operation_supported\": true,\n        \"href\": \"string\",\n        \"id\": \"907dc9e3-bb47-dd8d-e650-aab8847d1632\",\n        \"name\": \"bond0\",\n        \"type\": \"NetworkBondPort\",\n        \"network_type\": \"layer3\",\n        \"native_virtual_network\": {\n          \"vxlan\": 4,\n          \"instances\": [\n            {\n              \"href\": \"href\"\n            },\n            {\n              \"href\": \"href\"\n            }\n          ],\n          \"description\": \"description\",\n          \"created_at\": \"2000-01-23 04:56:07+00:00\",\n          \"assigned_to_virtual_circuit\": true,\n          \"tags\": [\n            \"tags\",\n            \"tags\"\n          ],\n          \"metal_gateways\": [\n            {\n              \"gateway_address\": \"10.1.2.1/27\",\n              \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n              \"vlan\": 1001,\n              \"created_at\": \"2000-01-23 04:56:07+00:00\",\n              \"href\": \"href\",\n              \"state\": null\n            },\n            {\n              \"gateway_address\": \"10.1.2.1/27\",\n              \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n              \"vlan\": 1001,\n              \"created_at\": \"2000-01-23 04:56:07+00:00\",\n              \"href\": \"href\",\n              \"state\": null\n            }\n          ],\n          \"metro_code\": \"metro_code\",\n          \"metro\": {\n            \"href\": \"href\"\n          },\n          \"href\": \"href\",\n          \"facility\": {\n            \"href\": \"href\"\n          },\n          \"assigned_to\": {\n            \"href\": \"href\"\n          }\n        },\n        \"virtual_networks\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ]\n      }\n    ],\n    \"operating_system\": {\n      \"distro\": \"string\",\n      \"distro_label\": \"string\",\n      \"id\": \"714046a7-1ee5-ad57-1e9d-d9925354f7ad\",\n      \"licensed\": true,\n      \"name\": \"string\",\n      \"preinstallable\": false,\n      \"pricing\": {},\n      \"provisionable_on\": [\n        \"string\",\n        \"string\"\n      ],\n      \"slug\": \"string\",\n      \"version\": \"string\",\n      \"default_operating_system\": true\n    },\n    \"actions\": [\n      {\n        \"name\": \"name\",\n        \"type\": \"type\"\n      },\n      {\n        \"name\": \"name\",\n        \"type\": \"type\"\n      }\n    ],\n    \"plan\": {\n      \"available_in\": [\n        {\n          \"price\": {\n            \"hour\": 1.23\n          },\n          \"href\": \"href\"\n        },\n        {\n          \"price\": {\n            \"hour\": 1.23\n          },\n          \"href\": \"href\"\n        }\n      ],\n      \"available_in_metros\": [\n        {\n          \"price\": {\n            \"hour\": 1.23\n          },\n          \"href\": \"href\"\n        },\n        {\n          \"price\": {\n            \"hour\": 1.23\n          },\n          \"href\": \"href\"\n        }\n      ],\n      \"categories\": [\n        \"string\",\n        \"string\"\n      ],\n      \"class\": \"m3.large.x86\",\n      \"description\": \"string\",\n      \"deployment_types\": [\n        \"spot_market\",\n        \"on_demand\"\n      ],\n      \"id\": \"f03b0684-5b27-eb19-e886-047f9390dc94\",\n      \"legacy\": false,\n      \"line\": \"string\",\n      \"name\": \"string\",\n      \"pricing\": {},\n      \"slug\": \"m3.large.x86\",\n      \"specs\": {\n        \"features\": {\n          \"txt\": true,\n          \"uefi\": true,\n          \"raid\": true\n        },\n        \"memory\": {\n          \"total\": \"total\"\n        },\n        \"cpus\": [\n          {\n            \"count\": 6,\n            \"type\": \"type\"\n          },\n          {\n            \"count\": 6,\n            \"type\": \"type\"\n          }\n        ],\n        \"drives\": [\n          {\n            \"size\": \"3.84TB\",\n            \"count\": 1,\n            \"type\": \"type\",\n            \"category\": null\n          },\n          {\n            \"size\": \"3.84TB\",\n            \"count\": 1,\n            \"type\": \"type\",\n            \"category\": null\n          }\n        ],\n        \"nics\": [\n          {\n            \"count\": 2,\n            \"type\": \"type\"\n          },\n          {\n            \"count\": 2,\n            \"type\": \"type\"\n          }\n        ]\n      },\n      \"type\": \"custom\"\n    },\n    \"project\": {\n      \"bgp_config\": {\n        \"href\": \"href\"\n      },\n      \"created_at\": \"2025-09-20T22:13:48.860Z\",\n      \"customdata\": {},\n      \"devices\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"href\": \"string\",\n      \"id\": \"c8a3dc66-7a55-0bdf-1eac-f1aa89afa6d3\",\n      \"invitations\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"max_devices\": {},\n      \"members\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"memberships\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"name\": \"string\",\n      \"network_status\": {},\n      \"organization\": {\n        \"address\": {\n          \"country\": \"country\",\n          \"address\": \"address\",\n          \"address2\": \"address2\",\n          \"city\": \"city\",\n          \"coordinates\": {\n            \"latitude\": \"latitude\",\n            \"longitude\": \"longitude\"\n          },\n          \"state\": \"state\",\n          \"zip_code\": \"zip_code\"\n        },\n        \"billing_address\": {\n          \"country\": \"country\",\n          \"address\": \"address\",\n          \"address2\": \"address2\",\n          \"city\": \"city\",\n          \"coordinates\": {\n            \"latitude\": \"latitude\",\n            \"longitude\": \"longitude\"\n          },\n          \"state\": \"state\",\n          \"zip_code\": \"zip_code\"\n        },\n        \"created_at\": \"1953-11-20T01:59:01.664Z\",\n        \"credit_amount\": 2161.8012549530654,\n        \"customdata\": {},\n        \"description\": \"string\",\n        \"enforce_2fa_at\": \"2004-04-14T18:12:48.300Z\",\n        \"id\": \"aa17413f-fd8f-9376-88f3-26cdfbf9e2e6\",\n        \"logo\": \"string\",\n        \"members\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"memberships\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"name\": \"string\",\n        \"projects\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"terms\": 889,\n        \"twitter\": \"string\",\n        \"updated_at\": \"2003-10-22T21:09:08.448Z\",\n        \"website\": \"string\"\n      },\n      \"payment_method\": {\n        \"href\": \"href\"\n      },\n      \"ssh_keys\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"updated_at\": \"2020-03-29T20:42:04.522Z\",\n      \"volumes\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"type\": \"default\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"project_lite\": {\n      \"href\": \"href\"\n    },\n    \"provisioning_events\": [\n      {\n        \"body\": \"string\",\n        \"created_at\": \"1980-10-27T13:33:30.015Z\",\n        \"href\": \"string\",\n        \"id\": \"03c1cfc0-d1da-f65b-7236-9d07e07b8c22\",\n        \"interpolated\": \"string\",\n        \"relationships\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"state\": \"string\",\n        \"type\": \"string\",\n        \"modified_by\": {},\n        \"ip\": \"string\"\n      },\n      {\n        \"body\": \"string\",\n        \"created_at\": \"1967-02-14T19:31:37.834Z\",\n        \"href\": \"string\",\n        \"id\": \"f8380399-a49c-b4e2-b38a-c052e1ae0b7e\",\n        \"interpolated\": \"string\",\n        \"relationships\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"state\": \"string\",\n        \"type\": \"string\",\n        \"modified_by\": {},\n        \"ip\": \"string\"\n      }\n    ],\n    \"provisioning_percentage\": 7250.630348317023,\n    \"root_password\": \"string\",\n    \"short_id\": \"string\",\n    \"spot_instance\": false,\n    \"spot_price_max\": 6914.898044626253,\n    \"ssh_keys\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"state\": \"active\",\n    \"storage\": {\n      \"disks\": [\n        {\n          \"partitions\": [\n            {\n              \"number\": 3,\n              \"size\": \"size\",\n              \"label\": \"label\"\n            },\n            {\n              \"number\": 3,\n              \"size\": \"size\",\n              \"label\": \"label\"\n            }\n          ],\n          \"wipeTable\": true,\n          \"device\": \"device\"\n        },\n        {\n          \"partitions\": [\n            {\n              \"number\": 3,\n              \"size\": \"size\",\n              \"label\": \"label\"\n            },\n            {\n              \"number\": 3,\n              \"size\": \"size\",\n              \"label\": \"label\"\n            }\n          ],\n          \"wipeTable\": true,\n          \"device\": \"device\"\n        }\n      ],\n      \"filesystems\": [\n        {\n          \"mount\": {\n            \"format\": \"format\",\n            \"options\": [\n              \"options\",\n              \"options\"\n            ],\n            \"device\": \"device\",\n            \"point\": \"point\"\n          }\n        },\n        {\n          \"mount\": {\n            \"format\": \"format\",\n            \"options\": [\n              \"options\",\n              \"options\"\n            ],\n            \"device\": \"device\",\n            \"point\": \"point\"\n          }\n        }\n      ],\n      \"raid\": [\n        {\n          \"devices\": [\n            \"devices\",\n            \"devices\"\n          ],\n          \"level\": \"level\",\n          \"name\": \"name\"\n        },\n        {\n          \"devices\": [\n            \"devices\",\n            \"devices\"\n          ],\n          \"level\": \"level\",\n          \"name\": \"name\"\n        }\n      ]\n    },\n    \"switch_uuid\": \"string\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"termination_time\": \"2021-09-03 16:32:00+03:00\",\n    \"updated_at\": \"1957-11-27T01:06:57.605Z\",\n    \"user\": \"string\",\n    \"userdata\": \"string\",\n    \"volumes\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"sos\": \"string\"\n  },\n  \"facility\": {\n    \"address\": {\n      \"country\": \"country\",\n      \"address\": \"address\",\n      \"address2\": \"address2\",\n      \"city\": \"city\",\n      \"coordinates\": {\n        \"latitude\": \"latitude\",\n        \"longitude\": \"longitude\"\n      },\n      \"state\": \"state\",\n      \"zip_code\": \"zip_code\"\n    },\n    \"code\": \"string\",\n    \"features\": [\n      \"baremetal\",\n      \"backend_transfer\",\n      \"global_ipv4\"\n    ],\n    \"id\": \"56ffa06f-d218-d73a-ef5d-c8b390a95913\",\n    \"ip_ranges\": [\n      \"2604:1380::/36\",\n      \"147.75.192.0/21\"\n    ],\n    \"metro\": {\n      \"country\": \"country\",\n      \"code\": \"code\",\n      \"name\": \"name\"\n    },\n    \"name\": \"string\"\n  },\n  \"href\": \"string\",\n  \"id\": \"0ce7c5ce-fd71-a24b-6092-f5e51e6e56ac\",\n  \"need_of_service\": false,\n  \"plan\": {\n    \"available_in\": [\n      {\n        \"price\": {\n          \"hour\": 1.23\n        },\n        \"href\": \"href\"\n      },\n      {\n        \"price\": {\n          \"hour\": 1.23\n        },\n        \"href\": \"href\"\n      }\n    ],\n    \"available_in_metros\": [\n      {\n        \"price\": {\n          \"hour\": 1.23\n        },\n        \"href\": \"href\"\n      },\n      {\n        \"price\": {\n          \"hour\": 1.23\n        },\n        \"href\": \"href\"\n      }\n    ],\n    \"categories\": [\n      \"string\",\n      \"string\"\n    ],\n    \"class\": \"m3.large.x86\",\n    \"description\": \"string\",\n    \"deployment_types\": [\n      \"spot_market\",\n      \"on_demand\"\n    ],\n    \"id\": \"479cedff-04fe-9ee3-0f76-9b6a3aa0f9df\",\n    \"legacy\": true,\n    \"line\": \"string\",\n    \"name\": \"string\",\n    \"pricing\": {},\n    \"slug\": \"m3.large.x86\",\n    \"specs\": {\n      \"cpus\": [\n        {\n          \"count\": 6,\n          \"type\": \"type\"\n        },\n        {\n          \"count\": 6,\n          \"type\": \"type\"\n        }\n      ],\n      \"memory\": {\n        \"total\": \"total\"\n      },\n      \"drives\": [\n        {\n          \"count\": 1747,\n          \"type\": \"string\",\n          \"size\": \"3.84TB\",\n          \"category\": \"boot\"\n        },\n        {\n          \"count\": 6799,\n          \"type\": \"string\",\n          \"size\": \"3.84TB\",\n          \"category\": \"boot\"\n        }\n      ],\n      \"nics\": [\n        {\n          \"count\": 2,\n          \"type\": \"type\"\n        },\n        {\n          \"count\": 2,\n          \"type\": \"type\"\n        }\n      ],\n      \"features\": {\n        \"txt\": true,\n        \"uefi\": true,\n        \"raid\": true\n      }\n    },\n    \"type\": \"custom\"\n  },\n  \"project\": {\n    \"bgp_config\": {\n      \"href\": \"href\"\n    },\n    \"created_at\": \"2013-01-28T08:36:02.612Z\",\n    \"customdata\": {},\n    \"devices\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"href\": \"string\",\n    \"id\": \"4abe58d2-9045-31a4-d450-5a9e5163ebc8\",\n    \"invitations\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"max_devices\": {},\n    \"members\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"memberships\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"name\": \"string\",\n    \"network_status\": {},\n    \"organization\": {\n      \"address\": {\n        \"country\": \"country\",\n        \"address\": \"address\",\n        \"address2\": \"address2\",\n        \"city\": \"city\",\n        \"coordinates\": {\n          \"latitude\": \"latitude\",\n          \"longitude\": \"longitude\"\n        },\n        \"state\": \"state\",\n        \"zip_code\": \"zip_code\"\n      },\n      \"billing_address\": {\n        \"country\": \"country\",\n        \"address\": \"address\",\n        \"address2\": \"address2\",\n        \"city\": \"city\",\n        \"coordinates\": {\n          \"latitude\": \"latitude\",\n          \"longitude\": \"longitude\"\n        },\n        \"state\": \"state\",\n        \"zip_code\": \"zip_code\"\n      },\n      \"created_at\": \"1947-10-01T18:04:19.254Z\",\n      \"credit_amount\": 1453.905623563415,\n      \"customdata\": {},\n      \"description\": \"string\",\n      \"enforce_2fa_at\": \"1953-09-03T12:00:54.489Z\",\n      \"id\": \"0b2143a0-5ab0-0a45-6ddf-90e32661c9b5\",\n      \"logo\": \"string\",\n      \"members\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"memberships\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"name\": \"string\",\n      \"projects\": [\n        {\n          \"href\": \"href\"\n        },\n        {\n          \"href\": \"href\"\n        }\n      ],\n      \"terms\": 7343,\n      \"twitter\": \"string\",\n      \"updated_at\": \"1981-11-21T23:34:22.315Z\",\n      \"website\": \"string\"\n    },\n    \"payment_method\": {\n      \"href\": \"href\"\n    },\n    \"ssh_keys\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"updated_at\": \"1955-11-23T18:38:25.925Z\",\n    \"volumes\": [\n      {\n        \"href\": \"href\"\n      },\n      {\n        \"href\": \"href\"\n      }\n    ],\n    \"type\": \"vmce\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"provisionable\": true,\n  \"short_id\": \"string\",\n  \"spare\": true,\n  \"switch_uuid\": \"string\",\n  \"termination_time\": \"2009-06-12T02:02:16.138Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b17022a6-c4f7-43fe-9ae0-77a3cc60c61d",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hardware-reservations",
+                    ":id",
+                    "move"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Hardware Reservation UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65da70b6-85db-4881-9484-eb5f2fc44366",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hardware-reservations",
+                    ":id",
+                    "move"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Hardware Reservation UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33047af3-4371-44ec-98fa-4389095b7ae4",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hardware-reservations",
+                    ":id",
+                    "move"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Hardware Reservation UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b0c896e-1995-4378-9ac2-3350c3e0abdd",
+          "name": "Retrieve all hardware reservations for a given project",
+          "request": {
+            "name": "Retrieve all hardware reservations for a given project",
+            "description": {
+              "content": "Provides a collection of hardware reservations for a given project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":id",
+                "hardware-reservations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Search by facility code, plan name, project name, reservation short ID or device hostname"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Filter by hardware reservation state"
+                },
+                {
+                  "disabled": false,
+                  "key": "provisionable",
+                  "value": "<string>",
+                  "description": "Filter hardware reservation that is provisionable"
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to include. Included objects will return their full\nattributes. Attribute names can be dotted (up to 3 levels) to included deeply\nnested objects."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude",
+                  "value": "<string>,<string>",
+                  "description": "Nested attributes to exclude. Excluded objects will return only the href\nattribute. Attribute names can be dotted (up to 3 levels) to exclude deeply\nnested objects."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "10",
+                  "description": "Items returned per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Project UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e40fda1a-06f7-43f7-9ff1-c7e534f006cc",
+              "name": "ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "hardware-reservations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "provisionable",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hardware_reservations\": [\n    {\n      \"created_at\": \"1996-02-09T19:17:12.795Z\",\n      \"custom_rate\": 1050.5,\n      \"device\": {\n        \"always_pxe\": false,\n        \"billing_cycle\": \"string\",\n        \"bonding_mode\": 4082,\n        \"created_at\": \"1996-12-10T14:21:55.528Z\",\n        \"created_by\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"short_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"avatar_thumb_url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"first_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"full_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"href\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"last_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updated_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"customdata\": {},\n        \"description\": \"string\",\n        \"facility\": {\n          \"address\": {\n            \"country\": \"country\",\n            \"address\": \"address\",\n            \"address2\": \"address2\",\n            \"city\": \"city\",\n            \"coordinates\": {\n              \"latitude\": \"latitude\",\n              \"longitude\": \"longitude\"\n            },\n            \"state\": \"state\",\n            \"zip_code\": \"zip_code\"\n          },\n          \"code\": \"string\",\n          \"features\": [\n            \"baremetal\",\n            \"backend_transfer\",\n            \"global_ipv4\"\n          ],\n          \"id\": \"163ff0ea-f44b-ef70-c0a2-35071067fc75\",\n          \"ip_ranges\": [\n            \"2604:1380::/36\",\n            \"147.75.192.0/21\"\n          ],\n          \"metro\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"string\"\n        },\n        \"firmware_set_id\": \"a135a954-ee74-6c4d-6b17-cf88dac88e6b\",\n        \"hardware_reservation\": {\n          \"value\": \"<Circular reference to #/components/schemas/HardwareReservation detected>\"\n        },\n        \"hostname\": \"string\",\n        \"href\": \"string\",\n        \"id\": \"20c34a67-40b7-df50-b37f-54e66b4681c6\",\n        \"image_url\": \"string\",\n        \"ip_addresses\": [\n          {\n            \"address\": \"string\",\n            \"address_family\": 9231,\n            \"assigned_to\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cidr\": 9691,\n            \"created_at\": \"1950-10-27T08:14:20.858Z\",\n            \"enabled\": true,\n            \"gateway\": \"string\",\n            \"global_ip\": true,\n            \"href\": \"string\",\n            \"id\": \"cb63d15f-ff3c-aaaa-36c4-3ba31039d566\",\n            \"manageable\": false,\n            \"management\": true,\n            \"metro\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"netmask\": \"string\",\n            \"network\": \"string\",\n            \"parent_block\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"public\": false,\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"next_hop\": \"25.188.130.134\",\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"address\": \"string\",\n            \"address_family\": 1762,\n            \"assigned_to\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cidr\": 8578,\n            \"created_at\": \"1993-04-10T06:24:29.911Z\",\n            \"enabled\": true,\n            \"gateway\": \"string\",\n            \"global_ip\": true,\n            \"href\": \"string\",\n            \"id\": \"9c3b6d54-b997-53f1-6328-3ec6e227b438\",\n            \"manageable\": true,\n            \"management\": false,\n            \"metro\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"netmask\": \"string\",\n            \"network\": \"string\",\n            \"parent_block\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"public\": true,\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"next_hop\": \"115.207.40.110\",\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"ipxe_script_url\": \"string\",\n        \"iqn\": \"string\",\n        \"locked\": true,\n        \"metro\": {\n          \"country\": \"country\",\n          \"code\": \"code\",\n          \"name\": \"name\"\n        },\n        \"network_frozen\": true,\n        \"network_ports\": [\n          {\n            \"native_virtual_network\": {\n              \"vxlan\": 4,\n              \"instances\": [\n                {\n                  \"href\": \"href\"\n                },\n                {\n                  \"href\": \"href\"\n                }\n              ],\n              \"description\": \"description\",\n              \"created_at\": \"2000-01-23 04:56:07+00:00\",\n              \"assigned_to_virtual_circuit\": true,\n              \"tags\": [\n                \"tags\",\n                \"tags\"\n              ],\n              \"metal_gateways\": [\n                {\n                  \"gateway_address\": \"10.1.2.1/27\",\n                  \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n                  \"vlan\": 1001,\n                  \"created_at\": \"2000-01-23 04:56:07+00:00\",\n                  \"href\": \"href\",\n                  \"state\": null\n                },\n                {\n                  \"gateway_address\": \"10.1.2.1/27\",\n                  \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n                  \"vlan\": 1001,\n                  \"created_at\": \"2000-01-23 04:56:07+00:00\",\n                  \"href\": \"href\",\n                  \"state\": null\n                }\n              ],\n              \"metro_code\": \"metro_code\",\n              \"metro\": {\n                \"href\": \"href\"\n              },\n              \"href\": \"href\",\n              \"facility\": {\n                \"href\": \"href\"\n              },\n              \"assigned_to\": {\n                \"href\": \"href\"\n              }\n            },\n            \"disbond_operation_supported\": true,\n            \"data\": {\n              \"bonded\": true,\n              \"mac\": \"mac\"\n            },\n            \"name\": \"bond0\",\n            \"virtual_networks\": [\n              {\n                \"href\": \"href\"\n              },\n              {\n                \"href\": \"href\"\n              }\n            ],\n            \"href\": \"href\",\n            \"type\": null,\n            \"network_type\": null,\n            \"bond\": {\n              \"name\": \"name\"\n            }\n          },\n          {\n            \"native_virtual_network\": {\n              \"vxlan\": 4,\n              \"instances\": [\n                {\n                  \"href\": \"href\"\n                },\n                {\n                  \"href\": \"href\"\n                }\n              ],\n              \"description\": \"description\",\n              \"created_at\": \"2000-01-23 04:56:07+00:00\",\n              \"assigned_to_virtual_circuit\": true,\n              \"tags\": [\n                \"tags\",\n                \"tags\"\n              ],\n              \"metal_gateways\": [\n                {\n                  \"gateway_address\": \"10.1.2.1/27\",\n                  \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n                  \"vlan\": 1001,\n                  \"created_at\": \"2000-01-23 04:56:07+00:00\",\n                  \"href\": \"href\",\n                  \"state\": null\n                },\n                {\n                  \"gateway_address\": \"10.1.2.1/27\",\n                  \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n                  \"vlan\": 1001,\n                  \"created_at\": \"2000-01-23 04:56:07+00:00\",\n                  \"href\": \"href\",\n                  \"state\": null\n                }\n              ],\n              \"metro_code\": \"metro_code\",\n              \"metro\": {\n                \"href\": \"href\"\n              },\n              \"href\": \"href\",\n              \"facility\": {\n                \"href\": \"href\"\n              },\n              \"assigned_to\": {\n                \"href\": \"href\"\n              }\n            },\n            \"disbond_operation_supported\": true,\n            \"data\": {\n              \"bonded\": true,\n              \"mac\": \"mac\"\n            },\n            \"name\": \"bond0\",\n            \"virtual_networks\": [\n              {\n                \"href\": \"href\"\n              },\n              {\n                \"href\": \"href\"\n              }\n            ],\n            \"href\": \"href\",\n            \"type\": null,\n            \"network_type\": null,\n            \"bond\": {\n              \"name\": \"name\"\n            }\n          }\n        ],\n        \"operating_system\": {\n          \"distro\": \"string\",\n          \"distro_label\": \"string\",\n          \"id\": \"2a51534a-31db-eabc-9f6f-2f1bf2f19cee\",\n          \"licensed\": false,\n          \"name\": \"string\",\n          \"preinstallable\": false,\n          \"pricing\": {},\n          \"provisionable_on\": [\n            \"string\",\n            \"string\"\n          ],\n          \"slug\": \"string\",\n          \"version\": \"string\",\n          \"default_operating_system\": true\n        },\n        \"actions\": [\n          {\n            \"name\": \"name\",\n            \"type\": \"type\"\n          },\n          {\n            \"name\": \"name\",\n            \"type\": \"type\"\n          }\n        ],\n        \"plan\": {\n          \"available_in\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"available_in_metros\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"categories\": [\n            \"string\",\n            \"string\"\n          ],\n          \"class\": \"m3.large.x86\",\n          \"description\": \"string\",\n          \"deployment_types\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"id\": \"ade109c3-7d05-ada4-8eb7-1d9b965760ad\",\n          \"legacy\": false,\n          \"line\": \"string\",\n          \"name\": \"string\",\n          \"pricing\": {},\n          \"slug\": \"m3.large.x86\",\n          \"specs\": {\n            \"features\": {\n              \"txt\": true,\n              \"uefi\": true,\n              \"raid\": true\n            },\n            \"memory\": {\n              \"total\": \"total\"\n            },\n            \"cpus\": [\n              {\n                \"count\": 6,\n                \"type\": \"type\"\n              },\n              {\n                \"count\": 6,\n                \"type\": \"type\"\n              }\n            ],\n            \"drives\": [\n              {\n                \"size\": \"3.84TB\",\n                \"count\": 1,\n                \"type\": \"type\",\n                \"category\": null\n              },\n              {\n                \"size\": \"3.84TB\",\n                \"count\": 1,\n                \"type\": \"type\",\n                \"category\": null\n              }\n            ],\n            \"nics\": [\n              {\n                \"count\": 2,\n                \"type\": \"type\"\n              },\n              {\n                \"count\": 2,\n                \"type\": \"type\"\n              }\n            ]\n          },\n          \"type\": \"standard\"\n        },\n        \"project\": {\n          \"bgp_config\": {\n            \"href\": \"href\"\n          },\n          \"created_at\": \"1973-01-20T00:26:29.343Z\",\n          \"customdata\": {},\n          \"devices\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"href\": \"string\",\n          \"id\": \"12e7a3e9-aff7-a730-05c3-b25a0d2a5da3\",\n          \"invitations\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"max_devices\": {},\n          \"members\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"memberships\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"name\": \"string\",\n          \"network_status\": {},\n          \"organization\": {\n            \"website\": \"website\",\n            \"address\": {\n              \"country\": \"country\",\n              \"address\": \"address\",\n              \"address2\": \"address2\",\n              \"city\": \"city\",\n              \"coordinates\": {\n                \"latitude\": \"latitude\",\n                \"longitude\": \"longitude\"\n              },\n              \"state\": \"state\",\n              \"zip_code\": \"zip_code\"\n            },\n            \"projects\": [\n              {\n                \"href\": \"href\"\n              },\n              {\n                \"href\": \"href\"\n              }\n            ],\n            \"credit_amount\": 1.4658129,\n            \"created_at\": \"2000-01-23 04:56:07+00:00\",\n            \"description\": \"description\",\n            \"billing_address\": {\n              \"country\": \"country\",\n              \"address\": \"address\",\n              \"address2\": \"address2\",\n              \"city\": \"city\",\n              \"coordinates\": {\n                \"latitude\": \"latitude\",\n                \"longitude\": \"longitude\"\n              },\n              \"state\": \"state\",\n              \"zip_code\": \"zip_code\"\n            },\n            \"memberships\": [\n              {\n                \"href\": \"href\"\n              },\n              {\n                \"href\": \"href\"\n              }\n            ],\n            \"enforce_2fa_at\": \"2000-01-23 04:56:07+00:00\",\n            \"twitter\": \"twitter\",\n            \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n            \"terms\": 5,\n            \"members\": [\n              {\n                \"href\": \"href\"\n              },\n              {\n                \"href\": \"href\"\n              }\n            ],\n            \"name\": \"name\",\n            \"logo\": \"logo\",\n            \"customdata\": \"{}\"\n          },\n          \"payment_method\": {\n            \"href\": \"href\"\n          },\n          \"ssh_keys\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"updated_at\": \"1949-03-10T06:21:05.588Z\",\n          \"volumes\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"type\": \"default\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"project_lite\": {\n          \"href\": \"href\"\n        },\n        \"provisioning_events\": [\n          {\n            \"body\": \"string\",\n            \"created_at\": \"2018-10-10T10:54:26.214Z\",\n            \"href\": \"string\",\n            \"id\": \"01cffaa1-bbfd-64ab-d66d-078136233fef\",\n            \"interpolated\": \"string\",\n            \"relationships\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"state\": \"string\",\n            \"type\": \"string\",\n            \"modified_by\": {},\n            \"ip\": \"string\"\n          },\n          {\n            \"body\": \"string\",\n            \"created_at\": \"2021-05-10T13:15:28.387Z\",\n            \"href\": \"string\",\n            \"id\": \"91f2d128-03dd-aa0b-9bb5-bd8e543ce018\",\n            \"interpolated\": \"string\",\n            \"relationships\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"state\": \"string\",\n            \"type\": \"string\",\n            \"modified_by\": {},\n            \"ip\": \"string\"\n          }\n        ],\n        \"provisioning_percentage\": 4603.29676257313,\n        \"root_password\": \"string\",\n        \"short_id\": \"string\",\n        \"spot_instance\": true,\n        \"spot_price_max\": 2103.437066242797,\n        \"ssh_keys\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"state\": \"reinstalling\",\n        \"storage\": {\n          \"disks\": [\n            {\n              \"partitions\": [\n                {\n                  \"number\": 3,\n                  \"size\": \"size\",\n                  \"label\": \"label\"\n                },\n                {\n                  \"number\": 3,\n                  \"size\": \"size\",\n                  \"label\": \"label\"\n                }\n              ],\n              \"wipeTable\": true,\n              \"device\": \"device\"\n            },\n            {\n              \"partitions\": [\n                {\n                  \"number\": 3,\n                  \"size\": \"size\",\n                  \"label\": \"label\"\n                },\n                {\n                  \"number\": 3,\n                  \"size\": \"size\",\n                  \"label\": \"label\"\n                }\n              ],\n              \"wipeTable\": true,\n              \"device\": \"device\"\n            }\n          ],\n          \"filesystems\": [\n            {\n              \"mount\": {\n                \"format\": \"format\",\n                \"options\": [\n                  \"options\",\n                  \"options\"\n                ],\n                \"device\": \"device\",\n                \"point\": \"point\"\n              }\n            },\n            {\n              \"mount\": {\n                \"format\": \"format\",\n                \"options\": [\n                  \"options\",\n                  \"options\"\n                ],\n                \"device\": \"device\",\n                \"point\": \"point\"\n              }\n            }\n          ],\n          \"raid\": [\n            {\n              \"devices\": [\n                \"devices\",\n                \"devices\"\n              ],\n              \"level\": \"level\",\n              \"name\": \"name\"\n            },\n            {\n              \"devices\": [\n                \"devices\",\n                \"devices\"\n              ],\n              \"level\": \"level\",\n              \"name\": \"name\"\n            }\n          ]\n        },\n        \"switch_uuid\": \"string\",\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ],\n        \"termination_time\": \"2021-09-03 16:32:00+03:00\",\n        \"updated_at\": \"2016-07-09T16:37:15.976Z\",\n        \"user\": \"string\",\n        \"userdata\": \"string\",\n        \"volumes\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"sos\": \"string\"\n      },\n      \"facility\": {\n        \"address\": {\n          \"country\": \"country\",\n          \"address\": \"address\",\n          \"address2\": \"address2\",\n          \"city\": \"city\",\n          \"coordinates\": {\n            \"latitude\": \"latitude\",\n            \"longitude\": \"longitude\"\n          },\n          \"state\": \"state\",\n          \"zip_code\": \"zip_code\"\n        },\n        \"code\": \"string\",\n        \"features\": [\n          \"baremetal\",\n          \"backend_transfer\",\n          \"global_ipv4\"\n        ],\n        \"id\": \"39126763-8ae4-8a2b-53b9-b5026a2fd421\",\n        \"ip_ranges\": [\n          \"2604:1380::/36\",\n          \"147.75.192.0/21\"\n        ],\n        \"metro\": {\n          \"country\": \"country\",\n          \"code\": \"code\",\n          \"name\": \"name\"\n        },\n        \"name\": \"string\"\n      },\n      \"href\": \"string\",\n      \"id\": \"777b7f27-84e5-1439-4d74-eb3b3ebfaa2d\",\n      \"need_of_service\": true,\n      \"plan\": {\n        \"available_in\": [\n          {\n            \"price\": {\n              \"hour\": 1.23\n            },\n            \"href\": \"href\"\n          },\n          {\n            \"price\": {\n              \"hour\": 1.23\n            },\n            \"href\": \"href\"\n          }\n        ],\n        \"available_in_metros\": [\n          {\n            \"price\": {\n              \"hour\": 1.23\n            },\n            \"href\": \"href\"\n          },\n          {\n            \"price\": {\n              \"hour\": 1.23\n            },\n            \"href\": \"href\"\n          }\n        ],\n        \"categories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"class\": \"m3.large.x86\",\n        \"description\": \"string\",\n        \"deployment_types\": [\n          \"on_demand\",\n          \"spot_market\"\n        ],\n        \"id\": \"a362d90c-3258-a9bb-2f29-8502da17f886\",\n        \"legacy\": false,\n        \"line\": \"string\",\n        \"name\": \"string\",\n        \"pricing\": {},\n        \"slug\": \"m3.large.x86\",\n        \"specs\": {\n          \"features\": {\n            \"txt\": true,\n            \"uefi\": true,\n            \"raid\": true\n          },\n          \"memory\": {\n            \"total\": \"total\"\n          },\n          \"cpus\": [\n            {\n              \"count\": 6,\n              \"type\": \"type\"\n            },\n            {\n              \"count\": 6,\n              \"type\": \"type\"\n            }\n          ],\n          \"drives\": [\n            {\n              \"size\": \"3.84TB\",\n              \"count\": 1,\n              \"type\": \"type\",\n              \"category\": null\n            },\n            {\n              \"size\": \"3.84TB\",\n              \"count\": 1,\n              \"type\": \"type\",\n              \"category\": null\n            }\n          ],\n          \"nics\": [\n            {\n              \"count\": 2,\n              \"type\": \"type\"\n            },\n            {\n              \"count\": 2,\n              \"type\": \"type\"\n            }\n          ]\n        },\n        \"type\": \"standard\"\n      },\n      \"project\": {\n        \"bgp_config\": {\n          \"href\": \"href\"\n        },\n        \"created_at\": \"1994-09-10T07:10:20.371Z\",\n        \"customdata\": {},\n        \"devices\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"href\": \"string\",\n        \"id\": \"692f0af2-96b6-7c43-9f04-3c9e51349f92\",\n        \"invitations\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"max_devices\": {},\n        \"members\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"memberships\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"name\": \"string\",\n        \"network_status\": {},\n        \"organization\": {\n          \"address\": {\n            \"country\": \"country\",\n            \"address\": \"address\",\n            \"address2\": \"address2\",\n            \"city\": \"city\",\n            \"coordinates\": {\n              \"latitude\": \"latitude\",\n              \"longitude\": \"longitude\"\n            },\n            \"state\": \"state\",\n            \"zip_code\": \"zip_code\"\n          },\n          \"billing_address\": {\n            \"country\": \"country\",\n            \"address\": \"address\",\n            \"address2\": \"address2\",\n            \"city\": \"city\",\n            \"coordinates\": {\n              \"latitude\": \"latitude\",\n              \"longitude\": \"longitude\"\n            },\n            \"state\": \"state\",\n            \"zip_code\": \"zip_code\"\n          },\n          \"created_at\": \"2005-11-18T13:00:10.315Z\",\n          \"credit_amount\": 5992.064754285724,\n          \"customdata\": {},\n          \"description\": \"string\",\n          \"enforce_2fa_at\": \"1980-01-01T11:02:37.217Z\",\n          \"id\": \"4a5db5dc-6343-98e1-8671-4bf157fc1d15\",\n          \"logo\": \"string\",\n          \"members\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"memberships\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"name\": \"string\",\n          \"projects\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"terms\": 1775,\n          \"twitter\": \"string\",\n          \"updated_at\": \"2010-07-09T06:44:08.203Z\",\n          \"website\": \"string\"\n        },\n        \"payment_method\": {\n          \"href\": \"href\"\n        },\n        \"ssh_keys\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"updated_at\": \"1952-12-16T01:11:49.933Z\",\n        \"volumes\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"type\": \"default\",\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"provisionable\": true,\n      \"short_id\": \"string\",\n      \"spare\": true,\n      \"switch_uuid\": \"string\",\n      \"termination_time\": \"2003-12-21T12:46:46.008Z\"\n    },\n    {\n      \"created_at\": \"2003-09-05T05:43:29.328Z\",\n      \"custom_rate\": 1050.5,\n      \"device\": {\n        \"always_pxe\": true,\n        \"billing_cycle\": \"string\",\n        \"bonding_mode\": 9884,\n        \"created_at\": \"1997-02-19T22:43:53.912Z\",\n        \"created_by\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"short_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"avatar_thumb_url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"first_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"full_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"href\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"last_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updated_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"customdata\": {},\n        \"description\": \"string\",\n        \"facility\": {\n          \"address\": {\n            \"country\": \"country\",\n            \"address\": \"address\",\n            \"address2\": \"address2\",\n            \"city\": \"city\",\n            \"coordinates\": {\n              \"latitude\": \"latitude\",\n              \"longitude\": \"longitude\"\n            },\n            \"state\": \"state\",\n            \"zip_code\": \"zip_code\"\n          },\n          \"code\": \"string\",\n          \"features\": [\n            \"baremetal\",\n            \"backend_transfer\",\n            \"global_ipv4\"\n          ],\n          \"id\": \"55df4c56-0780-08de-8cde-35dae02e9a54\",\n          \"ip_ranges\": [\n            \"2604:1380::/36\",\n            \"147.75.192.0/21\"\n          ],\n          \"metro\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"string\"\n        },\n        \"firmware_set_id\": \"3cb918d0-4e6a-2dfa-1e7e-66bb0a3593b7\",\n        \"hardware_reservation\": {\n          \"value\": \"<Circular reference to #/components/schemas/HardwareReservation detected>\"\n        },\n        \"hostname\": \"string\",\n        \"href\": \"string\",\n        \"id\": \"029f167c-417a-767e-7e52-27a3eb1d79df\",\n        \"image_url\": \"string\",\n        \"ip_addresses\": [\n          {\n            \"address\": \"string\",\n            \"address_family\": 3642,\n            \"assigned_to\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cidr\": 8760,\n            \"created_at\": \"2026-06-03T23:48:31.836Z\",\n            \"enabled\": true,\n            \"gateway\": \"string\",\n            \"global_ip\": false,\n            \"href\": \"string\",\n            \"id\": \"d302068f-4629-43aa-5387-437dbd489089\",\n            \"manageable\": true,\n            \"management\": true,\n            \"metro\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"netmask\": \"string\",\n            \"network\": \"string\",\n            \"parent_block\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"public\": false,\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"next_hop\": \"207.38.199.24\",\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"address\": \"string\",\n            \"address_family\": 2281,\n            \"assigned_to\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cidr\": 7872,\n            \"created_at\": \"1955-05-10T11:28:37.463Z\",\n            \"enabled\": false,\n            \"gateway\": \"string\",\n            \"global_ip\": false,\n            \"href\": \"string\",\n            \"id\": \"e95176b3-64ea-b39c-d271-7e19866814f7\",\n            \"manageable\": false,\n            \"management\": false,\n            \"metro\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"netmask\": \"string\",\n            \"network\": \"string\",\n            \"parent_block\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"public\": true,\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"next_hop\": \"242.35.36.51\",\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"ipxe_script_url\": \"string\",\n        \"iqn\": \"string\",\n        \"locked\": false,\n        \"metro\": {\n          \"country\": \"country\",\n          \"code\": \"code\",\n          \"name\": \"name\"\n        },\n        \"network_frozen\": false,\n        \"network_ports\": [\n          {\n            \"native_virtual_network\": {\n              \"vxlan\": 4,\n              \"instances\": [\n                {\n                  \"href\": \"href\"\n                },\n                {\n                  \"href\": \"href\"\n                }\n              ],\n              \"description\": \"description\",\n              \"created_at\": \"2000-01-23 04:56:07+00:00\",\n              \"assigned_to_virtual_circuit\": true,\n              \"tags\": [\n                \"tags\",\n                \"tags\"\n              ],\n              \"metal_gateways\": [\n                {\n                  \"gateway_address\": \"10.1.2.1/27\",\n                  \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n                  \"vlan\": 1001,\n                  \"created_at\": \"2000-01-23 04:56:07+00:00\",\n                  \"href\": \"href\",\n                  \"state\": null\n                },\n                {\n                  \"gateway_address\": \"10.1.2.1/27\",\n                  \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n                  \"vlan\": 1001,\n                  \"created_at\": \"2000-01-23 04:56:07+00:00\",\n                  \"href\": \"href\",\n                  \"state\": null\n                }\n              ],\n              \"metro_code\": \"metro_code\",\n              \"metro\": {\n                \"href\": \"href\"\n              },\n              \"href\": \"href\",\n              \"facility\": {\n                \"href\": \"href\"\n              },\n              \"assigned_to\": {\n                \"href\": \"href\"\n              }\n            },\n            \"disbond_operation_supported\": true,\n            \"data\": {\n              \"bonded\": true,\n              \"mac\": \"mac\"\n            },\n            \"name\": \"bond0\",\n            \"virtual_networks\": [\n              {\n                \"href\": \"href\"\n              },\n              {\n                \"href\": \"href\"\n              }\n            ],\n            \"href\": \"href\",\n            \"type\": null,\n            \"network_type\": null,\n            \"bond\": {\n              \"name\": \"name\"\n            }\n          },\n          {\n            \"native_virtual_network\": {\n              \"vxlan\": 4,\n              \"instances\": [\n                {\n                  \"href\": \"href\"\n                },\n                {\n                  \"href\": \"href\"\n                }\n              ],\n              \"description\": \"description\",\n              \"created_at\": \"2000-01-23 04:56:07+00:00\",\n              \"assigned_to_virtual_circuit\": true,\n              \"tags\": [\n                \"tags\",\n                \"tags\"\n              ],\n              \"metal_gateways\": [\n                {\n                  \"gateway_address\": \"10.1.2.1/27\",\n                  \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n                  \"vlan\": 1001,\n                  \"created_at\": \"2000-01-23 04:56:07+00:00\",\n                  \"href\": \"href\",\n                  \"state\": null\n                },\n                {\n                  \"gateway_address\": \"10.1.2.1/27\",\n                  \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n                  \"vlan\": 1001,\n                  \"created_at\": \"2000-01-23 04:56:07+00:00\",\n                  \"href\": \"href\",\n                  \"state\": null\n                }\n              ],\n              \"metro_code\": \"metro_code\",\n              \"metro\": {\n                \"href\": \"href\"\n              },\n              \"href\": \"href\",\n              \"facility\": {\n                \"href\": \"href\"\n              },\n              \"assigned_to\": {\n                \"href\": \"href\"\n              }\n            },\n            \"disbond_operation_supported\": true,\n            \"data\": {\n              \"bonded\": true,\n              \"mac\": \"mac\"\n            },\n            \"name\": \"bond0\",\n            \"virtual_networks\": [\n              {\n                \"href\": \"href\"\n              },\n              {\n                \"href\": \"href\"\n              }\n            ],\n            \"href\": \"href\",\n            \"type\": null,\n            \"network_type\": null,\n            \"bond\": {\n              \"name\": \"name\"\n            }\n          }\n        ],\n        \"operating_system\": {\n          \"distro\": \"string\",\n          \"distro_label\": \"string\",\n          \"id\": \"f526c857-ce9c-6f23-f53f-07e5301de4d0\",\n          \"licensed\": false,\n          \"name\": \"string\",\n          \"preinstallable\": true,\n          \"pricing\": {},\n          \"provisionable_on\": [\n            \"string\",\n            \"string\"\n          ],\n          \"slug\": \"string\",\n          \"version\": \"string\",\n          \"default_operating_system\": false\n        },\n        \"actions\": [\n          {\n            \"name\": \"name\",\n            \"type\": \"type\"\n          },\n          {\n            \"name\": \"name\",\n            \"type\": \"type\"\n          }\n        ],\n        \"plan\": {\n          \"available_in\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"available_in_metros\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"categories\": [\n            \"string\",\n            \"string\"\n          ],\n          \"class\": \"m3.large.x86\",\n          \"description\": \"string\",\n          \"deployment_types\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"id\": \"d41142e3-3990-5ef2-8d69-c4271257696b\",\n          \"legacy\": false,\n          \"line\": \"string\",\n          \"name\": \"string\",\n          \"pricing\": {},\n          \"slug\": \"m3.large.x86\",\n          \"specs\": {\n            \"features\": {\n              \"txt\": true,\n              \"uefi\": true,\n              \"raid\": true\n            },\n            \"memory\": {\n              \"total\": \"total\"\n            },\n            \"cpus\": [\n              {\n                \"count\": 6,\n                \"type\": \"type\"\n              },\n              {\n                \"count\": 6,\n                \"type\": \"type\"\n              }\n            ],\n            \"drives\": [\n              {\n                \"size\": \"3.84TB\",\n                \"count\": 1,\n                \"type\": \"type\",\n                \"category\": null\n              },\n              {\n                \"size\": \"3.84TB\",\n                \"count\": 1,\n                \"type\": \"type\",\n                \"category\": null\n              }\n            ],\n            \"nics\": [\n              {\n                \"count\": 2,\n                \"type\": \"type\"\n              },\n              {\n                \"count\": 2,\n                \"type\": \"type\"\n              }\n            ]\n          },\n          \"type\": \"workload_optimized\"\n        },\n        \"project\": {\n          \"bgp_config\": {\n            \"href\": \"href\"\n          },\n          \"created_at\": \"2026-04-05T11:33:34.120Z\",\n          \"customdata\": {},\n          \"devices\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"href\": \"string\",\n          \"id\": \"9f46e38e-2455-eefc-0228-334b52be839f\",\n          \"invitations\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"max_devices\": {},\n          \"members\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"memberships\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"name\": \"string\",\n          \"network_status\": {},\n          \"organization\": {\n            \"website\": \"website\",\n            \"address\": {\n              \"country\": \"country\",\n              \"address\": \"address\",\n              \"address2\": \"address2\",\n              \"city\": \"city\",\n              \"coordinates\": {\n                \"latitude\": \"latitude\",\n                \"longitude\": \"longitude\"\n              },\n              \"state\": \"state\",\n              \"zip_code\": \"zip_code\"\n            },\n            \"projects\": [\n              {\n                \"href\": \"href\"\n              },\n              {\n                \"href\": \"href\"\n              }\n            ],\n            \"credit_amount\": 1.4658129,\n            \"created_at\": \"2000-01-23 04:56:07+00:00\",\n            \"description\": \"description\",\n            \"billing_address\": {\n              \"country\": \"country\",\n              \"address\": \"address\",\n              \"address2\": \"address2\",\n              \"city\": \"city\",\n              \"coordinates\": {\n                \"latitude\": \"latitude\",\n                \"longitude\": \"longitude\"\n              },\n              \"state\": \"state\",\n              \"zip_code\": \"zip_code\"\n            },\n            \"memberships\": [\n              {\n                \"href\": \"href\"\n              },\n              {\n                \"href\": \"href\"\n              }\n            ],\n            \"enforce_2fa_at\": \"2000-01-23 04:56:07+00:00\",\n            \"twitter\": \"twitter\",\n            \"updated_at\": \"2000-01-23 04:56:07+00:00\",\n            \"terms\": 5,\n            \"members\": [\n              {\n                \"href\": \"href\"\n              },\n              {\n                \"href\": \"href\"\n              }\n            ],\n            \"name\": \"name\",\n            \"logo\": \"logo\",\n            \"customdata\": \"{}\"\n          },\n          \"payment_method\": {\n            \"href\": \"href\"\n          },\n          \"ssh_keys\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"updated_at\": \"2010-08-24T07:44:15.531Z\",\n          \"volumes\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"type\": \"default\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"project_lite\": {\n          \"href\": \"href\"\n        },\n        \"provisioning_events\": [\n          {\n            \"body\": \"string\",\n            \"created_at\": \"2020-05-06T10:34:59.783Z\",\n            \"href\": \"string\",\n            \"id\": \"2b5ac8b9-140c-197b-ee84-be6e9359c018\",\n            \"interpolated\": \"string\",\n            \"relationships\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"state\": \"string\",\n            \"type\": \"string\",\n            \"modified_by\": {},\n            \"ip\": \"string\"\n          },\n          {\n            \"body\": \"string\",\n            \"created_at\": \"1988-11-12T00:16:04.514Z\",\n            \"href\": \"string\",\n            \"id\": \"2baf94b4-23e9-75e1-945c-a5d0a44ed776\",\n            \"interpolated\": \"string\",\n            \"relationships\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"state\": \"string\",\n            \"type\": \"string\",\n            \"modified_by\": {},\n            \"ip\": \"string\"\n          }\n        ],\n        \"provisioning_percentage\": 2477.736825624206,\n        \"root_password\": \"string\",\n        \"short_id\": \"string\",\n        \"spot_instance\": true,\n        \"spot_price_max\": 5918.928265551548,\n        \"ssh_keys\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"state\": \"powering_off\",\n        \"storage\": {\n          \"disks\": [\n            {\n              \"partitions\": [\n                {\n                  \"number\": 3,\n                  \"size\": \"size\",\n                  \"label\": \"label\"\n                },\n                {\n                  \"number\": 3,\n                  \"size\": \"size\",\n                  \"label\": \"label\"\n                }\n              ],\n              \"wipeTable\": true,\n              \"device\": \"device\"\n            },\n            {\n              \"partitions\": [\n                {\n                  \"number\": 3,\n                  \"size\": \"size\",\n                  \"label\": \"label\"\n                },\n                {\n                  \"number\": 3,\n                  \"size\": \"size\",\n                  \"label\": \"label\"\n                }\n              ],\n              \"wipeTable\": true,\n              \"device\": \"device\"\n            }\n          ],\n          \"filesystems\": [\n            {\n              \"mount\": {\n                \"format\": \"format\",\n                \"options\": [\n                  \"options\",\n                  \"options\"\n                ],\n                \"device\": \"device\",\n                \"point\": \"point\"\n              }\n            },\n            {\n              \"mount\": {\n                \"format\": \"format\",\n                \"options\": [\n                  \"options\",\n                  \"options\"\n                ],\n                \"device\": \"device\",\n                \"point\": \"point\"\n              }\n            }\n          ],\n          \"raid\": [\n            {\n              \"devices\": [\n                \"devices\",\n                \"devices\"\n              ],\n              \"level\": \"level\",\n              \"name\": \"name\"\n            },\n            {\n              \"devices\": [\n                \"devices\",\n                \"devices\"\n              ],\n              \"level\": \"level\",\n              \"name\": \"name\"\n            }\n          ]\n        },\n        \"switch_uuid\": \"string\",\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ],\n        \"termination_time\": \"2021-09-03 16:32:00+03:00\",\n        \"updated_at\": \"2000-09-22T21:32:04.797Z\",\n        \"user\": \"string\",\n        \"userdata\": \"string\",\n        \"volumes\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"sos\": \"string\"\n      },\n      \"facility\": {\n        \"address\": {\n          \"country\": \"country\",\n          \"address\": \"address\",\n          \"address2\": \"address2\",\n          \"city\": \"city\",\n          \"coordinates\": {\n            \"latitude\": \"latitude\",\n            \"longitude\": \"longitude\"\n          },\n          \"state\": \"state\",\n          \"zip_code\": \"zip_code\"\n        },\n        \"code\": \"string\",\n        \"features\": [\n          \"baremetal\",\n          \"backend_transfer\",\n          \"global_ipv4\"\n        ],\n        \"id\": \"0e2073e5-1ddc-29ab-98a5-2d15e1f52f00\",\n        \"ip_ranges\": [\n          \"2604:1380::/36\",\n          \"147.75.192.0/21\"\n        ],\n        \"metro\": {\n          \"country\": \"country\",\n          \"code\": \"code\",\n          \"name\": \"name\"\n        },\n        \"name\": \"string\"\n      },\n      \"href\": \"string\",\n      \"id\": \"ed28266d-8ce7-18d2-6050-4db2b427d8bd\",\n      \"need_of_service\": true,\n      \"plan\": {\n        \"available_in\": [\n          {\n            \"price\": {\n              \"hour\": 1.23\n            },\n            \"href\": \"href\"\n          },\n          {\n            \"price\": {\n              \"hour\": 1.23\n            },\n            \"href\": \"href\"\n          }\n        ],\n        \"available_in_metros\": [\n          {\n            \"price\": {\n              \"hour\": 1.23\n            },\n            \"href\": \"href\"\n          },\n          {\n            \"price\": {\n              \"hour\": 1.23\n            },\n            \"href\": \"href\"\n          }\n        ],\n        \"categories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"class\": \"m3.large.x86\",\n        \"description\": \"string\",\n        \"deployment_types\": [\n          \"on_demand\",\n          \"spot_market\"\n        ],\n        \"id\": \"5c51a1cf-6045-e884-1423-c05e407d33be\",\n        \"legacy\": false,\n        \"line\": \"string\",\n        \"name\": \"string\",\n        \"pricing\": {},\n        \"slug\": \"m3.large.x86\",\n        \"specs\": {\n          \"features\": {\n            \"txt\": true,\n            \"uefi\": true,\n            \"raid\": true\n          },\n          \"memory\": {\n            \"total\": \"total\"\n          },\n          \"cpus\": [\n            {\n              \"count\": 6,\n              \"type\": \"type\"\n            },\n            {\n              \"count\": 6,\n              \"type\": \"type\"\n            }\n          ],\n          \"drives\": [\n            {\n              \"size\": \"3.84TB\",\n              \"count\": 1,\n              \"type\": \"type\",\n              \"category\": null\n            },\n            {\n              \"size\": \"3.84TB\",\n              \"count\": 1,\n              \"type\": \"type\",\n              \"category\": null\n            }\n          ],\n          \"nics\": [\n            {\n              \"count\": 2,\n              \"type\": \"type\"\n            },\n            {\n              \"count\": 2,\n              \"type\": \"type\"\n            }\n          ]\n        },\n        \"type\": \"custom\"\n      },\n      \"project\": {\n        \"bgp_config\": {\n          \"href\": \"href\"\n        },\n        \"created_at\": \"1958-05-20T17:26:42.828Z\",\n        \"customdata\": {},\n        \"devices\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"href\": \"string\",\n        \"id\": \"74bcbc72-0ac0-2a88-1f97-6c41cf17d6a6\",\n        \"invitations\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"max_devices\": {},\n        \"members\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"memberships\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"name\": \"string\",\n        \"network_status\": {},\n        \"organization\": {\n          \"address\": {\n            \"country\": \"country\",\n            \"address\": \"address\",\n            \"address2\": \"address2\",\n            \"city\": \"city\",\n            \"coordinates\": {\n              \"latitude\": \"latitude\",\n              \"longitude\": \"longitude\"\n            },\n            \"state\": \"state\",\n            \"zip_code\": \"zip_code\"\n          },\n          \"billing_address\": {\n            \"country\": \"country\",\n            \"address\": \"address\",\n            \"address2\": \"address2\",\n            \"city\": \"city\",\n            \"coordinates\": {\n              \"latitude\": \"latitude\",\n              \"longitude\": \"longitude\"\n            },\n            \"state\": \"state\",\n            \"zip_code\": \"zip_code\"\n          },\n          \"created_at\": \"2012-05-14T00:33:03.492Z\",\n          \"credit_amount\": 3452.493098810576,\n          \"customdata\": {},\n          \"description\": \"string\",\n          \"enforce_2fa_at\": \"2016-01-17T22:54:26.894Z\",\n          \"id\": \"ed47115f-782d-841a-eabe-9a49999e9a3a\",\n          \"logo\": \"string\",\n          \"members\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"memberships\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"name\": \"string\",\n          \"projects\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"terms\": 3903,\n          \"twitter\": \"string\",\n          \"updated_at\": \"1988-07-22T08:46:34.255Z\",\n          \"website\": \"string\"\n        },\n        \"payment_method\": {\n          \"href\": \"href\"\n        },\n        \"ssh_keys\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"updated_at\": \"1999-04-30T22:16:01.701Z\",\n        \"volumes\": [\n          {\n            \"href\": \"href\"\n          },\n          {\n            \"href\": \"href\"\n          }\n        ],\n        \"type\": \"vmce\",\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"provisionable\": true,\n      \"short_id\": \"string\",\n      \"spare\": true,\n      \"switch_uuid\": \"string\",\n      \"termination_time\": \"2015-09-07T22:41:53.312Z\"\n    }\n  ],\n  \"meta\": {\n    \"next\": {\n      \"href\": \"href\"\n    },\n    \"total\": 0,\n    \"last\": {\n      \"href\": \"href\"\n    },\n    \"previous\": {\n      \"href\": \"href\"\n    },\n    \"last_page\": 1,\n    \"self\": {\n      \"href\": \"href\"\n    },\n    \"first\": {\n      \"href\": \"href\"\n    },\n    \"current_page\": 6\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "394a2b7d-1e77-4c81-b7ed-c530a27532f2",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "hardware-reservations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "provisionable",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4c2c0f8-9038-435e-b78e-d8e924919765",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "hardware-reservations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "provisionable",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36af4de2-92c0-4512-b1a5-578c307a7e5e",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id",
+                    "hardware-reservations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "provisionable",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "exclude",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Project UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "24bea4b3-ded4-47d0-8f3f-dd8fd4e4afd7",
+    "name": "Equinix API Authentication HardwareReservations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}

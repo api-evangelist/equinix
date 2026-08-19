@@ -1,0 +1,3485 @@
+{
+  "item": [
+    {
+      "id": "272f541a-92ac-4cf9-aa22-7780798baf0b",
+      "name": "Streams",
+      "description": {
+        "content": "Streams",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ea444ffd-d4e4-4c59-bcaa-8f51ede408f3",
+          "name": "Get Streams",
+          "request": {
+            "name": "Get Streams",
+            "description": {
+              "content": "This API provides capability to retrieve streams",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "streams"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "number of records to fetch"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "153c1979-9da8-4562-9e35-ce51f9c6e17d",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20,\n    \"total\": 1\n  },\n  \"data\": [\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418\",\n      \"uuid\": \"d684aa26-8276-48b7-bb42-a6d9def0a418\",\n      \"type\": \"TELEMETRY_STREAM\",\n      \"name\": \"stream 1\",\n      \"description\": \"stream dec 1\",\n      \"project\": {\n        \"projectId\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n      },\n      \"state\": \"PROVISIONED\",\n      \"assetsCount\": 1,\n      \"streamSubscriptionsCount\": 2,\n      \"alertRulesCount\": 3,\n      \"changeLog\": {\n        \"createdDateTime\": \"2024-05-06 16:21:18.545214+00:00\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20958ac4-d950-4d0f-91c7-f1663b9284a2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "544e6396-211f-425a-b267-2ed7c73cbc44",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb7b9e9c-725e-4550-80df-1c1a734f6fd7",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ffbf691e-7c3c-48d1-9d4d-1d7b756d1606",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29175bfd-b941-4e65-8d0c-735b7dbf119b",
+          "name": "Create Stream",
+          "request": {
+            "name": "Create Stream",
+            "description": {
+              "content": "This API provides capability to create user's stream",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "streams"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"project\": {\n    \"projectId\": \"<string>\"\n  },\n  \"type\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "17b06a05-7a42-4459-a521-ea59ef1e7d95",
+              "name": "Stream object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"TELEMETRY_STREAM\",\n  \"name\": \"splunk1\",\n  \"description\": \"subscription-1\",\n  \"project\": {\n    \"projectId\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"uuid\": \"d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"type\": \"TELEMETRY_STREAM\",\n  \"name\": \"stream1\",\n  \"description\": \"stream 1\",\n  \"project\": {\n    \"projectId\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"state\": \"PROVISIONED\",\n  \"assetsCount\": 1,\n  \"streamSubscriptionsCount\": 2,\n  \"alertRulesCount\": 3,\n  \"changeLog\": {\n    \"createdDateTime\": \"2024-05-06 16:21:18.545214+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30a93901-f20b-4114-8bf8-edc4d00a7f71",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"TELEMETRY_STREAM\",\n  \"name\": \"splunk1\",\n  \"description\": \"subscription-1\",\n  \"project\": {\n    \"projectId\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-9779526\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-8868924\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81719338-8262-4bc3-9bef-4f2e66f620c8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"TELEMETRY_STREAM\",\n  \"name\": \"splunk1\",\n  \"description\": \"subscription-1\",\n  \"project\": {\n    \"projectId\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "611e3195-c5af-4d27-aa46-49b74684aa90",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"TELEMETRY_STREAM\",\n  \"name\": \"splunk1\",\n  \"description\": \"subscription-1\",\n  \"project\": {\n    \"projectId\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1a53646-afc5-467a-9348-597cdd172bd4",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"TELEMETRY_STREAM\",\n  \"name\": \"splunk1\",\n  \"description\": \"subscription-1\",\n  \"project\": {\n    \"projectId\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040016\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15b9ac17-c62c-4d24-a186-c7e0cde68751",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"TELEMETRY_STREAM\",\n  \"name\": \"splunk1\",\n  \"description\": \"subscription-1\",\n  \"project\": {\n    \"projectId\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b57475c6-9ce1-437c-9c09-866642bb1c70",
+          "name": "Get Stream",
+          "request": {
+            "name": "Get Stream",
+            "description": {
+              "content": "This API provides capability to get user's stream",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "streams",
+                ":streamId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "streamId",
+                  "description": "(Required) Stream UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "778351e4-a3f6-44e1-83af-83c324cc5ec6",
+              "name": "Stream object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"uuid\": \"d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"type\": \"TELEMETRY_STREAM\",\n  \"name\": \"stream1\",\n  \"description\": \"stream 1\",\n  \"project\": {\n    \"projectId\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"state\": \"PROVISIONED\",\n  \"assetsCount\": 1,\n  \"streamSubscriptionsCount\": 2,\n  \"alertRulesCount\": 3,\n  \"changeLog\": {\n    \"createdDateTime\": \"2024-05-06 16:21:18.545214+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7569287a-4176-45ff-98d0-5c5dc4b22d5f",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2665396\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-0454156\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f230f147-9b0d-402f-a75a-6fc1cac5a60b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2ace72a-fd10-4a42-822e-f7a6044aa0d3",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6cefa6ef-ae83-43ca-a32f-31a51e01fbb7",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d93e7de-d55f-4220-9910-2492035cc813",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53cb6df0-d10d-4261-a6ca-6f577c6173fb",
+          "name": "Update Stream",
+          "request": {
+            "name": "Update Stream",
+            "description": {
+              "content": "This API provides capability to update user's stream",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "streams",
+                ":streamId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "streamId",
+                  "description": "(Required) Stream UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a8bac49d-d8d9-409c-bf74-b66b21df3b36",
+              "name": "Stream object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"splunk1\",\n  \"description\": \"subscription 1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"uuid\": \"d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"type\": \"TELEMETRY_STREAM\",\n  \"name\": \"stream1\",\n  \"description\": \"stream 1\",\n  \"project\": {\n    \"projectId\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"state\": \"PROVISIONED\",\n  \"assetsCount\": 1,\n  \"streamSubscriptionsCount\": 2,\n  \"alertRulesCount\": 3,\n  \"changeLog\": {\n    \"createdDateTime\": \"2024-05-06 16:21:18.545214+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af0da4dd-546d-44e1-9420-8b28d2a98e31",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"splunk1\",\n  \"description\": \"subscription 1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2665396\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-0454156\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fea2fef7-e1e0-412b-9a74-c9b496e143f6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"splunk1\",\n  \"description\": \"subscription 1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8c7d28a-2194-419c-9ab3-27d100ff3057",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"splunk1\",\n  \"description\": \"subscription 1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de218d6c-686f-4271-a38d-4578af658a78",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"splunk1\",\n  \"description\": \"subscription 1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3a486bb-752d-4b40-980d-ca7b64364cd6",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"splunk1\",\n  \"description\": \"subscription 1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040016\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ebfb17c-d09f-4075-8456-028c80abe087",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"splunk1\",\n  \"description\": \"subscription 1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "611b2cde-d01b-428c-a803-f91f9212de8b",
+          "name": "Delete Stream",
+          "request": {
+            "name": "Delete Stream",
+            "description": {
+              "content": "This API provides capability to delete user's stream",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "streams",
+                ":streamId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "streamId",
+                  "description": "(Required) Stream UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "115e7026-07de-4c09-984d-9c00fbacc785",
+              "name": "Stream object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"uuid\": \"d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"type\": \"TELEMETRY_STREAM\",\n  \"name\": \"stream1\",\n  \"description\": \"stream 1\",\n  \"project\": {\n    \"projectId\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"state\": \"DEPROVISIONING\",\n  \"assetsCount\": 1,\n  \"streamSubscriptionsCount\": 2,\n  \"changeLog\": {\n    \"createdDateTime\": \"2024-05-06 16:21:18.545214+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0346d0e0-68f0-4a58-912a-694c292c4277",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2665396\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-0454156\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1bf4501-2e12-4015-8fdd-f078e31f93e5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44a12bef-982d-47c1-94b8-1fddbcddb440",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9279460-f691-4e61-928c-946766294377",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a898dd2-e207-4ddb-a25c-ede231435a78",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d606e3f8-1b49-40c0-9125-f1d324f505eb",
+          "name": "Get Assets",
+          "request": {
+            "name": "Get Assets",
+            "description": {
+              "content": "This API provides capability to retrieve stream assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "streamAssets",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "number of records to fetch"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"<string>\",\n        \"operator\": \"<string>\",\n        \"values\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"property\": \"<string>\",\n        \"operator\": \"<string>\",\n        \"values\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/uuid\"\n    },\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/uuid\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c360f718-dd12-4097-8777-866e9dfc4cac",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streamAssets",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/streamUuid\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"e684aa26-8276-48b7-bb42-a6d9def0a419\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/uuid\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20,\n    \"total\": 1\n  },\n  \"data\": [\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/ports/e684aa26-8276-48b7-bb42-a6d9def0a419\",\n      \"uuid\": \"d684aa26-8276-48b7-bb42-a6d9def0a418\",\n      \"type\": \"XF_PORT\",\n      \"metricsEnabled\": false,\n      \"attachmentStatus\": \"ATTACHED\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56c42635-24df-46a1-8bf5-cdf2c3ced3e1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streamAssets",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/streamUuid\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"e684aa26-8276-48b7-bb42-a6d9def0a419\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/uuid\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e19dc6a1-6fce-4075-9403-09e7594a91ef",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streamAssets",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/streamUuid\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"e684aa26-8276-48b7-bb42-a6d9def0a419\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/uuid\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83e0bce3-22be-4ac2-8038-5e9b37ad477b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streamAssets",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/streamUuid\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"e684aa26-8276-48b7-bb42-a6d9def0a419\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/uuid\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63b738ad-ef41-48df-ac39-a9d5190b3643",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streamAssets",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/streamUuid\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"e684aa26-8276-48b7-bb42-a6d9def0a419\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  },\n  \"sort\": [\n    {\n      \"direction\": \"DESC\",\n      \"property\": \"/uuid\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f00ec5e3-89a2-4a4e-915c-e7fc1bef4cbe",
+          "name": "Get Asset",
+          "request": {
+            "name": "Get Asset",
+            "description": {
+              "content": "This API provides capability to get user's assets attached to a stream",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "streams",
+                ":streamId",
+                ":asset",
+                ":assetId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "assetId",
+                  "description": "(Required) asset UUID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset",
+                  "description": "(Required) asset"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "streamId",
+                  "description": "(Required) Stream UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b8312103-15bb-4b80-8465-4c4bb51630d5",
+              "name": "Stream asset object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    ":asset",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/streams/e684aa26-8276-48b7-bb42-a6d9def0a419/connections/d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"uuid\": \"d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"type\": \"IP_VC\",\n  \"metricsEnabled\": false,\n  \"attachmentStatus\": \"ATTACHED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4eb2c784-c5bb-4c6d-b88f-d0f5c8e9b12c",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    ":asset",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2665396\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-0454156\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbec4c4a-492f-4a1a-b0db-4fea4d97e705",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    ":asset",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b06ba83-0bf6-4b2f-b717-7307ed59f284",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    ":asset",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdc0a6e1-a592-4846-a3cf-fc4a7f201712",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    ":asset",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d11f4a3f-5ab4-41bc-b146-5af11d80ea32",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    ":asset",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4a2193cb-9852-4a37-94be-48a63adc8c99",
+          "name": "Attach Asset",
+          "request": {
+            "name": "Attach Asset",
+            "description": {
+              "content": "This API provides capability to attach an asset to a stream",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "streams",
+                ":streamId",
+                ":asset",
+                ":assetId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "assetId",
+                  "description": "(Required) asset UUID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset",
+                  "description": "(Required) asset"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "streamId",
+                  "description": "(Required) Stream UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metricsEnabled\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f378e055-56c1-4e5c-a65a-a4447c724f59",
+              "name": "Stream object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    ":asset",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metricsEnabled\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/streams/e684aa26-8276-48b7-bb42-a6d9def0a419/routers/d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"uuid\": \"d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"type\": \"XF_ROUTER\",\n  \"metricsEnabled\": false,\n  \"attachmentStatus\": \"ATTACHING\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbcb5df9-fc75-4e88-8ead-4d2ceeb5c532",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    ":asset",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metricsEnabled\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2665396\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-0454156\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0547849b-007e-44a3-b451-7f5dc439ddd5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    ":asset",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metricsEnabled\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43eb4f71-519c-41ab-9416-bbb2c099a9a0",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    ":asset",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metricsEnabled\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cdbf27d7-a81b-47b5-85eb-5f7f6f0d67d8",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    ":asset",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metricsEnabled\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efdfa829-b8f1-4fc2-9641-67bce04960e5",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    ":asset",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metricsEnabled\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040016\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc2bd4e5-acb8-4f1a-91fc-1e01d09f4665",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    ":asset",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metricsEnabled\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2ccea744-1a6c-4651-95c4-31ced1a6ab75",
+          "name": "Detach Asset",
+          "request": {
+            "name": "Detach Asset",
+            "description": {
+              "content": "This API provides capability to detach an asset from a stream",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "streams",
+                ":streamId",
+                ":asset",
+                ":assetId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "assetId",
+                  "description": "(Required) asset UUID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset",
+                  "description": "(Required) asset"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "streamId",
+                  "description": "(Required) Stream UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc33d7be-caa9-46e0-9564-da64b4dd747f",
+              "name": "Stream object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    ":asset",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/streams/e684aa26-8276-48b7-bb42-a6d9def0a419/routers/d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"uuid\": \"d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"type\": \"XF_ROUTER\",\n  \"metricsEnabled\": false,\n  \"attachmentStatus\": \"DETACHING\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "018fe859-f9b2-45b6-85f4-95dffbbea15c",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    ":asset",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2665396\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-0454156\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ec855f8-1836-41bc-9d88-654e5f9fd790",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    ":asset",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "480489fa-9360-447f-9854-5e98056eda44",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    ":asset",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35e9a6ba-bedd-4bc3-b1e9-9de71d4fb50b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    ":asset",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da6625af-c1fd-4cbd-9c9e-4da605f15d38",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    ":asset",
+                    ":assetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "df52811d-0b47-4bb9-94f8-1e7f9800437e",
+    "name": "Equinix API Authentication Streams API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}

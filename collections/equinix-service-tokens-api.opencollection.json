@@ -1,0 +1,185 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Equinix API Authentication Service Tokens API",
+    "version": "1.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Service Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Token by uuid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/serviceTokens/:serviceTokenId",
+            "params": [
+              {
+                "name": "serviceTokenId",
+                "value": "",
+                "type": "path",
+                "description": "Service Token UUID"
+              }
+            ]
+          },
+          "docs": "Get Specified Service Tokens uses the uuid of an Equinix Fabric service token to return details about the token's type, state, location, bandwidth, and other key properties."
+        },
+        {
+          "info": {
+            "name": "Update Token By ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.equinix.com/fabric/v4/serviceTokens/:serviceTokenId",
+            "params": [
+              {
+                "name": "serviceTokenId",
+                "value": "",
+                "type": "path",
+                "description": "Service Token UUID"
+              },
+              {
+                "name": "dryRun",
+                "value": "",
+                "type": "query",
+                "description": "option to verify that API calls will succeed"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API provides capability to update user's Service Token"
+        },
+        {
+          "info": {
+            "name": "Delete Token by uuid",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.equinix.com/fabric/v4/serviceTokens/:serviceTokenId",
+            "params": [
+              {
+                "name": "serviceTokenId",
+                "value": "",
+                "type": "path",
+                "description": "Service Token UUID"
+              }
+            ]
+          },
+          "docs": "Delete Service Tokens removes an Equinix Fabric service token corresponding to the specified uuid which are in INACTIVE state."
+        },
+        {
+          "info": {
+            "name": "Get All Tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/serviceTokens",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "number of records to fetch"
+              }
+            ]
+          },
+          "docs": "Get All ServiceTokens creates a list of all Equinix Fabric service tokens associated with the subscriber's account."
+        },
+        {
+          "info": {
+            "name": "Create Service Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/serviceTokens",
+            "params": [
+              {
+                "name": "dryRun",
+                "value": "",
+                "type": "query",
+                "description": "option to verify that API calls will succeed"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Service Tokens generates Equinix Fabric? service tokens. These tokens authorize users to access protected resources and services."
+        },
+        {
+          "info": {
+            "name": "ServiceToken Actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/serviceTokens/:serviceTokenId/actions",
+            "params": [
+              {
+                "name": "serviceTokenId",
+                "value": "",
+                "type": "path",
+                "description": "Service Token UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API provides capability to accept/reject user's servicetokens"
+        },
+        {
+          "info": {
+            "name": "Search servicetokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/serviceTokens/search",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "number of records to fetch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The API provides capability to get list of user's servicetokens using search criteria, including optional filtering, pagination and sorting"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

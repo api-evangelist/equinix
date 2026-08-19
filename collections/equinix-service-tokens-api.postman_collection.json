@@ -1,0 +1,1917 @@
+{
+  "item": [
+    {
+      "id": "21c8c770-2875-479d-a85f-59d6b85fd7b0",
+      "name": "Service Tokens",
+      "description": {
+        "content": "Service Tokens",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "11758742-d73a-418f-8b68-9fcf77e909a5",
+          "name": "Get Token by uuid",
+          "request": {
+            "name": "Get Token by uuid",
+            "description": {
+              "content": "Get Specified Service Tokens uses the uuid of an Equinix Fabric service token to return details about the token's type, state, location, bandwidth, and other key properties.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "serviceTokens",
+                ":serviceTokenId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "serviceTokenId",
+                  "description": "(Required) Service Token UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e7da9deb-d277-4c49-b4ae-4568172484b4",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens",
+                    ":serviceTokenId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceTokenId",
+                      "description": "(Required) Service Token UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"http://api.equinix.com/fabric/v4/serviceTokens/13ab7dc7-c18e-4f73-aa35-fc3a83966e79\",\n  \"type\": \"VC_TOKEN\",\n  \"uuid\": \"13ab7dc7-c18e-4f73-aa35-fc3a83966e79\",\n  \"name\": \"Az_Aside_Dot1Q_Pri_SV\",\n  \"description\": \"Az_Aside_Dot1Q_Pri_SV_Description\",\n  \"state\": \"INACTIVE\",\n  \"expirationDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n  \"connection\": {\n    \"type\": \"EVPL_VC\",\n    \"allowRemoteConnection\": false,\n    \"bandwidthLimit\": 50,\n    \"allowCustomBandwidth\": false,\n    \"aSide\": {\n      \"accessPointSelectors\": [\n        {\n          \"type\": \"COLO\",\n          \"port\": {\n            \"href\": \"http://api.equinix.com/fabric/v4/ports/b840a1db-5758-758f-97e0-328a5c00a874\",\n            \"type\": \"XF_PORT\",\n            \"uuid\": \"b840a1db-5758-758f-97e0-328a5c00a874\"\n          },\n          \"linkProtocol\": {\n            \"type\": \"QINQ\",\n            \"vlanCTag\": 1399,\n            \"vlanSTag\": 1388\n          }\n        }\n      ]\n    }\n  },\n  \"notifications\": [\n    {\n      \"type\": \"NOTIFICATION\",\n      \"emails\": [\n        \"abc@company.com\",\n        \"provider@company.com\"\n      ]\n    }\n  ],\n  \"account\": {\n    \"orgId\": 111437\n  },\n  \"changeLog\": {\n    \"createdBy\": \"843577\",\n    \"createdDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n    \"updatedBy\": \"843577\",\n    \"updatedDateTime\": \"2021-03-18 06:44:14.206000+00:00\"\n  },\n  \"project\": {\n    \"projectId\": \"995072000433550\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bdbddcd0-329c-4e1a-9df5-1db6b02dbb22",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens",
+                    ":serviceTokenId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceTokenId",
+                      "description": "(Required) Service Token UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3034016\",\n    \"errorMessage\": \"Token not found\",\n    \"correlationId\": \"0963d003-ecda-4391-b166-8ccbf31d2d82\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"tokenUuid\",\n        \"reason\": \"Token not found\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3ab1896-d3d1-466e-96d9-c394d9e6defe",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens",
+                    ":serviceTokenId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceTokenId",
+                      "description": "(Required) Service Token UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e577577-fa4c-4da3-a959-e075a13330d6",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens",
+                    ":serviceTokenId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceTokenId",
+                      "description": "(Required) Service Token UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f9d253e-c53c-4b1c-98cd-1a7d36f4d838",
+          "name": "Delete Token by uuid",
+          "request": {
+            "name": "Delete Token by uuid",
+            "description": {
+              "content": "Delete Service Tokens removes an Equinix Fabric service token corresponding to the specified uuid which are in INACTIVE state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "serviceTokens",
+                ":serviceTokenId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "serviceTokenId",
+                  "description": "(Required) Service Token UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "79e83b12-7d11-4e27-ab36-b6e20764734e",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens",
+                    ":serviceTokenId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceTokenId",
+                      "description": "(Required) Service Token UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"http://api.equinix.com/fabric/v4/serviceTokens/13ab7dc7-c18e-4f73-aa35-fc3a83966e79\",\n  \"type\": \"VC_TOKEN\",\n  \"uuid\": \"13ab7dc7-c18e-4f73-aa35-fc3a83966e79\",\n  \"name\": \"Az_Aside_Dot1Q_Pri_SV\",\n  \"description\": \"Az_Aside_Dot1Q_Pri_SV_Description\",\n  \"state\": \"INACTIVE\",\n  \"expirationDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n  \"connection\": {\n    \"type\": \"EVPL_VC\",\n    \"allowRemoteConnection\": false,\n    \"bandwidthLimit\": 50,\n    \"allowCustomBandwidth\": false,\n    \"aSide\": {\n      \"accessPointSelectors\": [\n        {\n          \"type\": \"COLO\",\n          \"port\": {\n            \"href\": \"http://api.equinix.com/fabric/v4/ports/b840a1db-5758-758f-97e0-328a5c00a874\",\n            \"type\": \"XF_PORT\",\n            \"uuid\": \"b840a1db-5758-758f-97e0-328a5c00a874\"\n          },\n          \"linkProtocol\": {\n            \"type\": \"QINQ\",\n            \"vlanCTag\": 1399,\n            \"vlanSTag\": 1388\n          }\n        }\n      ]\n    }\n  },\n  \"notifications\": [\n    {\n      \"type\": \"NOTIFICATION\",\n      \"emails\": [\n        \"abc@company.com\",\n        \"provider@company.com\"\n      ]\n    }\n  ],\n  \"account\": {\n    \"orgId\": 111437\n  },\n  \"changeLog\": {\n    \"createdBy\": \"843577\",\n    \"createdDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n    \"updatedBy\": \"843577\",\n    \"updatedDateTime\": \"2021-03-18 06:44:14.206000+00:00\"\n  },\n  \"project\": {\n    \"projectId\": \"995072000433550\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a5acbbc-0ad8-4908-bf30-3c3f9257b455",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens",
+                    ":serviceTokenId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceTokenId",
+                      "description": "(Required) Service Token UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3034016\",\n    \"errorMessage\": \"Token not found\",\n    \"correlationId\": \"0963d003-ecda-4391-b166-8ccbf31d2d82\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"tokenUuid\",\n        \"reason\": \"Token not found\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1792005-e3c4-4b02-841c-02411e728b0e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens",
+                    ":serviceTokenId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceTokenId",
+                      "description": "(Required) Service Token UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e980080-b1d1-4ab2-8f79-d2795eb920ad",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens",
+                    ":serviceTokenId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceTokenId",
+                      "description": "(Required) Service Token UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d4e3d3f-2c1b-40e6-bb2e-298f1664599f",
+          "name": "Update Token By ID",
+          "request": {
+            "name": "Update Token By ID",
+            "description": {
+              "content": "This API provides capability to update user's Service Token",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "serviceTokens",
+                ":serviceTokenId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dryRun",
+                  "value": "false",
+                  "description": "option to verify that API calls will succeed"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "serviceTokenId",
+                  "description": "(Required) Service Token UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json-patch+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"op\": \"<string>\",\n    \"path\": \"<string>\",\n    \"value\": {}\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "30b075ac-8528-4e8d-ad83-ee918ba35621",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens",
+                    ":serviceTokenId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryRun",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceTokenId",
+                      "description": "(Required) Service Token UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/expirationDateTime\",\n    \"value\": \"2023-01-20 18:50:34.696000+00:00\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"http://api.equinix.com/fabric/v4/serviceTokens/13ab7dc7-c18e-4f73-aa35-fc3a83966e79\",\n  \"type\": \"VC_TOKEN\",\n  \"uuid\": \"13ab7dc7-c18e-4f73-aa35-fc3a83966e79\",\n  \"name\": \"Az_Aside_Dot1Q_Pri_SV\",\n  \"description\": \"Az_Aside_Dot1Q_Pri_SV_Description\",\n  \"state\": \"INACTIVE\",\n  \"expirationDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n  \"connection\": {\n    \"type\": \"EVPL_VC\",\n    \"allowRemoteConnection\": false,\n    \"bandwidthLimit\": 50,\n    \"allowCustomBandwidth\": false,\n    \"aSide\": {\n      \"accessPointSelectors\": [\n        {\n          \"type\": \"COLO\",\n          \"port\": {\n            \"href\": \"http://api.equinix.com/fabric/v4/ports/b840a1db-5758-758f-97e0-328a5c00a874\",\n            \"type\": \"XF_PORT\",\n            \"uuid\": \"b840a1db-5758-758f-97e0-328a5c00a874\"\n          },\n          \"linkProtocol\": {\n            \"type\": \"QINQ\",\n            \"vlanCTag\": 1399,\n            \"vlanSTag\": 1388\n          }\n        }\n      ]\n    }\n  },\n  \"notifications\": [\n    {\n      \"type\": \"NOTIFICATION\",\n      \"emails\": [\n        \"abc@company.com\",\n        \"provider@company.com\"\n      ]\n    }\n  ],\n  \"account\": {\n    \"orgId\": 111437\n  },\n  \"changeLog\": {\n    \"createdBy\": \"843577\",\n    \"createdDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n    \"updatedBy\": \"843577\",\n    \"updatedDateTime\": \"2021-03-18 06:44:14.206000+00:00\"\n  },\n  \"project\": {\n    \"projectId\": \"995072000433550\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ed9094d-ae69-4ee6-a9da-442094ebb5f6",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens",
+                    ":serviceTokenId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryRun",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceTokenId",
+                      "description": "(Required) Service Token UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/expirationDateTime\",\n    \"value\": \"2023-01-20 18:50:34.696000+00:00\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3034016\",\n    \"errorMessage\": \"Token not found\",\n    \"correlationId\": \"0963d003-ecda-4391-b166-8ccbf31d2d82\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"tokenUuid\",\n        \"reason\": \"Token not found\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4838dd0f-e23c-4a19-88d5-c2fbc227028e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens",
+                    ":serviceTokenId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryRun",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceTokenId",
+                      "description": "(Required) Service Token UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/expirationDateTime\",\n    \"value\": \"2023-01-20 18:50:34.696000+00:00\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2e53656-7aa0-4b10-9907-8366c8d76f84",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens",
+                    ":serviceTokenId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryRun",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceTokenId",
+                      "description": "(Required) Service Token UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/expirationDateTime\",\n    \"value\": \"2023-01-20 18:50:34.696000+00:00\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5efc1d57-abe6-4004-a984-74757d4de058",
+          "name": "Get All Tokens",
+          "request": {
+            "name": "Get All Tokens",
+            "description": {
+              "content": "Get All ServiceTokens creates a list of all Equinix Fabric service tokens associated with the subscriber's account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "serviceTokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<number>",
+                  "description": "offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<number>",
+                  "description": "number of records to fetch"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "15797db3-9b99-45f4-b997-f2c86cabdd0e",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 75,\n    \"total\": 2\n  },\n  \"data\": [\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/serviceTokens/ea40918e-9b39-4045-8be8-0beaa7eb5ce1\",\n      \"type\": \"VC_TOKEN\",\n      \"name\": \"zside_network_token\",\n      \"uuid\": \"ea40918e-9b39-4045-8be8-0beaa7eb5ce1\",\n      \"description\": \"zside_Network_token\",\n      \"connection\": {\n        \"type\": \"EVPLAN_VC\",\n        \"allowRemoteConnection\": true,\n        \"allowCustomBandwidth\": false,\n        \"bandwidthLimit\": 20000,\n        \"zSide\": {\n          \"accessPointSelectors\": [\n            {\n              \"type\": \"NETWORK\",\n              \"network\": {\n                \"href\": \"https://api.equinix.com/fabric/v4/networks/20d32a80-0d61-4333-bc03-707b591ae2f4\",\n                \"type\": \"EVPLAN\",\n                \"uuid\": \"20d32a80-0d61-4333-bc03-707b591ae2f4\",\n                \"scope\": \"REGIONAL\"\n              }\n            }\n          ]\n        }\n      },\n      \"project\": {\n        \"projectId\": \"30ad25e2-53dc-11ed-bdc3-0242ac120002\"\n      },\n      \"expirationDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n      \"notifications\": [\n        {\n          \"type\": \"NOTIFICATION\",\n          \"emails\": [\n            \"abc@company.com\"\n          ]\n        }\n      ]\n    },\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/serviceTokens/ea40918e-9b39-4045-8be8-0beaa7eb5ce1\",\n      \"type\": \"VC_TOKEN\",\n      \"name\": \"zside_vd_token\",\n      \"uuid\": \"ea40918e-9b39-4045-8be8-0beaa7eb5ce1\",\n      \"description\": \"zside vd token\",\n      \"connection\": {\n        \"type\": \"EVPL_VC\",\n        \"allowRemoteConnection\": true,\n        \"allowCustomBandwidth\": false,\n        \"supportedBandwidths\": [\n          10,\n          50,\n          200\n        ],\n        \"zSide\": {\n          \"accessPointSelectors\": [\n            {\n              \"type\": \"VD\",\n              \"virtualDevice\": {\n                \"type\": \"EDGE\",\n                \"uuid\": \"20d32a80-0d61-4333-bc03-707b591ae2f4\"\n              },\n              \"interface\": {\n                \"type\": \"NETWORK\",\n                \"id\": 45645\n              }\n            }\n          ]\n        }\n      },\n      \"project\": {\n        \"projectId\": \"30ad25e2-53dc-11ed-bdc3-0242ac120002\"\n      },\n      \"expirationDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n      \"notifications\": [\n        {\n          \"type\": \"NOTIFICATION\",\n          \"emails\": [\n            \"abc@company.com\"\n          ]\n        }\n      ]\n    },\n    {\n      \"href\": \"http://api.equinix.com/fabric/v4/serviceTokens/13ab7dc7-c18e-4f73-aa35-fc3a83966e79\",\n      \"type\": \"VC_TOKEN\",\n      \"uuid\": \"13ab7dc7-c18e-4f73-aa35-fc3a83966e79\",\n      \"name\": \"Az_Aside_Dot1Q_Pri_SV\",\n      \"description\": \"Az_Aside_Dot1Q_Pri_SV_Description\",\n      \"state\": \"INACTIVE\",\n      \"expirationDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n      \"project\": {\n        \"projectId\": \"30ad25e2-53dc-11ed-bdc3-0242ac120002\"\n      },\n      \"connection\": {\n        \"type\": \"EVPL_VC\",\n        \"allowRemoteConnection\": false,\n        \"bandwidthLimit\": 50,\n        \"allowCustomBandwidth\": false,\n        \"aSide\": {\n          \"accessPointSelectors\": [\n            {\n              \"type\": \"COLO\",\n              \"port\": {\n                \"href\": \"http://api.equinix.com/fabric/v4/ports/b840a1db-5758-758f-97e0-328a5c00a874\",\n                \"type\": \"XF_PORT\",\n                \"uuid\": \"b840a1db-5758-758f-97e0-328a5c00a874\"\n              },\n              \"linkProtocol\": {\n                \"type\": \"QINQ\",\n                \"vlanCTag\": 1399,\n                \"vlanSTag\": 1388\n              }\n            }\n          ]\n        }\n      },\n      \"notifications\": [\n        {\n          \"type\": \"NOTIFICATION\",\n          \"emails\": [\n            \"abc@company.com\",\n            \"provider@company.com\"\n          ]\n        }\n      ],\n      \"account\": {\n        \"orgId\": 111437\n      },\n      \"changeLog\": {\n        \"createdBy\": \"843577\",\n        \"createdDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n        \"updatedBy\": \"843577\",\n        \"updatedDateTime\": \"2021-03-18 06:44:14.206000+00:00\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1b4a33d-6c09-4779-8923-940b4be4f57a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd3ab92c-34ed-4803-9617-99d0fc773d82",
+          "name": "Create Service Token",
+          "request": {
+            "name": "Create Service Token",
+            "description": {
+              "content": "Create Service Tokens generates Equinix Fabric? service tokens. These tokens authorize users to access protected resources and services.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "serviceTokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dryRun",
+                  "value": "false",
+                  "description": "option to verify that API calls will succeed"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"expiry\": \"<integer>\",\n  \"uuid\": \"<uuid>\",\n  \"issuerSide\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"expirationDateTime\": \"<dateTime>\",\n  \"connection\": {\n    \"type\": \"<string>\",\n    \"uuid\": \"<uuid>\",\n    \"allowRemoteConnection\": false,\n    \"allowCustomBandwidth\": false,\n    \"bandwidthLimit\": \"<integer>\",\n    \"supportedBandwidths\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"aSide\": {\n      \"accessPointSelectors\": [\n        {\n          \"type\": \"<string>\",\n          \"hideAssetInfo\": \"<boolean>\",\n          \"port\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uuid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvpId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"bandwidth\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"portName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"encapsulationProtocolType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"accountName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"priority\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"location\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"linkProtocol\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vlanTag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vlanSTag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vlanCTag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"virtualDevice\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uuid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"account\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cluster\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"interface\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uuid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"network\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uuid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scope\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"location\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"type\": \"<string>\",\n          \"hideAssetInfo\": \"<boolean>\",\n          \"port\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uuid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvpId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"bandwidth\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"portName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"encapsulationProtocolType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"accountName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"priority\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"location\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"linkProtocol\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vlanTag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vlanSTag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vlanCTag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"virtualDevice\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uuid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"account\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cluster\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"interface\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uuid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"network\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uuid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scope\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"location\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    \"zSide\": {\n      \"accessPointSelectors\": [\n        {\n          \"type\": \"<string>\",\n          \"hideAssetInfo\": \"<boolean>\",\n          \"port\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uuid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvpId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"bandwidth\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"portName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"encapsulationProtocolType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"accountName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"priority\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"location\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"linkProtocol\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vlanTag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vlanSTag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vlanCTag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"virtualDevice\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uuid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"account\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cluster\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"interface\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uuid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"network\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uuid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scope\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"location\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"type\": \"<string>\",\n          \"hideAssetInfo\": \"<boolean>\",\n          \"port\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uuid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvpId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"bandwidth\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"portName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"encapsulationProtocolType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"accountName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"priority\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"location\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"linkProtocol\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vlanTag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vlanSTag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vlanCTag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"virtualDevice\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uuid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"account\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cluster\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"interface\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uuid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"network\": {\n            \"href\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uuid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scope\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"location\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    }\n  },\n  \"state\": \"<string>\",\n  \"notifications\": [\n    {\n      \"emails\": [\n        \"<email>\",\n        \"<email>\"\n      ],\n      \"type\": \"<string>\",\n      \"sendInterval\": \"<string>\",\n      \"registeredUsers\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"emails\": [\n        \"<email>\",\n        \"<email>\"\n      ],\n      \"type\": \"<string>\",\n      \"sendInterval\": \"<string>\",\n      \"registeredUsers\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"account\": {\n    \"accountNumber\": \"<long>\",\n    \"accountName\": \"<string>\",\n    \"orgId\": \"<long>\",\n    \"organizationName\": \"<string>\",\n    \"globalOrgId\": \"<string>\",\n    \"globalOrganizationName\": \"<string>\",\n    \"ucmId\": \"<string>\",\n    \"globalCustId\": \"<string>\",\n    \"resellerAccountNumber\": \"<long>\",\n    \"resellerAccountName\": \"<string>\",\n    \"resellerUcmId\": \"<string>\",\n    \"resellerOrgId\": \"<long>\"\n  },\n  \"changelog\": {\n    \"createdBy\": \"<string>\",\n    \"createdByFullName\": \"<string>\",\n    \"createdByEmail\": \"<string>\",\n    \"createdDateTime\": \"<dateTime>\",\n    \"updatedBy\": \"<string>\",\n    \"updatedByFullName\": \"<string>\",\n    \"updatedByEmail\": \"<string>\",\n    \"updatedDateTime\": \"<dateTime>\",\n    \"deletedBy\": \"<string>\",\n    \"deletedByFullName\": \"<string>\",\n    \"deletedByEmail\": \"<string>\",\n    \"deletedDateTime\": \"<dateTime>\"\n  },\n  \"project\": {\n    \"projectId\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "138f43fc-fffa-4e7a-93c8-85d7b4614341",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryRun",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"VC_TOKEN\",\n  \"name\": \"Az_Aside_Dot1Q_Pri_SV\",\n  \"description\": \"Az_Aside_Dot1Q_Pri_SV_Description\",\n  \"expirationDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n  \"connection\": {\n    \"type\": \"EVPL_VC\",\n    \"allowRemoteConnection\": false,\n    \"bandwidthLimit\": 50,\n    \"allowCustomBandwidth\": false,\n    \"aSide\": {\n      \"accessPointSelectors\": [\n        {\n          \"type\": \"COLO\",\n          \"port\": {\n            \"uuid\": \"b840a1db-5758-758f-97e0-328a5c00a874\"\n          },\n          \"linkProtocol\": {\n            \"type\": \"QINQ\",\n            \"vlanCTag\": 1399,\n            \"vlanSTag\": 1388\n          }\n        }\n      ]\n    }\n  },\n  \"notifications\": [\n    {\n      \"type\": \"NOTIFICATION\",\n      \"emails\": [\n        \"abc@company.com\",\n        \"provider@company.com\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"VC_TOKEN\",\n  \"name\": \"Aside_Dot1Q_Service_Token\",\n  \"description\": \"Az_Aside_Dot1Q_DryRun_Description\",\n  \"expirationDateTime\": \"2024-12-18 06:43:49.980000+00:00\",\n  \"connection\": {\n    \"type\": \"EVPL_VC\",\n    \"allowRemoteConnection\": false,\n    \"bandwidthLimit\": 50,\n    \"allowCustomBandwidth\": false,\n    \"aSide\": {\n      \"accessPointSelectors\": [\n        {\n          \"type\": \"COLO\",\n          \"port\": {\n            \"href\": \"http://api.equinix.com/fabric/v4/ports/b840a1db-5758-758f-97e0-328a5c00a874\",\n            \"uuid\": \"b840a1db-5758-758f-97e0-328a5c00a874\"\n          },\n          \"linkProtocol\": {\n            \"type\": \"DOT1Q\",\n            \"vlanTag\": 1399\n          }\n        }\n      ]\n    }\n  },\n  \"notifications\": [\n    {\n      \"type\": \"NOTIFICATION\",\n      \"emails\": [\n        \"abc@company.com\",\n        \"provider@company.com\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46fbbc10-5851-432e-9488-a42b0582bc03",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryRun",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"VC_TOKEN\",\n  \"name\": \"Az_Aside_Dot1Q_Pri_SV\",\n  \"description\": \"Az_Aside_Dot1Q_Pri_SV_Description\",\n  \"expirationDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n  \"connection\": {\n    \"type\": \"EVPL_VC\",\n    \"allowRemoteConnection\": false,\n    \"bandwidthLimit\": 50,\n    \"allowCustomBandwidth\": false,\n    \"aSide\": {\n      \"accessPointSelectors\": [\n        {\n          \"type\": \"COLO\",\n          \"port\": {\n            \"uuid\": \"b840a1db-5758-758f-97e0-328a5c00a874\"\n          },\n          \"linkProtocol\": {\n            \"type\": \"QINQ\",\n            \"vlanCTag\": 1399,\n            \"vlanSTag\": 1388\n          }\n        }\n      ]\n    }\n  },\n  \"notifications\": [\n    {\n      \"type\": \"NOTIFICATION\",\n      \"emails\": [\n        \"abc@company.com\",\n        \"provider@company.com\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"http://api.equinix.com/fabric/v4/serviceTokens/13ab7dc7-c18e-4f73-aa35-fc3a83966e79\",\n  \"type\": \"VC_TOKEN\",\n  \"uuid\": \"13ab7dc7-c18e-4f73-aa35-fc3a83966e79\",\n  \"name\": \"Az_Aside_Dot1Q_Pri_SV\",\n  \"description\": \"Az_Aside_Dot1Q_Pri_SV_Description\",\n  \"state\": \"INACTIVE\",\n  \"expirationDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n  \"connection\": {\n    \"type\": \"EVPL_VC\",\n    \"allowRemoteConnection\": false,\n    \"bandwidthLimit\": 50,\n    \"allowCustomBandwidth\": false,\n    \"aSide\": {\n      \"accessPointSelectors\": [\n        {\n          \"type\": \"COLO\",\n          \"port\": {\n            \"href\": \"http://api.equinix.com/fabric/v4/ports/b840a1db-5758-758f-97e0-328a5c00a874\",\n            \"type\": \"XF_PORT\",\n            \"uuid\": \"b840a1db-5758-758f-97e0-328a5c00a874\"\n          },\n          \"linkProtocol\": {\n            \"type\": \"QINQ\",\n            \"vlanCTag\": 1399,\n            \"vlanSTag\": 1388\n          }\n        }\n      ]\n    }\n  },\n  \"notifications\": [\n    {\n      \"type\": \"NOTIFICATION\",\n      \"emails\": [\n        \"abc@company.com\",\n        \"provider@company.com\"\n      ]\n    }\n  ],\n  \"account\": {\n    \"orgId\": 111437\n  },\n  \"changeLog\": {\n    \"createdBy\": \"843577\",\n    \"createdDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n    \"updatedBy\": \"843577\",\n    \"updatedDateTime\": \"2021-03-18 06:44:14.206000+00:00\"\n  },\n  \"project\": {\n    \"projectId\": \"995072000433550\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "346464b0-b36b-4566-b5f6-0b4c2de9707f",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryRun",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"VC_TOKEN\",\n  \"name\": \"Az_Aside_Dot1Q_Pri_SV\",\n  \"description\": \"Az_Aside_Dot1Q_Pri_SV_Description\",\n  \"expirationDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n  \"connection\": {\n    \"type\": \"EVPL_VC\",\n    \"allowRemoteConnection\": false,\n    \"bandwidthLimit\": 50,\n    \"allowCustomBandwidth\": false,\n    \"aSide\": {\n      \"accessPointSelectors\": [\n        {\n          \"type\": \"COLO\",\n          \"port\": {\n            \"uuid\": \"b840a1db-5758-758f-97e0-328a5c00a874\"\n          },\n          \"linkProtocol\": {\n            \"type\": \"QINQ\",\n            \"vlanCTag\": 1399,\n            \"vlanSTag\": 1388\n          }\n        }\n      ]\n    }\n  },\n  \"notifications\": [\n    {\n      \"type\": \"NOTIFICATION\",\n      \"emails\": [\n        \"abc@company.com\",\n        \"provider@company.com\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3142102\",\n    \"errorMessage\": \"Connection has duplicate buyer-side VLAN ID for port or the same VLAN ID is in the process of being deleted and should be freed up soon\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/aSide/accessPoint/linkProtocol\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142535\",\n    \"errorMessage\": \"The connection bandwidth provided in the connection request exceeds the bandwidth Limit on ServiceToken\",\n    \"details\": \"Please enter bandwidth less than the Speed limit on ServiceToken\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/aSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142536\",\n    \"errorMessage\": \"Remote connection cannot be created with the provided ServiceToken\",\n    \"details\": \"Only local Connection can be created using this ServiceToken\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/accessPoint/port/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142701\",\n    \"errorMessage\": \"The connection bandwidth provided in the connection request exceeds the bandwidth Limit on ServiceToken\",\n    \"details\": \"not an authorized user\",\n    \"correlationId\": \"test\"\n  },\n  {\n    \"errorCode\": \"EQ-3142501\",\n    \"errorMessage\": \"Invalid input\",\n    \"correlationId\": \"20d32a80-0d61-4333-bc03-707b591ae2f5\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"aSide/accessPoint/port/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142509\",\n    \"errorMessage\": \"Connection already deleted\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142510\",\n    \"errorMessage\": \"Connection is in transient state\",\n    \"correlationId\": \"20d32a80-0d61-4333-bc03-707b591ae2f5\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142221\",\n    \"errorMessage\": \"The primary and secondary token provided have different bandwidth tiers. Please use two tokens that support the same bandwidth tiers\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142222\",\n    \"errorMessage\": \"The primary and secondary tokens have different encapsulation types (Dot1Q or QinQ). Please use two tokens that support the same encapsulation type\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142223\",\n    \"errorMessage\": \"The primary and secondary tokens belong to different projects. Please use two tokens that belong to the same project\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142224\",\n    \"errorMessage\": \"The primary and secondary ports have different port speeds (bandwidth). Please use two tokens that support the same port speed\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142225\",\n    \"errorMessage\": \"The primary and secondary tokens provided are the same. Please provide a different token\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142514\",\n    \"errorMessage\": \"Redundancy group is required\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/redundancy/group\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142515\",\n    \"errorMessage\": \"Redundancy priority is required\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/redundancy/priority\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142516\",\n    \"errorMessage\": \"Invalid redundancy group\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/redundancy/group\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142517\",\n    \"errorMessage\": \"Invalid redundancy priority\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/redundancy/priority\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142303\",\n    \"errorMessage\": \"Only Primary connection allowed for this CSP\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/redundancy/priority\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142320\",\n    \"errorMessage\": \"For redundant connection, Service Profile should be the same\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/accessPoint/profile/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142021\",\n    \"errorMessage\": \"For redundant connection, Fabric Cloud Router should be the same\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/aSide/accessPoint/router/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142012\",\n    \"errorMessage\": \"Fabric Cloud Router is not in PROVISIONED state\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/aSide/accessPoint/router/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142301\",\n    \"errorMessage\": \"Given profile does not exist\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/accessPoint/profile/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142302\",\n    \"errorMessage\": \"Service provider does not exist in required zSide metro\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/accessPoint/location/metroCode\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142013\",\n    \"errorMessage\": \"Invalid metro for Cloud Router connection\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/aSide/accessPoint/router/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142304\",\n    \"errorMessage\": \"Private connections are not allowed on public profiles\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"visibility\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142306\",\n    \"errorMessage\": \"Requested bandwidth is not supported by service profile\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/bandwidth\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142308\",\n    \"errorMessage\": \"Authentication key is required\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/accessPoint/authenticationKey\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "160234ca-b4ec-478e-94c0-3510469acc5c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryRun",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"VC_TOKEN\",\n  \"name\": \"Az_Aside_Dot1Q_Pri_SV\",\n  \"description\": \"Az_Aside_Dot1Q_Pri_SV_Description\",\n  \"expirationDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n  \"connection\": {\n    \"type\": \"EVPL_VC\",\n    \"allowRemoteConnection\": false,\n    \"bandwidthLimit\": 50,\n    \"allowCustomBandwidth\": false,\n    \"aSide\": {\n      \"accessPointSelectors\": [\n        {\n          \"type\": \"COLO\",\n          \"port\": {\n            \"uuid\": \"b840a1db-5758-758f-97e0-328a5c00a874\"\n          },\n          \"linkProtocol\": {\n            \"type\": \"QINQ\",\n            \"vlanCTag\": 1399,\n            \"vlanSTag\": 1388\n          }\n        }\n      ]\n    }\n  },\n  \"notifications\": [\n    {\n      \"type\": \"NOTIFICATION\",\n      \"emails\": [\n        \"abc@company.com\",\n        \"provider@company.com\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c90842e-2eaa-4dcc-a7b5-4888075bafc0",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dryRun",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"VC_TOKEN\",\n  \"name\": \"Az_Aside_Dot1Q_Pri_SV\",\n  \"description\": \"Az_Aside_Dot1Q_Pri_SV_Description\",\n  \"expirationDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n  \"connection\": {\n    \"type\": \"EVPL_VC\",\n    \"allowRemoteConnection\": false,\n    \"bandwidthLimit\": 50,\n    \"allowCustomBandwidth\": false,\n    \"aSide\": {\n      \"accessPointSelectors\": [\n        {\n          \"type\": \"COLO\",\n          \"port\": {\n            \"uuid\": \"b840a1db-5758-758f-97e0-328a5c00a874\"\n          },\n          \"linkProtocol\": {\n            \"type\": \"QINQ\",\n            \"vlanCTag\": 1399,\n            \"vlanSTag\": 1388\n          }\n        }\n      ]\n    }\n  },\n  \"notifications\": [\n    {\n      \"type\": \"NOTIFICATION\",\n      \"emails\": [\n        \"abc@company.com\",\n        \"provider@company.com\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6b40c2bb-61bb-4f37-b778-19e3d9b0db8b",
+          "name": "ServiceToken Actions",
+          "request": {
+            "name": "ServiceToken Actions",
+            "description": {
+              "content": "This API provides capability to accept/reject user's servicetokens",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "serviceTokens",
+                ":serviceTokenId",
+                "actions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "serviceTokenId",
+                  "description": "(Required) Service Token UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "75b65d8b-624a-413f-a965-eb52d090c1f9",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens",
+                    ":serviceTokenId",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceTokenId",
+                      "description": "(Required) Service Token UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"RESEND_EMAIL_NOTIFICATION\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"http://api.equinix.com/fabric/v4/serviceTokens/13ab7dc7-c18e-4f73-aa35-fc3a83966e79\",\n  \"type\": \"VC_TOKEN\",\n  \"uuid\": \"13ab7dc7-c18e-4f73-aa35-fc3a83966e79\",\n  \"name\": \"Az_Aside_Dot1Q_Pri_SV\",\n  \"description\": \"Az_Aside_Dot1Q_Pri_SV_Description\",\n  \"state\": \"INACTIVE\",\n  \"expiry\": 0,\n  \"expirationDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n  \"connection\": {\n    \"type\": \"EVPL_VC\",\n    \"allowRemoteConnection\": false,\n    \"bandwidthLimit\": 50,\n    \"allowCustomBandwidth\": false,\n    \"aSide\": {\n      \"accessPointSelectors\": [\n        {\n          \"type\": \"COLO\",\n          \"port\": {\n            \"href\": \"http://api.equinix.com/fabric/v4/ports/b840a1db-5758-758f-97e0-328a5c00a874\",\n            \"type\": \"XF_PORT\",\n            \"uuid\": \"b840a1db-5758-758f-97e0-328a5c00a874\"\n          },\n          \"linkProtocol\": {\n            \"type\": \"QINQ\",\n            \"vlanCTag\": 1399,\n            \"vlanSTag\": 1388\n          }\n        }\n      ]\n    }\n  },\n  \"notifications\": [\n    {\n      \"type\": \"NOTIFICATION\",\n      \"emails\": [\n        \"abc@company.com\",\n        \"provider@company.com\"\n      ]\n    }\n  ],\n  \"account\": {\n    \"orgId\": 111437\n  },\n  \"changeLog\": {\n    \"createdBy\": \"843577\",\n    \"createdDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n    \"updatedBy\": \"843577\",\n    \"updatedDateTime\": \"2021-03-18 06:44:14.206000+00:00\"\n  },\n  \"project\": {\n    \"projectId\": \"995072000433550\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45214f81-46ef-410e-a902-8d6ef43b616d",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens",
+                    ":serviceTokenId",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceTokenId",
+                      "description": "(Required) Service Token UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"RESEND_EMAIL_NOTIFICATION\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3142102\",\n    \"errorMessage\": \"Connection has duplicate buyer-side VLAN ID for port or the same VLAN ID is in the process of being deleted and should be freed up soon\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/aSide/accessPoint/linkProtocol\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142535\",\n    \"errorMessage\": \"The connection bandwidth provided in the connection request exceeds the bandwidth Limit on ServiceToken\",\n    \"details\": \"Please enter bandwidth less than the Speed limit on ServiceToken\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/aSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142536\",\n    \"errorMessage\": \"Remote connection cannot be created with the provided ServiceToken\",\n    \"details\": \"Only local Connection can be created using this ServiceToken\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/accessPoint/port/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142701\",\n    \"errorMessage\": \"The connection bandwidth provided in the connection request exceeds the bandwidth Limit on ServiceToken\",\n    \"details\": \"not an authorized user\",\n    \"correlationId\": \"test\"\n  },\n  {\n    \"errorCode\": \"EQ-3142501\",\n    \"errorMessage\": \"Invalid input\",\n    \"correlationId\": \"20d32a80-0d61-4333-bc03-707b591ae2f5\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"aSide/accessPoint/port/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142509\",\n    \"errorMessage\": \"Connection already deleted\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142510\",\n    \"errorMessage\": \"Connection is in transient state\",\n    \"correlationId\": \"20d32a80-0d61-4333-bc03-707b591ae2f5\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142221\",\n    \"errorMessage\": \"The primary and secondary token provided have different bandwidth tiers. Please use two tokens that support the same bandwidth tiers\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142222\",\n    \"errorMessage\": \"The primary and secondary tokens have different encapsulation types (Dot1Q or QinQ). Please use two tokens that support the same encapsulation type\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142223\",\n    \"errorMessage\": \"The primary and secondary tokens belong to different projects. Please use two tokens that belong to the same project\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142224\",\n    \"errorMessage\": \"The primary and secondary ports have different port speeds (bandwidth). Please use two tokens that support the same port speed\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142225\",\n    \"errorMessage\": \"The primary and secondary tokens provided are the same. Please provide a different token\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142514\",\n    \"errorMessage\": \"Redundancy group is required\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/redundancy/group\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142515\",\n    \"errorMessage\": \"Redundancy priority is required\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/redundancy/priority\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142516\",\n    \"errorMessage\": \"Invalid redundancy group\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/redundancy/group\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142517\",\n    \"errorMessage\": \"Invalid redundancy priority\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/redundancy/priority\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142303\",\n    \"errorMessage\": \"Only Primary connection allowed for this CSP\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/redundancy/priority\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142320\",\n    \"errorMessage\": \"For redundant connection, Service Profile should be the same\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/accessPoint/profile/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142021\",\n    \"errorMessage\": \"For redundant connection, Fabric Cloud Router should be the same\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/aSide/accessPoint/router/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142012\",\n    \"errorMessage\": \"Fabric Cloud Router is not in PROVISIONED state\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/aSide/accessPoint/router/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142301\",\n    \"errorMessage\": \"Given profile does not exist\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/accessPoint/profile/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142302\",\n    \"errorMessage\": \"Service provider does not exist in required zSide metro\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/accessPoint/location/metroCode\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142013\",\n    \"errorMessage\": \"Invalid metro for Cloud Router connection\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/aSide/accessPoint/router/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142304\",\n    \"errorMessage\": \"Private connections are not allowed on public profiles\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"visibility\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142306\",\n    \"errorMessage\": \"Requested bandwidth is not supported by service profile\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/bandwidth\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142308\",\n    \"errorMessage\": \"Authentication key is required\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/accessPoint/authenticationKey\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2f334bd-f462-47ad-ab5f-890851be402a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens",
+                    ":serviceTokenId",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceTokenId",
+                      "description": "(Required) Service Token UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"RESEND_EMAIL_NOTIFICATION\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-4035587\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-6812635\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37a11565-e659-4257-9fd9-8c8bd4d16ed3",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens",
+                    ":serviceTokenId",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceTokenId",
+                      "description": "(Required) Service Token UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"RESEND_EMAIL_NOTIFICATION\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "077b916c-19e9-4f47-a3f5-da8c310285bd",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens",
+                    ":serviceTokenId",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "serviceTokenId",
+                      "description": "(Required) Service Token UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"RESEND_EMAIL_NOTIFICATION\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36508483-80ca-4259-81fc-c209b9aacc3d",
+          "name": "Search servicetokens",
+          "request": {
+            "name": "Search servicetokens",
+            "description": {
+              "content": "The API provides capability to get list of user's servicetokens using search criteria, including optional filtering, pagination and sorting",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "serviceTokens",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<number>",
+                  "description": "offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<number>",
+                  "description": "number of records to fetch"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ServiceTokenSearchExpression detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ServiceTokenSearchExpression detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ServiceTokenSearchExpression detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/ServiceTokenSearchExpression detected>\"\n      }\n    ],\n    \"property\": \"<string>\",\n    \"operator\": \"<string>\",\n    \"values\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "99a2830c-5db0-4e07-b404-2d896f90bfcb",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/uuid\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"407f8239-254c-4fe2-a378-458f197e17c4\"\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 75,\n    \"total\": 2\n  },\n  \"data\": [\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/serviceTokens/ea40918e-9b39-4045-8be8-0beaa7eb5ce1\",\n      \"type\": \"VC_TOKEN\",\n      \"name\": \"zside_network_token\",\n      \"uuid\": \"ea40918e-9b39-4045-8be8-0beaa7eb5ce1\",\n      \"description\": \"zside_Network_token\",\n      \"connection\": {\n        \"type\": \"EVPLAN_VC\",\n        \"allowRemoteConnection\": true,\n        \"allowCustomBandwidth\": false,\n        \"bandwidthLimit\": 20000,\n        \"zSide\": {\n          \"accessPointSelectors\": [\n            {\n              \"type\": \"NETWORK\",\n              \"network\": {\n                \"href\": \"https://api.equinix.com/fabric/v4/networks/20d32a80-0d61-4333-bc03-707b591ae2f4\",\n                \"type\": \"EVPLAN\",\n                \"uuid\": \"20d32a80-0d61-4333-bc03-707b591ae2f4\",\n                \"scope\": \"REGIONAL\"\n              }\n            }\n          ]\n        }\n      },\n      \"project\": {\n        \"projectId\": \"30ad25e2-53dc-11ed-bdc3-0242ac120002\"\n      },\n      \"expirationDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n      \"notifications\": [\n        {\n          \"type\": \"NOTIFICATION\",\n          \"emails\": [\n            \"abc@company.com\"\n          ]\n        }\n      ]\n    },\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/serviceTokens/ea40918e-9b39-4045-8be8-0beaa7eb5ce1\",\n      \"type\": \"VC_TOKEN\",\n      \"name\": \"zside_vd_token\",\n      \"uuid\": \"ea40918e-9b39-4045-8be8-0beaa7eb5ce1\",\n      \"description\": \"zside vd token\",\n      \"connection\": {\n        \"type\": \"EVPL_VC\",\n        \"allowRemoteConnection\": true,\n        \"allowCustomBandwidth\": false,\n        \"supportedBandwidths\": [\n          10,\n          50,\n          200\n        ],\n        \"zSide\": {\n          \"accessPointSelectors\": [\n            {\n              \"type\": \"VD\",\n              \"virtualDevice\": {\n                \"type\": \"EDGE\",\n                \"uuid\": \"20d32a80-0d61-4333-bc03-707b591ae2f4\"\n              },\n              \"interface\": {\n                \"type\": \"NETWORK\",\n                \"id\": 45645\n              }\n            }\n          ]\n        }\n      },\n      \"project\": {\n        \"projectId\": \"30ad25e2-53dc-11ed-bdc3-0242ac120002\"\n      },\n      \"expirationDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n      \"notifications\": [\n        {\n          \"type\": \"NOTIFICATION\",\n          \"emails\": [\n            \"abc@company.com\"\n          ]\n        }\n      ]\n    },\n    {\n      \"href\": \"http://api.equinix.com/fabric/v4/serviceTokens/13ab7dc7-c18e-4f73-aa35-fc3a83966e79\",\n      \"type\": \"VC_TOKEN\",\n      \"uuid\": \"13ab7dc7-c18e-4f73-aa35-fc3a83966e79\",\n      \"name\": \"Az_Aside_Dot1Q_Pri_SV\",\n      \"description\": \"Az_Aside_Dot1Q_Pri_SV_Description\",\n      \"state\": \"INACTIVE\",\n      \"expirationDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n      \"project\": {\n        \"projectId\": \"30ad25e2-53dc-11ed-bdc3-0242ac120002\"\n      },\n      \"connection\": {\n        \"type\": \"EVPL_VC\",\n        \"allowRemoteConnection\": false,\n        \"bandwidthLimit\": 50,\n        \"allowCustomBandwidth\": false,\n        \"aSide\": {\n          \"accessPointSelectors\": [\n            {\n              \"type\": \"COLO\",\n              \"port\": {\n                \"href\": \"http://api.equinix.com/fabric/v4/ports/b840a1db-5758-758f-97e0-328a5c00a874\",\n                \"type\": \"XF_PORT\",\n                \"uuid\": \"b840a1db-5758-758f-97e0-328a5c00a874\"\n              },\n              \"linkProtocol\": {\n                \"type\": \"QINQ\",\n                \"vlanCTag\": 1399,\n                \"vlanSTag\": 1388\n              }\n            }\n          ]\n        }\n      },\n      \"notifications\": [\n        {\n          \"type\": \"NOTIFICATION\",\n          \"emails\": [\n            \"abc@company.com\",\n            \"provider@company.com\"\n          ]\n        }\n      ],\n      \"account\": {\n        \"orgId\": 111437\n      },\n      \"changeLog\": {\n        \"createdBy\": \"843577\",\n        \"createdDateTime\": \"2021-03-18 06:43:49.980000+00:00\",\n        \"updatedBy\": \"843577\",\n        \"updatedDateTime\": \"2021-03-18 06:44:14.206000+00:00\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0bd7720-fd8f-4f4a-beaa-118c89e5184c",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/uuid\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"407f8239-254c-4fe2-a378-458f197e17c4\"\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3142102\",\n    \"errorMessage\": \"Connection has duplicate buyer-side VLAN ID for port or the same VLAN ID is in the process of being deleted and should be freed up soon\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/aSide/accessPoint/linkProtocol\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142535\",\n    \"errorMessage\": \"The connection bandwidth provided in the connection request exceeds the bandwidth Limit on ServiceToken\",\n    \"details\": \"Please enter bandwidth less than the Speed limit on ServiceToken\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/aSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142536\",\n    \"errorMessage\": \"Remote connection cannot be created with the provided ServiceToken\",\n    \"details\": \"Only local Connection can be created using this ServiceToken\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/accessPoint/port/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142701\",\n    \"errorMessage\": \"The connection bandwidth provided in the connection request exceeds the bandwidth Limit on ServiceToken\",\n    \"details\": \"not an authorized user\",\n    \"correlationId\": \"test\"\n  },\n  {\n    \"errorCode\": \"EQ-3142501\",\n    \"errorMessage\": \"Invalid input\",\n    \"correlationId\": \"20d32a80-0d61-4333-bc03-707b591ae2f5\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"aSide/accessPoint/port/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142509\",\n    \"errorMessage\": \"Connection already deleted\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142510\",\n    \"errorMessage\": \"Connection is in transient state\",\n    \"correlationId\": \"20d32a80-0d61-4333-bc03-707b591ae2f5\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142221\",\n    \"errorMessage\": \"The primary and secondary token provided have different bandwidth tiers. Please use two tokens that support the same bandwidth tiers\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142222\",\n    \"errorMessage\": \"The primary and secondary tokens have different encapsulation types (Dot1Q or QinQ). Please use two tokens that support the same encapsulation type\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142223\",\n    \"errorMessage\": \"The primary and secondary tokens belong to different projects. Please use two tokens that belong to the same project\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142224\",\n    \"errorMessage\": \"The primary and secondary ports have different port speeds (bandwidth). Please use two tokens that support the same port speed\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142225\",\n    \"errorMessage\": \"The primary and secondary tokens provided are the same. Please provide a different token\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/serviceToken/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142514\",\n    \"errorMessage\": \"Redundancy group is required\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/redundancy/group\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142515\",\n    \"errorMessage\": \"Redundancy priority is required\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/redundancy/priority\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142516\",\n    \"errorMessage\": \"Invalid redundancy group\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/redundancy/group\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142517\",\n    \"errorMessage\": \"Invalid redundancy priority\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/redundancy/priority\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142303\",\n    \"errorMessage\": \"Only Primary connection allowed for this CSP\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/redundancy/priority\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142320\",\n    \"errorMessage\": \"For redundant connection, Service Profile should be the same\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/accessPoint/profile/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142021\",\n    \"errorMessage\": \"For redundant connection, Fabric Cloud Router should be the same\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/aSide/accessPoint/router/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142012\",\n    \"errorMessage\": \"Fabric Cloud Router is not in PROVISIONED state\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/aSide/accessPoint/router/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142301\",\n    \"errorMessage\": \"Given profile does not exist\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/accessPoint/profile/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142302\",\n    \"errorMessage\": \"Service provider does not exist in required zSide metro\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/accessPoint/location/metroCode\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142013\",\n    \"errorMessage\": \"Invalid metro for Cloud Router connection\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/aSide/accessPoint/router/uuid\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142304\",\n    \"errorMessage\": \"Private connections are not allowed on public profiles\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"visibility\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142306\",\n    \"errorMessage\": \"Requested bandwidth is not supported by service profile\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/bandwidth\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-3142308\",\n    \"errorMessage\": \"Authentication key is required\",\n    \"correlationId\": \"test\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/zSide/accessPoint/authenticationKey\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50e4ee09-6af3-430f-b441-e2b091ec8a70",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/uuid\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"407f8239-254c-4fe2-a378-458f197e17c4\"\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d32915dd-cf75-4c1a-994d-b1c88dabb3df",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/uuid\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"407f8239-254c-4fe2-a378-458f197e17c4\"\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28744435-389e-4505-aacd-ab6b5b640c42",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "serviceTokens",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/uuid\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"407f8239-254c-4fe2-a378-458f197e17c4\"\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3041011\",\n    \"errorMessage\": \"Bad request - Internal Server Error. Please check the request payload and submit again.\",\n    \"details\": \"Please contact support@equinix.com for more info\",\n    \"correlationId\": \"9048796775044a60-39cb-4ccc-b272-b80f126e5408\",\n    \"additionalInfo\": [\n      {\n        \"reason\": \"Please contact support@equinix.com for more info\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "24a38efa-915a-48b5-8091-40cc14d3009e",
+    "name": "Equinix API Authentication Service Tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}

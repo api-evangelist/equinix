@@ -1,0 +1,761 @@
+{
+  "item": [
+    {
+      "id": "2ac15a64-bd89-4ba1-ae7f-2b72c78b2329",
+      "name": "Metros",
+      "description": {
+        "content": "Metro Management. Check out the product docs to learn more about [Metros](https://metal.equinix.com/developers/docs/locations/metros/).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3b0578bb-4852-4ba7-8ab9-488e0fa19143",
+          "name": "Retrieve all metros",
+          "request": {
+            "name": "Retrieve all metros",
+            "description": {
+              "content": "Provides a listing of available metros",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "locations",
+                "metros"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e9d93a0f-8de4-47e6-bead-edf5fdf2a6d3",
+              "name": "ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    "metros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metros\": [\n    {\n      \"country\": \"country\",\n      \"code\": \"code\",\n      \"name\": \"name\"\n    },\n    {\n      \"country\": \"country\",\n      \"code\": \"code\",\n      \"name\": \"name\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3ab6f32-590e-49f7-87f1-c67b36aa41b3",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    "metros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89888f3e-20b1-4505-af61-5b923dbb7e43",
+          "name": "Retrieve a specific Metro's details",
+          "request": {
+            "name": "Retrieve a specific Metro's details",
+            "description": {
+              "content": "Show the details for a metro, including name, code, and country.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "locations",
+                "metros",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Metro UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "77f59dce-9611-481c-bc7d-044fa56de4dd",
+              "name": "ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    "metros",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Metro UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"country\": \"country\",\n  \"code\": \"code\",\n  \"name\": \"name\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aaa5420e-f2f0-4915-bbd7-b181df93206a",
+              "name": "not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    "metros",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Metro UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "15479f95-f0e8-4805-8804-9b13c42ccb42",
+          "name": "Get all Metros",
+          "request": {
+            "name": "Get all Metros",
+            "description": {
+              "content": "GET All Subscriber Metros with an option query parameter to return all Equinix Fabric metros in which the customer has a presence, as well as latency data for each location.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "metros"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "presence",
+                  "value": "<string>",
+                  "description": "User On Boarded Metros based on Fabric resource availability"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "number of records to fetch"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53b36e27-1bd4-43e4-9833-b52d7a440843",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "metros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "presence",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 75,\n    \"total\": 1\n  },\n  \"data\": [\n    {\n      \"href\": \"https://api.equinix.com/v4/fabric/metros/AM\",\n      \"type\": \"XF_METRO\",\n      \"code\": \"AM\",\n      \"name\": \"Amsterdam\",\n      \"region\": \"EMEA\",\n      \"equinixAsn\": 60000,\n      \"localVCBandwidthMax\": 10000,\n      \"geoCoordinates\": {\n        \"latitude\": 52.30049,\n        \"longitude\": 4.942603\n      },\n      \"connectedMetros\": [\n        {\n          \"href\": \"https://api.equinix.com/v4/fabric/metros/MX\",\n          \"code\": \"MX\",\n          \"avgLatency\": 132,\n          \"remoteVCBandwidthMax\": 10000\n        },\n        {\n          \"href\": \"https://api.equinix.com/v4/fabric/metros/AM\",\n          \"code\": \"HH\",\n          \"avgLatency\": 8.62,\n          \"remoteVCBandwidthMax\": 10000\n        },\n        {\n          \"href\": \"https://api.equinix.com/v4/fabric/metros/SL\",\n          \"code\": \"SL\",\n          \"avgLatency\": 229,\n          \"remoteVCBandwidthMax\": 10000\n        },\n        {\n          \"href\": \"https://api.equinix.com/v4/fabric/metros/SO\",\n          \"code\": \"SO\",\n          \"avgLatency\": 36.3,\n          \"remoteVCBandwidthMax\": 50000\n        },\n        {\n          \"href\": \"https://api.equinix.com/v4/fabric/metros/IL\",\n          \"code\": \"IL\",\n          \"avgLatency\": 44.8,\n          \"remoteVCBandwidthMax\": 50000\n        },\n        {\n          \"href\": \"https://api.equinix.com/v4/fabric/metros/LS\",\n          \"code\": \"LS\",\n          \"avgLatency\": 36.6,\n          \"remoteVCBandwidthMax\": 50000\n        },\n        {\n          \"href\": \"https://api.equinix.com/v4/fabric/metros/BA\",\n          \"code\": \"BA\",\n          \"avgLatency\": 32.6,\n          \"remoteVCBandwidthMax\": 50000\n        },\n        {\n          \"href\": \"https://api.equinix.com/v4/fabric/metros/BL\",\n          \"code\": \"BL\",\n          \"avgLatency\": 3.28,\n          \"remoteVCBandwidthMax\": 50000\n        },\n        {\n          \"href\": \"https://api.equinix.com/v4/fabric/metros/GV\",\n          \"code\": \"GV\",\n          \"avgLatency\": 15.3,\n          \"remoteVCBandwidthMax\": 50000\n        },\n        {\n          \"href\": \"https://api.equinix.com/v4/fabric/metros/LD\",\n          \"code\": \"LD\",\n          \"avgLatency\": 5.85,\n          \"remoteVCBandwidthMax\": 50000\n        }\n      ],\n      \"services\": [\n        {\n          \"type\": \"ETHERNET_IP_SERVICE\"\n        },\n        {\n          \"type\": \"TIME_SERVICE\"\n        }\n      ],\n      \"geoScopes\": [\n        \"CANADA\",\n        \"CONUS\",\n        \"JAPAN\",\n        \"UK\",\n        \"AUSTRALIA\",\n        \"BRAZIL\",\n        \"SWITZERLAND\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c3f3a38-4062-4cbe-81fb-0946c4730c51",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "metros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "presence",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3036013\",\n    \"errorMessage\": \"Invalid Query Parameter\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"presence\",\n        \"reason\": \"Allowed value for presence is MY_PORTS\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11c681c7-8064-42a9-9df0-d45bb2c99bc8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "metros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "presence",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3036001\",\n    \"errorMessage\": \"Unauthorized\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"additionalInfo\": [\n      {\n        \"reason\": \"You are unauthorized to perform this operation\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01380923-f56e-4474-9b6a-e102ad64375e",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "metros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "presence",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3036030\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"additionalInfo\": [\n      {\n        \"reason\": \"An Internal Server Error occured\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7e0e868-01e8-4996-a737-0d553028db91",
+          "name": "Get Metro by Code",
+          "request": {
+            "name": "Get Metro by Code",
+            "description": {
+              "content": "GET Metros retrieves all Equinix Fabric metros, as well as latency data between each metro location.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "metros",
+                ":metroCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "metroCode",
+                  "description": "(Required) Metro Code"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c2b47e73-26b4-432a-8cae-b88ff5b5de14",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "metros",
+                    ":metroCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "metroCode",
+                      "description": "(Required) Metro Code"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/v4/fabric/metros/AM\",\n  \"type\": \"XF_METRO\",\n  \"code\": \"AM\",\n  \"region\": \"EMEA\",\n  \"name\": \"Amsterdam\",\n  \"equinixAsn\": 60000,\n  \"localVCBandwidthMax\": 50000,\n  \"geoCoordinates\": {\n    \"latitude\": 52.30049,\n    \"longitude\": 4.942603\n  },\n  \"connectedMetros\": [\n    {\n      \"href\": \"https://api.equinix.com/v4/fabric/metros/MX\",\n      \"code\": \"MX\",\n      \"avgLatency\": 132,\n      \"remoteVCBandwidthMax\": 50000\n    },\n    {\n      \"href\": \"https://api.equinix.com/v4/fabric/metros/HH\",\n      \"code\": \"HH\",\n      \"avgLatency\": 8.62,\n      \"remoteVCBandwidthMax\": 50000\n    },\n    {\n      \"href\": \"https://api.equinix.com/v4/fabric/metros/SL\",\n      \"code\": \"SL\",\n      \"avgLatency\": 229,\n      \"remoteVCBandwidthMax\": 50000\n    },\n    {\n      \"href\": \"https://api.equinix.com/v4/fabric/metros/SO\",\n      \"code\": \"SO\",\n      \"avgLatency\": 36.3,\n      \"remoteVCBandwidthMax\": 10000\n    },\n    {\n      \"href\": \"https://api.equinix.com/v4/fabric/metros/IL\",\n      \"code\": \"IL\",\n      \"avgLatency\": 44.8,\n      \"remoteVCBandwidthMax\": 10000\n    },\n    {\n      \"href\": \"https://api.equinix.com/v4/fabric/metros/LS\",\n      \"code\": \"LS\",\n      \"avgLatency\": 36.6,\n      \"remoteVCBandwidthMax\": 10000\n    },\n    {\n      \"href\": \"https://api.equinix.com/v4/fabric/metros/AM\",\n      \"code\": \"BA\",\n      \"avgLatency\": 32.6,\n      \"remoteVCBandwidthMax\": 10000\n    },\n    {\n      \"href\": \"https://api.equinix.com/v4/fabric/metros/BL\",\n      \"code\": \"BL\",\n      \"avgLatency\": 3.28,\n      \"remoteVCBandwidthMax\": 10000\n    },\n    {\n      \"href\": \"https://api.equinix.com/v4/fabric/metros/GV\",\n      \"code\": \"GV\",\n      \"avgLatency\": 15.3,\n      \"remoteVCBandwidthMax\": 10000\n    },\n    {\n      \"href\": \"https://api.equinix.com/v4/fabric/metros/LD\",\n      \"code\": \"LD\",\n      \"avgLatency\": 5.85,\n      \"remoteVCBandwidthMax\": 10000\n    }\n  ],\n  \"services\": [\n    {\n      \"type\": \"ETHERNET_IP_SERVICE\"\n    },\n    {\n      \"type\": \"TIME_SERVICE\"\n    }\n  ],\n  \"geoScopes\": [\n    \"CANADA\",\n    \"CONUS\",\n    \"JAPAN\",\n    \"UK\",\n    \"AUSTRALIA\",\n    \"BRAZIL\",\n    \"SWITZERLAND\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e773735e-09ce-46f3-be16-e96cb37b56bb",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "metros",
+                    ":metroCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "metroCode",
+                      "description": "(Required) Metro Code"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3036013\",\n    \"errorMessage\": \"Invalid Path Parameter\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"pathparameter-metroCode\",\n        \"reason\": \"Provide valid metro code\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe4c20b1-d7eb-47f9-9024-d1f326e9f055",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "metros",
+                    ":metroCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "metroCode",
+                      "description": "(Required) Metro Code"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3036001\",\n    \"errorMessage\": \"Unauthorized\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"additionalInfo\": [\n      {\n        \"reason\": \"You are unauthorized to perform this operation\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9be6462-c3ae-45e1-b96c-068034758931",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "metros",
+                    ":metroCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "metroCode",
+                      "description": "(Required) Metro Code"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3036030\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"additionalInfo\": [\n      {\n        \"reason\": \"An Internal Server Error occured\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d33313f2-9240-43eb-8c0b-a18b5a247531",
+    "name": "Equinix API Authentication Metros API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}

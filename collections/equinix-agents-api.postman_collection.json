@@ -1,0 +1,1969 @@
+{
+  "item": [
+    {
+      "id": "14403ce6-d9b7-47b0-a54d-2522f738dd26",
+      "name": "Agents",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1f3a4452-2bdc-485a-b0bd-6e30f889caca",
+          "name": "Get Agents",
+          "request": {
+            "name": "Get Agents",
+            "description": {
+              "content": "This API provides capability to retrieve agents",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "agents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "number of records to fetch"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3ad4159d-9281-446a-9489-8f154d722b18",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20,\n    \"total\": 1\n  },\n  \"data\": [\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/agents/d684aa26-8276-48b7-bb42-a6d9def0a418\",\n      \"type\": \"ANO_AGENT\",\n      \"uuid\": \"d684aa26-8276-48b7-bb42-a6d9def0a418\",\n      \"name\": \"bandwidth-upgrader-agent\",\n      \"description\": \"connection bandwidth upgrader agent\",\n      \"state\": \"PROVISIONED\",\n      \"enabled\": true,\n      \"project\": {\n        \"projectId\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n      },\n      \"agentTemplate\": {\n        \"uuid\": \"657400f8-c0af-430c-8216-43d44f08c1c5\"\n      },\n      \"configuration\": {\n        \"prompt\": \"Connection uuid is <connection_uuid>. Alert rule is <alert_rule_uuid>. Upgrade bandwidth to 10GB.\"\n      },\n      \"changeLog\": {\n        \"createdBy\": \"testuser\",\n        \"createdDateTime\": \"2024-05-06 16:21:18.545214+00:00\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eaa0ff0f-4820-479a-a14c-e96248e9465b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164013\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"additionalInfo\": [\n      {\n        \"reason\": \"You are unauthorized to perform this operation\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31058627-6b8e-49a9-9d78-baa7603e14ea",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164013\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"8a72af9d-23f7-4b90-8237-0987130b42dd\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa8f7656-dab1-45d0-9236-74cdfe6f0460",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164811\",\n    \"errorMessage\": \"Agent not found or already deleted\",\n    \"correlationId\": \"9b6baf30-3eb0-458c-af8b-fff3fae32bc7\",\n    \"details\": \"Agent not found or already deleted\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6c5af1b-4938-4c4d-bf02-9b118cec754a",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"f9018571-1001-4422-978b-bfa38ed6b92e\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "23fbf746-3240-4b08-bcff-fe9c9bd51432",
+          "name": "Create Agent",
+          "request": {
+            "name": "Create Agent",
+            "description": {
+              "content": "This API provides capability to create user's agent",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "agents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"agentTemplate\": {\n    \"uuid\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"project\": {\n    \"projectId\": \"<string>\"\n  },\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"configuration\": {\n    \"prompt\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "42d8a9d4-b4b5-43aa-9a34-382122644205",
+              "name": "Agent object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"ANO_AGENT\",\n  \"name\": \"bandwidth-upgrader-agent\",\n  \"description\": \"connection bandwidth upgrader agent\",\n  \"project\": {\n    \"projectId\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"agentTemplate\": {\n    \"uuid\": \"657400f8-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"configuration\": {\n    \"prompt\": \"Connection uuid is <connection_uuid>. Alert rule is <alert_rule_uuid>. Upgrade bandwidth to 10GB.\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/agents/d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"type\": \"ANO_AGENT\",\n  \"uuid\": \"d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"name\": \"bandwidth-upgrader-agent\",\n  \"description\": \"connection bandwidth upgrader agent\",\n  \"state\": \"PROVISIONING\",\n  \"enabled\": true,\n  \"project\": {\n    \"projectId\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"agentTemplate\": {\n    \"uuid\": \"657400f8-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"configuration\": {\n    \"prompt\": \"Connection uuid is <connection_uuid>. Alert rule is <alert_rule_uuid>. Upgrade bandwidth to 10GB.\"\n  },\n  \"changeLog\": {\n    \"createdBy\": \"testuser\",\n    \"createdDateTime\": \"2024-05-06 16:21:18.545214+00:00\",\n    \"deletedBy\": \"testuser\",\n    \"deletedDateTime\": \"2024-05-010T16:21:18.545214Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "180fcc9f-11f3-455a-b876-85860378bf42",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"ANO_AGENT\",\n  \"name\": \"bandwidth-upgrader-agent\",\n  \"description\": \"connection bandwidth upgrader agent\",\n  \"project\": {\n    \"projectId\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"agentTemplate\": {\n    \"uuid\": \"657400f8-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"configuration\": {\n    \"prompt\": \"Connection uuid is <connection_uuid>. Alert rule is <alert_rule_uuid>. Upgrade bandwidth to 10GB.\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-1077533\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-9575622\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b809a4a-6414-4992-bd7a-78a8bf692d26",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"ANO_AGENT\",\n  \"name\": \"bandwidth-upgrader-agent\",\n  \"description\": \"connection bandwidth upgrader agent\",\n  \"project\": {\n    \"projectId\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"agentTemplate\": {\n    \"uuid\": \"657400f8-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"configuration\": {\n    \"prompt\": \"Connection uuid is <connection_uuid>. Alert rule is <alert_rule_uuid>. Upgrade bandwidth to 10GB.\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164013\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"additionalInfo\": [\n      {\n        \"reason\": \"You are unauthorized to perform this operation\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0169a31e-ba37-4867-b079-e85eba03d48a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"ANO_AGENT\",\n  \"name\": \"bandwidth-upgrader-agent\",\n  \"description\": \"connection bandwidth upgrader agent\",\n  \"project\": {\n    \"projectId\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"agentTemplate\": {\n    \"uuid\": \"657400f8-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"configuration\": {\n    \"prompt\": \"Connection uuid is <connection_uuid>. Alert rule is <alert_rule_uuid>. Upgrade bandwidth to 10GB.\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164013\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"8a72af9d-23f7-4b90-8237-0987130b42dd\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7fef085b-46b3-4050-9b6f-979748b7bba5",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"ANO_AGENT\",\n  \"name\": \"bandwidth-upgrader-agent\",\n  \"description\": \"connection bandwidth upgrader agent\",\n  \"project\": {\n    \"projectId\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"agentTemplate\": {\n    \"uuid\": \"657400f8-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"configuration\": {\n    \"prompt\": \"Connection uuid is <connection_uuid>. Alert rule is <alert_rule_uuid>. Upgrade bandwidth to 10GB.\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164009\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "390bf6c4-845d-4499-91dc-998cc2dcffd1",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"ANO_AGENT\",\n  \"name\": \"bandwidth-upgrader-agent\",\n  \"description\": \"connection bandwidth upgrader agent\",\n  \"project\": {\n    \"projectId\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"agentTemplate\": {\n    \"uuid\": \"657400f8-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"configuration\": {\n    \"prompt\": \"Connection uuid is <connection_uuid>. Alert rule is <alert_rule_uuid>. Upgrade bandwidth to 10GB.\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"f9018571-1001-4422-978b-bfa38ed6b92e\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "87796cc4-d154-40e9-923f-196147b7f812",
+          "name": "Get Agent by UUID",
+          "request": {
+            "name": "Get Agent by UUID",
+            "description": {
+              "content": "This API provides capability to retrieve an agent by uuid",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "agents",
+                ":agentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "number of records to fetch"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agentId",
+                  "description": "(Required) Agent UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9bb43c62-fb25-40b7-987f-79fcf98cedf6",
+              "name": "Agent object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) Agent UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/agents/d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"type\": \"ANO_AGENT\",\n  \"uuid\": \"d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"name\": \"bandwidth-upgrader-agent\",\n  \"description\": \"connection bandwidth upgrader agent\",\n  \"state\": \"PROVISIONING\",\n  \"enabled\": true,\n  \"project\": {\n    \"projectId\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"agentTemplate\": {\n    \"uuid\": \"657400f8-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"configuration\": {\n    \"prompt\": \"Connection uuid is <connection_uuid>. Alert rule is <alert_rule_uuid>. Upgrade bandwidth to 10GB.\"\n  },\n  \"changeLog\": {\n    \"createdBy\": \"testuser\",\n    \"createdDateTime\": \"2024-05-06 16:21:18.545214+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5459eb2a-92ea-46b8-8577-ad47f56e5d31",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) Agent UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164013\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"additionalInfo\": [\n      {\n        \"reason\": \"You are unauthorized to perform this operation\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e07bf9a2-901d-4cdc-b999-41a71113da78",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) Agent UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164013\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"8a72af9d-23f7-4b90-8237-0987130b42dd\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cf141e8-81f2-424b-a062-8265126d7ce2",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) Agent UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164811\",\n    \"errorMessage\": \"Agent not found or already deleted\",\n    \"correlationId\": \"9b6baf30-3eb0-458c-af8b-fff3fae32bc7\",\n    \"details\": \"Agent not found or already deleted\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68f23914-c60b-4a99-add4-3bb87500431b",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) Agent UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"f9018571-1001-4422-978b-bfa38ed6b92e\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c50b6020-978a-4f37-a0ec-1a7ffa3a2548",
+          "name": "Delete Agent by UUID",
+          "request": {
+            "name": "Delete Agent by UUID",
+            "description": {
+              "content": "This API provides capability to delete an agent by uuid",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "agents",
+                ":agentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "number of records to fetch"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agentId",
+                  "description": "(Required) Agent UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e13652d5-117e-471d-8f8a-56dc59dec11f",
+              "name": "Agent object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) Agent UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/agents/d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"type\": \"ANO_AGENT\",\n  \"uuid\": \"d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"name\": \"bandwidth-upgrader-agent\",\n  \"description\": \"connection bandwidth upgrader agent\",\n  \"state\": \"DEPROVISIONING\",\n  \"enabled\": true,\n  \"project\": {\n    \"projectId\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"agentTemplate\": {\n    \"uuid\": \"657400f8-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"configuration\": {\n    \"prompt\": \"Connection uuid is <connection_uuid>. Alert rule is <alert_rule_uuid>. Upgrade bandwidth to 10GB.\"\n  },\n  \"changeLog\": {\n    \"createdBy\": \"testuser\",\n    \"createdDateTime\": \"2024-05-06 16:21:18.545214+00:00\",\n    \"deletedBy\": \"testuser\",\n    \"deletedDateTime\": \"2024-05-010T16:21:18.545214Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1f21d10-611f-4c1a-b687-729134365eee",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) Agent UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164013\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"additionalInfo\": [\n      {\n        \"reason\": \"You are unauthorized to perform this operation\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b20059d-30d3-47a8-8e78-2a8f7580f112",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) Agent UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164013\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"8a72af9d-23f7-4b90-8237-0987130b42dd\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac544349-ca95-438b-a03f-a19c64802dd0",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) Agent UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164811\",\n    \"errorMessage\": \"Agent not found or already deleted\",\n    \"correlationId\": \"9b6baf30-3eb0-458c-af8b-fff3fae32bc7\",\n    \"details\": \"Agent not found or already deleted\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "612e361d-aec6-4419-a6b1-a452323c6d65",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) Agent UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"f9018571-1001-4422-978b-bfa38ed6b92e\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e94dafbf-f865-4480-99d5-29ee552427e8",
+          "name": "Update Agent by UUID",
+          "request": {
+            "name": "Update Agent by UUID",
+            "description": {
+              "content": "This API provides capability to update an agent by uuid",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "agents",
+                ":agentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agentId",
+                  "description": "(Required) Agent UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"op\": \"<string>\",\n  \"path\": \"<string>\",\n  \"value\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3c7493c2-fab9-4198-9f6c-136d59ae7a49",
+              "name": "Agent object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) Agent UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"name\": \"/name\",\n    \"op\": \"/replace\",\n    \"value\": \"bandwidth-upgrader-agent-updated\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/agents/d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"type\": \"ANO_AGENT\",\n  \"uuid\": \"d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"name\": \"bandwidth-upgrader-agent-updated\",\n  \"description\": \"connection bandwidth upgrader agent updated\",\n  \"state\": \"PROVISIONING\",\n  \"enabled\": true,\n  \"project\": {\n    \"projectId\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"agentTemplate\": {\n    \"uuid\": \"657400f8-c0af-430c-8216-43d44f08c1c5\"\n  },\n  \"configuration\": {\n    \"prompt\": \"Connection uuid is <connection_uuid>. Alert rule is <alert_rule_uuid>. Upgrade bandwidth to 10GB.\"\n  },\n  \"changeLog\": {\n    \"createdBy\": \"testuser\",\n    \"createdDateTime\": \"2024-05-06 16:21:18.545214+00:00\",\n    \"updatedBy\": \"testuser\",\n    \"updatedDateTime\": \"2024-05-06 16:21:18.545214+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78dd12dd-d176-49d4-957f-15f1ab02fa64",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) Agent UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"name\": \"/name\",\n    \"op\": \"/replace\",\n    \"value\": \"bandwidth-upgrader-agent-updated\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164013\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"additionalInfo\": [\n      {\n        \"reason\": \"You are unauthorized to perform this operation\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f281803-011e-4319-b91c-e67c0b2ea342",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) Agent UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"name\": \"/name\",\n    \"op\": \"/replace\",\n    \"value\": \"bandwidth-upgrader-agent-updated\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164013\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"8a72af9d-23f7-4b90-8237-0987130b42dd\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7df3b816-95da-4c83-9f13-90232db37776",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) Agent UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"name\": \"/name\",\n    \"op\": \"/replace\",\n    \"value\": \"bandwidth-upgrader-agent-updated\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164811\",\n    \"errorMessage\": \"Agent not found or already deleted\",\n    \"correlationId\": \"9b6baf30-3eb0-458c-af8b-fff3fae32bc7\",\n    \"details\": \"Agent not found or already deleted\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "607cf399-7d76-4e35-8914-bbbf5c3341e5",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents",
+                    ":agentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) Agent UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"name\": \"/name\",\n    \"op\": \"/replace\",\n    \"value\": \"bandwidth-upgrader-agent-updated\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"f9018571-1001-4422-978b-bfa38ed6b92e\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8e1cc16-64bb-4ec1-b238-23211a80f674",
+          "name": "Get Agent Activities",
+          "request": {
+            "name": "Get Agent Activities",
+            "description": {
+              "content": "This API provides capability to retrieve an agent activities",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "agents",
+                ":agentId",
+                "activities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "number of records to fetch"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "agentId",
+                  "description": "(Required) Agent UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "adf62bcb-bc51-4495-99aa-0fb67209e9c0",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents",
+                    ":agentId",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) Agent UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20,\n    \"total\": 1\n  },\n  \"data\": [\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/agents/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170/activities\",\n      \"type\": \"AGENT_ACTIVITY\",\n      \"uuid\": \"123e4567-e89b-12d3-a456-426614174000\",\n      \"agent\": {\n        \"uuid\": \"3c9b8e7a2-f3b1-4576-a4a9-1366a63df170\",\n        \"type\": \"ANO_AGENT\"\n      },\n      \"status\": \"COMPLETED\",\n      \"metadata\": {\n        \"chatMessage\": {\n          \"messages\": [\n            {\n              \"type\": \"user\",\n              \"content\": \"Here are additional parameters: json\\n{\\n  \\\"connection_uuid\\\": \\\"456e4567-e89b-12d3-a456-426614174000\\\",\\n  \\\"operand\\\": \\\"ABOVE\\\",\\n  \\\"critical_threshold\\\": 400000,\\n  \\\"stream_uuid\\\": 789e4567-e89b-12d3-a456-426614174000\\n}. Follow the instructions step by step and complete all the operations.\"\n            },\n            {\n              \"type\": \"assistant\",\n              \"content\": \"The agent is setup process has been successfully completed.\"\n            }\n          ],\n          \"toolCallInformation\": [\n            {\n              \"name\": \"search_connections\",\n              \"input\": \"{\\\"query\\\":{\\\"filter\\\":{\\\"and\\\":[{\\\"property\\\":\\\"/uuid\\\",\\\"operator\\\":\\\"=\\\",\\\"values\\\":[\\\"456e4567-e89b-12d3-a456-426614174000\\\"]}]},\\\"pagination\\\":{\\\"limit\\\":5}}}\",\n              \"response\": \"{\\\"results\\\":[{\\\"uuid\\\":\\\"456e4567-e89b-12d3-a456-426614174000\\\",\\\"name\\\":\\\"Primary Connection\\\",\\\"bandwidth\\\":\\\"1Gbps\\\"}]}\"\n            }\n          ]\n        }\n      },\n      \"changeLog\": {\n        \"createdBy\": \"testuser\",\n        \"createdDateTime\": \"2024-05-06 16:21:18.545214+00:00\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03b218dd-afb1-4c9b-8860-503e4069093d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents",
+                    ":agentId",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) Agent UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164013\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"additionalInfo\": [\n      {\n        \"reason\": \"You are unauthorized to perform this operation\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dad02779-69f8-4fcd-9a27-c99583401c5e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents",
+                    ":agentId",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) Agent UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164013\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"8a72af9d-23f7-4b90-8237-0987130b42dd\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afa9d9c7-7264-4c48-843b-d76ea2bb08cb",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents",
+                    ":agentId",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) Agent UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164811\",\n    \"errorMessage\": \"Agent not found or already deleted\",\n    \"correlationId\": \"9b6baf30-3eb0-458c-af8b-fff3fae32bc7\",\n    \"details\": \"Agent not found or already deleted\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6fe60b9f-32bc-45a8-b8f7-527542fbedb7",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "agents",
+                    ":agentId",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "agentId",
+                      "description": "(Required) Agent UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3164004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"f9018571-1001-4422-978b-bfa38ed6b92e\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9d5c2636-036c-4d14-927f-74907ec391f9",
+    "name": "Equinix API Authentication Agents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}

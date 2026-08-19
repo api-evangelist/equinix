@@ -1,0 +1,967 @@
+{
+  "item": [
+    {
+      "id": "393815dc-d577-46b1-b468-25a16692c960",
+      "name": "Capacity",
+      "description": {
+        "content": "Capacity Management. Check out the product docs to learn more about [Capacity](https://metal.equinix.com/developers/docs/locations/capacity/).\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "086dc6d8-8d3c-4ecf-82e4-ff9bc64a73f4",
+          "name": "View capacity",
+          "request": {
+            "name": "View capacity",
+            "description": {
+              "content": "Returns a list of facilities and plans with their current capacity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "capacity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dfad7e65-4aa0-492b-b38e-62924240f6dc",
+              "name": "ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capacity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"capacity\": {\n    \"am6\": {\n      \"c2.medium.x86\": {\n        \"level\": \"string\"\n      },\n      \"m2.xlarge.x86\": {\n        \"level\": \"string\"\n      }\n    },\n    \"da11\": {\n      \"c2.medium.x86\": {\n        \"level\": \"string\"\n      },\n      \"m2.xlarge.x86\": {\n        \"level\": \"string\"\n      }\n    },\n    \"sv15\": {\n      \"c2.medium.x86\": {\n        \"level\": \"string\"\n      },\n      \"m2.xlarge.x86\": {\n        \"level\": \"string\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d1bc10a-1d0e-41ef-a298-5771b21deb79",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capacity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "082beac8-0a61-48d2-a11d-c0ad053ff726",
+          "name": "Check capacity",
+          "request": {
+            "name": "Check capacity",
+            "description": {
+              "content": "Validates if a deploy can be fulfilled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "capacity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"servers\": [\n    {\n      \"facility\": \"<string>\",\n      \"metro\": \"<string>\",\n      \"plan\": \"<string>\",\n      \"quantity\": \"<string>\"\n    },\n    {\n      \"facility\": \"<string>\",\n      \"metro\": \"<string>\",\n      \"plan\": \"<string>\",\n      \"quantity\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "69d5ddb4-4127-4ea6-8bbd-350dc0df81bd",
+              "name": "ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capacity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"servers\": [\n    {\n      \"quantity\": \"quantity\",\n      \"metro\": \"metro\",\n      \"facility\": \"facility\",\n      \"plan\": \"plan\"\n    },\n    {\n      \"quantity\": \"quantity\",\n      \"metro\": \"metro\",\n      \"facility\": \"facility\",\n      \"plan\": \"plan\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"servers\": [\n    {\n      \"quantity\": \"quantity\",\n      \"available\": true,\n      \"facility\": \"facility\",\n      \"plan\": \"plan\"\n    },\n    {\n      \"quantity\": \"quantity\",\n      \"available\": true,\n      \"facility\": \"facility\",\n      \"plan\": \"plan\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62781f87-7809-4faa-9ef7-ef1e30b2b0aa",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capacity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"servers\": [\n    {\n      \"quantity\": \"quantity\",\n      \"metro\": \"metro\",\n      \"facility\": \"facility\",\n      \"plan\": \"plan\"\n    },\n    {\n      \"quantity\": \"quantity\",\n      \"metro\": \"metro\",\n      \"facility\": \"facility\",\n      \"plan\": \"plan\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3936f21-bc6f-4658-814c-d10d7f9a8480",
+              "name": "unprocessable entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capacity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"servers\": [\n    {\n      \"quantity\": \"quantity\",\n      \"metro\": \"metro\",\n      \"facility\": \"facility\",\n      \"plan\": \"plan\"\n    },\n    {\n      \"quantity\": \"quantity\",\n      \"metro\": \"metro\",\n      \"facility\": \"facility\",\n      \"plan\": \"plan\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b1f16293-d7ca-442e-93d7-49dc779c2548",
+          "name": "View capacity for metros",
+          "request": {
+            "name": "View capacity for metros",
+            "description": {
+              "content": "Returns a list of metros and plans with their current capacity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "capacity",
+                "metros"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "05ea1685-6fe9-4de7-9c1d-66354a55b982",
+              "name": "ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capacity",
+                    "metros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"capacity\": {\n    \"am\": {\n      \"c2.medium.x86\": {\n        \"level\": \"string\"\n      },\n      \"m2.xlarge.x86\": {\n        \"level\": \"string\"\n      }\n    },\n    \"da\": {\n      \"c2.medium.x86\": {\n        \"level\": \"string\"\n      },\n      \"m2.xlarge.x86\": {\n        \"level\": \"string\"\n      }\n    },\n    \"dc\": {\n      \"c2.medium.x86\": {\n        \"level\": \"string\"\n      },\n      \"m2.xlarge.x86\": {\n        \"level\": \"string\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc5fb95c-2220-401d-ad0b-1f83e01527d9",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capacity",
+                    "metros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f17efb6b-e123-48eb-b750-1d3a908f15e0",
+          "name": "Check capacity for a metro",
+          "request": {
+            "name": "Check capacity for a metro",
+            "description": {
+              "content": "Validates if a deploy can be fulfilled in a metro.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "capacity",
+                "metros"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"servers\": [\n    {\n      \"facility\": \"<string>\",\n      \"metro\": \"<string>\",\n      \"plan\": \"<string>\",\n      \"quantity\": \"<string>\"\n    },\n    {\n      \"facility\": \"<string>\",\n      \"metro\": \"<string>\",\n      \"plan\": \"<string>\",\n      \"quantity\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ec058fb4-7079-43b0-97c7-f88d91b1b73b",
+              "name": "ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capacity",
+                    "metros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"servers\": [\n    {\n      \"quantity\": \"quantity\",\n      \"metro\": \"metro\",\n      \"facility\": \"facility\",\n      \"plan\": \"plan\"\n    },\n    {\n      \"quantity\": \"quantity\",\n      \"metro\": \"metro\",\n      \"facility\": \"facility\",\n      \"plan\": \"plan\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"servers\": [\n    {\n      \"quantity\": \"quantity\",\n      \"metro\": \"metro\",\n      \"available\": true,\n      \"plan\": \"plan\"\n    },\n    {\n      \"quantity\": \"quantity\",\n      \"metro\": \"metro\",\n      \"available\": true,\n      \"plan\": \"plan\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a86eb6b-141b-430c-99f6-b3a2caaf94df",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capacity",
+                    "metros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"servers\": [\n    {\n      \"quantity\": \"quantity\",\n      \"metro\": \"metro\",\n      \"facility\": \"facility\",\n      \"plan\": \"plan\"\n    },\n    {\n      \"quantity\": \"quantity\",\n      \"metro\": \"metro\",\n      \"facility\": \"facility\",\n      \"plan\": \"plan\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6506d8c1-d264-4f0a-86cb-1267926bc55d",
+              "name": "unprocessable entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capacity",
+                    "metros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"servers\": [\n    {\n      \"quantity\": \"quantity\",\n      \"metro\": \"metro\",\n      \"facility\": \"facility\",\n      \"plan\": \"plan\"\n    },\n    {\n      \"quantity\": \"quantity\",\n      \"metro\": \"metro\",\n      \"facility\": \"facility\",\n      \"plan\": \"plan\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "83786943-e8a7-4106-96d1-5a6b7319a322",
+          "name": "View available hardware plans per Facility for given organization",
+          "request": {
+            "name": "View available hardware plans per Facility for given organization",
+            "description": {
+              "content": "Returns a list of facilities and plans with their current capacity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":id",
+                "capacity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Organization UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b74a6338-9c76-4a69-a39e-a13f8ff30ae6",
+              "name": "ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":id",
+                    "capacity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Organization UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"capacity\": {\n    \"am6\": {\n      \"c2.medium.x86\": {\n        \"level\": \"string\"\n      },\n      \"m2.xlarge.x86\": {\n        \"level\": \"string\"\n      }\n    },\n    \"da11\": {\n      \"c2.medium.x86\": {\n        \"level\": \"string\"\n      },\n      \"m2.xlarge.x86\": {\n        \"level\": \"string\"\n      }\n    },\n    \"sv15\": {\n      \"c2.medium.x86\": {\n        \"level\": \"string\"\n      },\n      \"m2.xlarge.x86\": {\n        \"level\": \"string\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "722149f9-cba3-4925-a04a-242f84aa7524",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":id",
+                    "capacity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Organization UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5340a339-1b3c-4442-87b0-b926bf0ff662",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":id",
+                    "capacity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Organization UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75d72a0b-fc99-420c-97ac-1e0f7f951601",
+          "name": "View available hardware plans per Metro for given organization",
+          "request": {
+            "name": "View available hardware plans per Metro for given organization",
+            "description": {
+              "content": "Returns a list of metros and plans with their current capacity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":id",
+                "capacity",
+                "metros"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Organization UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d33cf6ef-a755-44a5-87aa-5157f4d7d705",
+              "name": "ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":id",
+                    "capacity",
+                    "metros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Organization UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"capacity\": {\n    \"am\": {\n      \"c2.medium.x86\": {\n        \"level\": \"string\"\n      },\n      \"m2.xlarge.x86\": {\n        \"level\": \"string\"\n      }\n    },\n    \"da\": {\n      \"c2.medium.x86\": {\n        \"level\": \"string\"\n      },\n      \"m2.xlarge.x86\": {\n        \"level\": \"string\"\n      }\n    },\n    \"dc\": {\n      \"c2.medium.x86\": {\n        \"level\": \"string\"\n      },\n      \"m2.xlarge.x86\": {\n        \"level\": \"string\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dac4cea3-f262-425f-8bd0-906fe4fabc9d",
+              "name": "unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":id",
+                    "capacity",
+                    "metros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Organization UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c67e9c8-6ab3-4ea9-b8ad-c1468b398827",
+              "name": "forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":id",
+                    "capacity",
+                    "metros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Organization UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "afb5fc5f-bf5b-40da-be98-58506ae52235",
+    "name": "Equinix API Authentication Capacity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}

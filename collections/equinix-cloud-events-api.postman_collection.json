@@ -1,0 +1,1023 @@
+{
+  "item": [
+    {
+      "id": "236c25f8-19e6-4790-a227-a120dfc237e5",
+      "name": "Cloud Events",
+      "description": {
+        "content": "Cloud Events",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5dff18ed-91ba-422b-8d9c-bc6bd138a646",
+          "name": "Get Cloud Events by Asset Id",
+          "request": {
+            "name": "Get Cloud Events by Asset Id",
+            "description": {
+              "content": "This API provides capability to retrieve cloud events of an asset id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                ":asset",
+                ":assetId",
+                "cloudevents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fromDateTime",
+                  "value": "<dateTime>",
+                  "description": "Start date and time"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDateTime",
+                  "value": "<dateTime>",
+                  "description": "End date and time"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "limit"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset",
+                  "description": "(Required) asset"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "assetId",
+                  "description": "(Required) asset UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4569c4d-69cc-4e56-87fc-531f742c6a0d",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    ":asset",
+                    ":assetId",
+                    "cloudevents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDateTime",
+                      "value": "2024-07-11 18:06:21+00:00"
+                    },
+                    {
+                      "key": "toDateTime",
+                      "value": "2024-07-11 18:06:21+00:00"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"offset\": 20,\n    \"limit\": 10,\n    \"total\": 3,\n    \"next\": null,\n    \"previous\": null\n  },\n  \"data\": [\n    {\n      \"specversion\": \"1.0\",\n      \"source\": \"https://api.equinix.com/fabric/v4/events\",\n      \"id\": \"66c62c1a-f186-4fbd-9792-71a60705518f\",\n      \"time\": \"2025-03-20 13:13:12+00:00\",\n      \"type\": \"equinix.fabric.connection.bgpipv4_session_status.connect\",\n      \"subject\": \"/fabric/v4/connections/dab9fc84-cc95-4cb4-abe3-ca39361285a9/routingProtocol/e92cdf09-59eb-4131-ade4-49a87dc816dc\",\n      \"dataschema\": \"https://equinix.github.io/equinix-cloudevents/jsonschema/equinix/fabric/v1/ChangeEvent.json\",\n      \"datacontenttype\": \"application/json\",\n      \"severitynumber\": 5,\n      \"severitytext\": \"INFO\",\n      \"equinixproject\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\",\n      \"authtype\": \"system\",\n      \"authid\": \"equinix\",\n      \"traceparent\": \"00-66c62c1af1864fbd979271a60705518f-00f067aa0ba90111-00,\",\n      \"tracestate\": \"71a60705518f,81a607055181\",\n      \"data\": {\n        \"message\": \"Neighbor 100.100.100.102 address session state changed to Connect\",\n        \"auth\": {\n          \"type\": \"system\",\n          \"id\": \"equinix\"\n        }\n      }\n    },\n    {\n      \"specversion\": \"1.0\",\n      \"source\": \"https://api.equinix.com/fabric/v4/cloudevents\",\n      \"id\": \"66c62c1a-f186-4fbd-9792-71a60705518f\",\n      \"type\": \"equinix.fabric.connection.state.provisioning\",\n      \"subject\": \"/fabric/v4/connections/dab9fc84-cc95-4cb4-abe3-ca39361285a9\",\n      \"time\": \"2025-03-20 13:13:12+00:00\",\n      \"dataschema\": \"https://equinix.github.io/equinix-cloudevents/jsonschema/equinix/fabric/v1/ChangeEvent.json\",\n      \"datacontenttype\": \"application/json\",\n      \"severitynumber\": 9,\n      \"severitytext\": \"INFO\",\n      \"equinixproject\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\",\n      \"authtype\": \"user\",\n      \"authid\": 123456,\n      \"traceparent\": \"00-66c62c1af1864fbd979271a60705518f-00f067aa0ba90111-00,\",\n      \"tracestate\": \"71a60705518f,81a607055181\",\n      \"data\": {\n        \"message\": \"Connection named TEST-CONNECTION state changed to provisioning\",\n        \"resource\": {\n          \"href\": \"http://api.corp.equinix.com/fabric/v4/connections/dab9fc84-cc95-4cb4-abe3-ca39361285a9\",\n          \"uuid\": \"dab9fc84-cc95-4cb4-abe3-ca39361285a9\",\n          \"type\": \"IP_VC\",\n          \"name\": \"TEST-CONNECTION\",\n          \"state\": \"PROVISIONING\"\n        },\n        \"auth\": {\n          \"type\": \"user\",\n          \"id\": 123456,\n          \"name\": \"test user\",\n          \"email\": \"testuser@test.com\"\n        }\n      }\n    },\n    {\n      \"specversion\": \"1.0\",\n      \"source\": \"https://api.equinix.com/fabric/v4/cloudevents\",\n      \"id\": \"66c62c1a-f186-4fbd-9792-71a60705518f\",\n      \"type\": \"equinix.fabric.connection.state.provisioned\",\n      \"subject\": \"/fabric/v4/connections/dab9fc84-cc95-4cb4-abe3-ca39361285a9\",\n      \"time\": \"2025-03-20 13:13:12+00:00\",\n      \"dataschema\": \"https://equinix.github.io/equinix-cloudevents/jsonschema/equinix/fabric/v1/ChangeEvent.json\",\n      \"datacontenttype\": \"application/json\",\n      \"severitynumber\": 9,\n      \"severitytext\": \"INFO\",\n      \"equinixproject\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\",\n      \"authtype\": \"system\",\n      \"authid\": \"equinix\",\n      \"traceparent\": \"00-66c62c1af1864fbd979271a60705518f-00f067aa0ba90111-00,\",\n      \"tracestate\": \"71a60705518f,81a607055181\",\n      \"data\": {\n        \"message\": \"Connection named TEST-CONNECTION state changed to provisioned\",\n        \"resource\": {\n          \"href\": \"http://api.corp.equinix.com/fabric/v4/connections/dab9fc84-cc95-4cb4-abe3-ca39361285a9\",\n          \"uuid\": \"dab9fc84-cc95-4cb4-abe3-ca39361285a9\",\n          \"type\": \"IP_VC\",\n          \"name\": \"TEST-CONNECTION\",\n          \"state\": \"PROVISIONED\"\n        },\n        \"auth\": {\n          \"type\": \"system\",\n          \"id\": \"equinix\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88068157-509f-4ffb-9bc8-d263790f306d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    ":asset",
+                    ":assetId",
+                    "cloudevents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDateTime",
+                      "value": "2024-07-11 18:06:21+00:00"
+                    },
+                    {
+                      "key": "toDateTime",
+                      "value": "2024-07-11 18:06:21+00:00"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "368dff13-673a-4356-89c8-084c0d19e20a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    ":asset",
+                    ":assetId",
+                    "cloudevents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDateTime",
+                      "value": "2024-07-11 18:06:21+00:00"
+                    },
+                    {
+                      "key": "toDateTime",
+                      "value": "2024-07-11 18:06:21+00:00"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dddf0b4b-2026-4b34-9a1e-a6d59e68bcfe",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    ":asset",
+                    ":assetId",
+                    "cloudevents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDateTime",
+                      "value": "2024-07-11 18:06:21+00:00"
+                    },
+                    {
+                      "key": "toDateTime",
+                      "value": "2024-07-11 18:06:21+00:00"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a85154fd-78f0-4213-a1f3-4690c13f2768",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    ":asset",
+                    ":assetId",
+                    "cloudevents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDateTime",
+                      "value": "2024-07-11 18:06:21+00:00"
+                    },
+                    {
+                      "key": "toDateTime",
+                      "value": "2024-07-11 18:06:21+00:00"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "967d4938-0702-4a8a-ad00-d01b44cffe9a",
+          "name": "Get Cloud Event",
+          "request": {
+            "name": "Get Cloud Event",
+            "description": {
+              "content": "This API provides capability to retrieve a cloud event by uuid",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "cloudevents",
+                ":cloudEventId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "cloudEventId",
+                  "description": "(Required) Cloud Event UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0cba7e8c-8eeb-48e9-9e1a-02e4ab17d432",
+              "name": "Cloud Event object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "cloudevents",
+                    ":cloudEventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cloudEventId",
+                      "description": "(Required) Cloud Event UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"specversion\": \"1.0\",\n  \"source\": \"https://api.equinix.com/fabric/v4/cloudevents\",\n  \"id\": \"66c62c1a-f186-4fbd-9792-71a60705518f\",\n  \"type\": \"equinix.fabric.connection.state.provisioning\",\n  \"subject\": \"/fabric/v4/connections/dab9fc84-cc95-4cb4-abe3-ca39361285a9\",\n  \"time\": \"2025-03-20 13:13:12+00:00\",\n  \"dataschema\": \"https://equinix.github.io/equinix-cloudevents/jsonschema/equinix/fabric/v1/ChangeEvent.json\",\n  \"datacontenttype\": \"application/json\",\n  \"severitynumber\": 9,\n  \"severitytext\": \"INFO\",\n  \"equinixproject\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\",\n  \"authtype\": \"user\",\n  \"authid\": 123456,\n  \"traceparent\": \"00-66c62c1af1864fbd979271a60705518f-00f067aa0ba90111-00,\",\n  \"tracestate\": \"71a60705518f,81a607055181\",\n  \"data\": {\n    \"message\": \"Connection named TEST-CONNECTION state changed to provisioning\",\n    \"resource\": {\n      \"href\": \"http://api.corp.equinix.com/fabric/v4/connections/dab9fc84-cc95-4cb4-abe3-ca39361285a9\",\n      \"uuid\": \"dab9fc84-cc95-4cb4-abe3-ca39361285a9\",\n      \"type\": \"IP_VC\",\n      \"name\": \"TEST-CONNECTION\",\n      \"state\": \"PROVISIONING\"\n    },\n    \"auth\": {\n      \"type\": \"user\",\n      \"id\": 123456,\n      \"name\": \"test user\",\n      \"email\": \"testuser@test.com\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b1be575-410c-42e3-ad5e-6a6ea18f09f9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "cloudevents",
+                    ":cloudEventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cloudEventId",
+                      "description": "(Required) Cloud Event UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de203bda-66cc-4bd2-95d8-0aadd649bd32",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "cloudevents",
+                    ":cloudEventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cloudEventId",
+                      "description": "(Required) Cloud Event UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c64b784a-bd85-4733-9863-781640a398d7",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "cloudevents",
+                    ":cloudEventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cloudEventId",
+                      "description": "(Required) Cloud Event UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4c92de5-6625-4328-a46a-01069107d6ab",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "cloudevents",
+                    ":cloudEventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "cloudEventId",
+                      "description": "(Required) Cloud Event UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0fac1891-566e-45cb-85af-dae2a59888be",
+          "name": "Search Cloud Events",
+          "request": {
+            "name": "Search Cloud Events",
+            "description": {
+              "content": "This API provides capability to search cloud events from a filtered query",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "cloudevents",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"<string>\",\n        \"operator\": \"<string>\",\n        \"values\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"property\": \"<string>\",\n        \"operator\": \"<string>\",\n        \"values\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fe22897a-a737-4b6c-80ba-027dd0534b95",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "cloudevents",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/type\",\n        \"operator\": \"IN\",\n        \"values\": [\n          \"equinix.fabric.port.status.*\"\n        ]\n      },\n      {\n        \"property\": \"/subject\",\n        \"operator\": \"IN\",\n        \"values\": [\n          \"/fabric/v4/ports/8ac8ecfe-c7cb-4def-9f77-5ce93c19d83d*\",\n          \"/fabric/v4/ports/c8bba3be-5132-4669-bb47-7f1a8811359b*\"\n        ]\n      },\n      {\n        \"property\": \"/equinixorganization\",\n        \"operator\": \"=\",\n        \"values\": [\n          526698000597331\n        ]\n      },\n      {\n        \"property\": \"/equinixproject\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n        ]\n      },\n      {\n        \"property\": \"/time\",\n        \"operator\": \">\",\n        \"values\": [\n          \"2018-04-05 17:31:00+00:00\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"offset\": 20,\n    \"limit\": 10,\n    \"total\": 3,\n    \"next\": null,\n    \"previous\": null\n  },\n  \"data\": [\n    {\n      \"specversion\": \"1.0\",\n      \"source\": \"https://api.equinix.com/fabric/v4/events\",\n      \"id\": \"66c62c1a-f186-4fbd-9792-71a60705518f\",\n      \"time\": \"2025-03-20 13:13:12+00:00\",\n      \"type\": \"equinix.fabric.connection.bgpipv4_session_status.connect\",\n      \"subject\": \"/fabric/v4/connections/dab9fc84-cc95-4cb4-abe3-ca39361285a9/routingProtocol/e92cdf09-59eb-4131-ade4-49a87dc816dc\",\n      \"dataschema\": \"https://equinix.github.io/equinix-cloudevents/jsonschema/equinix/fabric/v1/ChangeEvent.json\",\n      \"datacontenttype\": \"application/json\",\n      \"severitynumber\": 5,\n      \"severitytext\": \"INFO\",\n      \"equinixproject\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\",\n      \"authtype\": \"system\",\n      \"authid\": \"equinix\",\n      \"traceparent\": \"00-66c62c1af1864fbd979271a60705518f-00f067aa0ba90111-00,\",\n      \"tracestate\": \"71a60705518f,81a607055181\",\n      \"data\": {\n        \"message\": \"Neighbor 100.100.100.102 address session state changed to Connect\",\n        \"auth\": {\n          \"type\": \"system\",\n          \"id\": \"equinix\"\n        }\n      }\n    },\n    {\n      \"specversion\": \"1.0\",\n      \"source\": \"https://api.equinix.com/fabric/v4/cloudevents\",\n      \"id\": \"66c62c1a-f186-4fbd-9792-71a60705518f\",\n      \"type\": \"equinix.fabric.connection.state.provisioning\",\n      \"subject\": \"/fabric/v4/connections/dab9fc84-cc95-4cb4-abe3-ca39361285a9\",\n      \"time\": \"2025-03-20 13:13:12+00:00\",\n      \"dataschema\": \"https://equinix.github.io/equinix-cloudevents/jsonschema/equinix/fabric/v1/ChangeEvent.json\",\n      \"datacontenttype\": \"application/json\",\n      \"severitynumber\": 9,\n      \"severitytext\": \"INFO\",\n      \"equinixproject\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\",\n      \"authtype\": \"user\",\n      \"authid\": 123456,\n      \"traceparent\": \"00-66c62c1af1864fbd979271a60705518f-00f067aa0ba90111-00,\",\n      \"tracestate\": \"71a60705518f,81a607055181\",\n      \"data\": {\n        \"message\": \"Connection named TEST-CONNECTION state changed to provisioning\",\n        \"resource\": {\n          \"href\": \"http://api.corp.equinix.com/fabric/v4/connections/dab9fc84-cc95-4cb4-abe3-ca39361285a9\",\n          \"uuid\": \"dab9fc84-cc95-4cb4-abe3-ca39361285a9\",\n          \"type\": \"IP_VC\",\n          \"name\": \"TEST-CONNECTION\",\n          \"state\": \"PROVISIONING\"\n        },\n        \"auth\": {\n          \"type\": \"user\",\n          \"id\": 123456,\n          \"name\": \"test user\",\n          \"email\": \"testuser@test.com\"\n        }\n      }\n    },\n    {\n      \"specversion\": \"1.0\",\n      \"source\": \"https://api.equinix.com/fabric/v4/cloudevents\",\n      \"id\": \"66c62c1a-f186-4fbd-9792-71a60705518f\",\n      \"type\": \"equinix.fabric.connection.state.provisioned\",\n      \"subject\": \"/fabric/v4/connections/dab9fc84-cc95-4cb4-abe3-ca39361285a9\",\n      \"time\": \"2025-03-20 13:13:12+00:00\",\n      \"dataschema\": \"https://equinix.github.io/equinix-cloudevents/jsonschema/equinix/fabric/v1/ChangeEvent.json\",\n      \"datacontenttype\": \"application/json\",\n      \"severitynumber\": 9,\n      \"severitytext\": \"INFO\",\n      \"equinixproject\": \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\",\n      \"authtype\": \"system\",\n      \"authid\": \"equinix\",\n      \"traceparent\": \"00-66c62c1af1864fbd979271a60705518f-00f067aa0ba90111-00,\",\n      \"tracestate\": \"71a60705518f,81a607055181\",\n      \"data\": {\n        \"message\": \"Connection named TEST-CONNECTION state changed to provisioned\",\n        \"resource\": {\n          \"href\": \"http://api.corp.equinix.com/fabric/v4/connections/dab9fc84-cc95-4cb4-abe3-ca39361285a9\",\n          \"uuid\": \"dab9fc84-cc95-4cb4-abe3-ca39361285a9\",\n          \"type\": \"IP_VC\",\n          \"name\": \"TEST-CONNECTION\",\n          \"state\": \"PROVISIONED\"\n        },\n        \"auth\": {\n          \"type\": \"system\",\n          \"id\": \"equinix\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a4df7ae-4ebd-4dac-90d5-e923b3a7e468",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "cloudevents",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/type\",\n        \"operator\": \"IN\",\n        \"values\": [\n          \"equinix.fabric.port.status.*\"\n        ]\n      },\n      {\n        \"property\": \"/subject\",\n        \"operator\": \"IN\",\n        \"values\": [\n          \"/fabric/v4/ports/8ac8ecfe-c7cb-4def-9f77-5ce93c19d83d*\",\n          \"/fabric/v4/ports/c8bba3be-5132-4669-bb47-7f1a8811359b*\"\n        ]\n      },\n      {\n        \"property\": \"/equinixorganization\",\n        \"operator\": \"=\",\n        \"values\": [\n          526698000597331\n        ]\n      },\n      {\n        \"property\": \"/equinixproject\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n        ]\n      },\n      {\n        \"property\": \"/time\",\n        \"operator\": \">\",\n        \"values\": [\n          \"2018-04-05 17:31:00+00:00\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea8b73ad-ce2e-42ea-94a0-2862bda5d74e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "cloudevents",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/type\",\n        \"operator\": \"IN\",\n        \"values\": [\n          \"equinix.fabric.port.status.*\"\n        ]\n      },\n      {\n        \"property\": \"/subject\",\n        \"operator\": \"IN\",\n        \"values\": [\n          \"/fabric/v4/ports/8ac8ecfe-c7cb-4def-9f77-5ce93c19d83d*\",\n          \"/fabric/v4/ports/c8bba3be-5132-4669-bb47-7f1a8811359b*\"\n        ]\n      },\n      {\n        \"property\": \"/equinixorganization\",\n        \"operator\": \"=\",\n        \"values\": [\n          526698000597331\n        ]\n      },\n      {\n        \"property\": \"/equinixproject\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n        ]\n      },\n      {\n        \"property\": \"/time\",\n        \"operator\": \">\",\n        \"values\": [\n          \"2018-04-05 17:31:00+00:00\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c124a94-2459-46c0-abfb-4d3693b228c3",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "cloudevents",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/type\",\n        \"operator\": \"IN\",\n        \"values\": [\n          \"equinix.fabric.port.status.*\"\n        ]\n      },\n      {\n        \"property\": \"/subject\",\n        \"operator\": \"IN\",\n        \"values\": [\n          \"/fabric/v4/ports/8ac8ecfe-c7cb-4def-9f77-5ce93c19d83d*\",\n          \"/fabric/v4/ports/c8bba3be-5132-4669-bb47-7f1a8811359b*\"\n        ]\n      },\n      {\n        \"property\": \"/equinixorganization\",\n        \"operator\": \"=\",\n        \"values\": [\n          526698000597331\n        ]\n      },\n      {\n        \"property\": \"/equinixproject\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n        ]\n      },\n      {\n        \"property\": \"/time\",\n        \"operator\": \">\",\n        \"values\": [\n          \"2018-04-05 17:31:00+00:00\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "745eb8eb-ce91-4348-9a5e-dc7a97dd4fb3",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "cloudevents",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/type\",\n        \"operator\": \"IN\",\n        \"values\": [\n          \"equinix.fabric.port.status.*\"\n        ]\n      },\n      {\n        \"property\": \"/subject\",\n        \"operator\": \"IN\",\n        \"values\": [\n          \"/fabric/v4/ports/8ac8ecfe-c7cb-4def-9f77-5ce93c19d83d*\",\n          \"/fabric/v4/ports/c8bba3be-5132-4669-bb47-7f1a8811359b*\"\n        ]\n      },\n      {\n        \"property\": \"/equinixorganization\",\n        \"operator\": \"=\",\n        \"values\": [\n          526698000597331\n        ]\n      },\n      {\n        \"property\": \"/equinixproject\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"dadd3ab6-c0af-430c-8216-43d44f08c1c5\"\n        ]\n      },\n      {\n        \"property\": \"/time\",\n        \"operator\": \">\",\n        \"values\": [\n          \"2018-04-05 17:31:00+00:00\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "23c754e3-0051-4b4d-8c60-21f15cf17fa4",
+    "name": "Equinix API Authentication Cloud Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}

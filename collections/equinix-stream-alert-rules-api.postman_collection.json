@@ -1,0 +1,2041 @@
+{
+  "item": [
+    {
+      "id": "1c71f27a-d26e-427b-987d-1538ca272bb2",
+      "name": "Stream Alert Rules",
+      "description": {
+        "content": "Stream Alert Rules <font color=\"red\"> <sup color='red'>Beta</sup></font>",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b3a46c91-cd92-427f-adb4-5a312ba66f41",
+          "name": "Get Stream Alert Rules",
+          "request": {
+            "name": "Get Stream Alert Rules",
+            "description": {
+              "content": "This API provides capability to retrieve stream alert rules",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "streams",
+                ":streamId",
+                "alertRules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "number of records to fetch"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "streamId",
+                  "description": "(Required) Stream UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "84426ddc-5bb4-4e09-9ed2-37e28d8ed46b",
+              "name": "Stream Alert Rules object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20,\n    \"total\": 1\n  },\n  \"data\": [\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418/alertRules/0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15\",\n      \"uuid\": \"0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15\",\n      \"type\": \"METRIC_ALERT\",\n      \"name\": \"metric-alert-1\",\n      \"description\": \"metric-alert-1\",\n      \"state\": \"ACTIVE\",\n      \"enabled\": true,\n      \"metricSelector\": {\n        \"include\": [\n          \"equinix.fabric.connection.bandwidth_tx.usage\"\n        ]\n      },\n      \"resourceSelector\": {\n        \"include\": [\n          \"/fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b\"\n        ]\n      },\n      \"detectionMethod\": {\n        \"type\": \"THRESHOLD\",\n        \"windowSize\": \"PT15M\",\n        \"operand\": \"ABOVE\",\n        \"warningThreshold\": 35000000,\n        \"criticalThreshold\": 45000000\n      },\n      \"changeLog\": {\n        \"createdBy\": \"user\",\n        \"createdDateTime\": \"2024-05-06 16:21:18.545214+00:00\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48cdc456-5943-4baf-ab17-05ccb313fc9f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d12f199e-e558-4f98-bc7b-862d818c28ed",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3437b3b7-0d36-4059-af18-cbabd8d7e8f5",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bfec9d6f-5ba6-4920-a0ce-5a5372e36f19",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "11d377f8-77f0-49cb-a1ec-4f4434d1a4e6",
+          "name": "Create Stream Alert Rules",
+          "request": {
+            "name": "Create Stream Alert Rules",
+            "description": {
+              "content": "This API provides capability to create user's Stream Alert Rules",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "streams",
+                ":streamId",
+                "alertRules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "streamId",
+                  "description": "(Required) Stream UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"detectionMethod\": {\n    \"type\": \"<string>\",\n    \"windowSize\": \"<string>\",\n    \"operand\": \"<string>\",\n    \"warningThreshold\": \"<string>\",\n    \"criticalThreshold\": \"<string>\"\n  },\n  \"metricSelector\": {\n    \"include\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"name\": \"<string>\",\n  \"resourceSelector\": {\n    \"include\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f8e2388d-457f-459b-87f1-74e5bf9cdecc",
+              "name": "Stream Alert Rules object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"metric-alert-1\",\n  \"type\": \"METRIC_ALERT\",\n  \"description\": \"metric-alert-1\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.bandwidth_tx.usage\"\n    ]\n  },\n  \"resourceSelector\": {\n    \"include\": [\n      \"/fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b\"\n    ]\n  },\n  \"detectionMethod\": {\n    \"type\": \"THRESHOLD\",\n    \"windowSize\": \"PT15M\",\n    \"warningThreshold\": 35000000,\n    \"criticalThreshold\": 45000000\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418/alertRules/0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15\",\n  \"uuid\": \"0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15\",\n  \"type\": \"METRIC_ALERT\",\n  \"name\": \"metric-alert-1\",\n  \"description\": \"metric-alert-1\",\n  \"state\": \"ACTIVE\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.bandwidth_tx.usage\"\n    ]\n  },\n  \"resourceSelector\": {\n    \"include\": [\n      \"/fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b\"\n    ]\n  },\n  \"detectionMethod\": {\n    \"type\": \"THRESHOLD\",\n    \"windowSize\": \"PT15M\",\n    \"operand\": \"ABOVE\",\n    \"warningThreshold\": 35000000,\n    \"criticalThreshold\": 45000000\n  },\n  \"changeLog\": {\n    \"createdBy\": \"user\",\n    \"createdDateTime\": \"2024-05-06 16:21:18.545214+00:00\",\n    \"updatedBy\": \"user\",\n    \"updatedDateTime\": \"2025-02-04 00:20:54.511118+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e78dd6cb-5725-438a-bea0-22eaeada3cb8",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"metric-alert-1\",\n  \"type\": \"METRIC_ALERT\",\n  \"description\": \"metric-alert-1\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.bandwidth_tx.usage\"\n    ]\n  },\n  \"resourceSelector\": {\n    \"include\": [\n      \"/fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b\"\n    ]\n  },\n  \"detectionMethod\": {\n    \"type\": \"THRESHOLD\",\n    \"windowSize\": \"PT15M\",\n    \"warningThreshold\": 35000000,\n    \"criticalThreshold\": 45000000\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3293266\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-2416617\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff33a41c-31a5-447a-87b8-4c20aae764d0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"metric-alert-1\",\n  \"type\": \"METRIC_ALERT\",\n  \"description\": \"metric-alert-1\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.bandwidth_tx.usage\"\n    ]\n  },\n  \"resourceSelector\": {\n    \"include\": [\n      \"/fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b\"\n    ]\n  },\n  \"detectionMethod\": {\n    \"type\": \"THRESHOLD\",\n    \"windowSize\": \"PT15M\",\n    \"warningThreshold\": 35000000,\n    \"criticalThreshold\": 45000000\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e722a80-4cee-438d-b025-531cde56769d",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"metric-alert-1\",\n  \"type\": \"METRIC_ALERT\",\n  \"description\": \"metric-alert-1\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.bandwidth_tx.usage\"\n    ]\n  },\n  \"resourceSelector\": {\n    \"include\": [\n      \"/fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b\"\n    ]\n  },\n  \"detectionMethod\": {\n    \"type\": \"THRESHOLD\",\n    \"windowSize\": \"PT15M\",\n    \"warningThreshold\": 35000000,\n    \"criticalThreshold\": 45000000\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c806d11-1bc7-4bc9-b56b-2448cf72d83d",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"metric-alert-1\",\n  \"type\": \"METRIC_ALERT\",\n  \"description\": \"metric-alert-1\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.bandwidth_tx.usage\"\n    ]\n  },\n  \"resourceSelector\": {\n    \"include\": [\n      \"/fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b\"\n    ]\n  },\n  \"detectionMethod\": {\n    \"type\": \"THRESHOLD\",\n    \"windowSize\": \"PT15M\",\n    \"warningThreshold\": 35000000,\n    \"criticalThreshold\": 45000000\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040016\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad9d3b35-279d-4bc3-a6b6-99a4d6a214a0",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"metric-alert-1\",\n  \"type\": \"METRIC_ALERT\",\n  \"description\": \"metric-alert-1\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.bandwidth_tx.usage\"\n    ]\n  },\n  \"resourceSelector\": {\n    \"include\": [\n      \"/fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b\"\n    ]\n  },\n  \"detectionMethod\": {\n    \"type\": \"THRESHOLD\",\n    \"windowSize\": \"PT15M\",\n    \"warningThreshold\": 35000000,\n    \"criticalThreshold\": 45000000\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "263e9e22-9a4a-4cb6-a886-315dcb8e25db",
+          "name": "Get Stream Alert Rules",
+          "request": {
+            "name": "Get Stream Alert Rules",
+            "description": {
+              "content": "This API provides capability to get user's stream alert rules",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "streams",
+                ":streamId",
+                "alertRules",
+                ":alertRuleId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "streamId",
+                  "description": "(Required) Stream UUID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "alertRuleId",
+                  "description": "(Required) alert rule UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f1f811f9-d52e-4cf9-b391-4faae72f5afa",
+              "name": "Stream Alert Rules object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules",
+                    ":alertRuleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "alertRuleId",
+                      "description": "(Required) alert rule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418/alertRules/0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15\",\n  \"uuid\": \"0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15\",\n  \"type\": \"METRIC_ALERT\",\n  \"name\": \"metric-alert-1\",\n  \"description\": \"metric-alert-1\",\n  \"state\": \"ACTIVE\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.bandwidth_tx.usage\"\n    ]\n  },\n  \"resourceSelector\": {\n    \"include\": [\n      \"/fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b\"\n    ]\n  },\n  \"detectionMethod\": {\n    \"type\": \"THRESHOLD\",\n    \"windowSize\": \"PT15M\",\n    \"operand\": \"ABOVE\",\n    \"warningThreshold\": 35000000,\n    \"criticalThreshold\": 45000000\n  },\n  \"changeLog\": {\n    \"createdBy\": \"user\",\n    \"createdDateTime\": \"2024-05-06 16:21:18.545214+00:00\",\n    \"updatedBy\": \"user\",\n    \"updatedDateTime\": \"2025-02-04 00:20:54.511118+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e31cafb9-50cb-4dd8-a736-26c3f5a49a20",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules",
+                    ":alertRuleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "alertRuleId",
+                      "description": "(Required) alert rule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-1503140\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-2772099\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6ecc8f0-4f6d-4f02-88cd-b014442b66b4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules",
+                    ":alertRuleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "alertRuleId",
+                      "description": "(Required) alert rule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d5dab13-e8a3-41ef-8c4e-86d59ee8e81e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules",
+                    ":alertRuleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "alertRuleId",
+                      "description": "(Required) alert rule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "517f1580-80b8-4529-a291-2ed1aae9e4ca",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules",
+                    ":alertRuleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "alertRuleId",
+                      "description": "(Required) alert rule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96ac28cd-8ae5-43d5-bef0-14b40b1f2259",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules",
+                    ":alertRuleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "alertRuleId",
+                      "description": "(Required) alert rule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9795c2af-c2ce-40b2-a9a2-092dbf2496c0",
+          "name": "Update Stream Alert Rules",
+          "request": {
+            "name": "Update Stream Alert Rules",
+            "description": {
+              "content": "This API provides capability to update a user's stream alert rule",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "streams",
+                ":streamId",
+                "alertRules",
+                ":alertRuleId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "streamId",
+                  "description": "(Required) Stream UUID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "alertRuleId",
+                  "description": "(Required) alert rule UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"detectionMethod\": {\n    \"type\": \"<string>\",\n    \"windowSize\": \"<string>\",\n    \"operand\": \"<string>\",\n    \"warningThreshold\": \"<string>\",\n    \"criticalThreshold\": \"<string>\"\n  },\n  \"metricSelector\": {\n    \"include\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"name\": \"<string>\",\n  \"resourceSelector\": {\n    \"include\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1ad02c25-7897-4a1c-97e7-d72215d0f491",
+              "name": "Stream Alert Rules object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules",
+                    ":alertRuleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "alertRuleId",
+                      "description": "(Required) alert rule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"metric-alert-1\",\n  \"type\": \"METRIC_ALERT\",\n  \"description\": \"metric-alert-1\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.bandwidth_tx.usage\"\n    ]\n  },\n  \"resourceSelector\": {\n    \"include\": [\n      \"/fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b\"\n    ]\n  },\n  \"detectionMethod\": {\n    \"type\": \"THRESHOLD\",\n    \"windowSize\": \"PT15M\",\n    \"operand\": \"ABOVE\",\n    \"warningThreshold\": 35000000,\n    \"criticalThreshold\": 45000000\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418/alertRules/0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15\",\n  \"uuid\": \"0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15\",\n  \"type\": \"METRIC_ALERT\",\n  \"name\": \"metric-alert-1\",\n  \"description\": \"metric-alert-1\",\n  \"state\": \"ACTIVE\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.bandwidth_tx.usage\"\n    ]\n  },\n  \"resourceSelector\": {\n    \"include\": [\n      \"/fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b\"\n    ]\n  },\n  \"detectionMethod\": {\n    \"type\": \"THRESHOLD\",\n    \"windowSize\": \"PT15M\",\n    \"operand\": \"ABOVE\",\n    \"warningThreshold\": 35000000,\n    \"criticalThreshold\": 45000000\n  },\n  \"changeLog\": {\n    \"createdBy\": \"user\",\n    \"createdDateTime\": \"2024-05-06 16:21:18.545214+00:00\",\n    \"updatedBy\": \"user\",\n    \"updatedDateTime\": \"2025-02-04 00:20:54.511118+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df137664-4418-402e-b72d-49bb67e2d149",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules",
+                    ":alertRuleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "alertRuleId",
+                      "description": "(Required) alert rule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"metric-alert-1\",\n  \"type\": \"METRIC_ALERT\",\n  \"description\": \"metric-alert-1\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.bandwidth_tx.usage\"\n    ]\n  },\n  \"resourceSelector\": {\n    \"include\": [\n      \"/fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b\"\n    ]\n  },\n  \"detectionMethod\": {\n    \"type\": \"THRESHOLD\",\n    \"windowSize\": \"PT15M\",\n    \"operand\": \"ABOVE\",\n    \"warningThreshold\": 35000000,\n    \"criticalThreshold\": 45000000\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-1503140\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-2772099\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c837b805-89b3-4907-8425-4d45bc83a51a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules",
+                    ":alertRuleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "alertRuleId",
+                      "description": "(Required) alert rule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"metric-alert-1\",\n  \"type\": \"METRIC_ALERT\",\n  \"description\": \"metric-alert-1\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.bandwidth_tx.usage\"\n    ]\n  },\n  \"resourceSelector\": {\n    \"include\": [\n      \"/fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b\"\n    ]\n  },\n  \"detectionMethod\": {\n    \"type\": \"THRESHOLD\",\n    \"windowSize\": \"PT15M\",\n    \"operand\": \"ABOVE\",\n    \"warningThreshold\": 35000000,\n    \"criticalThreshold\": 45000000\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c66c584c-125b-498b-a6f8-6035c6e9ad78",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules",
+                    ":alertRuleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "alertRuleId",
+                      "description": "(Required) alert rule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"metric-alert-1\",\n  \"type\": \"METRIC_ALERT\",\n  \"description\": \"metric-alert-1\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.bandwidth_tx.usage\"\n    ]\n  },\n  \"resourceSelector\": {\n    \"include\": [\n      \"/fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b\"\n    ]\n  },\n  \"detectionMethod\": {\n    \"type\": \"THRESHOLD\",\n    \"windowSize\": \"PT15M\",\n    \"operand\": \"ABOVE\",\n    \"warningThreshold\": 35000000,\n    \"criticalThreshold\": 45000000\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54d88168-ab76-4c6d-a489-2c3c755e61ec",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules",
+                    ":alertRuleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "alertRuleId",
+                      "description": "(Required) alert rule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"metric-alert-1\",\n  \"type\": \"METRIC_ALERT\",\n  \"description\": \"metric-alert-1\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.bandwidth_tx.usage\"\n    ]\n  },\n  \"resourceSelector\": {\n    \"include\": [\n      \"/fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b\"\n    ]\n  },\n  \"detectionMethod\": {\n    \"type\": \"THRESHOLD\",\n    \"windowSize\": \"PT15M\",\n    \"operand\": \"ABOVE\",\n    \"warningThreshold\": 35000000,\n    \"criticalThreshold\": 45000000\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55efc249-dbd6-4095-8031-546de622c576",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules",
+                    ":alertRuleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "alertRuleId",
+                      "description": "(Required) alert rule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"metric-alert-1\",\n  \"type\": \"METRIC_ALERT\",\n  \"description\": \"metric-alert-1\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.bandwidth_tx.usage\"\n    ]\n  },\n  \"resourceSelector\": {\n    \"include\": [\n      \"/fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b\"\n    ]\n  },\n  \"detectionMethod\": {\n    \"type\": \"THRESHOLD\",\n    \"windowSize\": \"PT15M\",\n    \"operand\": \"ABOVE\",\n    \"warningThreshold\": 35000000,\n    \"criticalThreshold\": 45000000\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040016\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a7b4dcf-946b-4994-b567-338a033b3b05",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules",
+                    ":alertRuleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "alertRuleId",
+                      "description": "(Required) alert rule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"metric-alert-1\",\n  \"type\": \"METRIC_ALERT\",\n  \"description\": \"metric-alert-1\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.bandwidth_tx.usage\"\n    ]\n  },\n  \"resourceSelector\": {\n    \"include\": [\n      \"/fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b\"\n    ]\n  },\n  \"detectionMethod\": {\n    \"type\": \"THRESHOLD\",\n    \"windowSize\": \"PT15M\",\n    \"operand\": \"ABOVE\",\n    \"warningThreshold\": 35000000,\n    \"criticalThreshold\": 45000000\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "673fd963-71a2-4f77-b946-15a6fd153248",
+          "name": "Delete Stream Alert Rules",
+          "request": {
+            "name": "Delete Stream Alert Rules",
+            "description": {
+              "content": "This API provides capability to delete a user's stream alert rule",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "streams",
+                ":streamId",
+                "alertRules",
+                ":alertRuleId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "streamId",
+                  "description": "(Required) Stream UUID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "alertRuleId",
+                  "description": "(Required) alert rule UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "31857107-01a6-44d2-87f3-20d91ae26468",
+              "name": "Stream Alert Rules object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules",
+                    ":alertRuleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "alertRuleId",
+                      "description": "(Required) alert rule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418/alertRules/0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15\",\n  \"uuid\": \"0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15\",\n  \"type\": \"METRIC_ALERT\",\n  \"name\": \"metric-alert-1\",\n  \"description\": \"metric-alert-1\",\n  \"state\": \"INACTIVE\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.bandwidth_tx.usage\"\n    ]\n  },\n  \"resourceSelector\": {\n    \"include\": [\n      \"/fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b\"\n    ]\n  },\n  \"detectionMethod\": {\n    \"type\": \"THRESHOLD\",\n    \"windowSize\": \"PT15M\",\n    \"operand\": \"ABOVE\",\n    \"warningThreshold\": 35000000,\n    \"criticalThreshold\": 45000000\n  },\n  \"changeLog\": {\n    \"createdBy\": \"user\",\n    \"createdDateTime\": \"2024-05-06 16:21:18.545214+00:00\",\n    \"updatedBy\": \"user\",\n    \"updatedDateTime\": \"2025-02-04 00:20:54.511118+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ebd1d7f8-2d59-47b8-b663-a73ecbfce0d9",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules",
+                    ":alertRuleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "alertRuleId",
+                      "description": "(Required) alert rule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-1503140\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-2772099\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3fee0e9a-4c26-4a77-b93b-663ad4a4be33",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules",
+                    ":alertRuleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "alertRuleId",
+                      "description": "(Required) alert rule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c03fffa1-44b9-4e8a-9fb1-848cb7deabaa",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules",
+                    ":alertRuleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "alertRuleId",
+                      "description": "(Required) alert rule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ee7d219-6f9e-4060-9629-94f8d73c7bcb",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules",
+                    ":alertRuleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "alertRuleId",
+                      "description": "(Required) alert rule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb7cc23f-75c4-4142-81a9-0bb2377b307c",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "alertRules",
+                    ":alertRuleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "alertRuleId",
+                      "description": "(Required) alert rule UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8faedaa1-e935-4e15-994c-94d74ebc992f",
+    "name": "Equinix API Authentication Stream Alert Rules API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}

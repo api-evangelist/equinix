@@ -1,0 +1,1105 @@
+{
+  "item": [
+    {
+      "id": "55e88288-b0f1-4572-9ee2-210960c952d8",
+      "name": "Metrics",
+      "description": {
+        "content": "Metrics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "86e7fb2a-f183-461a-9b09-c21439cf3b0f",
+          "name": "Get Metrics by Asset Id",
+          "request": {
+            "name": "Get Metrics by Asset Id",
+            "description": {
+              "content": "This API provides capability to retrieve Metrics of an asset id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                ":asset",
+                ":assetId",
+                "metrics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of the metric types: \n- `equinix.fabric.connection.bandwidth_rx.usage`\n- `equinix.fabric.connection.bandwidth_tx.usage`\n- `equinix.fabric.connection.packets_dropped_rx_aside_rateexceeded.count`\n- `equinix.fabric.connection.packets_dropped_tx_aside_rateexceeded.count`\n- `equinix.fabric.connection.packets_dropped_rx_zside_rateexceeded.count`\n- `equinix.fabric.connection.packets_dropped_tx_zside_rateexceeded.count`\n- `equinix.fabric.port.bandwidth_rx.usage`\n- `equinix.fabric.port.bandwidth_tx.usage`\n- `equinix.fabric.port.packets_dropped_rx.count`\n- `equinix.fabric.port.packets_dropped_tx.count`\n- `equinix.fabric.port.packets_erred_rx.count`\n- `equinix.fabric.port.packets_erred_tx.count`\n- `equinix.fabric.metro.{SOURCE_METRO_CODE}_{DESTINATION_METRO_CODE}.latency`\n- `equinix.fabric.metro.{SOURCE_METRO_CODE}_{DESTINATION_METRO_CODE}.jitter_avg`\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDateTime",
+                  "value": "<dateTime>",
+                  "description": "Start date and time"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDateTime",
+                  "value": "<dateTime>",
+                  "description": "End date and time"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "limit"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset",
+                  "description": "(Required) asset"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "assetId",
+                  "description": "(Required) asset UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "447a4da6-2b78-4203-96f1-76370a2178da",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    ":asset",
+                    ":assetId",
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "equinix.fabric.connection.bandwidth_rx.usage"
+                    },
+                    {
+                      "key": "fromDateTime",
+                      "value": "2024-07-11 18:06:21+00:00"
+                    },
+                    {
+                      "key": "toDateTime",
+                      "value": "2024-07-11 18:06:21+00:00"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 10,\n    \"total\": 2,\n    \"next\": null,\n    \"previous\": null\n  },\n  \"data\": [\n    {\n      \"type\": \"GAUGE\",\n      \"name\": \"equinix.fabric.port.bandwidth_rx.usage\",\n      \"unit\": \"bit/s\",\n      \"interval\": \"PT5M\",\n      \"resource\": {\n        \"href\": \"https://api.equinix.com/fabric/v4/ports/0689734d-25c6-40d1-a9ff-3e4edea07a72\",\n        \"uuid\": \"0689734d-25c6-40d1-a9ff-3e4edea07a72\",\n        \"type\": \"XF_PORT\",\n        \"state\": \"PROVISIONED\",\n        \"name\": \"my-port-name\"\n      },\n      \"summary\": {\n        \"mean\": 102.15384615384616,\n        \"max\": 107\n      },\n      \"datapoints\": [\n        {\n          \"endDateTime\": \"2025-05-14 13:57:56+00:00\",\n          \"value\": 107\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:02:48+00:00\",\n          \"value\": 97\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:07:58+00:00\",\n          \"value\": 105\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:12:36+00:00\",\n          \"value\": 102\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:18:00+00:00\",\n          \"value\": 96\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:23:03+00:00\",\n          \"value\": 106\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:27:59+00:00\",\n          \"value\": 104\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:32:56+00:00\",\n          \"value\": 104\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:37:51+00:00\",\n          \"value\": 103\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:42:59+00:00\",\n          \"value\": 100\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:47:58+00:00\",\n          \"value\": 105\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:53:08+00:00\",\n          \"value\": 94\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:57:46+00:00\",\n          \"value\": 105\n        }\n      ]\n    },\n    {\n      \"type\": \"GAUGE\",\n      \"name\": \"equinix.fabric.port.bandwidth_tx.usage\",\n      \"unit\": \"bit/s\",\n      \"interval\": \"PT5M\",\n      \"resource\": {\n        \"href\": \"https://api.equinix.com/fabric/v4/ports/0689734d-25c6-40d1-a9ff-3e4edea07a72\",\n        \"uuid\": \"0689734d-25c6-40d1-a9ff-3e4edea07a72\"\n      },\n      \"summary\": {\n        \"mean\": 255.92307692307693,\n        \"max\": 295\n      },\n      \"datapoints\": [\n        {\n          \"endDateTime\": \"2025-05-14 13:57:56+00:00\",\n          \"value\": 259\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:02:48+00:00\",\n          \"value\": 234\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:07:58+00:00\",\n          \"value\": 242\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:12:36+00:00\",\n          \"value\": 280\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:18:00+00:00\",\n          \"value\": 243\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:23:03+00:00\",\n          \"value\": 262\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:27:59+00:00\",\n          \"value\": 247\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:32:56+00:00\",\n          \"value\": 295\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:37:51+00:00\",\n          \"value\": 284\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:42:59+00:00\",\n          \"value\": 227\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:47:58+00:00\",\n          \"value\": 260\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:53:08+00:00\",\n          \"value\": 251\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:57:46+00:00\",\n          \"value\": 243\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "345b87e0-b6f0-4d7c-8d9a-d49200fb6afb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    ":asset",
+                    ":assetId",
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "equinix.fabric.connection.bandwidth_rx.usage"
+                    },
+                    {
+                      "key": "fromDateTime",
+                      "value": "2024-07-11 18:06:21+00:00"
+                    },
+                    {
+                      "key": "toDateTime",
+                      "value": "2024-07-11 18:06:21+00:00"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69504c95-14d7-41a8-813a-a510696f63b4",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    ":asset",
+                    ":assetId",
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "equinix.fabric.connection.bandwidth_rx.usage"
+                    },
+                    {
+                      "key": "fromDateTime",
+                      "value": "2024-07-11 18:06:21+00:00"
+                    },
+                    {
+                      "key": "toDateTime",
+                      "value": "2024-07-11 18:06:21+00:00"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b68f1b29-5c5e-48bb-8a63-7661e2bf6622",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    ":asset",
+                    ":assetId",
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "equinix.fabric.connection.bandwidth_rx.usage"
+                    },
+                    {
+                      "key": "fromDateTime",
+                      "value": "2024-07-11 18:06:21+00:00"
+                    },
+                    {
+                      "key": "toDateTime",
+                      "value": "2024-07-11 18:06:21+00:00"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94a590af-4f90-4e05-8711-71cadf1085ea",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    ":asset",
+                    ":assetId",
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "equinix.fabric.connection.bandwidth_rx.usage"
+                    },
+                    {
+                      "key": "fromDateTime",
+                      "value": "2024-07-11 18:06:21+00:00"
+                    },
+                    {
+                      "key": "toDateTime",
+                      "value": "2024-07-11 18:06:21+00:00"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) asset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "assetId",
+                      "description": "(Required) asset UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b7c3ea6-fc3d-4107-8c05-8b75d9d8822e",
+          "name": "Get Metrics by Name",
+          "request": {
+            "name": "Get Metrics by Name",
+            "description": {
+              "content": "This API provides capability to retrieve Metrics by specific wildcard metric types",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "metrics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of the metric types with wildcard: \n- `equinix.fabric.metro.*.latency`\n- `equinix.fabric.metro.*.jitter_avg`\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "(Required) value"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "limit"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "304b60ec-1c7d-47ed-836a-e9dc69ad8df6",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "equinix.fabric.metro.*.latency"
+                    },
+                    {
+                      "key": "value",
+                      "value": "last"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 5000,\n    \"total\": 3\n  },\n  \"data\": [\n    {\n      \"type\": \"GAUGE\",\n      \"name\": \"equinix.fabric.metro.at_am.latency\",\n      \"unit\": \"ms\",\n      \"resource\": {\n        \"href\": \"https://uatapi.equinix.com/fabric/v4/metros/AT\",\n        \"type\": \"XF_METRO\",\n        \"code\": \"AT\",\n        \"description\": \"Atlanta to Amsterdam intermetro latency, average in milliseconds\"\n      },\n      \"datapoints\": [\n        {\n          \"endDateTime\": \"2026-02-03 23:05:04+00:00\",\n          \"value\": 94.8\n        }\n      ]\n    },\n    {\n      \"type\": \"GAUGE\",\n      \"name\": \"equinix.fabric.metro.at_ba.latency\",\n      \"unit\": \"ms\",\n      \"resource\": {\n        \"href\": \"https://uatapi.equinix.com/fabric/v4/metros/AT\",\n        \"type\": \"XF_METRO\",\n        \"code\": \"AT\",\n        \"description\": \"Atlanta to Barcelona intermetro latency, average in milliseconds\"\n      },\n      \"datapoints\": [\n        {\n          \"endDateTime\": \"2026-02-03 23:05:04+00:00\",\n          \"value\": 111\n        }\n      ]\n    },\n    {\n      \"type\": \"GAUGE\",\n      \"name\": \"equinix.fabric.metro.at_bg.latency\",\n      \"unit\": \"ms\",\n      \"resource\": {\n        \"href\": \"https://uatapi.equinix.com/fabric/v4/metros/AT\",\n        \"type\": \"XF_METRO\",\n        \"code\": \"AT\",\n        \"description\": \"Atlanta to Bogota intermetro latency, average in milliseconds\"\n      },\n      \"datapoints\": [\n        {\n          \"endDateTime\": \"2026-02-03 23:05:04+00:00\",\n          \"value\": 69.8\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e7c2d47-2724-491a-8efe-14ca8766bf34",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "equinix.fabric.metro.*.latency"
+                    },
+                    {
+                      "key": "value",
+                      "value": "last"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "958066d0-65c4-4b89-9ca7-31915f239f74",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "equinix.fabric.metro.*.latency"
+                    },
+                    {
+                      "key": "value",
+                      "value": "last"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d304aa2e-07a3-4f9a-b704-49cf07188a25",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "equinix.fabric.metro.*.latency"
+                    },
+                    {
+                      "key": "value",
+                      "value": "last"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "365da874-8a2d-4518-8966-84fe910a9f62",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "equinix.fabric.metro.*.latency"
+                    },
+                    {
+                      "key": "value",
+                      "value": "last"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "553c291c-bb2c-4129-a11e-2260ee5b29b4",
+          "name": "Search Metrics",
+          "request": {
+            "name": "Search Metrics",
+            "description": {
+              "content": "This API provides capability to search metrics from a filtered query",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "metrics",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"<string>\",\n        \"operator\": \"<string>\",\n        \"values\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"property\": \"<string>\",\n        \"operator\": \"<string>\",\n        \"values\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e952cb9c-c16f-421f-847d-7a055d533b32",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "metrics",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/subject\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"/fabric/v4/ports/8ac8ecfe-c7cb-4def-9f77-5ce93c19d83d\"\n        ]\n      },\n      {\n        \"property\": \"/name\",\n        \"operator\": \"IN\",\n        \"values\": [\n          \"equinix.fabric.port.bandwidth_rx.usage\",\n          \"equinix.fabric.port.bandwidth_tx.usage\",\n          \"equinix.fabric.port.operation.status\"\n        ]\n      },\n      {\n        \"property\": \"/dataPoints/endDateTime\",\n        \"operator\": \"BETWEEN\",\n        \"values\": [\n          \"2025-09-01 19:19:50+00:00\",\n          \"2025-09-03 19:19:50+00:00\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 10,\n    \"total\": 2,\n    \"next\": null,\n    \"previous\": null\n  },\n  \"data\": [\n    {\n      \"type\": \"GAUGE\",\n      \"name\": \"equinix.fabric.port.bandwidth_rx.usage\",\n      \"unit\": \"bit/s\",\n      \"interval\": \"PT5M\",\n      \"resource\": {\n        \"href\": \"https://api.equinix.com/fabric/v4/ports/0689734d-25c6-40d1-a9ff-3e4edea07a72\",\n        \"uuid\": \"0689734d-25c6-40d1-a9ff-3e4edea07a72\",\n        \"type\": \"XF_PORT\",\n        \"state\": \"PROVISIONED\",\n        \"name\": \"my-port-name\"\n      },\n      \"summary\": {\n        \"mean\": 102.15384615384616,\n        \"max\": 107\n      },\n      \"datapoints\": [\n        {\n          \"endDateTime\": \"2025-05-14 13:57:56+00:00\",\n          \"value\": 107\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:02:48+00:00\",\n          \"value\": 97\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:07:58+00:00\",\n          \"value\": 105\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:12:36+00:00\",\n          \"value\": 102\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:18:00+00:00\",\n          \"value\": 96\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:23:03+00:00\",\n          \"value\": 106\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:27:59+00:00\",\n          \"value\": 104\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:32:56+00:00\",\n          \"value\": 104\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:37:51+00:00\",\n          \"value\": 103\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:42:59+00:00\",\n          \"value\": 100\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:47:58+00:00\",\n          \"value\": 105\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:53:08+00:00\",\n          \"value\": 94\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:57:46+00:00\",\n          \"value\": 105\n        }\n      ]\n    },\n    {\n      \"type\": \"GAUGE\",\n      \"name\": \"equinix.fabric.port.bandwidth_tx.usage\",\n      \"unit\": \"bit/s\",\n      \"interval\": \"PT5M\",\n      \"resource\": {\n        \"href\": \"https://api.equinix.com/fabric/v4/ports/0689734d-25c6-40d1-a9ff-3e4edea07a72\",\n        \"uuid\": \"0689734d-25c6-40d1-a9ff-3e4edea07a72\"\n      },\n      \"summary\": {\n        \"mean\": 255.92307692307693,\n        \"max\": 295\n      },\n      \"datapoints\": [\n        {\n          \"endDateTime\": \"2025-05-14 13:57:56+00:00\",\n          \"value\": 259\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:02:48+00:00\",\n          \"value\": 234\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:07:58+00:00\",\n          \"value\": 242\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:12:36+00:00\",\n          \"value\": 280\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:18:00+00:00\",\n          \"value\": 243\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:23:03+00:00\",\n          \"value\": 262\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:27:59+00:00\",\n          \"value\": 247\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:32:56+00:00\",\n          \"value\": 295\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:37:51+00:00\",\n          \"value\": 284\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:42:59+00:00\",\n          \"value\": 227\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:47:58+00:00\",\n          \"value\": 260\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:53:08+00:00\",\n          \"value\": 251\n        },\n        {\n          \"endDateTime\": \"2025-05-14 14:57:46+00:00\",\n          \"value\": 243\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64d74579-5ec8-4d94-bf16-805df61f1960",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "metrics",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/subject\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"/fabric/v4/ports/8ac8ecfe-c7cb-4def-9f77-5ce93c19d83d\"\n        ]\n      },\n      {\n        \"property\": \"/name\",\n        \"operator\": \"IN\",\n        \"values\": [\n          \"equinix.fabric.port.bandwidth_rx.usage\",\n          \"equinix.fabric.port.bandwidth_tx.usage\",\n          \"equinix.fabric.port.operation.status\"\n        ]\n      },\n      {\n        \"property\": \"/dataPoints/endDateTime\",\n        \"operator\": \"BETWEEN\",\n        \"values\": [\n          \"2025-09-01 19:19:50+00:00\",\n          \"2025-09-03 19:19:50+00:00\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1111d526-fd94-4195-982f-6295644c09e8",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "metrics",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/subject\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"/fabric/v4/ports/8ac8ecfe-c7cb-4def-9f77-5ce93c19d83d\"\n        ]\n      },\n      {\n        \"property\": \"/name\",\n        \"operator\": \"IN\",\n        \"values\": [\n          \"equinix.fabric.port.bandwidth_rx.usage\",\n          \"equinix.fabric.port.bandwidth_tx.usage\",\n          \"equinix.fabric.port.operation.status\"\n        ]\n      },\n      {\n        \"property\": \"/dataPoints/endDateTime\",\n        \"operator\": \"BETWEEN\",\n        \"values\": [\n          \"2025-09-01 19:19:50+00:00\",\n          \"2025-09-03 19:19:50+00:00\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f21b346-152a-4d7a-b1c5-b7288e8063e3",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "metrics",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/subject\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"/fabric/v4/ports/8ac8ecfe-c7cb-4def-9f77-5ce93c19d83d\"\n        ]\n      },\n      {\n        \"property\": \"/name\",\n        \"operator\": \"IN\",\n        \"values\": [\n          \"equinix.fabric.port.bandwidth_rx.usage\",\n          \"equinix.fabric.port.bandwidth_tx.usage\",\n          \"equinix.fabric.port.operation.status\"\n        ]\n      },\n      {\n        \"property\": \"/dataPoints/endDateTime\",\n        \"operator\": \"BETWEEN\",\n        \"values\": [\n          \"2025-09-01 19:19:50+00:00\",\n          \"2025-09-03 19:19:50+00:00\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42961be8-456e-44d2-8800-21e71489561c",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "metrics",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/subject\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"/fabric/v4/ports/8ac8ecfe-c7cb-4def-9f77-5ce93c19d83d\"\n        ]\n      },\n      {\n        \"property\": \"/name\",\n        \"operator\": \"IN\",\n        \"values\": [\n          \"equinix.fabric.port.bandwidth_rx.usage\",\n          \"equinix.fabric.port.bandwidth_tx.usage\",\n          \"equinix.fabric.port.operation.status\"\n        ]\n      },\n      {\n        \"property\": \"/dataPoints/endDateTime\",\n        \"operator\": \"BETWEEN\",\n        \"values\": [\n          \"2025-09-01 19:19:50+00:00\",\n          \"2025-09-03 19:19:50+00:00\"\n        ]\n      }\n    ]\n  },\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1fe2cec7-71b7-4eec-88c0-c2f4f49e477f",
+    "name": "Equinix API Authentication Metrics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,354 @@
+{
+  "item": [
+    {
+      "id": "fe9a9076-c597-4427-a162-03cecebdc81a",
+      "name": "availability",
+      "description": {
+        "content": "Secure Cabinet availability",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "99e690a5-4f0b-47ab-a519-4f7a464908ab",
+          "name": "Secure Cabinet availability.",
+          "request": {
+            "name": "Secure Cabinet availability.",
+            "description": {
+              "content": "Returns the availability of Secure Cabinets and recommended additional products for provided billing account.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "securecabinet",
+                "v1",
+                "availability",
+                ":accountNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountNumber",
+                  "description": "(Required) Billing Account Number."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4c91ea7e-dbc2-4599-a9dd-a0d622310b5f",
+              "name": "Products availability details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "securecabinet",
+                    "v1",
+                    "availability",
+                    ":accountNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountNumber",
+                      "description": "(Required) Billing Account Number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"ibx\": \"CH1\",\n    \"maximumNumberOfCabinetsToOrder\": 2,\n    \"minimumDrawCapacityPerCabinet\": 5,\n    \"maximumDrawCapacityPerCabinet\": 5,\n    \"cabinetDimensions\": {\n      \"width\": {\n        \"unit\": \"MILLIMETER\",\n        \"value\": 482\n      },\n      \"depth\": {\n        \"unit\": \"MILLIMETER\",\n        \"value\": 482\n      },\n      \"height\": {\n        \"unit\": \"MILLIMETER\",\n        \"value\": 482\n      }\n    },\n    \"acCircuitConfiguration\": {\n      \"phase\": \"SINGLE\",\n      \"receptacle\": \"IEC 60309 1P+N+E\",\n      \"soldAmperage\": 8.9,\n      \"voltage\": 220\n    },\n    \"pduConfiguration\": {\n      \"model\": \"UU30009L\"\n    },\n    \"fabricPortSpeed\": \"SPEED_1_GBPS\"\n  },\n  {\n    \"ibx\": \"CH1\",\n    \"maximumNumberOfCabinetsToOrder\": 2,\n    \"minimumDrawCapacityPerCabinet\": 5,\n    \"maximumDrawCapacityPerCabinet\": 5,\n    \"cabinetDimensions\": {\n      \"width\": {\n        \"unit\": \"MILLIMETER\",\n        \"value\": 482\n      },\n      \"depth\": {\n        \"unit\": \"MILLIMETER\",\n        \"value\": 482\n      },\n      \"height\": {\n        \"unit\": \"MILLIMETER\",\n        \"value\": 482\n      }\n    },\n    \"acCircuitConfiguration\": {\n      \"phase\": \"SINGLE\",\n      \"receptacle\": \"IEC 60309 1P+N+E\",\n      \"soldAmperage\": 8.9,\n      \"voltage\": 220\n    },\n    \"pduConfiguration\": {\n      \"model\": \"UU30009L\"\n    },\n    \"fabricPortSpeed\": \"SPEED_1_GBPS\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30f26a54-f776-4986-9d00-5393df895ab7",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "securecabinet",
+                    "v1",
+                    "availability",
+                    ":accountNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountNumber",
+                      "description": "(Required) Billing Account Number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-7000400\",\n    \"errorMessage\": \"Account has following failed rules: [SCX_ACCOUNT_NO_MAIN_ADDRESS]\",\n    \"correlationId\": \"dd270016-e866-4146-9a53-84e5ea65ec06\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab60a1af-fec1-4e50-9a79-48c2dde17303",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "securecabinet",
+                    "v1",
+                    "availability",
+                    ":accountNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountNumber",
+                      "description": "(Required) Billing Account Number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-7000401\",\n    \"errorMessage\": \"Unauthorized\",\n    \"correlationId\": \"dd270016-e866-4146-9a53-84e5ea65ec06\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "924ab321-ed8c-4f93-8e5b-abd531d9c7f3",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "securecabinet",
+                    "v1",
+                    "availability",
+                    ":accountNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountNumber",
+                      "description": "(Required) Billing Account Number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-7000403\",\n    \"errorMessage\": \"Forbidden\",\n    \"correlationId\": \"dd270016-e866-4146-9a53-84e5ea65ec06\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f174dc8-074d-4c59-b328-759171962d9f",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "securecabinet",
+                    "v1",
+                    "availability",
+                    ":accountNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountNumber",
+                      "description": "(Required) Billing Account Number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-7000404\",\n    \"errorMessage\": \"Not Found\",\n    \"correlationId\": \"dd270016-e866-4146-9a53-84e5ea65ec06\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7fc1568b-c110-4a55-85e5-e0a97b86de4b",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "securecabinet",
+                    "v1",
+                    "availability",
+                    ":accountNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountNumber",
+                      "description": "(Required) Billing Account Number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-7000500\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"dd270016-e866-4146-9a53-84e5ea65ec06\",\n    \"details\": \"Could not connect to database\",\n    \"help\": \"Please check system logs.\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"$.info\",\n        \"reason\": \"must not be blank\"\n      },\n      {\n        \"property\": \"$.info\",\n        \"reason\": \"must not be blank\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-7000500\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"dd270016-e866-4146-9a53-84e5ea65ec06\",\n    \"details\": \"Could not connect to database\",\n    \"help\": \"Please check system logs.\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"$.info\",\n        \"reason\": \"must not be blank\"\n      },\n      {\n        \"property\": \"$.info\",\n        \"reason\": \"must not be blank\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "43daf81d-6f95-4280-bfaa-15f485bce9b7",
+    "name": "Equinix API Authentication availability API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Equinix API Authentication Retrieve Orders API",
+    "version": "1.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Retrieve Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve order permissible IBX locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/v1/retrieve-orders/locations",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "The API returns locations (IBXs and Cages) where the user's organization has a presence. The user may be able to view orders related to these locations, depending on their permissions."
+        },
+        {
+          "info": {
+            "name": "Search Orders History",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/v1/retrieve-orders",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Based on filtering criteria, this method returns a list of orders from the last 12 months for IBX locations where the user has permissions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,221 @@
+{
+  "item": [
+    {
+      "id": "9d977c27-95cb-4151-a598-638eb1ac4af3",
+      "name": "Prices",
+      "description": {
+        "content": "Prices",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "18886c4a-0c7b-48ee-844b-78fba7eb8bb5",
+          "name": "Get Prices",
+          "request": {
+            "name": "Get Prices",
+            "description": {
+              "content": "Search prices by search criteria",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "prices",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchExpression detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchExpression detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchExpression detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SearchExpression detected>\"\n      }\n    ],\n    \"property\": \"<string>\",\n    \"operator\": \"<string>\",\n    \"values\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b7c6a42d-cf0a-45ea-8eb2-10b7ad23ff6f",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "prices",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/type\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"VIRTUAL_CONNECTION_PRODUCT\"\n        ]\n      },\n      {\n        \"property\": \"/connection/type\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"EVPL_VC\"\n        ]\n      },\n      {\n        \"property\": \"/connection/bandwidth\",\n        \"operator\": \"IN\",\n        \"values\": [\n          \"100\"\n        ]\n      },\n      {\n        \"property\": \"/connection/aSide/accessPoint/type\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"COLO\"\n        ]\n      },\n      {\n        \"property\": \"/connection/aSide/accessPoint/location/metroCode\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"CH\"\n        ]\n      },\n      {\n        \"property\": \"/connection/aSide/accessPoint/port/settings/buyout\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"false\"\n        ]\n      },\n      {\n        \"property\": \"/connection/zSide/accessPoint/location/metroCode\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"CH\"\n        ]\n      },\n      {\n        \"property\": \"/connection/zSide/accessPoint/type\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"COLO\"\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 1,\n    \"total\": 1\n  },\n  \"data\": [\n    {\n      \"type\": \"VIRTUAL_CONNECTION_PRODUCT\",\n      \"code\": \"ECX00015.PROD\",\n      \"name\": \"Equinix Fabric Virtual Connection Product\",\n      \"description\": \"Equinix Fabric Virtual Connection\",\n      \"account\": {\n        \"accountNumber\": 200001\n      },\n      \"charges\": [\n        {\n          \"type\": \"MONTHLY_RECURRING\",\n          \"price\": 500\n        }\n      ],\n      \"currency\": \"USD\",\n      \"connection\": {\n        \"type\": \"EVPL_VC\",\n        \"bandwidth\": 100,\n        \"aSide\": {\n          \"accessPoint\": {\n            \"type\": \"COLO\",\n            \"location\": {\n              \"metroCode\": \"CH\"\n            },\n            \"port\": {\n              \"settings\": {\n                \"buyout\": false\n              }\n            }\n          }\n        },\n        \"zSide\": {\n          \"accessPoint\": {\n            \"type\": \"SP\",\n            \"location\": {\n              \"metroCode\": \"CH\"\n            },\n            \"profile\": {\n              \"uuid\": \"20d32a80-0d61-4333-bc03-707b591ae2f2\"\n            }\n          }\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e081655-118e-49c2-9550-558928214bb1",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "prices",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/type\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"VIRTUAL_CONNECTION_PRODUCT\"\n        ]\n      },\n      {\n        \"property\": \"/connection/type\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"EVPL_VC\"\n        ]\n      },\n      {\n        \"property\": \"/connection/bandwidth\",\n        \"operator\": \"IN\",\n        \"values\": [\n          \"100\"\n        ]\n      },\n      {\n        \"property\": \"/connection/aSide/accessPoint/type\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"COLO\"\n        ]\n      },\n      {\n        \"property\": \"/connection/aSide/accessPoint/location/metroCode\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"CH\"\n        ]\n      },\n      {\n        \"property\": \"/connection/aSide/accessPoint/port/settings/buyout\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"false\"\n        ]\n      },\n      {\n        \"property\": \"/connection/zSide/accessPoint/location/metroCode\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"CH\"\n        ]\n      },\n      {\n        \"property\": \"/connection/zSide/accessPoint/type\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"COLO\"\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3038010\",\n    \"errorMessage\": \"Validation failure\",\n    \"details\": \"Invalid request body\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"/connection/zSide/accessPoint/location/metroCode\",\n        \"reason\": \"/connection/zSide/accessPoint/location/metroCode has invalid format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77c1655d-55c0-4bb4-af03-0dbcaca8dba3",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "prices",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"property\": \"/type\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"VIRTUAL_CONNECTION_PRODUCT\"\n        ]\n      },\n      {\n        \"property\": \"/connection/type\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"EVPL_VC\"\n        ]\n      },\n      {\n        \"property\": \"/connection/bandwidth\",\n        \"operator\": \"IN\",\n        \"values\": [\n          \"100\"\n        ]\n      },\n      {\n        \"property\": \"/connection/aSide/accessPoint/type\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"COLO\"\n        ]\n      },\n      {\n        \"property\": \"/connection/aSide/accessPoint/location/metroCode\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"CH\"\n        ]\n      },\n      {\n        \"property\": \"/connection/aSide/accessPoint/port/settings/buyout\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"false\"\n        ]\n      },\n      {\n        \"property\": \"/connection/zSide/accessPoint/location/metroCode\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"CH\"\n        ]\n      },\n      {\n        \"property\": \"/connection/zSide/accessPoint/type\",\n        \"operator\": \"=\",\n        \"values\": [\n          \"COLO\"\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3038030\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"details\": \"We couldn't process you request\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "68f7d00c-163f-43a0-af72-ad16252afecd",
+    "name": "Equinix API Authentication Prices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}

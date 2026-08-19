@@ -1,0 +1,254 @@
+{
+  "item": [
+    {
+      "id": "9e9d8518-d5aa-4059-9a29-287198bb018c",
+      "name": "Port Packages",
+      "description": {
+        "content": "Port Packages <font color=\"red\"> <sup color='red'>Beta</sup></font>",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9a51a36c-4dec-4a23-96fa-ddcde37438a4",
+          "name": "Get All Port Packages",
+          "request": {
+            "name": "Get All Port Packages",
+            "description": {
+              "content": "Get All Port Packages returns details of all available port packages for the specified user credentials.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "portPackages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "86361869-8a29-41de-80ef-64aab3f1a4bb",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "portPackages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"href\": \"/fabric/v4/portPackages/XF_UNLIMITED_PLUS\",\n      \"type\": \"PORT_PACKAGE\",\n      \"code\": \"XF_UNLIMITED_PLUS\",\n      \"vcBandwidthMax\": 100000,\n      \"vcRemoteSupported\": true,\n      \"supportedServiceTypes\": [\n        \"MSP\"\n      ],\n      \"supportedSourceTypes\": [\n        \"COLO\"\n      ],\n      \"supportedMetros\": [\n        \"SV\",\n        \"DA\"\n      ]\n    },\n    {\n      \"href\": \"/fabric/v4/portPackages/XF_UNLIMITED\",\n      \"type\": \"PORT_PACKAGE\",\n      \"code\": \"XF_UNLIMITED\",\n      \"vcBandwidthMax\": 100000,\n      \"vcRemoteSupported\": false,\n      \"supportedServiceTypes\": [\n        \"MSP\"\n      ],\n      \"supportedSourceTypes\": [\n        \"REMOTE\",\n        \"COLO\"\n      ]\n    },\n    {\n      \"href\": \"/fabric/v4/portPackages/XF_STANDARD\",\n      \"type\": \"PORT_PACKAGE\",\n      \"code\": \"XF_STANDARD\",\n      \"vcBandwidthMax\": 100000,\n      \"vcRemoteSupported\": false,\n      \"supportedServiceTypes\": [\n        \"MSP\"\n      ],\n      \"supportedSourceTypes\": [\n        \"BMMR\",\n        \"REMOTE\",\n        \"COLO\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c5ccb35-f4e7-41b1-9c7f-6627deb98497",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "portPackages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7bb15d2d-c8e3-48cd-8d6f-ec292e082474",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "portPackages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e201cc8d-4777-4491-91d7-3b30d7321328",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "portPackages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040016\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6673e37-c27e-4c6e-8aee-0bd777d58571",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "portPackages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3143001\",\n    \"errorMessage\": \"Internal Error\",\n    \"details\": \"Internal system error\",\n    \"correlationId\": \"80066c00-0f20-11f0-8367-d5075ee362a7\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e890cb39-ff5f-4d6c-83bc-2d6e7d7361c5",
+    "name": "Equinix API Authentication Port Packages API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}

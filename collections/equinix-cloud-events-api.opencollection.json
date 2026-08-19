@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Equinix API Authentication Cloud Events API",
+    "version": "1.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cloud Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Cloud Events by Asset Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/:asset/:assetId/cloudevents",
+            "params": [
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path",
+                "description": "asset"
+              },
+              {
+                "name": "assetId",
+                "value": "",
+                "type": "path",
+                "description": "asset UUID"
+              },
+              {
+                "name": "fromDateTime",
+                "value": "",
+                "type": "query",
+                "description": "Start date and time"
+              },
+              {
+                "name": "toDateTime",
+                "value": "",
+                "type": "query",
+                "description": "End date and time"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit"
+              }
+            ]
+          },
+          "docs": "This API provides capability to retrieve cloud events of an asset id"
+        },
+        {
+          "info": {
+            "name": "Get Cloud Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/cloudevents/:cloudEventId",
+            "params": [
+              {
+                "name": "cloudEventId",
+                "value": "",
+                "type": "path",
+                "description": "Cloud Event UUID"
+              }
+            ]
+          },
+          "docs": "This API provides capability to retrieve a cloud event by uuid"
+        },
+        {
+          "info": {
+            "name": "Search Cloud Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/cloudevents/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API provides capability to search cloud events from a filtered query"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

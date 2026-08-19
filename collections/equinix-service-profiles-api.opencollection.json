@@ -1,0 +1,237 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Equinix API Authentication Service Profiles API",
+    "version": "1.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Service Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all Profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/serviceProfiles",
+            "params": [
+              {
+                "name": "offset",
+                "value": "1",
+                "type": "query",
+                "description": "offset"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "number of records to fetch"
+              },
+              {
+                "name": "viewPoint",
+                "value": "",
+                "type": "query",
+                "description": "flips view between buyer and seller representation"
+              }
+            ]
+          },
+          "docs": "The API request returns all Equinix Fabric Service Profiles in accordance with the view point requested."
+        },
+        {
+          "info": {
+            "name": "Create Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/serviceProfiles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Service Profile creates Equinix Fabric? Service Profile."
+        },
+        {
+          "info": {
+            "name": "Profile Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/serviceProfiles/search",
+            "params": [
+              {
+                "name": "viewPoint",
+                "value": "",
+                "type": "query",
+                "description": "flips view between buyer and seller representation"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search service profiles by search criteria"
+        },
+        {
+          "info": {
+            "name": "Get Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/serviceProfiles/:serviceProfileId",
+            "params": [
+              {
+                "name": "serviceProfileId",
+                "value": "",
+                "type": "path",
+                "description": "Service Profile UUID"
+              },
+              {
+                "name": "viewPoint",
+                "value": "",
+                "type": "query",
+                "description": "flips view between buyer and seller representation"
+              }
+            ]
+          },
+          "docs": "Get service profile by UUID. View Point parameter if set to zSide will give seller's view of the profile otherwise buyer's view."
+        },
+        {
+          "info": {
+            "name": "Replace Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.equinix.com/fabric/v4/serviceProfiles/:serviceProfileId",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "serviceProfileId",
+                "value": "",
+                "type": "path",
+                "description": "Service Profile UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API request replaces a service profile definition"
+        },
+        {
+          "info": {
+            "name": "Update Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.equinix.com/fabric/v4/serviceProfiles/:serviceProfileId",
+            "params": [
+              {
+                "name": "serviceProfileId",
+                "value": "",
+                "type": "path",
+                "description": "Service Profile UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Service Profile by UUID"
+        },
+        {
+          "info": {
+            "name": "Delete Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.equinix.com/fabric/v4/serviceProfiles/:serviceProfileId",
+            "params": [
+              {
+                "name": "serviceProfileId",
+                "value": "",
+                "type": "path",
+                "description": "Service Profile UUID"
+              }
+            ]
+          },
+          "docs": "delete Service Profile by UUID"
+        },
+        {
+          "info": {
+            "name": "Profile Actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.equinix.com/fabric/v4/serviceProfiles/:serviceProfileId/actions",
+            "params": [
+              {
+                "name": "serviceProfileId",
+                "value": "",
+                "type": "path",
+                "description": "Service Profile UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API provides capability to accept/reject service profile update requests"
+        },
+        {
+          "info": {
+            "name": "Get Profile Metros",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.equinix.com/fabric/v4/serviceProfiles/:serviceProfileId/metros",
+            "params": [
+              {
+                "name": "serviceProfileId",
+                "value": "",
+                "type": "path",
+                "description": "Service Profile UUID"
+              },
+              {
+                "name": "offset",
+                "value": "1",
+                "type": "query",
+                "description": "offset"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "number of records to fetch"
+              }
+            ]
+          },
+          "docs": "Get service profile metros by UUID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

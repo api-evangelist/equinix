@@ -1,0 +1,2647 @@
+{
+  "item": [
+    {
+      "id": "2e84dea0-63d1-46c3-af40-b5c33595c513",
+      "name": "Orders",
+      "description": {
+        "content": "Orders",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "58d5f91a-c30d-4a61-bf3c-9ad5a9739bc7",
+          "name": "Retrieve an order",
+          "request": {
+            "name": "Retrieve an order",
+            "description": {
+              "content": "This method retrieves an order by its ID for a user with permission to view this request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "colocations",
+                "v2",
+                "orders",
+                ":orderId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ibxs",
+                  "value": "<string>,<string>",
+                  "description": "List of IBXs to be filtered"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) Identifier of the Order"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "837c3159-62f2-4bf8-abcf-e4201d717131",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ibxs",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the Order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"orderId\": \"1-100000000001\",\n    \"accountName\": \"EQUNIX\",\n    \"accountNumber\": \"100001\",\n    \"quoteRequestType\": \"NEW\",\n    \"contacts\": [\n      {\n        \"firstName\": \"John\",\n        \"lastName\": \"Doe\",\n        \"details\": [\n          {\n            \"value\": \"johndoe@acme.com\",\n            \"type\": \"EMAIL\"\n          }\n        ],\n        \"type\": \"ORDERING\"\n      },\n      {\n        \"firstName\": \"Contact\",\n        \"lastName\": \"User 2\",\n        \"details\": [\n          {\n            \"value\": \"contact1@mail.com\",\n            \"type\": \"EMAIL\"\n          }\n        ],\n        \"type\": \"NOTIFICATION\"\n      },\n      {\n        \"firstName\": \"Contact\",\n        \"lastName\": \"User 1\",\n        \"details\": [\n          {\n            \"value\": \"contact1@mail.com\",\n            \"type\": \"EMAIL\"\n          }\n        ],\n        \"type\": \"NOTIFICATION\"\n      }\n    ],\n    \"status\": \"CLOSED\",\n    \"createdDateTime\": \"2020-07-31T11:23:06.000Z\",\n    \"updatedDateTime\": \"2020-08-06T05:29:26.000Z\",\n    \"channel\": \"API\",\n    \"details\": [\n      {\n        \"lineId\": \"1-ABCDNPE\",\n        \"description\": \"Cross Connect\",\n        \"ibx\": \"IB1\",\n        \"status\": \"Completed\",\n        \"cage\": \"IB1:04:B00010-62\",\n        \"productType\": \"CROSS_CONNECT\",\n        \"productCode\": \"CC00001\",\n        \"unitPricing\": [\n          {\n            \"value\": \"0.0\",\n            \"type\": \"ONE_TIME_CHARGE\",\n            \"valueType\": \"ABSOLUTE\"\n          }\n        ],\n        \"productName\": \"Cross Connect\",\n        \"requestType\": \"Add\",\n        \"purchaseOrder\": {}\n      },\n      {\n        \"lineId\": \"1-ABDESNPE\",\n        \"parentLineId\": \"1-ABCDNPE\",\n        \"description\": \"Cross Connect - Installation Fee\",\n        \"ibx\": \"IB1\",\n        \"status\": \"Completed\",\n        \"cage\": \"IB1:04:B00010-62\",\n        \"productType\": \"CROSS_CONNECT\",\n        \"productCode\": \"CC00001\",\n        \"pricingDetails\": [\n          {\n            \"value\": \"60000.0\",\n            \"type\": \"ONE_TIME_CHARGE\",\n            \"valueType\": \"ABSOLUTE\"\n          }\n        ],\n        \"productName\": \"Cross Connect - Installation Fee\",\n        \"requestType\": \"Add\",\n        \"purchaseOrder\": {}\n      },\n      {\n        \"lineId\": \"1-2DESJJNQ8\",\n        \"parentLineId\": \"1-ABCDNPE\",\n        \"description\": \"Network Cable Connection\",\n        \"ibx\": \"IB1\",\n        \"status\": \"Completed\",\n        \"cage\": \"IB1:04:B00010-62\",\n        \"productType\": \"CROSS_CONNECT\",\n        \"productCode\": \"CC00001\",\n        \"unitPricing\": [\n          {\n            \"value\": \"0.0\",\n            \"type\": \"ONE_TIME_CHARGE\",\n            \"valueType\": \"ABSOLUTE\"\n          }\n        ],\n        \"productName\": \"Network Cable Connection\",\n        \"requestType\": \"Add\",\n        \"additionalInfo\": [\n          {\n            \"key\": \"CIRCUIT_ID\",\n            \"value\": \"-\"\n          }\n        ],\n        \"purchaseOrder\": {}\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf84b438-b678-4b24-8bee-691e155a8076",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ibxs",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the Order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  },\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88385ca4-3d3a-4db2-832b-e6a26dd1bb7a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ibxs",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the Order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  },\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa742cea-ed8a-47d6-99b7-d0ebd1248c7e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ibxs",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the Order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  },\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "976f0d43-d60e-4175-a63d-59962bd67775",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ibxs",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the Order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  },\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7bef0e5-71ba-460e-8f9d-1f901a385c12",
+              "name": "Method Not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ibxs",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the Order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  },\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a243a688-2499-4bf5-b320-344217dba338",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ibxs",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the Order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  },\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f09a54a-8c70-4daf-9b0c-aa4a0f5a232c",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ibxs",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the Order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  },\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c98d7b5-986f-42f7-b5fd-d6b0bb8739e6",
+          "name": "Retrieve order negotiations",
+          "request": {
+            "name": "Retrieve order negotiations",
+            "description": {
+              "content": "This method retrieves order negotiations by its ID for a user with permission to view this request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "colocations",
+                "v2",
+                "orders",
+                ":orderId",
+                "negotiations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) Identifier of the order"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "b01d9a84-eb99-4fb1-8f37-ebcbc5946bbf",
+              "name": "List of negotiations messages",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "negotiations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"referenceId\": \"4-12312312132\",\n    \"orderRequestedDateTime\": \"2020-08-25T10:24:10.282Z\",\n    \"proposedDateTime\": \"2020-08-25T11:24:10.282Z\",\n    \"expirationDateTime\": \"2020-08-25T09:24:10.282Z\",\n    \"expedited\": false,\n    \"createdDateTime\": \"2020-08-25T06:24:10.282Z\",\n    \"message\": \"Due to multiple request, unable to process with requested time\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e00ef88-2b04-4820-b215-69cfba3892fb",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "negotiations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  },\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "114f36a7-1ffe-4911-b054-0924b5cb30a9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "negotiations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2042006\",\n    \"errorMessage\": \"Permission denied\",\n    \"correlationId\": \"99740129126918\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d11b776-7bf3-4b23-8d84-4cfeab4e2166",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "negotiations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2042006\",\n    \"errorMessage\": \"Permission denied\",\n    \"correlationId\": \"99740129126918\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b892d42-420e-48e3-84b0-716914106e09",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "negotiations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2042009\",\n    \"errorMessage\": \"Request is conflicting\",\n    \"correlationId\": \"99740129126918\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e44be546-3c04-45a0-857d-f0ac8e8c7cb7",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "negotiations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2042101\",\n    \"errorMessage\": \"The server has encountered an unexpected error. We apologize for the inconvenience. Please try again later.\",\n    \"correlationId\": \"99740129126918\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ffe8b59-b1a3-494e-87a3-699817480895",
+          "name": "Reply to an order negotiation",
+          "request": {
+            "name": "Reply to an order negotiation",
+            "description": {
+              "content": "This method approves or rejects an order negotiation for a user with permission to view this request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "colocations",
+                "v2",
+                "orders",
+                ":orderId",
+                "negotiations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) Identifier of the order"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6d5eaab7-627e-4d5c-84c4-4c9002624d81",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "negotiations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceId\": \"4-9091830\",\n  \"action\": \"APPROVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Location of an order \"/orders/1-23232322\"",
+                  "key": "Location",
+                  "value": "/orders/1-23232322"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "504d82c4-dc06-4005-9e61-63005798e965",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "negotiations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceId\": \"4-9091830\",\n  \"action\": \"APPROVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Location of an order \"/orders/1-23232322\"",
+                  "key": "Location",
+                  "value": "/orders/1-23232322"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "046c18ed-8563-45ec-844a-0e8907656214",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "negotiations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceId\": \"4-9091830\",\n  \"action\": \"APPROVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2042025\",\n    \"errorMessage\": \"Selected value is not in allowed list of values\",\n    \"correlationId\": \"99740113403329\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"action\",\n        \"reason\": \"Selected code is invalid. Allowed list are APPROVE, APPROVE_NON_EXPIDATE and CANCEL\",\n        \"value\": \"CANCELD\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6fb189f-a9ae-4e17-b20e-afc40c3c5c55",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "negotiations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceId\": \"4-9091830\",\n  \"action\": \"APPROVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2042006\",\n    \"errorMessage\": \"Permission denied\",\n    \"correlationId\": \"99740129126918\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2afc9a82-7377-42cd-a674-64b7ed78486c",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "negotiations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceId\": \"4-9091830\",\n  \"action\": \"APPROVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2042006\",\n    \"errorMessage\": \"Permission denied\",\n    \"correlationId\": \"99740129126918\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c3db0c4-4358-4d5c-bf43-3ca6e65554cd",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "negotiations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceId\": \"4-9091830\",\n  \"action\": \"APPROVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2042009\",\n    \"errorMessage\": \"Request is conflicting\",\n    \"correlationId\": \"99740129126918\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8fa0025c-046b-4426-8c5d-2e32120bd6ae",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "negotiations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceId\": \"4-9091830\",\n  \"action\": \"APPROVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2042101\",\n    \"errorMessage\": \"The server has encountered an unexpected error. We apologize for the inconvenience. Please try again later.\",\n    \"correlationId\": \"99740129126918\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a3fa80f-1838-46cd-be59-8ba9e67b20d3",
+          "name": "Add notes to an order",
+          "request": {
+            "name": "Add notes to an order",
+            "description": {
+              "content": "This method adds notes to an order by its ID for a user with permission to view this request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "colocations",
+                "v2",
+                "orders",
+                ":orderId",
+                "notes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) Identifier of the order"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"attachments\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "62e61dc1-2d72-4a6f-b171-123d465d942f",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"problem description\",\n  \"attachments\": [\n    {\n      \"id\": \"abae6f8c-e168-11ea-87d0-0242ac130003\",\n      \"name\": \"problem_attachments\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Location of an order \"/orders/1-23232322\"",
+                  "key": "Location",
+                  "value": "/orders/1-23232322"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ed3b21fb-94a3-481d-97f0-e3b6702a8807",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"problem description\",\n  \"attachments\": [\n    {\n      \"id\": \"abae6f8c-e168-11ea-87d0-0242ac130003\",\n      \"name\": \"problem_attachments\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Location of an order \"/orders/1-23232322\"",
+                  "key": "Location",
+                  "value": "/orders/1-23232322"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6e9b7d55-f837-4848-aa15-a392d1e52391",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"problem description\",\n  \"attachments\": [\n    {\n      \"id\": \"abae6f8c-e168-11ea-87d0-0242ac130003\",\n      \"name\": \"problem_attachments\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  },\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "991d06f9-a03d-4837-b76c-ba92b4331770",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"problem description\",\n  \"attachments\": [\n    {\n      \"id\": \"abae6f8c-e168-11ea-87d0-0242ac130003\",\n      \"name\": \"problem_attachments\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  },\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba39b2b0-3a33-4d4f-9e2e-eac64805045f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"problem description\",\n  \"attachments\": [\n    {\n      \"id\": \"abae6f8c-e168-11ea-87d0-0242ac130003\",\n      \"name\": \"problem_attachments\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  },\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e3502d9-5447-473d-8581-82f907ca6264",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"problem description\",\n  \"attachments\": [\n    {\n      \"id\": \"abae6f8c-e168-11ea-87d0-0242ac130003\",\n      \"name\": \"problem_attachments\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  },\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e2ffe6e-8082-4534-b70d-fa8b34d5218f",
+              "name": "Method Not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"problem description\",\n  \"attachments\": [\n    {\n      \"id\": \"abae6f8c-e168-11ea-87d0-0242ac130003\",\n      \"name\": \"problem_attachments\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  },\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6fb6410-8ef7-4a95-9088-2511517ef709",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"problem description\",\n  \"attachments\": [\n    {\n      \"id\": \"abae6f8c-e168-11ea-87d0-0242ac130003\",\n      \"name\": \"problem_attachments\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  },\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10252632-5cbd-49a1-884f-2142b8ee429a",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"problem description\",\n  \"attachments\": [\n    {\n      \"id\": \"abae6f8c-e168-11ea-87d0-0242ac130003\",\n      \"name\": \"problem_attachments\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  },\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7171885-339a-4515-959b-a1d133f595f2",
+          "name": "Cancel an order",
+          "request": {
+            "name": "Cancel an order",
+            "description": {
+              "content": "This method cancels an order by its ID for a user with permission to view this request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "colocations",
+                "v2",
+                "orders",
+                ":orderId",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) Identifier of the order"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"<string>\",\n  \"attachments\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"lineIds\": [\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2a2578bd-ed9b-4cf1-9f48-dd0ea68474ab",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\",\n  \"attachments\": [\n    {\n      \"id\": \"c77c5f58-a7ea-4e88-9fc4-1a2900027425\",\n      \"name\": \"error-log\"\n    },\n    {\n      \"id\": \"c77c5f58-a7ea-4e88-9fc4-1a2900027425\",\n      \"name\": \"error-log\"\n    }\n  ],\n  \"lineIds\": [\n    \"1-D89731S\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Location of an order \"/orders/1-23232322\"",
+                  "key": "Location",
+                  "value": "/orders/1-23232322"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7bdc6a5d-5521-4ac2-8cbd-705c5a70a37f",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\",\n  \"attachments\": [\n    {\n      \"id\": \"c77c5f58-a7ea-4e88-9fc4-1a2900027425\",\n      \"name\": \"error-log\"\n    },\n    {\n      \"id\": \"c77c5f58-a7ea-4e88-9fc4-1a2900027425\",\n      \"name\": \"error-log\"\n    }\n  ],\n  \"lineIds\": [\n    \"1-D89731S\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Location of an order \"/orders/1-23232322\"",
+                  "key": "Location",
+                  "value": "/orders/1-23232322"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "27a14bae-a4e2-44f2-b198-70b95453ca96",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\",\n  \"attachments\": [\n    {\n      \"id\": \"c77c5f58-a7ea-4e88-9fc4-1a2900027425\",\n      \"name\": \"error-log\"\n    },\n    {\n      \"id\": \"c77c5f58-a7ea-4e88-9fc4-1a2900027425\",\n      \"name\": \"error-log\"\n    }\n  ],\n  \"lineIds\": [\n    \"1-D89731S\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  },\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d83cc63-25aa-4e42-8bc6-39bfac83f8ac",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\",\n  \"attachments\": [\n    {\n      \"id\": \"c77c5f58-a7ea-4e88-9fc4-1a2900027425\",\n      \"name\": \"error-log\"\n    },\n    {\n      \"id\": \"c77c5f58-a7ea-4e88-9fc4-1a2900027425\",\n      \"name\": \"error-log\"\n    }\n  ],\n  \"lineIds\": [\n    \"1-D89731S\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  },\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69c3a6bc-8ca1-4174-ad34-f012ee3a525c",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\",\n  \"attachments\": [\n    {\n      \"id\": \"c77c5f58-a7ea-4e88-9fc4-1a2900027425\",\n      \"name\": \"error-log\"\n    },\n    {\n      \"id\": \"c77c5f58-a7ea-4e88-9fc4-1a2900027425\",\n      \"name\": \"error-log\"\n    }\n  ],\n  \"lineIds\": [\n    \"1-D89731S\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  },\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e58d040-5761-4645-9711-3687a5635c22",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\",\n  \"attachments\": [\n    {\n      \"id\": \"c77c5f58-a7ea-4e88-9fc4-1a2900027425\",\n      \"name\": \"error-log\"\n    },\n    {\n      \"id\": \"c77c5f58-a7ea-4e88-9fc4-1a2900027425\",\n      \"name\": \"error-log\"\n    }\n  ],\n  \"lineIds\": [\n    \"1-D89731S\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  },\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b50fb463-02d5-4771-bffc-2d3363932f1b",
+              "name": "Method Not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\",\n  \"attachments\": [\n    {\n      \"id\": \"c77c5f58-a7ea-4e88-9fc4-1a2900027425\",\n      \"name\": \"error-log\"\n    },\n    {\n      \"id\": \"c77c5f58-a7ea-4e88-9fc4-1a2900027425\",\n      \"name\": \"error-log\"\n    }\n  ],\n  \"lineIds\": [\n    \"1-D89731S\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  },\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca246df5-995d-42b4-a1a5-499450a73a50",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\",\n  \"attachments\": [\n    {\n      \"id\": \"c77c5f58-a7ea-4e88-9fc4-1a2900027425\",\n      \"name\": \"error-log\"\n    },\n    {\n      \"id\": \"c77c5f58-a7ea-4e88-9fc4-1a2900027425\",\n      \"name\": \"error-log\"\n    }\n  ],\n  \"lineIds\": [\n    \"1-D89731S\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  },\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eef7d84f-6047-4eaf-8b91-b9d5c8266f0b",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "orders",
+                    ":orderId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) Identifier of the order"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\",\n  \"attachments\": [\n    {\n      \"id\": \"c77c5f58-a7ea-4e88-9fc4-1a2900027425\",\n      \"name\": \"error-log\"\n    },\n    {\n      \"id\": \"c77c5f58-a7ea-4e88-9fc4-1a2900027425\",\n      \"name\": \"error-log\"\n    }\n  ],\n  \"lineIds\": [\n    \"1-D89731S\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  },\n  {\n    \"errorCode\": \"EQ-20YYXXX\",\n    \"errorMessage\": \"Error message\",\n    \"details\": \"Error details\",\n    \"correlationId\": \"Correlation ID to trace the error back\",\n    \"help\": \"URL to a help page for the corresponding errorCode\",\n    \"additionalInfo\": {\n      \"property\": \"id\",\n      \"reason\": \"missing id\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b03d3ee0-8af3-46bf-9d0d-094ab67c2703",
+          "name": "Order a new Secure Cabinet deployment",
+          "request": {
+            "name": "Order a new Secure Cabinet deployment",
+            "description": {
+              "content": "Order a new Secure Cabinet deployment and recommended additional products at IBX data centers worldwide.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "securecabinet",
+                "v1",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountNumber\": \"<string>\",\n  \"ibxCode\": \"<string>\",\n  \"contractTerm\": \"<string>\",\n  \"orderItem\": {\n    \"drawCapacity\": \"<double>\",\n    \"fabricPort\": \"<boolean>\",\n    \"numberOfCabinets\": \"<integer>\",\n    \"cabinetDimensions\": {\n      \"width\": {\n        \"unit\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"depth\": {\n        \"unit\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"height\": {\n        \"unit\": \"<string>\",\n        \"value\": \"<integer>\"\n      }\n    },\n    \"pdus\": \"<boolean>\"\n  },\n  \"customerReference\": \"<string>\",\n  \"endCustomerName\": \"<string>\",\n  \"purchaseOrderNumber\": \"<string>\",\n  \"technicalContact\": {\n    \"email\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"phone\": {\n      \"number\": \"<string>\",\n      \"availability\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ccc9e834-ae9c-454d-8094-0c3851b693a8",
+              "name": "Generated Order Number",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "securecabinet",
+                    "v1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"132028\",\n  \"ibxCode\": \"CH1\",\n  \"contractTerm\": \"TERM_24_MONTHS\",\n  \"orderItem\": {\n    \"drawCapacity\": 5,\n    \"fabricPort\": true,\n    \"numberOfCabinets\": 1,\n    \"cabinetDimensions\": {\n      \"width\": {\n        \"unit\": \"MILLIMETER\",\n        \"value\": 482\n      },\n      \"depth\": {\n        \"unit\": \"MILLIMETER\",\n        \"value\": 482\n      },\n      \"height\": {\n        \"unit\": \"MILLIMETER\",\n        \"value\": 482\n      }\n    },\n    \"pdus\": true\n  },\n  \"customerReference\": \"My Reference\",\n  \"endCustomerName\": \"Michael Scott\",\n  \"purchaseOrderNumber\": \"8-132028\",\n  \"technicalContact\": {\n    \"email\": \"john@smith.com\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Smith\",\n    \"phone\": {\n      \"number\": \"4915126449706\",\n      \"availability\": \"WORK_HOURS\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orderNumber\": \"1-126546546546\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e8c8bf5-23f3-4c87-85e0-31a075ffeb46",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "securecabinet",
+                    "v1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"132028\",\n  \"ibxCode\": \"CH1\",\n  \"contractTerm\": \"TERM_24_MONTHS\",\n  \"orderItem\": {\n    \"drawCapacity\": 5,\n    \"fabricPort\": true,\n    \"numberOfCabinets\": 1,\n    \"cabinetDimensions\": {\n      \"width\": {\n        \"unit\": \"MILLIMETER\",\n        \"value\": 482\n      },\n      \"depth\": {\n        \"unit\": \"MILLIMETER\",\n        \"value\": 482\n      },\n      \"height\": {\n        \"unit\": \"MILLIMETER\",\n        \"value\": 482\n      }\n    },\n    \"pdus\": true\n  },\n  \"customerReference\": \"My Reference\",\n  \"endCustomerName\": \"Michael Scott\",\n  \"purchaseOrderNumber\": \"8-132028\",\n  \"technicalContact\": {\n    \"email\": \"john@smith.com\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Smith\",\n    \"phone\": {\n      \"number\": \"4915126449706\",\n      \"availability\": \"WORK_HOURS\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-7000401\",\n    \"errorMessage\": \"Unauthorized\",\n    \"correlationId\": \"dd270016-e866-4146-9a53-84e5ea65ec06\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd5deee6-dff8-4ea6-935e-43f434c17371",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "securecabinet",
+                    "v1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"132028\",\n  \"ibxCode\": \"CH1\",\n  \"contractTerm\": \"TERM_24_MONTHS\",\n  \"orderItem\": {\n    \"drawCapacity\": 5,\n    \"fabricPort\": true,\n    \"numberOfCabinets\": 1,\n    \"cabinetDimensions\": {\n      \"width\": {\n        \"unit\": \"MILLIMETER\",\n        \"value\": 482\n      },\n      \"depth\": {\n        \"unit\": \"MILLIMETER\",\n        \"value\": 482\n      },\n      \"height\": {\n        \"unit\": \"MILLIMETER\",\n        \"value\": 482\n      }\n    },\n    \"pdus\": true\n  },\n  \"customerReference\": \"My Reference\",\n  \"endCustomerName\": \"Michael Scott\",\n  \"purchaseOrderNumber\": \"8-132028\",\n  \"technicalContact\": {\n    \"email\": \"john@smith.com\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Smith\",\n    \"phone\": {\n      \"number\": \"4915126449706\",\n      \"availability\": \"WORK_HOURS\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-7000403\",\n    \"errorMessage\": \"Forbidden\",\n    \"correlationId\": \"dd270016-e866-4146-9a53-84e5ea65ec06\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea374cbf-3d71-478c-9e6e-0fd6dc12bf17",
+              "name": "Input validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "securecabinet",
+                    "v1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"132028\",\n  \"ibxCode\": \"CH1\",\n  \"contractTerm\": \"TERM_24_MONTHS\",\n  \"orderItem\": {\n    \"drawCapacity\": 5,\n    \"fabricPort\": true,\n    \"numberOfCabinets\": 1,\n    \"cabinetDimensions\": {\n      \"width\": {\n        \"unit\": \"MILLIMETER\",\n        \"value\": 482\n      },\n      \"depth\": {\n        \"unit\": \"MILLIMETER\",\n        \"value\": 482\n      },\n      \"height\": {\n        \"unit\": \"MILLIMETER\",\n        \"value\": 482\n      }\n    },\n    \"pdus\": true\n  },\n  \"customerReference\": \"My Reference\",\n  \"endCustomerName\": \"Michael Scott\",\n  \"purchaseOrderNumber\": \"8-132028\",\n  \"technicalContact\": {\n    \"email\": \"john@smith.com\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Smith\",\n    \"phone\": {\n      \"number\": \"4915126449706\",\n      \"availability\": \"WORK_HOURS\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-7000422\",\n    \"errorMessage\": \"Unprocessable Entity\",\n    \"correlationId\": \"dd270016-e866-4146-9a53-84e5ea65ec06\",\n    \"details\": \"The submitted payload does not meet validation criteria\",\n    \"help\": \"Please fix submitted payload according to additionalInfo\",\n    \"additionalInfo\": [\n      {\n        \"reason\": \"Account does not exist\",\n        \"validationRuleTag\": \"AccountExists\",\n        \"property\": \"$.info\",\n        \"validationRoot\": \"AccountExists\",\n        \"validationParameters\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\",\n          \"key_3\": \"string\"\n        }\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-7000422\",\n    \"errorMessage\": \"Unprocessable Entity\",\n    \"correlationId\": \"dd270016-e866-4146-9a53-84e5ea65ec06\",\n    \"details\": \"The submitted payload does not meet validation criteria\",\n    \"help\": \"Please fix submitted payload according to additionalInfo\",\n    \"additionalInfo\": [\n      {\n        \"reason\": \"Account does not exist\",\n        \"validationRuleTag\": \"AccountExists\",\n        \"property\": \"$.info\",\n        \"validationRoot\": \"AccountExists\",\n        \"validationParameters\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        }\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "003714bc-c6a4-4f29-b42e-660df5ed26bb",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "securecabinet",
+                    "v1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"132028\",\n  \"ibxCode\": \"CH1\",\n  \"contractTerm\": \"TERM_24_MONTHS\",\n  \"orderItem\": {\n    \"drawCapacity\": 5,\n    \"fabricPort\": true,\n    \"numberOfCabinets\": 1,\n    \"cabinetDimensions\": {\n      \"width\": {\n        \"unit\": \"MILLIMETER\",\n        \"value\": 482\n      },\n      \"depth\": {\n        \"unit\": \"MILLIMETER\",\n        \"value\": 482\n      },\n      \"height\": {\n        \"unit\": \"MILLIMETER\",\n        \"value\": 482\n      }\n    },\n    \"pdus\": true\n  },\n  \"customerReference\": \"My Reference\",\n  \"endCustomerName\": \"Michael Scott\",\n  \"purchaseOrderNumber\": \"8-132028\",\n  \"technicalContact\": {\n    \"email\": \"john@smith.com\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Smith\",\n    \"phone\": {\n      \"number\": \"4915126449706\",\n      \"availability\": \"WORK_HOURS\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-7000500\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"dd270016-e866-4146-9a53-84e5ea65ec06\",\n    \"details\": \"Could not connect to database\",\n    \"help\": \"Please check system logs.\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"$.info\",\n        \"reason\": \"must not be blank\"\n      },\n      {\n        \"property\": \"$.info\",\n        \"reason\": \"must not be blank\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-7000500\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"dd270016-e866-4146-9a53-84e5ea65ec06\",\n    \"details\": \"Could not connect to database\",\n    \"help\": \"Please check system logs.\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"$.info\",\n        \"reason\": \"must not be blank\"\n      },\n      {\n        \"property\": \"$.info\",\n        \"reason\": \"must not be blank\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d288e965-fa62-4040-9443-51c4ac6b4c84",
+    "name": "Equinix API Authentication Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}

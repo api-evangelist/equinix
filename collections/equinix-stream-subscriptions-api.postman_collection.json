@@ -1,0 +1,2041 @@
+{
+  "item": [
+    {
+      "id": "71db1281-6013-4f04-923b-fe71d61e4499",
+      "name": "Stream Subscriptions",
+      "description": {
+        "content": "Stream Subscriptions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "071554bf-d1d7-49fd-a23e-f4a46b9cfea8",
+          "name": "Get Subscriptions",
+          "request": {
+            "name": "Get Subscriptions",
+            "description": {
+              "content": "This API provides capability to retrieve stream subscriptions",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "streams",
+                ":streamId",
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "number of records to fetch"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "streamId",
+                  "description": "(Required) Stream UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4989c61b-9b7a-4d56-8425-94f123e7c203",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"offset\": 0,\n    \"limit\": 20,\n    \"total\": 1\n  },\n  \"data\": [\n    {\n      \"href\": \"https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418/subscriptions/d684aa26-8276-48b7-bb42-a6d9def0a418\",\n      \"uuid\": \"d684aa26-8276-48b7-bb42-a6d9def0a418\",\n      \"type\": \"STREAM_SUBSCRIPTION\",\n      \"name\": \"splunk\",\n      \"description\": \"subscription 1\",\n      \"state\": \"PROVISIONED\",\n      \"metricSelector\": {\n        \"include\": [\n          \"equinix.fabric.connection.*\"\n        ]\n      },\n      \"eventSelector\": {\n        \"include\": [\n          \"equinix.fabric.connection.*\"\n        ]\n      },\n      \"sink\": {\n        \"uri\": \"https://xxxxxx\",\n        \"type\": \"SPLUNK_HEC\",\n        \"batchEnabled\": false,\n        \"batchSizeMax\": 50,\n        \"batchWaitTimeMax\": 5\n      },\n      \"operation\": {\n        \"eventsDeliveredCount\": 0,\n        \"metricsDeliveredCount\": 0,\n        \"alertsDeliveredCount\": 0,\n        \"errors\": []\n      },\n      \"changeLog\": {\n        \"createdDateTime\": \"2024-05-06 16:21:18.545214+00:00\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "902d57ce-4913-4b44-9f54-0ac8e89aa3e5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2e43a89-fde9-4bc3-aa9e-1392a74dbe4d",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5622a94-5f0f-45cf-b4dd-6a29bf8d890b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b02dc191-22ce-4f57-ae60-3b4cb3b1f0ec",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9559b5ec-9df1-404d-a288-73d702c8f525",
+          "name": "Create Subscription",
+          "request": {
+            "name": "Create Subscription",
+            "description": {
+              "content": "This API provides capability to create user's Stream Subscriptions",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "streams",
+                ":streamId",
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "streamId",
+                  "description": "(Required) Stream UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"sink\": {\n    \"type\": \"<string>\",\n    \"uri\": \"<string>\",\n    \"batchEnabled\": \"<boolean>\",\n    \"batchSizeMax\": \"<integer>\",\n    \"batchWaitTimeMax\": \"<integer>\",\n    \"credential\": {\n      \"type\": \"<string>\",\n      \"accessToken\": \"<string>\",\n      \"integrationKey\": \"<string>\",\n      \"apiKey\": \"<string>\",\n      \"username\": \"<string>\",\n      \"password\": \"<string>\"\n    },\n    \"settings\": {\n      \"eventIndex\": \"<string>\",\n      \"metricIndex\": \"<string>\",\n      \"source\": \"<string>\",\n      \"applicationKey\": \"<string>\",\n      \"eventUri\": \"<string>\",\n      \"metricUri\": \"<string>\",\n      \"format\": \"CLOUDEVENT\"\n    },\n    \"host\": \"<string>\"\n  },\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"except\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"eventSelector\": {\n    \"include\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"except\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "14c97166-7912-44cd-be16-5a8440637cfd",
+              "name": "Stream Subscription object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"STREAM_SUBSCRIPTION\",\n  \"name\": \"splunk1\",\n  \"description\": \"subscription-1\",\n  \"enabled\": true,\n  \"sink\": {\n    \"uri\": \"https://http-inputs-<host>.splunkcloud.com:<port>/services/collector/event\",\n    \"type\": \"SPLUNK_HEC\",\n    \"credential\": {\n      \"type\": \"ACCESS_TOKEN\",\n      \"accessToken\": \"Splunk <my-access-token>\"\n    },\n    \"settings\": {\n      \"source\": \"Equinix\",\n      \"eventIndex\": \"idx-hec-event\",\n      \"metricIndex\": \"idx-hec-metric\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418/subscriptions/d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"uuid\": \"d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"type\": \"STREAM_SUBSCRIPTION\",\n  \"name\": \"stream 1\",\n  \"description\": \"stream dec 1\",\n  \"state\": \"PROVISIONED\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.*\"\n    ]\n  },\n  \"eventSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.*\"\n    ]\n  },\n  \"sink\": {\n    \"uri\": \"https://http-inputs-<host>.splunkcloud.com:<port>/services/collector/event\",\n    \"type\": \"SPLUNK_HEC\",\n    \"credential\": {\n      \"type\": \"ACCESS_TOKEN\",\n      \"accessToken\": \"Splunk <my-access-token>\"\n    },\n    \"settings\": {\n      \"source\": \"Equinix\",\n      \"eventIndex\": \"idx-hec-event\",\n      \"metricIndex\": \"idx-hec-metric\"\n    },\n    \"batchEnabled\": false,\n    \"batchSizeMax\": 50,\n    \"batchWaitTimeMax\": 5\n  },\n  \"operation\": {\n    \"eventsDeliveredCount\": 0,\n    \"metricsDeliveredCount\": 0,\n    \"alertsDeliveredCount\": 0,\n    \"errors\": []\n  },\n  \"changeLog\": {\n    \"createdDateTime\": \"2024-05-06 16:21:18.545214+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c4567f6-824f-4437-a71e-8bf689c4f920",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"STREAM_SUBSCRIPTION\",\n  \"name\": \"splunk1\",\n  \"description\": \"subscription-1\",\n  \"enabled\": true,\n  \"sink\": {\n    \"uri\": \"https://http-inputs-<host>.splunkcloud.com:<port>/services/collector/event\",\n    \"type\": \"SPLUNK_HEC\",\n    \"credential\": {\n      \"type\": \"ACCESS_TOKEN\",\n      \"accessToken\": \"Splunk <my-access-token>\"\n    },\n    \"settings\": {\n      \"source\": \"Equinix\",\n      \"eventIndex\": \"idx-hec-event\",\n      \"metricIndex\": \"idx-hec-metric\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-5513748\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-9182775\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "763fdb4c-ec0f-4fb9-97ff-6f360e5dfd11",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"STREAM_SUBSCRIPTION\",\n  \"name\": \"splunk1\",\n  \"description\": \"subscription-1\",\n  \"enabled\": true,\n  \"sink\": {\n    \"uri\": \"https://http-inputs-<host>.splunkcloud.com:<port>/services/collector/event\",\n    \"type\": \"SPLUNK_HEC\",\n    \"credential\": {\n      \"type\": \"ACCESS_TOKEN\",\n      \"accessToken\": \"Splunk <my-access-token>\"\n    },\n    \"settings\": {\n      \"source\": \"Equinix\",\n      \"eventIndex\": \"idx-hec-event\",\n      \"metricIndex\": \"idx-hec-metric\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd420ca8-8709-4c9b-9f3d-b150758895d8",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"STREAM_SUBSCRIPTION\",\n  \"name\": \"splunk1\",\n  \"description\": \"subscription-1\",\n  \"enabled\": true,\n  \"sink\": {\n    \"uri\": \"https://http-inputs-<host>.splunkcloud.com:<port>/services/collector/event\",\n    \"type\": \"SPLUNK_HEC\",\n    \"credential\": {\n      \"type\": \"ACCESS_TOKEN\",\n      \"accessToken\": \"Splunk <my-access-token>\"\n    },\n    \"settings\": {\n      \"source\": \"Equinix\",\n      \"eventIndex\": \"idx-hec-event\",\n      \"metricIndex\": \"idx-hec-metric\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "386f80df-9d70-41bd-aac9-bc4534aa6433",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"STREAM_SUBSCRIPTION\",\n  \"name\": \"splunk1\",\n  \"description\": \"subscription-1\",\n  \"enabled\": true,\n  \"sink\": {\n    \"uri\": \"https://http-inputs-<host>.splunkcloud.com:<port>/services/collector/event\",\n    \"type\": \"SPLUNK_HEC\",\n    \"credential\": {\n      \"type\": \"ACCESS_TOKEN\",\n      \"accessToken\": \"Splunk <my-access-token>\"\n    },\n    \"settings\": {\n      \"source\": \"Equinix\",\n      \"eventIndex\": \"idx-hec-event\",\n      \"metricIndex\": \"idx-hec-metric\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040016\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63711d1a-828c-4e6c-a51c-26ab704a4746",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"STREAM_SUBSCRIPTION\",\n  \"name\": \"splunk1\",\n  \"description\": \"subscription-1\",\n  \"enabled\": true,\n  \"sink\": {\n    \"uri\": \"https://http-inputs-<host>.splunkcloud.com:<port>/services/collector/event\",\n    \"type\": \"SPLUNK_HEC\",\n    \"credential\": {\n      \"type\": \"ACCESS_TOKEN\",\n      \"accessToken\": \"Splunk <my-access-token>\"\n    },\n    \"settings\": {\n      \"source\": \"Equinix\",\n      \"eventIndex\": \"idx-hec-event\",\n      \"metricIndex\": \"idx-hec-metric\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8feee941-f08d-4c2e-a0da-a7c88ac3b528",
+          "name": "Get Subscription",
+          "request": {
+            "name": "Get Subscription",
+            "description": {
+              "content": "This API provides capability to delete user's get Stream Subscriptions",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "streams",
+                ":streamId",
+                "subscriptions",
+                ":subscriptionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "streamId",
+                  "description": "(Required) Stream UUID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "subscriptionId",
+                  "description": "(Required) Stream Subscription UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1f760672-4e62-4862-b727-18b90bcd0259",
+              "name": "Stream Subscription object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Stream Subscription UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418/subscriptions/d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"uuid\": \"d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"type\": \"STREAM_SUBSCRIPTION\",\n  \"name\": \"stream 1\",\n  \"description\": \"stream dec 1\",\n  \"state\": \"PROVISIONED\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.*\"\n    ]\n  },\n  \"eventSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.*\"\n    ]\n  },\n  \"sink\": {\n    \"uri\": \"https://http-inputs-<host>.splunkcloud.com:<port>/services/collector/event\",\n    \"type\": \"SPLUNK_HEC\",\n    \"credential\": {\n      \"type\": \"ACCESS_TOKEN\",\n      \"accessToken\": \"Splunk <my-access-token>\"\n    },\n    \"settings\": {\n      \"source\": \"Equinix\",\n      \"eventIndex\": \"idx-hec-event\",\n      \"metricIndex\": \"idx-hec-metric\"\n    },\n    \"batchEnabled\": false,\n    \"batchSizeMax\": 50,\n    \"batchWaitTimeMax\": 5\n  },\n  \"operation\": {\n    \"eventsDeliveredCount\": 0,\n    \"metricsDeliveredCount\": 0,\n    \"alertsDeliveredCount\": 0,\n    \"errors\": []\n  },\n  \"changeLog\": {\n    \"createdDateTime\": \"2024-05-06 16:21:18.545214+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4680708f-f583-4cb2-9790-979342f8c243",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Stream Subscription UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-5591226\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-2849307\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1595feff-d740-443f-9896-9abca59db5cf",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Stream Subscription UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a06c1d9c-03fa-4f41-8c02-df34f0debad5",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Stream Subscription UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd501dd9-4547-459d-8af4-aba08773b235",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Stream Subscription UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38f72c20-11ef-4f9a-9242-046d990f2639",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Stream Subscription UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac5a8aea-c954-40b0-8a39-b11b3e4956e3",
+          "name": "Update Subscription",
+          "request": {
+            "name": "Update Subscription",
+            "description": {
+              "content": "This API provides capability to update user's Stream Subscriptions",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "streams",
+                ":streamId",
+                "subscriptions",
+                ":subscriptionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "streamId",
+                  "description": "(Required) Stream UUID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "subscriptionId",
+                  "description": "(Required) Stream Subscription UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"sink\": {\n    \"type\": \"<string>\",\n    \"uri\": \"<string>\",\n    \"batchEnabled\": \"<boolean>\",\n    \"batchSizeMax\": \"<integer>\",\n    \"batchWaitTimeMax\": \"<integer>\",\n    \"credential\": {\n      \"type\": \"<string>\",\n      \"accessToken\": \"<string>\",\n      \"integrationKey\": \"<string>\",\n      \"apiKey\": \"<string>\",\n      \"username\": \"<string>\",\n      \"password\": \"<string>\"\n    },\n    \"settings\": {\n      \"eventIndex\": \"<string>\",\n      \"metricIndex\": \"<string>\",\n      \"source\": \"<string>\",\n      \"applicationKey\": \"<string>\",\n      \"eventUri\": \"<string>\",\n      \"metricUri\": \"<string>\",\n      \"format\": \"CLOUDEVENT\"\n    },\n    \"host\": \"<string>\"\n  },\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"filters\": {\n    \"and\": [\n      {\n        \"property\": \"<string>\",\n        \"operator\": \"<string>\",\n        \"values\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"property\": \"<string>\",\n        \"operator\": \"<string>\",\n        \"values\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  },\n  \"metricSelector\": {\n    \"include\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"except\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"eventSelector\": {\n    \"include\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"except\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a538f59c-d9a0-4983-a21f-7ebb335476ba",
+              "name": "Stream Subscription object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Stream Subscription UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"splunk1\",\n  \"description\": \"subscription 1\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.*\"\n    ]\n  },\n  \"eventSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.*\"\n    ]\n  },\n  \"sink\": {\n    \"uri\": \"https://xxxxxx\",\n    \"type\": \"SPLUNK_HEC\",\n    \"credential\": {\n      \"type\": \"ACCESS_TOKEN\",\n      \"accessToken\": \"my-access-token\"\n    },\n    \"settings\": {\n      \"source\": \"Equinix\",\n      \"eventIndex\": \"idx-hec-event\",\n      \"metricIndex\": \"idx-hec-metric\"\n    },\n    \"batchEnabled\": false,\n    \"batchSizeMax\": 50,\n    \"batchWaitTimeMax\": 5\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418/subscriptions/d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"uuid\": \"d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"type\": \"STREAM_SUBSCRIPTION\",\n  \"name\": \"stream 1\",\n  \"description\": \"stream dec 1\",\n  \"state\": \"PROVISIONED\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.*\"\n    ]\n  },\n  \"eventSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.*\"\n    ]\n  },\n  \"sink\": {\n    \"uri\": \"https://http-inputs-<host>.splunkcloud.com:<port>/services/collector/event\",\n    \"type\": \"SPLUNK_HEC\",\n    \"credential\": {\n      \"type\": \"ACCESS_TOKEN\",\n      \"accessToken\": \"Splunk <my-access-token>\"\n    },\n    \"settings\": {\n      \"source\": \"Equinix\",\n      \"eventIndex\": \"idx-hec-event\",\n      \"metricIndex\": \"idx-hec-metric\"\n    },\n    \"batchEnabled\": false,\n    \"batchSizeMax\": 50,\n    \"batchWaitTimeMax\": 5\n  },\n  \"operation\": {\n    \"eventsDeliveredCount\": 0,\n    \"metricsDeliveredCount\": 0,\n    \"alertsDeliveredCount\": 0,\n    \"errors\": []\n  },\n  \"changeLog\": {\n    \"createdDateTime\": \"2024-05-06 16:21:18.545214+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7f28df1-6339-437b-8cb9-cbafcbff78f8",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Stream Subscription UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"splunk1\",\n  \"description\": \"subscription 1\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.*\"\n    ]\n  },\n  \"eventSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.*\"\n    ]\n  },\n  \"sink\": {\n    \"uri\": \"https://xxxxxx\",\n    \"type\": \"SPLUNK_HEC\",\n    \"credential\": {\n      \"type\": \"ACCESS_TOKEN\",\n      \"accessToken\": \"my-access-token\"\n    },\n    \"settings\": {\n      \"source\": \"Equinix\",\n      \"eventIndex\": \"idx-hec-event\",\n      \"metricIndex\": \"idx-hec-metric\"\n    },\n    \"batchEnabled\": false,\n    \"batchSizeMax\": 50,\n    \"batchWaitTimeMax\": 5\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-5591226\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-2849307\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77cf837d-1690-446f-ba83-f9ea6e25211a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Stream Subscription UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"splunk1\",\n  \"description\": \"subscription 1\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.*\"\n    ]\n  },\n  \"eventSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.*\"\n    ]\n  },\n  \"sink\": {\n    \"uri\": \"https://xxxxxx\",\n    \"type\": \"SPLUNK_HEC\",\n    \"credential\": {\n      \"type\": \"ACCESS_TOKEN\",\n      \"accessToken\": \"my-access-token\"\n    },\n    \"settings\": {\n      \"source\": \"Equinix\",\n      \"eventIndex\": \"idx-hec-event\",\n      \"metricIndex\": \"idx-hec-metric\"\n    },\n    \"batchEnabled\": false,\n    \"batchSizeMax\": 50,\n    \"batchWaitTimeMax\": 5\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d0eaf86-0b51-4d0b-b5da-a0b52176fe9b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Stream Subscription UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"splunk1\",\n  \"description\": \"subscription 1\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.*\"\n    ]\n  },\n  \"eventSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.*\"\n    ]\n  },\n  \"sink\": {\n    \"uri\": \"https://xxxxxx\",\n    \"type\": \"SPLUNK_HEC\",\n    \"credential\": {\n      \"type\": \"ACCESS_TOKEN\",\n      \"accessToken\": \"my-access-token\"\n    },\n    \"settings\": {\n      \"source\": \"Equinix\",\n      \"eventIndex\": \"idx-hec-event\",\n      \"metricIndex\": \"idx-hec-metric\"\n    },\n    \"batchEnabled\": false,\n    \"batchSizeMax\": 50,\n    \"batchWaitTimeMax\": 5\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58afd6e1-3fcf-4df1-8776-0176ec05ded0",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Stream Subscription UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"splunk1\",\n  \"description\": \"subscription 1\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.*\"\n    ]\n  },\n  \"eventSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.*\"\n    ]\n  },\n  \"sink\": {\n    \"uri\": \"https://xxxxxx\",\n    \"type\": \"SPLUNK_HEC\",\n    \"credential\": {\n      \"type\": \"ACCESS_TOKEN\",\n      \"accessToken\": \"my-access-token\"\n    },\n    \"settings\": {\n      \"source\": \"Equinix\",\n      \"eventIndex\": \"idx-hec-event\",\n      \"metricIndex\": \"idx-hec-metric\"\n    },\n    \"batchEnabled\": false,\n    \"batchSizeMax\": 50,\n    \"batchWaitTimeMax\": 5\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86e96d36-2f54-49a8-a605-9e6f3faf99fa",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Stream Subscription UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"splunk1\",\n  \"description\": \"subscription 1\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.*\"\n    ]\n  },\n  \"eventSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.*\"\n    ]\n  },\n  \"sink\": {\n    \"uri\": \"https://xxxxxx\",\n    \"type\": \"SPLUNK_HEC\",\n    \"credential\": {\n      \"type\": \"ACCESS_TOKEN\",\n      \"accessToken\": \"my-access-token\"\n    },\n    \"settings\": {\n      \"source\": \"Equinix\",\n      \"eventIndex\": \"idx-hec-event\",\n      \"metricIndex\": \"idx-hec-metric\"\n    },\n    \"batchEnabled\": false,\n    \"batchSizeMax\": 50,\n    \"batchWaitTimeMax\": 5\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3040016\",\n    \"errorMessage\": \"Unsupported media type, please check the request's Content-Type or Content-Encoding\",\n    \"correlationId\": \"cebc3d33-9037-4a2b-a7af-0ad65602cdec\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"contentType\",\n        \"reason\": \"The payload format is in an unsupported format\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c34d0a7b-c945-4125-a3f1-96ecb51d080d",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Stream Subscription UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"splunk1\",\n  \"description\": \"subscription 1\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.*\"\n    ]\n  },\n  \"eventSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.*\"\n    ]\n  },\n  \"sink\": {\n    \"uri\": \"https://xxxxxx\",\n    \"type\": \"SPLUNK_HEC\",\n    \"credential\": {\n      \"type\": \"ACCESS_TOKEN\",\n      \"accessToken\": \"my-access-token\"\n    },\n    \"settings\": {\n      \"source\": \"Equinix\",\n      \"eventIndex\": \"idx-hec-event\",\n      \"metricIndex\": \"idx-hec-metric\"\n    },\n    \"batchEnabled\": false,\n    \"batchSizeMax\": 50,\n    \"batchWaitTimeMax\": 5\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b57b3c9-afe1-4aab-af6e-42384519d598",
+          "name": "Delete Subscription",
+          "request": {
+            "name": "Delete Subscription",
+            "description": {
+              "content": "This API provides capability to delete user's Stream Subscriptions",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fabric",
+                "v4",
+                "streams",
+                ":streamId",
+                "subscriptions",
+                ":subscriptionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "streamId",
+                  "description": "(Required) Stream UUID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "subscriptionId",
+                  "description": "(Required) Stream Subscription UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2a8a1336-905c-4758-8290-352532a7386b",
+              "name": "Stream Subscription object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Stream Subscription UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"href\": \"https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418/subscriptions/d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"uuid\": \"d684aa26-8276-48b7-bb42-a6d9def0a418\",\n  \"type\": \"STREAM_SUBSCRIPTION\",\n  \"name\": \"stream 1\",\n  \"description\": \"stream dec 1\",\n  \"state\": \"DEPROVISIONING\",\n  \"enabled\": true,\n  \"metricSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.*\"\n    ]\n  },\n  \"eventSelector\": {\n    \"include\": [\n      \"equinix.fabric.connection.*\"\n    ]\n  },\n  \"sink\": {\n    \"uri\": \"https://xxxxxx\",\n    \"type\": \"SPLUNK_HEC\",\n    \"credential\": {\n      \"type\": \"ACCESS_TOKEN\",\n      \"accessToken\": \"Splunk <my-access-token>\"\n    },\n    \"settings\": {\n      \"source\": \"Equinix\",\n      \"eventIndex\": \"idx-hec-event\",\n      \"metricIndex\": \"idx-hec-metric\"\n    },\n    \"batchEnabled\": false,\n    \"batchSizeMax\": 50,\n    \"batchWaitTimeMax\": 5\n  },\n  \"changeLog\": {\n    \"createdDateTime\": \"2024-05-06 16:21:18.545214+00:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba29eeee-c545-45b4-a2c6-988c7355238e",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Stream Subscription UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-5591226\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  },\n  {\n    \"errorCode\": \"EQ-2849307\",\n    \"errorMessage\": \"string\",\n    \"correlationId\": \"string\",\n    \"details\": \"string\",\n    \"help\": \"string\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"property\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d8515ca-7ce5-4605-bd9a-696f6e2de242",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Stream Subscription UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3000039\",\n    \"errorMessage\": \"User not found in request or invalid.\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db2bad69-a96a-4250-9b20-cab0d3864ea1",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Stream Subscription UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045003\",\n    \"errorMessage\": \"Operation not allowed\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Operation not allowed for current user\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8502de6d-71c0-42a9-ba49-fd2bba1c0c36",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Stream Subscription UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045811\",\n    \"errorMessage\": \"uuid not found\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"uuid not found\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4b16da8-3a31-4a24-81c3-514ff81e19a6",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fabric",
+                    "v4",
+                    "streams",
+                    ":streamId",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "streamId",
+                      "description": "(Required) Stream UUID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Stream Subscription UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-3045004\",\n    \"errorMessage\": \"Internal Server Error\",\n    \"correlationId\": \"c82ff3bc-de07-47e5-b3ec-53a009d01515\",\n    \"details\": \"Internal Server Error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "742504fe-8a2e-4801-b242-dfc3dd28adf9",
+    "name": "Equinix API Authentication Stream Subscriptions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}

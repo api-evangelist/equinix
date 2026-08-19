@@ -1,0 +1,1374 @@
+{
+  "item": [
+    {
+      "id": "771df347-d91d-440f-b9d8-8a9ddd2300f1",
+      "name": "Lookup",
+      "description": {
+        "content": "Lookup",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "42f87d87-1968-4ff7-87b1-67d8abbceba0",
+          "name": "Get Locations by permission code",
+          "request": {
+            "name": "Get Locations by permission code",
+            "description": {
+              "content": "This method retrieves all the user’s IBX locations, accounts, cages and cabinets information according to their ordering permission. This includes A-side and Z-side location information for a cross connect order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "colocations",
+                "v2",
+                "locations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "permissionCode",
+                  "value": "<string>",
+                  "description": "(Required) List of Permission code to be filtered"
+                },
+                {
+                  "disabled": false,
+                  "key": "ibxs",
+                  "value": "<string>,<string>",
+                  "description": "List of IBXs to be filtered"
+                },
+                {
+                  "disabled": false,
+                  "key": "providerAccountNumber",
+                  "value": "<string>",
+                  "description": "The service provider's account number (Z-side) linked to their cage. Mandatory when used together with `aSideIbx`. This is only applicable when permissionCode is `CROSS_CONNECT`"
+                },
+                {
+                  "disabled": false,
+                  "key": "aSideIbx",
+                  "value": "<string>",
+                  "description": "A-Side IBX details to fetch the (Z-side). This is only applicable when permissionCode is `CROSS_CONNECT`"
+                },
+                {
+                  "disabled": false,
+                  "key": "connectionService",
+                  "value": "<string>",
+                  "description": "Type of connection service to fetch the Z-side details. This is only applicable when permissionCode is `CROSS_CONNECT` and is required when searching for zSide details."
+                },
+                {
+                  "disabled": false,
+                  "key": "details",
+                  "value": "false",
+                  "description": "When `true`, API response returns cage, cabinet and account details"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "6e753a1f-8946-412b-b8da-4af9d114cefd",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "permissionCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ibxs",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "providerAccountNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aSideIbx",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "connectionService",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "details",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"crossConnects\": [\n    {\n      \"ibx\": \"LD5\",\n      \"accessRestricted\": false,\n      \"specialPrivilege\": false,\n      \"accounts\": [\n        {\n          \"accountNumber\": \"10000001\",\n          \"accountName\": \"Company Limited\",\n          \"allowOrder\": true\n        }\n      ],\n      \"cages\": [\n        {\n          \"id\": \"LD5:01:00001\",\n          \"type\": \"PRIVATE\",\n          \"accountNumber\": \"10000001\",\n          \"cabinetId\": \"LD5:01:00001:0000\",\n          \"cabinetType\": \"PRIVATE\"\n        },\n        {\n          \"id\": \"LD5:01:00002\",\n          \"type\": \"PRIVATE\",\n          \"accountNumber\": \"10000001\",\n          \"cabinetId\": \"LD5:01:00002:0101\",\n          \"cabinetType\": \"PRIVATE\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0abf6b8-edb0-45d8-affc-720ebc36986b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "permissionCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ibxs",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "providerAccountNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aSideIbx",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "connectionService",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "details",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2061011\",\n    \"errorMessage\": \"One or more mandatory properties are missing.\",\n    \"correlationId\": \"210407001942756\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"permissionCode\",\n        \"reason\": \"permissionCode is required\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8f75f8c-99d1-414f-adb1-b3c86f2a189e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "permissionCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ibxs",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "providerAccountNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aSideIbx",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "connectionService",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "details",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2061005\",\n    \"errorMessage\": \"Unable to access or locate given parameter. Please ensure you have appropriate permissions.\",\n    \"correlationId\": \"99740129126918\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83ef7a49-cfcb-4347-a9af-f34986fcb120",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "permissionCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ibxs",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "providerAccountNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aSideIbx",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "connectionService",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "details",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2061101\",\n    \"errorMessage\": \"The server has encountered an unexpected error. We apologize for the inconvenience. Please try again later.\",\n    \"correlationId\": \"99740129126918\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f308c4e-f64c-4b07-bcc7-cd1d4e13efa4",
+          "name": "Retrieve all patch panels",
+          "request": {
+            "name": "Retrieve all patch panels",
+            "description": {
+              "content": "This method retrieves all available patch panels associated with a cabinet for a user with cross connects ordering permission.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "colocations",
+                "v2",
+                "patchPanels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cabinetId",
+                  "value": "<string>",
+                  "description": "(Required) ID of the cabinet"
+                },
+                {
+                  "disabled": false,
+                  "key": "providerAccountNumber",
+                  "value": "<string>",
+                  "description": "The service provider's account number (Z-side) linked to their cage. Mandatory when used together with `aSideIbx`"
+                },
+                {
+                  "disabled": false,
+                  "key": "aSideIbx",
+                  "value": "<string>",
+                  "description": "The IBX location code for A-Side. When used together with `providerAccountNumber`, this returns Z-side patch panel details."
+                },
+                {
+                  "disabled": false,
+                  "key": "accountNumber",
+                  "value": "<string>",
+                  "description": "Account number is only required when cabinet is shared."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "561e50b6-c06d-4401-9919-1fb6208adc4f",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "patchPanels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cabinetId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aSideIbx",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accountNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"patchPanelId\": \"PP:0000:00000\",\n    \"availablePortCount\": 40,\n    \"patchPanelReferenceId\": \"CP:0000:09090\",\n    \"ifcEnabled\": false,\n    \"provisioningType\": \"REGULAR\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30e0adff-2b28-45fc-9c6f-c721eabf7dd4",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "patchPanels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cabinetId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aSideIbx",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accountNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2061011\",\n    \"errorMessage\": \"One or more mandatory properties are missing.\",\n    \"correlationId\": \"210407001942756\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"cabinetId\",\n        \"reason\": \"cabinetId is required\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "430b24dd-e7e0-4d75-9455-27958c9094cf",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "patchPanels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cabinetId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aSideIbx",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accountNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  [\n    {\n      \"errorCode\": \"EQ-20YYXXX\",\n      \"errorMessage\": \"Error message\",\n      \"details\": \"Error details\",\n      \"correlationId\": \"Correlation ID to trace the error back\",\n      \"help\": \"URL to a help page for the corresponding errorCode\",\n      \"additionalInfo\": {\n        \"property\": \"id\",\n        \"reason\": \"missing id\"\n      }\n    },\n    {\n      \"errorCode\": \"EQ-20YYXXX\",\n      \"errorMessage\": \"Error message\",\n      \"details\": \"Error details\",\n      \"correlationId\": \"Correlation ID to trace the error back\",\n      \"help\": \"URL to a help page for the corresponding errorCode\",\n      \"additionalInfo\": {\n        \"property\": \"id\",\n        \"reason\": \"missing id\"\n      }\n    }\n  ],\n  [\n    {\n      \"errorCode\": \"EQ-20YYXXX\",\n      \"errorMessage\": \"Error message\",\n      \"details\": \"Error details\",\n      \"correlationId\": \"Correlation ID to trace the error back\",\n      \"help\": \"URL to a help page for the corresponding errorCode\",\n      \"additionalInfo\": {\n        \"property\": \"id\",\n        \"reason\": \"missing id\"\n      }\n    },\n    {\n      \"errorCode\": \"EQ-20YYXXX\",\n      \"errorMessage\": \"Error message\",\n      \"details\": \"Error details\",\n      \"correlationId\": \"Correlation ID to trace the error back\",\n      \"help\": \"URL to a help page for the corresponding errorCode\",\n      \"additionalInfo\": {\n        \"property\": \"id\",\n        \"reason\": \"missing id\"\n      }\n    }\n  ]\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbe2f8aa-e8e0-4bfd-befa-3b2aadbdb741",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "patchPanels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cabinetId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "providerAccountNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aSideIbx",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accountNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2061101\",\n    \"errorMessage\": \"The server has encountered an unexpected error. We apologize for the inconvenience. Please try again later.\",\n    \"correlationId\": \"99740129126918\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ee36302-771f-4d47-8646-668d71ee4103",
+          "name": "Retrieve patch panel details",
+          "request": {
+            "name": "Retrieve patch panel details",
+            "description": {
+              "content": "This method retrieves details of a patch panel by its ID to a user with cross connects ordering permission.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "colocations",
+                "v2",
+                "patchPanels",
+                ":patchPanelId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "providerAccountNumber",
+                  "value": "<string>",
+                  "description": "The service provider's account number (Z-side) linked to their cage. Mandatory when used together with `aSideIbx`"
+                },
+                {
+                  "disabled": false,
+                  "key": "aSideIbx",
+                  "value": "<string>",
+                  "description": "The IBX location code for A-Side. When used together with `providerAccountNumber` and `accountNumber`, this returns Z-side patch panel details."
+                },
+                {
+                  "disabled": false,
+                  "key": "accountNumber",
+                  "value": "<string>",
+                  "description": "A-Side cage account number"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "patchPanelId",
+                  "description": "(Required) ID of patch panel"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "446ac680-3aa7-442e-ac58-890d9b4d0e24",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "patchPanels",
+                    ":patchPanelId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "providerAccountNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aSideIbx",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accountNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "patchPanelId",
+                      "description": "(Required) ID of patch panel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ibx\": \"IB1\",\n  \"cageId\": \"IB1:04:144155\",\n  \"accountName\": \"COMPANY INC.\",\n  \"accountNumber\": \"101323\",\n  \"patchPanelId\": \"PP:0000:31231\",\n  \"cabinetId\": \"PP:0000:31231:0000\",\n  \"prewired\": false,\n  \"maxPorts\": 48,\n  \"type\": \"Customer provided\",\n  \"customerReferenceId\": \"IFC DEMARC\",\n  \"ifcPanel\": false,\n  \"availablePorts\": [\n    1,\n    2\n  ],\n  \"connectionServices\": [\n    {\n      \"name\": \"COAX\",\n      \"mediaTypes\": [\n        {\n          \"name\": \"COAX\",\n          \"protocolTypes\": [\n            {\n              \"name\": \"DS_3\",\n              \"connectorTypes\": [\n                \"BNC\",\n                \"LC\"\n              ]\n            }\n          ],\n          \"circuitCounts\": [\n            3,\n            6\n          ]\n        }\n      ]\n    },\n    {\n      \"name\": \"MULTI_MODE_FIBER\",\n      \"mediaTypes\": [\n        {\n          \"name\": \"62.5_MICRON_MULTI_MODE_FIBER\",\n          \"protocolTypes\": [\n            {\n              \"name\": \"FIBRE_CHANNEL\",\n              \"connectorTypes\": [\n                \"ST\",\n                \"LC\",\n                \"FC\",\n                \"SC\"\n              ]\n            },\n            {\n              \"name\": \"FAST_ETHERNET\",\n              \"connectorTypes\": [\n                \"ST\",\n                \"SC\",\n                \"LC\",\n                \"FC\"\n              ]\n            },\n            {\n              \"name\": \"GIGABIT_ETHERNET\",\n              \"connectorTypes\": [\n                \"ST\",\n                \"SC\",\n                \"FC\",\n                \"LC\"\n              ]\n            }\n          ],\n          \"circuitCounts\": [\n            3,\n            6,\n            12,\n            24,\n            48\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f26e935-6189-4aef-8165-dc71b2e30553",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "patchPanels",
+                    ":patchPanelId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "providerAccountNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aSideIbx",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accountNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "patchPanelId",
+                      "description": "(Required) ID of patch panel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2061011\",\n    \"errorMessage\": \"One or more mandatory properties are missing.\",\n    \"correlationId\": \"210407001942756\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"patchPanelId\",\n        \"reason\": \"patchPanelId is required\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e879ecf8-dea9-4f37-8642-e5ca0307b381",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "patchPanels",
+                    ":patchPanelId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "providerAccountNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aSideIbx",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accountNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "patchPanelId",
+                      "description": "(Required) ID of patch panel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2061005\",\n    \"errorMessage\": \"Unable to access or locate given parameter. Please ensure you have appropriate permissions.\",\n    \"correlationId\": \"99740129126918\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd734126-c68a-424b-b767-042e42e1b1ef",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "patchPanels",
+                    ":patchPanelId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "providerAccountNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "aSideIbx",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accountNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "patchPanelId",
+                      "description": "(Required) ID of patch panel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2061101\",\n    \"errorMessage\": \"The server has encountered an unexpected error. We apologize for the inconvenience. Please try again later.\",\n    \"correlationId\": \"99740129126918\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1c5ece77-1603-419c-9a19-007c46956e5e",
+          "name": "Retrieve list of providers",
+          "request": {
+            "name": "Retrieve list of providers",
+            "description": {
+              "content": "This method retrieves all available cross connect service providers to a user with cross connects ordering permission.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "colocations",
+                "v2",
+                "providers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cageId",
+                  "value": "<string>",
+                  "description": "(Required) Cage ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "accountNumber",
+                  "value": "<string>",
+                  "description": "(Required) Account number of A-Side cage"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "1058fd7d-69ee-4279-a5d9-3d21f3b1f412",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cageId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accountNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"providerAccountName\": \"Equinix\",\n    \"providerAccountNumber\": \"1\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c961b50b-4780-4f8d-9c95-188ab35083be",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cageId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accountNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2061011\",\n    \"errorMessage\": \"One or more mandatory properties are missing.\",\n    \"correlationId\": \"210407001942756\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"cageId\",\n        \"reason\": \"cageId is required\"\n      },\n      {\n        \"property\": \"accountNumber\",\n        \"reason\": \"accountNumber is required\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d688a1a-1d8e-4136-868d-42c56b28b0b2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cageId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accountNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2061005\",\n    \"errorMessage\": \"Unable to access or locate given parameter. Please ensure you have appropriate permissions.\",\n    \"correlationId\": \"99740129126918\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed07ef49-cc38-449c-b05e-2e55fd511705",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cageId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accountNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2061101\",\n    \"errorMessage\": \"The server has encountered an unexpected error. We apologize for the inconvenience. Please try again later.\",\n    \"correlationId\": \"99740129126918\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5fad3920-b974-4e5c-9016-88f33f80e116",
+          "name": "Retrieve list of connection services",
+          "request": {
+            "name": "Retrieve list of connection services",
+            "description": {
+              "content": "This method retrieves a list of supported connection services such as media types, protocol types, connector types and circuit counts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "colocations",
+                "v2",
+                "connectionServices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ibx",
+                  "value": "<string>",
+                  "description": "(Required) IBX"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "c4441bec-6bff-4e4f-b7b1-71fc2705f9ef",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "connectionServices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ibx",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"MULTI_MODE_FIBER\",\n    \"mediaTypes\": [\n      {\n        \"name\": \"50_MICRON_MULTI_MODE_FIBER_OM3\",\n        \"protocolTypes\": [\n          {\n            \"name\": \"100_GIG_ETHERNET\",\n            \"connectorTypes\": [\n              \"SC\",\n              \"ST\"\n            ]\n          },\n          {\n            \"name\": \"10_GIG_ETHERNET\",\n            \"connectorTypes\": [\n              \"SC\",\n              \"ST\"\n            ]\n          },\n          {\n            \"name\": \"40_GIG_ETHERNET\",\n            \"connectorTypes\": [\n              \"SC\",\n              \"ST\"\n            ]\n          },\n          {\n            \"name\": \"FIBRE_CHANNEL\",\n            \"connectorTypes\": [\n              \"SC\",\n              \"ST\"\n            ]\n          },\n          {\n            \"name\": \"GIGABIT_ETHERNET\",\n            \"connectorTypes\": [\n              \"SC\",\n              \"ST\"\n            ]\n          }\n        ],\n        \"circuitCounts\": []\n      }\n    ]\n  },\n  {\n    \"name\": \"SINGLE_MODE_FIBER\",\n    \"mediaTypes\": [\n      {\n        \"name\": \"SINGLE_MODE_FIBER\",\n        \"protocolTypes\": [\n          {\n            \"name\": \"100_GIG_ETHERNET\",\n            \"connectorTypes\": [\n              \"FC\",\n              \"SC\",\n              \"ST\"\n            ]\n          },\n          {\n            \"name\": \"10_GIG_ETHERNET\",\n            \"connectorTypes\": [\n              \"FC\",\n              \"SC\",\n              \"ST\"\n            ]\n          },\n          {\n            \"name\": \"40_GIG_ETHERNET\",\n            \"connectorTypes\": [\n              \"FC\",\n              \"SC\",\n              \"ST\"\n            ]\n          },\n          {\n            \"name\": \"DARK_FIBER\",\n            \"connectorTypes\": [\n              \"FC\",\n              \"SC\",\n              \"ST\"\n            ]\n          },\n          {\n            \"name\": \"DWDM\",\n            \"connectorTypes\": [\n              \"FC\",\n              \"SC\",\n              \"ST\"\n            ]\n          },\n          {\n            \"name\": \"FIBRE_CHANNEL\",\n            \"connectorTypes\": [\n              \"FC\",\n              \"SC\",\n              \"ST\"\n            ]\n          },\n          {\n            \"name\": \"GIGABIT_ETHERNET\",\n            \"connectorTypes\": [\n              \"FC\",\n              \"SC\",\n              \"ST\"\n            ]\n          },\n          {\n            \"name\": \"OC-12\",\n            \"connectorTypes\": [\n              \"FC\",\n              \"SC\",\n              \"ST\"\n            ]\n          },\n          {\n            \"name\": \"OC-192\",\n            \"connectorTypes\": [\n              \"FC\",\n              \"SC\",\n              \"ST\"\n            ]\n          },\n          {\n            \"name\": \"OC-3\",\n            \"connectorTypes\": [\n              \"FC\",\n              \"SC\",\n              \"ST\"\n            ]\n          },\n          {\n            \"name\": \"OC-48\",\n            \"connectorTypes\": [\n              \"FC\",\n              \"SC\",\n              \"ST\"\n            ]\n          },\n          {\n            \"name\": \"STM-1\",\n            \"connectorTypes\": [\n              \"FC\",\n              \"SC\",\n              \"ST\"\n            ]\n          },\n          {\n            \"name\": \"STM-16\",\n            \"connectorTypes\": [\n              \"FC\",\n              \"SC\",\n              \"ST\"\n            ]\n          },\n          {\n            \"name\": \"STM-4\",\n            \"connectorTypes\": [\n              \"FC\",\n              \"SC\",\n              \"ST\"\n            ]\n          },\n          {\n            \"name\": \"STM-64\",\n            \"connectorTypes\": [\n              \"FC\",\n              \"SC\",\n              \"ST\"\n            ]\n          }\n        ],\n        \"circuitCounts\": []\n      }\n    ]\n  },\n  {\n    \"name\": \"UTP\",\n    \"mediaTypes\": [\n      {\n        \"name\": \"CAT5E\",\n        \"protocolTypes\": [\n          {\n            \"name\": \"56K\",\n            \"connectorTypes\": [\n              \"RJ45\"\n            ]\n          },\n          {\n            \"name\": \"E1\",\n            \"connectorTypes\": [\n              \"RJ45\"\n            ]\n          },\n          {\n            \"name\": \"ETHERNET\",\n            \"connectorTypes\": [\n              \"RJ45\"\n            ]\n          },\n          {\n            \"name\": \"FAST_ETHERNET\",\n            \"connectorTypes\": [\n              \"RJ45\"\n            ]\n          },\n          {\n            \"name\": \"GIGABIT_ETHERNET\",\n            \"connectorTypes\": [\n              \"RJ45\"\n            ]\n          },\n          {\n            \"name\": \"ISDN\",\n            \"connectorTypes\": [\n              \"RJ45\"\n            ]\n          },\n          {\n            \"name\": \"T1\",\n            \"connectorTypes\": [\n              \"RJ45\"\n            ]\n          }\n        ],\n        \"circuitCounts\": []\n      },\n      {\n        \"name\": \"CAT6\",\n        \"protocolTypes\": [\n          {\n            \"name\": \"ETHERNET\",\n            \"connectorTypes\": [\n              \"RJ45\"\n            ]\n          },\n          {\n            \"name\": \"FAST_ETHERNET\",\n            \"connectorTypes\": [\n              \"RJ45\"\n            ]\n          },\n          {\n            \"name\": \"GIGABIT_ETHERNET\",\n            \"connectorTypes\": [\n              \"RJ45\"\n            ]\n          }\n        ],\n        \"circuitCounts\": []\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1c809c5-14bb-4791-9a02-ee72a120b2eb",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "connectionServices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ibx",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2061011\",\n    \"errorMessage\": \"One or more mandatory properties are missing.\",\n    \"correlationId\": \"210407001942756\",\n    \"additionalInfo\": [\n      {\n        \"property\": \"ibx\",\n        \"reason\": \"ibx is required\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4264158-41de-48e1-b841-50f5b38b2704",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "connectionServices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ibx",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2061005\",\n    \"errorMessage\": \"Unable to access or locate given parameter. Please ensure you have appropriate permissions.\",\n    \"correlationId\": \"99740129126918\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d283455c-a86b-4a8b-a134-232f665be2e6",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "colocations",
+                    "v2",
+                    "connectionServices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ibx",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"EQ-2061101\",\n    \"errorMessage\": \"The server has encountered an unexpected error. We apologize for the inconvenience. Please try again later.\",\n    \"correlationId\": \"99740129126918\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.equinix.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c3520273-0674-49ae-8731-ebb5750a1b5d",
+    "name": "Equinix API Authentication Lookup API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.\nTo begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under \"My Apps\". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access\n\nContact Support:\n Name: Equinix API Support",
+      "type": "text/plain"
+    }
+  }
+}
