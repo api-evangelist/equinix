@@ -1,16 +1,20 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Equinix API Authentication Agent Templates API
-  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
-
-    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  title: Equinix Fabric API v4 Agent Templates API
+  description: 'Equinix Fabric is an advanced software-defined interconnection solution that enables you to directly, securely and dynamically connect to distributed infrastructure and digital ecosystems on platform Equinix via a single port, Customers can use Fabric to connect to: </br> 1. Cloud Service Providers - Clouds, network and other service providers.  </br> 2. Enterprises - Other Equinix customers, vendors and partners.  </br> 3. Myself - Another customer instance deployed at Equinix. </br> </br> <b>Integrations (SDKs, Tools) links:</b> </br> <a href="https://github.com/equinix/equinix-sdk-java">Fabric Java SDK</a> </br> <a href="https://github.com/equinix/equinix-sdk-go">Fabric Go SDK</a> </br> <a href="https://github.com/equinix/equinix-sdk-python">Fabric Python SDK</a> </br> <a href="https://registry.terraform.io/providers/equinix/equinix/latest/docs">Equinix Terraform Provider</a> </br> <a href="https://registry.terraform.io/modules/equinix/fabric/equinix/latest">Fabric Terraform Modules</a> </br> <a href="https://www.pulumi.com/registry/packages/equinix/">Equinix Pulumi Provider</a> </br>'
   termsOfService: https://www.equinix.com/about/legal/terms
   contact:
     name: Equinix API Support
     url: https://docs.equinix.com/api-support.htm
-  version: '1.2'
+  license:
+    name: Equinix Inc
+    url: https://developer.equinix.com/agreement
+  version: '4.28'
 servers:
 - url: https://api.equinix.com
+  description: Equinix Inc
+security:
+- BearerAuth: []
 tags:
 - name: Agent Templates
 paths:
@@ -157,88 +161,82 @@ paths:
                 example:
                   $ref: '#/components/examples/AgentTemplate_500'
 components:
-  examples:
-    AgentTemplate_500:
-      value:
-      - errorCode: EQ-3164004
-        errorMessage: Internal Server Error
-        correlationId: f9018571-1001-4422-978b-bfa38ed6b92e
-        details: Internal Server Error
-    AgentTemplatesResponseExample:
-      value:
-        href: https://api.equinix.com/fabric/v4/agentTemplates/d684aa26-8276-48b7-bb42-a6d9def0a418
-        type: ANO_AGENT_TEMPLATE
-        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
-        name: CONNECTION BANDWIDTH UPGRADER AGENT TEMPLATE
-        description: connection bandwidth upgrader agent template
-        state: PROVISIONED
-        enabled: true
-        agentDefinition:
-          url: /equinix/agent-factory/refs/heads/use_pdf_html/agent_factory_schema/equinix/fabric/v1/event_driven/upgrade-bw-primary-connection.md
-        changeLog:
-          createdBy: testuser
-          createdDateTime: 2024-05-06 16:21:18.545214
-          updatedBy: testuser
-          updatedDateTime: 2024-05-06 16:21:18.545214+00:00
-    AgentTemplate_403:
-      value:
-      - errorCode: EQ-3164013
-        errorMessage: Operation not allowed
-        correlationId: 8a72af9d-23f7-4b90-8237-0987130b42dd
-        details: Operation not allowed for current user
-    AgentTemplatesGetAllResponseExample:
-      value:
-        pagination:
-          offset: 0
-          limit: 20
-          total: 1
-        data:
-        - href: https://api.equinix.com/fabric/v4/agentTemplates/d684aa26-8276-48b7-bb42-a6d9def0a418
-          type: ANO_AGENT_TEMPLATE
-          uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
-          name: CONNECTION BANDWIDTH UPGRADER AGENT TEMPLATE
-          description: connection bandwidth upgrader agent template
-          state: PROVISIONED
-          enabled: true
-          agentDefinition:
-            url: /equinix/agent-factory/refs/heads/use_pdf_html/agent_factory_schema/equinix/fabric/v1/event_driven/upgrade-bw-primary-connection.md
-          changeLog:
-            createdBy: testuser
-            createdDateTime: 2024-05-06 16:21:18.545214
-            updatedBy: testuser
-            updatedDateTime: 2024-05-06 16:21:18.545214+00:00
-    AgentTemplate_404:
-      value:
-      - errorCode: EQ-3164811
-        errorMessage: Agent Template not found or already deleted
-        correlationId: 9b6baf30-3eb0-458c-af8b-fff3fae32bc7
-        details: Agent Template not found or already deleted
-    AgentTemplate_401:
-      value:
-      - errorCode: EQ-3164013
-        errorMessage: User not found in request or invalid.
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        additionalInfo:
-        - reason: You are unauthorized to perform this operation
   schemas:
-    AgentDefinition:
+    AgentTemplates:
       type: object
       properties:
-        url:
+        href:
           type: string
-          description: Agent Template ReadMe (.md) Definition
+          description: Agent Template URI
+          format: uuid
+          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        type:
+          type: string
+          description: type
+          example: ANO_AGENT_TEMPLATE
+        uuid:
+          type: string
+          description: Equinix-assigned access point identifier
+          format: uuid
+          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        name:
+          maxLength: 50
+          minLength: 3
+          type: string
+          description: Equinix-provided agent template name
+        description:
+          type: string
+          description: Equinix-provided agent template description
+        state:
+          type: string
+          description: Agent state
+          enum:
+          - PROVISIONING
+          - PROVISIONED
+          - REPROVISIONING
+          - DEPROVISIONING
+          - DEPROVISIONED
+          - FAILED
+        enabled:
+          type: boolean
+          description: Equinix-provided agent template enabled status
+        agentDefinition:
+          $ref: '#/components/schemas/AgentDefinition'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+      description: Agent Template object
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    AgentTemplateId:
+      type: string
+      description: Agent Template UUID
+      format: uuid
+      example: 657400f8-d360-11e9-bb65-2a2ae2dbcce5
     ErrorList:
       type: array
       description: List of Error Message
       items:
         $ref: '#/components/schemas/Error'
-    PriceError_additionalInfo:
-      type: object
-      properties:
-        property:
-          type: string
-        reason:
-          type: string
     Changelog:
       type: object
       properties:
@@ -294,76 +292,12 @@ components:
           format: date-time
           example: 2020-11-06 07:00:00+00:00
       description: Change log
-    AgentTemplateId:
-      type: string
-      description: Agent Template UUID
-      format: uuid
-      example: 657400f8-d360-11e9-bb65-2a2ae2dbcce5
-    Error:
-      required:
-      - errorCode
-      - errorMessage
+    AgentDefinition:
       type: object
       properties:
-        errorCode:
-          pattern: ^EQ-\d{7}$
+        url:
           type: string
-        errorMessage:
-          type: string
-        correlationId:
-          type: string
-        details:
-          type: string
-        help:
-          type: string
-        additionalInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/PriceError_additionalInfo'
-      description: Error Response with details
-    AgentTemplates:
-      type: object
-      properties:
-        href:
-          type: string
-          description: Agent Template URI
-          format: uuid
-          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-        type:
-          type: string
-          description: type
-          example: ANO_AGENT_TEMPLATE
-        uuid:
-          type: string
-          description: Equinix-assigned access point identifier
-          format: uuid
-          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-        name:
-          maxLength: 50
-          minLength: 3
-          type: string
-          description: Equinix-provided agent template name
-        description:
-          type: string
-          description: Equinix-provided agent template description
-        state:
-          type: string
-          description: Agent state
-          enum:
-          - PROVISIONING
-          - PROVISIONED
-          - REPROVISIONING
-          - DEPROVISIONING
-          - DEPROVISIONED
-          - FAILED
-        enabled:
-          type: boolean
-          description: Equinix-provided agent template enabled status
-        agentDefinition:
-          $ref: '#/components/schemas/AgentDefinition'
-        changeLog:
-          $ref: '#/components/schemas/Changelog'
-      description: Agent Template object
+          description: Agent Template ReadMe (.md) Definition
     AgentTemplateGetAllResponse:
       type: object
       properties:
@@ -374,6 +308,13 @@ components:
           description: Data returned from the API call.
           items:
             $ref: '#/components/schemas/AgentTemplates'
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
     Pagination:
       required:
       - limit
@@ -401,6 +342,74 @@ components:
           type: string
           description: URL relative to the previous item in the response.
       description: Pagination response information
-x-eqx-api-linter-skip-rules:
-- 3
-- 38
+  examples:
+    AgentTemplate_401:
+      value:
+      - errorCode: EQ-3164013
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        additionalInfo:
+        - reason: You are unauthorized to perform this operation
+    AgentTemplate_404:
+      value:
+      - errorCode: EQ-3164811
+        errorMessage: Agent Template not found or already deleted
+        correlationId: 9b6baf30-3eb0-458c-af8b-fff3fae32bc7
+        details: Agent Template not found or already deleted
+    AgentTemplatesGetAllResponseExample:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 1
+        data:
+        - href: https://api.equinix.com/fabric/v4/agentTemplates/d684aa26-8276-48b7-bb42-a6d9def0a418
+          type: ANO_AGENT_TEMPLATE
+          uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+          name: CONNECTION BANDWIDTH UPGRADER AGENT TEMPLATE
+          description: connection bandwidth upgrader agent template
+          state: PROVISIONED
+          enabled: true
+          agentDefinition:
+            url: /equinix/agent-factory/refs/heads/use_pdf_html/agent_factory_schema/equinix/fabric/v1/event_driven/upgrade-bw-primary-connection.md
+          changeLog:
+            createdBy: testuser
+            createdDateTime: 2024-05-06 16:21:18.545214
+            updatedBy: testuser
+            updatedDateTime: 2024-05-06 16:21:18.545214+00:00
+    AgentTemplate_500:
+      value:
+      - errorCode: EQ-3164004
+        errorMessage: Internal Server Error
+        correlationId: f9018571-1001-4422-978b-bfa38ed6b92e
+        details: Internal Server Error
+    AgentTemplate_403:
+      value:
+      - errorCode: EQ-3164013
+        errorMessage: Operation not allowed
+        correlationId: 8a72af9d-23f7-4b90-8237-0987130b42dd
+        details: Operation not allowed for current user
+    AgentTemplatesResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/agentTemplates/d684aa26-8276-48b7-bb42-a6d9def0a418
+        type: ANO_AGENT_TEMPLATE
+        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+        name: CONNECTION BANDWIDTH UPGRADER AGENT TEMPLATE
+        description: connection bandwidth upgrader agent template
+        state: PROVISIONED
+        enabled: true
+        agentDefinition:
+          url: /equinix/agent-factory/refs/heads/use_pdf_html/agent_factory_schema/equinix/fabric/v1/event_driven/upgrade-bw-primary-connection.md
+        changeLog:
+          createdBy: testuser
+          createdDateTime: 2024-05-06 16:21:18.545214
+          updatedBy: testuser
+          updatedDateTime: 2024-05-06 16:21:18.545214+00:00
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+externalDocs:
+  description: Find more information on Equinix Docs Portal
+  url: https://docs.equinix.com/fabric/

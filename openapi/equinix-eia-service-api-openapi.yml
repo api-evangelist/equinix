@@ -1,16 +1,21 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Equinix API Authentication EIA Service API
-  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
-
-    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  version: '2.0'
+  title: Equinix Internet Access EIA Service API
+  description: Equinix Internet Access provides direct access to the Internet with scalable bandwidth options in IBX data centers.
   termsOfService: https://www.equinix.com/about/legal/terms
   contact:
     name: Equinix API Support
-    url: https://docs.equinix.com/api-support.htm
-  version: '1.2'
+    url: https://equinix.com/about/
+    email: api-support@equinix.com
+  license:
+    name: Equinix Inc
+    url: https://developer.equinix.com/agreement
 servers:
 - url: https://api.equinix.com
+  description: Equinix API
+security:
+- BearerAuth: []
 tags:
 - name: EIA Service
   description: Equinix Internet Access Service API
@@ -92,73 +97,42 @@ paths:
                     correlationId: sampleCorrelationId
 components:
   schemas:
-    CustomerRouteIpv4Request:
+    IpBlockAddressingPlans:
+      required:
+      - afterThreeMonths
+      - immediate
+      - purpose
+      - size
       type: object
       properties:
-        ipBlock:
-          $ref: '#/components/schemas/IpBlockIpv4Request'
-        prefix:
-          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:/[0-2]*\d{1}|/3[0-2]){1}$
+        size:
+          minimum: 1
+          type: integer
+        purpose:
           type: string
-          description: 'Subnet prefix
+          description: 'The purpose of IP Subnet
 
             '
-          example: 198.51.100.0/24
-    RoutingProtocolRequest:
+          example: 'Provide internet services to the customers
+
+            '
+        immediate:
+          type: integer
+          description: 'Number of ip addresses to be used immediatelly
+
+            '
+          example: 1
+        afterThreeMonths:
+          minimum: 0
+          type: integer
+          description: 'Number of ip addresses to be used after 3 months
+
+            '
+          example: 1
+    ProjectReference:
       allOf:
-      - $ref: '#/components/schemas/Taggable'
-      - required:
-        - type
-        type: object
-        properties:
-          type:
-            $ref: '#/components/schemas/RoutingProtocolType'
-          name:
-            type: string
-            description: 'Name of the routing protocol instance.
-
-              '
-            example: WebServers Routes
-          description:
-            type: string
-            description: 'Description of the routing protocol instance
-
-              '
-            example: 'Routes to customer facing web servers
-
-              '
-    OrderSignatureRequest:
-      required:
-      - signatory
-      type: object
-      properties:
-        signatory:
-          type: string
-          example: SELF
-          enum:
-          - SELF
-          - DELEGATE
-          - SUPPORT
-        delegate:
-          $ref: '#/components/schemas/OrderSignatureDelegateRequest'
-    Taggable:
-      type: object
-      properties:
-        tags:
-          type: array
-          items:
-            type: string
-    RoutingProtocolIpv4Request:
-      required:
-      - customerRoutes
-      type: object
-      properties:
-        customerRoutes:
-          minItems: 1
-          type: array
-          description: Collection of customer routes of IP Version 4 (IPv4)
-          items:
-            $ref: '#/components/schemas/CustomerRouteIpv4Request'
+      - $ref: '#/components/schemas/EntityReference'
+      - $ref: '#/components/schemas/Project'
     DirectPeeringIpv6Request:
       type: object
       properties:
@@ -179,269 +153,13 @@ components:
 
             '
           example: 1002:0db8:85a3:0000:0000:8a2e:0370:6223
-    CustomerBillingAccount:
-      required:
-      - accountNumber
+    Taggable:
       type: object
       properties:
-        accountNumber:
-          type: string
-          description: 'Billing account number
-
-            '
-          example: 2-57689234
-    ServicePurchaseOrderAttachment:
-      type: object
-      properties:
-        attachmentId:
-          type: string
-          format: uuid
-    DirectPeeringIpv4Request_connection:
-      type: object
-      properties:
-        uuid:
-          type: string
-          format: uuid
-    Link:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/EntityReference'
-      - properties:
-          rel:
-            type: string
-            description: self, info, update, delete, statistics, events
-          method:
-            type: string
-          authenticate:
-            type: boolean
-            default: false
-          contentType:
-            type: string
-            example: application/json
-    ContactRequest_details:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - EMAIL
-          - PHONE
-          - MOBILE
-          - SECONDARY_EMAIL
-        value:
-          type: string
-        notes:
-          type: string
-    IpBlock:
-      type: object
-      properties:
-        uuid:
-          type: string
-          format: uuid
-        addressingPlans:
-          type: array
-          description: 'Collection of addressing plans
-
-            '
-          items:
-            $ref: '#/components/schemas/IpBlockAddressingPlans'
-        questions:
-          type: array
-          description: 'Connection of questions
-
-            '
-          items:
-            $ref: '#/components/schemas/IpBlockQuestions'
-    UniqueEntityReference:
-      allOf:
-      - $ref: '#/components/schemas/EntityReference'
-      - required:
-        - uuid
-        type: object
-        properties:
-          uuid:
-            type: string
-            format: uuid
-    OrderSignatureDelegateRequest:
-      required:
-      - email
-      type: object
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          description: 'Email address that the signature request should be sent to in case of DELEGATE signature
-
-            '
-          format: email
-          example: cto@business.com
-    ErrorList:
-      type: array
-      description: List of Error Message
-      items:
-        $ref: '#/components/schemas/Error'
-    ServiceState:
-      type: string
-      enum:
-      - DRAFT
-      - PENDING
-      - PROVISIONING
-      - ACTIVE
-      - INACTIVE
-      - DEPROVISIONING
-      - DEPROVISIONED
-      - FAILED
-    ServiceOrderType:
-      type: string
-      enum:
-      - NEW
-      - AMENDMENT
-    BgpRoutingProtocolRequest:
-      allOf:
-      - $ref: '#/components/schemas/RoutingProtocolRequest'
-      - required:
-        - exportPolicy
-        type: object
-        properties:
-          customerAsnRange:
-            type: string
-            description: Customer Autonomous System Number range
-            enum:
-            - BITS_16
-            - BITS_32
-          customerAsn:
-            maximum: 4294967295
-            minimum: 1
-            type: integer
-            description: 'Customer Autonomous System Number
-
-              '
-            format: int64
-            example: 16220
-          bgpAuthKey:
-            type: string
-            description: 'BGP authentication key
-
-              '
-            example: SecretKey
-          exportPolicy:
-            type: string
-            description: 'Denotes which routes should be advertised to the internet
-
-              '
-            example: FULL
-            enum:
-            - FULL
-            - DEFAULT
-            - FULL_DEFAULT
-            - PARTIAL
-          ipv4:
-            $ref: '#/components/schemas/RoutingProtocolIpv4Request'
-          ipv6:
-            $ref: '#/components/schemas/RoutingProtocolIpv6Request'
-        description: BGP routing protocol
-    StaticRoutingProtocolRequest:
-      allOf:
-      - $ref: '#/components/schemas/RoutingProtocolRequest'
-      - type: object
-        properties:
-          ipv4:
-            $ref: '#/components/schemas/RoutingProtocolIpv4Request'
-          ipv6:
-            $ref: '#/components/schemas/RoutingProtocolIpv6Request'
-        description: Static routing protocol
-    ServiceV2:
-      required:
-      - state
-      - uuid
-      type: object
-      properties:
-        uuid:
-          type: string
-          format: uuid
-        type:
-          $ref: '#/components/schemas/ServiceTypeV2'
-        bandwidth:
-          type: integer
-          description: Service bandwidth in Mbps
-          example: 1000
-        account:
-          $ref: '#/components/schemas/CustomerAccountReference'
-        changeLog:
-          $ref: '#/components/schemas/ServiceChangeLog'
-        links:
+        tags:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
-        order:
-          $ref: '#/components/schemas/ServiceOrderReference'
-        project:
-          $ref: '#/components/schemas/ProjectReference'
-        state:
-          $ref: '#/components/schemas/ServiceState'
-    ServiceOrderContact:
-      allOf:
-      - $ref: '#/components/schemas/ContactRequest'
-      - type: object
-        properties:
-          registeredUser:
             type: string
-            description: 'Identifies (e.g., userName) a registered user. If a registered user is specified, then firstName/lastName need not be provided
-
-              '
-            example: '123232'
-    RoutingProtocolType:
-      type: string
-      enum:
-      - DIRECT
-      - STATIC
-      - BGP
-    ServiceTypeV2:
-      type: string
-      example: SINGLE
-      enum:
-      - SINGLE
-      - DUAL
-    CustomerRouteIpv6Request:
-      type: object
-      properties:
-        ipBlock:
-          $ref: '#/components/schemas/IpBlockIpv6Request'
-        prefix:
-          pattern: ^s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:)))(%.+)?s*(\/([0-9]|[1-9][0-9]|1[0-1][0-9]|12[0-8]))?$
-          type: string
-          description: 'Subnet prefix
-
-            '
-          example: 2001:db8::/64
-    ServiceOrderReference:
-      required:
-      - type
-      allOf:
-      - $ref: '#/components/schemas/UniqueEntityReference'
-      - properties:
-          type:
-            $ref: '#/components/schemas/ServiceOrderType'
-    PurchaseOrderType:
-      type: string
-      description: Purchase order type
-      enum:
-      - STANDARD_PURCHASE_ORDER
-      - BLANKET_PURCHASE_ORDER
-    Project:
-      required:
-      - projectId
-      type: object
-      properties:
-        projectId:
-          type: string
-          description: 'Customer Resource Hierarchy Project identifier
-
-            '
-          example: '7348'
     ServiceOrderRequest:
       allOf:
       - $ref: '#/components/schemas/Taggable'
@@ -461,7 +179,65 @@ components:
             example: '239384723943'
           signature:
             $ref: '#/components/schemas/OrderSignatureRequest'
-    IpBlockIpv6Request:
+    CustomerRouteIpv4Request:
+      type: object
+      properties:
+        ipBlock:
+          $ref: '#/components/schemas/IpBlockIpv4Request'
+        prefix:
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:/[0-2]*\d{1}|/3[0-2]){1}$
+          type: string
+          description: 'Subnet prefix
+
+            '
+          example: 198.51.100.0/24
+    ServicePurchaseOrder:
+      required:
+      - number
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/PurchaseOrderType'
+        number:
+          type: string
+          description: 'Purchase order number
+
+            '
+          example: '129105284100'
+        amount:
+          minimum: 1
+          type: number
+          description: Amount
+          example: 100.5
+        startDate:
+          type: string
+          description: Start date in YYYY-MM-DD format
+          format: date
+        endDate:
+          type: string
+          description: End date in YYYY-MM-DD format
+          format: date
+        description:
+          maxLength: 4096
+          type: string
+          description: Purchase order description
+          example: example purchase order description
+        attachment:
+          $ref: '#/components/schemas/ServicePurchaseOrderAttachment'
+    EntityReference:
+      required:
+      - href
+      type: object
+      properties:
+        href:
+          type: string
+    ServiceTypeV2:
+      type: string
+      example: SINGLE
+      enum:
+      - SINGLE
+      - DUAL
+    IpBlockIpv4Request:
       allOf:
       - $ref: '#/components/schemas/IpBlock'
       - required:
@@ -469,73 +245,39 @@ components:
         type: object
         properties:
           prefixLength:
-            maximum: 126
-            minimum: 48
+            maximum: 30
+            minimum: 24
             type: integer
-            description: 'Length of the IP block, number after the / (slash)
-
-              '
-    ServiceChangeLog:
-      required:
-      - createdBy
-      - createdByEmail
-      - createdByFullName
-      - createdDateTime
-      - updatedBy
-      - updatedByEmail
-      - updatedByFullName
-      - updatedDateTime
+            description: Length of the IP block, number after the / (slash)
+    CustomerRouteIpv6Request:
       type: object
       properties:
-        createdBy:
+        ipBlock:
+          $ref: '#/components/schemas/IpBlockIpv6Request'
+        prefix:
+          pattern: ^s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:)))(%.+)?s*(\/([0-9]|[1-9][0-9]|1[0-1][0-9]|12[0-8]))?$
           type: string
-        createdByFullName:
+          description: 'Subnet prefix
+
+            '
+          example: 2001:db8::/64
+    CustomerBillingAccount:
+      required:
+      - accountNumber
+      type: object
+      properties:
+        accountNumber:
           type: string
-        createdByEmail:
+          description: 'Billing account number
+
+            '
+          example: 2-57689234
+    DirectPeeringIpv4Request_connection:
+      type: object
+      properties:
+        uuid:
           type: string
-          format: email
-        createdDateTime:
-          type: string
-          format: date-time
-        updatedBy:
-          type: string
-        updatedByFullName:
-          type: string
-        updatedByEmail:
-          type: string
-          format: email
-        updatedDateTime:
-          type: string
-          format: date-time
-        deletedBy:
-          type: string
-        deletedByFullName:
-          type: string
-        deletedByEmail:
-          type: string
-          format: email
-        deletedDateTime:
-          type: string
-          format: date-time
-    ContactType:
-      type: string
-      enum:
-      - NOTIFICATION
-      - TECHNICAL
-      - ORDERING
-      - RESELLING
-      - BILLING
-    DirectRoutingProtocolIpv6Request:
-      allOf:
-      - $ref: '#/components/schemas/RoutingProtocolIpv6Request'
-      - type: object
-        properties:
-          peerings:
-            maxItems: 2
-            minItems: 0
-            type: array
-            items:
-              $ref: '#/components/schemas/DirectPeeringIpv6Request'
+          format: uuid
     ErrorAdditionalInfo:
       type: object
       properties:
@@ -554,32 +296,54 @@ components:
             '
           example: work.emailId
       description: Additional info for error
-    ProjectReference:
+    Link:
+      type: object
       allOf:
       - $ref: '#/components/schemas/EntityReference'
-      - $ref: '#/components/schemas/Project'
-    DirectRoutingProtocolIpv4Request:
+      - properties:
+          rel:
+            type: string
+            description: self, info, update, delete, statistics, events
+          method:
+            type: string
+          authenticate:
+            type: boolean
+            default: false
+          contentType:
+            type: string
+            example: application/json
+    ServiceState:
+      type: string
+      enum:
+      - DRAFT
+      - PENDING
+      - PROVISIONING
+      - ACTIVE
+      - INACTIVE
+      - DEPROVISIONING
+      - DEPROVISIONED
+      - FAILED
+    UniqueEntityReference:
       allOf:
-      - $ref: '#/components/schemas/RoutingProtocolIpv4Request'
+      - $ref: '#/components/schemas/EntityReference'
+      - required:
+        - uuid
+        type: object
+        properties:
+          uuid:
+            type: string
+            format: uuid
+    ServiceOrderContact:
+      allOf:
+      - $ref: '#/components/schemas/ContactRequest'
       - type: object
         properties:
-          peerings:
-            maxItems: 2
-            minItems: 0
-            type: array
-            items:
-              $ref: '#/components/schemas/DirectPeeringIpv4Request'
-    RoutingProtocolIpv6Request:
-      required:
-      - customerRoutes
-      type: object
-      properties:
-        customerRoutes:
-          minItems: 1
-          type: array
-          description: Collection of customer routes of IP Version 6 (IPv6)
-          items:
-            $ref: '#/components/schemas/CustomerRouteIpv6Request'
+          registeredUser:
+            type: string
+            description: 'Identifies (e.g., userName) a registered user. If a registered user is specified, then firstName/lastName need not be provided
+
+              '
+            example: '123232'
     Error:
       required:
       - errorCode
@@ -635,41 +399,358 @@ components:
             $ref: '#/components/schemas/ErrorAdditionalInfo'
       description: Error Response with details
       readOnly: true
-    CustomerAccountReference:
-      $ref: '#/components/schemas/CustomerBillingAccount'
-    ServicePurchaseOrder:
+    IpBlockIpv6Request:
+      allOf:
+      - $ref: '#/components/schemas/IpBlock'
+      - required:
+        - prefixLength
+        type: object
+        properties:
+          prefixLength:
+            maximum: 126
+            minimum: 48
+            type: integer
+            description: 'Length of the IP block, number after the / (slash)
+
+              '
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
+    OrderSignatureDelegateRequest:
       required:
-      - number
+      - email
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          description: 'Email address that the signature request should be sent to in case of DELEGATE signature
+
+            '
+          format: email
+          example: cto@business.com
+    ContactRequest:
+      required:
+      - type
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/PurchaseOrderType'
-        number:
+          $ref: '#/components/schemas/ContactType'
+        firstName:
           type: string
-          description: 'Purchase order number
+        lastName:
+          type: string
+        timezone:
+          type: string
+        notes:
+          type: string
+        availability:
+          type: string
+          enum:
+          - WORK_HOURS
+          - ANYTIME
+          - CUSTOMER_BUSINESS_HOURS
+          - NOT_AVAILABLE
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactRequest_details'
+    DirectRoutingProtocolIpv4Request:
+      allOf:
+      - $ref: '#/components/schemas/RoutingProtocolIpv4Request'
+      - type: object
+        properties:
+          peerings:
+            maxItems: 2
+            minItems: 0
+            type: array
+            items:
+              $ref: '#/components/schemas/DirectPeeringIpv4Request'
+    OrderSignatureRequest:
+      required:
+      - signatory
+      type: object
+      properties:
+        signatory:
+          type: string
+          example: SELF
+          enum:
+          - SELF
+          - DELEGATE
+          - SUPPORT
+        delegate:
+          $ref: '#/components/schemas/OrderSignatureDelegateRequest'
+    StaticRoutingProtocolRequest:
+      allOf:
+      - $ref: '#/components/schemas/RoutingProtocolRequest'
+      - type: object
+        properties:
+          ipv4:
+            $ref: '#/components/schemas/RoutingProtocolIpv4Request'
+          ipv6:
+            $ref: '#/components/schemas/RoutingProtocolIpv6Request'
+        description: Static routing protocol
+    ContactRequest_details:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - EMAIL
+          - PHONE
+          - MOBILE
+          - SECONDARY_EMAIL
+        value:
+          type: string
+        notes:
+          type: string
+    DirectRoutingProtocolRequest:
+      allOf:
+      - $ref: '#/components/schemas/RoutingProtocolRequest'
+      - type: object
+        properties:
+          ipv4:
+            $ref: '#/components/schemas/DirectRoutingProtocolIpv4Request'
+          ipv6:
+            $ref: '#/components/schemas/DirectRoutingProtocolIpv6Request'
+        description: Direct routing protocol
+    ServiceV2:
+      required:
+      - state
+      - uuid
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        type:
+          $ref: '#/components/schemas/ServiceTypeV2'
+        bandwidth:
+          type: integer
+          description: Service bandwidth in Mbps
+          example: 1000
+        account:
+          $ref: '#/components/schemas/CustomerAccountReference'
+        changeLog:
+          $ref: '#/components/schemas/ServiceChangeLog'
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+        order:
+          $ref: '#/components/schemas/ServiceOrderReference'
+        project:
+          $ref: '#/components/schemas/ProjectReference'
+        state:
+          $ref: '#/components/schemas/ServiceState'
+    IpBlock:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        addressingPlans:
+          type: array
+          description: 'Collection of addressing plans
 
             '
-          example: '129105284100'
-        amount:
-          minimum: 1
-          type: number
-          description: Amount
-          example: 100.5
-        startDate:
+          items:
+            $ref: '#/components/schemas/IpBlockAddressingPlans'
+        questions:
+          type: array
+          description: 'Connection of questions
+
+            '
+          items:
+            $ref: '#/components/schemas/IpBlockQuestions'
+    DirectRoutingProtocolIpv6Request:
+      allOf:
+      - $ref: '#/components/schemas/RoutingProtocolIpv6Request'
+      - type: object
+        properties:
+          peerings:
+            maxItems: 2
+            minItems: 0
+            type: array
+            items:
+              $ref: '#/components/schemas/DirectPeeringIpv6Request'
+    RoutingProtocolIpv6Request:
+      required:
+      - customerRoutes
+      type: object
+      properties:
+        customerRoutes:
+          minItems: 1
+          type: array
+          description: Collection of customer routes of IP Version 6 (IPv6)
+          items:
+            $ref: '#/components/schemas/CustomerRouteIpv6Request'
+    PurchaseOrderType:
+      type: string
+      description: Purchase order type
+      enum:
+      - STANDARD_PURCHASE_ORDER
+      - BLANKET_PURCHASE_ORDER
+    ContactType:
+      type: string
+      enum:
+      - NOTIFICATION
+      - TECHNICAL
+      - ORDERING
+      - RESELLING
+      - BILLING
+    RoutingProtocolRequest:
+      allOf:
+      - $ref: '#/components/schemas/Taggable'
+      - required:
+        - type
+        type: object
+        properties:
+          type:
+            $ref: '#/components/schemas/RoutingProtocolType'
+          name:
+            type: string
+            description: 'Name of the routing protocol instance.
+
+              '
+            example: WebServers Routes
+          description:
+            type: string
+            description: 'Description of the routing protocol instance
+
+              '
+            example: 'Routes to customer facing web servers
+
+              '
+    CustomerAccountReference:
+      $ref: '#/components/schemas/CustomerBillingAccount'
+    BgpRoutingProtocolRequest:
+      allOf:
+      - $ref: '#/components/schemas/RoutingProtocolRequest'
+      - required:
+        - exportPolicy
+        type: object
+        properties:
+          customerAsnRange:
+            type: string
+            description: Customer Autonomous System Number range
+            enum:
+            - BITS_16
+            - BITS_32
+          customerAsn:
+            maximum: 4294967295
+            minimum: 1
+            type: integer
+            description: 'Customer Autonomous System Number
+
+              '
+            format: int64
+            example: 16220
+          bgpAuthKey:
+            type: string
+            description: 'BGP authentication key
+
+              '
+            example: SecretKey
+          exportPolicy:
+            type: string
+            description: 'Denotes which routes should be advertised to the internet
+
+              '
+            example: FULL
+            enum:
+            - FULL
+            - DEFAULT
+            - FULL_DEFAULT
+            - PARTIAL
+          ipv4:
+            $ref: '#/components/schemas/RoutingProtocolIpv4Request'
+          ipv6:
+            $ref: '#/components/schemas/RoutingProtocolIpv6Request'
+        description: BGP routing protocol
+    RoutingProtocolIpv4Request:
+      required:
+      - customerRoutes
+      type: object
+      properties:
+        customerRoutes:
+          minItems: 1
+          type: array
+          description: Collection of customer routes of IP Version 4 (IPv4)
+          items:
+            $ref: '#/components/schemas/CustomerRouteIpv4Request'
+    DirectPeeringIpv4Request:
+      type: object
+      properties:
+        connection:
+          $ref: '#/components/schemas/DirectPeeringIpv4Request_connection'
+        equinixPeerIps:
+          type: array
+          description: 'Peering IP addresses in Version 4 (IPv4)
+
+            '
+          items:
+            pattern: ^(?:\d{1,3}\.){3}\d{1,3}(?:\/(?:[0-2]?[0-9]|3[0-2]))?$
+            type: string
+        equinixVRRPIp:
+          pattern: ^(?:\d{1,3}\.){3}\d{1,3}(?:\/(?:[0-2]?[0-9]|3[0-2]))?$
           type: string
-          description: Start date in YYYY-MM-DD format
-          format: date
-        endDate:
+          description: 'Virtual router group IP addresses in Version 4 (IPv4)
+
+            '
+          example: 18.15.15.18
+    ServiceChangeLog:
+      required:
+      - createdBy
+      - createdByEmail
+      - createdByFullName
+      - createdDateTime
+      - updatedBy
+      - updatedByEmail
+      - updatedByFullName
+      - updatedDateTime
+      type: object
+      properties:
+        createdBy:
           type: string
-          description: End date in YYYY-MM-DD format
-          format: date
-        description:
-          maxLength: 4096
+        createdByFullName:
           type: string
-          description: Purchase order description
-          example: example purchase order description
-        attachment:
-          $ref: '#/components/schemas/ServicePurchaseOrderAttachment'
+        createdByEmail:
+          type: string
+          format: email
+        createdDateTime:
+          type: string
+          format: date-time
+        updatedBy:
+          type: string
+        updatedByFullName:
+          type: string
+        updatedByEmail:
+          type: string
+          format: email
+        updatedDateTime:
+          type: string
+          format: date-time
+        deletedBy:
+          type: string
+        deletedByFullName:
+          type: string
+        deletedByEmail:
+          type: string
+          format: email
+        deletedDateTime:
+          type: string
+          format: date-time
+    ServiceOrderType:
+      type: string
+      enum:
+      - NEW
+      - AMENDMENT
     IpBlockQuestions:
       required:
       - answer
@@ -691,6 +772,31 @@ components:
           enum:
           - true
           - false
+    ServicePurchaseOrderAttachment:
+      type: object
+      properties:
+        attachmentId:
+          type: string
+          format: uuid
+    Project:
+      required:
+      - projectId
+      type: object
+      properties:
+        projectId:
+          type: string
+          description: 'Customer Resource Hierarchy Project identifier
+
+            '
+          example: '7348'
+    ServiceOrderReference:
+      required:
+      - type
+      allOf:
+      - $ref: '#/components/schemas/UniqueEntityReference'
+      - properties:
+          type:
+            $ref: '#/components/schemas/ServiceOrderType'
     ServiceRequest:
       allOf:
       - $ref: '#/components/schemas/Taggable'
@@ -731,113 +837,17 @@ components:
                 BGP: '#/components/schemas/BgpRoutingProtocolRequest'
           order:
             $ref: '#/components/schemas/ServiceOrderRequest'
-    IpBlockIpv4Request:
-      allOf:
-      - $ref: '#/components/schemas/IpBlock'
-      - required:
-        - prefixLength
-        type: object
-        properties:
-          prefixLength:
-            maximum: 30
-            minimum: 24
-            type: integer
-            description: Length of the IP block, number after the / (slash)
-    IpBlockAddressingPlans:
-      required:
-      - afterThreeMonths
-      - immediate
-      - purpose
-      - size
-      type: object
-      properties:
-        size:
-          minimum: 1
-          type: integer
-        purpose:
-          type: string
-          description: 'The purpose of IP Subnet
-
-            '
-          example: 'Provide internet services to the customers
-
-            '
-        immediate:
-          type: integer
-          description: 'Number of ip addresses to be used immediatelly
-
-            '
-          example: 1
-        afterThreeMonths:
-          minimum: 0
-          type: integer
-          description: 'Number of ip addresses to be used after 3 months
-
-            '
-          example: 1
-    DirectRoutingProtocolRequest:
-      allOf:
-      - $ref: '#/components/schemas/RoutingProtocolRequest'
-      - type: object
-        properties:
-          ipv4:
-            $ref: '#/components/schemas/DirectRoutingProtocolIpv4Request'
-          ipv6:
-            $ref: '#/components/schemas/DirectRoutingProtocolIpv6Request'
-        description: Direct routing protocol
-    DirectPeeringIpv4Request:
-      type: object
-      properties:
-        connection:
-          $ref: '#/components/schemas/DirectPeeringIpv4Request_connection'
-        equinixPeerIps:
-          type: array
-          description: 'Peering IP addresses in Version 4 (IPv4)
-
-            '
-          items:
-            pattern: ^(?:\d{1,3}\.){3}\d{1,3}(?:\/(?:[0-2]?[0-9]|3[0-2]))?$
-            type: string
-        equinixVRRPIp:
-          pattern: ^(?:\d{1,3}\.){3}\d{1,3}(?:\/(?:[0-2]?[0-9]|3[0-2]))?$
-          type: string
-          description: 'Virtual router group IP addresses in Version 4 (IPv4)
-
-            '
-          example: 18.15.15.18
-    EntityReference:
-      required:
-      - href
-      type: object
-      properties:
-        href:
-          type: string
-    ContactRequest:
-      required:
-      - type
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ContactType'
-        firstName:
-          type: string
-        lastName:
-          type: string
-        timezone:
-          type: string
-        notes:
-          type: string
-        availability:
-          type: string
-          enum:
-          - WORK_HOURS
-          - ANYTIME
-          - CUSTOMER_BUSINESS_HOURS
-          - NOT_AVAILABLE
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContactRequest_details'
-x-eqx-api-linter-skip-rules:
-- 3
-- 38
+    RoutingProtocolType:
+      type: string
+      enum:
+      - DIRECT
+      - STATIC
+      - BGP
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+externalDocs:
+  url: https://developer.equinix.com
+  description: Find more information on Equinix Developer Portal

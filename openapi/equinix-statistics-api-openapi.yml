@@ -1,16 +1,20 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Equinix API Authentication Statistics API
-  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
-
-    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  title: Equinix Fabric API v4 Statistics API
+  description: 'Equinix Fabric is an advanced software-defined interconnection solution that enables you to directly, securely and dynamically connect to distributed infrastructure and digital ecosystems on platform Equinix via a single port, Customers can use Fabric to connect to: </br> 1. Cloud Service Providers - Clouds, network and other service providers.  </br> 2. Enterprises - Other Equinix customers, vendors and partners.  </br> 3. Myself - Another customer instance deployed at Equinix. </br> </br> <b>Integrations (SDKs, Tools) links:</b> </br> <a href="https://github.com/equinix/equinix-sdk-java">Fabric Java SDK</a> </br> <a href="https://github.com/equinix/equinix-sdk-go">Fabric Go SDK</a> </br> <a href="https://github.com/equinix/equinix-sdk-python">Fabric Python SDK</a> </br> <a href="https://registry.terraform.io/providers/equinix/equinix/latest/docs">Equinix Terraform Provider</a> </br> <a href="https://registry.terraform.io/modules/equinix/fabric/equinix/latest">Fabric Terraform Modules</a> </br> <a href="https://www.pulumi.com/registry/packages/equinix/">Equinix Pulumi Provider</a> </br>'
   termsOfService: https://www.equinix.com/about/legal/terms
   contact:
     name: Equinix API Support
     url: https://docs.equinix.com/api-support.htm
-  version: '1.2'
+  license:
+    name: Equinix Inc
+    url: https://developer.equinix.com/agreement
+  version: '4.28'
 servers:
 - url: https://api.equinix.com
+  description: Equinix Inc
+security:
+- BearerAuth: []
 tags:
 - name: Statistics
   description: Statistics
@@ -147,73 +151,12 @@ paths:
       deprecated: true
 components:
   schemas:
-    Statistics:
-      type: object
-      properties:
-        startDateTime:
-          type: string
-          description: Start and duration of the statistical analysis interval.
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        endDateTime:
-          type: string
-          description: End and duration of the statistical analysis interval.
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        viewPoint:
-          type: string
-          description: Point of view for connection metrics - aSide or zSide
-          enum:
-          - aSide
-          - zSide
-        bandwidthUtilization:
-          $ref: '#/components/schemas/BandwidthUtilization'
-      description: This API provides service-level traffic metrics so that you can view access and gather key information required to manage service subscription sizing and capacity.
-    ErrorList:
-      type: array
-      description: List of Error Message
-      items:
-        $ref: '#/components/schemas/Error'
-    PriceError_additionalInfo:
-      type: object
-      properties:
-        property:
-          type: string
-        reason:
-          type: string
-    Metrics:
-      type: object
-      properties:
-        intervalEndTimestamp:
-          type: string
-          description: Interval end timestamp
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        max:
-          type: number
-          description: Max bandwidth within statistics object time interval, represented in units specified by response "units" field
-          format: float
-        mean:
-          type: number
-          description: Mean bandwidth within statistics object time interval, represented in units specified by response "units" field
-          format: float
-      description: Bandwidth utilization statistics for a specified interval.
-    BandwidthUtilization:
-      type: object
-      properties:
-        unit:
-          type: string
-          description: Aggregated data transfer capacity. Possible values- Mbps, megabits (1 million bits) per second; Gbps, gigabits (1 billion bits) per second.
-          enum:
-          - Mbps
-        metricInterval:
-          type: string
-          description: An interval formatted value, indicating the time-interval the metric objects within the response represent
-        inbound:
-          $ref: '#/components/schemas/Direction'
-        outbound:
-          $ref: '#/components/schemas/Direction'
-      description: Bandwidth utilization statistics (octet counters-based)
+    viewPoint:
+      type: string
+      description: viewPoint
+      enum:
+      - aSide
+      - zSide
     Error:
       required:
       - errorCode
@@ -236,21 +179,27 @@ components:
           items:
             $ref: '#/components/schemas/PriceError_additionalInfo'
       description: Error Response with details
-    PortUUID:
-      type: string
-      description: Port UUID
-      format: uuid
-    EndDateTime:
-      type: string
-      description: End date and time
-      format: date-time
-      example: 2024-07-11 18:06:21+00:00
-    viewPoint:
-      type: string
-      description: viewPoint
-      enum:
-      - aSide
-      - zSide
+    BandwidthUtilization:
+      type: object
+      properties:
+        unit:
+          type: string
+          description: Aggregated data transfer capacity. Possible values- Mbps, megabits (1 million bits) per second; Gbps, gigabits (1 billion bits) per second.
+          enum:
+          - Mbps
+        metricInterval:
+          type: string
+          description: An interval formatted value, indicating the time-interval the metric objects within the response represent
+        inbound:
+          $ref: '#/components/schemas/Direction'
+        outbound:
+          $ref: '#/components/schemas/Direction'
+      description: Bandwidth utilization statistics (octet counters-based)
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
     Direction:
       type: object
       properties:
@@ -268,50 +217,70 @@ components:
           items:
             $ref: '#/components/schemas/Metrics'
       description: Directional statistics
-    VirtualCircuitId:
-      type: string
-      description: Virtual Circuit UUID
     StartDateTime:
       type: string
       description: Start date and time
       format: date-time
       example: 2024-07-11 18:06:21+00:00
+    Metrics:
+      type: object
+      properties:
+        intervalEndTimestamp:
+          type: string
+          description: Interval end timestamp
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        max:
+          type: number
+          description: Max bandwidth within statistics object time interval, represented in units specified by response "units" field
+          format: float
+        mean:
+          type: number
+          description: Mean bandwidth within statistics object time interval, represented in units specified by response "units" field
+          format: float
+      description: Bandwidth utilization statistics for a specified interval.
+    VirtualCircuitId:
+      type: string
+      description: Virtual Circuit UUID
+    PortUUID:
+      type: string
+      description: Port UUID
+      format: uuid
+    Statistics:
+      type: object
+      properties:
+        startDateTime:
+          type: string
+          description: Start and duration of the statistical analysis interval.
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        endDateTime:
+          type: string
+          description: End and duration of the statistical analysis interval.
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        viewPoint:
+          type: string
+          description: Point of view for connection metrics - aSide or zSide
+          enum:
+          - aSide
+          - zSide
+        bandwidthUtilization:
+          $ref: '#/components/schemas/BandwidthUtilization'
+      description: This API provides service-level traffic metrics so that you can view access and gather key information required to manage service subscription sizing and capacity.
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    EndDateTime:
+      type: string
+      description: End date and time
+      format: date-time
+      example: 2024-07-11 18:06:21+00:00
   examples:
-    '500':
-      value:
-      - errorCode: EQ-3045004
-        errorMessage: Internal Server Error
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Internal Server Error
-    200_port:
-      value:
-        href: http://api.equinix.com/fabric/v4/ports/xxxxx191-xx70-xxxx-xx04-xxxxxxxa37xx
-        type: XF_PORT
-        uuid: xxxxx191-xx70-xxxx-xx04-xxxxxxxa37xx
-        name: Equinix-EM-CX-xxx-L-Dot1q-BO-100G-PRI-xx
-        bandwidthUtilization: 10000
-        stats:
-          startDateTime: 2020-05-21 08:00:00+00:00
-          endDateTime: 2020-05-21 10:30:00+00:00
-          bandwidthUtilization:
-            unit: Mbps
-            metricInterval: PT5M
-            inbound:
-              max: 68.00905623111112
-              mean: 48.90562310112
-              lastPolled: 41.00905623111112
-              metrics:
-              - intervalEndDateTime: 2020-05-21 10:30:00+00:00
-                max: 45.5623145112009
-                mean: 31.38641687333333
-            outbound:
-              max: 41.99068261111111
-              mean: 33.70374303096296
-              lastPolled: 41.43428905111111
-              metrics:
-              - intervalEndDateTime: 2020-05-21 10:30:00+00:00
-                max: 42.01401189333334
-                mean: 39.40894303096296
     200_vc:
       value:
         href: https://api.equinix.com/fabric/v4/connections/97d1850f-4df0-468c-9281-fa7b0dfa2096
@@ -359,17 +328,57 @@ components:
               - intervalEndDateTime: 2021-01-10 20:20:00+00:00
                 max: 42.01401189333334
                 mean: 39.40894303096296
+    '401':
+      value:
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    200_port:
+      value:
+        href: http://api.equinix.com/fabric/v4/ports/xxxxx191-xx70-xxxx-xx04-xxxxxxxa37xx
+        type: XF_PORT
+        uuid: xxxxx191-xx70-xxxx-xx04-xxxxxxxa37xx
+        name: Equinix-EM-CX-xxx-L-Dot1q-BO-100G-PRI-xx
+        bandwidthUtilization: 10000
+        stats:
+          startDateTime: 2020-05-21 08:00:00+00:00
+          endDateTime: 2020-05-21 10:30:00+00:00
+          bandwidthUtilization:
+            unit: Mbps
+            metricInterval: PT5M
+            inbound:
+              max: 68.00905623111112
+              mean: 48.90562310112
+              lastPolled: 41.00905623111112
+              metrics:
+              - intervalEndDateTime: 2020-05-21 10:30:00+00:00
+                max: 45.5623145112009
+                mean: 31.38641687333333
+            outbound:
+              max: 41.99068261111111
+              mean: 33.70374303096296
+              lastPolled: 41.43428905111111
+              metrics:
+              - intervalEndDateTime: 2020-05-21 10:30:00+00:00
+                max: 42.01401189333334
+                mean: 39.40894303096296
     '403':
       value:
       - errorCode: EQ-3045003
         errorMessage: Operation not allowed
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
         details: Operation not allowed for current user
-    '401':
+    '500':
       value:
-      - errorCode: EQ-3000039
-        errorMessage: User not found in request or invalid.
+      - errorCode: EQ-3045004
+        errorMessage: Internal Server Error
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-x-eqx-api-linter-skip-rules:
-- 3
-- 38
+        details: Internal Server Error
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+externalDocs:
+  description: Find more information on Equinix Docs Portal
+  url: https://docs.equinix.com/fabric/

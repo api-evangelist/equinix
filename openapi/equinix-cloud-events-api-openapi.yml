@@ -1,16 +1,20 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Equinix API Authentication Cloud Events API
-  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
-
-    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  title: Equinix Fabric API v4 Cloud Events API
+  description: 'Equinix Fabric is an advanced software-defined interconnection solution that enables you to directly, securely and dynamically connect to distributed infrastructure and digital ecosystems on platform Equinix via a single port, Customers can use Fabric to connect to: </br> 1. Cloud Service Providers - Clouds, network and other service providers.  </br> 2. Enterprises - Other Equinix customers, vendors and partners.  </br> 3. Myself - Another customer instance deployed at Equinix. </br> </br> <b>Integrations (SDKs, Tools) links:</b> </br> <a href="https://github.com/equinix/equinix-sdk-java">Fabric Java SDK</a> </br> <a href="https://github.com/equinix/equinix-sdk-go">Fabric Go SDK</a> </br> <a href="https://github.com/equinix/equinix-sdk-python">Fabric Python SDK</a> </br> <a href="https://registry.terraform.io/providers/equinix/equinix/latest/docs">Equinix Terraform Provider</a> </br> <a href="https://registry.terraform.io/modules/equinix/fabric/equinix/latest">Fabric Terraform Modules</a> </br> <a href="https://www.pulumi.com/registry/packages/equinix/">Equinix Pulumi Provider</a> </br>'
   termsOfService: https://www.equinix.com/about/legal/terms
   contact:
     name: Equinix API Support
     url: https://docs.equinix.com/api-support.htm
-  version: '1.2'
+  license:
+    name: Equinix Inc
+    url: https://developer.equinix.com/agreement
+  version: '4.28'
 servers:
 - url: https://api.equinix.com
+  description: Equinix Inc
+security:
+- BearerAuth: []
 tags:
 - name: Cloud Events
   description: Cloud Events
@@ -243,13 +247,11 @@ components:
       - organizations
       - timeServices
       - companyProfiles
-    PriceError_additionalInfo:
-      type: object
-      properties:
-        property:
-          type: string
-        reason:
-          type: string
+    StartDateTime:
+      type: string
+      description: Start date and time
+      format: date-time
+      example: 2024-07-11 18:06:21+00:00
     CloudEventSimpleExpression:
       type: object
       properties:
@@ -266,85 +268,13 @@ components:
           items:
             type: string
             example: equinix.fabric.port.status.*
-    EndDateTime:
-      type: string
-      description: End date and time
-      format: date-time
-      example: 2024-07-11 18:06:21+00:00
-    Pagination:
-      required:
-      - limit
-      - total
+    PriceError_additionalInfo:
       type: object
       properties:
-        offset:
-          minimum: 0
-          type: integer
-          description: Index of the first item returned in the response. The default is 0.
-          default: 0
-        limit:
-          minimum: 0
-          type: integer
-          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
-          default: 20
-        total:
-          minimum: 0
-          type: integer
-          description: Total number of elements returned.
-        next:
+        property:
           type: string
-          description: URL relative to the next item in the response.
-        previous:
+        reason:
           type: string
-          description: URL relative to the previous item in the response.
-      description: Pagination response information
-    StartDateTime:
-      type: string
-      description: Start date and time
-      format: date-time
-      example: 2024-07-11 18:06:21+00:00
-    ErrorList:
-      type: array
-      description: List of Error Message
-      items:
-        $ref: '#/components/schemas/Error'
-    AssetId:
-      type: string
-      description: Asset UUID
-      format: uuid
-      example: 757400f8-d360-11e9-bb65-2a2ae2dbcce6
-    CloudEventData:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Cloud Event message
-        resource:
-          $ref: '#/components/schemas/ResourceData'
-        auth:
-          $ref: '#/components/schemas/AuthContext'
-    CloudEventFilters:
-      type: object
-      properties:
-        and:
-          type: array
-          items:
-            $ref: '#/components/schemas/CloudEventFilter'
-    CloudEventId:
-      type: string
-      description: Cloud Event UUID
-      format: uuid
-      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
-    GetCloudEventsByAssetResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          description: Data returned from the API call.
-          items:
-            $ref: '#/components/schemas/CloudEvent'
     CloudEvent:
       type: object
       properties:
@@ -405,38 +335,25 @@ components:
         data:
           $ref: '#/components/schemas/CloudEventData'
       description: Cloud Event object
-    Limit:
-      type: integer
-      description: Pagination limit
-      example: 20
-      default: 100
-    AuthContext:
+    EndDateTime:
+      type: string
+      description: End date and time
+      format: date-time
+      example: 2024-07-11 18:06:21+00:00
+    PaginationRequest:
       type: object
       properties:
-        authtype:
-          type: string
-          description: Cloud Event auth type
-          enum:
-          - system
-          - user
-        authid:
-          type: string
-          description: Cloud Event auth identifier
-          enum:
-          - equinix
-          - userId
-        name:
-          type: string
-          description: Cloud Event username
-        email:
-          type: string
-          description: Cloud Event email
-    OperationalStatus:
-      type: object
-      properties:
-        operationalStatus:
-          type: string
-          description: Operational status for the resource target of the event
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first element.
+          default: 0
+        limit:
+          minimum: 1
+          type: integer
+          description: Number of elements to be requested per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+      description: Pagination request information
     Error:
       required:
       - errorCode
@@ -459,10 +376,109 @@ components:
           items:
             $ref: '#/components/schemas/PriceError_additionalInfo'
       description: Error Response with details
+    CloudEventSearchRequest:
+      required:
+      - filter
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/CloudEventFilters'
+        pagination:
+          $ref: '#/components/schemas/PaginationRequest'
+      description: Search requests containing criteria
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
+    GetCloudEventsByAssetResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/CloudEvent'
     CloudEventFilter:
       type: object
       anyOf:
       - $ref: '#/components/schemas/CloudEventSimpleExpression'
+    AuthContext:
+      type: object
+      properties:
+        authtype:
+          type: string
+          description: Cloud Event auth type
+          enum:
+          - system
+          - user
+        authid:
+          type: string
+          description: Cloud Event auth identifier
+          enum:
+          - equinix
+          - userId
+        name:
+          type: string
+          description: Cloud Event username
+        email:
+          type: string
+          description: Cloud Event email
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    CloudEventData:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Cloud Event message
+        resource:
+          $ref: '#/components/schemas/ResourceData'
+        auth:
+          $ref: '#/components/schemas/AuthContext'
+    OperationalStatus:
+      type: object
+      properties:
+        operationalStatus:
+          type: string
+          description: Operational status for the resource target of the event
+    CloudEventId:
+      type: string
+      description: Cloud Event UUID
+      format: uuid
+      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+    AssetId:
+      type: string
+      description: Asset UUID
+      format: uuid
+      example: 757400f8-d360-11e9-bb65-2a2ae2dbcce6
     Offset:
       type: integer
       description: Pagination offset
@@ -488,73 +504,19 @@ components:
           description: Cloud Event asset state
         operation:
           $ref: '#/components/schemas/OperationalStatus'
-    PaginationRequest:
+    Limit:
+      type: integer
+      description: Pagination limit
+      example: 20
+      default: 100
+    CloudEventFilters:
       type: object
       properties:
-        offset:
-          minimum: 0
-          type: integer
-          description: Index of the first element.
-          default: 0
-        limit:
-          minimum: 1
-          type: integer
-          description: Number of elements to be requested per page. Number must be between 1 and 100, and the default is 20.
-          default: 20
-      description: Pagination request information
-    CloudEventSearchRequest:
-      required:
-      - filter
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/CloudEventFilters'
-        pagination:
-          $ref: '#/components/schemas/PaginationRequest'
-      description: Search requests containing criteria
+        and:
+          type: array
+          items:
+            $ref: '#/components/schemas/CloudEventFilter'
   examples:
-    get-cloud-event:
-      value:
-        specversion: '1.0'
-        source: https://api.equinix.com/fabric/v4/cloudevents
-        id: 66c62c1a-f186-4fbd-9792-71a60705518f
-        type: equinix.fabric.connection.state.provisioning
-        subject: /fabric/v4/connections/dab9fc84-cc95-4cb4-abe3-ca39361285a9
-        time: 2025-03-20 13:13:12+00:00
-        dataschema: https://equinix.github.io/equinix-cloudevents/jsonschema/equinix/fabric/v1/ChangeEvent.json
-        datacontenttype: application/json
-        severitynumber: 9
-        severitytext: INFO
-        equinixproject: dadd3ab6-c0af-430c-8216-43d44f08c1c5
-        authtype: user
-        authid: 123456
-        traceparent: 00-66c62c1af1864fbd979271a60705518f-00f067aa0ba90111-00,
-        tracestate: 71a60705518f,81a607055181
-        data:
-          message: Connection named TEST-CONNECTION state changed to provisioning
-          resource:
-            href: http://api.corp.equinix.com/fabric/v4/connections/dab9fc84-cc95-4cb4-abe3-ca39361285a9
-            uuid: dab9fc84-cc95-4cb4-abe3-ca39361285a9
-            type: IP_VC
-            name: TEST-CONNECTION
-            state: PROVISIONING
-          auth:
-            type: user
-            id: 123456
-            name: test user
-            email: testuser@test.com
-    '404':
-      value:
-      - errorCode: EQ-3045811
-        errorMessage: uuid not found
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: uuid not found
-    '403':
-      value:
-      - errorCode: EQ-3045003
-        errorMessage: Operation not allowed
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Operation not allowed for current user
     search-cloud-events:
       value:
         filter:
@@ -583,17 +545,12 @@ components:
         pagination:
           offset: 0
           limit: 20
-    '401':
+    '404':
       value:
-      - errorCode: EQ-3000039
-        errorMessage: User not found in request or invalid.
+      - errorCode: EQ-3045811
+        errorMessage: uuid not found
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-    '500':
-      value:
-      - errorCode: EQ-3045004
-        errorMessage: Internal Server Error
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Internal Server Error
+        details: uuid not found
     get-cloud-events-by-asset-id:
       value:
         pagination:
@@ -677,6 +634,58 @@ components:
             auth:
               type: system
               id: equinix
-x-eqx-api-linter-skip-rules:
-- 3
-- 38
+    get-cloud-event:
+      value:
+        specversion: '1.0'
+        source: https://api.equinix.com/fabric/v4/cloudevents
+        id: 66c62c1a-f186-4fbd-9792-71a60705518f
+        type: equinix.fabric.connection.state.provisioning
+        subject: /fabric/v4/connections/dab9fc84-cc95-4cb4-abe3-ca39361285a9
+        time: 2025-03-20 13:13:12+00:00
+        dataschema: https://equinix.github.io/equinix-cloudevents/jsonschema/equinix/fabric/v1/ChangeEvent.json
+        datacontenttype: application/json
+        severitynumber: 9
+        severitytext: INFO
+        equinixproject: dadd3ab6-c0af-430c-8216-43d44f08c1c5
+        authtype: user
+        authid: 123456
+        traceparent: 00-66c62c1af1864fbd979271a60705518f-00f067aa0ba90111-00,
+        tracestate: 71a60705518f,81a607055181
+        data:
+          message: Connection named TEST-CONNECTION state changed to provisioning
+          resource:
+            href: http://api.corp.equinix.com/fabric/v4/connections/dab9fc84-cc95-4cb4-abe3-ca39361285a9
+            uuid: dab9fc84-cc95-4cb4-abe3-ca39361285a9
+            type: IP_VC
+            name: TEST-CONNECTION
+            state: PROVISIONING
+          auth:
+            type: user
+            id: 123456
+            name: test user
+            email: testuser@test.com
+    '403':
+      value:
+      - errorCode: EQ-3045003
+        errorMessage: Operation not allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Operation not allowed for current user
+    '401':
+      value:
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    '500':
+      value:
+      - errorCode: EQ-3045004
+        errorMessage: Internal Server Error
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Internal Server Error
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+externalDocs:
+  description: Find more information on Equinix Docs Portal
+  url: https://docs.equinix.com/fabric/

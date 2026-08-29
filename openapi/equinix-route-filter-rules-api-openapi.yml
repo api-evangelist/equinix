@@ -1,16 +1,20 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Equinix API Authentication Route Filter Rules API
-  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
-
-    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  title: Equinix Fabric API v4 Route Filter Rules API
+  description: 'Equinix Fabric is an advanced software-defined interconnection solution that enables you to directly, securely and dynamically connect to distributed infrastructure and digital ecosystems on platform Equinix via a single port, Customers can use Fabric to connect to: </br> 1. Cloud Service Providers - Clouds, network and other service providers.  </br> 2. Enterprises - Other Equinix customers, vendors and partners.  </br> 3. Myself - Another customer instance deployed at Equinix. </br> </br> <b>Integrations (SDKs, Tools) links:</b> </br> <a href="https://github.com/equinix/equinix-sdk-java">Fabric Java SDK</a> </br> <a href="https://github.com/equinix/equinix-sdk-go">Fabric Go SDK</a> </br> <a href="https://github.com/equinix/equinix-sdk-python">Fabric Python SDK</a> </br> <a href="https://registry.terraform.io/providers/equinix/equinix/latest/docs">Equinix Terraform Provider</a> </br> <a href="https://registry.terraform.io/modules/equinix/fabric/equinix/latest">Fabric Terraform Modules</a> </br> <a href="https://www.pulumi.com/registry/packages/equinix/">Equinix Pulumi Provider</a> </br>'
   termsOfService: https://www.equinix.com/about/legal/terms
   contact:
     name: Equinix API Support
     url: https://docs.equinix.com/api-support.htm
-  version: '1.2'
+  license:
+    name: Equinix Inc
+    url: https://developer.equinix.com/agreement
+  version: '4.28'
 servers:
 - url: https://api.equinix.com
+  description: Equinix Inc
+security:
+- BearerAuth: []
 tags:
 - name: Route Filter Rules
   description: Route Filter Rules
@@ -908,11 +912,221 @@ paths:
                   $ref: '#/components/examples/500_internal_error'
 components:
   examples:
-    PatchRouteFilterRulePrefixMatch:
+    SearchRouteFilterRulesOrRequest:
+      value:
+        filter:
+          or:
+          - property: /type
+            operator: '='
+            values:
+            - BGP_IPv4_PREFIX_FILTER_RULE
+          - property: /state
+            operator: '='
+            values:
+            - PROVISIONED
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - property: /changeLog/updatedDateTime
+          direction: DESC
+    RouteFilterRuleDeleteBgpIpv6PrefixResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403
+        type: BGP_IPv6_PREFIX_FILTER_RULE
+        uuid: 9890d520-1579-4489-8003-154b34b8f403
+        name: Private-subnet-filter
+        description: Test rule
+        state: REPROVISIONING
+        change:
+          href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/e8528788-14d3-4a7b-a740-99b702067485
+          type: BGP_IPv6_PREFIX_FILTER_RULE_DELETION
+          uuid: e8528788-14d3-4a7b-a740-99b702067485
+        action: PERMIT
+        prefix: 2001:7a9::34f4:0:f3dd:1/126
+        prefixMatch: exact
+        changeLog:
+          createdBy: testuser
+          createdByEmail: testuser@equinix.com
+          createdByFullName: testuser testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: testuser1
+          updatedByEmail: testuser@equinix.com
+          updatedByFullName: testuser testuser
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+          deletedBy: testuser1
+          deletedByEmail: testuser@equinix.com
+          deletedByFullName: testuser testuser
+          deletedDateTime: 2020-05-21 10:30:00+00:00
+    RouteFilterRuleGetChangeResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/ff9653dc-88c5-47b5-b552-8a08d2f73f7e
+        type: BGP_IPv4_PREFIX_FILTER_RULE_CREATION
+        uuid: ff9653dc-88c5-47b5-b552-8a08d2f73f7e
+        status: COMPLETED
+        createdBy: testuser
+        createdByEmail: testuser@equinix.com
+        createdByFullName: testuser testuser
+        createdDateTime: 2020-05-21 10:30:00+00:00
+        updatedBy: _system
+        updatedByEmail: null
+        updatedByFullName: null
+        updatedDateTime: 2020-05-21 10:30:00+00:00
+        data:
+          type: BGP_IPv4_PREFIX_FILTER_RULE
+          name: Private-subnet-filter
+          description: Test rule
+          prefix: 192.168.0.0/25
+          prefixMatch: exact
+          action: PERMIT
+    RouteFilterRulesGetAll:
+      value:
+        pagination:
+          offset: 0
+          limit: 32
+          total: 2
+          next: null
+          previous: null
+        data:
+        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/65b025ef-022b-4180-85cf-82cfc1ab655b
+          type: BGP_IPv4_PREFIX_FILTER_RULE
+          uuid: 65b025ef-022b-4180-85cf-82cfc1ab655b
+          name: Private-subnet-filter-2
+          description: Test rule
+          prefixMatch: exact
+          action: PERMIT
+          prefix: 192.168.10.0/24
+          state: PROVISIONED
+          change:
+            href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/9397f111-19aa-489c-b3c7-349c86818f2d
+            type: IPv4_BGP_PREFIX_FILTER_RULE_CREATION
+            uuid: 9397f111-19aa-489c-b3c7-349c86818f2d
+          changeLog:
+            createdBy: testuser
+            createdByEmail: testuser@equinix.com
+            createdByFullName: testuser testuser
+            createdDateTime: 2020-05-21 10:30:00+00:00
+        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/ea48337b-fe04-4164-a3f0-48d81abf575b
+          type: BGP_IPv4_PREFIX_FILTER_RULE
+          uuid: ea48337b-fe04-4164-a3f0-48d81abf575b
+          name: Private-subnet-filter-2
+          description: Test rule
+          prefixMatch: orlonger
+          action: PERMIT
+          prefix: 192.168.20.0/24
+          state: PROVISIONED
+          change:
+            href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/9397f111-19aa-489c-b3c7-349c86818f2d
+            type: IPv4_BGP_PREFIX_FILTER_RULE_CREATION
+            uuid: 9397f111-19aa-489c-b3c7-349c86818f2d
+          changeLog:
+            createdBy: testuser
+            createdByEmail: testuser@equinix.com
+            createdByFullName: testuser testuser
+            createdDateTime: 2020-05-21 10:30:00+00:00
+    RouteFilterRuleReplaceIpv4Response:
+      value:
+        href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403
+        type: BGP_IPv4_PREFIX_FILTER_RULE
+        uuid: 9890d520-1579-4489-8003-154b34b8f403
+        name: Private-subnet-filter-update
+        description: Test rule
+        prefixMatch: exact
+        state: REPROVISIONING
+        action: PERMIT
+        change:
+          href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/a25ca469-721a-4614-89a9-cdef287aa628
+          type: BGP_IPv4_PREFIX_FILTER_RULE_UPDATE
+          uuid: a25ca469-721a-4614-89a9-cdef287aa628
+        prefix: 192.168.0.0/24
+        changeLog:
+          createdBy: testuser
+          createdByEmail: testuser@equinix.com
+          createdByFullName: testuser testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: testuser1
+          updatedByEmail: testuser@equinix.com
+          updatedByFullName: testuser testuser
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+    UpdateRouteFilterRuleIPv6:
+      value:
+        name: Private-subnet-filter-update
+        description: Test rule
+        prefix: 2001:7a9::34f4:0:f3dd:1/126
+        prefixMatch: exact
+    RouteFilterRuleCreateBgpIpv6Prefix:
+      value:
+        name: Private-subnet-filter
+        description: Test rule
+        prefix: 2001:7a9::34f4:0:f3dd:1/126
+        prefixMatch: orlonger
+    UpdateRouteFilterRuleIPv4:
+      value:
+        name: Private-subnet-filter-update
+        description: Test rule
+        prefix: 192.168.0.0/24
+        prefixMatch: exact
+    400_bad_request:
+      value:
+      - errorCode: EQ-3044013
+        errorMessage: Invalid argument value passed
+        property: prefixMatch
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+    '401':
+      value:
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    RouteFilterRulesBulkResponse:
+      value:
+        pagination:
+          offset: 0
+          limit: 32
+          total: 2
+          next: null
+          previous: null
+        data:
+        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/65b025ef-022b-4180-85cf-82cfc1ab655b
+          type: BGP_IPv4_PREFIX_FILTER_RULE
+          uuid: 65b025ef-022b-4180-85cf-82cfc1ab655b
+          name: Private-subnet-filter-2
+          description: Test rule
+          prefixMatch: exact
+          action: PERMIT
+          prefix: 192.168.10.0/24
+          state: PROVISIONING
+          change:
+            href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/9397f111-19aa-489c-b3c7-349c86818f2d
+            type: IPv4_BGP_PREFIX_FILTER_RULE_CREATION
+            uuid: 9397f111-19aa-489c-b3c7-349c86818f2d
+          changeLog:
+            createdBy: testuser
+            createdByEmail: testuser@equinix.com
+            createdByFullName: testuser testuser
+            createdDateTime: 2020-05-21 10:30:00+00:00
+        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/ea48337b-fe04-4164-a3f0-48d81abf575b
+          type: BGP_IPv4_PREFIX_FILTER_RULE
+          uuid: ea48337b-fe04-4164-a3f0-48d81abf575b
+          name: Private-subnet-filter-2
+          description: Test rule
+          prefixMatch: orlonger
+          action: PERMIT
+          prefix: 192.168.20.0/24
+          state: PROVISIONING
+          change:
+            href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/9397f111-19aa-489c-b3c7-349c86818f2d
+            type: IPv4_BGP_PREFIX_FILTER_RULE_CREATION
+            uuid: 9397f111-19aa-489c-b3c7-349c86818f2d
+          changeLog:
+            createdBy: testuser
+            createdByEmail: testuser@equinix.com
+            createdByFullName: testuser testuser
+            createdDateTime: 2020-05-21 10:30:00+00:00
+    PatchRouteFilterRuleName:
       value:
       - op: replace
-        path: /prefixMatch
-        value: orlonger
+        path: /name
+        value: test-route-filter-name-patch
     SearchRouteFilterRulesResponse:
       value:
         pagination:
@@ -950,218 +1164,82 @@ components:
             createdByEmail: testuser@equinix.com
             createdByFullName: testuser testuser
             createdDateTime: 2020-05-21 10:30:00+00:00
+    SearchRouteFilterRulesAndRequest:
+      value:
+        filter:
+          and:
+          - property: /type
+            operator: '='
+            values:
+            - BGP_IPv4_PREFIX_FILTER_RULE
+          - property: /state
+            operator: '='
+            values:
+            - PROVISIONED
+          - or:
+            - property: /name
+              operator: LIKE
+              values:
+              - '%Demo%'
+            - property: /name
+              operator: LIKE
+              values:
+              - '%Production%'
+          - or:
+            - property: /state
+              operator: '='
+              values:
+              - PROVISIONED
+            - and:
+              - property: /prefix
+                operator: '='
+                values:
+                - 192.168.2.0/24
+              - property: /prefixMatch
+                operator: '='
+                values:
+                - exact
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - property: /changeLog/updatedDateTime
+          direction: DESC
     400_transient_filter:
       value:
       - errorCode: EQ-3044215
         errorMessage: Cannot delete route filter rule in transient state
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
         details: Cannot delete route filter rule in transient state
-    404_invalid_id:
+    400_invalid_input:
       value:
-      - errorCode: EQ-3041120
-        errorMessage: The connection ID was not found or was already deleted.
-        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
-    400_Invalid_id:
-      value:
-      - errorCode: EQ-3142519
-        errorMessage: Connection does not exist or do not belong to user,Please check connection Id
-        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
-    '415':
-      value:
-      - errorCode: EQ-3040016
-        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
-        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+      - errorCode: EQ-3044305
+        errorMessage: Invalid input
+        correlationId: 20d32a80-0d61-4333-bc03-707b591ae2f5
         additionalInfo:
-        - property: contentType
-          reason: The payload format is in an unsupported format
-    RouteFilterRuleGetChangeResponseExample:
-      value:
-        href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/ff9653dc-88c5-47b5-b552-8a08d2f73f7e
-        type: BGP_IPv4_PREFIX_FILTER_RULE_CREATION
-        uuid: ff9653dc-88c5-47b5-b552-8a08d2f73f7e
-        status: COMPLETED
-        createdBy: testuser
-        createdByEmail: testuser@equinix.com
-        createdByFullName: testuser testuser
-        createdDateTime: 2020-05-21 10:30:00+00:00
-        updatedBy: _system
-        updatedByEmail: null
-        updatedByFullName: null
-        updatedDateTime: 2020-05-21 10:30:00+00:00
-        data:
-          type: BGP_IPv4_PREFIX_FILTER_RULE
-          name: Private-subnet-filter
-          description: Test rule
-          prefix: 192.168.0.0/25
-          prefixMatch: exact
-          action: PERMIT
-    400_bad_request:
-      value:
-      - errorCode: EQ-3044013
-        errorMessage: Invalid argument value passed
-        property: prefixMatch
-        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
-    RouteFilterRuleCreateBgpIpv6PrefixResponse:
-      value:
-        href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403
-        type: BGP_IPv6_PREFIX_FILTER_RULE
-        uuid: 9890d520-1579-4489-8003-154b34b8f403
-        name: Private-subnet-filter
-        description: Test rule
-        state: PROVISIONING
-        change:
-          href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/ff9653dc-88c5-47b5-b552-8a08d2f73f7e
-          type: BGP_IPv6_PREFIX_FILTER_RULE_CREATION
-          uuid: ff9653dc-88c5-47b5-b552-8a08d2f73f7e
-        action: PERMIT
-        prefix: 2001:7a9::34f4:0:f3dd:1/126
-        prefixMatch: exact
-        changeLog:
-          createdBy: testuser
-          createdByEmail: testuser@equinix.com
-          createdByFullName: testuser testuser
-          createdDateTime: 2020-05-21 10:30:00+00:00
-          updatedBy: testuser
-          updatedByEmail: testuser@equinix.com
-          updatedByFullName: testuser testuser
-          updatedDateTime: 2020-05-21 10:30:00+00:00
-    UpdateRouteFilterRuleIPv6:
-      value:
-        name: Private-subnet-filter-update
-        description: Test rule
-        prefix: 2001:7a9::34f4:0:f3dd:1/126
-        prefixMatch: exact
-    RouteFilterRuleCreateBgpIpv4PrefixResponse:
-      value:
-        href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403
-        type: BGP_IPv4_PREFIX_FILTER_RULE
-        uuid: 9890d520-1579-4489-8003-154b34b8f403
-        name: Private-subnet-filter
-        state: PROVISIONING
-        description: Test rule
-        change:
-          href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/ff9653dc-88c5-47b5-b552-8a08d2f73f7e
-          type: BGP_IPv4_PREFIX_FILTER_RULE_CREATION
-          uuid: ff9653dc-88c5-47b5-b552-8a08d2f73f7e
-        action: PERMIT
-        prefix: 192.168.0.0/24
-        prefixMatch: exact
-        changeLog:
-          createdBy: testuser
-          createdByEmail: testuser@equinix.com
-          createdByFullName: testuser testuser
-          createdDateTime: 2020-05-21 10:30:00+00:00
-          updatedBy: testuser
-          updatedByEmail: testuser@equinix.com
-          updatedByFullName: testuser testuser
-          updatedDateTime: 2020-05-21 10:30:00+00:00
-    RouteFilterRuleDeleteBgpIpv4PrefixResponse:
-      value:
-        href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403
-        type: BGP_IPv4_PREFIX_FILTER_RULE
-        uuid: 9890d520-1579-4489-8003-154b34b8f403
-        name: Private-subnet-filter
-        description: Test rule
-        state: DEPROVISIONING
-        change:
-          href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/e8528788-14d3-4a7b-a740-99b702067485
-          type: BGP_IPv4_PREFIX_FILTER_RULE_DELETION
-          uuid: e8528788-14d3-4a7b-a740-99b702067485
-        action: PERMIT
-        prefix: 192.168.0.0/24
-        prefixMatch: exact
-        changeLog:
-          createdBy: testuser
-          createdByEmail: testuser@equinix.com
-          createdByFullName: testuser testuser
-          createdDateTime: 2020-05-21 10:30:00+00:00
-          updatedBy: testuser1
-          updatedByEmail: testuser@equinix.com
-          updatedByFullName: testuser testuser
-          updatedDateTime: 2020-05-21 10:30:00+00:00
-          deletedBy: testuser1
-          deletedByEmail: testuser@equinix.com
-          deletedByFullName: testuser testuser
-          deletedDateTime: 2020-05-21 10:30:00+00:00
-    RouteFilterRulesGetAllChangesResponseExample:
-      value:
-        pagination:
-          offset: 0
-          limit: 20
-          total: 3
-          next: null
-          previous: null
-        data:
-        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/ff9653dc-88c5-47b5-b552-8a08d2f73f7e
-          type: BGP_IPv4_PREFIX_FILTER_RULE_CREATION
-          uuid: ff9653dc-88c5-47b5-b552-8a08d2f73f7e
-          status: COMPLETED
-          createdBy: testuser
-          createdByEmail: testuser@equinix.com
-          createdByFullName: testuser testuser
-          createdDateTime: 2020-05-21 10:30:00+00:00
-          updatedBy: _system
-          updatedByEmail: null
-          updatedByFullName: null
-          updatedDateTime: 2020-05-21 10:30:00+00:00
-          data:
-            type: BGP_IPv4_PREFIX_FILTER_RULE
-            name: Private-subnet-filter
-            description: Test rule
-            prefix: 192.168.0.0/25
-            prefixMatch: exact
-            action: PERMIT
-        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/a40085a4-f0cc-416c-af01-286f7f7ec736
-          type: BGP_IPv4_PREFIX_FILTER_RULE_UPDATE
-          uuid: a40085a4-f0cc-416c-af01-286f7f7ec736
-          status: COMPLETED
-          createdBy: testuser
-          createdByEmail: testuser@equinix.com
-          createdByFullName: testuser testuser
-          createdDateTime: 2020-05-21 10:30:00+00:00
-          updatedBy: _system
-          updatedByEmail: null
-          updatedByFullName: null
-          updatedDateTime: 2020-05-21 10:30:00+00:00
-          data:
-          - op: replace
-            path: /prefixMatch
-            value: orlonger
-            previousValue: exact
-        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/a25ca469-721a-4614-89a9-cdef287aa628
-          type: BGP_IPv4_PREFIX_FILTER_RULE_UPDATE
-          uuid: a25ca469-721a-4614-89a9-cdef287aa628
-          status: COMPLETED
-          createdBy: testuser
-          createdByEmail: testuser@equinix.com
-          createdByFullName: testuser testuser
-          createdDateTime: 2020-05-21 10:30:00+00:00
-          updatedBy: _system
-          updatedByEmail: null
-          updatedByFullName: null
-          updatedDateTime: 2020-05-21 10:30:00+00:00
-          data:
-          - op: replace
-            path: /prefixMatch
-            value: exact
-            previousValue: orlonger
-    '403':
-      value:
-      - errorCode: EQ-3045003
-        errorMessage: Operation not allowed
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Operation not allowed for current user
-    '401':
-      value:
-      - errorCode: EQ-3000039
-        errorMessage: User not found in request or invalid.
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        - property: type
     RouteFilterRuleCreateBgpIpv4Prefix:
       value:
         name: Private-subnet-filter
         description: Test rule
         prefix: 192.168.0.0/24
         prefixMatch: exact
+    PatchRouteFilterRulePrefixMatch:
+      value:
+      - op: replace
+        path: /prefixMatch
+        value: orlonger
+    400_Invalid_id:
+      value:
+      - errorCode: EQ-3142519
+        errorMessage: Connection does not exist or do not belong to user,Please check connection Id
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+    '403':
+      value:
+      - errorCode: EQ-3045003
+        errorMessage: Operation not allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Operation not allowed for current user
     '400':
       value:
       - errorCode: EQ-3142102
@@ -1295,207 +1373,38 @@ components:
         correlationId: test
         additionalInfo:
         - property: /zSide/accessPoint/authenticationKey
-    RouteFilterRuleDeleteBgpIpv6PrefixResponse:
-      value:
-        href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403
-        type: BGP_IPv6_PREFIX_FILTER_RULE
-        uuid: 9890d520-1579-4489-8003-154b34b8f403
-        name: Private-subnet-filter
-        description: Test rule
-        state: REPROVISIONING
-        change:
-          href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/e8528788-14d3-4a7b-a740-99b702067485
-          type: BGP_IPv6_PREFIX_FILTER_RULE_DELETION
-          uuid: e8528788-14d3-4a7b-a740-99b702067485
-        action: PERMIT
-        prefix: 2001:7a9::34f4:0:f3dd:1/126
-        prefixMatch: exact
-        changeLog:
-          createdBy: testuser
-          createdByEmail: testuser@equinix.com
-          createdByFullName: testuser testuser
-          createdDateTime: 2020-05-21 10:30:00+00:00
-          updatedBy: testuser1
-          updatedByEmail: testuser@equinix.com
-          updatedByFullName: testuser testuser
-          updatedDateTime: 2020-05-21 10:30:00+00:00
-          deletedBy: testuser1
-          deletedByEmail: testuser@equinix.com
-          deletedByFullName: testuser testuser
-          deletedDateTime: 2020-05-21 10:30:00+00:00
-    RouteFilterRulesBulkResponse:
-      value:
-        pagination:
-          offset: 0
-          limit: 32
-          total: 2
-          next: null
-          previous: null
-        data:
-        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/65b025ef-022b-4180-85cf-82cfc1ab655b
-          type: BGP_IPv4_PREFIX_FILTER_RULE
-          uuid: 65b025ef-022b-4180-85cf-82cfc1ab655b
-          name: Private-subnet-filter-2
-          description: Test rule
-          prefixMatch: exact
-          action: PERMIT
-          prefix: 192.168.10.0/24
-          state: PROVISIONING
-          change:
-            href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/9397f111-19aa-489c-b3c7-349c86818f2d
-            type: IPv4_BGP_PREFIX_FILTER_RULE_CREATION
-            uuid: 9397f111-19aa-489c-b3c7-349c86818f2d
-          changeLog:
-            createdBy: testuser
-            createdByEmail: testuser@equinix.com
-            createdByFullName: testuser testuser
-            createdDateTime: 2020-05-21 10:30:00+00:00
-        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/ea48337b-fe04-4164-a3f0-48d81abf575b
-          type: BGP_IPv4_PREFIX_FILTER_RULE
-          uuid: ea48337b-fe04-4164-a3f0-48d81abf575b
-          name: Private-subnet-filter-2
-          description: Test rule
-          prefixMatch: orlonger
-          action: PERMIT
-          prefix: 192.168.20.0/24
-          state: PROVISIONING
-          change:
-            href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/9397f111-19aa-489c-b3c7-349c86818f2d
-            type: IPv4_BGP_PREFIX_FILTER_RULE_CREATION
-            uuid: 9397f111-19aa-489c-b3c7-349c86818f2d
-          changeLog:
-            createdBy: testuser
-            createdByEmail: testuser@equinix.com
-            createdByFullName: testuser testuser
-            createdDateTime: 2020-05-21 10:30:00+00:00
-    SearchRouteFilterRulesAndRequest:
-      value:
-        filter:
-          and:
-          - property: /type
-            operator: '='
-            values:
-            - BGP_IPv4_PREFIX_FILTER_RULE
-          - property: /state
-            operator: '='
-            values:
-            - PROVISIONED
-          - or:
-            - property: /name
-              operator: LIKE
-              values:
-              - '%Demo%'
-            - property: /name
-              operator: LIKE
-              values:
-              - '%Production%'
-          - or:
-            - property: /state
-              operator: '='
-              values:
-              - PROVISIONED
-            - and:
-              - property: /prefix
-                operator: '='
-                values:
-                - 192.168.2.0/24
-              - property: /prefixMatch
-                operator: '='
-                values:
-                - exact
-        pagination:
-          offset: 0
-          limit: 20
-        sort:
-        - property: /changeLog/updatedDateTime
-          direction: DESC
-    400_invalid_input:
-      value:
-      - errorCode: EQ-3044305
-        errorMessage: Invalid input
-        correlationId: 20d32a80-0d61-4333-bc03-707b591ae2f5
-        additionalInfo:
-        - property: type
-    RouteFilterRuleReplaceIpv4Response:
+    RouteFilterRuleCreateBgpIpv4PrefixResponse:
       value:
         href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403
         type: BGP_IPv4_PREFIX_FILTER_RULE
         uuid: 9890d520-1579-4489-8003-154b34b8f403
-        name: Private-subnet-filter-update
+        name: Private-subnet-filter
+        state: PROVISIONING
         description: Test rule
-        prefixMatch: exact
-        state: REPROVISIONING
-        action: PERMIT
         change:
-          href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/a25ca469-721a-4614-89a9-cdef287aa628
-          type: BGP_IPv4_PREFIX_FILTER_RULE_UPDATE
-          uuid: a25ca469-721a-4614-89a9-cdef287aa628
+          href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/ff9653dc-88c5-47b5-b552-8a08d2f73f7e
+          type: BGP_IPv4_PREFIX_FILTER_RULE_CREATION
+          uuid: ff9653dc-88c5-47b5-b552-8a08d2f73f7e
+        action: PERMIT
         prefix: 192.168.0.0/24
+        prefixMatch: exact
         changeLog:
           createdBy: testuser
           createdByEmail: testuser@equinix.com
           createdByFullName: testuser testuser
           createdDateTime: 2020-05-21 10:30:00+00:00
-          updatedBy: testuser1
+          updatedBy: testuser
           updatedByEmail: testuser@equinix.com
           updatedByFullName: testuser testuser
           updatedDateTime: 2020-05-21 10:30:00+00:00
-    PatchRouteFilterRuleName:
+    '415':
       value:
-      - op: replace
-        path: /name
-        value: test-route-filter-name-patch
-    RouteFilterRulesGetAll:
-      value:
-        pagination:
-          offset: 0
-          limit: 32
-          total: 2
-          next: null
-          previous: null
-        data:
-        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/65b025ef-022b-4180-85cf-82cfc1ab655b
-          type: BGP_IPv4_PREFIX_FILTER_RULE
-          uuid: 65b025ef-022b-4180-85cf-82cfc1ab655b
-          name: Private-subnet-filter-2
-          description: Test rule
-          prefixMatch: exact
-          action: PERMIT
-          prefix: 192.168.10.0/24
-          state: PROVISIONED
-          change:
-            href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/9397f111-19aa-489c-b3c7-349c86818f2d
-            type: IPv4_BGP_PREFIX_FILTER_RULE_CREATION
-            uuid: 9397f111-19aa-489c-b3c7-349c86818f2d
-          changeLog:
-            createdBy: testuser
-            createdByEmail: testuser@equinix.com
-            createdByFullName: testuser testuser
-            createdDateTime: 2020-05-21 10:30:00+00:00
-        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/ea48337b-fe04-4164-a3f0-48d81abf575b
-          type: BGP_IPv4_PREFIX_FILTER_RULE
-          uuid: ea48337b-fe04-4164-a3f0-48d81abf575b
-          name: Private-subnet-filter-2
-          description: Test rule
-          prefixMatch: orlonger
-          action: PERMIT
-          prefix: 192.168.20.0/24
-          state: PROVISIONED
-          change:
-            href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/9397f111-19aa-489c-b3c7-349c86818f2d
-            type: IPv4_BGP_PREFIX_FILTER_RULE_CREATION
-            uuid: 9397f111-19aa-489c-b3c7-349c86818f2d
-          changeLog:
-            createdBy: testuser
-            createdByEmail: testuser@equinix.com
-            createdByFullName: testuser testuser
-            createdDateTime: 2020-05-21 10:30:00+00:00
-    UpdateRouteFilterRuleIPv4:
-      value:
-        name: Private-subnet-filter-update
-        description: Test rule
-        prefix: 192.168.0.0/24
-        prefixMatch: exact
+      - errorCode: EQ-3040016
+        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: contentType
+          reason: The payload format is in an unsupported format
     RouteFilterRuleReplaceIpv6Response:
       value:
         href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403
@@ -1520,29 +1429,11 @@ components:
           updatedByEmail: testuser@equinix.com
           updatedByFullName: testuser testuser
           updatedDateTime: 2020-05-21 10:30:00+00:00
-    PatchRouteFilterRulePrefix:
+    404_invalid_id:
       value:
-      - op: replace
-        path: /prefix
-        value: 192.168.0.0/30
-    SearchRouteFilterRulesOrRequest:
-      value:
-        filter:
-          or:
-          - property: /type
-            operator: '='
-            values:
-            - BGP_IPv4_PREFIX_FILTER_RULE
-          - property: /state
-            operator: '='
-            values:
-            - PROVISIONED
-        pagination:
-          offset: 0
-          limit: 20
-        sort:
-        - property: /changeLog/updatedDateTime
-          direction: DESC
+      - errorCode: EQ-3041120
+        errorMessage: The connection ID was not found or was already deleted.
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
     500_internal_error:
       value:
       - errorCode: EQ-3041011
@@ -1551,19 +1442,188 @@ components:
         correlationId: 9048796775044a60-39cb-4ccc-b272-b80f126e5408
         additionalInfo:
         - reason: Please contact support@equinix.com for more info
-    RouteFilterRuleCreateBgpIpv6Prefix:
+    RouteFilterRulesGetAllChangesResponseExample:
       value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 3
+          next: null
+          previous: null
+        data:
+        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/ff9653dc-88c5-47b5-b552-8a08d2f73f7e
+          type: BGP_IPv4_PREFIX_FILTER_RULE_CREATION
+          uuid: ff9653dc-88c5-47b5-b552-8a08d2f73f7e
+          status: COMPLETED
+          createdBy: testuser
+          createdByEmail: testuser@equinix.com
+          createdByFullName: testuser testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: _system
+          updatedByEmail: null
+          updatedByFullName: null
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+          data:
+            type: BGP_IPv4_PREFIX_FILTER_RULE
+            name: Private-subnet-filter
+            description: Test rule
+            prefix: 192.168.0.0/25
+            prefixMatch: exact
+            action: PERMIT
+        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/a40085a4-f0cc-416c-af01-286f7f7ec736
+          type: BGP_IPv4_PREFIX_FILTER_RULE_UPDATE
+          uuid: a40085a4-f0cc-416c-af01-286f7f7ec736
+          status: COMPLETED
+          createdBy: testuser
+          createdByEmail: testuser@equinix.com
+          createdByFullName: testuser testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: _system
+          updatedByEmail: null
+          updatedByFullName: null
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+          data:
+          - op: replace
+            path: /prefixMatch
+            value: orlonger
+            previousValue: exact
+        - href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/a25ca469-721a-4614-89a9-cdef287aa628
+          type: BGP_IPv4_PREFIX_FILTER_RULE_UPDATE
+          uuid: a25ca469-721a-4614-89a9-cdef287aa628
+          status: COMPLETED
+          createdBy: testuser
+          createdByEmail: testuser@equinix.com
+          createdByFullName: testuser testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: _system
+          updatedByEmail: null
+          updatedByFullName: null
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+          data:
+          - op: replace
+            path: /prefixMatch
+            value: exact
+            previousValue: orlonger
+    PatchRouteFilterRulePrefix:
+      value:
+      - op: replace
+        path: /prefix
+        value: 192.168.0.0/30
+    RouteFilterRuleCreateBgpIpv6PrefixResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403
+        type: BGP_IPv6_PREFIX_FILTER_RULE
+        uuid: 9890d520-1579-4489-8003-154b34b8f403
         name: Private-subnet-filter
         description: Test rule
+        state: PROVISIONING
+        change:
+          href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/ff9653dc-88c5-47b5-b552-8a08d2f73f7e
+          type: BGP_IPv6_PREFIX_FILTER_RULE_CREATION
+          uuid: ff9653dc-88c5-47b5-b552-8a08d2f73f7e
+        action: PERMIT
         prefix: 2001:7a9::34f4:0:f3dd:1/126
-        prefixMatch: orlonger
+        prefixMatch: exact
+        changeLog:
+          createdBy: testuser
+          createdByEmail: testuser@equinix.com
+          createdByFullName: testuser testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: testuser
+          updatedByEmail: testuser@equinix.com
+          updatedByFullName: testuser testuser
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+    RouteFilterRuleDeleteBgpIpv4PrefixResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403
+        type: BGP_IPv4_PREFIX_FILTER_RULE
+        uuid: 9890d520-1579-4489-8003-154b34b8f403
+        name: Private-subnet-filter
+        description: Test rule
+        state: DEPROVISIONING
+        change:
+          href: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/9890d520-1579-4489-8003-154b34b8f403/changes/e8528788-14d3-4a7b-a740-99b702067485
+          type: BGP_IPv4_PREFIX_FILTER_RULE_DELETION
+          uuid: e8528788-14d3-4a7b-a740-99b702067485
+        action: PERMIT
+        prefix: 192.168.0.0/24
+        prefixMatch: exact
+        changeLog:
+          createdBy: testuser
+          createdByEmail: testuser@equinix.com
+          createdByFullName: testuser testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: testuser1
+          updatedByEmail: testuser@equinix.com
+          updatedByFullName: testuser testuser
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+          deletedBy: testuser1
+          deletedByEmail: testuser@equinix.com
+          deletedByFullName: testuser testuser
+          deletedDateTime: 2020-05-21 10:30:00+00:00
   schemas:
-    RouteFilterRulesPatchRequest:
-      minItems: 1
-      type: array
-      description: Patch Route Filters Rule request
-      items:
-        $ref: '#/components/schemas/RouteFilterRulesPatchRequestItem'
+    RouteFilterRulesData:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Route Filter Rules URI
+          format: uri
+          example: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/65b025ef-022b-4180-85cf-82cfc1ab655b
+        type:
+          type: string
+          description: Route filter type
+          enum:
+          - BGP_IPv4_PREFIX_FILTER_RULE
+          - BGP_IPv6_PREFIX_FILTER_RULE
+        uuid:
+          type: string
+          description: Route Filter Rule identifier
+          format: uuid
+          example: 65b025ef-022b-4180-85cf-82cfc1ab655b
+        name:
+          type: string
+          example: Private-subnet-filter-2
+        description:
+          type: string
+          description: Customer-provided Route Filter Rule description
+        state:
+          $ref: '#/components/schemas/RouteFilterRuleState'
+        prefixMatch:
+          type: string
+          description: prefix matching operator
+          example: exact
+          default: orlonger
+        change:
+          $ref: '#/components/schemas/RouteFilterRulesChange'
+        action:
+          type: string
+          enum:
+          - PERMIT
+          - DENY
+        prefix:
+          type: string
+          example: 192.168.0.0/24
+        changelog:
+          $ref: '#/components/schemas/Changelog'
+    RouteFilterRuleExpression:
+      description: Filter expression that can be AND, OR, or a simple expression
+      anyOf:
+      - $ref: '#/components/schemas/RouteFilterRuleAndExpression'
+      - $ref: '#/components/schemas/RouteFilterRuleOrExpression'
+      - $ref: '#/components/schemas/RouteFilterRuleSimpleExpression'
+    RouteFilterRulesSearchRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/RouteFilterRulesFilter'
+        pagination:
+          $ref: '#/components/schemas/PaginationRequest'
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteFilterRuleSortCriteria'
+      description: Search route filter rules
     PriceError_additionalInfo:
       type: object
       properties:
@@ -1571,17 +1631,26 @@ components:
           type: string
         reason:
           type: string
-    RouteFilterRuleState:
+    RouteFilterRuleSortCriteria:
+      type: object
+      properties:
+        direction:
+          $ref: '#/components/schemas/RouteFilterRuleSortDirection'
+        property:
+          $ref: '#/components/schemas/RouteFilterRuleSortBy'
+    RouteFilterRuleSortBy:
       type: string
-      description: Route filter rule status
+      description: Possible field names to use on sorting
+      default: /changeLog/updatedDateTime
       enum:
-      - PROVISIONING
-      - REPROVISIONING
-      - DEPROVISIONING
-      - PROVISIONED
-      - DEPROVISIONED
-      - NOT_PROVISIONED
-      - NOT_DEPROVISIONED
+      - /type
+      - /uuid
+      - /name
+      - /state
+      - /prefix
+      - /prefixMatch
+      - /changeLog/createdDateTime
+      - /changeLog/updatedDateTime
     RouteFilterRulesPostRequest:
       type: object
       properties:
@@ -1591,48 +1660,81 @@ components:
           items:
             $ref: '#/components/schemas/RouteFilterRulesBase'
       description: Create Route Filter Rule POST request
-    Pagination:
+    Error:
       required:
-      - limit
-      - total
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    PaginationRequest:
       type: object
       properties:
         offset:
           minimum: 0
           type: integer
-          description: Index of the first item returned in the response. The default is 0.
+          description: Index of the first element.
           default: 0
         limit:
-          minimum: 0
+          minimum: 1
           type: integer
-          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          description: Number of elements to be requested per page. Number must be between 1 and 100, and the default is 20.
           default: 20
-        total:
-          minimum: 0
-          type: integer
-          description: Total number of elements returned.
-        next:
+      description: Pagination request information
+    RouteFilterRulesChange:
+      required:
+      - type
+      - uuid
+      type: object
+      properties:
+        uuid:
           type: string
-          description: URL relative to the next item in the response.
-        previous:
+          description: Uniquely identifies a change
+        type:
           type: string
-          description: URL relative to the previous item in the response.
-      description: Pagination response information
-    RouteFilterRulesSearchResponse:
+          description: Type of change
+          enum:
+          - BGP_IPv4_PREFIX_FILTER_RULE_UPDATE
+          - BGP_IPv4_PREFIX_FILTER_RULE_CREATION
+          - BGP_IPv4_PREFIX_FILTER_RULE_DELETION
+          - BGP_IPv6_PREFIX_FILTER_RULE_UPDATE
+          - BGP_IPv6_PREFIX_FILTER_RULE_CREATION
+          - BGP_IPv6_PREFIX_FILTER_RULE_DELETION
+        href:
+          type: string
+          description: Route Filter Change URI
+          format: uri
+      description: Current state of latest route filter rule change
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
+    RouteFilterRulesChangeDataResponse:
       type: object
       properties:
         pagination:
           $ref: '#/components/schemas/Pagination'
         data:
           type: array
-          description: List of route filter rules
           items:
-            $ref: '#/components/schemas/RouteFilterRulesData'
-    ErrorList:
-      type: array
-      description: List of Error Message
-      items:
-        $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/RouteFilterRulesChangeData'
+      description: List of route filter rule changes
     Changelog:
       type: object
       properties:
@@ -1688,6 +1790,80 @@ components:
           format: date-time
           example: 2020-11-06 07:00:00+00:00
       description: Change log
+    RouteFilterRuleSimpleExpression:
+      type: object
+      properties:
+        property:
+          type: string
+          description: "Possible field names to use on filters:\n * `/type` - Route Filter Rules Type\n * `/name` - Route Filter Rules Name\n * `/uuid` - Route Filter Rules uuid\n * `/state` - Route Filter Rules status\n * `/prefix` - Route Filter Rule Prefix\n * `/prefixMatch` - Route Filter Rule Prefix Match\n"
+          example: /name
+        operator:
+          type: string
+          description: "Possible operators to use on filters:\n * `=` - equal\n * `!=` - not equal\n * `[NOT] LIKE` - (not) like\n * `[NOT] IN` - (not) in\n * `ILIKE` - case-insensitive like\n"
+          example: '='
+        values:
+          maxItems: 8
+          minItems: 1
+          type: array
+          items:
+            type: string
+            example: Route_Filter_Rule_Demo
+      description: Simple filter expression with property, operator, and values
+    RouteFilterRulesPatchRequestItem:
+      required:
+      - op
+      - path
+      - value
+      type: object
+      properties:
+        op:
+          type: string
+          description: Handy shortcut for operation name
+          example: replace
+        path:
+          type: string
+          description: path to change
+          example: /prefixMatch
+        value:
+          description: new value for updated parameter
+      description: Route filter rule change operation data
+    RouteFilterRuleAndExpression:
+      type: object
+      properties:
+        and:
+          maxItems: 8
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteFilterRuleExpression'
+      description: AND expression containing multiple filter expressions
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
     RouteFilterRulesChangeOperation:
       required:
       - op
@@ -1709,61 +1885,11 @@ components:
         value:
           $ref: '#/components/schemas/RouteFilterRulesBase'
       description: Route filter rule change operation data
-    RouteFilterRulesBase:
-      required:
-      - prefix
-      type: object
-      properties:
-        name:
-          type: string
-          example: Private-subnet-filter
-        description:
-          type: string
-          description: Customer-provided Route Filter Rule description
-        prefix:
-          type: string
-          example: 192.168.0.0/24
-        prefixMatch:
-          type: string
-          example: orlonger, exact
-          default: orlonger
     ChangeId_2:
       type: string
       description: Route Filter Rule Change UUID
       format: uuid
       example: 6d500177-9404-41f2-99e8-2bf1a84d8db5
-    RouteFilterRuleId:
-      type: string
-      description: Route Filter Rule UUID
-      example: 65b025ef-022b-4180-85cf-82cfc1ab655b
-    GetRouteFilterRulesResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          description: List of Route Filter Rules
-          items:
-            $ref: '#/components/schemas/RouteFilterRulesData'
-    RouteFilterRulesPatchRequestItem:
-      required:
-      - op
-      - path
-      - value
-      type: object
-      properties:
-        op:
-          type: string
-          description: Handy shortcut for operation name
-          example: replace
-        path:
-          type: string
-          description: path to change
-          example: /prefixMatch
-        value:
-          description: new value for updated parameter
-      description: Route filter rule change operation data
     RouteFilterRuleOrExpression:
       type: object
       properties:
@@ -1774,44 +1900,31 @@ components:
           items:
             $ref: '#/components/schemas/RouteFilterRuleExpression'
       description: OR expression containing multiple filter expressions
-    RouteFilterRuleExpression:
-      description: Filter expression that can be AND, OR, or a simple expression
-      anyOf:
-      - $ref: '#/components/schemas/RouteFilterRuleAndExpression'
-      - $ref: '#/components/schemas/RouteFilterRuleOrExpression'
-      - $ref: '#/components/schemas/RouteFilterRuleSimpleExpression'
-    RouteFilterRuleSortCriteria:
-      type: object
-      properties:
-        direction:
-          $ref: '#/components/schemas/RouteFilterRuleSortDirection'
-        property:
-          $ref: '#/components/schemas/RouteFilterRuleSortBy'
-    RouteFilterRulesFilter:
-      description: Top-level filter that can be either an AND expression or OR expression
-      anyOf:
-      - $ref: '#/components/schemas/RouteFilterRuleAndExpression'
-      - $ref: '#/components/schemas/RouteFilterRuleOrExpression'
-    RouteFilterRuleAndExpression:
-      type: object
-      properties:
-        and:
-          maxItems: 8
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/RouteFilterRuleExpression'
-      description: AND expression containing multiple filter expressions
-    RouteFilterRulesChangeDataResponse:
+    GetRouteFilterRulesResponse:
       type: object
       properties:
         pagination:
           $ref: '#/components/schemas/Pagination'
         data:
           type: array
+          description: List of Route Filter Rules
           items:
-            $ref: '#/components/schemas/RouteFilterRulesChangeData'
-      description: List of route filter rule changes
+            $ref: '#/components/schemas/RouteFilterRulesData'
+    RouteFilterRuleState:
+      type: string
+      description: Route filter rule status
+      enum:
+      - PROVISIONING
+      - REPROVISIONING
+      - DEPROVISIONING
+      - PROVISIONED
+      - DEPROVISIONED
+      - NOT_PROVISIONED
+      - NOT_DEPROVISIONED
+    RouteFilterId:
+      type: string
+      description: Route Filters UUID
+      example: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
     RouteFilterRulesChangeData:
       type: object
       properties:
@@ -1841,54 +1954,6 @@ components:
       description: Current state of latest route filter rules change
       allOf:
       - $ref: '#/components/schemas/RouteFilterRulesChange'
-    RouteFilterRulesData:
-      type: object
-      properties:
-        href:
-          type: string
-          description: Route Filter Rules URI
-          format: uri
-          example: https://api.equinix.com/fabric/v4/routeFilters/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/routeFilterRules/65b025ef-022b-4180-85cf-82cfc1ab655b
-        type:
-          type: string
-          description: Route filter type
-          enum:
-          - BGP_IPv4_PREFIX_FILTER_RULE
-          - BGP_IPv6_PREFIX_FILTER_RULE
-        uuid:
-          type: string
-          description: Route Filter Rule identifier
-          format: uuid
-          example: 65b025ef-022b-4180-85cf-82cfc1ab655b
-        name:
-          type: string
-          example: Private-subnet-filter-2
-        description:
-          type: string
-          description: Customer-provided Route Filter Rule description
-        state:
-          $ref: '#/components/schemas/RouteFilterRuleState'
-        prefixMatch:
-          type: string
-          description: prefix matching operator
-          example: exact
-          default: orlonger
-        change:
-          $ref: '#/components/schemas/RouteFilterRulesChange'
-        action:
-          type: string
-          enum:
-          - PERMIT
-          - DENY
-        prefix:
-          type: string
-          example: 192.168.0.0/24
-        changelog:
-          $ref: '#/components/schemas/Changelog'
-    RouteFilterId:
-      type: string
-      description: Route Filters UUID
-      example: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
     RouteFilterRuleSortDirection:
       type: string
       description: Sorting direction
@@ -1896,110 +1961,54 @@ components:
       enum:
       - DESC
       - ASC
-    Error:
-      required:
-      - errorCode
-      - errorMessage
+    RouteFilterRulesSearchResponse:
       type: object
       properties:
-        errorCode:
-          pattern: ^EQ-\d{7}$
-          type: string
-        errorMessage:
-          type: string
-        correlationId:
-          type: string
-        details:
-          type: string
-        help:
-          type: string
-        additionalInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/PriceError_additionalInfo'
-      description: Error Response with details
-    RouteFilterRuleSimpleExpression:
-      type: object
-      properties:
-        property:
-          type: string
-          description: "Possible field names to use on filters:\n * `/type` - Route Filter Rules Type\n * `/name` - Route Filter Rules Name\n * `/uuid` - Route Filter Rules uuid\n * `/state` - Route Filter Rules status\n * `/prefix` - Route Filter Rule Prefix\n * `/prefixMatch` - Route Filter Rule Prefix Match\n"
-          example: /name
-        operator:
-          type: string
-          description: "Possible operators to use on filters:\n * `=` - equal\n * `!=` - not equal\n * `[NOT] LIKE` - (not) like\n * `[NOT] IN` - (not) in\n * `ILIKE` - case-insensitive like\n"
-          example: '='
-        values:
-          maxItems: 8
-          minItems: 1
-          type: array
-          items:
-            type: string
-            example: Route_Filter_Rule_Demo
-      description: Simple filter expression with property, operator, and values
-    RouteFilterRulesSearchRequest:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/RouteFilterRulesFilter'
         pagination:
-          $ref: '#/components/schemas/PaginationRequest'
-        sort:
+          $ref: '#/components/schemas/Pagination'
+        data:
           type: array
+          description: List of route filter rules
           items:
-            $ref: '#/components/schemas/RouteFilterRuleSortCriteria'
-      description: Search route filter rules
-    RouteFilterRuleSortBy:
+            $ref: '#/components/schemas/RouteFilterRulesData'
+    RouteFilterRuleId:
       type: string
-      description: Possible field names to use on sorting
-      default: /changeLog/updatedDateTime
-      enum:
-      - /type
-      - /uuid
-      - /name
-      - /state
-      - /prefix
-      - /prefixMatch
-      - /changeLog/createdDateTime
-      - /changeLog/updatedDateTime
-    RouteFilterRulesChange:
+      description: Route Filter Rule UUID
+      example: 65b025ef-022b-4180-85cf-82cfc1ab655b
+    RouteFilterRulesPatchRequest:
+      minItems: 1
+      type: array
+      description: Patch Route Filters Rule request
+      items:
+        $ref: '#/components/schemas/RouteFilterRulesPatchRequestItem'
+    RouteFilterRulesFilter:
+      description: Top-level filter that can be either an AND expression or OR expression
+      anyOf:
+      - $ref: '#/components/schemas/RouteFilterRuleAndExpression'
+      - $ref: '#/components/schemas/RouteFilterRuleOrExpression'
+    RouteFilterRulesBase:
       required:
-      - type
-      - uuid
+      - prefix
       type: object
       properties:
-        uuid:
+        name:
           type: string
-          description: Uniquely identifies a change
-        type:
+          example: Private-subnet-filter
+        description:
           type: string
-          description: Type of change
-          enum:
-          - BGP_IPv4_PREFIX_FILTER_RULE_UPDATE
-          - BGP_IPv4_PREFIX_FILTER_RULE_CREATION
-          - BGP_IPv4_PREFIX_FILTER_RULE_DELETION
-          - BGP_IPv6_PREFIX_FILTER_RULE_UPDATE
-          - BGP_IPv6_PREFIX_FILTER_RULE_CREATION
-          - BGP_IPv6_PREFIX_FILTER_RULE_DELETION
-        href:
+          description: Customer-provided Route Filter Rule description
+        prefix:
           type: string
-          description: Route Filter Change URI
-          format: uri
-      description: Current state of latest route filter rule change
-    PaginationRequest:
-      type: object
-      properties:
-        offset:
-          minimum: 0
-          type: integer
-          description: Index of the first element.
-          default: 0
-        limit:
-          minimum: 1
-          type: integer
-          description: Number of elements to be requested per page. Number must be between 1 and 100, and the default is 20.
-          default: 20
-      description: Pagination request information
-x-eqx-api-linter-skip-rules:
-- 3
-- 38
+          example: 192.168.0.0/24
+        prefixMatch:
+          type: string
+          example: orlonger, exact
+          default: orlonger
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+externalDocs:
+  description: Find more information on Equinix Docs Portal
+  url: https://docs.equinix.com/fabric/

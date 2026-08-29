@@ -1,16 +1,20 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Equinix API Authentication Cloud Routers API
-  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
-
-    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  title: Equinix Fabric API v4 Cloud Routers API
+  description: 'Equinix Fabric is an advanced software-defined interconnection solution that enables you to directly, securely and dynamically connect to distributed infrastructure and digital ecosystems on platform Equinix via a single port, Customers can use Fabric to connect to: </br> 1. Cloud Service Providers - Clouds, network and other service providers.  </br> 2. Enterprises - Other Equinix customers, vendors and partners.  </br> 3. Myself - Another customer instance deployed at Equinix. </br> </br> <b>Integrations (SDKs, Tools) links:</b> </br> <a href="https://github.com/equinix/equinix-sdk-java">Fabric Java SDK</a> </br> <a href="https://github.com/equinix/equinix-sdk-go">Fabric Go SDK</a> </br> <a href="https://github.com/equinix/equinix-sdk-python">Fabric Python SDK</a> </br> <a href="https://registry.terraform.io/providers/equinix/equinix/latest/docs">Equinix Terraform Provider</a> </br> <a href="https://registry.terraform.io/modules/equinix/fabric/equinix/latest">Fabric Terraform Modules</a> </br> <a href="https://www.pulumi.com/registry/packages/equinix/">Equinix Pulumi Provider</a> </br>'
   termsOfService: https://www.equinix.com/about/legal/terms
   contact:
     name: Equinix API Support
     url: https://docs.equinix.com/api-support.htm
-  version: '1.2'
+  license:
+    name: Equinix Inc
+    url: https://developer.equinix.com/agreement
+  version: '4.28'
 servers:
 - url: https://api.equinix.com
+  description: Equinix Inc
+security:
+- BearerAuth: []
 tags:
 - name: Cloud Routers
   description: Cloud Routers
@@ -1553,42 +1557,42 @@ paths:
                   $ref: '#/components/examples/500'
 components:
   schemas:
-    RouteTableEntryOrFilter:
+    CloudRouterPostRequestBase:
       type: object
       properties:
-        or:
-          maxItems: 3
+        type:
+          type: string
+          enum:
+          - XF_ROUTER
+        name:
+          type: string
+          description: Customer-provided Cloud Router name
+        location:
+          $ref: '#/components/schemas/SimplifiedLocationWithoutIBX'
+        package:
+          $ref: '#/components/schemas/CloudRouterPostRequestPackage'
+        order:
+          $ref: '#/components/schemas/Order'
+        project:
+          $ref: '#/components/schemas/Project'
+        account:
+          $ref: '#/components/schemas/SimplifiedAccount'
+        notifications:
+          type: array
+          description: Preferences for notifications on connection configuration or status changes
+          items:
+            $ref: '#/components/schemas/SimplifiedNotification'
+        marketplaceSubscription:
+          $ref: '#/components/schemas/marketplaceSubscription'
+      description: Create Cloud Router
+    RouteTableEntryFilters:
+      type: object
+      properties:
+        and:
+          maxItems: 8
           type: array
           items:
-            $ref: '#/components/schemas/RouteTableEntrySimpleExpression'
-    CloudRouterCommandSearchSortCriteria:
-      type: object
-      properties:
-        direction:
-          $ref: '#/components/schemas/CloudRouterCommandSearchSortDirection'
-        property:
-          $ref: '#/components/schemas/CloudRouterCommandSearchSortBy'
-    ConnectionRouteEntryFilter:
-      type: object
-      anyOf:
-      - $ref: '#/components/schemas/ConnectionRouteEntrySimpleExpression'
-      - $ref: '#/components/schemas/ConnectionRouteEntryOrFilter'
-    RouteTableEntrySimpleExpression:
-      type: object
-      properties:
-        property:
-          type: string
-          description: "Possible field names to use on filters:\n * `/type` - Route table entry type\n * `/prefix` - Route table entry prefix\n * `/nextHop` - Route table entry nextHop\n * `/state` - Route table entry state\n * `/MED` - Route table entry med\n * `/*` - all-category search\n"
-          example: /type
-        operator:
-          type: string
-          description: "Possible operators to use on filters:\n * `=` - equal\n * `!=` - not equal\n * `>` - greater than\n * `>=` - greater than or equal to\n * `<` - less than\n * `<=` - less than or equal to\n * `[NOT] BETWEEN` - (not) between\n * `[NOT] LIKE` - (not) like\n * `[NOT] IN` - (not) in\n * `~*` - case-insensitive like\n"
-          example: '='
-        values:
-          type: array
-          items:
-            type: string
-            example: IPv4_BGP_ROUTE
+            $ref: '#/components/schemas/RouteTableEntryFilter'
     Hop_probes:
       type: object
       properties:
@@ -1606,141 +1610,234 @@ components:
           example: '11.764'
         annotation:
           type: string
-    RouterPackageCode:
-      type: string
-      description: Router package code
-      enum:
-      - LAB
-      - BASIC
-      - STANDARD
-      - ADVANCED
-      - PREMIUM
-    CloudRouterSimpleExpression:
+    marketplaceSubscription:
       type: object
       properties:
-        property:
+        href:
           type: string
-          description: "Possible field names to use on filters:\n * `/project/projectId` - project id (mandatory)\n * `/name` - Fabric Cloud Router name\n * `/uuid` - Fabric Cloud Router uuid\n * `/state` - Fabric Cloud Router status\n * `/location/metroCode` - Fabric Cloud Router metro code\n * `/location/metroName` - Fabric Cloud Router metro name\n * `/package/code` - Fabric Cloud Router package\n * `/*` - all-category search\n"
-          example: /name
-        operator:
+          description: Marketplace Subscription URI
+          format: uri
+          readOnly: true
+          example: https://api.equinix.com/fabric/v4/marketplaceSubscriptions/20d32a80-0d61-4333-bc03-707b591ae2f5
+        type:
           type: string
-          description: "Possible operators to use on filters:\n * `=` - equal\n * `!=` - not equal\n * `>` - greater than\n * `>=` - greater than or equal to\n * `<` - less than\n * `<=` - less than or equal to\n * `[NOT] BETWEEN` - (not) between\n * `[NOT] LIKE` - (not) like\n * `[NOT] IN` - (not) in\n * `ILIKE` - case-insensitive like\n"
-          example: '='
-        values:
-          type: array
-          items:
-            type: string
-            example: FabricCloudRouter-1
-    PackageChangeLog:
-      type: object
-      properties:
-        createdDateTime:
+          description: Marketplace Subscription type
+          example: AWS_MARKETPLACE_SUBSCRIPTION
+          enum:
+          - AWS_MARKETPLACE_SUBSCRIPTION
+          - GCP_MARKETPLACE_SUBSCRIPTION
+          - AZURE_MARKETPLACE_SUBSCRIPTION
+        uuid:
           type: string
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        updatedDateTime:
-          type: string
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-      description: Cloud Router package change log
-    RouteTableEntryState:
+          description: Equinix-assigned Marketplace Subscription identifier
+          example: 20d32a80-0d61-4333-bc03-707b591ae2f5
+      description: Equinix Fabric Entity for Marketplace Subscription
+    ConnectionId:
       type: string
-      description: Route table entry state
-      enum:
-      - ACTIVE
-    code:
-      type: string
-      description: Cloud Router package code
-      example: LAB
-      enum:
-      - LAB
-      - BASIC
-      - STANDARD
-      - ADVANCED
-      - PREMIUM
-    RouteTableEntryType:
-      type: string
-      description: Route table entry type
-      enum:
-      - IPv4_BGP_ROUTE
-      - IPv4_STATIC_ROUTE
-      - IPv4_DIRECT_ROUTE
-      - IPv6_BGP_ROUTE
-      - IPv6_STATIC_ROUTE
-      - IPv6_DIRECT_ROUTE
+      description: Connection UUID
+      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
     CloudRouterCommandSearchFilter:
       type: object
       anyOf:
       - $ref: '#/components/schemas/CloudRouterCommandSearchExpression'
       - $ref: '#/components/schemas/CloudRouterCommandSearchOrFilter'
-    CloudRouterCommandSearchSortBy:
-      type: string
-      description: Possible field names to use on sorting
-      default: /changeLog/updatedDateTime
-      enum:
-      - /changeLog/createdDateTime
-      - /changeLog/updatedDateTime
-      - /name
-      - /type
-    CloudRouterPostRequestPackage:
-      required:
-      - code
+    ConnectionRouteTableEntrySearchResponse:
       type: object
       properties:
-        href:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/ConnectionRouteTableEntry'
+    CloudRouterChangeOperation:
+      required:
+      - op
+      - path
+      - value
+      type: object
+      properties:
+        op:
           type: string
-          description: Fabric Cloud Router URI
-          format: uri
-          example: https://api.equinix.com/fabric/v4/routerPackages/LAB
-        type:
-          type: string
-          description: Cloud Router package type
-          example: ROUTER_PACKAGE
+          description: Handy shortcut for operation name
           enum:
-          - ROUTER_PACKAGE
-        code:
+          - replace
+          - add
+          - remove
+        path:
           type: string
-          description: Cloud Router package code
-          example: LAB
-          enum:
-          - LAB
-          - BASIC
-          - STANDARD
-          - ADVANCED
-          - PREMIUM
-      description: Fabric Cloud Router Package Type
-    ConnectionRouteSortCriteria:
+          description: path inside document leading to updated parameter
+        value:
+          description: new value for updated parameter
+      description: Fabric Cloud Router change operation data
+    CloudRouterActionsSearchSortCriteria:
       type: object
       properties:
         direction:
-          $ref: '#/components/schemas/ConnectionRouteEntrySortDirection'
+          $ref: '#/components/schemas/CloudRouterActionsSearchSortDirection'
         property:
-          $ref: '#/components/schemas/ConnectionRouteEntrySortBy'
-    RouteTableEntrySearchRequest:
+          $ref: '#/components/schemas/CloudRouterActionsSearchSortBy'
+    SimplifiedNotification:
+      required:
+      - emails
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          description: Notification Type
+          example: BANDWIDTH_ALERT
+          enum:
+          - NOTIFICATION
+          - BANDWIDTH_ALERT
+          - CONNECTION_APPROVAL
+          - PROFILE_LIFECYCLE
+          - ALL
+          - SALES_REP_NOTIFICATIONS
+          - TECHNICAL
+          - ORDERING
+        sendInterval:
+          type: string
+        emails:
+          type: array
+          description: Array of contact emails
+          items:
+            type: string
+            format: email
+        registeredUsers:
+          type: array
+          description: Array of registered users
+          items:
+            type: string
+    CloudRouterActionsSearchFilters:
+      type: object
+      properties:
+        and:
+          maxItems: 8
+          type: array
+          items:
+            $ref: '#/components/schemas/CloudRouterActionsSearchFilter'
+    ConnectionRouteSearchRequest:
       type: object
       properties:
         filter:
-          $ref: '#/components/schemas/RouteTableEntryFilters'
+          $ref: '#/components/schemas/ConnectionRouteEntryFilters'
         pagination:
           $ref: '#/components/schemas/PaginationRequest'
         sort:
           type: array
           items:
-            $ref: '#/components/schemas/RouteTableEntrySortCriteria'
+            $ref: '#/components/schemas/ConnectionRouteSortCriteria'
       description: Search requests containing criteria
-    CloudRouterSortBy:
+    CloudRouterChange:
+      required:
+      - type
+      - updatedDateTime
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Uniquely identifies a change
+        type:
+          type: string
+          description: Type of change
+          enum:
+          - ROUTER_UPDATE
+        status:
+          type: string
+          description: Current outcome of the change flow
+          enum:
+          - COMPLETED
+          - FAILED
+          - REQUESTED
+        createdDateTime:
+          type: string
+          description: Set when change flow starts
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedDateTime:
+          type: string
+          description: Set when change object is updated
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        information:
+          type: string
+          description: Additional information
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CloudRouterChangeOperation'
+      description: Current state of latest CloudRouter change
+    CloudRouterCommand:
+      type: object
+      properties:
+        href:
+          type: string
+          example: https://api.equinix.com//fabric/v4/routers/a1c6b7fd-aead-410a-96b4-b1dfa1071700/commands/1e9414f1-763e-4c0a-86c6-0bc8336048d9
+        type:
+          $ref: '#/components/schemas/CloudRouterCommandType'
+        uuid:
+          type: string
+          format: uuid
+          example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+        name:
+          type: string
+          description: Customer-provided Cloud Router name
+          format: string
+          example: test-fg-1
+        description:
+          type: string
+          example: description
+        state:
+          $ref: '#/components/schemas/CloudRouterCommandState'
+        project:
+          $ref: '#/components/schemas/Project'
+        request:
+          $ref: '#/components/schemas/CloudRouterCommandRequestResponse'
+        response:
+          $ref: '#/components/schemas/CloudRouterCommandResponse'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+      description: Get Fabric Cloud Router Command response object
+    CloudRouterCommandSearchSortDirection:
       type: string
-      description: Possible field names to use on sorting
-      default: /changeLog/updatedDateTime
+      description: Sorting direction
+      default: DESC
       enum:
-      - /name
-      - /uuid
-      - /state
-      - /location/metroCode
-      - /location/metroName
-      - /package/code
-      - /changeLog/createdDateTime
-      - /changeLog/updatedDateTime
+      - DESC
+      - ASC
+    RouteTableEntrySortDirection:
+      type: string
+      description: Sorting direction
+      default: DESC
+      enum:
+      - DESC
+      - ASC
+    CloudRouterSortCriteria:
+      type: object
+      properties:
+        direction:
+          $ref: '#/components/schemas/CloudRouterSortDirection'
+        property:
+          $ref: '#/components/schemas/CloudRouterSortBy'
+    CloudRouterActionRequest:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/CloudRouterActionType'
+        connection:
+          $ref: '#/components/schemas/RouterActionsConnection'
+      description: Cloud router action request
+    CloudRouterCommandSearchSortCriteria:
+      type: object
+      properties:
+        direction:
+          $ref: '#/components/schemas/CloudRouterCommandSearchSortDirection'
+        property:
+          $ref: '#/components/schemas/CloudRouterCommandSearchSortBy'
     OutputStructuredPing:
       type: object
       properties:
@@ -1783,113 +1880,75 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OutputStructuredPingResponseItem'
-    CloudRouterActionState:
-      type: string
-      description: Cloud router action state
-      enum:
-      - SUCCEEDED
-      - FAILED
-      - PENDING
-    CloudRouterCommandRequestPayload:
-      required:
-      - destination
-      - sourceConnection
+    CloudRouterSimpleExpression:
       type: object
       properties:
-        destination:
+        property:
           type: string
-          description: Fabric Cloud Router Ping or Traceroute Command Destination
-          example: 8.8.8.8
-        sourceConnection:
-          $ref: '#/components/schemas/CloudRouterCommandRequestConnection'
-        timeout:
-          type: integer
-          description: "Timeout in seconds for Fabric Cloud Router Command:\n  - For `PING_COMMAND`: Packet timeout duration. The default value is 5.\n  - For `TRACEROUTE_COMMAND`: Probe timeout duration.\n    The default value is 2 and it is not configurable.\n"
-          example: 2
-        dataBytes:
-          maximum: 9000
-          minimum: 16
-          type: integer
-          description: "Ping Command DataBytes. \nThis field is only applicable for commands of type `PING_COMMAND`.\n"
-          example: 100
-          default: 64
-        probes:
-          type: integer
-          description: 'Number of probes for Fabric Cloud Router Traceroute Command.
-
-            This field is only applicable for commands of type `TRACEROUTE_COMMAND` and is not configurable.
-
-            '
-          example: 3
-          default: 3
-        hopsMax:
-          maximum: 30
-          type: integer
-          description: 'Maximum number of hops for the traceroute command.
-
-            This field is only applicable for commands of type `TRACEROUTE_COMMAND`.
-
-            '
-          example: 20
-          default: 20
-      description: Fabric Cloud Router Command Request
-    CloudRouterCommandPingResponse:
-      type: object
-      properties:
-        output:
+          description: "Possible field names to use on filters:\n * `/project/projectId` - project id (mandatory)\n * `/name` - Fabric Cloud Router name\n * `/uuid` - Fabric Cloud Router uuid\n * `/state` - Fabric Cloud Router status\n * `/location/metroCode` - Fabric Cloud Router metro code\n * `/location/metroName` - Fabric Cloud Router metro name\n * `/package/code` - Fabric Cloud Router package\n * `/*` - all-category search\n"
+          example: /name
+        operator:
           type: string
-        outputStructuredPing:
-          $ref: '#/components/schemas/OutputStructuredPing'
-        errors:
+          description: "Possible operators to use on filters:\n * `=` - equal\n * `!=` - not equal\n * `>` - greater than\n * `>=` - greater than or equal to\n * `<` - less than\n * `<=` - less than or equal to\n * `[NOT] BETWEEN` - (not) between\n * `[NOT] LIKE` - (not) like\n * `[NOT] IN` - (not) in\n * `ILIKE` - case-insensitive like\n"
+          example: '='
+        values:
           type: array
           items:
-            $ref: '#/components/schemas/Error'
-    CloudRouterCommandType:
-      type: string
-      description: Fabric Cloud Router Command Type
-      example: PING_COMMAND
-      enum:
-      - PING_COMMAND
-      - TRACEROUTE_COMMAND
-    CloudRouterCommandState:
-      type: string
-      description: Fabric Cloud Router Command State
-      example: SUCCEEDED
-      enum:
-      - PENDING
-      - SUCCEEDED
-      - FAILED
-      - DELETED
-    CloudRouterCommandPostRequest:
-      required:
-      - project
-      - request
-      - type
+            type: string
+            example: FabricCloudRouter-1
+    CloudRouterActionsSearchResponse:
       type: object
       properties:
-        type:
-          $ref: '#/components/schemas/CloudRouterCommandType'
-        name:
-          type: string
-          description: Customer-provided Cloud Router Command name
-        description:
-          type: string
-          description: Customer-provided Cloud Router Command description
-        project:
-          $ref: '#/components/schemas/Project'
-        request:
-          $ref: '#/components/schemas/CloudRouterCommandRequestPayload'
-      description: Execute Cloud Router Command Request
-    CloudRouterCommandRequestConnection:
-      required:
-      - uuid
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/CloudRouterActionResponse'
+    CommandId:
+      type: string
+      description: Command UUID
+      format: uuid
+      example: 37c10edc-ba2e-4240-a850-8a48f9c47d00
+    ActionId_1:
+      type: string
+      description: Action UUID
+      format: uuid
+      example: 457400f8-d360-11e9-bb65-2a2ae2dbcced
+    CloudRouterSortDirection:
+      type: string
+      description: Sorting direction
+      default: DESC
+      enum:
+      - DESC
+      - ASC
+    CloudRouterActionsSearchSortBy:
+      type: string
+      description: Possible field names to use on sorting
+      default: /changeLog/updatedDateTime
+      enum:
+      - /changeLog/createdDateTime
+      - /changeLog/updatedDateTime
+      - /connection/name
+      - /type
+    RouteTableEntrySearchResponse:
       type: object
       properties:
-        uuid:
-          type: string
-          description: Connection UUID
-          example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
-      description: Connection object for Cloud Router Command
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/RouteTableEntry'
+    ConnectionRouteEntrySortDirection:
+      type: string
+      description: Sorting direction
+      default: DESC
+      enum:
+      - DESC
+      - ASC
     RouteTableEntry_connection:
       type: object
       properties:
@@ -1902,63 +1961,51 @@ components:
         href:
           type: string
           format: uri
-    RouteTableEntrySortBy:
+    CloudRouterCommandState:
       type: string
-      description: Possible field names to use on sorting
-      default: /changeLog/updatedDateTime
+      description: Fabric Cloud Router Command State
+      example: SUCCEEDED
       enum:
-      - /changeLog/createdDateTime
-      - /changeLog/updatedDateTime
-      - /prefix
-      - /nextHop
-      - /connection/name
-      - /type
-      - /MED
-    Hop:
+      - PENDING
+      - SUCCEEDED
+      - FAILED
+      - DELETED
+    CloudRouterActionResponse:
+      required:
+      - changeLog
+      - state
+      - type
+      - uuid
       type: object
       properties:
-        hop:
-          type: integer
-          example: 1
-        probes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Hop_probes'
-    PaginationRequest:
-      type: object
-      properties:
-        offset:
-          minimum: 0
-          type: integer
-          description: Index of the first element.
-          default: 0
-        limit:
-          minimum: 1
-          type: integer
-          description: Number of elements to be requested per page. Number must be between 1 and 100, and the default is 20.
-          default: 20
-      description: Pagination request information
-    CloudRouterFilter:
-      type: object
-      anyOf:
-      - $ref: '#/components/schemas/CloudRouterSimpleExpression'
-      - $ref: '#/components/schemas/CloudRouterOrFilter'
-    CloudRouterCommandTracerouteResponse:
-      type: object
-      properties:
-        output:
+        type:
+          $ref: '#/components/schemas/CloudRouterActionType'
+        uuid:
           type: string
-        outputStructuredTraceroute:
-          $ref: '#/components/schemas/OutputStructuredTraceroute'
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    CloudRouterCommandResponse:
+          format: uuid
+          example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+        description:
+          type: string
+          example: description
+        state:
+          $ref: '#/components/schemas/CloudRouterActionState'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+        href:
+          type: string
+          example: https://api.equinix.com//fabric/v4/routers/a1c6b7fd-aead-410a-96b4-b1dfa1071700/actions/1e9414f1-763e-4c0a-86c6-0bc8336048d9
+        connection:
+          $ref: '#/components/schemas/RouterActionsConnection'
+        router:
+          $ref: '#/components/schemas/RouterActionsRouter'
+      description: Cloud router actions response object
+    PriceError_additionalInfo:
       type: object
-      oneOf:
-      - $ref: '#/components/schemas/CloudRouterCommandPingResponse'
-      - $ref: '#/components/schemas/CloudRouterCommandTracerouteResponse'
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
     Operation:
       type: object
       properties:
@@ -1979,12 +2026,818 @@ components:
           description: distinct IPV6 prefixes count
           example: 4
       description: Operation object for router actions
+    CloudRouterCommandPingResponse:
+      type: object
+      properties:
+        output:
+          type: string
+        outputStructuredPing:
+          $ref: '#/components/schemas/OutputStructuredPing'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    CloudRouterCommandTracerouteResponse:
+      type: object
+      properties:
+        output:
+          type: string
+        outputStructuredTraceroute:
+          $ref: '#/components/schemas/OutputStructuredTraceroute'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    ConnectionRouteEntrySortBy:
+      type: string
+      description: Possible field names to use on sorting
+      default: /changeLog/updatedDateTime
+      enum:
+      - /changeLog/createdDateTime
+      - /changeLog/updatedDateTime
+      - /med
+      - /connection/name
+      - /type
+      - /prefix
+      - /nextHop
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    RouteTableEntry:
+      required:
+      - changeLog
+      - state
+      - type
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/RouteTableEntryType'
+        protocolType:
+          $ref: '#/components/schemas/RouteTableEntryProtocolType'
+        state:
+          $ref: '#/components/schemas/RouteTableEntryState'
+        prefix:
+          type: string
+          example: 192.168.10.0/24
+        nextHop:
+          type: string
+          example: 10.10.10.5
+        MED:
+          type: integer
+          example: 5
+        localPreference:
+          type: integer
+          example: 200
+        asPath:
+          type: array
+          items:
+            type: string
+            example: '20100'
+        connection:
+          $ref: '#/components/schemas/RouteTableEntry_connection'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+      description: Route table entry object
+    code:
+      type: string
+      description: Cloud Router package code
+      example: LAB
+      enum:
+      - LAB
+      - BASIC
+      - STANDARD
+      - ADVANCED
+      - PREMIUM
+    PackageChangeLog:
+      type: object
+      properties:
+        createdDateTime:
+          type: string
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedDateTime:
+          type: string
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+      description: Cloud Router package change log
+    CloudRouterCommandSearchFilters:
+      type: object
+      properties:
+        and:
+          maxItems: 8
+          type: array
+          items:
+            $ref: '#/components/schemas/CloudRouterCommandSearchFilter'
+    CloudRouterFilters:
+      type: object
+      properties:
+        and:
+          maxItems: 8
+          type: array
+          items:
+            $ref: '#/components/schemas/CloudRouterFilter'
+    CloudRouterPackage:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Cloud Router package URI
+          format: uri
+          readOnly: true
+          example: https://api.equinix.com/fabric/v4/routerPackages/LAB
+        type:
+          type: string
+          description: Type of Router package
+          example: ROUTER_PACKAGE
+          enum:
+          - ROUTER_PACKAGE
+        code:
+          $ref: '#/components/schemas/code'
+        description:
+          type: string
+          description: Fabric Cloud Router Package description
+        totalIPv4RoutesMax:
+          minimum: 0
+          type: integer
+          description: Cloud Router package BGP IPv4 routes limit
+          example: 50
+        totalIPv6RoutesMax:
+          minimum: 0
+          type: integer
+          description: Cloud Router package BGP IPv6 routes limit
+          example: 50
+        routeFilterSupported:
+          type: boolean
+          description: CloudRouter package route filter support
+        vcCountMax:
+          minimum: 0
+          type: integer
+          description: CloudRouter package Max Connection limit
+          example: 10
+        crCountMax:
+          minimum: 0
+          type: integer
+          description: CloudRouter package Max CloudRouter limit
+          example: 3
+        vcBandwidthMax:
+          minimum: 0
+          type: integer
+          description: CloudRouter package Max Bandwidth limit
+          example: 50
+        changeLog:
+          $ref: '#/components/schemas/PackageChangeLog'
+      description: Fabric Cloud Router Package
+    SimplifiedLocationWithoutIBX:
+      required:
+      - metroCode
+      type: object
+      properties:
+        metroHref:
+          type: string
+          description: The Canonical URL at which the resource resides.
+          example: https://api.equinix.com/fabric/v4/metros/AM
+        region:
+          type: string
+          example: AMER, APAC, EMEA
+        metroName:
+          type: string
+          example: Amsterdam
+        metroCode:
+          type: string
+          example: AM
+    RouterId:
+      type: string
+      description: Cloud Router UUID
+      format: uuid
+      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+    RouterActionsConnection:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Connection UUID
+          example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+        href:
+          type: string
+          example: https://api.equinix.com/fabric/v4/connections/557400f8-d360-11e9-bb65-2a2ae2dbcce4
+        type:
+          $ref: '#/components/schemas/ConnectionType'
+        operation:
+          $ref: '#/components/schemas/Operation'
+      description: Connection object for router actions
+    RouteTableEntryProtocolType:
+      type: string
+      description: Route table entry protocol type
+      enum:
+      - BGP
+      - STATIC
+      - DIRECT
+    CloudRouterCommandPostRequest:
+      required:
+      - project
+      - request
+      - type
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/CloudRouterCommandType'
+        name:
+          type: string
+          description: Customer-provided Cloud Router Command name
+        description:
+          type: string
+          description: Customer-provided Cloud Router Command description
+        project:
+          $ref: '#/components/schemas/Project'
+        request:
+          $ref: '#/components/schemas/CloudRouterCommandRequestPayload'
+      description: Execute Cloud Router Command Request
+    CloudRouterAccessPointState:
+      type: string
+      description: Access point lifecycle state
+      enum:
+      - PROVISIONED
+      - PROVISIONING
+      - DEPROVISIONING
+      - DEPROVISIONED
+      - REPROVISIONING
+      - NOT_PROVISIONED
+      - NOT_DEPROVISIONED
+    CloudRouterSearchRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/CloudRouterFilters'
+        pagination:
+          $ref: '#/components/schemas/PaginationRequest'
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/CloudRouterSortCriteria'
+      description: Search requests containing criteria
+    CloudRouterActionsSearchSortDirection:
+      type: string
+      description: Sorting direction
+      default: DESC
+      enum:
+      - DESC
+      - ASC
+    CloudRouterCommandType:
+      type: string
+      description: Fabric Cloud Router Command Type
+      example: PING_COMMAND
+      enum:
+      - PING_COMMAND
+      - TRACEROUTE_COMMAND
+    GetAllCloudRouterCommands:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CloudRouterCommand'
+      description: List of Fabric Cloud Router Command
+    SearchResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/CloudRouter'
+    RouteTableEntryFilter:
+      type: object
+      anyOf:
+      - $ref: '#/components/schemas/RouteTableEntrySimpleExpression'
+      - $ref: '#/components/schemas/RouteTableEntryOrFilter'
+    ConnectionRouteSortCriteria:
+      type: object
+      properties:
+        direction:
+          $ref: '#/components/schemas/ConnectionRouteEntrySortDirection'
+        property:
+          $ref: '#/components/schemas/ConnectionRouteEntrySortBy'
+    OutputStructuredPingResponseItem:
+      type: object
+      properties:
+        bytes:
+          type: integer
+          example: 100
+        ip:
+          type: string
+          example: 8.8.8.8
+        icmpSeq:
+          type: integer
+          example: 0
+        ttl:
+          type: integer
+          example: 117
+        time:
+          type: number
+          format: float
+          example: 9.839
+    CloudRouterActionsSearchExpression:
+      type: object
+      properties:
+        property:
+          type: string
+          description: "Possible field names to use on filters:\n * `/type` - type of update\n * `/state` - action state\n * `/connection/uuid` - connection uuid associated\n * `/*` - all-category search\n"
+          example: /type
+        operator:
+          type: string
+          description: "Possible operators to use on filters:\n * `=` - equal\n * `!=` - not equal\n * `>` - greater than\n * `>=` - greater than or equal to\n * `<` - less than\n * `<=` - less than or equal to\n * `[NOT] BETWEEN` - (not) between\n * `[NOT] LIKE` - (not) like\n * `[NOT] IN` - (not) in\n * `~*` - case-insensitive like\n"
+          example: '='
+        values:
+          type: array
+          items:
+            type: string
+            example: ROUTE_TABLE_ENTRY_UPDATE
+    CloudRouter:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Cloud Routers URI
+          format: uri
+          readOnly: true
+          example: https://api.equinix.com/fabric/v4/routers/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        uuid:
+          type: string
+          description: Equinix-assigned access point identifier
+          format: uuid
+          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        name:
+          type: string
+          description: Customer-provided Cloud Router name
+          format: string
+          example: test-fg-1
+        state:
+          $ref: '#/components/schemas/CloudRouterAccessPointState'
+        equinixAsn:
+          type: integer
+          description: Equinix ASN
+          format: int64
+          example: 30000
+        connectionsCount:
+          minimum: 0
+          type: integer
+          description: Number of connections associated with this Access point
+        marketplaceSubscription:
+          $ref: '#/components/schemas/marketplaceSubscription'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+        change:
+          $ref: '#/components/schemas/CloudRouterChange'
+      description: Fabric Cloud Router object
+      allOf:
+      - $ref: '#/components/schemas/CloudRouterPostRequestBase'
+    Order:
+      type: object
+      properties:
+        purchaseOrderNumber:
+          type: string
+          description: Purchase order number
+        customerReferenceNumber:
+          type: string
+          description: Customer reference number
+        billingTier:
+          type: string
+          description: Billing tier for connection bandwidth
+        orderId:
+          type: string
+          description: Order Identification
+        orderNumber:
+          type: string
+          description: Order Reference Number
+        termLength:
+          maximum: 36
+          minimum: 1
+          type: integer
+          description: Term length in months, valid values are 1, 12, 24, 36 where 1 is the default value (for on-demand case).
+          default: 1
+        contractedBandwidth:
+          type: integer
+          description: Contracted bandwidth
+    CloudRouterFilter:
+      type: object
+      anyOf:
+      - $ref: '#/components/schemas/CloudRouterSimpleExpression'
+      - $ref: '#/components/schemas/CloudRouterOrFilter'
+    ConnectionRouteTableEntry_connection:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 81331c52-04c0-4656-a4a7-18c52669348f
+        name:
+          type: string
+          example: connection_1
+        href:
+          type: string
+          example: https://api.equinix.com/fabric/v4/connections/3066ab1d-af87-49d7-8a14-c9bdb57ac809
+    ConnectionRouteEntrySimpleExpression:
+      type: object
+      properties:
+        property:
+          type: string
+          description: "Possible field names to use on filters:\n * `/type` - Route table entry type\n * `/state` - Route table entry state\n * `/prefix` - Route table entry prefix\n * `/nextHop` - Route table entry nextHop\n * `/*` - all-category search\n"
+          example: /type
+        operator:
+          type: string
+          description: "Possible operators to use on filters:\n * `=` - equal\n * `!=` - not equal\n * `>` - greater than\n * `>=` - greater than or equal to\n * `<` - less than\n * `<=` - less than or equal to\n * `[NOT] BETWEEN` - (not) between\n * `[NOT] LIKE` - (not) like\n * `[NOT] IN` - (not) in\n * `~*` - case-insensitive like\n"
+          example: '='
+        values:
+          type: array
+          items:
+            type: string
+            example: IPv4_BGP_ROUTE
+    RouteTableEntryType:
+      type: string
+      description: Route table entry type
+      enum:
+      - IPv4_BGP_ROUTE
+      - IPv4_STATIC_ROUTE
+      - IPv4_DIRECT_ROUTE
+      - IPv6_BGP_ROUTE
+      - IPv6_STATIC_ROUTE
+      - IPv6_DIRECT_ROUTE
+    RouterActionsRouter:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Router UUID
+          example: a1c6b7fd-aead-410a-96b4-b1dfa1071700
+        href:
+          type: string
+          example: https://api.equinix.com/fabric/v4/routers/a1c6b7fd-aead-410a-96b4-b1dfa1071700
+        type:
+          type: string
+          enum:
+          - XF_ROUTER
+        operation:
+          $ref: '#/components/schemas/Operation'
+      description: Router object for router actions
+    ConnectionType:
+      type: string
+      description: Connection type
+      enum:
+      - EVPL_VC
+      - EPL_VC
+      - EC_VC
+      - IP_VC
+      - ACCESS_EPL_VC
+      - EIA_VC
+      - EVPLAN_VC
+      - EPLAN_VC
+      - EVPTREE_VC
+      - EPTREE_VC
+      - IPWAN_VC
+      - IA_VC
+      - MC_VC
+      - IX_VC
+    RouteTableEntryState:
+      type: string
+      description: Route table entry state
+      enum:
+      - ACTIVE
+    SimplifiedAccount:
+      type: object
+      properties:
+        accountNumber:
+          type: integer
+          description: Account number
+          format: int64
+        accountName:
+          type: string
+          description: Account name
+        orgId:
+          type: integer
+          description: Customer organization identifier
+          format: int64
+        organizationName:
+          type: string
+          description: Customer organization name
+        globalOrgId:
+          type: string
+          description: Global organization identifier
+        globalOrganizationName:
+          type: string
+          description: Global organization name
+        ucmId:
+          type: string
+          description: Account ucmId
+        globalCustId:
+          type: string
+          description: Account name
+        resellerAccountNumber:
+          type: integer
+          description: Reseller account number
+          format: int64
+        resellerAccountName:
+          type: string
+          description: Reseller account name
+        resellerUcmId:
+          type: string
+          description: Reseller account ucmId
+        resellerOrgId:
+          type: integer
+          description: Reseller customer organization identifier
+          format: int64
+    ConnectionRouteTableEntry:
+      required:
+      - changeLog
+      - type
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/RouteTableEntryType'
+        protocolType:
+          $ref: '#/components/schemas/RouteTableEntryProtocolType'
+        state:
+          type: string
+          example: ACTIVE
+          enum:
+          - ACTIVE
+          - INACTIVE
+        prefix:
+          type: string
+          example: 192.168.10.0/24
+        nextHop:
+          type: string
+          example: 10.10.10.5
+        MED:
+          type: integer
+          example: 5
+        localPreference:
+          type: integer
+          example: 200
+        asPath:
+          type: array
+          items:
+            type: string
+        connection:
+          $ref: '#/components/schemas/ConnectionRouteTableEntry_connection'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+      description: Advertised and received route table entry object
+    RouteTableEntrySortCriteria:
+      type: object
+      properties:
+        direction:
+          $ref: '#/components/schemas/RouteTableEntrySortDirection'
+        property:
+          $ref: '#/components/schemas/RouteTableEntrySortBy'
+    CloudRouterCommandResponse:
+      type: object
+      oneOf:
+      - $ref: '#/components/schemas/CloudRouterCommandPingResponse'
+      - $ref: '#/components/schemas/CloudRouterCommandTracerouteResponse'
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    RouteTableEntryOrFilter:
+      type: object
+      properties:
+        or:
+          maxItems: 3
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteTableEntrySimpleExpression'
+    PackageResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/CloudRouterPackage'
+    CloudRouterActionsSearchRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/CloudRouterActionsSearchFilters'
+        pagination:
+          $ref: '#/components/schemas/PaginationRequest'
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/CloudRouterActionsSearchSortCriteria'
+      description: Search requests containing criteria
+    CloudRouterActionType:
+      type: string
+      description: Cloud router action type
+      enum:
+      - BGP_SESSION_STATUS_UPDATE
+      - ROUTE_TABLE_ENTRY_UPDATE
+      - RECEIVED_ROUTE_ENTRY_UPDATE
+      - ADVERTISED_ROUTE_ENTRY_UPDATE
     CloudRouterUpdateRequest:
       minItems: 1
       type: array
       description: Fabric Cloud Router Update Request
       items:
         $ref: '#/components/schemas/CloudRouterChangeOperation'
+    CloudRouterCommandSearchRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/CloudRouterCommandSearchFilters'
+        pagination:
+          $ref: '#/components/schemas/PaginationRequest'
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/CloudRouterCommandSearchSortCriteria'
+      description: Search requests containing criteria
+    CloudRouterActionsSearchOrFilter:
+      type: object
+      properties:
+        or:
+          maxItems: 3
+          type: array
+          items:
+            $ref: '#/components/schemas/CloudRouterActionsSearchExpression'
+    RouteTableEntrySearchRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/RouteTableEntryFilters'
+        pagination:
+          $ref: '#/components/schemas/PaginationRequest'
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteTableEntrySortCriteria'
+      description: Search requests containing criteria
+    CloudRouterCommandSearchOrFilter:
+      type: object
+      properties:
+        or:
+          maxItems: 3
+          type: array
+          items:
+            $ref: '#/components/schemas/CloudRouterCommandSearchExpression'
+    Project:
+      required:
+      - projectId
+      type: object
+      properties:
+        projectId:
+          type: string
+          description: Subscriber-assigned project ID
+          example: 44f4c4f8-2f39-494e-838c-d8e640591be5
+    OutputStructuredTraceroute:
+      type: object
+      properties:
+        destinationIp:
+          type: string
+          example: 8.8.8.8
+        destinationName:
+          type: string
+          example: 8.8.8.8
+        packetBytes:
+          type: integer
+          example: 60
+        hopsMax:
+          type: integer
+          example: 10
+        hops:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hop'
+    CloudRouterCommandRequestConnection:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Connection UUID
+          example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+      description: Connection object for Cloud Router Command
+    CloudRouterActionsSearchFilter:
+      type: object
+      anyOf:
+      - $ref: '#/components/schemas/CloudRouterActionsSearchExpression'
+      - $ref: '#/components/schemas/CloudRouterActionsSearchOrFilter'
+    CloudRouterCommandSearchExpression:
+      type: object
+      properties:
+        property:
+          type: string
+          description: "Possible field names to use on filters:\n * `/type` - type of command\n * `/name` - name of command\n * `/state` - state of command\n * `/request/destination` - destination of command request\n * `/request/sourceConnection/uuid` - source connection uuid\n * `/*` - all-category search\n"
+          example: /state
+        operator:
+          type: string
+          description: "Possible operators to use on filters:\n * `=` - equal\n * `!=` - not equal\n * `>` - greater than\n * `>=` - greater than or equal to\n * `<` - less than\n * `<=` - less than or equal to\n * `[NOT] BETWEEN` - (not) between\n * `[NOT] LIKE` - (not) like\n * `[NOT] IN` - (not) in\n * `~*` - case-insensitive like\n"
+          example: '='
+        values:
+          type: array
+          items:
+            type: string
+            example: PING_COMMAND
+    CloudRouterCommandSearchSortBy:
+      type: string
+      description: Possible field names to use on sorting
+      default: /changeLog/updatedDateTime
+      enum:
+      - /changeLog/createdDateTime
+      - /changeLog/updatedDateTime
+      - /name
+      - /type
+    CloudRouterActionState:
+      type: string
+      description: Cloud router action state
+      enum:
+      - SUCCEEDED
+      - FAILED
+      - PENDING
+    RouterPackageCode:
+      type: string
+      description: Router package code
+      enum:
+      - LAB
+      - BASIC
+      - STANDARD
+      - ADVANCED
+      - PREMIUM
+    PaginationRequest:
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first element.
+          default: 0
+        limit:
+          minimum: 1
+          type: integer
+          description: Number of elements to be requested per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+      description: Pagination request information
+    CloudRouterOrFilter:
+      type: object
+      properties:
+        or:
+          maxItems: 3
+          type: array
+          items:
+            $ref: '#/components/schemas/CloudRouterSimpleExpression'
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
     Changelog:
       type: object
       properties:
@@ -2040,1011 +2893,6 @@ components:
           format: date-time
           example: 2020-11-06 07:00:00+00:00
       description: Change log
-    marketplaceSubscription:
-      type: object
-      properties:
-        href:
-          type: string
-          description: Marketplace Subscription URI
-          format: uri
-          readOnly: true
-          example: https://api.equinix.com/fabric/v4/marketplaceSubscriptions/20d32a80-0d61-4333-bc03-707b591ae2f5
-        type:
-          type: string
-          description: Marketplace Subscription type
-          example: AWS_MARKETPLACE_SUBSCRIPTION
-          enum:
-          - AWS_MARKETPLACE_SUBSCRIPTION
-          - GCP_MARKETPLACE_SUBSCRIPTION
-          - AZURE_MARKETPLACE_SUBSCRIPTION
-        uuid:
-          type: string
-          description: Equinix-assigned Marketplace Subscription identifier
-          example: 20d32a80-0d61-4333-bc03-707b591ae2f5
-      description: Equinix Fabric Entity for Marketplace Subscription
-    CloudRouterCommandSearchFilters:
-      type: object
-      properties:
-        and:
-          maxItems: 8
-          type: array
-          items:
-            $ref: '#/components/schemas/CloudRouterCommandSearchFilter'
-    CloudRouterActionsSearchSortBy:
-      type: string
-      description: Possible field names to use on sorting
-      default: /changeLog/updatedDateTime
-      enum:
-      - /changeLog/createdDateTime
-      - /changeLog/updatedDateTime
-      - /connection/name
-      - /type
-    ConnectionRouteEntrySimpleExpression:
-      type: object
-      properties:
-        property:
-          type: string
-          description: "Possible field names to use on filters:\n * `/type` - Route table entry type\n * `/state` - Route table entry state\n * `/prefix` - Route table entry prefix\n * `/nextHop` - Route table entry nextHop\n * `/*` - all-category search\n"
-          example: /type
-        operator:
-          type: string
-          description: "Possible operators to use on filters:\n * `=` - equal\n * `!=` - not equal\n * `>` - greater than\n * `>=` - greater than or equal to\n * `<` - less than\n * `<=` - less than or equal to\n * `[NOT] BETWEEN` - (not) between\n * `[NOT] LIKE` - (not) like\n * `[NOT] IN` - (not) in\n * `~*` - case-insensitive like\n"
-          example: '='
-        values:
-          type: array
-          items:
-            type: string
-            example: IPv4_BGP_ROUTE
-    RouterActionsConnection:
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: Connection UUID
-          example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
-        href:
-          type: string
-          example: https://api.equinix.com/fabric/v4/connections/557400f8-d360-11e9-bb65-2a2ae2dbcce4
-        type:
-          $ref: '#/components/schemas/ConnectionType'
-        operation:
-          $ref: '#/components/schemas/Operation'
-      description: Connection object for router actions
-    RouteTableEntrySearchResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          description: Data returned from the API call.
-          items:
-            $ref: '#/components/schemas/RouteTableEntry'
-    CloudRouterActionResponse:
-      required:
-      - changeLog
-      - state
-      - type
-      - uuid
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/CloudRouterActionType'
-        uuid:
-          type: string
-          format: uuid
-          example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
-        description:
-          type: string
-          example: description
-        state:
-          $ref: '#/components/schemas/CloudRouterActionState'
-        changeLog:
-          $ref: '#/components/schemas/Changelog'
-        href:
-          type: string
-          example: https://api.equinix.com//fabric/v4/routers/a1c6b7fd-aead-410a-96b4-b1dfa1071700/actions/1e9414f1-763e-4c0a-86c6-0bc8336048d9
-        connection:
-          $ref: '#/components/schemas/RouterActionsConnection'
-        router:
-          $ref: '#/components/schemas/RouterActionsRouter'
-      description: Cloud router actions response object
-    CloudRouterCommandSearchResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          description: Data returned from the API call.
-          items:
-            $ref: '#/components/schemas/CloudRouterCommand'
-    CloudRouterActionsSearchFilter:
-      type: object
-      anyOf:
-      - $ref: '#/components/schemas/CloudRouterActionsSearchExpression'
-      - $ref: '#/components/schemas/CloudRouterActionsSearchOrFilter'
-    CloudRouter:
-      type: object
-      properties:
-        href:
-          type: string
-          description: Cloud Routers URI
-          format: uri
-          readOnly: true
-          example: https://api.equinix.com/fabric/v4/routers/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-        uuid:
-          type: string
-          description: Equinix-assigned access point identifier
-          format: uuid
-          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-        name:
-          type: string
-          description: Customer-provided Cloud Router name
-          format: string
-          example: test-fg-1
-        state:
-          $ref: '#/components/schemas/CloudRouterAccessPointState'
-        equinixAsn:
-          type: integer
-          description: Equinix ASN
-          format: int64
-          example: 30000
-        connectionsCount:
-          minimum: 0
-          type: integer
-          description: Number of connections associated with this Access point
-        marketplaceSubscription:
-          $ref: '#/components/schemas/marketplaceSubscription'
-        changeLog:
-          $ref: '#/components/schemas/Changelog'
-        change:
-          $ref: '#/components/schemas/CloudRouterChange'
-      description: Fabric Cloud Router object
-      allOf:
-      - $ref: '#/components/schemas/CloudRouterPostRequestBase'
-    RouteTableEntrySortCriteria:
-      type: object
-      properties:
-        direction:
-          $ref: '#/components/schemas/RouteTableEntrySortDirection'
-        property:
-          $ref: '#/components/schemas/RouteTableEntrySortBy'
-    RouterActionsRouter:
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: Router UUID
-          example: a1c6b7fd-aead-410a-96b4-b1dfa1071700
-        href:
-          type: string
-          example: https://api.equinix.com/fabric/v4/routers/a1c6b7fd-aead-410a-96b4-b1dfa1071700
-        type:
-          type: string
-          enum:
-          - XF_ROUTER
-        operation:
-          $ref: '#/components/schemas/Operation'
-      description: Router object for router actions
-    SimplifiedNotification:
-      required:
-      - emails
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          description: Notification Type
-          example: BANDWIDTH_ALERT
-          enum:
-          - NOTIFICATION
-          - BANDWIDTH_ALERT
-          - CONNECTION_APPROVAL
-          - PROFILE_LIFECYCLE
-          - ALL
-          - SALES_REP_NOTIFICATIONS
-          - TECHNICAL
-          - ORDERING
-        sendInterval:
-          type: string
-        emails:
-          type: array
-          description: Array of contact emails
-          items:
-            type: string
-            format: email
-        registeredUsers:
-          type: array
-          description: Array of registered users
-          items:
-            type: string
-    CloudRouterOrFilter:
-      type: object
-      properties:
-        or:
-          maxItems: 3
-          type: array
-          items:
-            $ref: '#/components/schemas/CloudRouterSimpleExpression'
-    ConnectionRouteEntryFilters:
-      type: object
-      properties:
-        and:
-          maxItems: 8
-          type: array
-          items:
-            $ref: '#/components/schemas/ConnectionRouteEntryFilter'
-    GetAllCloudRouterCommands:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CloudRouterCommand'
-      description: List of Fabric Cloud Router Command
-    CloudRouterActionRequest:
-      required:
-      - type
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/CloudRouterActionType'
-        connection:
-          $ref: '#/components/schemas/RouterActionsConnection'
-      description: Cloud router action request
-    RouteTableEntryFilter:
-      type: object
-      anyOf:
-      - $ref: '#/components/schemas/RouteTableEntrySimpleExpression'
-      - $ref: '#/components/schemas/RouteTableEntryOrFilter'
-    Pagination:
-      required:
-      - limit
-      - total
-      type: object
-      properties:
-        offset:
-          minimum: 0
-          type: integer
-          description: Index of the first item returned in the response. The default is 0.
-          default: 0
-        limit:
-          minimum: 0
-          type: integer
-          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
-          default: 20
-        total:
-          minimum: 0
-          type: integer
-          description: Total number of elements returned.
-        next:
-          type: string
-          description: URL relative to the next item in the response.
-        previous:
-          type: string
-          description: URL relative to the previous item in the response.
-      description: Pagination response information
-    CommandId:
-      type: string
-      description: Command UUID
-      format: uuid
-      example: 37c10edc-ba2e-4240-a850-8a48f9c47d00
-    ConnectionRouteTableEntrySearchResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          description: Data returned from the API call.
-          items:
-            $ref: '#/components/schemas/ConnectionRouteTableEntry'
-    PackageResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          description: Data returned from the API call.
-          items:
-            $ref: '#/components/schemas/CloudRouterPackage'
-    ActionState:
-      $ref: '#/components/schemas/CloudRouterActionState'
-    CloudRouterChangeOperation:
-      required:
-      - op
-      - path
-      - value
-      type: object
-      properties:
-        op:
-          type: string
-          description: Handy shortcut for operation name
-          enum:
-          - replace
-          - add
-          - remove
-        path:
-          type: string
-          description: path inside document leading to updated parameter
-        value:
-          description: new value for updated parameter
-      description: Fabric Cloud Router change operation data
-    ConnectionId:
-      type: string
-      description: Connection UUID
-      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
-    CloudRouterSortCriteria:
-      type: object
-      properties:
-        direction:
-          $ref: '#/components/schemas/CloudRouterSortDirection'
-        property:
-          $ref: '#/components/schemas/CloudRouterSortBy'
-    RouteTableEntry:
-      required:
-      - changeLog
-      - state
-      - type
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/RouteTableEntryType'
-        protocolType:
-          $ref: '#/components/schemas/RouteTableEntryProtocolType'
-        state:
-          $ref: '#/components/schemas/RouteTableEntryState'
-        prefix:
-          type: string
-          example: 192.168.10.0/24
-        nextHop:
-          type: string
-          example: 10.10.10.5
-        MED:
-          type: integer
-          example: 5
-        localPreference:
-          type: integer
-          example: 200
-        asPath:
-          type: array
-          items:
-            type: string
-            example: '20100'
-        connection:
-          $ref: '#/components/schemas/RouteTableEntry_connection'
-        changeLog:
-          $ref: '#/components/schemas/Changelog'
-      description: Route table entry object
-    CloudRouterSortDirection:
-      type: string
-      description: Sorting direction
-      default: DESC
-      enum:
-      - DESC
-      - ASC
-    ActionId_1:
-      type: string
-      description: Action UUID
-      format: uuid
-      example: 457400f8-d360-11e9-bb65-2a2ae2dbcced
-    CloudRouterFilters:
-      type: object
-      properties:
-        and:
-          maxItems: 8
-          type: array
-          items:
-            $ref: '#/components/schemas/CloudRouterFilter'
-    CloudRouterChange:
-      required:
-      - type
-      - updatedDateTime
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: Uniquely identifies a change
-        type:
-          type: string
-          description: Type of change
-          enum:
-          - ROUTER_UPDATE
-        status:
-          type: string
-          description: Current outcome of the change flow
-          enum:
-          - COMPLETED
-          - FAILED
-          - REQUESTED
-        createdDateTime:
-          type: string
-          description: Set when change flow starts
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        updatedDateTime:
-          type: string
-          description: Set when change object is updated
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        information:
-          type: string
-          description: Additional information
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CloudRouterChangeOperation'
-      description: Current state of latest CloudRouter change
-    CloudRouterCommandSearchOrFilter:
-      type: object
-      properties:
-        or:
-          maxItems: 3
-          type: array
-          items:
-            $ref: '#/components/schemas/CloudRouterCommandSearchExpression'
-    ConnectionRouteSearchRequest:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/ConnectionRouteEntryFilters'
-        pagination:
-          $ref: '#/components/schemas/PaginationRequest'
-        sort:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConnectionRouteSortCriteria'
-      description: Search requests containing criteria
-    RouteTableEntryFilters:
-      type: object
-      properties:
-        and:
-          maxItems: 8
-          type: array
-          items:
-            $ref: '#/components/schemas/RouteTableEntryFilter'
-    CloudRouterActionsSearchRequest:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/CloudRouterActionsSearchFilters'
-        pagination:
-          $ref: '#/components/schemas/PaginationRequest'
-        sort:
-          type: array
-          items:
-            $ref: '#/components/schemas/CloudRouterActionsSearchSortCriteria'
-      description: Search requests containing criteria
-    OutputStructuredPingResponseItem:
-      type: object
-      properties:
-        bytes:
-          type: integer
-          example: 100
-        ip:
-          type: string
-          example: 8.8.8.8
-        icmpSeq:
-          type: integer
-          example: 0
-        ttl:
-          type: integer
-          example: 117
-        time:
-          type: number
-          format: float
-          example: 9.839
-    CloudRouterActionsSearchOrFilter:
-      type: object
-      properties:
-        or:
-          maxItems: 3
-          type: array
-          items:
-            $ref: '#/components/schemas/CloudRouterActionsSearchExpression'
-    ConnectionType:
-      type: string
-      description: Connection type
-      enum:
-      - EVPL_VC
-      - EPL_VC
-      - EC_VC
-      - IP_VC
-      - ACCESS_EPL_VC
-      - EIA_VC
-      - EVPLAN_VC
-      - EPLAN_VC
-      - EVPTREE_VC
-      - EPTREE_VC
-      - IPWAN_VC
-      - IA_VC
-      - MC_VC
-      - IX_VC
-    RouterId:
-      type: string
-      description: Cloud Router UUID
-      format: uuid
-      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
-    CloudRouterCommandSearchSortDirection:
-      type: string
-      description: Sorting direction
-      default: DESC
-      enum:
-      - DESC
-      - ASC
-    RouterId_1:
-      type: string
-      description: Router UUID
-      format: uuid
-      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
-    PriceError_additionalInfo:
-      type: object
-      properties:
-        property:
-          type: string
-        reason:
-          type: string
-    CloudRouterActionsSearchSortCriteria:
-      type: object
-      properties:
-        direction:
-          $ref: '#/components/schemas/CloudRouterActionsSearchSortDirection'
-        property:
-          $ref: '#/components/schemas/CloudRouterActionsSearchSortBy'
-    RouteTableEntryProtocolType:
-      type: string
-      description: Route table entry protocol type
-      enum:
-      - BGP
-      - STATIC
-      - DIRECT
-    CloudRouterCommandSearchRequest:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/CloudRouterCommandSearchFilters'
-        pagination:
-          $ref: '#/components/schemas/PaginationRequest'
-        sort:
-          type: array
-          items:
-            $ref: '#/components/schemas/CloudRouterCommandSearchSortCriteria'
-      description: Search requests containing criteria
-    CloudRouterActionsSearchFilters:
-      type: object
-      properties:
-        and:
-          maxItems: 8
-          type: array
-          items:
-            $ref: '#/components/schemas/CloudRouterActionsSearchFilter'
-    CloudRouterActionType:
-      type: string
-      description: Cloud router action type
-      enum:
-      - BGP_SESSION_STATUS_UPDATE
-      - ROUTE_TABLE_ENTRY_UPDATE
-      - RECEIVED_ROUTE_ENTRY_UPDATE
-      - ADVERTISED_ROUTE_ENTRY_UPDATE
-    SearchResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          description: Data returned from the API call.
-          items:
-            $ref: '#/components/schemas/CloudRouter'
-    ErrorList:
-      type: array
-      description: List of Error Message
-      items:
-        $ref: '#/components/schemas/Error'
-    CloudRouterCommandSearchExpression:
-      type: object
-      properties:
-        property:
-          type: string
-          description: "Possible field names to use on filters:\n * `/type` - type of command\n * `/name` - name of command\n * `/state` - state of command\n * `/request/destination` - destination of command request\n * `/request/sourceConnection/uuid` - source connection uuid\n * `/*` - all-category search\n"
-          example: /state
-        operator:
-          type: string
-          description: "Possible operators to use on filters:\n * `=` - equal\n * `!=` - not equal\n * `>` - greater than\n * `>=` - greater than or equal to\n * `<` - less than\n * `<=` - less than or equal to\n * `[NOT] BETWEEN` - (not) between\n * `[NOT] LIKE` - (not) like\n * `[NOT] IN` - (not) in\n * `~*` - case-insensitive like\n"
-          example: '='
-        values:
-          type: array
-          items:
-            type: string
-            example: PING_COMMAND
-    CloudRouterAccessPointState:
-      type: string
-      description: Access point lifecycle state
-      enum:
-      - PROVISIONED
-      - PROVISIONING
-      - DEPROVISIONING
-      - DEPROVISIONED
-      - REPROVISIONING
-      - NOT_PROVISIONED
-      - NOT_DEPROVISIONED
-    ConnectionRouteEntrySortBy:
-      type: string
-      description: Possible field names to use on sorting
-      default: /changeLog/updatedDateTime
-      enum:
-      - /changeLog/createdDateTime
-      - /changeLog/updatedDateTime
-      - /med
-      - /connection/name
-      - /type
-      - /prefix
-      - /nextHop
-    CloudRouterSearchRequest:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/CloudRouterFilters'
-        pagination:
-          $ref: '#/components/schemas/PaginationRequest'
-        sort:
-          type: array
-          items:
-            $ref: '#/components/schemas/CloudRouterSortCriteria'
-      description: Search requests containing criteria
-    CloudRouterCommand:
-      type: object
-      properties:
-        href:
-          type: string
-          example: https://api.equinix.com//fabric/v4/routers/a1c6b7fd-aead-410a-96b4-b1dfa1071700/commands/1e9414f1-763e-4c0a-86c6-0bc8336048d9
-        type:
-          $ref: '#/components/schemas/CloudRouterCommandType'
-        uuid:
-          type: string
-          format: uuid
-          example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
-        name:
-          type: string
-          description: Customer-provided Cloud Router name
-          format: string
-          example: test-fg-1
-        description:
-          type: string
-          example: description
-        state:
-          $ref: '#/components/schemas/CloudRouterCommandState'
-        project:
-          $ref: '#/components/schemas/Project'
-        request:
-          $ref: '#/components/schemas/CloudRouterCommandRequestResponse'
-        response:
-          $ref: '#/components/schemas/CloudRouterCommandResponse'
-        changeLog:
-          $ref: '#/components/schemas/Changelog'
-      description: Get Fabric Cloud Router Command response object
-    CloudRouterActionsSearchExpression:
-      type: object
-      properties:
-        property:
-          type: string
-          description: "Possible field names to use on filters:\n * `/type` - type of update\n * `/state` - action state\n * `/connection/uuid` - connection uuid associated\n * `/*` - all-category search\n"
-          example: /type
-        operator:
-          type: string
-          description: "Possible operators to use on filters:\n * `=` - equal\n * `!=` - not equal\n * `>` - greater than\n * `>=` - greater than or equal to\n * `<` - less than\n * `<=` - less than or equal to\n * `[NOT] BETWEEN` - (not) between\n * `[NOT] LIKE` - (not) like\n * `[NOT] IN` - (not) in\n * `~*` - case-insensitive like\n"
-          example: '='
-        values:
-          type: array
-          items:
-            type: string
-            example: ROUTE_TABLE_ENTRY_UPDATE
-    Order:
-      type: object
-      properties:
-        purchaseOrderNumber:
-          type: string
-          description: Purchase order number
-        customerReferenceNumber:
-          type: string
-          description: Customer reference number
-        billingTier:
-          type: string
-          description: Billing tier for connection bandwidth
-        orderId:
-          type: string
-          description: Order Identification
-        orderNumber:
-          type: string
-          description: Order Reference Number
-        termLength:
-          maximum: 36
-          minimum: 1
-          type: integer
-          description: Term length in months, valid values are 1, 12, 24, 36 where 1 is the default value (for on-demand case).
-          default: 1
-        contractedBandwidth:
-          type: integer
-          description: Contracted bandwidth
-    RouteTableEntrySortDirection:
-      type: string
-      description: Sorting direction
-      default: DESC
-      enum:
-      - DESC
-      - ASC
-    SimplifiedAccount:
-      type: object
-      properties:
-        accountNumber:
-          type: integer
-          description: Account number
-          format: int64
-        accountName:
-          type: string
-          description: Account name
-        orgId:
-          type: integer
-          description: Customer organization identifier
-          format: int64
-        organizationName:
-          type: string
-          description: Customer organization name
-        globalOrgId:
-          type: string
-          description: Global organization identifier
-        globalOrganizationName:
-          type: string
-          description: Global organization name
-        ucmId:
-          type: string
-          description: Account ucmId
-        globalCustId:
-          type: string
-          description: Account name
-        resellerAccountNumber:
-          type: integer
-          description: Reseller account number
-          format: int64
-        resellerAccountName:
-          type: string
-          description: Reseller account name
-        resellerUcmId:
-          type: string
-          description: Reseller account ucmId
-        resellerOrgId:
-          type: integer
-          description: Reseller customer organization identifier
-          format: int64
-    OutputStructuredTraceroute:
-      type: object
-      properties:
-        destinationIp:
-          type: string
-          example: 8.8.8.8
-        destinationName:
-          type: string
-          example: 8.8.8.8
-        packetBytes:
-          type: integer
-          example: 60
-        hopsMax:
-          type: integer
-          example: 10
-        hops:
-          type: array
-          items:
-            $ref: '#/components/schemas/Hop'
-    ConnectionRouteEntrySortDirection:
-      type: string
-      description: Sorting direction
-      default: DESC
-      enum:
-      - DESC
-      - ASC
-    Project:
-      required:
-      - projectId
-      type: object
-      properties:
-        projectId:
-          type: string
-          description: Subscriber-assigned project ID
-          example: 44f4c4f8-2f39-494e-838c-d8e640591be5
-    SimplifiedLocationWithoutIBX:
-      required:
-      - metroCode
-      type: object
-      properties:
-        metroHref:
-          type: string
-          description: The Canonical URL at which the resource resides.
-          example: https://api.equinix.com/fabric/v4/metros/AM
-        region:
-          type: string
-          example: AMER, APAC, EMEA
-        metroName:
-          type: string
-          example: Amsterdam
-        metroCode:
-          type: string
-          example: AM
-    ConnectionRouteEntryOrFilter:
-      type: object
-      properties:
-        or:
-          maxItems: 3
-          type: array
-          items:
-            $ref: '#/components/schemas/ConnectionRouteEntrySimpleExpression'
-    CloudRouterPostRequestBase:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - XF_ROUTER
-        name:
-          type: string
-          description: Customer-provided Cloud Router name
-        location:
-          $ref: '#/components/schemas/SimplifiedLocationWithoutIBX'
-        package:
-          $ref: '#/components/schemas/CloudRouterPostRequestPackage'
-        order:
-          $ref: '#/components/schemas/Order'
-        project:
-          $ref: '#/components/schemas/Project'
-        account:
-          $ref: '#/components/schemas/SimplifiedAccount'
-        notifications:
-          type: array
-          description: Preferences for notifications on connection configuration or status changes
-          items:
-            $ref: '#/components/schemas/SimplifiedNotification'
-        marketplaceSubscription:
-          $ref: '#/components/schemas/marketplaceSubscription'
-      description: Create Cloud Router
-    CloudRouterActionsSearchResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          description: Data returned from the API call.
-          items:
-            $ref: '#/components/schemas/CloudRouterActionResponse'
-    CloudRouterActionsSearchSortDirection:
-      type: string
-      description: Sorting direction
-      default: DESC
-      enum:
-      - DESC
-      - ASC
-    Error:
-      required:
-      - errorCode
-      - errorMessage
-      type: object
-      properties:
-        errorCode:
-          pattern: ^EQ-\d{7}$
-          type: string
-        errorMessage:
-          type: string
-        correlationId:
-          type: string
-        details:
-          type: string
-        help:
-          type: string
-        additionalInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/PriceError_additionalInfo'
-      description: Error Response with details
-    CloudRouterPackage:
-      type: object
-      properties:
-        href:
-          type: string
-          description: Cloud Router package URI
-          format: uri
-          readOnly: true
-          example: https://api.equinix.com/fabric/v4/routerPackages/LAB
-        type:
-          type: string
-          description: Type of Router package
-          example: ROUTER_PACKAGE
-          enum:
-          - ROUTER_PACKAGE
-        code:
-          $ref: '#/components/schemas/code'
-        description:
-          type: string
-          description: Fabric Cloud Router Package description
-        totalIPv4RoutesMax:
-          minimum: 0
-          type: integer
-          description: Cloud Router package BGP IPv4 routes limit
-          example: 50
-        totalIPv6RoutesMax:
-          minimum: 0
-          type: integer
-          description: Cloud Router package BGP IPv6 routes limit
-          example: 50
-        routeFilterSupported:
-          type: boolean
-          description: CloudRouter package route filter support
-        vcCountMax:
-          minimum: 0
-          type: integer
-          description: CloudRouter package Max Connection limit
-          example: 10
-        crCountMax:
-          minimum: 0
-          type: integer
-          description: CloudRouter package Max CloudRouter limit
-          example: 3
-        vcBandwidthMax:
-          minimum: 0
-          type: integer
-          description: CloudRouter package Max Bandwidth limit
-          example: 50
-        changeLog:
-          $ref: '#/components/schemas/PackageChangeLog'
-      description: Fabric Cloud Router Package
-    ConnectionRouteTableEntry:
-      required:
-      - changeLog
-      - type
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/RouteTableEntryType'
-        protocolType:
-          $ref: '#/components/schemas/RouteTableEntryProtocolType'
-        state:
-          type: string
-          example: ACTIVE
-          enum:
-          - ACTIVE
-          - INACTIVE
-        prefix:
-          type: string
-          example: 192.168.10.0/24
-        nextHop:
-          type: string
-          example: 10.10.10.5
-        MED:
-          type: integer
-          example: 5
-        localPreference:
-          type: integer
-          example: 200
-        asPath:
-          type: array
-          items:
-            type: string
-        connection:
-          $ref: '#/components/schemas/ConnectionRouteTableEntry_connection'
-        changeLog:
-          $ref: '#/components/schemas/Changelog'
-      description: Advertised and received route table entry object
-    CloudRouterPostRequest:
-      required:
-      - location
-      - name
-      - notification
-      - package
-      - type
-      allOf:
-      - $ref: '#/components/schemas/CloudRouterPostRequestBase'
     CloudRouterCommandRequestResponse:
       type: object
       properties:
@@ -3103,28 +2951,190 @@ components:
           example: 20
           default: 20
       description: Fabric Cloud Router Command Request
-    ConnectionRouteTableEntry_connection:
+    ConnectionRouteEntryFilter:
+      type: object
+      anyOf:
+      - $ref: '#/components/schemas/ConnectionRouteEntrySimpleExpression'
+      - $ref: '#/components/schemas/ConnectionRouteEntryOrFilter'
+    ConnectionRouteEntryFilters:
       type: object
       properties:
-        uuid:
+        and:
+          maxItems: 8
+          type: array
+          items:
+            $ref: '#/components/schemas/ConnectionRouteEntryFilter'
+    RouteTableEntrySortBy:
+      type: string
+      description: Possible field names to use on sorting
+      default: /changeLog/updatedDateTime
+      enum:
+      - /changeLog/createdDateTime
+      - /changeLog/updatedDateTime
+      - /prefix
+      - /nextHop
+      - /connection/name
+      - /type
+      - /MED
+    CloudRouterPostRequest:
+      required:
+      - location
+      - name
+      - notification
+      - package
+      - type
+      allOf:
+      - $ref: '#/components/schemas/CloudRouterPostRequestBase'
+    CloudRouterSortBy:
+      type: string
+      description: Possible field names to use on sorting
+      default: /changeLog/updatedDateTime
+      enum:
+      - /name
+      - /uuid
+      - /state
+      - /location/metroCode
+      - /location/metroName
+      - /package/code
+      - /changeLog/createdDateTime
+      - /changeLog/updatedDateTime
+    ActionState:
+      $ref: '#/components/schemas/CloudRouterActionState'
+    Hop:
+      type: object
+      properties:
+        hop:
+          type: integer
+          example: 1
+        probes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hop_probes'
+    CloudRouterCommandRequestPayload:
+      required:
+      - destination
+      - sourceConnection
+      type: object
+      properties:
+        destination:
           type: string
-          example: 81331c52-04c0-4656-a4a7-18c52669348f
-        name:
-          type: string
-          example: connection_1
+          description: Fabric Cloud Router Ping or Traceroute Command Destination
+          example: 8.8.8.8
+        sourceConnection:
+          $ref: '#/components/schemas/CloudRouterCommandRequestConnection'
+        timeout:
+          type: integer
+          description: "Timeout in seconds for Fabric Cloud Router Command:\n  - For `PING_COMMAND`: Packet timeout duration. The default value is 5.\n  - For `TRACEROUTE_COMMAND`: Probe timeout duration.\n    The default value is 2 and it is not configurable.\n"
+          example: 2
+        dataBytes:
+          maximum: 9000
+          minimum: 16
+          type: integer
+          description: "Ping Command DataBytes. \nThis field is only applicable for commands of type `PING_COMMAND`.\n"
+          example: 100
+          default: 64
+        probes:
+          type: integer
+          description: 'Number of probes for Fabric Cloud Router Traceroute Command.
+
+            This field is only applicable for commands of type `TRACEROUTE_COMMAND` and is not configurable.
+
+            '
+          example: 3
+          default: 3
+        hopsMax:
+          maximum: 30
+          type: integer
+          description: 'Maximum number of hops for the traceroute command.
+
+            This field is only applicable for commands of type `TRACEROUTE_COMMAND`.
+
+            '
+          example: 20
+          default: 20
+      description: Fabric Cloud Router Command Request
+    CloudRouterPostRequestPackage:
+      required:
+      - code
+      type: object
+      properties:
         href:
           type: string
-          example: https://api.equinix.com/fabric/v4/connections/3066ab1d-af87-49d7-8a14-c9bdb57ac809
+          description: Fabric Cloud Router URI
+          format: uri
+          example: https://api.equinix.com/fabric/v4/routerPackages/LAB
+        type:
+          type: string
+          description: Cloud Router package type
+          example: ROUTER_PACKAGE
+          enum:
+          - ROUTER_PACKAGE
+        code:
+          type: string
+          description: Cloud Router package code
+          example: LAB
+          enum:
+          - LAB
+          - BASIC
+          - STANDARD
+          - ADVANCED
+          - PREMIUM
+      description: Fabric Cloud Router Package Type
+    ConnectionRouteEntryOrFilter:
+      type: object
+      properties:
+        or:
+          maxItems: 3
+          type: array
+          items:
+            $ref: '#/components/schemas/ConnectionRouteEntrySimpleExpression'
+    RouterId_1:
+      type: string
+      description: Router UUID
+      format: uuid
+      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+    RouteTableEntrySimpleExpression:
+      type: object
+      properties:
+        property:
+          type: string
+          description: "Possible field names to use on filters:\n * `/type` - Route table entry type\n * `/prefix` - Route table entry prefix\n * `/nextHop` - Route table entry nextHop\n * `/state` - Route table entry state\n * `/MED` - Route table entry med\n * `/*` - all-category search\n"
+          example: /type
+        operator:
+          type: string
+          description: "Possible operators to use on filters:\n * `=` - equal\n * `!=` - not equal\n * `>` - greater than\n * `>=` - greater than or equal to\n * `<` - less than\n * `<=` - less than or equal to\n * `[NOT] BETWEEN` - (not) between\n * `[NOT] LIKE` - (not) like\n * `[NOT] IN` - (not) in\n * `~*` - case-insensitive like\n"
+          example: '='
+        values:
+          type: array
+          items:
+            type: string
+            example: IPv4_BGP_ROUTE
+    CloudRouterCommandSearchResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/CloudRouterCommand'
   examples:
-    '415':
+    PostRequestTracerouteCommand:
       value:
-      - errorCode: EQ-3040016
-        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
-        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
-        additionalInfo:
-        - property: contentType
-          reason: The payload format is in an unsupported format
-    CloudRouterPostResponseMarketplaceExample:
+        type: TRACEROUTE_COMMAND
+        name: traceroute-test-1
+        description: Testing FCR-SV-1
+        project:
+          projectId: b11d4cb5-978a-418a-8b13-bf19abb97938
+        request:
+          destination: 8.8.8.8
+          sourceConnection:
+            uuid: 1da3778c-6aa3-4e47-b2fe-83a0773dde18
+          timeout: 2
+          probes: 3
+          hopsMax: 20
+    CloudRouterPostResponseExample:
       value:
         href: https://api.equinix.com/fabric/v4/routers/201b7346-a9eb-42fe-ae7a-08148c71928d
         uuid: 201b7346-a9eb-42fe-ae7a-08148c71928d
@@ -3138,38 +3148,22 @@ components:
         package:
           href: https://api.equinix.com/fabric/v4/routerPackages/STANDARD
           code: STANDARD
+        order:
+          purchaseOrderNumber: 1-129105284100
         project:
-          projectId: ae708bbb-d669-406a-845a-99b39ff65fd0
+          projectId: '12345'
         notifications:
         - type: ALL
           emails:
           - abc@abc.com
+        account:
+          accountNumber: 123
         connectionsCount: 0
-        marketplaceSubscription:
-          href: https://api.equinix.com/fabric/v4/marketplaceSubscriptions/20d32a80-0d61-4333-bc03-707b591ae2f5
-          type: AWS_MARKETPLACE_SUBSCRIPTION
-          uuid: 20d32a80-0d61-4333-bc03-707b591ae2f5
         changeLog:
           createdBy: abc@xyz.com
           createdByFullName: abc
           createdByEmail: abc@xyz.com
           createdDateTime: 2021-09-24 06:59:46+00:00
-    CreateLabPackage:
-      value:
-        type: XF_ROUTER
-        name: My-Cloud-Router
-        location:
-          metroCode: SV
-        package:
-          code: LAB
-        notifications:
-        - type: ALL
-          emails:
-          - test@test.com
-        account:
-          accountNumber: 272010
-        project:
-          projectId: '995072000433550'
     CloudRouterActionsSearchByType:
       value:
         filter:
@@ -3184,6 +3178,12 @@ components:
         sort:
         - direction: DESC
           property: /changeLog/createdDateTime
+    '404':
+      value:
+      - errorCode: EQ-3045811
+        errorMessage: uuid not found
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: uuid not found
     UpdateNotifications:
       value:
       - op: replace
@@ -3193,14 +3193,141 @@ components:
           emails:
           - testEmail1@equinix.com
           - testEmail2@equinix.com
-    GetResponsePingCommand:
+    500_commands:
+      value:
+      - errorCode: EQ-3043005
+        errorMessage: Internal server error
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        details: Internal server error
+    CloudRouterReceivedRoutesActionResponse:
+      value:
+        type: RECEIVED_ROUTE_ENTRY_UPDATE
+        uuid: 37c10edc-ba2e-4240-a850-8a48f9c47d01
+        state: PENDING
+        connection:
+          uuid: 3066ab1d-af87-49d7-8a14-c9bdb57ac809
+        changeLog:
+          createdDateTime: 2020-05-21 10:30:00+00:00
+    UpdateTermLength:
+      value:
+      - op: replace
+        path: /order/termLength
+        value: 12
+    ListFCRPackagesResponse:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 4
+        data:
+        - href: https://api.equinix.com/fabric/v4/routerPackages/LAB
+          type: ROUTER_PACKAGE
+          code: LAB
+          description: string
+          totalIPv4RoutesMax: 50
+          totalIPv6RoutesMax: 50
+          routeFilterSupported: true
+          vcCountMax: 10
+          crCountMax: 3
+          vcBandwidthMax: 50
+          changeLog:
+            createdDateTime: 2022-02-10 00:14:47+00:00
+            updatedDateTime: 2022-02-10 00:14:47+00:00
+        - href: https://api.equinix.com/fabric/v4/routerPackages/STANDARD
+          type: ROUTER_PACKAGE
+          code: STANDARD
+          description: string
+          totalIPv4RoutesMax: 1000
+          totalIPv6RoutesMax: 100
+          routeFilterSupported: true
+          vcCountMax: 10
+          crCountMax: 3
+          vcBandwidthMax: 10000
+          changeLog:
+            createdDateTime: 2023-02-10 00:14:47+00:00
+            updatedDateTime: 2023-02-10 00:14:47+00:00
+        - href: https://api.equinix.com/fabric/v4/routerPackages/ADVANCED
+          type: ROUTER_PACKAGE
+          code: ADVANCED
+          description: string
+          totalIPv4RoutesMax: 4000
+          totalIPv6RoutesMax: 250
+          routeFilterSupported: true
+          vcCountMax: 99999
+          crCountMax: 3
+          vcBandwidthMax: 50000
+          changeLog:
+            createdDateTime: 2023-02-10 00:14:47+00:00
+            updatedDateTime: 2023-02-10 00:14:47+00:00
+        - href: https://api.equinix.com/fabric/v4/routerPackages/PREMIUM
+          type: ROUTER_PACKAGE
+          code: PREMIUM
+          description: string
+          totalIPv4RoutesMax: 10000
+          totalIPv6RoutesMax: 500
+          routeFilterSupported: true
+          vcCountMax: 10
+          crCountMax: 3
+          vcBandwidthMax: 50000
+          changeLog:
+            createdDateTime: 2023-02-10 00:14:47+00:00
+            updatedDateTime: 2023-02-10 00:14:47+00:00
+    GetResponseTracerouteCommandWithError:
       value:
         href: https://api.equinix.com/fabric/v4/routers/9b8c5042-b553-4d5e-a2ac-c73bf6d4fd81/commands/37c10edc-ba2e-4240-a850-8a48f9c47d00
-        type: PING_COMMAND
+        type: TRACEROUTE_COMMAND
         uuid: 37c10edc-ba2e-4240-a850-8a48f9c47d00
+        name: traceroute-test-1
+        description: Testing FCR-SV-1
+        state: FAILED
+        project:
+          projectId: b11d4cb5-978a-418a-8b13-bf19abb97938
+        request:
+          destination: 8.8.8.8
+          sourceConnection:
+            uuid: 1da3778c-6aa3-4e47-b2fe-83a0773dde18
+          timeout: 2
+          probes: 3
+          hopsMax: 20
+        response:
+          errors:
+          - errorCode: EQ-3041105
+            errorMessage: Request timeout.
+            correlationId: 86c57a79-06fb-4ba3-b496-5387f3b45380
+            details: Request timeout after 480 seconds.
+            additionalInfo:
+            - reason: Request timeout after 480 seconds.
+        changeLog:
+          createdBy: testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+    400_dry_run:
+      value:
+      - errorCode: EQ-3142411
+        errorMessage: Dry run is not supported for this connection type
+        correlationId: 1012536-0000-108258589231-api
+        additionalInfo:
+        - reason: queryParam:dryRun
+    CreateWithMarketplaceSubscription:
+      value:
+        type: XF_ROUTER
+        name: My-Cloud-Router
+        location:
+          metroCode: SV
+        package:
+          code: ADVANCED
+        notifications:
+        - type: ALL
+          emails:
+          - test@test.com
+        project:
+          projectId: ae708bbb-d669-406a-845a-99b39ff65fd0
+        marketplaceSubscription:
+          uuid: 20d32a80-0d61-4333-bc03-707b591ae2f5
+    PostRequestPingCommand:
+      value:
+        type: PING_COMMAND
         name: ping-test-1
         description: Testing FCR-SV-1
-        state: SUCCEEDED
         project:
           projectId: b11d4cb5-978a-418a-8b13-bf19abb97938
         request:
@@ -3209,45 +3336,242 @@ components:
             uuid: 1da3778c-6aa3-4e47-b2fe-83a0773dde18
           timeout: 2
           dataBytes: 100
-          count: 5
-          interval: 1000
-        response:
-          output: "PING 8.8.8.8 (8.8.8.8): 100 data bytes\n108 bytes from 8.8.8.8: icmp_seq=0 ttl=117 time=9.839 ms\n108 bytes from 8.8.8.8: icmp_seq=1 ttl=117 time=16.051 ms\n108 bytes from 8.8.8.8: icmp_seq=2 ttl=117 time=9.271 ms\n108 bytes from 8.8.8.8: icmp_seq=3 ttl=117 time=26.771 ms \n--- 8.8.8.8 ping statistics ---\n4 packets transmitted, 4 packets received, 0.0% packet loss\nround-trip min/avg/max/stddev = 9.271/15.483/26.771/7.039 ms"
-          outputStructuredPing:
-            destinationIp: 8.8.8.8
-            destinationName: 8.8.8.8
-            dataBytes: 100
-            packetsTransmitted: 4
-            packetsReceived: 4
-            packetsLossPercent: 0
-            rttMin: 9.271
-            rttAvg: 15.483
-            rttMax: 26.771
-            rttStdDev: 7.039
-            responses:
-            - bytes: 100
-              ip: 8.8.8.8
-              icmpSeq: 0
-              ttl: 117
-              time: 9.839
-            - bytes: 100
-              ip: 8.8.8.8
-              icmpSeq: 1
-              ttl: 117
-              time: 16.051
-            - bytes: 100
-              ip: 8.8.8.8
-              icmpSeq: 2
-              ttl: 117
-              time: 9.271
-            - bytes: 100
-              ip: 8.8.8.8
-              icmpSeq: 3
-              ttl: 117
-              time: 26.771
+    CloudRouterActiveRoutesSearchResponse:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 1
+        data:
+        - type: IPv4_BGP_ROUTE
+          protocolType: BGP
+          state: ACTIVE
+          prefix: 192.168.10.0/24
+          nextHop: 10.10.10.5
+          asPath:
+          - 20001
+          changeLog:
+            createdBy: johnsmith
+            createdByFullName: John Smith
+            createdByEmail: john.smith@example.com
+            createdDateTime: 2020-11-06 07:00:00+00:00
+            updatedBy: johnsmith
+            updatedByFullName: John Smith
+            updatedByEmail: john.smith@example.com
+            updatedDateTime: 2020-11-06 07:00:00+00:00
+            deletedBy: johnsmith
+            deletedByFullName: John Smith
+            deletedByEmail: john.smith@example.com
+            deletedDateTime: 2020-11-06 07:00:00+00:00
+    CloudRouterPatchResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/routers/201b7346-a9eb-42fe-ae7a-08148c71928d
+        uuid: 201b7346-a9eb-42fe-ae7a-08148c71928d
+        state: PROVISIONED
+        type: XF_ROUTER
+        name: My-Cloud-Router
+        location:
+          metroHref: https://api.equinix.com/fabric/v4/metros/HH
+          metroCode: HH
+        equinixAsn: 30000
+        package:
+          href: https://api.equinix.com/fabric/v4/routerPackages/STANDARD
+          code: STANDARD
+        order:
+          purchaseOrderNumber: 1-129105284100
+        project:
+          projectId: '123456'
+        notifications:
+        - type: ALL
+          emails:
+          - abc@abc.com
+        account:
+          accountNumber: 123
+        connectionsCount: 0
+        change:
+          uuid: 3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          type: ROUTER_UPDATE
+          status: REQUESTED
+          createdDateTime: 2022-04-19 04:20:55.471000+00:00
+          updatedDateTime: 2022-04-19 04:20:55.471000+00:00
+          data:
+          - op: replace
+            path: /package/code
+            value: PREMIUM
+          - op: replace
+            path: /order/termLength
+            value: 12
         changeLog:
-          createdBy: testuser
+          createdBy: abc@xyz.com
+          createdByFullName: abc
+          createdByEmail: abc@xyz.com
+          createdDateTime: 2021-09-24 06:59:46+00:00
+          updatedBy: abc@xyz.com
+          updatedByFullName: abc
+          updatedByEmail: abc@xyz.com
+          updatedDateTime: 2021-09-24 06:59:46+00:00
+          deletedBy: abc@xyz.com
+          deletedByFullName: abc
+          deletedByEmail: abc@xyz.com
+          deletedDateTime: 2021-09-24 06:59:46+00:00
+    AdvertisedRouteEntriesStatusUpdate:
+      value:
+        type: ADVERTISED_ROUTE_ENTRY_UPDATE
+        connection:
+          uuid: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+    SearchFilterByPrefix:
+      value:
+        filter:
+          and:
+          - property: /prefix
+            operator: '='
+            values:
+            - 192.168.10.0/24
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - direction: DESC
+          property: /changeLog/createdDateTime
+    400_invalid_name:
+      value:
+      - errorCode: EQ-3040022
+        errorMessage: Name is minimum 3 and up to 24 characters in length
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Name is minimum 3 and up to 24 characters in length
+        additionalInfo:
+        - property: /name
+          reason: Name is minimum 3 and up to 24 characters in length
+    CloudRouterResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/routers/201b7346-a9eb-42fe-ae7a-08148c71928d
+        uuid: 201b7346-a9eb-42fe-ae7a-08148c71928d
+        state: PROVISIONED
+        type: XF_ROUTER
+        name: My-Cloud-Router
+        location:
+          metroHref: https://api.equinix.com/fabric/v4/metros/HH
+          metroCode: HH
+        equinixAsn: 30000
+        package:
+          href: https://api.equinix.com/fabric/v4/routerPackages/STANDARD
+          code: STANDARD
+        order:
+          purchaseOrderNumber: 1-129105284100
+        project:
+          projectId: ae708bbb-d669-406a-845a-99b39ff65fd0
+        notifications:
+        - type: ALL
+          emails:
+          - abc@abc.com
+        account:
+          accountNumber: 123
+        connectionsCount: 0
+        changeLog:
+          createdBy: abc@xyz.com
+          createdByFullName: abc
+          createdByEmail: abc@xyz.com
+          createdDateTime: 2021-09-24 06:59:46+00:00
+          updatedBy: abc@xyz.com
+          updatedByFullName: abc
+          updatedByEmail: abc@xyz.com
+          updatedDateTime: 2021-09-24 06:59:46+00:00
+          deletedBy: abc@xyz.com
+          deletedByFullName: abc
+          deletedByEmail: abc@xyz.com
+          deletedDateTime: 2021-09-24 06:59:46+00:00
+    400_invalid_sorting:
+      value:
+      - errorCode: EQ-3043015
+        errorMessage: Invalid value for sorting direction.
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - reason: Only accept DESC and ASC for sorting direction.
+    CloudRouterAdvertisedRoutesSearchResponse:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 1
+        data:
+        - type: IPv4_BGP_ROUTE
+          protocolType: BGP
+          state: ACTIVE
+          prefix: 192.168.10.0/24
+          nextHop: 10.10.10.5
+          MED: 5
+          asPath:
+          - 20001
+          connection:
+            href: https://api.equinix.com/fabric/v4/connections/3066ab1d-af87-49d7-8a14-c9bdb57ac809
+            uuid: 81331c52-04c0-4656-a4a7-18c52669348f
+            name: connection_1
+          changeLog:
+            createdBy: johnsmith
+            createdByFullName: John Smith
+            createdByEmail: john.smith@example.com
+            createdDateTime: 2020-11-06 07:00:00+00:00
+            updatedBy: johnsmith
+            updatedByFullName: John Smith
+            updatedByEmail: john.smith@example.com
+            updatedDateTime: 2020-11-06 07:00:00+00:00
+            deletedBy: johnsmith
+            deletedByFullName: John Smith
+            deletedByEmail: john.smith@example.com
+            deletedDateTime: 2020-11-06 07:00:00+00:00
+    SearchFilterByNameAndMetroName:
+      value:
+        filter:
+          and:
+          - property: /name
+            operator: '='
+            values:
+            - test-fg
+          - property: /metroName
+            operator: LIKE
+            values:
+            - Si%
+          - property: /project/projectId
+            operator: '='
+            values:
+            - '995072000433550'
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - direction: DESC
+          property: /changeLog/createdDateTime
+    CloudRouterAdvertisedRoutesActionResponse:
+      value:
+        type: ADVERTISED_ROUTE_ENTRY_UPDATE
+        uuid: 37c10edc-ba2e-4240-a850-8a48f9c47d01
+        state: PENDING
+        connection:
+          uuid: 3066ab1d-af87-49d7-8a14-c9bdb57ac809
+        changeLog:
           createdDateTime: 2020-05-21 10:30:00+00:00
+    UpdatePackageAndTermLength:
+      value:
+      - op: replace
+        path: /package/code
+        value: PREMIUM
+      - op: replace
+        path: /order/termLength
+        value: 12
+    ConnectionRoutesSearchByPrefix:
+      value:
+        filter:
+          and:
+          - property: /prefix
+            operator: '='
+            values:
+            - 192.168.10.0/24
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - direction: DESC
+          property: /changeLog/createdDateTime
     ConnectionRoutesSearchByNextHop:
       value:
         filter:
@@ -3256,6 +3580,20 @@ components:
             operator: '='
             values:
             - 10.10.10.5
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - direction: DESC
+          property: /changeLog/createdDateTime
+    ConnectionRoutesSearchByType:
+      value:
+        filter:
+          and:
+          - property: /type
+            operator: '='
+            values:
+            - IPv4_BGP_ROUTE
         pagination:
           offset: 0
           limit: 20
@@ -3324,6 +3662,120 @@ components:
           changeLog:
             createdBy: testuser
             createdDateTime: 2020-05-21 10:30:00+00:00
+    400_invalid_state_commands:
+      value:
+      - errorCode: EQ-3043023
+        errorMessage: Cannot delete Command in pending state
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Cannot delete Fabric Cloud Router in transient state.
+    CloudRouterResponseExampleDryRun:
+      value:
+        type: XF_ROUTER
+        name: My-Cloud-Router
+        location:
+          metroHref: https://api.equinix.com/fabric/v4/metros/SV
+          metroCode: SV
+        package:
+          href: https://api.equinix.com/fabric/v4/routerPackages/STANDARD
+          code: STANDARD
+        project:
+          projectId: e1c94b73-1be8-44d5-b577-99bbf67249a4
+        notifications:
+        - type: ALL
+          emails:
+          - abc@abc.com
+        account:
+          accountNumber: 123
+    GetResponsePingCommand:
+      value:
+        href: https://api.equinix.com/fabric/v4/routers/9b8c5042-b553-4d5e-a2ac-c73bf6d4fd81/commands/37c10edc-ba2e-4240-a850-8a48f9c47d00
+        type: PING_COMMAND
+        uuid: 37c10edc-ba2e-4240-a850-8a48f9c47d00
+        name: ping-test-1
+        description: Testing FCR-SV-1
+        state: SUCCEEDED
+        project:
+          projectId: b11d4cb5-978a-418a-8b13-bf19abb97938
+        request:
+          destination: 8.8.8.8
+          sourceConnection:
+            uuid: 1da3778c-6aa3-4e47-b2fe-83a0773dde18
+          timeout: 2
+          dataBytes: 100
+          count: 5
+          interval: 1000
+        response:
+          output: "PING 8.8.8.8 (8.8.8.8): 100 data bytes\n108 bytes from 8.8.8.8: icmp_seq=0 ttl=117 time=9.839 ms\n108 bytes from 8.8.8.8: icmp_seq=1 ttl=117 time=16.051 ms\n108 bytes from 8.8.8.8: icmp_seq=2 ttl=117 time=9.271 ms\n108 bytes from 8.8.8.8: icmp_seq=3 ttl=117 time=26.771 ms \n--- 8.8.8.8 ping statistics ---\n4 packets transmitted, 4 packets received, 0.0% packet loss\nround-trip min/avg/max/stddev = 9.271/15.483/26.771/7.039 ms"
+          outputStructuredPing:
+            destinationIp: 8.8.8.8
+            destinationName: 8.8.8.8
+            dataBytes: 100
+            packetsTransmitted: 4
+            packetsReceived: 4
+            packetsLossPercent: 0
+            rttMin: 9.271
+            rttAvg: 15.483
+            rttMax: 26.771
+            rttStdDev: 7.039
+            responses:
+            - bytes: 100
+              ip: 8.8.8.8
+              icmpSeq: 0
+              ttl: 117
+              time: 9.839
+            - bytes: 100
+              ip: 8.8.8.8
+              icmpSeq: 1
+              ttl: 117
+              time: 16.051
+            - bytes: 100
+              ip: 8.8.8.8
+              icmpSeq: 2
+              ttl: 117
+              time: 9.271
+            - bytes: 100
+              ip: 8.8.8.8
+              icmpSeq: 3
+              ttl: 117
+              time: 26.771
+        changeLog:
+          createdBy: testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+    PostResponsePingCommand:
+      value:
+        href: https://api.equinix.com/fabric/v4/routers/9b8c5042-b553-4d5e-a2ac-c73bf6d4fd81/commands/37c10edc-ba2e-4240-a850-8a48f9c47d00
+        type: PING_COMMAND
+        uuid: 37c10edc-ba2e-4240-a850-8a48f9c47d00
+        name: ping-test-1
+        description: Testing FCR-SV-1
+        state: PENDING
+        project:
+          projectId: b11d4cb5-978a-418a-8b13-bf19abb97938
+        request:
+          destination: 8.8.8.8
+          sourceConnection:
+            uuid: 1da3778c-6aa3-4e47-b2fe-83a0773dde18
+          timeout: 2
+          dataBytes: 100
+          count: 5
+          interval: 1000
+        changeLog:
+          createdBy: testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+    SearchFilterByStatus:
+      value:
+        filter:
+          and:
+          - property: /state
+            operator: '='
+            values:
+            - ACTIVE
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - direction: DESC
+          property: /changeLog/createdDateTime
     '400':
       value:
       - errorCode: EQ-3142102
@@ -3457,6 +3909,334 @@ components:
         correlationId: test
         additionalInfo:
         - property: /zSide/accessPoint/authenticationKey
+    400_invalid_operation:
+      value:
+      - errorCode: EQ-3044011
+        errorMessage: Invalid argument passed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Only replace name operation is supported.
+    400_max_lab_fcr_demo:
+      value:
+      - errorCode: EQ-3040060
+        errorMessage: Create request rejected
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Only 3 Lab Fabric Cloud Routers allowed per Organization
+    UpdateName:
+      value:
+      - op: replace
+        path: /name
+        value: Router-name-2
+    CloudRouterReceivedRoutesSearchResponse:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 1
+        data:
+        - type: IPv4_BGP_ROUTE
+          protocolType: BGP
+          state: ACTIVE
+          prefix: 192.168.10.0/24
+          nextHop: 10.10.10.5
+          MED: 5
+          asPath:
+          - 20001
+          connection:
+            href: https://api.equinix.com/fabric/v4/connections/3066ab1d-af87-49d7-8a14-c9bdb57ac809
+            uuid: 81331c52-04c0-4656-a4a7-18c52669348f
+            name: connection_1
+          changeLog:
+            createdBy: johnsmith
+            createdByFullName: John Smith
+            createdByEmail: john.smith@example.com
+            createdDateTime: 2020-11-06 07:00:00+00:00
+            updatedBy: johnsmith
+            updatedByFullName: John Smith
+            updatedByEmail: john.smith@example.com
+            updatedDateTime: 2020-11-06 07:00:00+00:00
+            deletedBy: johnsmith
+            deletedByFullName: John Smith
+            deletedByEmail: john.smith@example.com
+            deletedDateTime: 2020-11-06 07:00:00+00:00
+    ConnectionRoutesSearchByState:
+      value:
+        filter:
+          and:
+          - property: /state
+            operator: '='
+            values:
+            - ACTIVE
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - direction: DESC
+          property: /changeLog/createdDateTime
+    CreateStandardPackage:
+      value:
+        type: XF_ROUTER
+        name: My-Cloud-Router
+        location:
+          metroCode: SV
+        package:
+          code: STANDARD
+        notifications:
+        - type: ALL
+          emails:
+          - test@test.com
+        account:
+          accountNumber: 272010
+        project:
+          projectId: '995072000433550'
+    400_invalid_account:
+      value:
+      - errorCode: EQ-3040032
+        errorMessage: Invalid account number
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Invalid account number
+        additionalInfo:
+        - property: /account/accountNumber
+          reason: Invalid project account number
+    404_commands:
+      value:
+      - errorCode: EQ-3043022
+        errorMessage: Cloud router command not found
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        details: Cloud router command not found
+    SearchByStateRequest:
+      value:
+        filter:
+          and:
+          - property: /state
+            operator: '='
+            values:
+            - SUCCEEDED
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - direction: DESC
+          property: /changeLog/createdDateTime
+    PostResponseTracerouteCommand:
+      value:
+        href: https://api.equinix.com/fabric/v4/routers/9b8c5042-b553-4d5e-a2ac-c73bf6d4fd81/commands/37c10edc-ba2e-4240-a850-8a48f9c47d00
+        type: TRACEROUTE_COMMAND
+        uuid: 37c10edc-ba2e-4240-a850-8a48f9c47d00
+        name: traceroute-test-1
+        description: Testing FCR-SV-1
+        state: PENDING
+        project:
+          projectId: b11d4cb5-978a-418a-8b13-bf19abb97938
+        request:
+          destination: 8.8.8.8
+          sourceConnection:
+            uuid: 1da3778c-6aa3-4e47-b2fe-83a0773dde18
+          timeout: 2
+          probes: 3
+          hopsMax: 20
+        changeLog:
+          createdBy: testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+    400_invalid_state:
+      value:
+      - errorCode: EQ-3040030
+        errorMessage: Cannot delete Fabric Cloud Router in transient state
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Cannot delete Fabric Cloud Router in transient state.
+    ConnectionRoutesSearchByMed:
+      value:
+        filter:
+          and:
+          - property: /med
+            operator: '='
+            values:
+            - 200
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - direction: DESC
+          property: /changeLog/createdDateTime
+    400_invalid_operation_commands:
+      value:
+      - errorCode: EQ-3043002
+        errorMessage: Invalid argument passed
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        details: Invalid argument passed
+    403_commands:
+      value:
+      - errorCode: EQ-3043006
+        errorMessage: The system is unable to process your request.
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        details: The system is unable to process your request.
+    '403':
+      value:
+      - errorCode: EQ-3045003
+        errorMessage: Operation not allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Operation not allowed for current user
+    CloudRouterPostResponseMarketplaceExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/routers/201b7346-a9eb-42fe-ae7a-08148c71928d
+        uuid: 201b7346-a9eb-42fe-ae7a-08148c71928d
+        state: PROVISIONED
+        type: XF_ROUTER
+        name: My-Cloud-Router
+        location:
+          metroHref: https://api.equinix.com/fabric/v4/metros/HH
+          metroCode: HH
+        equinixAsn: 30000
+        package:
+          href: https://api.equinix.com/fabric/v4/routerPackages/STANDARD
+          code: STANDARD
+        project:
+          projectId: ae708bbb-d669-406a-845a-99b39ff65fd0
+        notifications:
+        - type: ALL
+          emails:
+          - abc@abc.com
+        connectionsCount: 0
+        marketplaceSubscription:
+          href: https://api.equinix.com/fabric/v4/marketplaceSubscriptions/20d32a80-0d61-4333-bc03-707b591ae2f5
+          type: AWS_MARKETPLACE_SUBSCRIPTION
+          uuid: 20d32a80-0d61-4333-bc03-707b591ae2f5
+        changeLog:
+          createdBy: abc@xyz.com
+          createdByFullName: abc
+          createdByEmail: abc@xyz.com
+          createdDateTime: 2021-09-24 06:59:46+00:00
+    SearchFilterByType:
+      value:
+        filter:
+          and:
+          - property: /type
+            operator: '='
+            values:
+            - IPv4_BGP_ROUTE
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - direction: DESC
+          property: /changeLog/createdDateTime
+    RouteEntriesStatusUpdate:
+      value:
+        type: ROUTE_TABLE_ENTRY_UPDATE
+    ReceivedRouteEntriesStatusUpdate:
+      value:
+        type: RECEIVED_ROUTE_ENTRY_UPDATE
+        connection:
+          uuid: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+    CloudRouterActionSearchResponse:
+      value:
+        pagination:
+          offset: 0
+          limit: 1
+          total: 2
+          prev: null
+          next: null
+        data:
+        - href: https://api.equinix.com//fabric/v4/routers/a1c6b7fd-aead-410a-96b4-b1dfa1071700/actions/1e9414f1-763e-4c0a-86c6-0bc8336048d9
+          uuid: 1e9414f1-763e-4c0a-86c6-0bc8336048d9
+          type: RECEIVED_ROUTE_ENTRY_UPDATE
+          state: SUCCEEDED
+          connection:
+            href: https://api.equinix.com/fabric/v4/connections/3066ab1d-af87-49d7-8a14-c9bdb57ac809
+            uuid: 3066ab1d-af87-49d7-8a14-c9bdb57ac809
+            type: IP_VC
+            operation:
+              bgpIpv4RoutesCount: 6
+              bgpIpv6RoutesCount: 6
+              distinctIpv4PrefixesCount: 4
+              distinctIpv6PrefixesCount: 4
+          changeLog:
+            createdDateTime: 2024-01-01 01:00:00+00:00
+            updatedDateTime: 2024-01-01 01:01:00+00:00
+        - href: https://api.equinix.com//fabric/v4/routers/a1c6b7fd-aead-410a-96b4-b1dfa1071700/actions/1e9414f1-763e-4c0a-86c6-0bc8336048d9
+          uuid: 1e9414f1-763e-4c0a-86c6-0bc8336048d9
+          type: ROUTE_TABLE_ENTRY_UPDATE
+          state: SUCCEEDED
+          router:
+            href: https://api.equinix.com/fabric/v4/connections/3066ab1d-af87-49d7-8a14-c9bdb57ac809
+            uuid: 3066ab1d-af87-49d7-8a14-c9bdb57ac809
+            type: XF_ROUTER
+            operation:
+              bgpIpv4RoutesCount: 6
+              bgpIpv6RoutesCount: 6
+              distinctIpv4PrefixesCount: 4
+              distinctIpv6PrefixesCount: 4
+          changeLog:
+            createdDateTime: 2024-01-01 01:00:00+00:00
+            updatedDateTime: 2024-01-01 01:01:00+00:00
+    400_attached_to_gateway:
+      value:
+      - errorCode: EQ-3000039
+        errorMessage: Gateway must be detached before deleting Fabric Cloud Router.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01586
+        details: User must detach Gateway before deleting a Fabric Cloud Router.
+    CreateLabPackage:
+      value:
+        type: XF_ROUTER
+        name: My-Cloud-Router
+        location:
+          metroCode: SV
+        package:
+          code: LAB
+        notifications:
+        - type: ALL
+          emails:
+          - test@test.com
+        account:
+          accountNumber: 272010
+        project:
+          projectId: '995072000433550'
+    CloudRouterResponseExampleMarketplace:
+      value:
+        href: https://api.equinix.com/fabric/v4/routers/201b7346-a9eb-42fe-ae7a-08148c71928d
+        uuid: 201b7346-a9eb-42fe-ae7a-08148c71928d
+        state: PROVISIONED
+        type: XF_ROUTER
+        name: My-Cloud-Router
+        location:
+          metroHref: https://api.equinix.com/fabric/v4/metros/HH
+          metroCode: HH
+        equinixAsn: 30000
+        package:
+          href: https://api.equinix.com/fabric/v4/routerPackages/STANDARD
+          code: STANDARD
+        project:
+          projectId: ae708bbb-d669-406a-845a-99b39ff65fd0
+        notifications:
+        - type: ALL
+          emails:
+          - abc@abc.com
+        connectionsCount: 0
+        marketplaceSubscription:
+          href: https://api.equinix.com/fabric/v4/marketplaceSubscriptions/20d32a80-0d61-4333-bc03-707b591ae2f5
+          type: AWS_MARKETPLACE_SUBSCRIPTION
+          uuid: 20d32a80-0d61-4333-bc03-707b591ae2f5
+        changeLog:
+          createdBy: abc@xyz.com
+          createdByFullName: abc
+          createdByEmail: abc@xyz.com
+          createdDateTime: 2021-09-24 06:59:46+00:00
+          updatedBy: abc@xyz.com
+          updatedByFullName: abc
+          updatedByEmail: abc@xyz.com
+          updatedDateTime: 2021-09-24 06:59:46+00:00
+    400_invalid_sorting_commands:
+      value:
+      - errorCode: EQ-3043015
+        errorMessage: Invalid value for sorting direction.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        additionalInfo:
+        - reason: Only accept DESC and ASC for sorting direction.
+    400_invalid_package:
+      value:
+      - errorCode: EQ-3040028
+        errorMessage: Package not found
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: package must be of type LAB or PRO
     GetAllPingCommandResponse:
       value:
         pagination:
@@ -3519,201 +4299,32 @@ components:
           changeLog:
             createdBy: testuser
             createdDateTime: 2020-05-21 10:30:00+00:00
-    CloudRouterActionSearchResponse:
+    CloudRouterActionResponse:
       value:
-        pagination:
-          offset: 0
-          limit: 1
-          total: 2
-          prev: null
-          next: null
-        data:
-        - href: https://api.equinix.com//fabric/v4/routers/a1c6b7fd-aead-410a-96b4-b1dfa1071700/actions/1e9414f1-763e-4c0a-86c6-0bc8336048d9
-          uuid: 1e9414f1-763e-4c0a-86c6-0bc8336048d9
-          type: RECEIVED_ROUTE_ENTRY_UPDATE
-          state: SUCCEEDED
-          connection:
-            href: https://api.equinix.com/fabric/v4/connections/3066ab1d-af87-49d7-8a14-c9bdb57ac809
-            uuid: 3066ab1d-af87-49d7-8a14-c9bdb57ac809
-            type: IP_VC
-            operation:
-              bgpIpv4RoutesCount: 6
-              bgpIpv6RoutesCount: 6
-              distinctIpv4PrefixesCount: 4
-              distinctIpv6PrefixesCount: 4
-          changeLog:
-            createdDateTime: 2024-01-01 01:00:00+00:00
-            updatedDateTime: 2024-01-01 01:01:00+00:00
-        - href: https://api.equinix.com//fabric/v4/routers/a1c6b7fd-aead-410a-96b4-b1dfa1071700/actions/1e9414f1-763e-4c0a-86c6-0bc8336048d9
-          uuid: 1e9414f1-763e-4c0a-86c6-0bc8336048d9
-          type: ROUTE_TABLE_ENTRY_UPDATE
-          state: SUCCEEDED
-          router:
-            href: https://api.equinix.com/fabric/v4/connections/3066ab1d-af87-49d7-8a14-c9bdb57ac809
-            uuid: 3066ab1d-af87-49d7-8a14-c9bdb57ac809
-            type: XF_ROUTER
-            operation:
-              bgpIpv4RoutesCount: 6
-              bgpIpv6RoutesCount: 6
-              distinctIpv4PrefixesCount: 4
-              distinctIpv6PrefixesCount: 4
-          changeLog:
-            createdDateTime: 2024-01-01 01:00:00+00:00
-            updatedDateTime: 2024-01-01 01:01:00+00:00
-    CloudRouterPatchResponseExample:
-      value:
-        href: https://api.equinix.com/fabric/v4/routers/201b7346-a9eb-42fe-ae7a-08148c71928d
-        uuid: 201b7346-a9eb-42fe-ae7a-08148c71928d
-        state: PROVISIONED
-        type: XF_ROUTER
-        name: My-Cloud-Router
-        location:
-          metroHref: https://api.equinix.com/fabric/v4/metros/HH
-          metroCode: HH
-        equinixAsn: 30000
-        package:
-          href: https://api.equinix.com/fabric/v4/routerPackages/STANDARD
-          code: STANDARD
-        order:
-          purchaseOrderNumber: 1-129105284100
-        project:
-          projectId: '123456'
-        notifications:
-        - type: ALL
-          emails:
-          - abc@abc.com
-        account:
-          accountNumber: 123
-        connectionsCount: 0
-        change:
-          uuid: 3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-          type: ROUTER_UPDATE
-          status: REQUESTED
-          createdDateTime: 2022-04-19 04:20:55.471000+00:00
-          updatedDateTime: 2022-04-19 04:20:55.471000+00:00
-          data:
-          - op: replace
-            path: /package/code
-            value: PREMIUM
-          - op: replace
-            path: /order/termLength
-            value: 12
-        changeLog:
-          createdBy: abc@xyz.com
-          createdByFullName: abc
-          createdByEmail: abc@xyz.com
-          createdDateTime: 2021-09-24 06:59:46+00:00
-          updatedBy: abc@xyz.com
-          updatedByFullName: abc
-          updatedByEmail: abc@xyz.com
-          updatedDateTime: 2021-09-24 06:59:46+00:00
-          deletedBy: abc@xyz.com
-          deletedByFullName: abc
-          deletedByEmail: abc@xyz.com
-          deletedDateTime: 2021-09-24 06:59:46+00:00
-    CloudRouterResponseExampleMarketplace:
-      value:
-        href: https://api.equinix.com/fabric/v4/routers/201b7346-a9eb-42fe-ae7a-08148c71928d
-        uuid: 201b7346-a9eb-42fe-ae7a-08148c71928d
-        state: PROVISIONED
-        type: XF_ROUTER
-        name: My-Cloud-Router
-        location:
-          metroHref: https://api.equinix.com/fabric/v4/metros/HH
-          metroCode: HH
-        equinixAsn: 30000
-        package:
-          href: https://api.equinix.com/fabric/v4/routerPackages/STANDARD
-          code: STANDARD
-        project:
-          projectId: ae708bbb-d669-406a-845a-99b39ff65fd0
-        notifications:
-        - type: ALL
-          emails:
-          - abc@abc.com
-        connectionsCount: 0
-        marketplaceSubscription:
-          href: https://api.equinix.com/fabric/v4/marketplaceSubscriptions/20d32a80-0d61-4333-bc03-707b591ae2f5
-          type: AWS_MARKETPLACE_SUBSCRIPTION
-          uuid: 20d32a80-0d61-4333-bc03-707b591ae2f5
-        changeLog:
-          createdBy: abc@xyz.com
-          createdByFullName: abc
-          createdByEmail: abc@xyz.com
-          createdDateTime: 2021-09-24 06:59:46+00:00
-          updatedBy: abc@xyz.com
-          updatedByFullName: abc
-          updatedByEmail: abc@xyz.com
-          updatedDateTime: 2021-09-24 06:59:46+00:00
-    SearchByStateRequest:
-      value:
-        filter:
-          and:
-          - property: /state
-            operator: '='
-            values:
-            - SUCCEEDED
-        pagination:
-          offset: 0
-          limit: 20
-        sort:
-        - direction: DESC
-          property: /changeLog/createdDateTime
-    CloudRouterReceivedRoutesActionResponse:
-      value:
-        type: RECEIVED_ROUTE_ENTRY_UPDATE
-        uuid: 37c10edc-ba2e-4240-a850-8a48f9c47d01
+        type: ROUTE_TABLE_ENTRY_UPDATE
+        uuid: 37c10edc-ba2e-4240-a850-8a48f9c47d00
         state: PENDING
-        connection:
-          uuid: 3066ab1d-af87-49d7-8a14-c9bdb57ac809
         changeLog:
           createdDateTime: 2020-05-21 10:30:00+00:00
-    ConnectionRoutesSearchByState:
+    SearchFilterByNextHop:
       value:
         filter:
           and:
-          - property: /state
+          - property: /nextHop
             operator: '='
             values:
-            - ACTIVE
+            - 10.10.10.5
         pagination:
           offset: 0
           limit: 20
         sort:
         - direction: DESC
           property: /changeLog/createdDateTime
-    CloudRouterResponseExampleDryRun:
+    UpdatePackage:
       value:
-        type: XF_ROUTER
-        name: My-Cloud-Router
-        location:
-          metroHref: https://api.equinix.com/fabric/v4/metros/SV
-          metroCode: SV
-        package:
-          href: https://api.equinix.com/fabric/v4/routerPackages/STANDARD
-          code: STANDARD
-        project:
-          projectId: e1c94b73-1be8-44d5-b577-99bbf67249a4
-        notifications:
-        - type: ALL
-          emails:
-          - abc@abc.com
-        account:
-          accountNumber: 123
-    SearchFilterByPrefix:
-      value:
-        filter:
-          and:
-          - property: /prefix
-            operator: '='
-            values:
-            - 192.168.10.0/24
-        pagination:
-          offset: 0
-          limit: 20
-        sort:
-        - direction: DESC
-          property: /changeLog/createdDateTime
+      - op: replace
+        path: /package/code
+        value: PREMIUM
     search-example:
       value:
         pagination:
@@ -3759,6 +4370,14 @@ components:
             deletedByFullName: abc
             deletedByEmail: abc@xyz.com
             deletedDateTime: 2021-09-24 06:59:46+00:00
+    '415':
+      value:
+      - errorCode: EQ-3040016
+        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: contentType
+          reason: The payload format is in an unsupported format
     SearchFilterOrAnd:
       value:
         filter:
@@ -3772,638 +4391,28 @@ components:
               operator: LIKE
               values:
               - abc
-    UpdatePackage:
-      value:
-      - op: replace
-        path: /package/code
-        value: PREMIUM
     415_commands:
       value:
       - errorCode: EQ-3043029
         errorMessage: Unsupported media type
         correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
         details: Content type application/json not supported.
-    PostRequestPingCommand:
+    '401':
       value:
-        type: PING_COMMAND
-        name: ping-test-1
-        description: Testing FCR-SV-1
-        project:
-          projectId: b11d4cb5-978a-418a-8b13-bf19abb97938
-        request:
-          destination: 8.8.8.8
-          sourceConnection:
-            uuid: 1da3778c-6aa3-4e47-b2fe-83a0773dde18
-          timeout: 2
-          dataBytes: 100
-    400_invalid_package:
-      value:
-      - errorCode: EQ-3040028
-        errorMessage: Package not found
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: package must be of type LAB or PRO
-    '403':
-      value:
-      - errorCode: EQ-3045003
-        errorMessage: Operation not allowed
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Operation not allowed for current user
-    PostRequestTracerouteCommand:
-      value:
-        type: TRACEROUTE_COMMAND
-        name: traceroute-test-1
-        description: Testing FCR-SV-1
-        project:
-          projectId: b11d4cb5-978a-418a-8b13-bf19abb97938
-        request:
-          destination: 8.8.8.8
-          sourceConnection:
-            uuid: 1da3778c-6aa3-4e47-b2fe-83a0773dde18
-          timeout: 2
-          probes: 3
-          hopsMax: 20
-    ConnectionRoutesSearchByMed:
-      value:
-        filter:
-          and:
-          - property: /med
-            operator: '='
-            values:
-            - 200
-        pagination:
-          offset: 0
-          limit: 20
-        sort:
-        - direction: DESC
-          property: /changeLog/createdDateTime
     '500':
       value:
       - errorCode: EQ-3045004
         errorMessage: Internal Server Error
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
         details: Internal Server Error
-    RouteEntriesStatusUpdate:
-      value:
-        type: ROUTE_TABLE_ENTRY_UPDATE
-    400_invalid_state:
-      value:
-      - errorCode: EQ-3040030
-        errorMessage: Cannot delete Fabric Cloud Router in transient state
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Cannot delete Fabric Cloud Router in transient state.
-    400_attached_to_gateway:
-      value:
-      - errorCode: EQ-3000039
-        errorMessage: Gateway must be detached before deleting Fabric Cloud Router.
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01586
-        details: User must detach Gateway before deleting a Fabric Cloud Router.
-    CloudRouterAdvertisedRoutesSearchResponse:
-      value:
-        pagination:
-          offset: 0
-          limit: 20
-          total: 1
-        data:
-        - type: IPv4_BGP_ROUTE
-          protocolType: BGP
-          state: ACTIVE
-          prefix: 192.168.10.0/24
-          nextHop: 10.10.10.5
-          MED: 5
-          asPath:
-          - 20001
-          connection:
-            href: https://api.equinix.com/fabric/v4/connections/3066ab1d-af87-49d7-8a14-c9bdb57ac809
-            uuid: 81331c52-04c0-4656-a4a7-18c52669348f
-            name: connection_1
-          changeLog:
-            createdBy: johnsmith
-            createdByFullName: John Smith
-            createdByEmail: john.smith@example.com
-            createdDateTime: 2020-11-06 07:00:00+00:00
-            updatedBy: johnsmith
-            updatedByFullName: John Smith
-            updatedByEmail: john.smith@example.com
-            updatedDateTime: 2020-11-06 07:00:00+00:00
-            deletedBy: johnsmith
-            deletedByFullName: John Smith
-            deletedByEmail: john.smith@example.com
-            deletedDateTime: 2020-11-06 07:00:00+00:00
-    CloudRouterPostResponseExample:
-      value:
-        href: https://api.equinix.com/fabric/v4/routers/201b7346-a9eb-42fe-ae7a-08148c71928d
-        uuid: 201b7346-a9eb-42fe-ae7a-08148c71928d
-        state: PROVISIONED
-        type: XF_ROUTER
-        name: My-Cloud-Router
-        location:
-          metroHref: https://api.equinix.com/fabric/v4/metros/HH
-          metroCode: HH
-        equinixAsn: 30000
-        package:
-          href: https://api.equinix.com/fabric/v4/routerPackages/STANDARD
-          code: STANDARD
-        order:
-          purchaseOrderNumber: 1-129105284100
-        project:
-          projectId: '12345'
-        notifications:
-        - type: ALL
-          emails:
-          - abc@abc.com
-        account:
-          accountNumber: 123
-        connectionsCount: 0
-        changeLog:
-          createdBy: abc@xyz.com
-          createdByFullName: abc
-          createdByEmail: abc@xyz.com
-          createdDateTime: 2021-09-24 06:59:46+00:00
-    ReceivedRouteEntriesStatusUpdate:
-      value:
-        type: RECEIVED_ROUTE_ENTRY_UPDATE
-        connection:
-          uuid: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
-    GetResponseTracerouteCommandWithError:
-      value:
-        href: https://api.equinix.com/fabric/v4/routers/9b8c5042-b553-4d5e-a2ac-c73bf6d4fd81/commands/37c10edc-ba2e-4240-a850-8a48f9c47d00
-        type: TRACEROUTE_COMMAND
-        uuid: 37c10edc-ba2e-4240-a850-8a48f9c47d00
-        name: traceroute-test-1
-        description: Testing FCR-SV-1
-        state: FAILED
-        project:
-          projectId: b11d4cb5-978a-418a-8b13-bf19abb97938
-        request:
-          destination: 8.8.8.8
-          sourceConnection:
-            uuid: 1da3778c-6aa3-4e47-b2fe-83a0773dde18
-          timeout: 2
-          probes: 3
-          hopsMax: 20
-        response:
-          errors:
-          - errorCode: EQ-3041105
-            errorMessage: Request timeout.
-            correlationId: 86c57a79-06fb-4ba3-b496-5387f3b45380
-            details: Request timeout after 480 seconds.
-            additionalInfo:
-            - reason: Request timeout after 480 seconds.
-        changeLog:
-          createdBy: testuser
-          createdDateTime: 2020-05-21 10:30:00+00:00
-    403_commands:
-      value:
-      - errorCode: EQ-3043006
-        errorMessage: The system is unable to process your request.
-        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
-        details: The system is unable to process your request.
-    400_invalid_operation_commands:
-      value:
-      - errorCode: EQ-3043002
-        errorMessage: Invalid argument passed
-        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
-        details: Invalid argument passed
-    PostResponsePingCommand:
-      value:
-        href: https://api.equinix.com/fabric/v4/routers/9b8c5042-b553-4d5e-a2ac-c73bf6d4fd81/commands/37c10edc-ba2e-4240-a850-8a48f9c47d00
-        type: PING_COMMAND
-        uuid: 37c10edc-ba2e-4240-a850-8a48f9c47d00
-        name: ping-test-1
-        description: Testing FCR-SV-1
-        state: PENDING
-        project:
-          projectId: b11d4cb5-978a-418a-8b13-bf19abb97938
-        request:
-          destination: 8.8.8.8
-          sourceConnection:
-            uuid: 1da3778c-6aa3-4e47-b2fe-83a0773dde18
-          timeout: 2
-          dataBytes: 100
-          count: 5
-          interval: 1000
-        changeLog:
-          createdBy: testuser
-          createdDateTime: 2020-05-21 10:30:00+00:00
-    SearchFilterByType:
-      value:
-        filter:
-          and:
-          - property: /type
-            operator: '='
-            values:
-            - IPv4_BGP_ROUTE
-        pagination:
-          offset: 0
-          limit: 20
-        sort:
-        - direction: DESC
-          property: /changeLog/createdDateTime
-    ConnectionRoutesSearchByType:
-      value:
-        filter:
-          and:
-          - property: /type
-            operator: '='
-            values:
-            - IPv4_BGP_ROUTE
-        pagination:
-          offset: 0
-          limit: 20
-        sort:
-        - direction: DESC
-          property: /changeLog/createdDateTime
-    400_invalid_account:
-      value:
-      - errorCode: EQ-3040032
-        errorMessage: Invalid account number
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Invalid account number
-        additionalInfo:
-        - property: /account/accountNumber
-          reason: Invalid project account number
-    SearchFilterByNameAndMetroName:
-      value:
-        filter:
-          and:
-          - property: /name
-            operator: '='
-            values:
-            - test-fg
-          - property: /metroName
-            operator: LIKE
-            values:
-            - Si%
-          - property: /project/projectId
-            operator: '='
-            values:
-            - '995072000433550'
-        pagination:
-          offset: 0
-          limit: 20
-        sort:
-        - direction: DESC
-          property: /changeLog/createdDateTime
-    CloudRouterActionResponse:
-      value:
-        type: ROUTE_TABLE_ENTRY_UPDATE
-        uuid: 37c10edc-ba2e-4240-a850-8a48f9c47d00
-        state: PENDING
-        changeLog:
-          createdDateTime: 2020-05-21 10:30:00+00:00
-    400_max_lab_fcr_demo:
-      value:
-      - errorCode: EQ-3040060
-        errorMessage: Create request rejected
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Only 3 Lab Fabric Cloud Routers allowed per Organization
-    400_invalid_sorting_commands:
-      value:
-      - errorCode: EQ-3043015
-        errorMessage: Invalid value for sorting direction.
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        additionalInfo:
-        - reason: Only accept DESC and ASC for sorting direction.
-    UpdateName:
-      value:
-      - op: replace
-        path: /name
-        value: Router-name-2
-    404_commands:
-      value:
-      - errorCode: EQ-3043022
-        errorMessage: Cloud router command not found
-        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
-        details: Cloud router command not found
-    CloudRouterAdvertisedRoutesActionResponse:
-      value:
-        type: ADVERTISED_ROUTE_ENTRY_UPDATE
-        uuid: 37c10edc-ba2e-4240-a850-8a48f9c47d01
-        state: PENDING
-        connection:
-          uuid: 3066ab1d-af87-49d7-8a14-c9bdb57ac809
-        changeLog:
-          createdDateTime: 2020-05-21 10:30:00+00:00
-    500_commands:
-      value:
-      - errorCode: EQ-3043005
-        errorMessage: Internal server error
-        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
-        details: Internal server error
-    UpdatePackageAndTermLength:
-      value:
-      - op: replace
-        path: /package/code
-        value: PREMIUM
-      - op: replace
-        path: /order/termLength
-        value: 12
-    '404':
-      value:
-      - errorCode: EQ-3045811
-        errorMessage: uuid not found
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: uuid not found
-    CloudRouterReceivedRoutesSearchResponse:
-      value:
-        pagination:
-          offset: 0
-          limit: 20
-          total: 1
-        data:
-        - type: IPv4_BGP_ROUTE
-          protocolType: BGP
-          state: ACTIVE
-          prefix: 192.168.10.0/24
-          nextHop: 10.10.10.5
-          MED: 5
-          asPath:
-          - 20001
-          connection:
-            href: https://api.equinix.com/fabric/v4/connections/3066ab1d-af87-49d7-8a14-c9bdb57ac809
-            uuid: 81331c52-04c0-4656-a4a7-18c52669348f
-            name: connection_1
-          changeLog:
-            createdBy: johnsmith
-            createdByFullName: John Smith
-            createdByEmail: john.smith@example.com
-            createdDateTime: 2020-11-06 07:00:00+00:00
-            updatedBy: johnsmith
-            updatedByFullName: John Smith
-            updatedByEmail: john.smith@example.com
-            updatedDateTime: 2020-11-06 07:00:00+00:00
-            deletedBy: johnsmith
-            deletedByFullName: John Smith
-            deletedByEmail: john.smith@example.com
-            deletedDateTime: 2020-11-06 07:00:00+00:00
-    ConnectionRoutesSearchByPrefix:
-      value:
-        filter:
-          and:
-          - property: /prefix
-            operator: '='
-            values:
-            - 192.168.10.0/24
-        pagination:
-          offset: 0
-          limit: 20
-        sort:
-        - direction: DESC
-          property: /changeLog/createdDateTime
-    400_invalid_sorting:
-      value:
-      - errorCode: EQ-3043015
-        errorMessage: Invalid value for sorting direction.
-        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
-        additionalInfo:
-        - reason: Only accept DESC and ASC for sorting direction.
-    PostResponseTracerouteCommand:
-      value:
-        href: https://api.equinix.com/fabric/v4/routers/9b8c5042-b553-4d5e-a2ac-c73bf6d4fd81/commands/37c10edc-ba2e-4240-a850-8a48f9c47d00
-        type: TRACEROUTE_COMMAND
-        uuid: 37c10edc-ba2e-4240-a850-8a48f9c47d00
-        name: traceroute-test-1
-        description: Testing FCR-SV-1
-        state: PENDING
-        project:
-          projectId: b11d4cb5-978a-418a-8b13-bf19abb97938
-        request:
-          destination: 8.8.8.8
-          sourceConnection:
-            uuid: 1da3778c-6aa3-4e47-b2fe-83a0773dde18
-          timeout: 2
-          probes: 3
-          hopsMax: 20
-        changeLog:
-          createdBy: testuser
-          createdDateTime: 2020-05-21 10:30:00+00:00
-    400_invalid_name:
-      value:
-      - errorCode: EQ-3040022
-        errorMessage: Name is minimum 3 and up to 24 characters in length
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Name is minimum 3 and up to 24 characters in length
-        additionalInfo:
-        - property: /name
-          reason: Name is minimum 3 and up to 24 characters in length
-    400_invalid_operation:
-      value:
-      - errorCode: EQ-3044011
-        errorMessage: Invalid argument passed
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Only replace name operation is supported.
-    400_invalid_state_commands:
-      value:
-      - errorCode: EQ-3043023
-        errorMessage: Cannot delete Command in pending state
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Cannot delete Fabric Cloud Router in transient state.
-    CloudRouterActiveRoutesSearchResponse:
-      value:
-        pagination:
-          offset: 0
-          limit: 20
-          total: 1
-        data:
-        - type: IPv4_BGP_ROUTE
-          protocolType: BGP
-          state: ACTIVE
-          prefix: 192.168.10.0/24
-          nextHop: 10.10.10.5
-          asPath:
-          - 20001
-          changeLog:
-            createdBy: johnsmith
-            createdByFullName: John Smith
-            createdByEmail: john.smith@example.com
-            createdDateTime: 2020-11-06 07:00:00+00:00
-            updatedBy: johnsmith
-            updatedByFullName: John Smith
-            updatedByEmail: john.smith@example.com
-            updatedDateTime: 2020-11-06 07:00:00+00:00
-            deletedBy: johnsmith
-            deletedByFullName: John Smith
-            deletedByEmail: john.smith@example.com
-            deletedDateTime: 2020-11-06 07:00:00+00:00
-    400_dry_run:
-      value:
-      - errorCode: EQ-3142411
-        errorMessage: Dry run is not supported for this connection type
-        correlationId: 1012536-0000-108258589231-api
-        additionalInfo:
-        - reason: queryParam:dryRun
-    SearchFilterByNextHop:
-      value:
-        filter:
-          and:
-          - property: /nextHop
-            operator: '='
-            values:
-            - 10.10.10.5
-        pagination:
-          offset: 0
-          limit: 20
-        sort:
-        - direction: DESC
-          property: /changeLog/createdDateTime
-    CreateWithMarketplaceSubscription:
-      value:
-        type: XF_ROUTER
-        name: My-Cloud-Router
-        location:
-          metroCode: SV
-        package:
-          code: ADVANCED
-        notifications:
-        - type: ALL
-          emails:
-          - test@test.com
-        project:
-          projectId: ae708bbb-d669-406a-845a-99b39ff65fd0
-        marketplaceSubscription:
-          uuid: 20d32a80-0d61-4333-bc03-707b591ae2f5
-    CloudRouterResponseExample:
-      value:
-        href: https://api.equinix.com/fabric/v4/routers/201b7346-a9eb-42fe-ae7a-08148c71928d
-        uuid: 201b7346-a9eb-42fe-ae7a-08148c71928d
-        state: PROVISIONED
-        type: XF_ROUTER
-        name: My-Cloud-Router
-        location:
-          metroHref: https://api.equinix.com/fabric/v4/metros/HH
-          metroCode: HH
-        equinixAsn: 30000
-        package:
-          href: https://api.equinix.com/fabric/v4/routerPackages/STANDARD
-          code: STANDARD
-        order:
-          purchaseOrderNumber: 1-129105284100
-        project:
-          projectId: ae708bbb-d669-406a-845a-99b39ff65fd0
-        notifications:
-        - type: ALL
-          emails:
-          - abc@abc.com
-        account:
-          accountNumber: 123
-        connectionsCount: 0
-        changeLog:
-          createdBy: abc@xyz.com
-          createdByFullName: abc
-          createdByEmail: abc@xyz.com
-          createdDateTime: 2021-09-24 06:59:46+00:00
-          updatedBy: abc@xyz.com
-          updatedByFullName: abc
-          updatedByEmail: abc@xyz.com
-          updatedDateTime: 2021-09-24 06:59:46+00:00
-          deletedBy: abc@xyz.com
-          deletedByFullName: abc
-          deletedByEmail: abc@xyz.com
-          deletedDateTime: 2021-09-24 06:59:46+00:00
-    '401':
-      value:
-      - errorCode: EQ-3000039
-        errorMessage: User not found in request or invalid.
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-    AdvertisedRouteEntriesStatusUpdate:
-      value:
-        type: ADVERTISED_ROUTE_ENTRY_UPDATE
-        connection:
-          uuid: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
-    UpdateTermLength:
-      value:
-      - op: replace
-        path: /order/termLength
-        value: 12
-    ListFCRPackagesResponse:
-      value:
-        pagination:
-          offset: 0
-          limit: 20
-          total: 4
-        data:
-        - href: https://api.equinix.com/fabric/v4/routerPackages/LAB
-          type: ROUTER_PACKAGE
-          code: LAB
-          description: string
-          totalIPv4RoutesMax: 50
-          totalIPv6RoutesMax: 50
-          routeFilterSupported: true
-          vcCountMax: 10
-          crCountMax: 3
-          vcBandwidthMax: 50
-          changeLog:
-            createdDateTime: 2022-02-10 00:14:47+00:00
-            updatedDateTime: 2022-02-10 00:14:47+00:00
-        - href: https://api.equinix.com/fabric/v4/routerPackages/STANDARD
-          type: ROUTER_PACKAGE
-          code: STANDARD
-          description: string
-          totalIPv4RoutesMax: 1000
-          totalIPv6RoutesMax: 100
-          routeFilterSupported: true
-          vcCountMax: 10
-          crCountMax: 3
-          vcBandwidthMax: 10000
-          changeLog:
-            createdDateTime: 2023-02-10 00:14:47+00:00
-            updatedDateTime: 2023-02-10 00:14:47+00:00
-        - href: https://api.equinix.com/fabric/v4/routerPackages/ADVANCED
-          type: ROUTER_PACKAGE
-          code: ADVANCED
-          description: string
-          totalIPv4RoutesMax: 4000
-          totalIPv6RoutesMax: 250
-          routeFilterSupported: true
-          vcCountMax: 99999
-          crCountMax: 3
-          vcBandwidthMax: 50000
-          changeLog:
-            createdDateTime: 2023-02-10 00:14:47+00:00
-            updatedDateTime: 2023-02-10 00:14:47+00:00
-        - href: https://api.equinix.com/fabric/v4/routerPackages/PREMIUM
-          type: ROUTER_PACKAGE
-          code: PREMIUM
-          description: string
-          totalIPv4RoutesMax: 10000
-          totalIPv6RoutesMax: 500
-          routeFilterSupported: true
-          vcCountMax: 10
-          crCountMax: 3
-          vcBandwidthMax: 50000
-          changeLog:
-            createdDateTime: 2023-02-10 00:14:47+00:00
-            updatedDateTime: 2023-02-10 00:14:47+00:00
-    CreateStandardPackage:
-      value:
-        type: XF_ROUTER
-        name: My-Cloud-Router
-        location:
-          metroCode: SV
-        package:
-          code: STANDARD
-        notifications:
-        - type: ALL
-          emails:
-          - test@test.com
-        account:
-          accountNumber: 272010
-        project:
-          projectId: '995072000433550'
-    SearchFilterByStatus:
-      value:
-        filter:
-          and:
-          - property: /state
-            operator: '='
-            values:
-            - ACTIVE
-        pagination:
-          offset: 0
-          limit: 20
-        sort:
-        - direction: DESC
-          property: /changeLog/createdDateTime
-x-eqx-api-linter-skip-rules:
-- 3
-- 38
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+externalDocs:
+  description: Find more information on Equinix Docs Portal
+  url: https://docs.equinix.com/fabric/

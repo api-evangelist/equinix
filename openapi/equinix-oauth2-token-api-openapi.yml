@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Equinix API Authentication OAuth2 Token API
   description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
@@ -76,6 +76,35 @@ paths:
       x-codegen-request-body-name: Payload
 components:
   schemas:
+    Oauth2TokenResponse:
+      required:
+      - access_token
+      - token_timeout
+      - token_type
+      - user_name
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: the OAuth2 Bearer token required to access Equinix API's
+        token_timeout:
+          type: string
+          description: The max validity in seconds for this access_token
+          default: 3599 (60 minutes)
+        user_name:
+          type: string
+          description: The Equinix user account to which this token is associated with
+        token_type:
+          type: string
+          description: The type of access_token returned in this response
+          default: Bearer
+        refresh_token:
+          type: string
+          description: The OAuth2 refresh token which could be used to retrieve a new access_token without user credentials. The refresh_token has a max validity of 60 days after which a new Access Token request must be made. Refresh token is Not returned for "client_credentials" grant type
+        refresh_token_timeout:
+          type: string
+          description: The max validity in seconds for the refresh_token. This field is not retruned for the "client_credentials" grant type
+          default: 5182560 (60 days)
     Oauth2TokenRequest:
       required:
       - client_id
@@ -141,35 +170,6 @@ components:
         refresh_token:
           type: string
           description: The OAuth2 refresh_token retrieved from the previous successful Access Token API call
-    Oauth2TokenResponse:
-      required:
-      - access_token
-      - token_timeout
-      - token_type
-      - user_name
-      type: object
-      properties:
-        access_token:
-          type: string
-          description: the OAuth2 Bearer token required to access Equinix API's
-        token_timeout:
-          type: string
-          description: The max validity in seconds for this access_token
-          default: 3599 (60 minutes)
-        user_name:
-          type: string
-          description: The Equinix user account to which this token is associated with
-        token_type:
-          type: string
-          description: The type of access_token returned in this response
-          default: Bearer
-        refresh_token:
-          type: string
-          description: The OAuth2 refresh token which could be used to retrieve a new access_token without user credentials. The refresh_token has a max validity of 60 days after which a new Access Token request must be made. Refresh token is Not returned for "client_credentials" grant type
-        refresh_token_timeout:
-          type: string
-          description: The max validity in seconds for the refresh_token. This field is not retruned for the "client_credentials" grant type
-          default: 5182560 (60 days)
 x-eqx-api-linter-skip-rules:
 - 3
 - 38

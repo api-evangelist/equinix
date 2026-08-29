@@ -1,16 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Equinix API Authentication use API
-  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
-
-    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  title: Equinix Security Token Service Use API
+  description: Exchange ID tokens for Equinix access tokens according to managed trust relationships. STS is an alpha service and is not generally available to customers.
+  version: 1.0.0-alpha
   termsOfService: https://www.equinix.com/about/legal/terms
   contact:
     name: Equinix API Support
     url: https://docs.equinix.com/api-support.htm
-  version: '1.2'
+  license:
+    name: Equinix Inc
+    url: https://developer.equinix.com/agreement
 servers:
-- url: https://api.equinix.com
+- url: https://sts.eqix.equinix.com
+security:
+- bearerAuth: []
 tags:
 - name: use
   description: Operations for normal users of this service
@@ -57,6 +60,17 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A short, machine-readable error code.
+        error_description:
+          type: string
+          description: A human-readable description of the error.
+      required:
+      - error
     TokenExchangeResponse:
       type: object
       properties:
@@ -77,17 +91,8 @@ components:
       - issued_token_type
       - token_type
       - expires_in
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: A short, machine-readable error code.
-        error_description:
-          type: string
-          description: A human-readable description of the error.
-      required:
-      - error
-x-eqx-api-linter-skip-rules:
-- 3
-- 38
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

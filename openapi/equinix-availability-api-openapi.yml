@@ -1,16 +1,17 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Equinix API Authentication availability API
-  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
-
-    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+  title: Secure Cabinet Availability API
+  description: Secure Cabinet API
   termsOfService: https://www.equinix.com/about/legal/terms
   contact:
     name: Equinix API Support
     url: https://docs.equinix.com/api-support.htm
-  version: '1.2'
+  version: 1.0.0
 servers:
 - url: https://api.equinix.com
+  description: Equinix API
+security:
+- BearerAuth: []
 tags:
 - name: availability
   description: Secure Cabinet availability
@@ -88,42 +89,24 @@ paths:
                 $ref: '#/components/schemas/Errors'
 components:
   schemas:
-    Dimensions:
+    AcCircuitConfig:
       type: object
       required:
-      - width
-      - depth
-      - height
+      - phase
+      - receptacle
+      - soldAmperage
+      - voltage
       properties:
-        width:
-          $ref: '#/components/schemas/Dimension'
-        depth:
-          $ref: '#/components/schemas/Dimension'
-        height:
-          $ref: '#/components/schemas/Dimension'
-    ErrorAdditionalInfo:
-      properties:
-        property:
+        voltage:
+          $ref: '#/components/schemas/Voltage'
+        soldAmperage:
+          $ref: '#/components/schemas/Amperage'
+        phase:
+          $ref: '#/components/schemas/Phase'
+        receptacle:
           type: string
-          description: Property at which the error occurs. Can be empty.
-          example: $.info
-        reason:
-          type: string
-          description: Fallback error message in plain English.
-          example: must not be blank
-    FabricPortSpeed:
-      type: string
-      description: Port speed
-      example: SPEED_1_GBPS
-      enum:
-      - SPEED_1_GBPS
-      - SPEED_10_GBPS
-    Phase:
-      type: string
-      description: Circuit phase
-      example: SINGLE
-      enum:
-      - SINGLE
+          description: Receptacle type
+          example: IEC 60309 1P+N+E
     Error:
       required:
       - errorCode
@@ -155,38 +138,6 @@ components:
         additionalInfo:
           $ref: '#/components/schemas/ErrorAdditionalInfoList'
       description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
-    Errors:
-      type: array
-      items:
-        $ref: '#/components/schemas/Error'
-    AcCircuitConfig:
-      type: object
-      required:
-      - phase
-      - receptacle
-      - soldAmperage
-      - voltage
-      properties:
-        voltage:
-          $ref: '#/components/schemas/Voltage'
-        soldAmperage:
-          $ref: '#/components/schemas/Amperage'
-        phase:
-          $ref: '#/components/schemas/Phase'
-        receptacle:
-          type: string
-          description: Receptacle type
-          example: IEC 60309 1P+N+E
-    ErrorAdditionalInfoList:
-      type: array
-      description: Contains application specific information for this error. The object inside this array can have any number of application specific properties.
-      items:
-        $ref: '#/components/schemas/ErrorAdditionalInfo'
-    AccountNumber:
-      minLength: 1
-      type: string
-      description: Identifier of a billing account, with permission to order colocation products.
-      example: '132028'
     Dimension:
       required:
       - unit
@@ -205,6 +156,59 @@ components:
           - MILLIMETER
           - CENTIMETER
           - METER
+    Errors:
+      type: array
+      items:
+        $ref: '#/components/schemas/Error'
+    IbxCode:
+      pattern: ^[A-Z]{2}[0-9]+x?$
+      type: string
+      description: IBX data center identifier.
+      example: CH1
+    Amperage:
+      type: number
+      description: Amperage Numerical Value
+      format: double
+      example: 8.9
+    Voltage:
+      type: integer
+      description: Voltage numerical value
+      example: 220
+    FabricPortSpeed:
+      type: string
+      description: Port speed
+      example: SPEED_1_GBPS
+      enum:
+      - SPEED_1_GBPS
+      - SPEED_10_GBPS
+    AccountNumber:
+      minLength: 1
+      type: string
+      description: Identifier of a billing account, with permission to order colocation products.
+      example: '132028'
+    Dimensions:
+      type: object
+      required:
+      - width
+      - depth
+      - height
+      properties:
+        width:
+          $ref: '#/components/schemas/Dimension'
+        depth:
+          $ref: '#/components/schemas/Dimension'
+        height:
+          $ref: '#/components/schemas/Dimension'
+    ErrorAdditionalInfoList:
+      type: array
+      description: Contains application specific information for this error. The object inside this array can have any number of application specific properties.
+      items:
+        $ref: '#/components/schemas/ErrorAdditionalInfo'
+    ProductsAvailabilities:
+      type: array
+      description: A list of ibxs with information about product availabilities
+      items:
+        $ref: '#/components/schemas/ProductsAvailability'
     ProductsAvailability:
       required:
       - ibx
@@ -244,11 +248,16 @@ components:
           $ref: '#/components/schemas/PduConfig'
         fabricPortSpeed:
           $ref: '#/components/schemas/FabricPortSpeed'
-    ProductsAvailabilities:
-      type: array
-      description: A list of ibxs with information about product availabilities
-      items:
-        $ref: '#/components/schemas/ProductsAvailability'
+    ErrorAdditionalInfo:
+      properties:
+        property:
+          type: string
+          description: Property at which the error occurs. Can be empty.
+          example: $.info
+        reason:
+          type: string
+          description: Fallback error message in plain English.
+          example: must not be blank
     PduConfig:
       type: object
       required:
@@ -258,20 +267,14 @@ components:
           type: string
           description: Model Code
           example: UU30009L
-    Voltage:
-      type: integer
-      description: Voltage numerical value
-      example: 220
-    Amperage:
-      type: number
-      description: Amperage Numerical Value
-      format: double
-      example: 8.9
-    IbxCode:
-      pattern: ^[A-Z]{2}[0-9]+x?$
+    Phase:
       type: string
-      description: IBX data center identifier.
-      example: CH1
-x-eqx-api-linter-skip-rules:
-- 3
-- 38
+      description: Circuit phase
+      example: SINGLE
+      enum:
+      - SINGLE
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

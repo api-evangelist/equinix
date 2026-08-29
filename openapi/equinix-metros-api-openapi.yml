@@ -1,70 +1,16 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Equinix API Authentication Metros API
-  description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
-
-    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
-  termsOfService: https://www.equinix.com/about/legal/terms
-  contact:
-    name: Equinix API Support
-    url: https://docs.equinix.com/api-support.htm
-  version: '1.2'
+  title: Equinix Metros API
+  version: '1.0'
+  description: 'Operations tagged Metros across 2 of this provider''s published API definitions: fabric-openapi-original.yml, metal-openapi-original.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.equinix.com
+  description: Equinix Inc
+- url: https://api.equinix.com/metal/v1
 tags:
-- description: Metro Management. Check out the product docs to learn more about [Metros](https://metal.equinix.com/developers/docs/locations/metros/).
-  externalDocs:
-    url: https://metal.equinix.com/developers/docs/locations/metros/
-  name: Metros
+- name: Metros
+  description: Metros
 paths:
-  /locations/metros:
-    get:
-      description: Provides a listing of available metros
-      operationId: findMetros
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MetroList'
-          description: ok
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: unauthorized
-      summary: Retrieve all metros
-      tags:
-      - Metros
-  /locations/metros/{id}:
-    get:
-      description: Show the details for a metro, including name, code, and country.
-      operationId: getMetro
-      parameters:
-      - description: Metro UUID
-        in: path
-        name: id
-        required: true
-        schema:
-          format: uuid
-          type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Metro'
-          description: ok
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: not found
-      summary: Retrieve a specific Metro's details
-      tags:
-      - Metros
   /fabric/v4/metros:
     get:
       tags:
@@ -130,6 +76,11 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500_metros'
+      security:
+      - BearerAuth: []
+    servers:
+    - url: https://api.equinix.com
+      description: Equinix Inc
   /fabric/v4/metros/{metroCode}:
     get:
       tags:
@@ -150,7 +101,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Metro_2'
+                $ref: '#/components/schemas/Metro'
               examples:
                 metroExample:
                   $ref: '#/components/examples/metroByCode'
@@ -181,56 +132,126 @@ paths:
               examples:
                 example:
                   $ref: '#/components/examples/500_metros'
-components:
-  schemas:
-    MetroList:
-      example:
-        metros:
-        - country: country
-          code: code
-          name: name
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - country: country
-          code: code
-          name: name
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        metros:
-          items:
-            $ref: '#/components/schemas/Metro'
-          type: array
-      type: object
-    Error:
-      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
-      properties:
-        error:
-          description: A description of the error that caused the request to fail.
-          type: string
-        errors:
-          description: A list of errors that contributed to the request failing.
-          items:
-            description: An error message that contributed to the request failing.
-            type: string
-          type: array
-      type: object
-    Metro:
-      example:
-        country: country
-        code: code
-        name: name
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        code:
-          type: string
-        country:
-          type: string
-        id:
+      security:
+      - BearerAuth: []
+    servers:
+    - url: https://api.equinix.com
+      description: Equinix Inc
+  /locations/metros:
+    get:
+      description: Provides a listing of available metros
+      operationId: findMetros
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetroList'
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+      summary: Retrieve all metros
+      tags:
+      - Metros
+      security:
+      - x_auth_token: []
+    servers:
+    - url: https://api.equinix.com/metal/v1
+  /locations/metros/{id}:
+    get:
+      description: Show the details for a metro, including name, code, and country.
+      operationId: getMetro
+      parameters:
+      - description: Metro UUID
+        in: path
+        name: id
+        required: true
+        schema:
           format: uuid
           type: string
-        name:
-          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metro_2'
+          description: ok
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Retrieve a specific Metro's details
+      tags:
+      - Metros
+      security:
+      - x_auth_token: []
+    servers:
+    - url: https://api.equinix.com/metal/v1
+components:
+  schemas:
+    GeoCoordinates:
       type: object
-    Metro_2:
+      properties:
+        latitude:
+          type: number
+          description: Latitude of a Fabric Metro
+          format: double
+        longitude:
+          type: number
+          description: Longitude of a Fabric Metro
+          format: double
+      description: Geographic location data of Fabric Metro
+    MetroCode:
+      type: string
+      description: Metro Code
+    Presence:
+      type: string
+      description: Presence
+      enum:
+      - MY_PORTS
+    GeoScopeType:
+      type: string
+      description: Geographic boundary types
+      enum:
+      - CANADA
+      - CONUS
+      - JAPAN
+      - UK
+      - AUSTRALIA
+      - BRAZIL
+      - SWITZERLAND
+    MetroResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: List of Fabric Metros.
+          items:
+            $ref: '#/components/schemas/Metro'
+      description: GET Metros retrieves all Equinix? Fabric? metros, as well as latency data for each location.This performance data helps network planning engineers and administrators make strategic decisions about port locations and traffic routes.
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    services:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of Service
+      description: Arrays of objects containing type of services supported in the specified metros
+    Metro:
       type: object
       properties:
         href:
@@ -275,59 +296,6 @@ components:
           items:
             $ref: '#/components/schemas/GeoScopeType'
       description: GET Metros retrieves all Equinix? Fabric? metros, as well as latency data for each location.This performance data helps network planning engineers and administrators make strategic decisions about port locations and traffic routes.
-    PriceError_additionalInfo:
-      type: object
-      properties:
-        property:
-          type: string
-        reason:
-          type: string
-    GeoScopeType:
-      type: string
-      description: Geographic boundary types
-      enum:
-      - CANADA
-      - CONUS
-      - JAPAN
-      - UK
-      - AUSTRALIA
-      - BRAZIL
-      - SWITZERLAND
-    GeoCoordinates:
-      type: object
-      properties:
-        latitude:
-          type: number
-          description: Latitude of a Fabric Metro
-          format: double
-        longitude:
-          type: number
-          description: Longitude of a Fabric Metro
-          format: double
-      description: Geographic location data of Fabric Metro
-    Presence:
-      type: string
-      description: Presence
-      enum:
-      - MY_PORTS
-    MetroErrorList:
-      type: array
-      items:
-        $ref: '#/components/schemas/MetroError'
-    MetroResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          description: List of Fabric Metros.
-          items:
-            $ref: '#/components/schemas/Metro_2'
-      description: GET Metros retrieves all Equinix? Fabric? metros, as well as latency data for each location.This performance data helps network planning engineers and administrators make strategic decisions about port locations and traffic routes.
-    MetroCode:
-      type: string
-      description: Metro Code
     ConnectedMetro:
       type: object
       properties:
@@ -407,21 +375,58 @@ components:
           type: string
           description: URL relative to the previous item in the response.
       description: Pagination response information
-    services:
-      type: object
+    MetroErrorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetroError'
+    Error:
+      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
       properties:
-        type:
+        error:
+          description: A description of the error that caused the request to fail.
           type: string
-          description: Type of Service
-      description: Arrays of objects containing type of services supported in the specified metros
+        errors:
+          description: A list of errors that contributed to the request failing.
+          items:
+            description: An error message that contributed to the request failing.
+            type: string
+          type: array
+      type: object
+    MetroList:
+      example:
+        metros:
+        - country: country
+          code: code
+          name: name
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - country: country
+          code: code
+          name: name
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        metros:
+          items:
+            $ref: '#/components/schemas/Metro_2'
+          type: array
+      type: object
+    Metro_2:
+      example:
+        country: country
+        code: code
+        name: name
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        code:
+          type: string
+        country:
+          type: string
+        id:
+          format: uuid
+          type: string
+        name:
+          type: string
+      type: object
   examples:
-    500_metros:
-      value:
-      - errorCode: EQ-3036030
-        errorMessage: Internal Server Error
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        additionalInfo:
-        - reason: An Internal Server Error occured
     401_metros:
       value:
       - errorCode: EQ-3036001
@@ -429,6 +434,14 @@ components:
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
         additionalInfo:
         - reason: You are unauthorized to perform this operation
+    400_metros:
+      value:
+      - errorCode: EQ-3036013
+        errorMessage: Invalid Query Parameter
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        additionalInfo:
+        - property: presence
+          reason: Allowed value for presence is MY_PORTS
     metro:
       value:
         pagination:
@@ -498,22 +511,6 @@ components:
           - AUSTRALIA
           - BRAZIL
           - SWITZERLAND
-    400_metros:
-      value:
-      - errorCode: EQ-3036013
-        errorMessage: Invalid Query Parameter
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        additionalInfo:
-        - property: presence
-          reason: Allowed value for presence is MY_PORTS
-    400_metroCode:
-      value:
-      - errorCode: EQ-3036013
-        errorMessage: Invalid Path Parameter
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        additionalInfo:
-        - property: pathparameter-metroCode
-          reason: Provide valid metro code
     metroByCode:
       value:
         href: https://api.equinix.com/v4/fabric/metros/AM
@@ -578,6 +575,40 @@ components:
         - AUSTRALIA
         - BRAZIL
         - SWITZERLAND
+    500_metros:
+      value:
+      - errorCode: EQ-3036030
+        errorMessage: Internal Server Error
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        additionalInfo:
+        - reason: An Internal Server Error occured
+    400_metroCode:
+      value:
+      - errorCode: EQ-3036013
+        errorMessage: Invalid Path Parameter
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        additionalInfo:
+        - property: pathparameter-metroCode
+          reason: Provide valid metro code
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    x_auth_token:
+      description: 'HTTP header containing the User or Project API key that will be used to authenticate the request.
+
+        '
+      in: header
+      name: X-Auth-Token
+      type: apiKey
+      x-displayName: X-Auth-Token
+externalDocs:
+  description: Find more information on Equinix Docs Portal
+  url: https://docs.equinix.com/fabric/
+x-refined-from:
+- fabric-openapi-original.yml
+- metal-openapi-original.yml
 x-eqx-api-linter-skip-rules:
 - 3
 - 38
