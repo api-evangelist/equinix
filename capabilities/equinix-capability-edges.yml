@@ -1,0 +1,60 @@
+slug: equinix
+provider: Equinix
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Telecommunications
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Devices
+  spec_file: equinix-devices-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.75
+  evidence: '''Delete the device'', ''Update the device'', ''Perform an action'', ''Retrieve an instance
+    bandwidth'', ''Create a BGP session'', ''Get Device''s Health Status'' with schemas DeviceCreateInput,
+    Plan, IPAssignment'
+  reason: Full lifecycle management of bare-metal compute instances including their IPs, ports, BGP sessions
+    and firmware — provisioning and operating compute/network infrastructure, i.e. IT Infrastructure Management
+    for whoever consumes it.
+- tag: Ports
+  spec_file: equinix-ports-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.72
+  evidence: POST /fabric/v4/ports createPort 'Create Port'; 'Add to Lag'; 'Get Vlans'; schemas Port, PortDevice,
+    LinkProtocolState
+  reason: Operations create, update, delete and bond physical/virtual network ports on Equinix Fabric
+    — provisioning and administering network infrastructure resources consumed by the customer. This is
+    cross-industry IT infrastructure (compute/storage/network/cloud) rather than an operator's own telecom
+    network operations, since the caller is configuring rented interconnection infrastructure.
+- tag: PaymentMethods
+  spec_file: equinix-paymentmethods-api-openapi.yml
+  capability_id: BC-4250.40
+  capability_id_l1: BC-4250
+  capability_name: Payment Collection & Dunning
+  confidence: 0.7
+  evidence: GET /payment-methods/{id}  findPaymentMethodById  Retrieve a payment method; schemas PaymentMethod,
+    PaymentMethodBillingAddress
+  reason: CRUD over stored customer payment methods and billing addresses for the platform's recurring
+    charges — payment-method management within subscription billing.
+- tag: Routing Protocols
+  spec_file: equinix-routing-protocols-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: POST /fabric/v4/connections/{connectionId}/routingProtocols createConnectionRoutingProtocol
+    'Create Protocol'; 'Clear/Reset BGP'; schemas BGPConnectionIpv4, RoutingProtocolBFD, RouterId
+  reason: Configuration and operational actions (BGP clear/reset, BFD) on routing protocols for Fabric
+    connections — direct network configuration of the customer's virtual routing infrastructure, i.e.
+    cross-industry IT infrastructure management.
