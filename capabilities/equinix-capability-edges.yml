@@ -11,8 +11,156 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 4
+edge_count: 20
 edges:
+- tag: Cloud Routers
+  spec_file: equinix-cloud-routers-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: POST /fabric/v4/routers 'Create Routers'; GET /fabric/v4/routers/{routerId}/actions 'Get Route
+    Table Actions'; POST /fabric/v4/connections/{connectionId}/advertisedRoutes/search 'Search Advertised
+    Routes'
+  reason: Lifecycle of virtual cloud routers, route tables, advertised/received routes and router commands
+    — provisioning and operating network infrastructure, squarely IT Infrastructure Management.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: VRFs
+  spec_file: equinix-vrfs-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.82
+  evidence: POST /projects/{id}/vrfs createVrf Create a new VRF in the specified project; POST /metal-gateways/{id}/bgp-dynamic-neighbors
+    Create a VRF BGP Dynamic Neighbor range; VrfRoute, VrfIpReservation
+  reason: Operations configure VRFs, BGP neighbours, routes and IP reservations — pure network infrastructure
+    configuration, mapping to IT Infrastructure Management.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: MetalGateways
+  spec_file: equinix-metalgateways-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: '"Create a metal gateway", "List Metal Gateway Elastic IPs", schemas IPReservation, VrfVirtualCircuit,
+    MetalGatewayCreateInput'
+  reason: Creates and manages network gateways and elastic IP reservations for bare-metal projects — provisioning
+    of network/cloud infrastructure resources.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: Route Aggregation Rules
+  spec_file: equinix-route-aggregation-rules-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: POST /fabric/v4/routeAggregations/{routeAggregationId}/routeAggregationRules 'Create RARule';
+    schemas RouteAggregationRuleExpression, RouteAggregationRuleState
+  reason: CRUD over BGP route-aggregation rules on Fabric interconnection — pure network configuration,
+    which sits under IT Infrastructure Management (compute, storage, network, cloud infrastructure).
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: Route Aggregations
+  spec_file: equinix-route-aggregations-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: PUT /fabric/v4/connections/{connectionId}/routeAggregations/{routeAggregationId} 'Attach Aggregation';
+    schemas CloudRouterRouteAggregationsFilter, RouteAggregationState
+  reason: Creating and attaching route aggregations to Fabric connections is network routing configuration
+    for interconnection infrastructure, i.e. IT Infrastructure Management.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: Route Filter Rules
+  spec_file: equinix-route-filter-rules-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: POST /fabric/v4/routeFilters/{routeFilterId}/routeFilterRules 'Create Route Filter Rule';
+    schemas RouteFilterRulesBase, RouteFilterRuleSimpleExpression
+  reason: Route filter rule lifecycle on Fabric connections is network prefix-filtering configuration
+    — infrastructure/network management, not a security policy or business capability.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: Route Filters
+  spec_file: equinix-route-filters-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: PUT /fabric/v4/connections/{connectionId}/routeFilters/{routeFilterId} 'Attach Route Filter';
+    GET /fabric/v4/routeFilters/{routeFilterId}/connections 'Get All Connections on Route Filter'
+  reason: Managing and attaching route filters to interconnection connections is network routing configuration,
+    mapped to IT Infrastructure Management.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: IPAddresses
+  spec_file: equinix-ip-addresses-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.78
+  evidence: POST /projects/{id}/ips  requestIPReservation  Requesting IP reservations; DELETE /ips/{id}  deleteIPAddress  Unassign
+    an ip address; schemas VrfIpReservation, IPAssignment
+  reason: Allocation, assignment and release of IP address space and subnets to projects and devices —
+    network address resource management, squarely IT Infrastructure Management.
+  recovered_from: sweep-20260828T235257Z-edges.json
+  reanchored_from: equinix-ipaddresses-api-openapi.yml
+- tag: Interconnections
+  spec_file: equinix-interconnections-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.78
+  evidence: '"Request a new interconnection for the organization", "Create a new Virtual Circuit", schemas
+    InterconnectionPort, VlanVirtualCircuitCreateInput'
+  reason: Operations provision and manage physical/virtual network connectivity (ports, virtual circuits)
+    between infrastructure locations — network infrastructure provisioning, i.e. IT Infrastructure Management,
+    not a business-domain capability.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: Networks
+  spec_file: equinix-networks-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.78
+  evidence: '"Create Network", "Get Connections", schemas Network, NetworkConnections, CloudRouter, SimplifiedPort'
+  reason: Full lifecycle of network constructs and their connections (cloud router, ports, connection
+    sides) — provisioning and stewardship of network/cloud infrastructure.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: VLANs
+  spec_file: equinix-vlans-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.78
+  evidence: POST /projects/{id}/virtual-networks createVirtualNetwork Create a virtual network; schemas
+    VirtualNetwork, MetalGatewayLite
+  reason: Provisioning and deletion of layer-2 virtual networks (VLANs) attached to metal gateways is
+    network infrastructure provisioning, i.e. IT Infrastructure Management (compute, storage, network,
+    cloud).
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: BGP
+  spec_file: equinix-bgp-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.75
+  evidence: GET /projects/{id}/bgp-config 'Retrieve a bgp config'; PUT /bgp/sessions/{id} 'Update the
+    BGP session'; GET /projects/{id}/global-bgp-ranges 'Retrieve all global bgp ranges'
+  reason: Configuration of BGP routing sessions and IP ranges for a project — provisioning and management
+    of network infrastructure, which is IT Infrastructure Management (compute, storage, network, cloud).
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: Connections
+  spec_file: equinix-connections-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.75
+  evidence: POST /fabric/v4/connections  createConnection  Create Connection; schemas CloudRouter, PhysicalPortType,
+    ConnectionRedundancy, NetworkState
+  reason: Operations provision, modify and delete Equinix Fabric network interconnections between ports,
+    cloud routers and virtual devices. That is provisioning of network infrastructure, best matched by
+    IT Infrastructure Management (compute, storage, network, cloud). No commercial/subscription semantics
+    in the operations.
+  recovered_from: sweep-20260828T235257Z-edges.json
 - tag: Devices
   spec_file: equinix-devices-api-openapi.yml
   capability_id: BC-600.50
@@ -25,6 +173,29 @@ edges:
   reason: Full lifecycle management of bare-metal compute instances including their IPs, ports, BGP sessions
     and firmware — provisioning and operating compute/network infrastructure, i.e. IT Infrastructure Management
     for whoever consumes it.
+- tag: Invoices
+  spec_file: equinix-invoices-api-openapi.yml
+  capability_id: BC-4250.30
+  capability_id_l1: BC-4250
+  capability_name: Invoicing & Statement Management
+  confidence: 0.74
+  evidence: '"Retrieve all invoices for an organization", schemas Invoice, InvoiceList, LineItem, Plan_available_in_inner_price'
+  reason: Exposes invoices and line items tied to service plans/prices for a customer organization — invoice
+    and statement retrieval within recurring service billing. Read-only exposure only, hence not higher
+    confidence.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: HardwareReservations
+  spec_file: equinix-hardwarereservations-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.72
+  evidence: POST /hardware-reservations/{id}/activate  activateHardwareReservation  Activate a spare hardware
+    reservation; POST /hardware-reservations/{id}/move  moveHardwareReservation
+  reason: Manages reserved physical server capacity for a project — activating spares and moving reservations.
+    This is management of compute infrastructure capacity, i.e. IT Infrastructure Management, not a commercial
+    subscription construct.
+  recovered_from: sweep-20260828T235257Z-edges.json
 - tag: Ports
   spec_file: equinix-ports-api-openapi.yml
   capability_id: BC-600.50
@@ -59,3 +230,14 @@ edges:
   reason: Configuration and operational actions (BGP clear/reset, BFD) on routing protocols for Fabric
     connections — direct network configuration of the customer's virtual routing infrastructure, i.e.
     cross-industry IT infrastructure management.
+- tag: TwoFactorAuth
+  spec_file: equinix-two-factor-auth-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: POST /user/otp/app enableTfaApp Enable two factor auth using app; DELETE /user/otp/sms disableTfaSms
+  reason: Enabling/disabling MFA on user accounts is an identity and access management control, the one
+    honest mapping; kept below 0.8 because authentication surfaces are often pure plumbing.
+  recovered_from: sweep-20260828T235257Z-edges.json
+  reanchored_from: equinix-twofactorauth-api-openapi.yml
