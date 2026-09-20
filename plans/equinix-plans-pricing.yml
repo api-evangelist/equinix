@@ -1,42 +1,86 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Equinix
-providerId: equinix
-created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
-reconciled: true
-tags:
-  - Data Center / Interconnect
-  - Enterprise
-  - B2B
-description: Equinix does not publish public API pricing. Access is via partner/B2B contracts negotiated
-  through the provider's enterprise sales team. Equinix Fabric, Metal, and Network Edge APIs require commercial
-  accounts; pricing per port/cross-connect/server.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://docs.equinix.com/network-edge/billing/ne-pricing-terms-billing/
 sources:
-  - https://developer.equinix.com/
+- https://docs.equinix.com/network-edge/billing/ne-pricing-terms-billing/
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T125857
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: tiered-subscription
+published: true
+note: Network Edge pricing based on VNF CPU count, US market; term discounts 8%/16%/25% for 12/24/36 months.
+  Prices outside US via Solution Builder.
+plan_count: 11
+currency: USD
 plans:
-  - id: equinix-partner
-    name: Partner / B2B Contract
-    type: enterprise
-    description: Custom pricing through enterprise sales / partner program.
-    entries:
-      - label: Annual contract (custom)
-        name: annual
-        type: subscription
-        metric: year
-        limit: -1
-        timeFrame: year
-        geo: global
-        unit: 1
-        price: custom
-        userMultiplied: false
-    elements:
-      - name: Negotiated contracts
-      - name: Volume discounts
-      - name: Service-level agreements
-      - name: Dedicated account team
-      - name: 'Partner program: https://developer.equinix.com/'
+- name: VNF 1 CPU
+  price_text: '700'
+  price: 700
+  currency: USD
+  period: month
+  unit: per VNF (1 CPU)
+- name: VNF 2 CPU
+  price_text: '1000'
+  price: 1000
+  currency: USD
+  period: month
+  unit: per VNF (2 CPUs)
+- name: VNF 4 CPU
+  price_text: '1400'
+  price: 1400
+  currency: USD
+  period: month
+  unit: per VNF (4 CPUs)
+- name: VNF 5 CPU
+  price_text: '1600'
+  price: 1600
+  currency: USD
+  period: month
+  unit: per VNF (5 CPUs)
+- name: VNF 6 CPU
+  price_text: '1800'
+  price: 1800
+  currency: USD
+  period: month
+  unit: per VNF (6 CPUs)
+- name: VNF 8 CPU
+  price_text: '2200'
+  price: 2200
+  currency: USD
+  period: month
+  unit: per VNF (8 CPUs)
+- name: VNF 9 CPU
+  price_text: '2325'
+  price: 2325
+  currency: USD
+  period: month
+  unit: per VNF (9 CPUs)
+- name: VNF 10 CPU
+  price_text: '2450'
+  price: 2450
+  currency: USD
+  period: month
+  unit: per VNF (10 CPUs)
+- name: VNF 12 CPU
+  price_text: '2700'
+  price: 2700
+  currency: USD
+  period: month
+  unit: per VNF (12 CPUs)
+- name: VNF 16 CPU
+  price_text: '3200'
+  price: 3200
+  currency: USD
+  period: month
+  unit: per VNF (16 CPUs)
+- name: VNF 32 CPU
+  price_text: '4600'
+  price: 4600
+  currency: USD
+  period: month
+  unit: per VNF (32 CPUs)
+rate_limit_statements:
+- The minimum billing period is one day (24 hours).
