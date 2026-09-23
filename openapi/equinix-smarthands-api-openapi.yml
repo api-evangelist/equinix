@@ -20,7 +20,6 @@ paths:
       summary: Request equipment installation per your specifications by an IBX Technician
       tags:
       - Smarthands
-      description: Request equipment installation per your specifications by an IBX Technician
       responses:
         '201':
           $ref: '#/components/schemas/smarthandResponse'
@@ -71,7 +70,7 @@ paths:
     - $ref: '#/components/parameters/authorizationHeader'
     post:
       operationId: handleSmartHandShipmentUnpackOrder
-      summary: Request inbound shipment unpacking and packaging disposal.
+      summary: Request inbound shipment unpacking and packaging disposal
       tags:
       - Smarthands
       description: This API is used to request inbound shipment unpacking and packaging disposal.
@@ -125,7 +124,7 @@ paths:
     - $ref: '#/components/parameters/authorizationHeader'
     post:
       operationId: handleSmartHandMoveJumperCableOrder
-      summary: This API is used to request a patch cable to be moved between devices.
+      summary: This API is used to request a patch cable to be moved between devices
       tags:
       - Smarthands
       description: This API is used to request a patch cable to be moved between devices.
@@ -233,7 +232,7 @@ paths:
     - $ref: '#/components/parameters/authorizationHeader'
     post:
       operationId: handleSmartHandLocatePackageOrder
-      summary: Get the location of your package(s) at an IBX.
+      summary: Get the location of your package(s) at an IBX
       tags:
       - Smarthands
       description: This API is used to get the location of your package(s) at an IBX.
@@ -287,7 +286,7 @@ paths:
     - $ref: '#/components/parameters/authorizationHeader'
     post:
       operationId: handleSmartHandPicturesDocumentOrder
-      summary: Request an IBX Technician to provide cage-related pictures or documentation.
+      summary: Request an IBX Technician to provide cage-related pictures or documentation
       tags:
       - Smarthands
       description: Request an IBX Technician to provide cage-related pictures or documentation.
@@ -341,7 +340,7 @@ paths:
     - $ref: '#/components/parameters/authorizationHeader'
     post:
       operationId: handleSmartHandPatchCableInstallOrder
-      summary: Request installation of a cross connect patch cable by an IBX Technician.
+      summary: Request installation of a cross connect patch cable by an IBX Technician
       tags:
       - Smarthands
       description: Request installation of a cross connect patch cable by an IBX Technician.
@@ -395,7 +394,7 @@ paths:
     - $ref: '#/components/parameters/authorizationHeader'
     post:
       operationId: handleSmartHandPatchCableRemovalOrder
-      summary: Request removal of a cross connect cable by an IBX Technician.
+      summary: Request removal of a cross connect cable by an IBX Technician
       tags:
       - Smarthands
       description: Request removal of a cross connect cable by an IBX Technician.
@@ -503,7 +502,7 @@ paths:
     - $ref: '#/components/parameters/authorizationHeader'
     post:
       operationId: handleSmartHandCableRequestOrder
-      summary: This API is used to request cables per your specifications for your equipment.
+      summary: This API is used to request cables per your specifications for your equipment
       tags:
       - Smarthands
       description: This API is used to request cables per your specifications for your equipment.
@@ -557,7 +556,7 @@ paths:
     - $ref: '#/components/parameters/authorizationHeader'
     post:
       operationId: handleSmartHandRunJumperCableOrder
-      summary: This API is used to request a jumper cable to be ran between devices.
+      summary: This API is used to request a jumper cable to be ran between devices
       tags:
       - Smarthands
       description: This API is used to request a jumper cable to be ran between devices.
@@ -665,7 +664,7 @@ paths:
     - $ref: '#/components/parameters/authorizationHeader'
     get:
       operationId: getLocation
-      summary: Get locations(ibx, cage) details for placing smart hands based on smart hands permission for user
+      summary: Get locations(ibx, cage) details for placing smart hands based on smart hands…
       tags:
       - Smarthands
       description: Get locations(ibx, cage) details for placing smart hands based on smart hands permission for user
@@ -743,7 +742,7 @@ paths:
     - $ref: '#/components/parameters/authorizationHeader'
     get:
       operationId: smartHandTypes
-      summary: All supported smart hands types API.
+      summary: All supported smart hands types API
       tags:
       - Smarthands
       description: Smart Hands Types API provides all types of supported smart hands.
@@ -802,6 +801,533 @@ paths:
                 ticketId: '190619221547673'
 components:
   schemas:
+    smarthandType:
+      title: Smart hands Type
+      type: object
+      properties:
+        type:
+          type: string
+          description: Smarthand Type
+          example: EQUIPMENT_INSTALL
+        typeDescription:
+          type: string
+          description: Description of Smarthand Type
+          example: EQUIPMENT_INSTALL
+      required:
+      - type
+      - typeDescription
+    order-contacts:
+      type: array
+      title: Order Contacts Array
+      description: Use this array to pass ordering contact, notification contacts and technical contact. Only one ordering contact, technical contact is allowed. One or more notification contacts are allowed. Ordering and notification contacts are always registered customers with the customer portal.
+      minItems: 3
+      example:
+      - contactType: ORDERING
+        userName: jondoe@test.com
+      - contactType: NOTIFICATION
+        userName: jondoe@test.com
+      - contactType: TECHNICAL
+        name: John Doe
+        workPhone: '1111111'
+        workPhonePrefToCall: ANYTIME
+        mobilePhone: '1111111'
+        mobilePhonePrefToCall: ANYTIME
+      items:
+        $ref: '#/components/schemas/contactInfo'
+    moveJumperCableRequest:
+      title: Move Jumper Cable Request
+      type: object
+      properties:
+        customerReferenceNumber:
+          $ref: '#/components/schemas/customerReferenceNumber'
+        purchaseOrder:
+          $ref: '#/components/schemas/purchaseOrder'
+        ibxLocation:
+          $ref: '#/components/schemas/ibxLocation'
+        contacts:
+          $ref: '#/components/schemas/order-contacts'
+        schedule:
+          $ref: '#/components/schemas/scheduleInfo'
+        attachments:
+          $ref: '#/components/schemas/attachmentArray'
+        serviceDetails:
+          type: object
+          description: Move Jumper Cable Service Details Object. Please fill out the Cable ID, Current Device (Name, Slot, Port) and New Device (Name, Slot, Port) details for each jumper cable and attach it to the form or complete scope of work text box when 'Quantity' is greater than 1. You may mix jumper types but if you require more than 12 jumpers ran, the site will contact you for scheduling of your request based on parts and availability. Please select the best option for your scheduling needs. If 'Quantity' is 1, then below 'currentDeviceDetails' and 'newDeviceDetails' objects are mandatory.
+          properties:
+            quantity:
+              type: string
+              description: Quantity.
+              enum:
+              - '1'
+              - '2'
+              - '3'
+              - '4'
+              - '5'
+              - '6'
+              - '7'
+              - '8'
+              - '9'
+              - '10'
+              - '11'
+              - '12'
+              - 12+
+            cableId:
+              type: string
+              description: Enter Cable ID or ‘None’ if not applicable. This field is mandatory if 'Quantity' is 1.
+              example: A01-5-10
+            currentDeviceDetails:
+              $ref: '#/components/schemas/device'
+            newDeviceDetails:
+              $ref: '#/components/schemas/device'
+            scopeOfWork:
+              $ref: '#/components/schemas/scopeOfWork'
+          required:
+          - quantity
+          - scopeOfWork
+      required:
+      - ibxLocation
+      - contacts
+      - schedule
+      - serviceDetails
+    cross-connect-removal:
+      title: Cross Connect for Removal
+      type: object
+      properties:
+        serialNumber:
+          type: string
+          description: Cross Connect serialNumber
+        deviceCabinet:
+          type: string
+          description: Cross Connect Cabinet
+        deviceConnectorType:
+          type: string
+          description: Cross Connect Device Connector Type
+        deviceDetails:
+          type: string
+          description: Cross Connect Device Details
+        devicePort:
+          type: string
+          description: Cross Connect Device Port
+        removePatchCableWithLiveTraffic:
+          type: boolean
+          example: true
+          description: Proceed with the de-install if live traffic is detected (Optional). By selecting this option, I agree to the terms of removal with live traffic. Please be advised that Equinix will complete the requested removal based on your instruction and will not be responsible for any service outages resulting from this removal.
+        scopeOfWork:
+          type: string
+          description: Scope of work
+          minLength: 1
+          maxLength: 4000
+      required:
+      - serialNumber
+      - deviceCabinet
+      - deviceConnectorType
+      - deviceDetails
+      - devicePort
+    scheduleInfo:
+      title: Schedule Info
+      type: object
+      description: Use this model to pass the scheduling option that best meets your needs. Please remember that additional approvals or fees may be required for expedited requests.
+      properties:
+        scheduleType:
+          type: string
+          description: <u>STANDARD:</u> <br>Choose this option and we will complete your request in the standard turnaround time pending install base readiness. Most requests are processed within 24 to 72 hours. Requests will be processed on a first come, first served basis unless they are expedited. RequestedStartDate and requestedCompletionDate ignored for standard scheduling <br><br> <u>EXPEDITED:</u> Choose this option and Equinix will prioritize your request and attempt to fulfill it as soon as reasonably possible. Additional fees may apply. RequestedCompletionDate is mandatory for expedite scheduling. RequestedStartDate is ignored for expedite scheduling. <br><br> <u>SCHEDULED_MAINTENANCE:</u> Choose this option to schedule a request for a specific date and time, including today. RequestedStartDate and requestedCompletionDate are mandatory for schedule maintenance
+          enum:
+          - STANDARD
+          - EXPEDITED
+          - SCHEDULED_MAINTENANCE
+        requestedStartDate:
+          description: Requested Start Date Time (ISO Date)<br> Cannot Past Date.
+          type: string
+          format: date-time
+          example: '2017-04-05T12:00:00Z'
+        requestedCompletionDate:
+          description: Requested Completion Date Time (ISO Date)<br>Cannot Past Date.
+          type: string
+          format: date-time
+          example: '2017-04-05T12:00:00Z'
+      required:
+      - scheduleType
+    account:
+      title: Account
+      type: object
+      properties:
+        number:
+          type: string
+          description: Account Number
+          example: '136008'
+        name:
+          type: string
+          description: Name of Account
+          example: Service Corporation
+        isCreditHold:
+          type: boolean
+          description: Is credit Hold account
+          example: 'false'
+        isPOBearing:
+          type: boolean
+          description: Is PO Bearing account
+          example: 'false'
+        cabinets:
+          type: array
+          items:
+            $ref: '#/components/schemas/cabinets'
+          description: List of Cabinets
+      required:
+      - number
+      - name
+    cabinets:
+      title: Cabinets
+      type: object
+      properties:
+        cabinet:
+          type: string
+          description: Cabinet Number
+          example: LD5:01:001MC3:0718
+        cabinetType:
+          type: string
+          description: Cabinet Type, Eg. Regular, Demarc
+    location:
+      title: Location
+      type: object
+      properties:
+        ibx:
+          type: string
+          description: Ibx Name
+          example: AM1
+        cages:
+          type: array
+          description: List of cage
+          items:
+            $ref: '#/components/schemas/cage'
+      required:
+      - ibx
+      - cages
+    needSupportFromASubmarineCableStationEngineer:
+      type: boolean
+      title: Need Support From Submarine Cable Station Engineer
+      description: This flag is only applicable to Submarine Cable IBXs
+      example: false
+    patchCableRemovalRequest:
+      title: Patch Cable Removal Request
+      type: object
+      properties:
+        customerReferenceNumber:
+          $ref: '#/components/schemas/customerReferenceNumber'
+        purchaseOrder:
+          $ref: '#/components/schemas/purchaseOrder'
+        ibxLocation:
+          $ref: '#/components/schemas/ibxLocation'
+        contacts:
+          $ref: '#/components/schemas/order-contacts'
+        schedule:
+          $ref: '#/components/schemas/scheduleInfo'
+        attachments:
+          $ref: '#/components/schemas/attachmentArray'
+        serviceDetails:
+          type: object
+          properties:
+            crossConnects:
+              type: array
+              items:
+                $ref: '#/components/schemas/cross-connect-removal'
+          required:
+          - crossConnects
+          - scopeOfWork
+      required:
+      - ibxLocation
+      - contacts
+      - schedule
+      - serviceDetails
+    shipmentUnpackRequest:
+      title: Shipment Unpack Request
+      type: object
+      required:
+      - serviceDetails
+      - ibxLocation
+      - contacts
+      - schedule
+      properties:
+        customerReferenceNumber:
+          $ref: '#/components/schemas/customerReferenceNumber'
+        purchaseOrder:
+          $ref: '#/components/schemas/purchaseOrder'
+        ibxLocation:
+          $ref: '#/components/schemas/ibxLocation'
+        contacts:
+          $ref: '#/components/schemas/order-contacts'
+        schedule:
+          $ref: '#/components/schemas/scheduleInfo'
+        attachments:
+          $ref: '#/components/schemas/attachmentArray'
+        serviceDetails:
+          type: object
+          description: Shipment Unpacking
+          properties:
+            inboundShipmentOrderNumber:
+              type: string
+              description: Inbound Shipment Order Number
+              pattern: ^[ A-Za-z0-9~!|\[\]@#$%^&*()_+:"<>?\/.,;'=\-\{\}`]{1,50}$
+              example: 1-12122121
+            copyOfPackingSlipNeeded:
+              type: boolean
+              description: Copy of Packaging Slip Needed?
+              example: false
+            scopeOfWork:
+              $ref: '#/components/schemas/scopeOfWork'
+            discardShipmentMaterial:
+              type: boolean
+              description: Discard Shipment Material?
+              example: false
+          required:
+          - inboundShipmentOrderNumber
+          - discardShipmentMaterial
+          - copyOfPackingSlipNeeded
+          - scopeOfWork
+    cross-connect-install:
+      title: Cross Connect for Install
+      type: object
+      properties:
+        serialNumber:
+          type: string
+          description: Cross Connect serialNumber
+        deviceCabinet:
+          type: string
+          description: Cross Connect Cabinet
+        deviceConnectorType:
+          type: string
+          description: Cross Connect Device Connector Type
+        deviceDetails:
+          type: string
+          description: Cross Connect Device Details
+        devicePort:
+          type: string
+          description: Cross Connect Device Port
+        lightLinkVerification:
+          type: boolean
+          example: true
+          description: Cross Connect Light Link Verification (Optional). Select this option if you would like a light reading provided and tx/rx verification after the cross connect is completed. In order to verify the correct transmit/receive alignment, please ensure your Z-Side Cross Connect Partner has their end fully extended to their equipment and their port is enabled. A separate billable activity will be created.
+        scopeOfWork:
+          type: string
+          description: Scope of work
+          minLength: 1
+          maxLength: 4000
+      required:
+      - serialNumber
+      - deviceCabinet
+      - deviceConnectorType
+      - deviceDetails
+      - devicePort
+    purchaseOrder:
+      title: Purchase Order
+      type: object
+      description: Use this model to pass purchase order reference information. When purchase order selection type is EXEMTED, number is not required
+      properties:
+        number:
+          type: string
+          maxLength: 20
+          description: Purchase Order Number
+          example: '123455'
+        purchaseOrderType:
+          type: string
+          enum:
+          - EXISTING
+          - EXEMPTED
+          description: Purchase Order Selection Type
+      required:
+      - purchaseOrderType
+    equipmentInstallRequest:
+      title: Equipment Install Request
+      type: object
+      properties:
+        customerReferenceNumber:
+          $ref: '#/components/schemas/customerReferenceNumber'
+        purchaseOrder:
+          $ref: '#/components/schemas/purchaseOrder'
+        ibxLocation:
+          $ref: '#/components/schemas/ibxLocation'
+        contacts:
+          $ref: '#/components/schemas/order-contacts'
+        schedule:
+          $ref: '#/components/schemas/scheduleInfo'
+        attachments:
+          $ref: '#/components/schemas/attachmentArray'
+        serviceDetails:
+          type: object
+          properties:
+            deviceLocation:
+              type: string
+              description: Device Location
+              example: abc location
+            elevationDrawingAttached:
+              type: boolean
+              description: Elevation drawing attached?
+              example: false
+            installationPoint:
+              type: string
+              description: Installation Point
+              example: abc
+            installedEquipmentPhotoRequired:
+              type: boolean
+              description: Installed Equipment Photo Required?
+              example: false
+            mountHardwareIncluded:
+              type: boolean
+              description: Mount hardware included?
+              example: true
+            patchDevices:
+              type: boolean
+              description: Patch Devices?
+              example: true
+            patchingInfo:
+              type: string
+              description: Patching info
+              example: Patch my equipment
+            powerItOn:
+              type: boolean
+              description: Power it on?
+              example: true
+            needSupportFromASubmarineCableStationEngineer:
+              $ref: '#/components/schemas/needSupportFromASubmarineCableStationEngineer'
+            scopeOfWork:
+              $ref: '#/components/schemas/scopeOfWork'
+          required:
+          - deviceLocation
+          - elevationDrawingAttached
+          - installationPoint
+          - installedEquipmentPhotoRequired
+          - mountHardwareIncluded
+          - patchDevices
+          - powerItOn
+          - scopeOfWork
+      required:
+      - ibxLocation
+      - contacts
+      - schedule
+      - serviceDetails
+    cageEscortRequest:
+      title: Cage Escort Request
+      type: object
+      required:
+      - ibxLocation
+      - contacts
+      - schedule
+      - serviceDetails
+      properties:
+        customerReferenceNumber:
+          $ref: '#/components/schemas/customerReferenceNumber'
+        purchaseOrder:
+          $ref: '#/components/schemas/purchaseOrder'
+        ibxLocation:
+          $ref: '#/components/schemas/ibxLocation'
+        contacts:
+          $ref: '#/components/schemas/order-contacts'
+        schedule:
+          $ref: '#/components/schemas/scheduleInfo'
+        attachments:
+          $ref: '#/components/schemas/attachmentArray'
+        serviceDetails:
+          type: object
+          description: Escort to Open Cage/Open Cabinet
+          properties:
+            durationVisit:
+              type: string
+              description: Duration of the visit for the Visitor
+              enum:
+              - 30 Minutes
+              - 60 Minutes
+              - 90 Minutes
+              - 2 Hours
+              - 2 Hours 30 Minutes
+              - 3 Hours
+              - 3 Hours 30 Minutes
+              - 4 Hours
+            openCabinetForVisitor:
+              type: boolean
+              description: Open the Cabinet for the Visitor?
+              example: false
+            scopeOfWork:
+              $ref: '#/components/schemas/scopeOfWork'
+            supervisionReqForVisitor:
+              type: boolean
+              description: Supervision Required For the Visitor?
+              example: false
+            workVisitOrderNumber:
+              type: string
+              description: Work Visit Order Number
+              pattern: ^[ A-Za-z0-9~!|\[\]@#$%^&*()_+:"<>?\/.,;'=\-\{\}`]{1,200}$
+              example: 1-108050984499
+          required:
+          - durationVisit
+          - openCabinetForVisitor
+          - scopeOfWork
+          - supervisionReqForVisitor
+          - workVisitOrderNumber
+    customerReferenceNumber:
+      type: string
+      title: Customer Reference Number
+      description: You may use numbers and text in this field to enter reference information for your records. This will also appear in your reports and details. You may use this information to search for this content on the submitted requests page.
+      minLength: 1
+      maxLength: 50
+      example: RSS41244
+    smarthandResponse:
+      title: Smart hands Order Response
+      description: Order has been submitted successfully
+      type: object
+      properties:
+        orderNumber:
+          type: string
+          description: Order Number
+          example: 1-108124419634
+      required:
+      - orderNumber
+      example:
+        orderNumber: 1-128726682521
+    attachment:
+      title: Attachment
+      type: object
+      properties:
+        id:
+          type: string
+          description: Attachement Id generated from Attachment Api
+          minLength: 1
+          example: eb9ab7e9-3785-41e4-af24-112dff
+        name:
+          type: string
+          description: Attachment file name, Please make sure attachment name which is used while uploading via Attachment Api
+          minLength: 1
+          example: eb9ab7e9-3785-41e4-af24-asfsa5424
+      required:
+      - id
+      - name
+    otherRequest:
+      title: Other Request
+      type: object
+      properties:
+        customerReferenceNumber:
+          $ref: '#/components/schemas/customerReferenceNumber'
+        purchaseOrder:
+          $ref: '#/components/schemas/purchaseOrder'
+        ibxLocation:
+          $ref: '#/components/schemas/ibxLocation'
+        contacts:
+          $ref: '#/components/schemas/order-contacts'
+        schedule:
+          $ref: '#/components/schemas/scheduleInfo'
+        attachments:
+          $ref: '#/components/schemas/attachmentArray'
+        serviceDetails:
+          type: object
+          description: Other
+          required:
+          - scopeOfWork
+          properties:
+            scopeOfWork:
+              $ref: '#/components/schemas/scopeOfWork'
+      required:
+      - serviceDetails
+      - schedule
+      - contacts
+      - ibxLocation
     cableRequestRequest:
       title: Request Cables - Request
       type: object
@@ -875,332 +1401,6 @@ components:
       - contacts
       - schedule
       - serviceDetails
-    scopeOfWork:
-      type: string
-      title: Scope Of Work
-      description: Enter any additional details that will help our technicians execute your request. You may also attach your scope of work as a document if you exceed the character limit in this field.
-      minLength: 1
-      maxLength: 4000
-      example: Scope of work
-    device:
-      title: Device
-      type: object
-      properties:
-        name:
-          type: string
-          description: Device name
-          maxLength: 200
-          example: Device Name
-        slot:
-          type: string
-          description: Device slot
-          maxLength: 50
-          example: '50'
-        port:
-          type: string
-          description: Device port
-          maxLength: 50
-          example: '50'
-      required:
-      - name
-      - slot
-      - port
-    attachmentArray:
-      type: array
-      title: Attachments Array
-      description: Use this to pass uploaded attachments. Attachments need to be uploaded using the attachments API. Maximum size of an attachment is 2MB with the following formats - bmp, jpg, jpeg, gif, png, tif, tiff, txt, doc, docx, xls, xlsx, ppt, pps, ppsx, pdf, and vsd.
-      maxItems: 5
-      items:
-        $ref: '#/components/schemas/attachment'
-    cross-connect-removal:
-      title: Cross Connect for Removal
-      type: object
-      properties:
-        serialNumber:
-          type: string
-          description: Cross Connect serialNumber
-        deviceCabinet:
-          type: string
-          description: Cross Connect Cabinet
-        deviceConnectorType:
-          type: string
-          description: Cross Connect Device Connector Type
-        deviceDetails:
-          type: string
-          description: Cross Connect Device Details
-        devicePort:
-          type: string
-          description: Cross Connect Device Port
-        removePatchCableWithLiveTraffic:
-          type: boolean
-          example: true
-          description: Proceed with the de-install if live traffic is detected (Optional). By selecting this option, I agree to the terms of removal with live traffic. Please be advised that Equinix will complete the requested removal based on your instruction and will not be responsible for any service outages resulting from this removal.
-        scopeOfWork:
-          type: string
-          description: Scope of work
-          minLength: 1
-          maxLength: 4000
-      required:
-      - serialNumber
-      - deviceCabinet
-      - deviceConnectorType
-      - deviceDetails
-      - devicePort
-    genericError:
-      type: object
-      title: Application Errors
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
-        ticketId:
-          type: string
-    attachment:
-      title: Attachment
-      type: object
-      properties:
-        id:
-          type: string
-          description: Attachement Id generated from Attachment Api
-          minLength: 1
-          example: eb9ab7e9-3785-41e4-af24-112dff
-        name:
-          type: string
-          description: Attachment file name, Please make sure attachment name which is used while uploading via Attachment Api
-          minLength: 1
-          example: eb9ab7e9-3785-41e4-af24-asfsa5424
-      required:
-      - id
-      - name
-    equipmentInstallRequest:
-      title: Equipment Install Request
-      type: object
-      properties:
-        customerReferenceNumber:
-          $ref: '#/components/schemas/customerReferenceNumber'
-        purchaseOrder:
-          $ref: '#/components/schemas/purchaseOrder'
-        ibxLocation:
-          $ref: '#/components/schemas/ibxLocation'
-        contacts:
-          $ref: '#/components/schemas/order-contacts'
-        schedule:
-          $ref: '#/components/schemas/scheduleInfo'
-        attachments:
-          $ref: '#/components/schemas/attachmentArray'
-        serviceDetails:
-          type: object
-          properties:
-            deviceLocation:
-              type: string
-              description: Device Location
-              example: abc location
-            elevationDrawingAttached:
-              type: boolean
-              description: Elevation drawing attached?
-              example: false
-            installationPoint:
-              type: string
-              description: Installation Point
-              example: abc
-            installedEquipmentPhotoRequired:
-              type: boolean
-              description: Installed Equipment Photo Required?
-              example: false
-            mountHardwareIncluded:
-              type: boolean
-              description: Mount hardware included?
-              example: true
-            patchDevices:
-              type: boolean
-              description: Patch Devices?
-              example: true
-            patchingInfo:
-              type: string
-              description: Patching info
-              example: Patch my equipment
-            powerItOn:
-              type: boolean
-              description: Power it on?
-              example: true
-            needSupportFromASubmarineCableStationEngineer:
-              $ref: '#/components/schemas/needSupportFromASubmarineCableStationEngineer'
-            scopeOfWork:
-              $ref: '#/components/schemas/scopeOfWork'
-          required:
-          - deviceLocation
-          - elevationDrawingAttached
-          - installationPoint
-          - installedEquipmentPhotoRequired
-          - mountHardwareIncluded
-          - patchDevices
-          - powerItOn
-          - scopeOfWork
-      required:
-      - ibxLocation
-      - contacts
-      - schedule
-      - serviceDetails
-    account:
-      title: Account
-      type: object
-      properties:
-        number:
-          type: string
-          description: Account Number
-          example: '136008'
-        name:
-          type: string
-          description: Name of Account
-          example: Service Corporation
-        isCreditHold:
-          type: boolean
-          description: Is credit Hold account
-          example: 'false'
-        isPOBearing:
-          type: boolean
-          description: Is PO Bearing account
-          example: 'false'
-        cabinets:
-          type: array
-          items:
-            $ref: '#/components/schemas/cabinets'
-          description: List of Cabinets
-      required:
-      - number
-      - name
-    cageEscortRequest:
-      title: Cage Escort Request
-      type: object
-      required:
-      - ibxLocation
-      - contacts
-      - schedule
-      - serviceDetails
-      properties:
-        customerReferenceNumber:
-          $ref: '#/components/schemas/customerReferenceNumber'
-        purchaseOrder:
-          $ref: '#/components/schemas/purchaseOrder'
-        ibxLocation:
-          $ref: '#/components/schemas/ibxLocation'
-        contacts:
-          $ref: '#/components/schemas/order-contacts'
-        schedule:
-          $ref: '#/components/schemas/scheduleInfo'
-        attachments:
-          $ref: '#/components/schemas/attachmentArray'
-        serviceDetails:
-          type: object
-          description: Escort to Open Cage/Open Cabinet
-          properties:
-            durationVisit:
-              type: string
-              description: Duration of the visit for the Visitor
-              enum:
-              - 30 Minutes
-              - 60 Minutes
-              - 90 Minutes
-              - 2 Hours
-              - 2 Hours 30 Minutes
-              - 3 Hours
-              - 3 Hours 30 Minutes
-              - 4 Hours
-            openCabinetForVisitor:
-              type: boolean
-              description: Open the Cabinet for the Visitor?
-              example: false
-            scopeOfWork:
-              $ref: '#/components/schemas/scopeOfWork'
-            supervisionReqForVisitor:
-              type: boolean
-              description: Supervision Required For the Visitor?
-              example: false
-            workVisitOrderNumber:
-              type: string
-              description: Work Visit Order Number
-              pattern: ^[ A-Za-z0-9~!|\[\]@#$%^&*()_+:"<>?\/.,;'=\-\{\}`]{1,200}$
-              example: 1-108050984499
-          required:
-          - durationVisit
-          - openCabinetForVisitor
-          - scopeOfWork
-          - supervisionReqForVisitor
-          - workVisitOrderNumber
-    order-contacts:
-      type: array
-      title: Order Contacts Array
-      description: Use this array to pass ordering contact, notification contacts and technical contact. Only one ordering contact, technical contact is allowed. One or more notification contacts are allowed. Ordering and notification contacts are always registered customers with the customer portal.
-      minItems: 3
-      example:
-      - contactType: ORDERING
-        userName: jondoe@test.com
-      - contactType: NOTIFICATION
-        userName: jondoe@test.com
-      - contactType: TECHNICAL
-        name: John Doe
-        workPhone: '1111111'
-        workPhonePrefToCall: ANYTIME
-        mobilePhone: '1111111'
-        mobilePhonePrefToCall: ANYTIME
-      items:
-        $ref: '#/components/schemas/contactInfo'
-    cage:
-      title: Cage
-      type: object
-      properties:
-        cage:
-          type: string
-          description: Cage or Suite
-          example: LD5:01:001MC3
-        cageTypes:
-          type: array
-          description: Cage Types
-          example: Shared
-          items:
-            type: string
-        accounts:
-          type: array
-          description: List of Accounts
-          items:
-            $ref: '#/components/schemas/account'
-      required:
-      - cage
-    cross-connect-install:
-      title: Cross Connect for Install
-      type: object
-      properties:
-        serialNumber:
-          type: string
-          description: Cross Connect serialNumber
-        deviceCabinet:
-          type: string
-          description: Cross Connect Cabinet
-        deviceConnectorType:
-          type: string
-          description: Cross Connect Device Connector Type
-        deviceDetails:
-          type: string
-          description: Cross Connect Device Details
-        devicePort:
-          type: string
-          description: Cross Connect Device Port
-        lightLinkVerification:
-          type: boolean
-          example: true
-          description: Cross Connect Light Link Verification (Optional). Select this option if you would like a light reading provided and tx/rx verification after the cross connect is completed. In order to verify the correct transmit/receive alignment, please ensure your Z-Side Cross Connect Partner has their end fully extended to their equipment and their port is enabled. A separate billable activity will be created.
-        scopeOfWork:
-          type: string
-          description: Scope of work
-          minLength: 1
-          maxLength: 4000
-      required:
-      - serialNumber
-      - deviceCabinet
-      - deviceConnectorType
-      - deviceDetails
-      - devicePort
     picturesDocumentRequest:
       title: Pictures Document Request
       type: object
@@ -1248,6 +1448,102 @@ components:
       - contacts
       - schedule
       - serviceDetails
+    runJumperCableRequest:
+      title: Move Jumper Cable Request
+      type: object
+      properties:
+        customerReferenceNumber:
+          $ref: '#/components/schemas/customerReferenceNumber'
+        purchaseOrder:
+          $ref: '#/components/schemas/purchaseOrder'
+        ibxLocation:
+          $ref: '#/components/schemas/ibxLocation'
+        contacts:
+          $ref: '#/components/schemas/order-contacts'
+        schedule:
+          $ref: '#/components/schemas/scheduleInfo'
+        attachments:
+          $ref: '#/components/schemas/attachmentArray'
+        serviceDetails:
+          type: object
+          description: Move Jumper Cable Service Details Object. Please fill out the Media Type, Connector Type, Cable ID(optional), 'Should Equinix provide you Tx/Rx light levels, Yes Or No?', Devices to Connect details for Device#1 (Name/Panel, Device Slot, Device Ports) and Device#2(Optional) (Name/Panel, Device Slot, Device Ports) details for each jumper cable and attach it to the form or complete scope of work text box when 'Quantity' is greater than 1. If any device is being shipped to Equinix, please include the shipment number. You may mix jumper types but if you require more than 12 jumpers ran, the site will contact you for scheduling of your request based on parts and availability. Please select the best option for your scheduling needs. If ‘Quantity’ is 1, then ‘Jumper Type’, Media Type, Connector Type, 'Should Equinix provide you Tx/Rx light levels?' and Device details are mandatory.
+          properties:
+            quantity:
+              type: string
+              description: Quantity.
+              enum:
+              - '1'
+              - '2'
+              - '3'
+              - '4'
+              - '5'
+              - '6'
+              - '7'
+              - '8'
+              - '9'
+              - '10'
+              - '11'
+              - '12'
+              - 12+
+            jumperType:
+              type: string
+              description: Jumper Type
+              enum:
+              - Jumper
+              - Pre-Wiring
+              - Patch Cable
+              - Other
+            mediaType:
+              type: string
+              description: Media Type
+              enum:
+              - Multi-mode 62.5mic
+              - Multi-mode 50mic
+              - Single-mode
+              - Cat-5
+              - Cat-6
+              - Coax
+              - POTS
+              - T1
+              - E1
+            connector:
+              type: string
+              description: Connector Type
+              enum:
+              - RJ45
+              - SC
+              - LC
+              - BNC
+              - Other
+            cableId:
+              type: string
+              description: Cable ID
+              example: A01-5-10
+            provideTxRxLightLevels:
+              type: boolean
+              description: Provide Tx/Rx Light Levels
+              example: true
+            deviceDetails:
+              type: array
+              items:
+                $ref: '#/components/schemas/device'
+            scopeOfWork:
+              $ref: '#/components/schemas/scopeOfWork'
+          required:
+          - quantity
+          - scopeOfWork
+      required:
+      - ibxLocation
+      - contacts
+      - schedule
+      - serviceDetails
+    attachmentArray:
+      type: array
+      title: Attachments Array
+      description: Use this to pass uploaded attachments. Attachments need to be uploaded using the attachments API. Maximum size of an attachment is 2MB with the following formats - bmp, jpg, jpeg, gif, png, tif, tiff, txt, doc, docx, xls, xlsx, ppt, pps, ppsx, pdf, and vsd.
+      maxItems: 5
+      items:
+        $ref: '#/components/schemas/attachment'
     contactInfo:
       title: Contact Info
       type: object
@@ -1341,160 +1637,6 @@ components:
           example: America/LosAngeles
       required:
       - contactType
-    cabinets:
-      title: Cabinets
-      type: object
-      properties:
-        cabinet:
-          type: string
-          description: Cabinet Number
-          example: LD5:01:001MC3:0718
-        cabinetType:
-          type: string
-          description: Cabinet Type, Eg. Regular, Demarc
-    patchCableInstallRequest:
-      title: Patch Cable Install Request
-      type: object
-      properties:
-        customerReferenceNumber:
-          $ref: '#/components/schemas/customerReferenceNumber'
-        purchaseOrder:
-          $ref: '#/components/schemas/purchaseOrder'
-        ibxLocation:
-          $ref: '#/components/schemas/ibxLocation'
-        contacts:
-          $ref: '#/components/schemas/order-contacts'
-        schedule:
-          $ref: '#/components/schemas/scheduleInfo'
-        attachments:
-          $ref: '#/components/schemas/attachmentArray'
-        serviceDetails:
-          type: object
-          properties:
-            crossConnects:
-              type: array
-              items:
-                $ref: '#/components/schemas/cross-connect-install'
-          required:
-          - crossConnects
-          - scopeOfWork
-      required:
-      - ibxLocation
-      - contacts
-      - schedule
-      - serviceDetails
-    scheduleInfo:
-      title: Schedule Info
-      type: object
-      description: Use this model to pass the scheduling option that best meets your needs. Please remember that additional approvals or fees may be required for expedited requests.
-      properties:
-        scheduleType:
-          type: string
-          description: <u>STANDARD:</u> <br>Choose this option and we will complete your request in the standard turnaround time pending install base readiness. Most requests are processed within 24 to 72 hours. Requests will be processed on a first come, first served basis unless they are expedited. RequestedStartDate and requestedCompletionDate ignored for standard scheduling <br><br> <u>EXPEDITED:</u> Choose this option and Equinix will prioritize your request and attempt to fulfill it as soon as reasonably possible. Additional fees may apply. RequestedCompletionDate is mandatory for expedite scheduling. RequestedStartDate is ignored for expedite scheduling. <br><br> <u>SCHEDULED_MAINTENANCE:</u> Choose this option to schedule a request for a specific date and time, including today. RequestedStartDate and requestedCompletionDate are mandatory for schedule maintenance
-          enum:
-          - STANDARD
-          - EXPEDITED
-          - SCHEDULED_MAINTENANCE
-        requestedStartDate:
-          description: Requested Start Date Time (ISO Date)<br> Cannot Past Date.
-          type: string
-          format: date-time
-          example: '2017-04-05T12:00:00Z'
-        requestedCompletionDate:
-          description: Requested Completion Date Time (ISO Date)<br>Cannot Past Date.
-          type: string
-          format: date-time
-          example: '2017-04-05T12:00:00Z'
-      required:
-      - scheduleType
-    moveJumperCableRequest:
-      title: Move Jumper Cable Request
-      type: object
-      properties:
-        customerReferenceNumber:
-          $ref: '#/components/schemas/customerReferenceNumber'
-        purchaseOrder:
-          $ref: '#/components/schemas/purchaseOrder'
-        ibxLocation:
-          $ref: '#/components/schemas/ibxLocation'
-        contacts:
-          $ref: '#/components/schemas/order-contacts'
-        schedule:
-          $ref: '#/components/schemas/scheduleInfo'
-        attachments:
-          $ref: '#/components/schemas/attachmentArray'
-        serviceDetails:
-          type: object
-          description: Move Jumper Cable Service Details Object. Please fill out the Cable ID, Current Device (Name, Slot, Port) and New Device (Name, Slot, Port) details for each jumper cable and attach it to the form or complete scope of work text box when 'Quantity' is greater than 1. You may mix jumper types but if you require more than 12 jumpers ran, the site will contact you for scheduling of your request based on parts and availability. Please select the best option for your scheduling needs. If 'Quantity' is 1, then below 'currentDeviceDetails' and 'newDeviceDetails' objects are mandatory.
-          properties:
-            quantity:
-              type: string
-              description: Quantity.
-              enum:
-              - '1'
-              - '2'
-              - '3'
-              - '4'
-              - '5'
-              - '6'
-              - '7'
-              - '8'
-              - '9'
-              - '10'
-              - '11'
-              - '12'
-              - 12+
-            cableId:
-              type: string
-              description: Enter Cable ID or ‘None’ if not applicable. This field is mandatory if 'Quantity' is 1.
-              example: A01-5-10
-            currentDeviceDetails:
-              $ref: '#/components/schemas/device'
-            newDeviceDetails:
-              $ref: '#/components/schemas/device'
-            scopeOfWork:
-              $ref: '#/components/schemas/scopeOfWork'
-          required:
-          - quantity
-          - scopeOfWork
-      required:
-      - ibxLocation
-      - contacts
-      - schedule
-      - serviceDetails
-    smarthandResponse:
-      title: Smart hands Order Response
-      description: Order has been submitted successfully
-      type: object
-      properties:
-        orderNumber:
-          type: string
-          description: Order Number
-          example: 1-108124419634
-      required:
-      - orderNumber
-      example:
-        orderNumber: 1-128726682521
-    smarthandType:
-      title: Smart hands Type
-      type: object
-      properties:
-        type:
-          type: string
-          description: Smarthand Type
-          example: EQUIPMENT_INSTALL
-        typeDescription:
-          type: string
-          description: Description of Smarthand Type
-          example: EQUIPMENT_INSTALL
-      required:
-      - type
-      - typeDescription
-    needSupportFromASubmarineCableStationEngineer:
-      type: boolean
-      title: Need Support From Submarine Cable Station Engineer
-      description: This flag is only applicable to Submarine Cable IBXs
-      example: false
     cageCleanupRequest:
       title: Cage Cleanup Request
       type: object
@@ -1537,155 +1679,6 @@ components:
       - ibxLocation
       - contacts
       - serviceDetails
-    patchCableRemovalRequest:
-      title: Patch Cable Removal Request
-      type: object
-      properties:
-        customerReferenceNumber:
-          $ref: '#/components/schemas/customerReferenceNumber'
-        purchaseOrder:
-          $ref: '#/components/schemas/purchaseOrder'
-        ibxLocation:
-          $ref: '#/components/schemas/ibxLocation'
-        contacts:
-          $ref: '#/components/schemas/order-contacts'
-        schedule:
-          $ref: '#/components/schemas/scheduleInfo'
-        attachments:
-          $ref: '#/components/schemas/attachmentArray'
-        serviceDetails:
-          type: object
-          properties:
-            crossConnects:
-              type: array
-              items:
-                $ref: '#/components/schemas/cross-connect-removal'
-          required:
-          - crossConnects
-          - scopeOfWork
-      required:
-      - ibxLocation
-      - contacts
-      - schedule
-      - serviceDetails
-    otherRequest:
-      title: Other Request
-      type: object
-      properties:
-        customerReferenceNumber:
-          $ref: '#/components/schemas/customerReferenceNumber'
-        purchaseOrder:
-          $ref: '#/components/schemas/purchaseOrder'
-        ibxLocation:
-          $ref: '#/components/schemas/ibxLocation'
-        contacts:
-          $ref: '#/components/schemas/order-contacts'
-        schedule:
-          $ref: '#/components/schemas/scheduleInfo'
-        attachments:
-          $ref: '#/components/schemas/attachmentArray'
-        serviceDetails:
-          type: object
-          description: Other
-          required:
-          - scopeOfWork
-          properties:
-            scopeOfWork:
-              $ref: '#/components/schemas/scopeOfWork'
-      required:
-      - serviceDetails
-      - schedule
-      - contacts
-      - ibxLocation
-    runJumperCableRequest:
-      title: Move Jumper Cable Request
-      type: object
-      properties:
-        customerReferenceNumber:
-          $ref: '#/components/schemas/customerReferenceNumber'
-        purchaseOrder:
-          $ref: '#/components/schemas/purchaseOrder'
-        ibxLocation:
-          $ref: '#/components/schemas/ibxLocation'
-        contacts:
-          $ref: '#/components/schemas/order-contacts'
-        schedule:
-          $ref: '#/components/schemas/scheduleInfo'
-        attachments:
-          $ref: '#/components/schemas/attachmentArray'
-        serviceDetails:
-          type: object
-          description: Move Jumper Cable Service Details Object. Please fill out the Media Type, Connector Type, Cable ID(optional), 'Should Equinix provide you Tx/Rx light levels, Yes Or No?', Devices to Connect details for Device#1 (Name/Panel, Device Slot, Device Ports) and Device#2(Optional) (Name/Panel, Device Slot, Device Ports) details for each jumper cable and attach it to the form or complete scope of work text box when 'Quantity' is greater than 1. If any device is being shipped to Equinix, please include the shipment number. You may mix jumper types but if you require more than 12 jumpers ran, the site will contact you for scheduling of your request based on parts and availability. Please select the best option for your scheduling needs. If ‘Quantity’ is 1, then ‘Jumper Type’, Media Type, Connector Type, 'Should Equinix provide you Tx/Rx light levels?' and Device details are mandatory.
-          properties:
-            quantity:
-              type: string
-              description: Quantity.
-              enum:
-              - '1'
-              - '2'
-              - '3'
-              - '4'
-              - '5'
-              - '6'
-              - '7'
-              - '8'
-              - '9'
-              - '10'
-              - '11'
-              - '12'
-              - 12+
-            jumperType:
-              type: string
-              description: Jumper Type
-              enum:
-              - Jumper
-              - Pre-Wiring
-              - Patch Cable
-              - Other
-            mediaType:
-              type: string
-              description: Media Type
-              enum:
-              - Multi-mode 62.5mic
-              - Multi-mode 50mic
-              - Single-mode
-              - Cat-5
-              - Cat-6
-              - Coax
-              - POTS
-              - T1
-              - E1
-            connector:
-              type: string
-              description: Connector Type
-              enum:
-              - RJ45
-              - SC
-              - LC
-              - BNC
-              - Other
-            cableId:
-              type: string
-              description: Cable ID
-              example: A01-5-10
-            provideTxRxLightLevels:
-              type: boolean
-              description: Provide Tx/Rx Light Levels
-              example: true
-            deviceDetails:
-              type: array
-              items:
-                $ref: '#/components/schemas/device'
-            scopeOfWork:
-              $ref: '#/components/schemas/scopeOfWork'
-          required:
-          - quantity
-          - scopeOfWork
-      required:
-      - ibxLocation
-      - contacts
-      - schedule
-      - serviceDetails
     ibxLocation:
       title: IBX Location
       type: object
@@ -1721,6 +1714,16 @@ components:
       required:
       - ibx
       - cages
+    genericError:
+      type: object
+      title: Application Errors
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+        ticketId:
+          type: string
     locatePackageRequest:
       title: Locate Package Request
       type: object
@@ -1774,55 +1777,53 @@ components:
           - possibleLocation
           - packageDescription
           - scopeOfWork
-    customerReferenceNumber:
-      type: string
-      title: Customer Reference Number
-      description: You may use numbers and text in this field to enter reference information for your records. This will also appear in your reports and details. You may use this information to search for this content on the submitted requests page.
-      minLength: 1
-      maxLength: 50
-      example: RSS41244
-    location:
-      title: Location
+    device:
+      title: Device
       type: object
       properties:
-        ibx:
+        name:
           type: string
-          description: Ibx Name
-          example: AM1
-        cages:
+          description: Device name
+          maxLength: 200
+          example: Device Name
+        slot:
+          type: string
+          description: Device slot
+          maxLength: 50
+          example: '50'
+        port:
+          type: string
+          description: Device port
+          maxLength: 50
+          example: '50'
+      required:
+      - name
+      - slot
+      - port
+    cage:
+      title: Cage
+      type: object
+      properties:
+        cage:
+          type: string
+          description: Cage or Suite
+          example: LD5:01:001MC3
+        cageTypes:
           type: array
-          description: List of cage
+          description: Cage Types
+          example: Shared
           items:
-            $ref: '#/components/schemas/cage'
+            type: string
+        accounts:
+          type: array
+          description: List of Accounts
+          items:
+            $ref: '#/components/schemas/account'
       required:
-      - ibx
-      - cages
-    purchaseOrder:
-      title: Purchase Order
+      - cage
+    patchCableInstallRequest:
+      title: Patch Cable Install Request
       type: object
-      description: Use this model to pass purchase order reference information. When purchase order selection type is EXEMTED, number is not required
-      properties:
-        number:
-          type: string
-          maxLength: 20
-          description: Purchase Order Number
-          example: '123455'
-        purchaseOrderType:
-          type: string
-          enum:
-          - EXISTING
-          - EXEMPTED
-          description: Purchase Order Selection Type
-      required:
-      - purchaseOrderType
-    shipmentUnpackRequest:
-      title: Shipment Unpack Request
-      type: object
-      required:
-      - serviceDetails
-      - ibxLocation
-      - contacts
-      - schedule
       properties:
         customerReferenceNumber:
           $ref: '#/components/schemas/customerReferenceNumber'
@@ -1838,28 +1839,26 @@ components:
           $ref: '#/components/schemas/attachmentArray'
         serviceDetails:
           type: object
-          description: Shipment Unpacking
           properties:
-            inboundShipmentOrderNumber:
-              type: string
-              description: Inbound Shipment Order Number
-              pattern: ^[ A-Za-z0-9~!|\[\]@#$%^&*()_+:"<>?\/.,;'=\-\{\}`]{1,50}$
-              example: 1-12122121
-            copyOfPackingSlipNeeded:
-              type: boolean
-              description: Copy of Packaging Slip Needed?
-              example: false
-            scopeOfWork:
-              $ref: '#/components/schemas/scopeOfWork'
-            discardShipmentMaterial:
-              type: boolean
-              description: Discard Shipment Material?
-              example: false
+            crossConnects:
+              type: array
+              items:
+                $ref: '#/components/schemas/cross-connect-install'
           required:
-          - inboundShipmentOrderNumber
-          - discardShipmentMaterial
-          - copyOfPackingSlipNeeded
+          - crossConnects
           - scopeOfWork
+      required:
+      - ibxLocation
+      - contacts
+      - schedule
+      - serviceDetails
+    scopeOfWork:
+      type: string
+      title: Scope Of Work
+      description: Enter any additional details that will help our technicians execute your request. You may also attach your scope of work as a document if you exceed the character limit in this field.
+      minLength: 1
+      maxLength: 4000
+      example: Scope of work
   parameters:
     authorizationHeader:
       name: Authorization

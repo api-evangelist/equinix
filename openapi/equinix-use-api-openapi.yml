@@ -15,13 +15,13 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- name: use
+- name: Use
   description: Operations for normal users of this service
 paths:
   /use/token:
     post:
       tags:
-      - use
+      - Use
       description: An OAuth 2.0 token endpoint supporting RFC 8693 token exchange, used to exchange an OIDC ID token issued by a trusted OIDC provider to a trusted client for an access token that can be used access other Equinix product APIs.
       requestBody:
         content:
@@ -58,19 +58,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      summary: Create use token
+      x-summary-source: derived
+      operationId: postUseToken
+      x-operation-id-source: derived
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: A short, machine-readable error code.
-        error_description:
-          type: string
-          description: A human-readable description of the error.
-      required:
-      - error
     TokenExchangeResponse:
       type: object
       properties:
@@ -91,6 +84,17 @@ components:
       - issued_token_type
       - token_type
       - expires_in
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A short, machine-readable error code.
+        error_description:
+          type: string
+          description: A human-readable description of the error.
+      required:
+      - error
   securitySchemes:
     bearerAuth:
       type: http

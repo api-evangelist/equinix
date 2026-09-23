@@ -1,7 +1,9 @@
 openapi: 3.2.0
 info:
   title: Equinix Fabric API v4 Port Packages API
-  description: 'Equinix Fabric is an advanced software-defined interconnection solution that enables you to directly, securely and dynamically connect to distributed infrastructure and digital ecosystems on platform Equinix via a single port, Customers can use Fabric to connect to: </br> 1. Cloud Service Providers - Clouds, network and other service providers.  </br> 2. Enterprises - Other Equinix customers, vendors and partners.  </br> 3. Myself - Another customer instance deployed at Equinix. </br> </br> <b>Integrations (SDKs, Tools) links:</b> </br> <a href="https://github.com/equinix/equinix-sdk-java">Fabric Java SDK</a> </br> <a href="https://github.com/equinix/equinix-sdk-go">Fabric Go SDK</a> </br> <a href="https://github.com/equinix/equinix-sdk-python">Fabric Python SDK</a> </br> <a href="https://registry.terraform.io/providers/equinix/equinix/latest/docs">Equinix Terraform Provider</a> </br> <a href="https://registry.terraform.io/modules/equinix/fabric/equinix/latest">Fabric Terraform Modules</a> </br> <a href="https://www.pulumi.com/registry/packages/equinix/">Equinix Pulumi Provider</a> </br>'
+  description: 'Equinix Fabric is an advanced software-defined interconnection solution that enables you to directly, securely and dynamically connect to distributed infrastructure and digital ecosystems on platform Equinix via a single port, Customers can use Fabric to connect to:
+
+    1.'
   termsOfService: https://www.equinix.com/about/legal/terms
   contact:
     name: Equinix API Support
@@ -17,7 +19,7 @@ security:
 - BearerAuth: []
 tags:
 - name: Port Packages
-  description: Port Packages <font color="red"> <sup color='red'>Beta</sup></font>
+  description: Port Packages Beta
 paths:
   /fabric/v4/portPackages:
     get:
@@ -75,28 +77,29 @@ paths:
                   $ref: '#/components/examples/port-packages-500'
 components:
   schemas:
-    Error:
+    AllPortPackagesResponse:
       required:
-      - errorCode
-      - errorMessage
+      - data
       type: object
       properties:
-        errorCode:
-          pattern: ^EQ-\d{7}$
-          type: string
-        errorMessage:
-          type: string
-        correlationId:
-          type: string
-        details:
-          type: string
-        help:
-          type: string
-        additionalInfo:
+        data:
           type: array
+          description: List of Port Packages
           items:
-            $ref: '#/components/schemas/PriceError_additionalInfo'
-      description: Error Response with details
+            $ref: '#/components/schemas/PortPackage'
+      description: Port Packages response
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
     PortPackage:
       required:
       - code
@@ -140,11 +143,28 @@ components:
           items:
             type: string
       description: Port Package details
-    ErrorList:
-      type: array
-      description: List of Error Message
-      items:
-        $ref: '#/components/schemas/Error'
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
     PortPackageSourceType:
       type: string
       description: Port Package Source Type
@@ -152,44 +172,7 @@ components:
       - COLO
       - REMOTE
       - BMMR
-    AllPortPackagesResponse:
-      required:
-      - data
-      type: object
-      properties:
-        data:
-          type: array
-          description: List of Port Packages
-          items:
-            $ref: '#/components/schemas/PortPackage'
-      description: Port Packages response
-    PriceError_additionalInfo:
-      type: object
-      properties:
-        property:
-          type: string
-        reason:
-          type: string
   examples:
-    '415':
-      value:
-      - errorCode: EQ-3040016
-        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
-        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
-        additionalInfo:
-        - property: contentType
-          reason: The payload format is in an unsupported format
-    '403':
-      value:
-      - errorCode: EQ-3045003
-        errorMessage: Operation not allowed
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Operation not allowed for current user
-    '401':
-      value:
-      - errorCode: EQ-3000039
-        errorMessage: User not found in request or invalid.
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
     port-packages:
       value:
         data:
@@ -232,6 +215,25 @@ components:
         errorMessage: Internal Error
         details: Internal system error
         correlationId: 80066c00-0f20-11f0-8367-d5075ee362a7
+    '403':
+      value:
+      - errorCode: EQ-3045003
+        errorMessage: Operation not allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Operation not allowed for current user
+    '415':
+      value:
+      - errorCode: EQ-3040016
+        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: contentType
+          reason: The payload format is in an unsupported format
+    '401':
+      value:
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
   securitySchemes:
     BearerAuth:
       type: http

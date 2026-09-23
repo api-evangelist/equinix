@@ -125,6 +125,28 @@ paths:
               $ref: '#/components/schemas/orderhistoryapirequest'
 components:
   schemas:
+    product-types-enum:
+      title: Product Types(Order Types) Enum
+      type: string
+      example: CROSS_CONNECT
+      enum:
+      - SMART_HANDS
+      - TROUBLE
+      - SHIPMENT
+      - WORK_VISIT
+      - SECURITY_ACCESS
+      - CONFERENCE_ROOM
+      - TOUR_REQUESTS
+      - CROSS_CONNECT
+      - CLOUD_EXCHANGE_PORT
+      - INTERNET_EXCHANGE_PORT
+      - METRO_CONNECT
+      - POWER
+      - IBX_SMARTVIEW_SENSOR
+      - ACCESSORY
+      - CAGE
+      - CABINET
+      - IBX_SMART_VIEW
     sort:
       title: Sort
       type: object
@@ -141,111 +163,16 @@ components:
           enum:
           - ASC
           - DESC
-    order-header-status-enum:
-      title: Order Header Status Enum
-      description: '<b>ENTERED: </b> Order Created. <br><b>SUBMITTED: </b> When the order is assigned to the Equinix OPS team.<br/><b>IN_PROGRESS: </b> When the order fulfillment is in progress <br/><b>PENDING_QA: </b>The order couldn''t be submitted. This order required manual intervention from Equinix end.<br/><b>CANCELLED: </b> The order is canceled.<br/><b>CLOSED: </b>Order is closed.'
-      type: string
-      example: SUBMITTED
-      enum:
-      - ENTERED
-      - SUBMITTED
-      - IN_PROGRESS
-      - PENDING_QA
-      - CANCELLED
-      - CLOSED
-    order-header:
-      title: Order Header
+    genericError:
       type: object
+      title: Application Errors
       properties:
-        orderNumber:
-          type: string
-          description: Order number
-          example: 1-12345678
-        type:
+        errors:
           type: array
-          description: List Of Proudcts Ordered in the Order.
           items:
             type: string
-            example: Cross Connect, Smart Hands
-        orderStatus:
-          $ref: '#/components/schemas/order-header-status-enum'
-        createdAt:
+        ticketId:
           type: string
-          description: Order Created DateTime in ISO Date Format
-          example: '2019-07-02T22:01:50Z'
-        account:
-          $ref: '#/components/schemas/account'
-        orderingContact:
-          $ref: '#/components/schemas/ordering-contact'
-        notificationContact:
-          $ref: '#/components/schemas/notification-contact'
-        ibx:
-          type: array
-          description: List of ibxs for the order lines.
-          items:
-            type: string
-            example: SV1
-        customerReferenceNumbers:
-          type: array
-          description: List of customer reference numbers for the order lines.
-          items:
-            type: string
-            example: cust-100
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/link'
-      required:
-      - submittedDate
-    link:
-      title: Link
-      type: object
-      properties:
-        rel:
-          type: string
-          enum:
-          - self
-          - prev
-          - next
-          - orderFullDetails
-        href:
-          type: string
-          example: https://api.equinix.com/v1/retrieve-orders
-    page-request-model:
-      title: Page Request
-      type: object
-      properties:
-        number:
-          type: integer
-          description: Page number indexed from 0.
-          default: 0
-          example: 0
-        size:
-          type: integer
-          description: Page Size.
-          maximum: 200
-          default: 10
-          example: 25
-    page-details-for-response:
-      title: Orders Response Page Details
-      type: object
-      properties:
-        size:
-          type: integer
-          description: Page Size
-          example: '25'
-        totalElements:
-          type: number
-          description: Total number of records
-          example: '160'
-        totalPages:
-          type: integer
-          description: Total number of pages
-          example: '7'
-        number:
-          type: integer
-          description: Current page number
-          example: '0'
     order-history-location-response:
       title: Order-History-Location-Response
       type: array
@@ -294,133 +221,6 @@ components:
             $ref: '#/components/schemas/link'
         page:
           $ref: '#/components/schemas/page-details-for-response'
-    account:
-      title: Account
-      type: object
-      properties:
-        accountNumber:
-          type: string
-          description: Account Number
-          example: 136008
-        accountName:
-          type: string
-          description: Name of Account
-          example: Service Corporation
-      required:
-      - accountNumber
-      - accountName
-    permissible-location:
-      title: PermissibleLocation
-      type: object
-      properties:
-        ibx:
-          $ref: '#/components/schemas/ibx-detail-for-locations-endpoint'
-        cages:
-          type: array
-          items:
-            type: string
-            description: Cage in ibx
-            example: SV1:01:0101
-    notification-contact:
-      title: Notification Contact
-      type: object
-      properties:
-        name:
-          type: string
-          description: Notification Contact name
-          example: John Doe
-        email:
-          type: string
-          description: Notification Contact email
-          example: johnDoe@test.com
-        phone:
-          type: string
-          description: Notification Contact phone
-          example: +1 408 123 1234
-    genericError:
-      type: object
-      title: Application Errors
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
-        ticketId:
-          type: string
-    ibx-detail-for-locations-endpoint:
-      title: IBX Detail (Locations Endpoint)
-      type: object
-      properties:
-        code:
-          type: string
-          description: Ibx Code
-          example: AT1
-        metro:
-          type: string
-          description: Metro code where ibx is located
-          example: AT
-        region:
-          type: string
-          description: Region where ibx is located
-          example: AMER
-        country:
-          type: string
-          description: Country where ibx is located
-          example: United States of America
-        city:
-          type: string
-          description: City where ibx is located
-          example: Atlanta
-        state:
-          type: string
-          description: State where ibx is located
-          example: GA
-        address:
-          type: string
-          description: Address of the ibx
-          example: 180 Peachtree Street NW, 2nd, 3rd and 6th Floors
-        postalCode:
-          type: string
-          description: Postal code of ibx location
-          example: '30303'
-    product-types-enum:
-      title: Product Types(Order Types) Enum
-      type: string
-      example: CROSS_CONNECT
-      enum:
-      - SMART_HANDS
-      - TROUBLE
-      - SHIPMENT
-      - WORK_VISIT
-      - SECURITY_ACCESS
-      - CONFERENCE_ROOM
-      - TOUR_REQUESTS
-      - CROSS_CONNECT
-      - CLOUD_EXCHANGE_PORT
-      - INTERNET_EXCHANGE_PORT
-      - METRO_CONNECT
-      - POWER
-      - IBX_SMARTVIEW_SENSOR
-      - ACCESSORY
-      - CAGE
-      - CABINET
-      - IBX_SMART_VIEW
-    ordering-contact:
-      title: Ordering Contact
-      type: object
-      properties:
-        name:
-          type: string
-          description: Ordering Contact name
-          example: John Doe
-        email:
-          type: string
-          description: Ordering Contact email
-          example: johnDoe@test.com
-        phone:
-          type: string
-          description: Ordering Contact phone
-          example: +1 408 123 1234
     filters:
       title: Retrieve Order filters
       type: object
@@ -473,6 +273,206 @@ components:
         - SV1
         fromDate: 05/01/2018
         toDate: 05/02/2018
+    page-details-for-response:
+      title: Orders Response Page Details
+      type: object
+      properties:
+        size:
+          type: integer
+          description: Page Size
+          example: '25'
+        totalElements:
+          type: number
+          description: Total number of records
+          example: '160'
+        totalPages:
+          type: integer
+          description: Total number of pages
+          example: '7'
+        number:
+          type: integer
+          description: Current page number
+          example: '0'
+    ibx-detail-for-locations-endpoint:
+      title: IBX Detail (Locations Endpoint)
+      type: object
+      properties:
+        code:
+          type: string
+          description: Ibx Code
+          example: AT1
+        metro:
+          type: string
+          description: Metro code where ibx is located
+          example: AT
+        region:
+          type: string
+          description: Region where ibx is located
+          example: AMER
+        country:
+          type: string
+          description: Country where ibx is located
+          example: United States of America
+        city:
+          type: string
+          description: City where ibx is located
+          example: Atlanta
+        state:
+          type: string
+          description: State where ibx is located
+          example: GA
+        address:
+          type: string
+          description: Address of the ibx
+          example: 180 Peachtree Street NW, 2nd, 3rd and 6th Floors
+        postalCode:
+          type: string
+          description: Postal code of ibx location
+          example: '30303'
+    link:
+      title: Link
+      type: object
+      properties:
+        rel:
+          type: string
+          enum:
+          - self
+          - prev
+          - next
+          - orderFullDetails
+        href:
+          type: string
+          example: https://api.equinix.com/v1/retrieve-orders
+    permissible-location:
+      title: PermissibleLocation
+      type: object
+      properties:
+        ibx:
+          $ref: '#/components/schemas/ibx-detail-for-locations-endpoint'
+        cages:
+          type: array
+          items:
+            type: string
+            description: Cage in ibx
+            example: SV1:01:0101
+    order-header-status-enum:
+      title: Order Header Status Enum
+      description: '<b>ENTERED: </b> Order Created. <br><b>SUBMITTED: </b> When the order is assigned to the Equinix OPS team.<br/><b>IN_PROGRESS: </b> When the order fulfillment is in progress <br/><b>PENDING_QA: </b>The order couldn''t be submitted. This order required manual intervention from Equinix end.<br/><b>CANCELLED: </b> The order is canceled.<br/><b>CLOSED: </b>Order is closed.'
+      type: string
+      example: SUBMITTED
+      enum:
+      - ENTERED
+      - SUBMITTED
+      - IN_PROGRESS
+      - PENDING_QA
+      - CANCELLED
+      - CLOSED
+    page-request-model:
+      title: Page Request
+      type: object
+      properties:
+        number:
+          type: integer
+          description: Page number indexed from 0.
+          default: 0
+          example: 0
+        size:
+          type: integer
+          description: Page Size.
+          maximum: 200
+          default: 10
+          example: 25
+    account:
+      title: Account
+      type: object
+      properties:
+        accountNumber:
+          type: string
+          description: Account Number
+          example: 136008
+        accountName:
+          type: string
+          description: Name of Account
+          example: Service Corporation
+      required:
+      - accountNumber
+      - accountName
+    ordering-contact:
+      title: Ordering Contact
+      type: object
+      properties:
+        name:
+          type: string
+          description: Ordering Contact name
+          example: John Doe
+        email:
+          type: string
+          description: Ordering Contact email
+          example: johnDoe@test.com
+        phone:
+          type: string
+          description: Ordering Contact phone
+          example: +1 408 123 1234
+    order-header:
+      title: Order Header
+      type: object
+      properties:
+        orderNumber:
+          type: string
+          description: Order number
+          example: 1-12345678
+        type:
+          type: array
+          description: List Of Proudcts Ordered in the Order.
+          items:
+            type: string
+            example: Cross Connect, Smart Hands
+        orderStatus:
+          $ref: '#/components/schemas/order-header-status-enum'
+        createdAt:
+          type: string
+          description: Order Created DateTime in ISO Date Format
+          example: '2019-07-02T22:01:50Z'
+        account:
+          $ref: '#/components/schemas/account'
+        orderingContact:
+          $ref: '#/components/schemas/ordering-contact'
+        notificationContact:
+          $ref: '#/components/schemas/notification-contact'
+        ibx:
+          type: array
+          description: List of ibxs for the order lines.
+          items:
+            type: string
+            example: SV1
+        customerReferenceNumbers:
+          type: array
+          description: List of customer reference numbers for the order lines.
+          items:
+            type: string
+            example: cust-100
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/link'
+      required:
+      - submittedDate
+    notification-contact:
+      title: Notification Contact
+      type: object
+      properties:
+        name:
+          type: string
+          description: Notification Contact name
+          example: John Doe
+        email:
+          type: string
+          description: Notification Contact email
+          example: johnDoe@test.com
+        phone:
+          type: string
+          description: Notification Contact phone
+          example: +1 408 123 1234
   parameters:
     authorizationHeader:
       name: Authorization

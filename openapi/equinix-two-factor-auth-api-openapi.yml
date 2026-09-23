@@ -10,28 +10,45 @@ info:
     name: Equinix Metal
     url: https://metal.equinix.com/legal/
   termsOfService: https://metal.equinix.com/legal/
-  title: Metal Password Reset Tokens API
+  title: Metal Two Factor Auth API
   version: 1.0.0
 servers:
 - url: https://api.equinix.com/metal/v1
 security:
 - x_auth_token: []
 tags:
-- description: Password Reset Token Management
+- description: Two Factor Authentication Management. Check out the product docs to learn more about 2FA.
   externalDocs:
-    url: https://metal.equinix.com/developers/docs/accounts/users/#security-settings
-  name: PasswordResetTokens
+    url: https://metal.equinix.com/developers/docs/accounts/two-factor-authentication/
+  name: Two Factor Auth
 paths:
-  /reset-password:
+  /user/otp/app:
     delete:
-      description: Resets current user password.
-      operationId: resetPassword
+      description: Disables two factor authentication.
+      operationId: disableTfaApp
       responses:
-        '201':
+        '204':
+          description: no content
+        '401':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NewPassword'
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: not found
+      summary: Disable two factor authentication
+      tags:
+      - Two Factor Auth
+    post:
+      description: Enables two factor authentication using authenticator app.
+      operationId: enableTfaApp
+      responses:
+        '200':
           description: ok
         '401':
           content:
@@ -39,43 +56,46 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: unauthorized
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: unprocessable entity
-      summary: Reset current user password
+      summary: Enable two factor auth using app
       tags:
-      - PasswordResetTokens
-    post:
-      description: Creates a password reset token
-      operationId: createPasswordResetToken
-      parameters:
-      - description: Email of user to create password reset token
-        in: query
-        name: email
-        required: true
-        schema:
-          type: string
+      - Two Factor Auth
+  /user/otp/sms:
+    delete:
+      description: Disables two factor authentication.
+      operationId: disableTfaSms
       responses:
-        '201':
-          description: created
+        '204':
+          description: no content
         '401':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
           description: unauthorized
-        '422':
+        '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: unprocessable entity
-      summary: Create a password reset token
+          description: not found
+      summary: Disable two factor authentication
       tags:
-      - PasswordResetTokens
+      - Two Factor Auth
+    post:
+      description: Enables two factor authentication with sms.
+      operationId: enableTfaSms
+      responses:
+        '200':
+          description: ok
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unauthorized
+      summary: Enable two factor auth using sms
+      tags:
+      - Two Factor Auth
 components:
   schemas:
     Error:
@@ -90,13 +110,6 @@ components:
             description: An error message that contributed to the request failing.
             type: string
           type: array
-      type: object
-    NewPassword:
-      example:
-        new_password: new_password
-      properties:
-        new_password:
-          type: string
       type: object
   securitySchemes:
     x_auth_token:

@@ -690,75 +690,6 @@ paths:
                 correlationId: '99740129126918'
 components:
   schemas:
-    media_types:
-      type: string
-      description: Name of the media type that corresponds with the connection service.
-      example: SINGLE_MODE_FIBER
-      enum:
-      - COAX
-      - MP4_CABLE
-      - 50_MICRON_MULTI_MODE_FIBER
-      - 50_MICRON_MULTI_MODE_FIBER_OM2
-      - 50_MICRON_MULTI_MODE_FIBER_OM3
-      - 50_MICRON_MULTI_MODE_FIBER_OM4
-      - 62.5_MICRON_MULTI_MODE_FIBER
-      - 62.5_MICRON_MULTI_MODE_FIBER_OM1
-      - ABAM
-      - CAT3
-      - CAT5E
-      - CAT6
-      - CAT6A
-      - OS1
-      - SINGLE_MODE_FIBER
-    locations_details:
-      type: object
-      properties:
-        ibx:
-          type: string
-          description: IBX locations code
-          example: AM1
-        accessRestricted:
-          type: boolean
-          description: IBX access is restricted when the value is `true`
-          default: false
-        specialPrivilege:
-          type: boolean
-          description: When set to `true`, user will be allowed to access IBXs with restricted access. This only applies for specific partners
-          default: false
-        accounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/accounts'
-        cages:
-          type: array
-          items:
-            $ref: '#/components/schemas/cage_details'
-    provider:
-      type: object
-      properties:
-        providerAccountName:
-          type: string
-          example: Account NAME
-          description: Cage account name of service provider
-        providerAccountNumber:
-          type: string
-          example: '1000001'
-          description: Cage account number of service provider
-    accounts:
-      type: object
-      properties:
-        accountNumber:
-          type: string
-          description: Customer account number
-          example: '100013200'
-        accountName:
-          type: string
-          description: Customer account name
-          example: Legal Account name
-        allowOrder:
-          type: boolean
-          description: When set to `true`, User is allowed to place an orders on this account
-          default: true
     Connection_services:
       type: string
       description: The name of the available connection service.
@@ -770,6 +701,33 @@ components:
       - POTS
       - SINGLE_MODE_FIBER
       - UTP
+    patch_panel_response:
+      type: object
+      required:
+      - id
+      properties:
+        patchPanelId:
+          type: string
+          example: PP:000:01231231
+          description: Patch panel unique ID / serial number
+        availablePortCount:
+          type: number
+          example: 48
+          description: Available ports for use
+        patchPanelReferenceId:
+          type: string
+          description: Unique reference ID associated with patch panel
+        ifcEnabled:
+          type: boolean
+          default: false
+          example: false
+          description: Patch panel will support only intra facility when `true`
+        provisioningType:
+          type: string
+          enum:
+          - REGULAR
+          - FAST_PROVISIONING
+          description: If `REGULAR`, order will be provisioned as per standard lead time. If `FAST_PROVISIONING`, order is typically provisioned in 30min through the support of fast provisioning scheduling. However, service may be delayed due to system maintenance
     Connection_services_details:
       type: array
       items:
@@ -803,6 +761,91 @@ components:
                   example:
                   - 1
                   - 2
+    protocol_types:
+      type: string
+      description: Name of the protocol type that corresponds with the media type.
+      example: FAST_ETHERNET
+      enum:
+      - ANTENNA
+      - DS-3
+      - E1
+      - E3
+      - ETHERNET
+      - FAST_ETHERNET
+      - GIGABIT_ETHERNET
+      - POTS
+      - T1
+      - FIBRE_CHANNEL
+      - 10_GIG_ETHERNET
+      - 100_GIG_ETHERNET
+      - 40_GIG_ETHERNET
+      - DARK_FIBER
+      - DWDM
+      - 56K
+      - ISDN
+      - OC-12
+      - OC-192
+      - OC-3
+      - OC-48
+      - STM-1
+      - STM-16
+      - STM-4
+      - STM-64
+      - NA
+    locations_details_response:
+      type: object
+      properties:
+        crossConnects:
+          type: array
+          items:
+            $ref: '#/components/schemas/locations_details'
+    userPortDetails:
+      type: object
+      properties:
+        portNumber:
+          type: number
+          example: 7
+          description: Port number that is currently in use
+        serialNumber:
+          type: string
+          example: 99910002
+          description: Serial number or cable id
+        connectionServicesName:
+          $ref: '#/components/schemas/Connection_services'
+        zSideProviderName:
+          type: string
+          example: ABC Telecom
+          description: Name of Z-Side service provider
+        circuitId:
+          type: string
+          example: /L8YX/999999//ATI/
+    locations_details:
+      type: object
+      properties:
+        ibx:
+          type: string
+          description: IBX locations code
+          example: AM1
+        accessRestricted:
+          type: boolean
+          description: IBX access is restricted when the value is `true`
+          default: false
+        specialPrivilege:
+          type: boolean
+          description: When set to `true`, user will be allowed to access IBXs with restricted access. This only applies for specific partners
+          default: false
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/accounts'
+        cages:
+          type: array
+          items:
+            $ref: '#/components/schemas/cage_details'
+    provider_details:
+      type: array
+      items:
+        $ref: '#/components/schemas/provider'
     patchpanel_Response:
       title: Get all the patch panel response data
       required:
@@ -839,6 +882,46 @@ components:
           enum:
           - PRIVATE
           - DEMARCATION
+    provider:
+      type: object
+      properties:
+        providerAccountName:
+          type: string
+          example: Account NAME
+          description: Cage account name of service provider
+        providerAccountNumber:
+          type: string
+          example: '1000001'
+          description: Cage account number of service provider
+    connector_types:
+      type: string
+      description: Name of the connector type that corresponds with the connection service
+      example: LC
+      enum:
+      - BNC
+      - LC
+      - FC
+      - SC
+      - ST
+      - WIRE_WRAP
+      - RJ45
+      - E2000
+      - RJ11
+    accounts:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+          description: Customer account number
+          example: '100013200'
+        accountName:
+          type: string
+          description: Customer account name
+          example: Legal Account name
+        allowOrder:
+          type: boolean
+          description: When set to `true`, User is allowed to place an orders on this account
+          default: true
     Error:
       title: Error Info
       type: array
@@ -871,58 +954,6 @@ components:
               reason:
                 type: string
                 example: missing id
-    connector_types:
-      type: string
-      description: Name of the connector type that corresponds with the connection service
-      example: LC
-      enum:
-      - BNC
-      - LC
-      - FC
-      - SC
-      - ST
-      - WIRE_WRAP
-      - RJ45
-      - E2000
-      - RJ11
-    patch_panel_response:
-      type: object
-      required:
-      - id
-      properties:
-        patchPanelId:
-          type: string
-          example: PP:000:01231231
-          description: Patch panel unique ID / serial number
-        availablePortCount:
-          type: number
-          example: 48
-          description: Available ports for use
-        patchPanelReferenceId:
-          type: string
-          description: Unique reference ID associated with patch panel
-        ifcEnabled:
-          type: boolean
-          default: false
-          example: false
-          description: Patch panel will support only intra facility when `true`
-        provisioningType:
-          type: string
-          enum:
-          - REGULAR
-          - FAST_PROVISIONING
-          description: If `REGULAR`, order will be provisioned as per standard lead time. If `FAST_PROVISIONING`, order is typically provisioned in 30min through the support of fast provisioning scheduling. However, service may be delayed due to system maintenance
-    locations_details_response:
-      type: object
-      properties:
-        crossConnects:
-          type: array
-          items:
-            $ref: '#/components/schemas/locations_details'
-    provider_details:
-      type: array
-      items:
-        $ref: '#/components/schemas/provider'
     patch_panel_details:
       type: object
       properties:
@@ -1001,57 +1032,26 @@ components:
           - REGULAR
           - FAST_PROVISIONING
           description: If `REGULAR`, order will be provisioned as per standard lead time. If `FAST_PROVISIONING`, order is typically provisioned in 30min through the support of fast provisioning scheduling. However, service may be delayed due to system maintenance
-    protocol_types:
+    media_types:
       type: string
-      description: Name of the protocol type that corresponds with the media type.
-      example: FAST_ETHERNET
+      description: Name of the media type that corresponds with the connection service.
+      example: SINGLE_MODE_FIBER
       enum:
-      - ANTENNA
-      - DS-3
-      - E1
-      - E3
-      - ETHERNET
-      - FAST_ETHERNET
-      - GIGABIT_ETHERNET
-      - POTS
-      - T1
-      - FIBRE_CHANNEL
-      - 10_GIG_ETHERNET
-      - 100_GIG_ETHERNET
-      - 40_GIG_ETHERNET
-      - DARK_FIBER
-      - DWDM
-      - 56K
-      - ISDN
-      - OC-12
-      - OC-192
-      - OC-3
-      - OC-48
-      - STM-1
-      - STM-16
-      - STM-4
-      - STM-64
-      - NA
-    userPortDetails:
-      type: object
-      properties:
-        portNumber:
-          type: number
-          example: 7
-          description: Port number that is currently in use
-        serialNumber:
-          type: string
-          example: 99910002
-          description: Serial number or cable id
-        connectionServicesName:
-          $ref: '#/components/schemas/Connection_services'
-        zSideProviderName:
-          type: string
-          example: ABC Telecom
-          description: Name of Z-Side service provider
-        circuitId:
-          type: string
-          example: /L8YX/999999//ATI/
+      - COAX
+      - MP4_CABLE
+      - 50_MICRON_MULTI_MODE_FIBER
+      - 50_MICRON_MULTI_MODE_FIBER_OM2
+      - 50_MICRON_MULTI_MODE_FIBER_OM3
+      - 50_MICRON_MULTI_MODE_FIBER_OM4
+      - 62.5_MICRON_MULTI_MODE_FIBER
+      - 62.5_MICRON_MULTI_MODE_FIBER_OM1
+      - ABAM
+      - CAT3
+      - CAT5E
+      - CAT6
+      - CAT6A
+      - OS1
+      - SINGLE_MODE_FIBER
   securitySchemes:
     BearerAuth:
       type: http

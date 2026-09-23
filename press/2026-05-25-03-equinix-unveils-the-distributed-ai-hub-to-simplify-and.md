@@ -1,7 +1,9 @@
 ---
 title: Equinix Unveils the Distributed AI Hub to Simplify and ...
 url: https://newsroom.equinix.com/2026-03-11-Equinix-Unveils-the-Distributed-AI-Hub-to-Simplify-and-Secure-Enterprise-AI-Infrastructure
-date: '2026-05-25'
+published: '2026-03-11'
+date_basis: url-derived
+harvested: '2026-05-25'
 query: '"Equinix" press release artificial intelligence'
 position: 3
 source: serpapi-google

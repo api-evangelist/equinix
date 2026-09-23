@@ -3,7 +3,7 @@ info:
   title: Equinix API Authentication OAuth2 Token API
   description: 'Equinix APIs use the OAuth 2.0 for authentication and authorization. Equinix supports the resource owner password and the client credentials flow.
 
-    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application  requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
+    To begin, obtain OAuth 2.0 client credentials from the Equinix Developer Console under "My Apps". Then your client application requests an access token from the Equinix API Authorization endpoint, extracts the access_token from the response, and sends the Bearer token to the API that you want to access'
   termsOfService: https://www.equinix.com/about/legal/terms
   contact:
     name: Equinix API Support
@@ -19,9 +19,7 @@ paths:
       tags:
       - OAuth2 Token
       summary: Renew Access Tokens
-      description: 'Use this API to refresh an access token using its refresh token. A valid refresh token is needed to retrieve a new access_token.
-
-        '
+      description: Use this API to refresh an access token using its refresh token. A valid refresh token is needed to retrieve a new access_token.
       operationId: RefreshOAuth2AccessToken
       requestBody:
         description: Refresh token json payload.
@@ -49,9 +47,7 @@ paths:
       tags:
       - OAuth2 Token
       summary: Generate New Access Token
-      description: 'This API handles authentication and authorization of the API developer. It returns an access_token which would be valid for 60 minutes. The user account will get locked after 5 successive invalid attempts.
-
-        '
+      description: This API handles authentication and authorization of the API developer. It returns an access_token which would be valid for 60 minutes. The user account will get locked after 5 successive invalid attempts.
       operationId: GetOAuth2AccessToken
       requestBody:
         description: Request token json payload
@@ -76,6 +72,30 @@ paths:
       x-codegen-request-body-name: Payload
 components:
   schemas:
+    Oauth2TokenErrorResponse:
+      required:
+      - developer_message
+      - error_code
+      - error_domain
+      - error_message
+      - error_title
+      type: object
+      properties:
+        error_domain:
+          type: string
+          description: The module associated with this error
+        error_title:
+          type: string
+          description: The error title
+        error_code:
+          type: string
+          description: The code used to identify the error category
+        developer_message:
+          type: string
+          description: The error message to be used for auditing purpose by the consuming application
+        error_message:
+          type: string
+          description: The error message which could be displayed to the end user
     Oauth2TokenResponse:
       required:
       - access_token
@@ -105,6 +125,22 @@ components:
           type: string
           description: The max validity in seconds for the refresh_token. This field is not retruned for the "client_credentials" grant type
           default: 5182560 (60 days)
+    Oauth2RefreshTokenRequest:
+      required:
+      - client_id
+      - client_secret
+      - refresh_token
+      type: object
+      properties:
+        client_id:
+          type: string
+          description: API Consumer Key available under "My Apps" in developer portal
+        client_secret:
+          type: string
+          description: API Consumer secret available under "My Apps" in developer portal
+        refresh_token:
+          type: string
+          description: The OAuth2 refresh_token retrieved from the previous successful Access Token API call
     Oauth2TokenRequest:
       required:
       - client_id
@@ -130,46 +166,6 @@ components:
           type: string
           description: For enhanced security, you may encrypt the password value while requesting for an access_token. Currently only "md5-b64" hashing is supported. Any other value would treat password value as raw string
           default: none
-    Oauth2TokenErrorResponse:
-      required:
-      - developer_message
-      - error_code
-      - error_domain
-      - error_message
-      - error_title
-      type: object
-      properties:
-        error_domain:
-          type: string
-          description: The module associated with this error
-        error_title:
-          type: string
-          description: The error title
-        error_code:
-          type: string
-          description: The code used to identify the error category
-        developer_message:
-          type: string
-          description: The error message to be used for auditing purpose by the consuming application
-        error_message:
-          type: string
-          description: The error message which could be displayed to the end user
-    Oauth2RefreshTokenRequest:
-      required:
-      - client_id
-      - client_secret
-      - refresh_token
-      type: object
-      properties:
-        client_id:
-          type: string
-          description: API Consumer Key available under "My Apps" in developer portal
-        client_secret:
-          type: string
-          description: API Consumer secret available under "My Apps" in developer portal
-        refresh_token:
-          type: string
-          description: The OAuth2 refresh_token retrieved from the previous successful Access Token API call
 x-eqx-api-linter-skip-rules:
 - 3
 - 38
