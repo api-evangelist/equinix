@@ -116,19 +116,6 @@ paths:
       - Usages
 components:
   schemas:
-    DeviceUsage:
-      example:
-        total: total
-        unit: unit
-        quantity: quantity
-      properties:
-        quantity:
-          type: string
-        total:
-          type: string
-        unit:
-          type: string
-      type: object
     ProjectUsageList:
       example:
         usages:
@@ -154,6 +141,34 @@ components:
         usages:
           items:
             $ref: '#/components/schemas/ProjectUsage'
+          type: array
+      type: object
+    DeviceUsageList:
+      example:
+        usages:
+        - total: total
+          unit: unit
+          quantity: quantity
+        - total: total
+          unit: unit
+          quantity: quantity
+      properties:
+        usages:
+          items:
+            $ref: '#/components/schemas/DeviceUsage'
+          type: array
+      type: object
+    Error:
+      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
+      properties:
+        error:
+          description: A description of the error that caused the request to fail.
+          type: string
+        errors:
+          description: A list of errors that contributed to the request failing.
+          items:
+            description: An error message that contributed to the request failing.
+            type: string
           type: array
       type: object
     ProjectUsage:
@@ -187,33 +202,18 @@ components:
         unit:
           type: string
       type: object
-    DeviceUsageList:
+    DeviceUsage:
       example:
-        usages:
-        - total: total
-          unit: unit
-          quantity: quantity
-        - total: total
-          unit: unit
-          quantity: quantity
+        total: total
+        unit: unit
+        quantity: quantity
       properties:
-        usages:
-          items:
-            $ref: '#/components/schemas/DeviceUsage'
-          type: array
-      type: object
-    Error:
-      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
-      properties:
-        error:
-          description: A description of the error that caused the request to fail.
+        quantity:
           type: string
-        errors:
-          description: A list of errors that contributed to the request failing.
-          items:
-            description: An error message that contributed to the request failing.
-            type: string
-          type: array
+        total:
+          type: string
+        unit:
+          type: string
       type: object
   securitySchemes:
     x_auth_token:

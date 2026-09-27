@@ -130,6 +130,18 @@ paths:
                 $ref: '#/components/schemas/ErrorList'
 components:
   schemas:
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
     Pagination:
       required:
       - limit
@@ -157,49 +169,6 @@ components:
           type: string
           description: URL relative to the previous item in the response.
       description: Pagination response information
-    PriceError_additionalInfo:
-      type: object
-      properties:
-        property:
-          type: string
-        reason:
-          type: string
-    TagRequest:
-      required:
-      - displayName
-      - name
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of tag
-          example: RESOURCE_TAG
-        name:
-          minLength: 1
-          type: string
-          description: Name of the Tag
-        displayName:
-          maxLength: 24
-          minLength: 1
-          type: string
-          description: Display name of the Tag
-      description: Equinix Fabric Tag Request Object
-    ErrorList:
-      type: array
-      description: List of Error Message
-      items:
-        $ref: '#/components/schemas/Error'
-    TagListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/TagResponse'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-      description: Equinix Fabric Tag List Response Object
     Error:
       required:
       - errorCode
@@ -222,6 +191,37 @@ components:
           items:
             $ref: '#/components/schemas/PriceError_additionalInfo'
       description: Error Response with details
+    TagRequest:
+      required:
+      - displayName
+      - name
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of tag
+          example: RESOURCE_TAG
+        name:
+          minLength: 1
+          type: string
+          description: Name of the Tag
+        displayName:
+          maxLength: 24
+          minLength: 1
+          type: string
+          description: Display name of the Tag
+      description: Equinix Fabric Tag Request Object
+    TagListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      description: Equinix Fabric Tag List Response Object
     TagResponse:
       type: object
       properties:

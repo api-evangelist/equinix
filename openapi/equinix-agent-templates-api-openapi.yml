@@ -164,61 +164,19 @@ paths:
                   $ref: '#/components/examples/AgentTemplate_500'
 components:
   schemas:
-    Changelog:
+    PriceError_additionalInfo:
       type: object
       properties:
-        createdBy:
+        property:
           type: string
-          description: Created by User Key
-          example: johnsmith
-        createdByFullName:
+        reason:
           type: string
-          description: Created by User Full Name
-          example: John Smith
-        createdByEmail:
+    AgentDefinition:
+      type: object
+      properties:
+        url:
           type: string
-          description: Created by User Email Address
-          example: john.smith@example.com
-        createdDateTime:
-          type: string
-          description: Created by Date and Time
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        updatedBy:
-          type: string
-          description: Updated by User Key
-          example: johnsmith
-        updatedByFullName:
-          type: string
-          description: Updated by User Full Name
-          example: John Smith
-        updatedByEmail:
-          type: string
-          description: Updated by User Email Address
-          example: john.smith@example.com
-        updatedDateTime:
-          type: string
-          description: Updated by Date and Time
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        deletedBy:
-          type: string
-          description: Deleted by User Key
-          example: johnsmith
-        deletedByFullName:
-          type: string
-          description: Deleted by User Full Name
-          example: John Smith
-        deletedByEmail:
-          type: string
-          description: Deleted by User Email Address
-          example: john.smith@example.com
-        deletedDateTime:
-          type: string
-          description: Deleted by Date and Time
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-      description: Change log
+          description: Agent Template ReadMe (.md) Definition
     AgentTemplates:
       type: object
       properties:
@@ -289,18 +247,71 @@ components:
           type: string
           description: URL relative to the previous item in the response.
       description: Pagination response information
-    PriceError_additionalInfo:
+    Changelog:
       type: object
       properties:
-        property:
+        createdBy:
           type: string
-        reason:
+          description: Created by User Key
+          example: johnsmith
+        createdByFullName:
           type: string
-    AgentTemplateId:
-      type: string
-      description: Agent Template UUID
-      format: uuid
-      example: 657400f8-d360-11e9-bb65-2a2ae2dbcce5
+          description: Created by User Full Name
+          example: John Smith
+        createdByEmail:
+          type: string
+          description: Created by User Email Address
+          example: john.smith@example.com
+        createdDateTime:
+          type: string
+          description: Created by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedBy:
+          type: string
+          description: Updated by User Key
+          example: johnsmith
+        updatedByFullName:
+          type: string
+          description: Updated by User Full Name
+          example: John Smith
+        updatedByEmail:
+          type: string
+          description: Updated by User Email Address
+          example: john.smith@example.com
+        updatedDateTime:
+          type: string
+          description: Updated by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        deletedBy:
+          type: string
+          description: Deleted by User Key
+          example: johnsmith
+        deletedByFullName:
+          type: string
+          description: Deleted by User Full Name
+          example: John Smith
+        deletedByEmail:
+          type: string
+          description: Deleted by User Email Address
+          example: john.smith@example.com
+        deletedDateTime:
+          type: string
+          description: Deleted by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+      description: Change log
+    AgentTemplateGetAllResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/AgentTemplates'
     ErrorList:
       type: array
       description: List of Error Message
@@ -328,23 +339,18 @@ components:
           items:
             $ref: '#/components/schemas/PriceError_additionalInfo'
       description: Error Response with details
-    AgentDefinition:
-      type: object
-      properties:
-        url:
-          type: string
-          description: Agent Template ReadMe (.md) Definition
-    AgentTemplateGetAllResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          description: Data returned from the API call.
-          items:
-            $ref: '#/components/schemas/AgentTemplates'
+    AgentTemplateId:
+      type: string
+      description: Agent Template UUID
+      format: uuid
+      example: 657400f8-d360-11e9-bb65-2a2ae2dbcce5
   examples:
+    AgentTemplate_500:
+      value:
+      - errorCode: EQ-3164004
+        errorMessage: Internal Server Error
+        correlationId: f9018571-1001-4422-978b-bfa38ed6b92e
+        details: Internal Server Error
     AgentTemplatesResponseExample:
       value:
         href: https://api.equinix.com/fabric/v4/agentTemplates/d684aa26-8276-48b7-bb42-a6d9def0a418
@@ -361,25 +367,6 @@ components:
           createdDateTime: 2024-05-06 16:21:18.545214
           updatedBy: testuser
           updatedDateTime: 2024-05-06 16:21:18.545214+00:00
-    AgentTemplate_404:
-      value:
-      - errorCode: EQ-3164811
-        errorMessage: Agent Template not found or already deleted
-        correlationId: 9b6baf30-3eb0-458c-af8b-fff3fae32bc7
-        details: Agent Template not found or already deleted
-    AgentTemplate_401:
-      value:
-      - errorCode: EQ-3164013
-        errorMessage: User not found in request or invalid.
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        additionalInfo:
-        - reason: You are unauthorized to perform this operation
-    AgentTemplate_500:
-      value:
-      - errorCode: EQ-3164004
-        errorMessage: Internal Server Error
-        correlationId: f9018571-1001-4422-978b-bfa38ed6b92e
-        details: Internal Server Error
     AgentTemplatesGetAllResponseExample:
       value:
         pagination:
@@ -401,6 +388,19 @@ components:
             createdDateTime: 2024-05-06 16:21:18.545214
             updatedBy: testuser
             updatedDateTime: 2024-05-06 16:21:18.545214+00:00
+    AgentTemplate_401:
+      value:
+      - errorCode: EQ-3164013
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        additionalInfo:
+        - reason: You are unauthorized to perform this operation
+    AgentTemplate_404:
+      value:
+      - errorCode: EQ-3164811
+        errorMessage: Agent Template not found or already deleted
+        correlationId: 9b6baf30-3eb0-458c-af8b-fff3fae32bc7
+        details: Agent Template not found or already deleted
     AgentTemplate_403:
       value:
       - errorCode: EQ-3164013

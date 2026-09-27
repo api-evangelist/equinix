@@ -158,6 +158,37 @@ paths:
       - SelfServiceReservations
 components:
   schemas:
+    CreateSelfServiceReservationRequest:
+      example:
+        item:
+        - amount: 0.8008282
+          metro_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity: 6
+          term: term
+          plan_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - amount: 0.8008282
+          metro_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity: 6
+          term: term
+          plan_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        period:
+          unit: null
+          count: null
+        notes: notes
+        start_date: 2000-01-23 04:56:07+00:00
+      properties:
+        item:
+          items:
+            $ref: '#/components/schemas/SelfServiceReservationItemRequest'
+          type: array
+        notes:
+          type: string
+        period:
+          $ref: '#/components/schemas/CreateSelfServiceReservationRequest_period'
+        start_date:
+          format: date-time
+          type: string
+      type: object
     SelfServiceReservationItemResponse:
       example:
         plan_slug: plan_slug
@@ -202,16 +233,6 @@ components:
         term:
           type: string
       type: object
-    CreateSelfServiceReservationRequest_period:
-      example:
-        unit: null
-        count: null
-      properties:
-        count:
-          $ref: '#/components/schemas/CreateSelfServiceReservationRequest_period_count'
-        unit:
-          $ref: '#/components/schemas/CreateSelfServiceReservationRequest_period_unit'
-      type: object
     SelfServiceReservationItemRequest:
       example:
         amount: 0.8008282
@@ -234,117 +255,6 @@ components:
         term:
           type: string
       type: object
-    CreateSelfServiceReservationRequest:
-      example:
-        item:
-        - amount: 0.8008282
-          metro_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          quantity: 6
-          term: term
-          plan_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - amount: 0.8008282
-          metro_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          quantity: 6
-          term: term
-          plan_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        period:
-          unit: null
-          count: null
-        notes: notes
-        start_date: 2000-01-23 04:56:07+00:00
-      properties:
-        item:
-          items:
-            $ref: '#/components/schemas/SelfServiceReservationItemRequest'
-          type: array
-        notes:
-          type: string
-        period:
-          $ref: '#/components/schemas/CreateSelfServiceReservationRequest_period'
-        start_date:
-          format: date-time
-          type: string
-      type: object
-    SelfServiceReservationResponse:
-      example:
-        item:
-        - plan_slug: plan_slug
-          amount: 0.8008282
-          metro_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          quantity: 6
-          metro_code: metro_code
-          metro_name: metro_name
-          term: term
-          id: id
-          plan_categories:
-          - plan_categories
-          - plan_categories
-          plan_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          plan_name: plan_name
-        - plan_slug: plan_slug
-          amount: 0.8008282
-          metro_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          quantity: 6
-          metro_code: metro_code
-          metro_name: metro_name
-          term: term
-          id: id
-          plan_categories:
-          - plan_categories
-          - plan_categories
-          plan_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          plan_name: plan_name
-        period:
-          unit: null
-          count: null
-        notes: notes
-        total_cost: 1
-        project_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        organization: organization
-        organization_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        created_at: 2000-01-23 04:56:07+00:00
-        project: project
-        start_date: 2000-01-23 04:56:07+00:00
-        status: status
-      properties:
-        created_at:
-          format: date-time
-          type: string
-        item:
-          items:
-            $ref: '#/components/schemas/SelfServiceReservationItemResponse'
-          type: array
-        notes:
-          type: string
-        organization:
-          type: string
-        organization_id:
-          format: uuid
-          type: string
-        period:
-          $ref: '#/components/schemas/CreateSelfServiceReservationRequest_period'
-        project:
-          type: string
-        project_id:
-          format: uuid
-          type: string
-        start_date:
-          format: date-time
-          type: string
-        status:
-          type: string
-        total_cost:
-          type: integer
-      type: object
-    CreateSelfServiceReservationRequest_period_unit:
-      enum:
-      - monthly
-      type: string
-    CreateSelfServiceReservationRequest_period_count:
-      enum:
-      - 12
-      - 36
-      type: integer
     Error:
       description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
       properties:
@@ -358,15 +268,16 @@ components:
             type: string
           type: array
       type: object
-    findOrganizationDevices_categories_parameter_inner:
-      enum:
-      - compute
-      - storage
-      - vmce
-      - legacy_gen
-      - current_gen
-      example: compute
-      type: string
+    CreateSelfServiceReservationRequest_period:
+      example:
+        unit: null
+        count: null
+      properties:
+        count:
+          $ref: '#/components/schemas/CreateSelfServiceReservationRequest_period_count'
+        unit:
+          $ref: '#/components/schemas/CreateSelfServiceReservationRequest_period_unit'
+      type: object
     SelfServiceReservationList:
       example:
         reservations:
@@ -453,6 +364,95 @@ components:
           items:
             $ref: '#/components/schemas/SelfServiceReservationResponse'
           type: array
+      type: object
+    CreateSelfServiceReservationRequest_period_unit:
+      enum:
+      - monthly
+      type: string
+    CreateSelfServiceReservationRequest_period_count:
+      enum:
+      - 12
+      - 36
+      type: integer
+    findOrganizationDevices_categories_parameter_inner:
+      enum:
+      - compute
+      - storage
+      - vmce
+      - legacy_gen
+      - current_gen
+      example: compute
+      type: string
+    SelfServiceReservationResponse:
+      example:
+        item:
+        - plan_slug: plan_slug
+          amount: 0.8008282
+          metro_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity: 6
+          metro_code: metro_code
+          metro_name: metro_name
+          term: term
+          id: id
+          plan_categories:
+          - plan_categories
+          - plan_categories
+          plan_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          plan_name: plan_name
+        - plan_slug: plan_slug
+          amount: 0.8008282
+          metro_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          quantity: 6
+          metro_code: metro_code
+          metro_name: metro_name
+          term: term
+          id: id
+          plan_categories:
+          - plan_categories
+          - plan_categories
+          plan_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          plan_name: plan_name
+        period:
+          unit: null
+          count: null
+        notes: notes
+        total_cost: 1
+        project_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        organization: organization
+        organization_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        created_at: 2000-01-23 04:56:07+00:00
+        project: project
+        start_date: 2000-01-23 04:56:07+00:00
+        status: status
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        item:
+          items:
+            $ref: '#/components/schemas/SelfServiceReservationItemResponse'
+          type: array
+        notes:
+          type: string
+        organization:
+          type: string
+        organization_id:
+          format: uuid
+          type: string
+        period:
+          $ref: '#/components/schemas/CreateSelfServiceReservationRequest_period'
+        project:
+          type: string
+        project_id:
+          format: uuid
+          type: string
+        start_date:
+          format: date-time
+          type: string
+        status:
+          type: string
+        total_cost:
+          type: integer
       type: object
   securitySchemes:
     x_auth_token:

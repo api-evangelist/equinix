@@ -421,30 +421,210 @@ paths:
                   $ref: '#/components/examples/500'
 components:
   schemas:
-    StreamId:
-      type: string
-      description: Stream UUID
-      format: uuid
-      example: 657400f8-d360-11e9-bb65-2a2ae2dbcce5
-    StreamSubscriptionSelectorExpression:
-      type: string
-      description: "Supported event or metric types to use on event and metric selectors:\n * `*` - all events or metrics\n * `equinix.fabric.port.*` - port events or metrics\n * `equinix.fabric.connection.*` - connection events or metrics\n * `equinix.fabric.router.*` - cloud router events\n * `equinix.fabric.metro.*` - metro metrics\n * `equinix.fabric.network.*` - network events\n * `equinix.fabric.service_token.*` - service token events\n * `equinix.network_edge.*` - network edge events\n * `equinix.network_edge.acl.*` - network edge acl events\n * `equinix.network_edge.device.*` - network edge device events\n * `equinix.access_manager.*` - identity access manager events\n * `equinix.access_manager.user.role.*` - identity access manager user role events\n"
-      example: equinix.fabric.connection.*
+    StreamSubscriptionSinkSetting:
+      type: object
+      properties:
+        eventIndex:
+          type: string
+          description: event index
+        metricIndex:
+          type: string
+          description: metric index
+        source:
+          type: string
+          description: source
+        applicationKey:
+          type: string
+          description: Application key
+        eventUri:
+          type: string
+          description: event uri
+        metricUri:
+          type: string
+          description: metric uri
+        format:
+          type: string
+          description: webhook message format
+          default: CLOUDEVENT
+          enum:
+          - CLOUDEVENT
+          - OPENTELEMETRY
+      description: Stream subscription sink settings
+    StreamSubscriptionPostRequest:
+      required:
+      - name
+      - sink
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - STREAM_SUBSCRIPTION
+        name:
+          type: string
+          description: Customer-provided stream subscription name
+        description:
+          type: string
+          description: Customer-provided stream subscription description
+        enabled:
+          type: boolean
+          description: Stream subscription enabled status
+          example: true
+          default: true
+        metricSelector:
+          $ref: '#/components/schemas/StreamSubscriptionSelector'
+        eventSelector:
+          $ref: '#/components/schemas/StreamSubscriptionSelector'
+        sink:
+          $ref: '#/components/schemas/StreamSubscriptionSink'
+      description: Create Stream Subscription
+    Changelog:
+      type: object
+      properties:
+        createdBy:
+          type: string
+          description: Created by User Key
+          example: johnsmith
+        createdByFullName:
+          type: string
+          description: Created by User Full Name
+          example: John Smith
+        createdByEmail:
+          type: string
+          description: Created by User Email Address
+          example: john.smith@example.com
+        createdDateTime:
+          type: string
+          description: Created by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedBy:
+          type: string
+          description: Updated by User Key
+          example: johnsmith
+        updatedByFullName:
+          type: string
+          description: Updated by User Full Name
+          example: John Smith
+        updatedByEmail:
+          type: string
+          description: Updated by User Email Address
+          example: john.smith@example.com
+        updatedDateTime:
+          type: string
+          description: Updated by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        deletedBy:
+          type: string
+          description: Deleted by User Key
+          example: johnsmith
+        deletedByFullName:
+          type: string
+          description: Deleted by User Full Name
+          example: John Smith
+        deletedByEmail:
+          type: string
+          description: Deleted by User Email Address
+          example: john.smith@example.com
+        deletedDateTime:
+          type: string
+          description: Deleted by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+      description: Change log
     StreamFilter:
       type: object
       anyOf:
       - $ref: '#/components/schemas/StreamFilterSimpleExpression'
       - $ref: '#/components/schemas/StreamFilterOrFilter'
-    GetAllStreamSubscriptionResponse:
+    Error:
+      required:
+      - errorCode
+      - errorMessage
       type: object
       properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
           type: array
-          description: Data returned from the API call.
           items:
-            $ref: '#/components/schemas/StreamSubscription'
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    StreamSubscriptionSink:
+      required:
+      - type
+      type: object
+      properties:
+        uri:
+          type: string
+          description: any publicly reachable http endpoint
+        type:
+          type: string
+          description: destination type
+          enum:
+          - DATADOG
+          - GOOGLE_PUBSUB
+          - PAGERDUTY
+          - SERVICENOW
+          - SLACK
+          - SPLUNK_HEC
+          - TEAMS
+          - WEBHOOK
+        batchEnabled:
+          type: boolean
+          description: batch mode on/off
+          example: false
+        batchSizeMax:
+          type: integer
+          description: maximum batch size
+        batchWaitTimeMax:
+          type: integer
+          description: maximum batch waiting time
+        credential:
+          $ref: '#/components/schemas/StreamSubscriptionSinkCredential'
+        settings:
+          $ref: '#/components/schemas/StreamSubscriptionSinkSetting'
+        host:
+          type: string
+          description: sink host
+      description: Create Stream destination
+    StreamSubscriptionSelector:
+      type: object
+      properties:
+        include:
+          maxItems: 8
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamSubscriptionSelectorExpression'
+        except:
+          maxItems: 8
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamSubscriptionSelectorExpression'
+    StreamSubscriptionFilter:
+      type: object
+      properties:
+        and:
+          maxItems: 8
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamFilter'
+    StreamSubscriptionId:
+      type: string
+      description: Stream Subscription UUID
+      format: uuid
+      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
     StreamSubscriptionOperationErrors:
       type: object
       properties:
@@ -461,19 +641,177 @@ components:
         additionalInfo:
           $ref: '#/components/schemas/StreamSubscriptionOperationAdditionalInfo'
       description: Error information for stream subscription delivery
-    StreamSubscriptionId:
+    StreamSubscriptionOperation:
+      type: object
+      properties:
+        eventsDeliveredCount:
+          type: integer
+          description: count of delivered events
+        metricsDeliveredCount:
+          type: integer
+          description: count of delivered metrics
+        alertsDeliveredCount:
+          type: integer
+          description: count of delivered alerts
+        lastSuccessfulDeliveryDateTime:
+          type: string
+          description: last successful date time of delivered event, metric, or alert
+          format: date-time
+        suspendedDateTime:
+          type: string
+          description: suspended date time of stream subscription delivery for event, metric, or alert
+          format: date-time
+        errors:
+          type: array
+          description: List of error information for stream subscription delivery
+          items:
+            $ref: '#/components/schemas/StreamSubscriptionOperationErrors'
+      description: Stream subscription operational information
+    StreamSubscriptionSinkCredential:
+      type: object
+      properties:
+        type:
+          type: string
+          description: credential type
+          enum:
+          - ACCESS_TOKEN
+          - INTEGRATION_KEY
+          - API_KEY
+          - USERNAME_PASSWORD
+        accessToken:
+          type: string
+          description: passed as Authorization header value
+        integrationKey:
+          type: string
+          description: passed as Authorization header value
+        apiKey:
+          type: string
+          description: passed as Authorization header value
+        username:
+          type: string
+          description: passed as Authorization header value
+        password:
+          type: string
+          description: passed as Authorization header value
+      description: Stream subscription sink credentials
+    StreamSubscriptionSelectorExpression:
       type: string
-      description: Stream Subscription UUID
+      description: "Supported event or metric types to use on event and metric selectors:\n * `*` - all events or metrics\n * `equinix.fabric.port.*` - port events or metrics\n * `equinix.fabric.connection.*` - connection events or metrics\n * `equinix.fabric.router.*` - cloud router events\n * `equinix.fabric.metro.*` - metro metrics\n * `equinix.fabric.network.*` - network events\n * `equinix.fabric.service_token.*` - service token events\n * `equinix.network_edge.*` - network edge events\n * `equinix.network_edge.acl.*` - network edge acl events\n * `equinix.network_edge.device.*` - network edge device events\n * `equinix.access_manager.*` - identity access manager events\n * `equinix.access_manager.user.role.*` - identity access manager user role events\n"
+      example: equinix.fabric.connection.*
+    StreamFilterSimpleExpression:
+      type: object
+      properties:
+        property:
+          type: string
+          description: "Possible field names to use on filters:\n * `/subject` - subject\n * `/type` - type\n"
+          example: /type
+        operator:
+          type: string
+          description: "Possible operators to use on filters:\n * `=` - equal\n * `in` - in\n * `LIKE` - case-sensitive like\n * `ILIKE` - case-insensitive like\n"
+          example: '='
+        values:
+          type: array
+          description: "### Supported event or metric names to use on filters with property /type:\n  * `*` - all events or metrics\n  * `equinix.fabric.port.*` - port events or metrics\n  * `equinix.fabric.connection.*` - connection events or metrics\n  * `equinix.fabric.router.*` - cloud router events\n  * `equinix.fabric.metro.*` - metro metrics\n  * `equinix.fabric.network.*` - network events\n  * `equinix.fabric.service_token.*` - service token events\n  * `equinix.network_edge.*` - network edge events\n  * `equinix.network_edge.acl.*` - network edge acl events\n  * `equinix.network_edge.device.*` - network edge device events\n  * `equinix.access_manager.*` - identity access manager events\n  * `equinix.access_manager.user.role.*` - identity access manager user role events\n### Supported event or metric names to use on filters with property /subject:\n  * `*` - all events or metrics\n  * `/fabric/v4/ports/<uuid>` - port events or metrics\n  * `/fabric/v4/connections/<uuid>` - connection events or metrics\n  * `/fabric/v4/routers/<uuid>` - cloud router events\n  * `/fabric/v4/metros/<metroCode>` - metro metrics\n  * `/fabric/v4/networks/<uuid>` - network events\n  * `/fabric/v4/tokens/<uuid>` - service token events\n  * `/ne/v1/acl/<uuid>` - network edge acl events\n  * `/ne/v1/devices/<uuid>` - network edge device events\n  * `/am/v2/users/<uuid>/roleAssignments/<uuid>` - identity access manager events\n"
+          items:
+            type: string
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    StreamSubscriptionOperationAdditionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+          description: Additional attribute for error information
+        statusCode:
+          type: string
+          description: HTTP error status code response from sink type if error occurred
+        reason:
+          type: string
+          description: HTTP error message response from sink type if error occurred
+      description: External error information from subscription sink
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    StreamId:
+      type: string
+      description: Stream UUID
       format: uuid
-      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+      example: 657400f8-d360-11e9-bb65-2a2ae2dbcce5
+    GetAllStreamSubscriptionResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/StreamSubscription'
+    StreamSubscriptionPutRequest:
+      required:
+      - name
+      - sink
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - STREAM_SUBSCRIPTION
+        name:
+          type: string
+          description: Customer-provided stream subscription name
+        description:
+          type: string
+          description: Customer-provided stream subscription description
+        enabled:
+          type: boolean
+          description: Stream subscription enabled status
+          example: true
+        filters:
+          $ref: '#/components/schemas/StreamSubscriptionFilter'
+        metricSelector:
+          $ref: '#/components/schemas/StreamSubscriptionSelector'
+        eventSelector:
+          $ref: '#/components/schemas/StreamSubscriptionSelector'
+        sink:
+          $ref: '#/components/schemas/StreamSubscriptionSink'
+      description: Update Stream Subscription
     ErrorList:
       type: array
       description: List of Error Message
       items:
         $ref: '#/components/schemas/Error'
-    StreamSubscriptionSink:
-      required:
-      - type
+    StreamSubscriptionSinkResponse:
       type: object
       properties:
         uri:
@@ -558,161 +896,6 @@ components:
         changeLog:
           $ref: '#/components/schemas/Changelog'
       description: Stream Subscription object
-    StreamFilterSimpleExpression:
-      type: object
-      properties:
-        property:
-          type: string
-          description: "Possible field names to use on filters:\n * `/subject` - subject\n * `/type` - type\n"
-          example: /type
-        operator:
-          type: string
-          description: "Possible operators to use on filters:\n * `=` - equal\n * `in` - in\n * `LIKE` - case-sensitive like\n * `ILIKE` - case-insensitive like\n"
-          example: '='
-        values:
-          type: array
-          description: "### Supported event or metric names to use on filters with property /type:\n  * `*` - all events or metrics\n  * `equinix.fabric.port.*` - port events or metrics\n  * `equinix.fabric.connection.*` - connection events or metrics\n  * `equinix.fabric.router.*` - cloud router events\n  * `equinix.fabric.metro.*` - metro metrics\n  * `equinix.fabric.network.*` - network events\n  * `equinix.fabric.service_token.*` - service token events\n  * `equinix.network_edge.*` - network edge events\n  * `equinix.network_edge.acl.*` - network edge acl events\n  * `equinix.network_edge.device.*` - network edge device events\n  * `equinix.access_manager.*` - identity access manager events\n  * `equinix.access_manager.user.role.*` - identity access manager user role events\n### Supported event or metric names to use on filters with property /subject:\n  * `*` - all events or metrics\n  * `/fabric/v4/ports/<uuid>` - port events or metrics\n  * `/fabric/v4/connections/<uuid>` - connection events or metrics\n  * `/fabric/v4/routers/<uuid>` - cloud router events\n  * `/fabric/v4/metros/<metroCode>` - metro metrics\n  * `/fabric/v4/networks/<uuid>` - network events\n  * `/fabric/v4/tokens/<uuid>` - service token events\n  * `/ne/v1/acl/<uuid>` - network edge acl events\n  * `/ne/v1/devices/<uuid>` - network edge device events\n  * `/am/v2/users/<uuid>/roleAssignments/<uuid>` - identity access manager events\n"
-          items:
-            type: string
-    Changelog:
-      type: object
-      properties:
-        createdBy:
-          type: string
-          description: Created by User Key
-          example: johnsmith
-        createdByFullName:
-          type: string
-          description: Created by User Full Name
-          example: John Smith
-        createdByEmail:
-          type: string
-          description: Created by User Email Address
-          example: john.smith@example.com
-        createdDateTime:
-          type: string
-          description: Created by Date and Time
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        updatedBy:
-          type: string
-          description: Updated by User Key
-          example: johnsmith
-        updatedByFullName:
-          type: string
-          description: Updated by User Full Name
-          example: John Smith
-        updatedByEmail:
-          type: string
-          description: Updated by User Email Address
-          example: john.smith@example.com
-        updatedDateTime:
-          type: string
-          description: Updated by Date and Time
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        deletedBy:
-          type: string
-          description: Deleted by User Key
-          example: johnsmith
-        deletedByFullName:
-          type: string
-          description: Deleted by User Full Name
-          example: John Smith
-        deletedByEmail:
-          type: string
-          description: Deleted by User Email Address
-          example: john.smith@example.com
-        deletedDateTime:
-          type: string
-          description: Deleted by Date and Time
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-      description: Change log
-    StreamSubscriptionFilter:
-      type: object
-      properties:
-        and:
-          maxItems: 8
-          type: array
-          items:
-            $ref: '#/components/schemas/StreamFilter'
-    Pagination:
-      required:
-      - limit
-      - total
-      type: object
-      properties:
-        offset:
-          minimum: 0
-          type: integer
-          description: Index of the first item returned in the response. The default is 0.
-          default: 0
-        limit:
-          minimum: 0
-          type: integer
-          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
-          default: 20
-        total:
-          minimum: 0
-          type: integer
-          description: Total number of elements returned.
-        next:
-          type: string
-          description: URL relative to the next item in the response.
-        previous:
-          type: string
-          description: URL relative to the previous item in the response.
-      description: Pagination response information
-    StreamSubscriptionSelector:
-      type: object
-      properties:
-        include:
-          maxItems: 8
-          type: array
-          items:
-            $ref: '#/components/schemas/StreamSubscriptionSelectorExpression'
-        except:
-          maxItems: 8
-          type: array
-          items:
-            $ref: '#/components/schemas/StreamSubscriptionSelectorExpression'
-    StreamSubscriptionSinkResponse:
-      type: object
-      properties:
-        uri:
-          type: string
-          description: any publicly reachable http endpoint
-        type:
-          type: string
-          description: destination type
-          enum:
-          - DATADOG
-          - GOOGLE_PUBSUB
-          - PAGERDUTY
-          - SERVICENOW
-          - SLACK
-          - SPLUNK_HEC
-          - TEAMS
-          - WEBHOOK
-        batchEnabled:
-          type: boolean
-          description: batch mode on/off
-          example: false
-        batchSizeMax:
-          type: integer
-          description: maximum batch size
-        batchWaitTimeMax:
-          type: integer
-          description: maximum batch waiting time
-        credential:
-          $ref: '#/components/schemas/StreamSubscriptionSinkCredential'
-        settings:
-          $ref: '#/components/schemas/StreamSubscriptionSinkSetting'
-        host:
-          type: string
-          description: sink host
-      description: Create Stream destination
     StreamFilterOrFilter:
       type: object
       properties:
@@ -721,197 +904,51 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/StreamFilterSimpleExpression'
-    StreamSubscriptionOperationAdditionalInfo:
-      type: object
-      properties:
-        property:
-          type: string
-          description: Additional attribute for error information
-        statusCode:
-          type: string
-          description: HTTP error status code response from sink type if error occurred
-        reason:
-          type: string
-          description: HTTP error message response from sink type if error occurred
-      description: External error information from subscription sink
-    StreamSubscriptionPutRequest:
-      required:
-      - name
-      - sink
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - STREAM_SUBSCRIPTION
-        name:
-          type: string
-          description: Customer-provided stream subscription name
-        description:
-          type: string
-          description: Customer-provided stream subscription description
-        enabled:
-          type: boolean
-          description: Stream subscription enabled status
-          example: true
-        filters:
-          $ref: '#/components/schemas/StreamSubscriptionFilter'
-        metricSelector:
-          $ref: '#/components/schemas/StreamSubscriptionSelector'
-        eventSelector:
-          $ref: '#/components/schemas/StreamSubscriptionSelector'
-        sink:
-          $ref: '#/components/schemas/StreamSubscriptionSink'
-      description: Update Stream Subscription
-    PriceError_additionalInfo:
-      type: object
-      properties:
-        property:
-          type: string
-        reason:
-          type: string
-    StreamSubscriptionPostRequest:
-      required:
-      - name
-      - sink
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - STREAM_SUBSCRIPTION
-        name:
-          type: string
-          description: Customer-provided stream subscription name
-        description:
-          type: string
-          description: Customer-provided stream subscription description
-        enabled:
-          type: boolean
-          description: Stream subscription enabled status
-          example: true
-          default: true
-        metricSelector:
-          $ref: '#/components/schemas/StreamSubscriptionSelector'
-        eventSelector:
-          $ref: '#/components/schemas/StreamSubscriptionSelector'
-        sink:
-          $ref: '#/components/schemas/StreamSubscriptionSink'
-      description: Create Stream Subscription
-    StreamSubscriptionSinkCredential:
-      type: object
-      properties:
-        type:
-          type: string
-          description: credential type
-          enum:
-          - ACCESS_TOKEN
-          - INTEGRATION_KEY
-          - API_KEY
-          - USERNAME_PASSWORD
-        accessToken:
-          type: string
-          description: passed as Authorization header value
-        integrationKey:
-          type: string
-          description: passed as Authorization header value
-        apiKey:
-          type: string
-          description: passed as Authorization header value
-        username:
-          type: string
-          description: passed as Authorization header value
-        password:
-          type: string
-          description: passed as Authorization header value
-      description: Stream subscription sink credentials
-    StreamSubscriptionSinkSetting:
-      type: object
-      properties:
-        eventIndex:
-          type: string
-          description: event index
-        metricIndex:
-          type: string
-          description: metric index
-        source:
-          type: string
-          description: source
-        applicationKey:
-          type: string
-          description: Application key
-        eventUri:
-          type: string
-          description: event uri
-        metricUri:
-          type: string
-          description: metric uri
-        format:
-          type: string
-          description: webhook message format
-          default: CLOUDEVENT
-          enum:
-          - CLOUDEVENT
-          - OPENTELEMETRY
-      description: Stream subscription sink settings
-    Error:
-      required:
-      - errorCode
-      - errorMessage
-      type: object
-      properties:
-        errorCode:
-          pattern: ^EQ-\d{7}$
-          type: string
-        errorMessage:
-          type: string
-        correlationId:
-          type: string
-        details:
-          type: string
-        help:
-          type: string
-        additionalInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/PriceError_additionalInfo'
-      description: Error Response with details
-    StreamSubscriptionOperation:
-      type: object
-      properties:
-        eventsDeliveredCount:
-          type: integer
-          description: count of delivered events
-        metricsDeliveredCount:
-          type: integer
-          description: count of delivered metrics
-        alertsDeliveredCount:
-          type: integer
-          description: count of delivered alerts
-        lastSuccessfulDeliveryDateTime:
-          type: string
-          description: last successful date time of delivered event, metric, or alert
-          format: date-time
-        suspendedDateTime:
-          type: string
-          description: suspended date time of stream subscription delivery for event, metric, or alert
-          format: date-time
-        errors:
-          type: array
-          description: List of error information for stream subscription delivery
-          items:
-            $ref: '#/components/schemas/StreamSubscriptionOperationErrors'
-      description: Stream subscription operational information
   examples:
-    '403':
+    StreamSubscriptionPostRequestExampleSplunk:
       value:
-      - errorCode: EQ-3045003
-        errorMessage: Operation not allowed
+        type: STREAM_SUBSCRIPTION
+        name: splunk1
+        description: subscription-1
+        enabled: true
+        metricSelector:
+          include:
+          - equinix.fabric.connection.*
+        eventSelector:
+          include:
+          - equinix.fabric.connection.*
+        sink:
+          uri: https://http-inputs-<host>.splunkcloud.com:<port>/services/collector/event
+          type: SPLUNK_HEC
+          credential:
+            type: ACCESS_TOKEN
+            accessToken: Splunk <my-access-token>
+          settings:
+            source: Equinix
+            eventIndex: idx-hec-event
+            metricIndex: idx-hec-metric
+    '404':
+      value:
+      - errorCode: EQ-3045811
+        errorMessage: uuid not found
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Operation not allowed for current user
-    StreamSubscriptionPostRequestExampleGrafanaWebhook:
+        details: uuid not found
+    StreamSubscriptionPostRequestExampleTeams:
+      value:
+        type: STREAM_SUBSCRIPTION
+        name: teams1
+        description: subscription-1
+        enabled: true
+        metricSelector:
+          include:
+          - equinix.fabric.connection.*
+        eventSelector:
+          include:
+          - equinix.fabric.connection.*
+        sink:
+          uri: https://xxxxxx
+          type: TEAMS
+    StreamSubscriptionPostRequestExampleWebhook:
       value:
         type: STREAM_SUBSCRIPTION
         name: webhook
@@ -923,40 +960,23 @@ components:
         sink:
           type: WEBHOOK
           settings:
-            eventUri: https://<grafana_oltp_endpoint>/otlp/v1/logs
-            metricUri: https://<grafana_oltp_endpoint>/otlp/v1/metrics
-            format: OPENTELEMETRY
-          credential:
-            type: API_KEY
-            apiKey: <granfana_instance_id>:<grafana_api_key>
-    '415':
-      value:
-      - errorCode: EQ-3040016
-        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
-        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
-        additionalInfo:
-        - property: contentType
-          reason: The payload format is in an unsupported format
-    StreamSubscriptionPostRequestExampleDatadog:
+            eventUri: https://xxxxxx
+            format: CLOUDEVENT
+    StreamSubscriptionPostRequestExampleSlack:
       value:
         type: STREAM_SUBSCRIPTION
-        name: datadog
+        name: slack1
         description: subscription-1
         enabled: true
         metricSelector:
           include:
           - equinix.fabric.connection.*
+        eventSelector:
+          include:
+          - equinix.fabric.connection.*
         sink:
-          host: https://<xyz>.datadoghq.com
-          type: DATADOG
-          credential:
-            type: API_KEY
-            apiKey: my-api-key
-          settings:
-            source: Equinix
-            applicationKey: my-application-key
-            eventUri: https://<xyz>.datadoghq.com/api/v1/events
-            metricUri: https://<xyz>.datadoghq.com/api/v2/series
+          uri: https://xxxxxx
+          type: SLACK
     StreamSubscriptionDeleteResponseExample:
       value:
         href: https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418/subscriptions/d684aa26-8276-48b7-bb42-a6d9def0a418
@@ -987,33 +1007,12 @@ components:
           batchWaitTimeMax: 5
         changeLog:
           createdDateTime: 2024-05-06 16:21:18.545214+00:00
-    StreamSubscriptionPostRequestExampleSlack:
-      value:
-        type: STREAM_SUBSCRIPTION
-        name: slack1
-        description: subscription-1
-        enabled: true
-        metricSelector:
-          include:
-          - equinix.fabric.connection.*
-        eventSelector:
-          include:
-          - equinix.fabric.connection.*
-        sink:
-          uri: https://xxxxxx
-          type: SLACK
-    StreamSubscriptionPostRequestExampleSplunk:
+    StreamSubscriptionPostRequestExampleSimpleDefaultSplunk:
       value:
         type: STREAM_SUBSCRIPTION
         name: splunk1
         description: subscription-1
         enabled: true
-        metricSelector:
-          include:
-          - equinix.fabric.connection.*
-        eventSelector:
-          include:
-          - equinix.fabric.connection.*
         sink:
           uri: https://http-inputs-<host>.splunkcloud.com:<port>/services/collector/event
           type: SPLUNK_HEC
@@ -1024,52 +1023,45 @@ components:
             source: Equinix
             eventIndex: idx-hec-event
             metricIndex: idx-hec-metric
-    '401':
+    '403':
       value:
-      - errorCode: EQ-3000039
-        errorMessage: User not found in request or invalid.
+      - errorCode: EQ-3045003
+        errorMessage: Operation not allowed
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-    StreamSubscriptionPostRequestExamplePagerduty:
+        details: Operation not allowed for current user
+    StreamSubscriptionPostRequestExampleGooglePubSub:
       value:
         type: STREAM_SUBSCRIPTION
-        name: pagerduty
+        name: gcp-pubsub
         description: subscription-1
         enabled: true
         metricSelector:
           include:
           - equinix.fabric.connection.*
+        sink:
+          type: GOOGLE_PUBSUB
+          uri: https://pubsub.googleapis.com/v1/projects/<gcp-project-name>/topics/<gcp-topic-name>:publish
+          credential:
+            type: ACCESS_TOKEN
+            accessToken: <encoded-base64-gcp-service-account-json>
+    StreamSubscriptionPostRequestExampleServicenow:
+      value:
+        type: STREAM_SUBSCRIPTION
+        name: servicenow-1
+        description: subscription-1
+        enabled: true
         eventSelector:
           include:
           - equinix.fabric.connection.*
         sink:
-          host: https://events.pagerduty.com
-          type: PAGERDUTY
+          host: https://<servicenow-host>.com
+          type: SERVICENOW
           credential:
-            type: INTEGRATION_KEY
-            integrationKey: my-integration-key
+            type: USERNAME_PASSWORD
+            username: <servicenow-username>
+            password: <servicenow-password>
           settings:
-            changeUri: https://events.pagerduty.com/v2/change/enqueeue
-            alertUri: https://events.pagerduty.com/v2/enqueeue
-    '500':
-      value:
-      - errorCode: EQ-3045004
-        errorMessage: Internal Server Error
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Internal Server Error
-    StreamSubscriptionPostRequestExampleWebhook:
-      value:
-        type: STREAM_SUBSCRIPTION
-        name: webhook
-        description: subscription-1
-        enabled: true
-        metricSelector:
-          include:
-          - equinix.fabric.connection.*
-        sink:
-          type: WEBHOOK
-          settings:
-            eventUri: https://xxxxxx
-            format: CLOUDEVENT
+            source: Equinix
     StreamSubscriptionResponseExample:
       value:
         href: https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418/subscriptions/d684aa26-8276-48b7-bb42-a6d9def0a418
@@ -1105,6 +1097,108 @@ components:
           errors: []
         changeLog:
           createdDateTime: 2024-05-06 16:21:18.545214+00:00
+    '415':
+      value:
+      - errorCode: EQ-3040016
+        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: contentType
+          reason: The payload format is in an unsupported format
+    '401':
+      value:
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    StreamSubscriptionPutRequestExample:
+      value:
+        name: splunk1
+        description: subscription 1
+        enabled: true
+        metricSelector:
+          include:
+          - equinix.fabric.connection.*
+        eventSelector:
+          include:
+          - equinix.fabric.connection.*
+        sink:
+          uri: https://xxxxxx
+          type: SPLUNK_HEC
+          credential:
+            type: ACCESS_TOKEN
+            accessToken: my-access-token
+          settings:
+            source: Equinix
+            eventIndex: idx-hec-event
+            metricIndex: idx-hec-metric
+          batchEnabled: false
+          batchSizeMax: 50
+          batchWaitTimeMax: 5
+    StreamSubscriptionPostRequestExampleDatadog:
+      value:
+        type: STREAM_SUBSCRIPTION
+        name: datadog
+        description: subscription-1
+        enabled: true
+        metricSelector:
+          include:
+          - equinix.fabric.connection.*
+        sink:
+          host: https://<xyz>.datadoghq.com
+          type: DATADOG
+          credential:
+            type: API_KEY
+            apiKey: my-api-key
+          settings:
+            source: Equinix
+            applicationKey: my-application-key
+            eventUri: https://<xyz>.datadoghq.com/api/v1/events
+            metricUri: https://<xyz>.datadoghq.com/api/v2/series
+    '500':
+      value:
+      - errorCode: EQ-3045004
+        errorMessage: Internal Server Error
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Internal Server Error
+    StreamSubscriptionPostRequestExampleGrafanaWebhook:
+      value:
+        type: STREAM_SUBSCRIPTION
+        name: webhook
+        description: subscription-1
+        enabled: true
+        metricSelector:
+          include:
+          - equinix.fabric.connection.*
+        sink:
+          type: WEBHOOK
+          settings:
+            eventUri: https://<grafana_oltp_endpoint>/otlp/v1/logs
+            metricUri: https://<grafana_oltp_endpoint>/otlp/v1/metrics
+            format: OPENTELEMETRY
+          credential:
+            type: API_KEY
+            apiKey: <granfana_instance_id>:<grafana_api_key>
+    StreamSubscriptionPostRequestExamplePagerduty:
+      value:
+        type: STREAM_SUBSCRIPTION
+        name: pagerduty
+        description: subscription-1
+        enabled: true
+        metricSelector:
+          include:
+          - equinix.fabric.connection.*
+        eventSelector:
+          include:
+          - equinix.fabric.connection.*
+        sink:
+          host: https://events.pagerduty.com
+          type: PAGERDUTY
+          credential:
+            type: INTEGRATION_KEY
+            integrationKey: my-integration-key
+          settings:
+            changeUri: https://events.pagerduty.com/v2/change/enqueeue
+            alertUri: https://events.pagerduty.com/v2/enqueeue
     stream-subscription-get-all-example:
       value:
         pagination:
@@ -1137,100 +1231,6 @@ components:
             errors: []
           changeLog:
             createdDateTime: 2024-05-06 16:21:18.545214+00:00
-    StreamSubscriptionPostRequestExampleGooglePubSub:
-      value:
-        type: STREAM_SUBSCRIPTION
-        name: gcp-pubsub
-        description: subscription-1
-        enabled: true
-        metricSelector:
-          include:
-          - equinix.fabric.connection.*
-        sink:
-          type: GOOGLE_PUBSUB
-          uri: https://pubsub.googleapis.com/v1/projects/<gcp-project-name>/topics/<gcp-topic-name>:publish
-          credential:
-            type: ACCESS_TOKEN
-            accessToken: <encoded-base64-gcp-service-account-json>
-    StreamSubscriptionPostRequestExampleTeams:
-      value:
-        type: STREAM_SUBSCRIPTION
-        name: teams1
-        description: subscription-1
-        enabled: true
-        metricSelector:
-          include:
-          - equinix.fabric.connection.*
-        eventSelector:
-          include:
-          - equinix.fabric.connection.*
-        sink:
-          uri: https://xxxxxx
-          type: TEAMS
-    StreamSubscriptionPostRequestExampleServicenow:
-      value:
-        type: STREAM_SUBSCRIPTION
-        name: servicenow-1
-        description: subscription-1
-        enabled: true
-        eventSelector:
-          include:
-          - equinix.fabric.connection.*
-        sink:
-          host: https://<servicenow-host>.com
-          type: SERVICENOW
-          credential:
-            type: USERNAME_PASSWORD
-            username: <servicenow-username>
-            password: <servicenow-password>
-          settings:
-            source: Equinix
-    '404':
-      value:
-      - errorCode: EQ-3045811
-        errorMessage: uuid not found
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: uuid not found
-    StreamSubscriptionPostRequestExampleSimpleDefaultSplunk:
-      value:
-        type: STREAM_SUBSCRIPTION
-        name: splunk1
-        description: subscription-1
-        enabled: true
-        sink:
-          uri: https://http-inputs-<host>.splunkcloud.com:<port>/services/collector/event
-          type: SPLUNK_HEC
-          credential:
-            type: ACCESS_TOKEN
-            accessToken: Splunk <my-access-token>
-          settings:
-            source: Equinix
-            eventIndex: idx-hec-event
-            metricIndex: idx-hec-metric
-    StreamSubscriptionPutRequestExample:
-      value:
-        name: splunk1
-        description: subscription 1
-        enabled: true
-        metricSelector:
-          include:
-          - equinix.fabric.connection.*
-        eventSelector:
-          include:
-          - equinix.fabric.connection.*
-        sink:
-          uri: https://xxxxxx
-          type: SPLUNK_HEC
-          credential:
-            type: ACCESS_TOKEN
-            accessToken: my-access-token
-          settings:
-            source: Equinix
-            eventIndex: idx-hec-event
-            metricIndex: idx-hec-metric
-          batchEnabled: false
-          batchSizeMax: 50
-          batchWaitTimeMax: 5
   securitySchemes:
     BearerAuth:
       type: http
