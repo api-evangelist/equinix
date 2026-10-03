@@ -76,41 +76,76 @@ paths:
                 portPackagesInternalErrorExample:
                   $ref: '#/components/examples/port-packages-500'
 components:
-  schemas:
-    PriceError_additionalInfo:
-      type: object
-      properties:
-        property:
-          type: string
-        reason:
-          type: string
-    ErrorList:
-      type: array
-      description: List of Error Message
-      items:
-        $ref: '#/components/schemas/Error'
-    Error:
-      required:
-      - errorCode
-      - errorMessage
-      type: object
-      properties:
-        errorCode:
-          pattern: ^EQ-\d{7}$
-          type: string
-        errorMessage:
-          type: string
-        correlationId:
-          type: string
-        details:
-          type: string
-        help:
-          type: string
+  examples:
+    port-packages:
+      value:
+        data:
+        - href: /fabric/v4/portPackages/XF_UNLIMITED_PLUS
+          type: PORT_PACKAGE
+          code: XF_UNLIMITED_PLUS
+          vcBandwidthMax: 100000
+          vcRemoteSupported: true
+          supportedServiceTypes:
+          - MSP
+          supportedSourceTypes:
+          - COLO
+          supportedMetros:
+          - SV
+          - DA
+        - href: /fabric/v4/portPackages/XF_UNLIMITED
+          type: PORT_PACKAGE
+          code: XF_UNLIMITED
+          vcBandwidthMax: 100000
+          vcRemoteSupported: false
+          supportedServiceTypes:
+          - MSP
+          supportedSourceTypes:
+          - REMOTE
+          - COLO
+        - href: /fabric/v4/portPackages/XF_STANDARD
+          type: PORT_PACKAGE
+          code: XF_STANDARD
+          vcBandwidthMax: 100000
+          vcRemoteSupported: false
+          supportedServiceTypes:
+          - MSP
+          supportedSourceTypes:
+          - BMMR
+          - REMOTE
+          - COLO
+    '403':
+      value:
+      - errorCode: EQ-3045003
+        errorMessage: Operation not allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Operation not allowed for current user
+    port-packages-500:
+      value:
+      - errorCode: EQ-3143001
+        errorMessage: Internal Error
+        details: Internal system error
+        correlationId: 80066c00-0f20-11f0-8367-d5075ee362a7
+    '401':
+      value:
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    '415':
+      value:
+      - errorCode: EQ-3040016
+        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
         additionalInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/PriceError_additionalInfo'
-      description: Error Response with details
+        - property: contentType
+          reason: The payload format is in an unsupported format
+  schemas:
+    PortPackageSourceType:
+      type: string
+      description: Port Package Source Type
+      enum:
+      - COLO
+      - REMOTE
+      - BMMR
     PortPackage:
       required:
       - code
@@ -154,13 +189,35 @@ components:
           items:
             type: string
       description: Port Package details
-    PortPackageSourceType:
-      type: string
-      description: Port Package Source Type
-      enum:
-      - COLO
-      - REMOTE
-      - BMMR
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
     AllPortPackagesResponse:
       required:
       - data
@@ -172,68 +229,11 @@ components:
           items:
             $ref: '#/components/schemas/PortPackage'
       description: Port Packages response
-  examples:
-    port-packages-500:
-      value:
-      - errorCode: EQ-3143001
-        errorMessage: Internal Error
-        details: Internal system error
-        correlationId: 80066c00-0f20-11f0-8367-d5075ee362a7
-    '403':
-      value:
-      - errorCode: EQ-3045003
-        errorMessage: Operation not allowed
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Operation not allowed for current user
-    '415':
-      value:
-      - errorCode: EQ-3040016
-        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
-        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
-        additionalInfo:
-        - property: contentType
-          reason: The payload format is in an unsupported format
-    port-packages:
-      value:
-        data:
-        - href: /fabric/v4/portPackages/XF_UNLIMITED_PLUS
-          type: PORT_PACKAGE
-          code: XF_UNLIMITED_PLUS
-          vcBandwidthMax: 100000
-          vcRemoteSupported: true
-          supportedServiceTypes:
-          - MSP
-          supportedSourceTypes:
-          - COLO
-          supportedMetros:
-          - SV
-          - DA
-        - href: /fabric/v4/portPackages/XF_UNLIMITED
-          type: PORT_PACKAGE
-          code: XF_UNLIMITED
-          vcBandwidthMax: 100000
-          vcRemoteSupported: false
-          supportedServiceTypes:
-          - MSP
-          supportedSourceTypes:
-          - REMOTE
-          - COLO
-        - href: /fabric/v4/portPackages/XF_STANDARD
-          type: PORT_PACKAGE
-          code: XF_STANDARD
-          vcBandwidthMax: 100000
-          vcRemoteSupported: false
-          supportedServiceTypes:
-          - MSP
-          supportedSourceTypes:
-          - BMMR
-          - REMOTE
-          - COLO
-    '401':
-      value:
-      - errorCode: EQ-3000039
-        errorMessage: User not found in request or invalid.
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
   securitySchemes:
     BearerAuth:
       type: http

@@ -159,6 +159,15 @@ paths:
       - Payment Methods
 components:
   schemas:
+    Href:
+      example:
+        href: href
+      properties:
+        href:
+          type: string
+      required:
+      - href
+      type: object
     PaymentMethodUpdateInput:
       example:
         expiration_year: 0
@@ -193,28 +202,6 @@ components:
             description: An error message that contributed to the request failing.
             type: string
           type: array
-      type: object
-    PaymentMethodBillingAddress:
-      example:
-        street_address: street_address
-        country_code_alpha2: country_code_alpha2
-        postal_code: postal_code
-      properties:
-        country_code_alpha2:
-          type: string
-        postal_code:
-          type: string
-        street_address:
-          type: string
-      type: object
-    Href:
-      example:
-        href: href
-      properties:
-        href:
-          type: string
-      required:
-      - href
       type: object
     PaymentMethod:
       example:
@@ -275,6 +262,19 @@ components:
           type: string
         updated_at:
           format: date-time
+          type: string
+      type: object
+    PaymentMethodBillingAddress:
+      example:
+        street_address: street_address
+        country_code_alpha2: country_code_alpha2
+        postal_code: postal_code
+      properties:
+        country_code_alpha2:
+          type: string
+        postal_code:
+          type: string
+        street_address:
           type: string
       type: object
   securitySchemes:

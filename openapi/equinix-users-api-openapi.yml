@@ -424,106 +424,14 @@ paths:
       - Users
 components:
   schemas:
-    Meta:
+    Href:
       example:
-        next:
-          href: href
-        total: 0
-        last:
-          href: href
-        previous:
-          href: href
-        last_page: 1
-        self:
-          href: href
-        first:
-          href: href
-        current_page: 6
+        href: href
       properties:
-        first:
-          $ref: '#/components/schemas/Href'
-        last:
-          $ref: '#/components/schemas/Href'
-        next:
-          $ref: '#/components/schemas/Href'
-        previous:
-          $ref: '#/components/schemas/Href'
-        self:
-          $ref: '#/components/schemas/Href'
-        total:
-          type: integer
-        current_page:
-          type: integer
-        last_page:
-          type: integer
-      type: object
-    UserCreateInput:
-      example:
-        invitation_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        level: level
-        timezone: timezone
-        last_name: last_name
-        avatar: ''
-        title: title
-        nonce: nonce
-        emails:
-        - default: true
-          address: address
-        - default: true
-          address: address
-        social_accounts: '{}'
-        password: password
-        verified_at: 2000-01-23 04:56:07+00:00
-        company_name: company_name
-        company_url: company_url
-        phone_number: phone_number
-        customdata: '{}'
-        first_name: first_name
-        two_factor_auth: two_factor_auth
-      properties:
-        avatar:
-          format: binary
-          type: string
-        company_name:
-          type: string
-        company_url:
-          type: string
-        customdata:
-          type: object
-        emails:
-          items:
-            $ref: '#/components/schemas/EmailInput'
-          type: array
-        first_name:
-          type: string
-        last_name:
-          type: string
-        level:
-          type: string
-        password:
-          type: string
-        phone_number:
-          type: string
-        social_accounts:
-          type: object
-        timezone:
-          type: string
-        title:
-          type: string
-        two_factor_auth:
-          type: string
-        verified_at:
-          format: date-time
-          type: string
-        invitation_id:
-          format: uuid
-          type: string
-        nonce:
+        href:
           type: string
       required:
-      - emails
-      - first_name
-      - last_name
+      - href
       type: object
     User:
       example:
@@ -618,6 +526,139 @@ components:
             type: string
           type: array
       type: object
+    EmailInput:
+      example:
+        default: true
+        address: address
+      properties:
+        address:
+          type: string
+        default:
+          type: boolean
+      required:
+      - address
+      type: object
+    UserUpdateInput:
+      example:
+        password: password
+        timezone: timezone
+        last_name: last_name
+        phone_number: phone_number
+        customdata: '{}'
+        first_name: first_name
+      properties:
+        customdata:
+          type: object
+        first_name:
+          type: string
+        last_name:
+          type: string
+        password:
+          type: string
+        phone_number:
+          type: string
+        timezone:
+          type: string
+      type: object
+    UserCreateInput:
+      example:
+        invitation_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        level: level
+        timezone: timezone
+        last_name: last_name
+        avatar: ''
+        title: title
+        nonce: nonce
+        emails:
+        - default: true
+          address: address
+        - default: true
+          address: address
+        social_accounts: '{}'
+        password: password
+        verified_at: 2000-01-23 04:56:07+00:00
+        company_name: company_name
+        company_url: company_url
+        phone_number: phone_number
+        customdata: '{}'
+        first_name: first_name
+        two_factor_auth: two_factor_auth
+      properties:
+        avatar:
+          format: binary
+          type: string
+        company_name:
+          type: string
+        company_url:
+          type: string
+        customdata:
+          type: object
+        emails:
+          items:
+            $ref: '#/components/schemas/EmailInput'
+          type: array
+        first_name:
+          type: string
+        last_name:
+          type: string
+        level:
+          type: string
+        password:
+          type: string
+        phone_number:
+          type: string
+        social_accounts:
+          type: object
+        timezone:
+          type: string
+        title:
+          type: string
+        two_factor_auth:
+          type: string
+        verified_at:
+          format: date-time
+          type: string
+        invitation_id:
+          format: uuid
+          type: string
+        nonce:
+          type: string
+      required:
+      - emails
+      - first_name
+      - last_name
+      type: object
+    InvitationList:
+      example:
+        invitations:
+        - updated_at: 2000-01-23 04:56:07+00:00
+          roles:
+          - roles
+          - roles
+          created_at: 2000-01-23 04:56:07+00:00
+          project:
+            href: href
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user:
+            href: href
+        - updated_at: 2000-01-23 04:56:07+00:00
+          roles:
+          - roles
+          - roles
+          created_at: 2000-01-23 04:56:07+00:00
+          project:
+            href: href
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          user:
+            href: href
+      properties:
+        invitations:
+          items:
+            $ref: '#/components/schemas/Membership'
+          type: array
+      type: object
     Membership:
       example:
         updated_at: 2000-01-23 04:56:07+00:00
@@ -652,36 +693,38 @@ components:
         user:
           $ref: '#/components/schemas/Href'
       type: object
-    UserUpdateInput:
+    Meta:
       example:
-        password: password
-        timezone: timezone
-        last_name: last_name
-        phone_number: phone_number
-        customdata: '{}'
-        first_name: first_name
+        next:
+          href: href
+        total: 0
+        last:
+          href: href
+        previous:
+          href: href
+        last_page: 1
+        self:
+          href: href
+        first:
+          href: href
+        current_page: 6
       properties:
-        customdata:
-          type: object
-        first_name:
-          type: string
-        last_name:
-          type: string
-        password:
-          type: string
-        phone_number:
-          type: string
-        timezone:
-          type: string
-      type: object
-    Href:
-      example:
-        href: href
-      properties:
-        href:
-          type: string
-      required:
-      - href
+        first:
+          $ref: '#/components/schemas/Href'
+        last:
+          $ref: '#/components/schemas/Href'
+        next:
+          $ref: '#/components/schemas/Href'
+        previous:
+          $ref: '#/components/schemas/Href'
+        self:
+          $ref: '#/components/schemas/Href'
+        total:
+          type: integer
+        current_page:
+          type: integer
+        last_page:
+          type: integer
       type: object
     UserList:
       example:
@@ -755,49 +798,6 @@ components:
           items:
             $ref: '#/components/schemas/User'
           type: array
-      type: object
-    InvitationList:
-      example:
-        invitations:
-        - updated_at: 2000-01-23 04:56:07+00:00
-          roles:
-          - roles
-          - roles
-          created_at: 2000-01-23 04:56:07+00:00
-          project:
-            href: href
-          href: href
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          user:
-            href: href
-        - updated_at: 2000-01-23 04:56:07+00:00
-          roles:
-          - roles
-          - roles
-          created_at: 2000-01-23 04:56:07+00:00
-          project:
-            href: href
-          href: href
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          user:
-            href: href
-      properties:
-        invitations:
-          items:
-            $ref: '#/components/schemas/Membership'
-          type: array
-      type: object
-    EmailInput:
-      example:
-        default: true
-        address: address
-      properties:
-        address:
-          type: string
-        default:
-          type: boolean
-      required:
-      - address
       type: object
   securitySchemes:
     x_auth_token:

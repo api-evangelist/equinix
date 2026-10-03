@@ -405,6 +405,238 @@ paths:
                   $ref: '#/components/examples/500'
 components:
   schemas:
+    AlertRulePutRequest:
+      required:
+      - detectionMethod
+      - metricSelector
+      - name
+      - resourceSelector
+      - type
+      type: object
+      properties:
+        name:
+          type: string
+          description: Customer-provided stream name
+        type:
+          type: string
+          enum:
+          - METRIC_ALERT
+        description:
+          type: string
+          description: Customer-provided stream description
+        enabled:
+          type: boolean
+          description: Stream alert rule enabled status
+          default: true
+        metricSelector:
+          $ref: '#/components/schemas/MetricSelector'
+        resourceSelector:
+          $ref: '#/components/schemas/ResourceSelector'
+        detectionMethod:
+          $ref: '#/components/schemas/DetectionMethod'
+      description: Create Stream Alert Rules
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    MetricSelectorResponse:
+      type: object
+      properties:
+        include:
+          type: array
+          description: Stream alert rule filtered by metric name
+          items:
+            type: string
+            example: equinix.fabric.metro.sv_da.latency
+    DetectionMethodResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          description: '* THRESHOLD - Alert when a metric crosses a defined threshold by user.
+
+            * OUTLIER - Intelligent Alert that has an outlier behavior. This option is currently supported for metro latency metric.
+
+            '
+          enum:
+          - THRESHOLD
+          - OUTLIER
+        windowSize:
+          type: string
+          description: Stream alert rule metric window size
+          example: PT15M
+        operand:
+          type: string
+          description: Stream alert rule metric operand
+          enum:
+          - ABOVE
+          - BELOW
+        warningThreshold:
+          type: string
+          description: Stream alert rule metric warning threshold
+        criticalThreshold:
+          type: string
+          description: Stream alert rule metric critical threshold
+    AlertRulePostRequest:
+      required:
+      - detectionMethod
+      - metricSelector
+      - name
+      - resourceSelector
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - METRIC_ALERT
+        name:
+          type: string
+          description: Customer-provided stream name
+        description:
+          type: string
+          description: Customer-provided stream description
+        enabled:
+          type: boolean
+          description: Stream alert rule enabled status
+          example: true
+          default: true
+        metricSelector:
+          $ref: '#/components/schemas/MetricSelector'
+        resourceSelector:
+          $ref: '#/components/schemas/ResourceSelector'
+        detectionMethod:
+          $ref: '#/components/schemas/DetectionMethod'
+      description: Create Stream Alert Rules
+    StreamAlertRule:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Stream Alert Rule URI
+          format: uri
+          readOnly: true
+        uuid:
+          type: string
+          description: Equinix-assigned access point identifier
+          format: uuid
+          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        type:
+          type: string
+          description: Stream subscription type
+          enum:
+          - METRIC_ALERT
+        name:
+          type: string
+          description: Customer-provided stream alert rule name
+        description:
+          type: string
+          description: Customer-provided stream alert rule description
+        state:
+          type: string
+          description: Steam subscription provision state
+          enum:
+          - ACTIVE
+          - INACTIVE
+        enabled:
+          type: boolean
+          description: Stream alert rule enabled status
+          default: true
+        metricSelector:
+          $ref: '#/components/schemas/MetricSelectorResponse'
+        resourceSelector:
+          $ref: '#/components/schemas/ResourceSelectorResponse'
+        detectionMethod:
+          $ref: '#/components/schemas/DetectionMethodResponse'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+      description: Stream object
+    AlertRuleId:
+      type: string
+      description: Stream Alert Rule UUID
+      format: uuid
+      example: 0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15
+    GetAllStreamAlertRuleResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/StreamAlertRule'
+    ResourceSelector:
+      required:
+      - include
+      type: object
+      properties:
+        include:
+          type: array
+          description: "### Supported metric names to use on filters with property /subject:\n  * `/fabric/v4/ports/<uuid>` - port metrics\n  * `/fabric/v4/connections/<uuid>` - connection metrics\n  * `/fabric/v4/metros/<metroCode>` - metro latency metrics\n"
+          items:
+            type: string
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    MetricSelector:
+      required:
+      - include
+      type: object
+      properties:
+        include:
+          type: array
+          description: Stream alert rule filtered by metric name
+          items:
+            type: string
+            example: equinix.fabric.metro.sv_da.latency
+    StreamId:
+      type: string
+      description: Stream UUID
+      format: uuid
+      example: 657400f8-d360-11e9-bb65-2a2ae2dbcce5
     Changelog:
       type: object
       properties:
@@ -460,68 +692,6 @@ components:
           format: date-time
           example: 2020-11-06 07:00:00+00:00
       description: Change log
-    Error:
-      required:
-      - errorCode
-      - errorMessage
-      type: object
-      properties:
-        errorCode:
-          pattern: ^EQ-\d{7}$
-          type: string
-        errorMessage:
-          type: string
-        correlationId:
-          type: string
-        details:
-          type: string
-        help:
-          type: string
-        additionalInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/PriceError_additionalInfo'
-      description: Error Response with details
-    DetectionMethod:
-      required:
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          description: '* THRESHOLD - Alert when a metric crosses a defined threshold by user.
-
-            * OUTLIER - Intelligent Alert that has an outlier behavior. This option is currently supported for metro latency metric.
-
-            '
-          enum:
-          - THRESHOLD
-          - OUTLIER
-        windowSize:
-          type: string
-          description: Stream alert rule metric window size
-          example: PT15M
-        operand:
-          type: string
-          description: Stream alert rule metric operand
-          enum:
-          - ABOVE
-          - BELOW
-        warningThreshold:
-          type: string
-          description: Stream alert rule metric warning threshold
-        criticalThreshold:
-          type: string
-          description: Stream alert rule metric critical threshold
-    MetricSelectorResponse:
-      type: object
-      properties:
-        include:
-          type: array
-          description: Stream alert rule filtered by metric name
-          items:
-            type: string
-            example: equinix.fabric.metro.sv_da.latency
     ResourceSelectorResponse:
       type: object
       properties:
@@ -530,62 +700,9 @@ components:
           description: "### Supported metric names to use on filters with property /subject:\n  * `/fabric/v4/ports/<uuid>` - port metrics\n  * `/fabric/v4/connections/<uuid>` - connection metrics\n  * `/fabric/v4/metros/<metroCode>` - metro latency metrics\n"
           items:
             type: string
-    GetAllStreamAlertRuleResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          description: Data returned from the API call.
-          items:
-            $ref: '#/components/schemas/StreamAlertRule'
-    ResourceSelector:
+    DetectionMethod:
       required:
-      - include
-      type: object
-      properties:
-        include:
-          type: array
-          description: "### Supported metric names to use on filters with property /subject:\n  * `/fabric/v4/ports/<uuid>` - port metrics\n  * `/fabric/v4/connections/<uuid>` - connection metrics\n  * `/fabric/v4/metros/<metroCode>` - metro latency metrics\n"
-          items:
-            type: string
-    AlertRuleId:
-      type: string
-      description: Stream Alert Rule UUID
-      format: uuid
-      example: 0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15
-    AlertRulePutRequest:
-      required:
-      - detectionMethod
-      - metricSelector
-      - name
-      - resourceSelector
       - type
-      type: object
-      properties:
-        name:
-          type: string
-          description: Customer-provided stream name
-        type:
-          type: string
-          enum:
-          - METRIC_ALERT
-        description:
-          type: string
-          description: Customer-provided stream description
-        enabled:
-          type: boolean
-          description: Stream alert rule enabled status
-          default: true
-        metricSelector:
-          $ref: '#/components/schemas/MetricSelector'
-        resourceSelector:
-          $ref: '#/components/schemas/ResourceSelector'
-        detectionMethod:
-          $ref: '#/components/schemas/DetectionMethod'
-      description: Create Stream Alert Rules
-    DetectionMethodResponse:
       type: object
       properties:
         type:
@@ -621,175 +738,12 @@ components:
           type: string
         reason:
           type: string
-    Pagination:
-      required:
-      - limit
-      - total
-      type: object
-      properties:
-        offset:
-          minimum: 0
-          type: integer
-          description: Index of the first item returned in the response. The default is 0.
-          default: 0
-        limit:
-          minimum: 0
-          type: integer
-          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
-          default: 20
-        total:
-          minimum: 0
-          type: integer
-          description: Total number of elements returned.
-        next:
-          type: string
-          description: URL relative to the next item in the response.
-        previous:
-          type: string
-          description: URL relative to the previous item in the response.
-      description: Pagination response information
-    StreamId:
-      type: string
-      description: Stream UUID
-      format: uuid
-      example: 657400f8-d360-11e9-bb65-2a2ae2dbcce5
-    MetricSelector:
-      required:
-      - include
-      type: object
-      properties:
-        include:
-          type: array
-          description: Stream alert rule filtered by metric name
-          items:
-            type: string
-            example: equinix.fabric.metro.sv_da.latency
-    AlertRulePostRequest:
-      required:
-      - detectionMethod
-      - metricSelector
-      - name
-      - resourceSelector
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - METRIC_ALERT
-        name:
-          type: string
-          description: Customer-provided stream name
-        description:
-          type: string
-          description: Customer-provided stream description
-        enabled:
-          type: boolean
-          description: Stream alert rule enabled status
-          example: true
-          default: true
-        metricSelector:
-          $ref: '#/components/schemas/MetricSelector'
-        resourceSelector:
-          $ref: '#/components/schemas/ResourceSelector'
-        detectionMethod:
-          $ref: '#/components/schemas/DetectionMethod'
-      description: Create Stream Alert Rules
     ErrorList:
       type: array
       description: List of Error Message
       items:
         $ref: '#/components/schemas/Error'
-    StreamAlertRule:
-      type: object
-      properties:
-        href:
-          type: string
-          description: Stream Alert Rule URI
-          format: uri
-          readOnly: true
-        uuid:
-          type: string
-          description: Equinix-assigned access point identifier
-          format: uuid
-          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-        type:
-          type: string
-          description: Stream subscription type
-          enum:
-          - METRIC_ALERT
-        name:
-          type: string
-          description: Customer-provided stream alert rule name
-        description:
-          type: string
-          description: Customer-provided stream alert rule description
-        state:
-          type: string
-          description: Steam subscription provision state
-          enum:
-          - ACTIVE
-          - INACTIVE
-        enabled:
-          type: boolean
-          description: Stream alert rule enabled status
-          default: true
-        metricSelector:
-          $ref: '#/components/schemas/MetricSelectorResponse'
-        resourceSelector:
-          $ref: '#/components/schemas/ResourceSelectorResponse'
-        detectionMethod:
-          $ref: '#/components/schemas/DetectionMethodResponse'
-        changeLog:
-          $ref: '#/components/schemas/Changelog'
-      description: Stream object
   examples:
-    '404':
-      value:
-      - errorCode: EQ-3045811
-        errorMessage: uuid not found
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: uuid not found
-    StreamSmartAlertRulePostRequestExample:
-      value:
-        name: metric-alert-1
-        type: METRIC_ALERT
-        description: metric-alert-1
-        enabled: true
-        metricSelector:
-          include:
-          - equinix.fabric.metro.sv_sy.latency
-        resourceSelector:
-          include:
-          - /fabric/v4/metros/SV
-        detectionMethod:
-          type: OUTLIER
-    StreamAlertRuleDeleteResponseExample:
-      value:
-        href: https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418/alertRules/0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15
-        uuid: 0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15
-        type: METRIC_ALERT
-        name: metric-alert-1
-        description: metric-alert-1
-        state: INACTIVE
-        enabled: true
-        metricSelector:
-          include:
-          - equinix.fabric.connection.bandwidth_tx.usage
-        resourceSelector:
-          include:
-          - /fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b
-        detectionMethod:
-          type: THRESHOLD
-          windowSize: PT15M
-          operand: ABOVE
-          warningThreshold: 35000000
-          criticalThreshold: 45000000
-        changeLog:
-          createdBy: user
-          createdDateTime: 2024-05-06 16:21:18.545214+00:00
-          updatedBy: user
-          updatedDateTime: 2025-02-04 00:20:54.511118+00:00
     StreamAlertRulePostRequestExample:
       value:
         name: metric-alert-1
@@ -833,7 +787,13 @@ components:
           createdDateTime: 2024-05-06 16:21:18.545214+00:00
           updatedBy: user
           updatedDateTime: 2025-02-04 00:20:54.511118+00:00
-    StreamAlertRulePutRequestExample:
+    '404':
+      value:
+      - errorCode: EQ-3045811
+        errorMessage: uuid not found
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: uuid not found
+    StreamSmartAlertRulePostRequestExample:
       value:
         name: metric-alert-1
         type: METRIC_ALERT
@@ -841,16 +801,12 @@ components:
         enabled: true
         metricSelector:
           include:
-          - equinix.fabric.connection.bandwidth_tx.usage
+          - equinix.fabric.metro.sv_sy.latency
         resourceSelector:
           include:
-          - /fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b
+          - /fabric/v4/metros/SV
         detectionMethod:
-          type: THRESHOLD
-          windowSize: PT15M
-          operand: ABOVE
-          warningThreshold: 35000000
-          criticalThreshold: 45000000
+          type: OUTLIER
     stream-alert-rules-get-all-example:
       value:
         pagination:
@@ -880,12 +836,30 @@ components:
           changeLog:
             createdBy: user
             createdDateTime: 2024-05-06 16:21:18.545214+00:00
-    '403':
+    StreamAlertRulePutRequestExample:
       value:
-      - errorCode: EQ-3045003
-        errorMessage: Operation not allowed
+        name: metric-alert-1
+        type: METRIC_ALERT
+        description: metric-alert-1
+        enabled: true
+        metricSelector:
+          include:
+          - equinix.fabric.connection.bandwidth_tx.usage
+        resourceSelector:
+          include:
+          - /fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b
+        detectionMethod:
+          type: THRESHOLD
+          windowSize: PT15M
+          operand: ABOVE
+          warningThreshold: 35000000
+          criticalThreshold: 45000000
+    '500':
+      value:
+      - errorCode: EQ-3045004
+        errorMessage: Internal Server Error
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Operation not allowed for current user
+        details: Internal Server Error
     '415':
       value:
       - errorCode: EQ-3040016
@@ -894,17 +868,43 @@ components:
         additionalInfo:
         - property: contentType
           reason: The payload format is in an unsupported format
+    '403':
+      value:
+      - errorCode: EQ-3045003
+        errorMessage: Operation not allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Operation not allowed for current user
     '401':
       value:
       - errorCode: EQ-3000039
         errorMessage: User not found in request or invalid.
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-    '500':
+    StreamAlertRuleDeleteResponseExample:
       value:
-      - errorCode: EQ-3045004
-        errorMessage: Internal Server Error
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Internal Server Error
+        href: https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418/alertRules/0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15
+        uuid: 0bbcea48-1333-4ad5-a7ea-e4d58a5fbd15
+        type: METRIC_ALERT
+        name: metric-alert-1
+        description: metric-alert-1
+        state: INACTIVE
+        enabled: true
+        metricSelector:
+          include:
+          - equinix.fabric.connection.bandwidth_tx.usage
+        resourceSelector:
+          include:
+          - /fabric/v4/connections/8b140c74-0331-46d1-9cb3-2981be84dd1b
+        detectionMethod:
+          type: THRESHOLD
+          windowSize: PT15M
+          operand: ABOVE
+          warningThreshold: 35000000
+          criticalThreshold: 45000000
+        changeLog:
+          createdBy: user
+          createdDateTime: 2024-05-06 16:21:18.545214+00:00
+          updatedBy: user
+          updatedDateTime: 2025-02-04 00:20:54.511118+00:00
   securitySchemes:
     BearerAuth:
       type: http

@@ -64,6 +64,41 @@ paths:
       - OperatingSystems
 components:
   schemas:
+    OperatingSystemList:
+      example:
+        operating_systems:
+        - default_operating_system: true
+          distro: distro
+          preinstallable: true
+          licensed: true
+          name: name
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          provisionable_on:
+          - provisionable_on
+          - provisionable_on
+          version: version
+          pricing: '{}'
+          slug: slug
+          distro_label: distro_label
+        - default_operating_system: true
+          distro: distro
+          preinstallable: true
+          licensed: true
+          name: name
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          provisionable_on:
+          - provisionable_on
+          - provisionable_on
+          version: version
+          pricing: '{}'
+          slug: slug
+          distro_label: distro_label
+      properties:
+        operating_systems:
+          items:
+            $ref: '#/components/schemas/OperatingSystem'
+          type: array
+      type: object
     OperatingSystem:
       example:
         default_operating_system: true
@@ -110,41 +145,6 @@ components:
           description: Default operating system for the distro.
           readOnly: true
           type: boolean
-      type: object
-    OperatingSystemList:
-      example:
-        operating_systems:
-        - default_operating_system: true
-          distro: distro
-          preinstallable: true
-          licensed: true
-          name: name
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          provisionable_on:
-          - provisionable_on
-          - provisionable_on
-          version: version
-          pricing: '{}'
-          slug: slug
-          distro_label: distro_label
-        - default_operating_system: true
-          distro: distro
-          preinstallable: true
-          licensed: true
-          name: name
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          provisionable_on:
-          - provisionable_on
-          - provisionable_on
-          version: version
-          pricing: '{}'
-          slug: slug
-          distro_label: distro_label
-      properties:
-        operating_systems:
-          items:
-            $ref: '#/components/schemas/OperatingSystem'
-          type: array
       type: object
     Error:
       description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.

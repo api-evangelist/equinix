@@ -598,251 +598,6 @@ paths:
                   $ref: '#/components/examples/404'
 components:
   schemas:
-    PhysicalPortType:
-      type: string
-      description: Type of Port
-      enum:
-      - XF_PHYSICAL_PORT
-    PortDevice:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Device name
-          deprecated: true
-        redundancy:
-          $ref: '#/components/schemas/PortDeviceRedundancy'
-        vcBandwidthMax:
-          type: integer
-          description: Maximum bandwidth allowed for connection.
-          format: int64
-      description: Port device
-    NetworkScope:
-      type: string
-      description: Network scope
-      enum:
-      - REGIONAL
-      - GLOBAL
-      - LOCAL
-    PortEncapsulation:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Port encapsulation protocol type
-          enum:
-          - 'NULL'
-          - DOT1Q
-          - QINQ
-          - UNTAGGED
-        tagProtocolId:
-          type: string
-          description: Port encapsulation tag protocol identifier
-      description: Port encapsulation configuration
-    Changelog:
-      type: object
-      properties:
-        createdBy:
-          type: string
-          description: Created by User Key
-          example: johnsmith
-        createdByFullName:
-          type: string
-          description: Created by User Full Name
-          example: John Smith
-        createdByEmail:
-          type: string
-          description: Created by User Email Address
-          example: john.smith@example.com
-        createdDateTime:
-          type: string
-          description: Created by Date and Time
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        updatedBy:
-          type: string
-          description: Updated by User Key
-          example: johnsmith
-        updatedByFullName:
-          type: string
-          description: Updated by User Full Name
-          example: John Smith
-        updatedByEmail:
-          type: string
-          description: Updated by User Email Address
-          example: john.smith@example.com
-        updatedDateTime:
-          type: string
-          description: Updated by Date and Time
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        deletedBy:
-          type: string
-          description: Deleted by User Key
-          example: johnsmith
-        deletedByFullName:
-          type: string
-          description: Deleted by User Full Name
-          example: John Smith
-        deletedByEmail:
-          type: string
-          description: Deleted by User Email Address
-          example: john.smith@example.com
-        deletedDateTime:
-          type: string
-          description: Deleted by Date and Time
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-      description: Change log
-    PortOrder:
-      type: object
-      properties:
-        purchaseOrder:
-          $ref: '#/components/schemas/PortOrderPurchaseOrder'
-        orderId:
-          type: string
-          description: Order Identification
-        customerReferenceId:
-          type: string
-          description: Customer order reference Id
-        orderNumber:
-          type: string
-          description: Order Reference Number
-        uuid:
-          type: string
-          description: Equinix-assigned order identifier, this is a derived response atrribute
-          format: uuid
-          deprecated: true
-        signature:
-          $ref: '#/components/schemas/PortOrderSignature'
-    ServiceTokenSide:
-      type: object
-      properties:
-        accessPointSelectors:
-          type: array
-          description: List of AccessPointSelectors
-          items:
-            $ref: '#/components/schemas/AccessPointSelector'
-      description: Connection link protocol,virtual device or network configuration
-    PortDeviceRedundancy:
-      type: object
-      properties:
-        group:
-          type: string
-          description: Device redundancy group
-        priority:
-          type: string
-          description: Device redundancy priority
-          enum:
-          - PRIMARY
-          - SECONDARY
-      description: Device redundancy
-    Order:
-      type: object
-      properties:
-        purchaseOrderNumber:
-          type: string
-          description: Purchase order number
-        customerReferenceNumber:
-          type: string
-          description: Customer reference number
-        billingTier:
-          type: string
-          description: Billing tier for connection bandwidth
-        orderId:
-          type: string
-          description: Order Identification
-        orderNumber:
-          type: string
-          description: Order Reference Number
-        termLength:
-          maximum: 36
-          minimum: 1
-          type: integer
-          description: Term length in months, valid values are 1, 12, 24, 36 where 1 is the default value (for on-demand case).
-          default: 1
-        contractedBandwidth:
-          type: integer
-          description: Contracted bandwidth
-    SimplifiedMetadataEntity:
-      type: object
-      properties:
-        href:
-          type: string
-          description: url to entity
-          format: uri
-        uuid:
-          type: string
-          description: Equinix assigned Identifier
-          format: uuid
-        type:
-          type: string
-          description: Type of Port
-        cvpId:
-          type: integer
-          description: Customer virtual port Id
-        bandwidth:
-          type: number
-          description: Port Bandwidth
-        portName:
-          type: string
-          description: Port Name
-        encapsulationProtocolType:
-          type: string
-          description: Port Encapsulation
-        accountName:
-          type: string
-          description: Account Name
-        priority:
-          type: string
-          description: Port Priority
-        location:
-          $ref: '#/components/schemas/SimplifiedLocation'
-      description: Configuration details for port used at the access point.
-    NetworkChangeType:
-      type: string
-      description: Type of change
-      enum:
-      - NETWORK_CREATION
-      - NETWORK_UPDATE
-      - NETWORK_DELETION
-    NetworkFilter:
-      type: object
-      properties:
-        and:
-          $ref: '#/components/schemas/NetworkSimpleExpression'
-        or:
-          $ref: '#/components/schemas/NetworkSimpleExpression'
-        property:
-          $ref: '#/components/schemas/NetworkSearchFieldName'
-        operator:
-          type: string
-          example: '='
-          enum:
-          - '='
-          - '!='
-          - '>'
-          - '>='
-          - <
-          - <=
-          - BETWEEN
-          - NOT BETWEEN
-          - LIKE
-          - NOT LIKE
-          - ILIKE
-          - NOT ILIKE
-          - IN
-          - NOT IN
-        values:
-          type: array
-          items:
-            type: string
-            example: Network-1
-    PortType:
-      type: string
-      description: Type of Port
-      enum:
-      - XF_PORT
     Interface:
       type: object
       properties:
@@ -868,88 +623,145 @@ components:
           type: string
           description: Interface Project ID
       description: Interface Information
-    PortState:
+    ServiceTokenState:
       type: string
-      description: Port lifecycle state
+      description: Service token state
       enum:
-      - PENDING
-      - PROVISIONING
-      - REPROVISIONING
-      - PENDING_CROSS_CONNECT
-      - PROVISIONED
       - ACTIVE
-      - DEPROVISIONING
-      - DEPROVISIONED
       - INACTIVE
-      - FAILED
-      - ADDED
+      - EXPIRED
       - DELETED
-      - TO_BE_ADDED
-      - TO_BE_DELETED
-    PriceError_additionalInfo:
-      type: object
-      properties:
-        property:
-          type: string
-        reason:
-          type: string
-    PhysicalPort:
+    AccessPointType:
+      type: string
+      description: Access point type
+      enum:
+      - VD
+      - VG
+      - SP
+      - IGW
+      - COLO
+      - SUBNET
+      - CLOUD_ROUTER
+      - NETWORK
+      - METAL_NETWORK
+      - VPIC_INTERFACE
+      - APP_LINK
+    VirtualDevice:
       type: object
       properties:
         href:
           type: string
-          description: Equinix assigned response attribute for an absolute URL that is the subject of the link's context.
+          description: Virtual Device URI
           format: uri
           readOnly: true
-        type:
-          $ref: '#/components/schemas/PhysicalPortType'
-        id:
-          type: integer
-          description: Equinix assigned response attribute for Physical Port Id
-          deprecated: true
-        state:
-          $ref: '#/components/schemas/PortState'
-        account:
-          $ref: '#/components/schemas/SimplifiedAccount'
-        interfaceSpeed:
-          minimum: 0
-          type: integer
-          description: Physical Port Speed in Mbps
-        interfaceType:
-          type: string
-          description: Physical Port Interface Type
         uuid:
           type: string
-          description: Equinix assigned response attribute for physical port identifier
+          description: Equinix-assigned Virtual Device identifier
           format: uuid
-        tether:
-          $ref: '#/components/schemas/PortTether'
-        demarcationPoint:
-          $ref: '#/components/schemas/PortDemarcationPoint'
-        settings:
-          $ref: '#/components/schemas/PhysicalPortSettings'
-        interface:
-          $ref: '#/components/schemas/PortInterface'
-        notifications:
+        name:
+          type: string
+          description: Customer-assigned Virtual Device name
+        type:
+          type: string
+          description: Virtual Device type
+          enum:
+          - EDGE
+        account:
+          $ref: '#/components/schemas/SimplifiedAccount'
+        cluster:
+          type: string
+          description: Virtual Device Cluster Information
+      description: Virtual Device AccessPoint Information
+    ServiceProfileTypeEnum:
+      type: string
+      description: Service profile type
+      example: L2_PROFILE
+      enum:
+      - L2_PROFILE
+      - L3_PROFILE
+      - IA_PROFILE
+      - IX_PROFILE
+      x-eqx-api-linter-skip-rules:
+      - 40
+    PortAdditionalInfo:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Key
+        value:
+          type: string
+          description: Value
+      description: Additional information
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    NetworkConnections:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
           type: array
-          description: Notification preferences
           items:
-            $ref: '#/components/schemas/PortNotification'
-        additionalInfo:
-          type: array
-          description: Physical Port additional information
-          items:
-            $ref: '#/components/schemas/PortAdditionalInfo'
-        order:
-          $ref: '#/components/schemas/PortOrder'
-        operation:
-          $ref: '#/components/schemas/PortOperation'
-        loas:
-          type: array
-          description: Port Loas
-          items:
-            $ref: '#/components/schemas/PortLoa'
-      description: Physical Port specification
+            $ref: '#/components/schemas/Connection'
+      description: List of network changes
+    LinkProtocolType:
+      type: string
+      description: Type of Link Protocol
+      enum:
+      - UNTAGGED
+      - DOT1Q
+      - QINQ
+      - EVPN_VXLAN
+      - VXLAN
+    PaginationRequest:
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first element.
+          default: 0
+        limit:
+          minimum: 1
+          type: integer
+          description: Number of elements to be requested per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+      description: Pagination request information
+    NetworkType:
+      type: string
+      description: Network type
+      enum:
+      - EVPLAN
+      - EPLAN
+      - IPWAN
+      - EVPTREE
+      - EPTREE
     ConnectionSideAdditionalInfo:
       type: object
       properties:
@@ -960,117 +772,192 @@ components:
           type: string
           description: Value
       description: Additional information
-    PortSettings:
+    PortOrderPurchaseOrder:
       type: object
       properties:
-        buyout:
-          type: boolean
-          deprecated: true
-        viewPortPermission:
-          type: boolean
-          deprecated: true
-        placeVcOrderPermission:
-          type: boolean
-          deprecated: true
-        layer3Enabled:
-          type: boolean
-          deprecated: true
-        sharedPortType:
-          type: boolean
-        sharedPortProduct:
+        number:
           type: string
-          enum:
-          - NETWORK_EDGE
-          - VIRTUAL_GATEWAY
-          - SMARTKEY
-          - EDGE_METAL
-        packageType:
+          description: purchase order number
+        amount:
           type: string
-          description: Type of Port Package
-          deprecated: true
-          enum:
-          - STANDARD
-          - UNLIMITED
-          - UNLIMITED_PLUS
-      description: Port configuration settings
-    NetworkChange:
-      type: object
-      properties:
-        href:
+          description: purchase order amount
+        startDate:
           type: string
-          description: Network URI
-          format: uri
-          readOnly: true
-          example: https://api.equinix.com/fabric/v4/networks/2a4fb415-5a7f-436f-bae6-02f5e403deec/changes/4b17da68-3d6b-436d-9c8f-2105f3b950d9
-        uuid:
+          format: date-time
+        endDate:
           type: string
-          description: Uniquely identifies a change
+          format: date-time
+        attachmentId:
+          type: string
           format: uuid
-          example: 4b17da68-3d6b-436d-9c8f-2105f3b950d9
+        selectionType:
+          type: string
+          deprecated: true
+          enum:
+          - EXEMPTION
+          - EXISTING
+          - NEW
+          - BLANKET
         type:
-          $ref: '#/components/schemas/NetworkChangeType'
-        status:
-          $ref: '#/components/schemas/NetworkChangeStatus'
-        createdDateTime:
           type: string
-          description: Set when change flow starts
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        updatedDateTime:
+          enum:
+          - EXEMPTION
+          - EXISTING
+          - NEW
+          - BLANKET
+      description: purchase order
+    PortTether:
+      type: object
+      properties:
+        crossConnectId:
           type: string
-          description: Set when change object is updated
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        data:
+          description: Port cross connect identifier
+        cabinetNumber:
+          type: string
+          description: Port cabinet number
+        systemName:
+          type: string
+          description: Port system name
+        patchPanel:
+          type: string
+          description: Port patch panel
+        patchPanelPortA:
+          type: string
+          description: Port patch panel port A
+        patchPanelPortB:
+          type: string
+          description: Port patch panel port B
+        ibx:
+          type: string
+          description: z-side/Equinix IBX
+      description: Port physical connection
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
           type: array
           items:
-            $ref: '#/components/schemas/NetworkChangeOperation'
-      description: Current state of latest network change
-    AccessPoint:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    EquinixStatus:
+      type: string
+      description: Connection status
+      enum:
+      - REJECTED_ACK
+      - REJECTED
+      - PENDING_DELETE
+      - PROVISIONED
+      - PENDING_APPROVAL
+      - NOT_PROVISIONED
+      - DEPROVISIONING
+      - NOT_DEPROVISIONED
+      - PENDING_AUTO_APPROVAL
+      - PROVISIONING
+      - PENDING_BGP_PEERING
+      - PENDING_PROVIDER_VLAN
+      - DEPROVISIONED
+      - DELETED
+      - AUTO_APPROVAL_FAILED
+      - PENDING_PROVIDER_VLAN_ERROR
+      - DRAFT
+      - CANCELLED
+      - PENDING_INTERFACE_CONFIGURATION
+    PortNotification:
+      required:
+      - registeredUsers
+      - type
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/AccessPointType'
-        account:
-          $ref: '#/components/schemas/SimplifiedAccount'
-        location:
-          $ref: '#/components/schemas/SimplifiedLocation'
-        port:
-          $ref: '#/components/schemas/SimplifiedPort'
-        profile:
-          $ref: '#/components/schemas/SimplifiedServiceProfile'
-        router:
-          $ref: '#/components/schemas/CloudRouter'
-        linkProtocol:
-          $ref: '#/components/schemas/SimplifiedLinkProtocol'
-        virtualDevice:
-          $ref: '#/components/schemas/VirtualDevice'
-        interface:
-          $ref: '#/components/schemas/Interface'
-        network:
-          $ref: '#/components/schemas/SimplifiedNetwork'
-        sellerRegion:
           type: string
-          description: Access point seller region
-        peeringType:
-          $ref: '#/components/schemas/PeeringType'
-        authenticationKey:
-          type: string
-          description: Access point authentication key
-        providerConnectionId:
-          type: string
-          description: Provider assigned Connection Id
-        virtualNetwork:
-          $ref: '#/components/schemas/VirtualNetwork'
-        interconnection:
-          $ref: '#/components/schemas/MetalInterconnection'
-        role:
-          type: string
-          description: E-Tree network connection role
+          description: Notification Type
           enum:
-          - LEAF
-          - ROOT
-      description: Access point object
+          - NOTIFICATION
+          - TECHNICAL
+          - PEERING
+          - ESCALATION
+        registeredUsers:
+          type: array
+          description: Array of registered users
+          items:
+            type: string
+    CloudRouterChangeOperation:
+      required:
+      - op
+      - path
+      - value
+      type: object
+      properties:
+        op:
+          type: string
+          description: Handy shortcut for operation name
+          enum:
+          - replace
+          - add
+          - remove
+        path:
+          type: string
+          description: path inside document leading to updated parameter
+        value:
+          description: new value for updated parameter
+      description: Fabric Cloud Router change operation data
+    PortRedundancy:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Access point redundancy
+        group:
+          type: string
+          description: Port UUID of respective primary port
+          deprecated: true
+        priority:
+          $ref: '#/components/schemas/PortPriority'
+      description: Port redundancy configuration
+    ServiceProfileLinkProtocolConfig:
+      type: object
+      properties:
+        encapsulationStrategy:
+          type: string
+          description: was tagType - missing on wiki
+          enum:
+          - CTAGED
+          - BOTH
+          - NAMED
+        namedTags:
+          maxItems: 64
+          type: array
+          items:
+            type: string
+        vlanCTagLabel:
+          type: string
+          description: was ctagLabel
+        reuseVlanSTag:
+          type: boolean
+          example: true
+          default: false
+        encapsulation:
+          type: string
+          description: Port encapsulation - Derived response attribute. Ignored on request payloads.
+          enum:
+          - QINQ
+          - DOT1Q
+          - UNTAGGED
+      description: Configuration for dot1q to qinq translation support
     Link:
       type: object
       properties:
@@ -1091,165 +978,172 @@ components:
         authenticate:
           type: boolean
           description: Authentication required or not
-    NetworkSortDirectionResponse:
-      type: string
-      description: Sorting direction
-      default: DESC
-      enum:
-      - DESC
-      - ASC
-    ServiceTokenConnection:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of Connection
-          enum:
-          - EVPL_VC
-          - EPL_VC
-          - EVPLAN_VC
-          - EPLAN_VC
-          - IPWAN_VC
-          - IP_VC
-          - EVPTREE_VC
-          - EPTREE_VC
-        href:
-          type: string
-          description: An absolute URL that is the subject of the link's context.
-          format: uri
-          readOnly: true
-        uuid:
-          type: string
-          description: Equinix-assigned connection identifier
-          format: uuid
-        allowRemoteConnection:
-          type: boolean
-          description: Authorization to connect remotely
-          default: false
-        allowCustomBandwidth:
-          type: boolean
-          description: Allow custom bandwidth value
-          default: false
-        bandwidthLimit:
-          maximum: 100000
-          minimum: 0
-          type: integer
-          description: Connection bandwidth limit in Mbps
-        supportedBandwidths:
-          type: array
-          description: List of permitted bandwidths.
-          items:
-            type: integer
-        aSide:
-          $ref: '#/components/schemas/ServiceTokenSide'
-        zSide:
-          $ref: '#/components/schemas/ServiceTokenSide'
-      description: Service Token Connection Type Information
-    ServiceToken:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ServiceTokenType'
-        href:
-          type: string
-          description: An absolute URL that is the subject of the link's context.
-          format: uri
-          readOnly: true
-        expiry:
-          type: integer
-          deprecated: true
-        uuid:
-          type: string
-          description: Equinix-assigned service token identifier
-          format: uuid
-        issuerSide:
-          type: string
-          description: information about token side
-          deprecated: true
-        name:
-          type: string
-          description: Customer-provided service token name
-        description:
-          type: string
-          description: Customer-provided service token description
-        expirationDateTime:
-          type: string
-          description: Expiration date and time of the service token.
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        connection:
-          $ref: '#/components/schemas/ServiceTokenConnection'
-        state:
-          $ref: '#/components/schemas/ServiceTokenState'
-        notifications:
-          type: array
-          description: Service token related notifications
-          items:
-            $ref: '#/components/schemas/SimplifiedNotification'
-        account:
-          $ref: '#/components/schemas/SimplifiedAccount'
-        changelog:
-          $ref: '#/components/schemas/Changelog'
-        project:
-          $ref: '#/components/schemas/Project'
-      description: Create Service Tokens (v4) generates Equinix Fabric service tokens. These tokens authorize users to access protected resources and services. The tokens remove sensitive content from the environment, rather than just masking it, making the protected data impossible to unencrypt or decrypt. Resource owners can distribute the tokens to trusted partners and vendors, allowing selected third parties to work directly with Equinix network assets.
     Tags:
       type: array
       items:
         type: string
-    PortNotification:
-      required:
-      - registeredUsers
-      - type
+    NetworkChangeStatus:
+      type: string
+      description: Current outcome of the change flow
+      enum:
+      - APPROVED
+      - COMPLETED
+      - FAILED
+      - REJECTED
+      - REQUESTED
+      - SUBMITTED_FOR_APPROVAL
+    ServiceTokenSide:
       type: object
       properties:
-        type:
-          type: string
-          description: Notification Type
-          enum:
-          - NOTIFICATION
-          - TECHNICAL
-          - PEERING
-          - ESCALATION
-        registeredUsers:
+        accessPointSelectors:
           type: array
-          description: Array of registered users
+          description: List of AccessPointSelectors
+          items:
+            $ref: '#/components/schemas/AccessPointSelector'
+      description: Connection link protocol,virtual device or network configuration
+    CustomField:
+      required:
+      - dataType
+      - isRequired
+      - label
+      properties:
+        label:
+          type: string
+          example: Account Number
+        description:
+          type: string
+          example: Provide a valid account number
+        required:
+          type: boolean
+          example: true
+        dataType:
+          type: string
+          enum:
+          - STRING
+          - LIST
+          - NUMBER
+        options:
+          type: array
           items:
             type: string
-    ConnectionOperation:
+        captureInEmail:
+          type: boolean
+          description: capture this field as a part of email notification
+      description: Define Custom Attributes
+    PortLoa:
       type: object
       properties:
-        providerStatus:
-          $ref: '#/components/schemas/ProviderStatus'
-        equinixStatus:
-          $ref: '#/components/schemas/EquinixStatus'
-        operationalStatus:
+        uuid:
           type: string
-          description: Connection operational status
-          enum:
-          - UP
-          - DOWN
-        errors:
+          description: uuid
+        type:
+          type: string
+          description: Loa type
+          example: DIGITAL_LOA
+      description: Port Loas
+    ConnectionType:
+      type: string
+      description: Connection type
+      enum:
+      - EVPL_VC
+      - EPL_VC
+      - EC_VC
+      - IP_VC
+      - ACCESS_EPL_VC
+      - EIA_VC
+      - EVPLAN_VC
+      - EPLAN_VC
+      - EVPTREE_VC
+      - EPTREE_VC
+      - IPWAN_VC
+      - IA_VC
+      - MC_VC
+      - IX_VC
+    NetworkOperation:
+      type: object
+      properties:
+        equinixStatus:
+          $ref: '#/components/schemas/NetworkEquinixStatus'
+      description: Network operational data
+    SimplifiedNetwork:
+      required:
+      - uuid
+      type: object
+      properties:
+        href:
+          type: string
+          description: Network URI
+          format: uri
+          readOnly: true
+          example: https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784
+        uuid:
+          type: string
+          description: Equinix-assigned network identifier
+          format: uuid
+          example: 92dc376a-a932-43aa-a6a2-c806dedbd784
+        name:
+          type: string
+          description: Customer-assigned network name
+          example: My EVPLAN Network
+        state:
+          $ref: '#/components/schemas/NetworkState'
+        account:
+          $ref: '#/components/schemas/SimplifiedAccount'
+        change:
+          $ref: '#/components/schemas/SimplifiedNetworkChange'
+        operation:
+          $ref: '#/components/schemas/NetworkOperation'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+        links:
+          type: array
+          description: Network sub-resources links
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/Link'
+        type:
+          $ref: '#/components/schemas/NetworkType'
+        scope:
+          $ref: '#/components/schemas/NetworkScope'
+        location:
+          $ref: '#/components/schemas/SimplifiedLocation'
+      description: Network specification
+    ConnectionDirection:
+      type: string
+      description: Connection directionality from the requester point of view
+      enum:
+      - INTERNAL
+      - INCOMING
+      - OUTGOING
+    Bandwidth:
+      type: integer
+      description: speed in Mbps
+      example: 50
+    PortOrderSignatureDelegate:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: first name of delegate
+        lastName:
+          type: string
+          description: last Name of delegate
+        email:
+          type: string
+          description: email of delegate
+      description: order delegate details
+    NetworkSearchRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/NetworkFilter'
+        pagination:
+          $ref: '#/components/schemas/PaginationRequest'
+        sort:
           type: array
           items:
-            $ref: '#/components/schemas/Error'
-        opStatusChangedAt:
-          type: string
-          description: When connection transitioned into current operational status
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-      description: Connection type-specific operational data
-    ServiceProfileTypeEnum:
-      type: string
-      description: Service profile type
-      example: L2_PROFILE
-      enum:
-      - L2_PROFILE
-      - L3_PROFILE
-      - IA_PROFILE
-      - IX_PROFILE
-      x-eqx-api-linter-skip-rules:
-      - 40
+            $ref: '#/components/schemas/NetworkSortCriteria'
+      description: Search requests containing criteria
     SimplifiedNetworkChange:
       type: object
       properties:
@@ -1267,31 +1161,237 @@ components:
         type:
           $ref: '#/components/schemas/NetworkChangeType'
       description: Current state of latest network change
-    ConnectionRedundancy:
+    ServiceProfileAccessPointTypeVD:
+      required:
+      - type
       type: object
       properties:
-        group:
+        uuid:
           type: string
-          description: Redundancy group identifier (UUID of primary connection)
-        priority:
-          $ref: '#/components/schemas/ConnectionPriority'
-      description: Connection redundancy configuration
-    VirtualDeviceInterface:
+        type:
+          $ref: '#/components/schemas/ServiceProfileAccessPointTypeEnum'
+        supportedBandwidths:
+          $ref: '#/components/schemas/Bandwidths'
+        allowRemoteConnections:
+          type: boolean
+          description: Allow remote connections to Service Profile
+          example: true
+        allowCustomBandwidth:
+          type: boolean
+          example: true
+      additionalProperties: false
+      description: VirtualDevice Access Point Type
+    AuthenticationKey:
+      type: object
+      properties:
+        required:
+          type: boolean
+          example: true
+          default: false
+        label:
+          type: string
+          example: Service Key
+        description:
+          type: string
+          example: description for the authentication key
+      description: Authentication Key Support and Customization
+    NetworkChangeOperation:
+      required:
+      - op
+      - path
+      - value
+      type: object
+      properties:
+        op:
+          type: string
+          description: Handy shortcut for operation name
+          enum:
+          - replace
+          - add
+          - remove
+        path:
+          type: string
+          description: path inside document leading to updated parameter
+          example: /name
+        value:
+          description: new value for updated parameter
+      description: Network change operation data
+    SimplifiedTokenNetwork:
+      type: object
+      properties:
+        href:
+          type: string
+          description: url to entity
+          format: uri
+        uuid:
+          type: string
+          description: Network Identifier
+          format: uuid
+        type:
+          type: string
+          description: Type of Network
+          enum:
+          - EVPLAN
+          - EPLAN
+          - IPWAN
+          - EVPTREE
+          - EPTREE
+        name:
+          type: string
+          description: Network Name
+        scope:
+          type: string
+          description: scope of Network
+          enum:
+          - LOCAL
+          - REGIONAL
+          - GLOBAL
+        location:
+          $ref: '#/components/schemas/SimplifiedLocation'
+    AccessPointSelector:
       type: object
       properties:
         type:
           type: string
-          description: Type of interface
+          description: Type of Access point
           enum:
+          - COLO
+          - VD
           - NETWORK
-        id:
+        hideAssetInfo:
+          type: boolean
+          deprecated: true
+        port:
+          $ref: '#/components/schemas/SimplifiedMetadataEntity'
+        linkProtocol:
+          $ref: '#/components/schemas/SimplifiedLinkProtocol'
+        virtualDevice:
+          $ref: '#/components/schemas/SimplifiedVirtualDevice'
+        interface:
+          $ref: '#/components/schemas/VirtualDeviceInterface'
+        network:
+          $ref: '#/components/schemas/SimplifiedTokenNetwork'
+      description: List of criteria for selecting network access points with optimal efficiency, security, compatibility, and availability.
+    SimplifiedLinkProtocol:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/LinkProtocolType'
+        vlanTag:
+          maximum: 4092
+          minimum: 2
           type: integer
-          description: Network Edge assigned identifier
+          description: vlanTag value specified for DOT1Q connections
+        vlanSTag:
+          maximum: 4092
+          minimum: 2
+          type: integer
+          description: vlanSTag value specified for QINQ connections
+        vlanCTag:
+          maximum: 4092
+          minimum: 2
+          type: integer
+          description: vlanCTag value specified for QINQ connections
+      description: Connection link protocol Configuration
+    ServiceProfileAccessPointTypeCOLO:
+      required:
+      - type
+      type: object
+      properties:
         uuid:
           type: string
-          description: Interface identifier
-          format: uuid
-      description: Virtual Device Interface Information
+        type:
+          $ref: '#/components/schemas/ServiceProfileAccessPointTypeEnum'
+        supportedBandwidths:
+          $ref: '#/components/schemas/Bandwidths'
+        allowRemoteConnections:
+          type: boolean
+          description: Setting to allow or prohibit remote connections to the service profile.
+          example: true
+          default: false
+        allowCustomBandwidth:
+          type: boolean
+          description: Setting to enable or disable the ability of the buyer to customize the bandwidth.
+          example: true
+          default: false
+        bandwidthAlertThreshold:
+          type: number
+          description: percentage of port bandwidth at which an allocation alert is generated - missing on wiki.
+        allowBandwidthAutoApproval:
+          type: boolean
+          description: Setting to enable or disable the ability of the buyer to change connection bandwidth without approval of the seller.
+          default: false
+        allowBandwidthUpgrade:
+          type: boolean
+          description: Availability of a bandwidth upgrade. The default is false.
+        linkProtocolConfig:
+          $ref: '#/components/schemas/ServiceProfileLinkProtocolConfig'
+        enableAutoGenerateServiceKey:
+          type: boolean
+          description: for verizon only.
+        connectionRedundancyRequired:
+          type: boolean
+          description: Mandate redundant connections
+          example: true
+          default: false
+        selectiveRedundancy:
+          type: boolean
+          description: Optional redundant connections
+          example: true
+          default: false
+        apiConfig:
+          $ref: '#/components/schemas/ApiConfig'
+        connectionLabel:
+          type: string
+          description: custom name for "Connection"
+        authenticationKey:
+          $ref: '#/components/schemas/AuthenticationKey'
+        metadata:
+          $ref: '#/components/schemas/ServiceProfileMetadata'
+      description: Colo Access Point Type
+    SimplifiedAccount:
+      type: object
+      properties:
+        accountNumber:
+          type: integer
+          description: Account number
+          format: int64
+        accountName:
+          type: string
+          description: Account name
+        orgId:
+          type: integer
+          description: Customer organization identifier
+          format: int64
+        organizationName:
+          type: string
+          description: Customer organization name
+        globalOrgId:
+          type: string
+          description: Global organization identifier
+        globalOrganizationName:
+          type: string
+          description: Global organization name
+        ucmId:
+          type: string
+          description: Account ucmId
+        globalCustId:
+          type: string
+          description: Account name
+        resellerAccountNumber:
+          type: integer
+          description: Reseller account number
+          format: int64
+        resellerAccountName:
+          type: string
+          description: Reseller account name
+        resellerUcmId:
+          type: string
+          description: Reseller account ucmId
+        resellerOrgId:
+          type: integer
+          description: Reseller customer organization identifier
+          format: int64
     Connection:
       required:
       - aSide
@@ -1360,321 +1460,443 @@ components:
         project:
           $ref: '#/components/schemas/Project'
       description: Connection specification
-    AccessPointSelector:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of Access point
-          enum:
-          - COLO
-          - VD
-          - NETWORK
-        hideAssetInfo:
-          type: boolean
-          deprecated: true
-        port:
-          $ref: '#/components/schemas/SimplifiedMetadataEntity'
-        linkProtocol:
-          $ref: '#/components/schemas/SimplifiedLinkProtocol'
-        virtualDevice:
-          $ref: '#/components/schemas/SimplifiedVirtualDevice'
-        interface:
-          $ref: '#/components/schemas/VirtualDeviceInterface'
-        network:
-          $ref: '#/components/schemas/SimplifiedTokenNetwork'
-      description: List of criteria for selecting network access points with optimal efficiency, security, compatibility, and availability.
-    NetworkPostRequest:
-      required:
-      - name
-      - notifications
-      - scope
-      - type
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/NetworkType'
-        name:
-          type: string
-          description: Customer-provided network name
-        scope:
-          $ref: '#/components/schemas/NetworkScope'
-        location:
-          $ref: '#/components/schemas/SimplifiedLocation'
-        project:
-          $ref: '#/components/schemas/Project'
-        notifications:
-          type: array
-          description: Preferences for notifications on network configuration or status changes
-          items:
-            $ref: '#/components/schemas/SimplifiedNotification'
-      description: Create Network
-    MetalInterconnection:
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: Equinix Metal Interconnection
-          format: uuid
-      description: Metal Interconnection
-    NetworkType:
-      type: string
-      description: Network type
-      enum:
-      - EVPLAN
-      - EPLAN
-      - IPWAN
-      - EVPTREE
-      - EPTREE
-    NetworkEquinixStatus:
-      type: string
-      description: Network status
-      enum:
-      - PROVISIONING
-      - PROVISIONED
-      - NOT_PROVISIONED
-      - DEPROVISIONING
-      - DEPROVISIONED
-      - NOT_DEPROVISIONED
-    NetworkConnections:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Connection'
-      description: List of network changes
-    PeeringType:
-      type: string
-      description: Access point peering type
-      enum:
-      - PRIVATE
-      - MICROSOFT
-      - PUBLIC
-      - MANUAL
-    AuthenticationKey:
-      type: object
-      properties:
-        required:
-          type: boolean
-          example: true
-          default: false
-        label:
-          type: string
-          example: Service Key
-        description:
-          type: string
-          example: description for the authentication key
-      description: Authentication Key Support and Customization
-    CustomField:
-      required:
-      - dataType
-      - isRequired
-      - label
-      properties:
-        label:
-          type: string
-          example: Account Number
-        description:
-          type: string
-          example: Provide a valid account number
-        required:
-          type: boolean
-          example: true
-        dataType:
-          type: string
-          enum:
-          - STRING
-          - LIST
-          - NUMBER
-        options:
-          type: array
-          items:
-            type: string
-        captureInEmail:
-          type: boolean
-          description: capture this field as a part of email notification
-      description: Define Custom Attributes
-    VirtualDevice:
+    NetworkUpdateRequest:
+      minItems: 1
+      type: array
+      description: Fabric Network Update Request
+      items:
+        $ref: '#/components/schemas/NetworkChangeOperation'
+    NetworkChange:
       type: object
       properties:
         href:
           type: string
-          description: Virtual Device URI
+          description: Network URI
+          format: uri
+          readOnly: true
+          example: https://api.equinix.com/fabric/v4/networks/2a4fb415-5a7f-436f-bae6-02f5e403deec/changes/4b17da68-3d6b-436d-9c8f-2105f3b950d9
+        uuid:
+          type: string
+          description: Uniquely identifies a change
+          format: uuid
+          example: 4b17da68-3d6b-436d-9c8f-2105f3b950d9
+        type:
+          $ref: '#/components/schemas/NetworkChangeType'
+        status:
+          $ref: '#/components/schemas/NetworkChangeStatus'
+        createdDateTime:
+          type: string
+          description: Set when change flow starts
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedDateTime:
+          type: string
+          description: Set when change object is updated
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/NetworkChangeOperation'
+      description: Current state of latest network change
+    NetworkSortByResponse:
+      type: string
+      description: Possible field names to use on sorting
+      default: /changeLog/updatedDateTime
+      enum:
+      - /name
+      - /type
+      - /uuid
+      - /state
+      - /scope
+      - /location/region
+      - /changeLog/createdDateTime
+      - /changeLog/updatedDateTime
+    ServiceProfileAccessPointType:
+      type: object
+      description: Access Point Type
+      oneOf:
+      - $ref: '#/components/schemas/ServiceProfileAccessPointTypeCOLO'
+      - $ref: '#/components/schemas/ServiceProfileAccessPointTypeVD'
+    PhysicalPortType:
+      type: string
+      description: Type of Port
+      enum:
+      - XF_PHYSICAL_PORT
+    NetworkFilter:
+      type: object
+      properties:
+        and:
+          $ref: '#/components/schemas/NetworkSimpleExpression'
+        or:
+          $ref: '#/components/schemas/NetworkSimpleExpression'
+        property:
+          $ref: '#/components/schemas/NetworkSearchFieldName'
+        operator:
+          type: string
+          example: '='
+          enum:
+          - '='
+          - '!='
+          - '>'
+          - '>='
+          - <
+          - <=
+          - BETWEEN
+          - NOT BETWEEN
+          - LIKE
+          - NOT LIKE
+          - ILIKE
+          - NOT ILIKE
+          - IN
+          - NOT IN
+        values:
+          type: array
+          items:
+            type: string
+            example: Network-1
+    NetworkSearchFieldName:
+      type: string
+      description: Possible field names to use on filters
+      example: /name
+      enum:
+      - /name
+      - /uuid
+      - /scope
+      - /type
+      - /operation/equinixStatus
+      - /location/region
+      - /project/projectId
+      - /account/globalCustId
+      - /account/orgId
+      - /deletedDate
+      - /*
+    NetworkSimpleExpression:
+      type: array
+      items:
+        $ref: '#/components/schemas/NetworkFilter'
+    ConnectionPriority:
+      type: string
+      description: Connection priority in redundancy group
+      enum:
+      - PRIMARY
+      - SECONDARY
+    NetworkSortCriteria:
+      type: object
+      properties:
+        direction:
+          $ref: '#/components/schemas/NetworkSortDirection'
+        property:
+          $ref: '#/components/schemas/NetworkSortBy'
+    PortType:
+      type: string
+      description: Type of Port
+      enum:
+      - XF_PORT
+    SimplifiedLocation:
+      type: object
+      properties:
+        metroHref:
+          type: string
+          example: https://api.equinix.com/fabric/v4/metros/AM
+        region:
+          type: string
+          example: AMER, APAC, EMEA
+        metroName:
+          type: string
+          example: Amsterdam
+        metroCode:
+          type: string
+          example: AM
+        ibx:
+          type: string
+          example: AM1
+          deprecated: true
+    Changelog:
+      type: object
+      properties:
+        createdBy:
+          type: string
+          description: Created by User Key
+          example: johnsmith
+        createdByFullName:
+          type: string
+          description: Created by User Full Name
+          example: John Smith
+        createdByEmail:
+          type: string
+          description: Created by User Email Address
+          example: john.smith@example.com
+        createdDateTime:
+          type: string
+          description: Created by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedBy:
+          type: string
+          description: Updated by User Key
+          example: johnsmith
+        updatedByFullName:
+          type: string
+          description: Updated by User Full Name
+          example: John Smith
+        updatedByEmail:
+          type: string
+          description: Updated by User Email Address
+          example: john.smith@example.com
+        updatedDateTime:
+          type: string
+          description: Updated by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        deletedBy:
+          type: string
+          description: Deleted by User Key
+          example: johnsmith
+        deletedByFullName:
+          type: string
+          description: Deleted by User Full Name
+          example: John Smith
+        deletedByEmail:
+          type: string
+          description: Deleted by User Email Address
+          example: john.smith@example.com
+        deletedDateTime:
+          type: string
+          description: Deleted by Date and Time
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+      description: Change log
+    NetworkSortBy:
+      type: string
+      description: Possible field names to use on sorting
+      default: /changeLog/updatedDateTime
+      enum:
+      - /name
+      - /uuid
+      - /scope
+      - /operation/equinixStatus
+      - /location/region
+      - /changeLog/createdDateTime
+      - /changeLog/updatedDateTime
+    PortSettings:
+      type: object
+      properties:
+        buyout:
+          type: boolean
+          deprecated: true
+        viewPortPermission:
+          type: boolean
+          deprecated: true
+        placeVcOrderPermission:
+          type: boolean
+          deprecated: true
+        layer3Enabled:
+          type: boolean
+          deprecated: true
+        sharedPortType:
+          type: boolean
+        sharedPortProduct:
+          type: string
+          enum:
+          - NETWORK_EDGE
+          - VIRTUAL_GATEWAY
+          - SMARTKEY
+          - EDGE_METAL
+        packageType:
+          type: string
+          description: Type of Port Package
+          deprecated: true
+          enum:
+          - STANDARD
+          - UNLIMITED
+          - UNLIMITED_PLUS
+      description: Port configuration settings
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    NetworkState:
+      type: string
+      description: Network status
+      example: ACTIVE
+      enum:
+      - ACTIVE
+      - INACTIVE
+      - DELETED
+    PhysicalPort:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Equinix assigned response attribute for an absolute URL that is the subject of the link's context.
+          format: uri
+          readOnly: true
+        type:
+          $ref: '#/components/schemas/PhysicalPortType'
+        id:
+          type: integer
+          description: Equinix assigned response attribute for Physical Port Id
+          deprecated: true
+        state:
+          $ref: '#/components/schemas/PortState'
+        account:
+          $ref: '#/components/schemas/SimplifiedAccount'
+        interfaceSpeed:
+          minimum: 0
+          type: integer
+          description: Physical Port Speed in Mbps
+        interfaceType:
+          type: string
+          description: Physical Port Interface Type
+        uuid:
+          type: string
+          description: Equinix assigned response attribute for physical port identifier
+          format: uuid
+        tether:
+          $ref: '#/components/schemas/PortTether'
+        demarcationPoint:
+          $ref: '#/components/schemas/PortDemarcationPoint'
+        settings:
+          $ref: '#/components/schemas/PhysicalPortSettings'
+        interface:
+          $ref: '#/components/schemas/PortInterface'
+        notifications:
+          type: array
+          description: Notification preferences
+          items:
+            $ref: '#/components/schemas/PortNotification'
+        additionalInfo:
+          type: array
+          description: Physical Port additional information
+          items:
+            $ref: '#/components/schemas/PortAdditionalInfo'
+        order:
+          $ref: '#/components/schemas/PortOrder'
+        operation:
+          $ref: '#/components/schemas/PortOperation'
+        loas:
+          type: array
+          description: Port Loas
+          items:
+            $ref: '#/components/schemas/PortLoa'
+      description: Physical Port specification
+    ServiceTokenType:
+      type: string
+      description: Type of Service Token
+      enum:
+      - VC_TOKEN
+      - EPL_TOKEN
+    VirtualNetwork:
+      type: object
+      properties:
+        href:
+          type: string
+          description: The Canonical URL at which the resource resides.
           format: uri
           readOnly: true
         uuid:
           type: string
-          description: Equinix-assigned Virtual Device identifier
+          description: Equinix-assigned Virtual Network identifier
           format: uuid
-        name:
-          type: string
-          description: Customer-assigned Virtual Device name
-        type:
-          type: string
-          description: Virtual Device type
-          enum:
-          - EDGE
-        account:
-          $ref: '#/components/schemas/SimplifiedAccount'
-        cluster:
-          type: string
-          description: Virtual Device Cluster Information
-      description: Virtual Device AccessPoint Information
-    EquinixStatus:
+      description: Virtual Network Information
+    NetworkSortDirection:
       type: string
-      description: Connection status
+      description: Sorting direction
+      default: DESC
       enum:
-      - REJECTED_ACK
-      - REJECTED
-      - PENDING_DELETE
-      - PROVISIONED
-      - PENDING_APPROVAL
-      - NOT_PROVISIONED
-      - DEPROVISIONING
-      - NOT_DEPROVISIONED
-      - PENDING_AUTO_APPROVAL
-      - PROVISIONING
-      - PENDING_BGP_PEERING
-      - PENDING_PROVIDER_VLAN
-      - DEPROVISIONED
-      - DELETED
-      - AUTO_APPROVAL_FAILED
-      - PENDING_PROVIDER_VLAN_ERROR
-      - DRAFT
-      - CANCELLED
-      - PENDING_INTERFACE_CONFIGURATION
-    LinkProtocolType:
-      type: string
-      description: Type of Link Protocol
-      enum:
-      - UNTAGGED
-      - DOT1Q
-      - QINQ
-      - EVPN_VXLAN
-      - VXLAN
-    PortOrderSignatureDelegate:
-      type: object
-      properties:
-        firstName:
-          type: string
-          description: first name of delegate
-        lastName:
-          type: string
-          description: last Name of delegate
-        email:
-          type: string
-          description: email of delegate
-      description: order delegate details
-    ServiceProfileMetadata:
-      type: object
-      properties:
-        props:
-          type: string
-        regEx:
-          type: string
-        regExMsg:
-          type: string
-        vlanRangeMaxValue:
-          type: integer
-        vlanRangeMinValue:
-          type: integer
-        maxQinq:
-          type: string
-        maxDot1q:
-          type: integer
-        variableBilling:
-          type: boolean
-        globalOrganization:
-          type: string
-        limitAuthKeyConn:
-          type: boolean
-        allowSecondaryLocation:
-          type: boolean
-        redundantProfileId:
-          type: string
-        allowVcMigration:
-          type: boolean
-        connectionEditable:
-          type: boolean
-        releaseVlan:
-          type: boolean
-        maxConnectionsOnPort:
-          type: integer
-        portAssignmentStrategy:
-          type: string
-        eqxManagedPort:
-          type: boolean
-        connectionNameEditable:
-          type: boolean
-      description: Metadata. Response attribute. Ignored on request payload.
-    ServiceProfileAccessPointTypeVD:
-      required:
-      - type
-      type: object
-      properties:
-        uuid:
-          type: string
-        type:
-          $ref: '#/components/schemas/ServiceProfileAccessPointTypeEnum'
-        supportedBandwidths:
-          $ref: '#/components/schemas/Bandwidths'
-        allowRemoteConnections:
-          type: boolean
-          description: Allow remote connections to Service Profile
-          example: true
-        allowCustomBandwidth:
-          type: boolean
-          example: true
-      additionalProperties: false
-      description: VirtualDevice Access Point Type
-    ConnectionType:
-      type: string
-      description: Connection type
-      enum:
-      - EVPL_VC
-      - EPL_VC
-      - EC_VC
-      - IP_VC
-      - ACCESS_EPL_VC
-      - EIA_VC
-      - EVPLAN_VC
-      - EPLAN_VC
-      - EVPTREE_VC
-      - EPTREE_VC
-      - IPWAN_VC
-      - IA_VC
-      - MC_VC
-      - IX_VC
-    CloudRouterPostRequestPackage:
-      required:
-      - code
+      - DESC
+      - ASC
+    CloudRouter:
       type: object
       properties:
         href:
           type: string
-          description: Fabric Cloud Router URI
+          description: Cloud Routers URI
           format: uri
-          example: https://api.equinix.com/fabric/v4/routerPackages/LAB
+          readOnly: true
+          example: https://api.equinix.com/fabric/v4/routers/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        uuid:
+          type: string
+          description: Equinix-assigned access point identifier
+          format: uuid
+          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        name:
+          type: string
+          description: Customer-provided Cloud Router name
+          format: string
+          example: test-fg-1
+        state:
+          $ref: '#/components/schemas/CloudRouterAccessPointState'
+        equinixAsn:
+          type: integer
+          description: Equinix ASN
+          format: int64
+          example: 30000
+        connectionsCount:
+          minimum: 0
+          type: integer
+          description: Number of connections associated with this Access point
+        marketplaceSubscription:
+          $ref: '#/components/schemas/marketplaceSubscription'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+        change:
+          $ref: '#/components/schemas/CloudRouterChange'
+      description: Fabric Cloud Router object
+      allOf:
+      - $ref: '#/components/schemas/CloudRouterPostRequestBase'
+    ServiceProfileVisibilityEnum:
+      type: string
+      enum:
+      - PRIVATE
+      - PUBLIC
+    PortInterface:
+      type: object
+      properties:
         type:
           type: string
-          description: Cloud Router package type
-          example: ROUTER_PACKAGE
-          enum:
-          - ROUTER_PACKAGE
-        code:
-          type: string
-          description: Cloud Router package code
-          example: LAB
-          enum:
-          - LAB
-          - BASIC
-          - STANDARD
-          - ADVANCED
-          - PREMIUM
-      description: Fabric Cloud Router Package Type
+          description: Port interface type
+      description: Port interface
+    PortState:
+      type: string
+      description: Port lifecycle state
+      enum:
+      - PENDING
+      - PROVISIONING
+      - REPROVISIONING
+      - PENDING_CROSS_CONNECT
+      - PROVISIONED
+      - ACTIVE
+      - DEPROVISIONING
+      - DEPROVISIONED
+      - INACTIVE
+      - FAILED
+      - ADDED
+      - DELETED
+      - TO_BE_ADDED
+      - TO_BE_DELETED
+    NetworkChangeType:
+      type: string
+      description: Type of change
+      enum:
+      - NETWORK_CREATION
+      - NETWORK_UPDATE
+      - NETWORK_DELETION
+    CloudRouterAccessPointState:
+      type: string
+      description: Access point lifecycle state
+      enum:
+      - PROVISIONED
+      - PROVISIONING
+      - DEPROVISIONING
+      - DEPROVISIONED
+      - REPROVISIONING
+      - NOT_PROVISIONED
+      - NOT_DEPROVISIONED
     ApiConfig:
       type: object
       properties:
@@ -1723,224 +1945,403 @@ components:
           type: boolean
           default: false
       description: Configuration for API based Integration for Service Profile
-    SimplifiedLocation:
-      type: object
-      properties:
-        metroHref:
-          type: string
-          example: https://api.equinix.com/fabric/v4/metros/AM
-        region:
-          type: string
-          example: AMER, APAC, EMEA
-        metroName:
-          type: string
-          example: Amsterdam
-        metroCode:
-          type: string
-          example: AM
-        ibx:
-          type: string
-          example: AM1
-          deprecated: true
-    Pagination:
+    Project:
       required:
-      - limit
-      - total
+      - projectId
       type: object
       properties:
-        offset:
-          minimum: 0
-          type: integer
-          description: Index of the first item returned in the response. The default is 0.
-          default: 0
-        limit:
-          minimum: 0
-          type: integer
-          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
-          default: 20
-        total:
-          minimum: 0
-          type: integer
-          description: Total number of elements returned.
-        next:
+        projectId:
           type: string
-          description: URL relative to the next item in the response.
-        previous:
-          type: string
-          description: URL relative to the previous item in the response.
-      description: Pagination response information
-    NetworkChangeOperation:
+          description: Subscriber-assigned project ID
+          example: 44f4c4f8-2f39-494e-838c-d8e640591be5
+    CloudRouterPostRequestPackage:
       required:
-      - op
-      - path
-      - value
-      type: object
-      properties:
-        op:
-          type: string
-          description: Handy shortcut for operation name
-          enum:
-          - replace
-          - add
-          - remove
-        path:
-          type: string
-          description: path inside document leading to updated parameter
-          example: /name
-        value:
-          description: new value for updated parameter
-      description: Network change operation data
-    Bandwidth:
-      type: integer
-      description: speed in Mbps
-      example: 50
-    ServiceProfileAccessPointTypeCOLO:
-      required:
-      - type
-      type: object
-      properties:
-        uuid:
-          type: string
-        type:
-          $ref: '#/components/schemas/ServiceProfileAccessPointTypeEnum'
-        supportedBandwidths:
-          $ref: '#/components/schemas/Bandwidths'
-        allowRemoteConnections:
-          type: boolean
-          description: Setting to allow or prohibit remote connections to the service profile.
-          example: true
-          default: false
-        allowCustomBandwidth:
-          type: boolean
-          description: Setting to enable or disable the ability of the buyer to customize the bandwidth.
-          example: true
-          default: false
-        bandwidthAlertThreshold:
-          type: number
-          description: percentage of port bandwidth at which an allocation alert is generated - missing on wiki.
-        allowBandwidthAutoApproval:
-          type: boolean
-          description: Setting to enable or disable the ability of the buyer to change connection bandwidth without approval of the seller.
-          default: false
-        allowBandwidthUpgrade:
-          type: boolean
-          description: Availability of a bandwidth upgrade. The default is false.
-        linkProtocolConfig:
-          $ref: '#/components/schemas/ServiceProfileLinkProtocolConfig'
-        enableAutoGenerateServiceKey:
-          type: boolean
-          description: for verizon only.
-        connectionRedundancyRequired:
-          type: boolean
-          description: Mandate redundant connections
-          example: true
-          default: false
-        selectiveRedundancy:
-          type: boolean
-          description: Optional redundant connections
-          example: true
-          default: false
-        apiConfig:
-          $ref: '#/components/schemas/ApiConfig'
-        connectionLabel:
-          type: string
-          description: custom name for "Connection"
-        authenticationKey:
-          $ref: '#/components/schemas/AuthenticationKey'
-        metadata:
-          $ref: '#/components/schemas/ServiceProfileMetadata'
-      description: Colo Access Point Type
-    CloudRouter:
+      - code
       type: object
       properties:
         href:
           type: string
-          description: Cloud Routers URI
+          description: Fabric Cloud Router URI
           format: uri
-          readOnly: true
-          example: https://api.equinix.com/fabric/v4/routers/3c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-        uuid:
+          example: https://api.equinix.com/fabric/v4/routerPackages/LAB
+        type:
           type: string
-          description: Equinix-assigned access point identifier
-          format: uuid
-          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+          description: Cloud Router package type
+          example: ROUTER_PACKAGE
+          enum:
+          - ROUTER_PACKAGE
+        code:
+          type: string
+          description: Cloud Router package code
+          example: LAB
+          enum:
+          - LAB
+          - BASIC
+          - STANDARD
+          - ADVANCED
+          - PREMIUM
+      description: Fabric Cloud Router Package Type
+    PortOrderSignature:
+      type: object
+      properties:
+        signatory:
+          type: string
+          description: Port signature Type
+          enum:
+          - DELEGATE
+          - SELF
+          - ACCOUNT_SUPPORT
+        delegate:
+          $ref: '#/components/schemas/PortOrderSignatureDelegate'
+      description: Port signature details
+    PortDevice:
+      type: object
+      properties:
         name:
           type: string
-          description: Customer-provided Cloud Router name
-          format: string
-          example: test-fg-1
-        state:
-          $ref: '#/components/schemas/CloudRouterAccessPointState'
-        equinixAsn:
+          description: Device name
+          deprecated: true
+        redundancy:
+          $ref: '#/components/schemas/PortDeviceRedundancy'
+        vcBandwidthMax:
           type: integer
-          description: Equinix ASN
+          description: Maximum bandwidth allowed for connection.
           format: int64
-          example: 30000
-        connectionsCount:
-          minimum: 0
-          type: integer
-          description: Number of connections associated with this Access point
-        marketplaceSubscription:
-          $ref: '#/components/schemas/marketplaceSubscription'
-        changeLog:
-          $ref: '#/components/schemas/Changelog'
-        change:
-          $ref: '#/components/schemas/CloudRouterChange'
-      description: Fabric Cloud Router object
-      allOf:
-      - $ref: '#/components/schemas/CloudRouterPostRequestBase'
-    NetworkSortBy:
-      type: string
-      description: Possible field names to use on sorting
-      default: /changeLog/updatedDateTime
-      enum:
-      - /name
-      - /uuid
-      - /scope
-      - /operation/equinixStatus
-      - /location/region
-      - /changeLog/createdDateTime
-      - /changeLog/updatedDateTime
-    ProcessStep:
+      description: Port device
+    AccessPoint:
       type: object
       properties:
-        title:
+        type:
+          $ref: '#/components/schemas/AccessPointType'
+        account:
+          $ref: '#/components/schemas/SimplifiedAccount'
+        location:
+          $ref: '#/components/schemas/SimplifiedLocation'
+        port:
+          $ref: '#/components/schemas/SimplifiedPort'
+        profile:
+          $ref: '#/components/schemas/SimplifiedServiceProfile'
+        router:
+          $ref: '#/components/schemas/CloudRouter'
+        linkProtocol:
+          $ref: '#/components/schemas/SimplifiedLinkProtocol'
+        virtualDevice:
+          $ref: '#/components/schemas/VirtualDevice'
+        interface:
+          $ref: '#/components/schemas/Interface'
+        network:
+          $ref: '#/components/schemas/SimplifiedNetwork'
+        sellerRegion:
           type: string
-          description: Service profile custom step title
-        subTitle:
+          description: Access point seller region
+        peeringType:
+          $ref: '#/components/schemas/PeeringType'
+        authenticationKey:
           type: string
-          description: Service profile custom step sub title
-        description:
+          description: Access point authentication key
+        providerConnectionId:
           type: string
-          description: Service profile custom step description
-      description: Definition of customized step while making connection
-    NetworkSortDirection:
-      type: string
-      description: Sorting direction
-      default: DESC
-      enum:
-      - DESC
-      - ASC
-    MarketingInfo:
+          description: Provider assigned Connection Id
+        virtualNetwork:
+          $ref: '#/components/schemas/VirtualNetwork'
+        interconnection:
+          $ref: '#/components/schemas/MetalInterconnection'
+        role:
+          type: string
+          description: E-Tree network connection role
+          enum:
+          - LEAF
+          - ROOT
+      description: Access point object
+    ServiceProfileAccessPointCOLO:
+      required:
+      - type
+      - uuid
       type: object
       properties:
-        logo:
+        type:
           type: string
-          description: Logo file name
-        promotion:
-          type: boolean
-          description: Profile promotion on marketplace
-        processSteps:
-          maxItems: 3
+          enum:
+          - XF_PORT
+          - IX_PORT
+        uuid:
+          type: string
+          format: uuid
+          example: 94662143-e21b-4098-bfcf-e9416f47eae1
+        location:
+          $ref: '#/components/schemas/SimplifiedLocation'
+        sellerRegion:
+          type: string
+        sellerRegionDescription:
+          type: string
+        crossConnectId:
+          type: string
+      description: Colo Access Point
+    NetworkSortCriteriaResponse:
+      type: object
+      properties:
+        direction:
+          $ref: '#/components/schemas/NetworkSortDirectionResponse'
+        property:
+          $ref: '#/components/schemas/NetworkSortByResponse'
+    NetworkChangeResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
           type: array
           items:
-            $ref: '#/components/schemas/ProcessStep'
-    PortPriority:
+            $ref: '#/components/schemas/NetworkChange'
+      description: List of network changes
+    NetworkId:
       type: string
-      description: Port priority in redundancy group
+      description: Network UUID
+      format: uuid
+      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+    ConnectionSide:
+      type: object
+      properties:
+        serviceToken:
+          $ref: '#/components/schemas/ServiceToken'
+        accessPoint:
+          $ref: '#/components/schemas/AccessPoint'
+        additionalInfo:
+          type: array
+          description: Any additional information, which is not part of connection metadata or configuration
+          items:
+            $ref: '#/components/schemas/ConnectionSideAdditionalInfo'
+      description: Connection configuration object for each side of multi-segment connection
+    ProviderStatus:
+      type: string
+      description: Connection provider readiness status
       enum:
-      - PRIMARY
-      - SECONDARY
+      - AVAILABLE
+      - DEPROVISIONED
+      - DEPROVISIONING
+      - FAILED
+      - NOT_AVAILABLE
+      - PENDING_APPROVAL
+      - PENDING_CONFIGURATION
+      - PROVISIONED
+      - PROVISIONING
+      - REJECTED
+      - PENDING_BGP
+      - ERROR
+      - ORDERING
+      - DELETING
+      - PENDING DELETE
+      - N/A
+    SimplifiedMetadataEntity:
+      type: object
+      properties:
+        href:
+          type: string
+          description: url to entity
+          format: uri
+        uuid:
+          type: string
+          description: Equinix assigned Identifier
+          format: uuid
+        type:
+          type: string
+          description: Type of Port
+        cvpId:
+          type: integer
+          description: Customer virtual port Id
+        bandwidth:
+          type: number
+          description: Port Bandwidth
+        portName:
+          type: string
+          description: Port Name
+        encapsulationProtocolType:
+          type: string
+          description: Port Encapsulation
+        accountName:
+          type: string
+          description: Account Name
+        priority:
+          type: string
+          description: Port Priority
+        location:
+          $ref: '#/components/schemas/SimplifiedLocation'
+      description: Configuration details for port used at the access point.
+    PortDeviceRedundancy:
+      type: object
+      properties:
+        group:
+          type: string
+          description: Device redundancy group
+        priority:
+          type: string
+          description: Device redundancy priority
+          enum:
+          - PRIMARY
+          - SECONDARY
+      description: Device redundancy
+    GeoScopeType:
+      type: string
+      description: Geographic boundary types
+      enum:
+      - CANADA
+      - CONUS
+      - JAPAN
+      - UK
+      - AUSTRALIA
+      - BRAZIL
+      - SWITZERLAND
+    PortDemarcationPoint:
+      type: object
+      properties:
+        cabinetUniqueSpaceId:
+          type: string
+          description: Port cabinet unique space id
+        cageUniqueSpaceId:
+          type: string
+          description: Port cage unique space id
+        patchPanel:
+          type: string
+          description: Port patch panel
+        patchPanelName:
+          type: string
+          description: Port patch panel
+          deprecated: true
+        patchPanelPortA:
+          type: string
+          description: Port patch panel port A
+        patchPanelPortB:
+          type: string
+          description: Port patch panel port B
+        connectorType:
+          type: string
+          description: Port connector type
+        ibx:
+          type: string
+          description: Port ibx identifier
+      description: Customer physical Port
+    SimplifiedServiceProfile:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Service Profile URI response attribute
+          format: uri
+          readOnly: true
+        type:
+          $ref: '#/components/schemas/ServiceProfileTypeEnum'
+        name:
+          maxLength: 50
+          type: string
+          description: Customer-assigned service profile name
+          example: Sample Service Profile
+        uuid:
+          type: string
+          description: Equinix-assigned service profile identifier
+          format: uuid
+        description:
+          type: string
+          description: User-provided service description should be of maximum length 375
+          example: offering connectivity to my-network
+        notifications:
+          type: array
+          description: Recipients of notifications on service profile change
+          items:
+            $ref: '#/components/schemas/SimplifiedNotification'
+        tags:
+          $ref: '#/components/schemas/Tags'
+        visibility:
+          $ref: '#/components/schemas/ServiceProfileVisibilityEnum'
+        allowedEmails:
+          type: array
+          items:
+            type: string
+            format: email
+        accessPointTypeConfigs:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceProfileAccessPointType'
+        customFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomField'
+        marketingInfo:
+          $ref: '#/components/schemas/MarketingInfo'
+        ports:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceProfileAccessPointCOLO'
+        virtualDevices:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceProfileAccessPointVD'
+        metros:
+          type: array
+          description: Derived response attribute.
+          items:
+            $ref: '#/components/schemas/ServiceMetro'
+        selfProfile:
+          type: boolean
+          description: response attribute indicates whether the profile belongs to the same organization as the api-invoker.
+        projectId:
+          type: string
+      description: 'Service Profile is a software definition for a named provider service and it''s network connectivity requirements.
+
+        This includes the basic marketing information and one
+
+        or more sets of access points (a set per each access point type) fulfilling the provider service.
+
+        '
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
+    PeeringType:
+      type: string
+      description: Access point peering type
+      enum:
+      - PRIVATE
+      - MICROSOFT
+      - PUBLIC
+      - MANUAL
+    PortEncapsulation:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Port encapsulation protocol type
+          enum:
+          - 'NULL'
+          - DOT1Q
+          - QINQ
+          - UNTAGGED
+        tagProtocolId:
+          type: string
+          description: Port encapsulation tag protocol identifier
+      description: Port encapsulation configuration
+    PortOrder:
+      type: object
+      properties:
+        purchaseOrder:
+          $ref: '#/components/schemas/PortOrderPurchaseOrder'
+        orderId:
+          type: string
+          description: Order Identification
+        customerReferenceId:
+          type: string
+          description: Customer order reference Id
+        orderNumber:
+          type: string
+          description: Order Reference Number
+        uuid:
+          type: string
+          description: Equinix-assigned order identifier, this is a derived response atrribute
+          format: uuid
+          deprecated: true
+        signature:
+          $ref: '#/components/schemas/PortOrderSignature'
     Network:
       type: object
       description: Network specification
@@ -1983,6 +2384,403 @@ components:
             items:
               $ref: '#/components/schemas/Link'
       - $ref: '#/components/schemas/NetworkPostRequest'
+    PortOperation:
+      type: object
+      properties:
+        operationalStatus:
+          type: string
+          description: Availability of a given physical port.
+          enum:
+          - UP
+          - DOWN
+          - PARTIAL
+        connectionCount:
+          type: integer
+          description: Total number of connections.
+          format: int64
+        evplVCCount:
+          type: integer
+          description: Total number of connections.
+          format: int64
+        fgVCCount:
+          type: integer
+          description: Total number of connections.
+          format: int64
+        accessVCCount:
+          type: integer
+          description: Total number of connections.
+          format: int64
+        opStatusChangedAt:
+          type: string
+          description: Date and time at which port availability changed.
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+      description: Operational specifications for ports.
+    Order:
+      type: object
+      properties:
+        purchaseOrderNumber:
+          type: string
+          description: Purchase order number
+        customerReferenceNumber:
+          type: string
+          description: Customer reference number
+        billingTier:
+          type: string
+          description: Billing tier for connection bandwidth
+        orderId:
+          type: string
+          description: Order Identification
+        orderNumber:
+          type: string
+          description: Order Reference Number
+        termLength:
+          maximum: 36
+          minimum: 1
+          type: integer
+          description: Term length in months, valid values are 1, 12, 24, 36 where 1 is the default value (for on-demand case).
+          default: 1
+        contractedBandwidth:
+          type: integer
+          description: Contracted bandwidth
+    CloudRouterChange:
+      required:
+      - type
+      - updatedDateTime
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Uniquely identifies a change
+        type:
+          type: string
+          description: Type of change
+          enum:
+          - ROUTER_UPDATE
+        status:
+          type: string
+          description: Current outcome of the change flow
+          enum:
+          - COMPLETED
+          - FAILED
+          - REQUESTED
+        createdDateTime:
+          type: string
+          description: Set when change flow starts
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedDateTime:
+          type: string
+          description: Set when change object is updated
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        information:
+          type: string
+          description: Additional information
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CloudRouterChangeOperation'
+      description: Current state of latest CloudRouter change
+    ServiceMetro:
+      type: object
+      properties:
+        code:
+          type: string
+          description: metro code
+        name:
+          type: string
+          description: metro name
+        vcBandwidthMax:
+          type: integer
+          description: max VC speed supported in Mbps
+        ibxs:
+          type: array
+          items:
+            type: string
+            description: ibx codes
+        inTrail:
+          type: boolean
+        displayName:
+          type: string
+          description: service metro display name
+        sellerRegions:
+          type: object
+          additionalProperties:
+            type: string
+    PhysicalPortSettings:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        packageType:
+          type: string
+          deprecated: true
+      description: Physical Port configuration settings
+    PortServiceCode:
+      type: string
+      description: type of product
+      enum:
+      - CX
+      - IX
+      - IA
+      - MC
+    Package:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Type of Port Package
+          enum:
+          - STANDARD
+          - UNLIMITED
+          - UNLIMITED_PLUS
+        type:
+          type: string
+          description: Port service Type
+          enum:
+          - EPL
+          - MSP
+      description: Package settings for port
+    ProcessStep:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Service profile custom step title
+        subTitle:
+          type: string
+          description: Service profile custom step sub title
+        description:
+          type: string
+          description: Service profile custom step description
+      description: Definition of customized step while making connection
+    SimplifiedVirtualDevice:
+      type: object
+      properties:
+        href:
+          type: string
+          description: url to entity
+          format: uri
+        uuid:
+          type: string
+          description: Network Edge assigned Virtual Device Identifier
+          format: uuid
+        name:
+          type: string
+          description: Customer-assigned Virtual Device name
+        type:
+          type: string
+          description: Type of Virtual Device
+          enum:
+          - EDGE
+        account:
+          $ref: '#/components/schemas/SimplifiedAccount'
+        cluster:
+          type: string
+          description: Virtual Device Cluster Information
+    ConnectionOperation:
+      type: object
+      properties:
+        providerStatus:
+          $ref: '#/components/schemas/ProviderStatus'
+        equinixStatus:
+          $ref: '#/components/schemas/EquinixStatus'
+        operationalStatus:
+          type: string
+          description: Connection operational status
+          enum:
+          - UP
+          - DOWN
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        opStatusChangedAt:
+          type: string
+          description: When connection transitioned into current operational status
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+      description: Connection type-specific operational data
+    PortPriority:
+      type: string
+      description: Port priority in redundancy group
+      enum:
+      - PRIMARY
+      - SECONDARY
+    ServiceProfileMetadata:
+      type: object
+      properties:
+        props:
+          type: string
+        regEx:
+          type: string
+        regExMsg:
+          type: string
+        vlanRangeMaxValue:
+          type: integer
+        vlanRangeMinValue:
+          type: integer
+        maxQinq:
+          type: string
+        maxDot1q:
+          type: integer
+        variableBilling:
+          type: boolean
+        globalOrganization:
+          type: string
+        limitAuthKeyConn:
+          type: boolean
+        allowSecondaryLocation:
+          type: boolean
+        redundantProfileId:
+          type: string
+        allowVcMigration:
+          type: boolean
+        connectionEditable:
+          type: boolean
+        releaseVlan:
+          type: boolean
+        maxConnectionsOnPort:
+          type: integer
+        portAssignmentStrategy:
+          type: string
+        eqxManagedPort:
+          type: boolean
+        connectionNameEditable:
+          type: boolean
+      description: Metadata. Response attribute. Ignored on request payload.
+    Bandwidths:
+      type: array
+      items:
+        $ref: '#/components/schemas/Bandwidth'
+    SimplifiedLocationWithoutIBX:
+      required:
+      - metroCode
+      type: object
+      properties:
+        metroHref:
+          type: string
+          description: The Canonical URL at which the resource resides.
+          example: https://api.equinix.com/fabric/v4/metros/AM
+        region:
+          type: string
+          example: AMER, APAC, EMEA
+        metroName:
+          type: string
+          example: Amsterdam
+        metroCode:
+          type: string
+          example: AM
+    NetworkSortDirectionResponse:
+      type: string
+      description: Sorting direction
+      default: DESC
+      enum:
+      - DESC
+      - ASC
+    ConnectionRedundancy:
+      type: object
+      properties:
+        group:
+          type: string
+          description: Redundancy group identifier (UUID of primary connection)
+        priority:
+          $ref: '#/components/schemas/ConnectionPriority'
+      description: Connection redundancy configuration
+    marketplaceSubscription:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Marketplace Subscription URI
+          format: uri
+          readOnly: true
+          example: https://api.equinix.com/fabric/v4/marketplaceSubscriptions/20d32a80-0d61-4333-bc03-707b591ae2f5
+        type:
+          type: string
+          description: Marketplace Subscription type
+          example: AWS_MARKETPLACE_SUBSCRIPTION
+          enum:
+          - AWS_MARKETPLACE_SUBSCRIPTION
+          - GCP_MARKETPLACE_SUBSCRIPTION
+          - AZURE_MARKETPLACE_SUBSCRIPTION
+        uuid:
+          type: string
+          description: Equinix-assigned Marketplace Subscription identifier
+          example: 20d32a80-0d61-4333-bc03-707b591ae2f5
+      description: Equinix Fabric Entity for Marketplace Subscription
+    NetworkSearchResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/NetworkSortCriteriaResponse'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Network'
+      description: List of networks
+    Change:
+      required:
+      - createdDateTime
+      - type
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Uniquely identifies a change
+        type:
+          type: string
+          description: Type of change
+          enum:
+          - CONNECTION_CREATION
+          - CONNECTION_UPDATE
+          - CONNECTION_DELETION
+          - CONNECTION_PROVIDER_STATUS_REQUEST
+        status:
+          type: string
+          description: Current outcome of the change flow
+          enum:
+          - APPROVED
+          - COMPLETED
+          - FAILED
+          - REJECTED
+          - REQUESTED
+          - SUBMITTED_FOR_APPROVAL
+        createdDateTime:
+          type: string
+          description: Set when change flow starts
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        updatedDateTime:
+          type: string
+          description: Set when change object is updated
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        information:
+          type: string
+          description: Additional information
+        data:
+          $ref: '#/components/schemas/ConnectionChangeOperation'
+      description: Current state of latest connection change
+    MarketingInfo:
+      type: object
+      properties:
+        logo:
+          type: string
+          description: Logo file name
+        promotion:
+          type: boolean
+          description: Profile promotion on marketplace
+        processSteps:
+          maxItems: 3
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessStep'
     SimplifiedPort:
       type: object
       properties:
@@ -2081,104 +2879,199 @@ components:
           items:
             $ref: '#/components/schemas/PhysicalPort'
       description: Port specification
-    CloudRouterAccessPointState:
+    VirtualDeviceInterface:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of interface
+          enum:
+          - NETWORK
+        id:
+          type: integer
+          description: Network Edge assigned identifier
+        uuid:
+          type: string
+          description: Interface identifier
+          format: uuid
+      description: Virtual Device Interface Information
+    NetworkScope:
       type: string
-      description: Access point lifecycle state
+      description: Network scope
       enum:
-      - PROVISIONED
+      - REGIONAL
+      - GLOBAL
+      - LOCAL
+    CloudRouterPostRequestBase:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - XF_ROUTER
+        name:
+          type: string
+          description: Customer-provided Cloud Router name
+        location:
+          $ref: '#/components/schemas/SimplifiedLocationWithoutIBX'
+        package:
+          $ref: '#/components/schemas/CloudRouterPostRequestPackage'
+        order:
+          $ref: '#/components/schemas/Order'
+        project:
+          $ref: '#/components/schemas/Project'
+        account:
+          $ref: '#/components/schemas/SimplifiedAccount'
+        notifications:
+          type: array
+          description: Preferences for notifications on connection configuration or status changes
+          items:
+            $ref: '#/components/schemas/SimplifiedNotification'
+        marketplaceSubscription:
+          $ref: '#/components/schemas/marketplaceSubscription'
+      description: Create Cloud Router
+    ServiceTokenConnection:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of Connection
+          enum:
+          - EVPL_VC
+          - EPL_VC
+          - EVPLAN_VC
+          - EPLAN_VC
+          - IPWAN_VC
+          - IP_VC
+          - EVPTREE_VC
+          - EPTREE_VC
+        href:
+          type: string
+          description: An absolute URL that is the subject of the link's context.
+          format: uri
+          readOnly: true
+        uuid:
+          type: string
+          description: Equinix-assigned connection identifier
+          format: uuid
+        allowRemoteConnection:
+          type: boolean
+          description: Authorization to connect remotely
+          default: false
+        allowCustomBandwidth:
+          type: boolean
+          description: Allow custom bandwidth value
+          default: false
+        bandwidthLimit:
+          maximum: 100000
+          minimum: 0
+          type: integer
+          description: Connection bandwidth limit in Mbps
+        supportedBandwidths:
+          type: array
+          description: List of permitted bandwidths.
+          items:
+            type: integer
+        aSide:
+          $ref: '#/components/schemas/ServiceTokenSide'
+        zSide:
+          $ref: '#/components/schemas/ServiceTokenSide'
+      description: Service Token Connection Type Information
+    NetworkPostRequest:
+      required:
+      - name
+      - notifications
+      - scope
+      - type
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/NetworkType'
+        name:
+          type: string
+          description: Customer-provided network name
+        scope:
+          $ref: '#/components/schemas/NetworkScope'
+        location:
+          $ref: '#/components/schemas/SimplifiedLocation'
+        project:
+          $ref: '#/components/schemas/Project'
+        notifications:
+          type: array
+          description: Preferences for notifications on network configuration or status changes
+          items:
+            $ref: '#/components/schemas/SimplifiedNotification'
+      description: Create Network
+    ServiceToken:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ServiceTokenType'
+        href:
+          type: string
+          description: An absolute URL that is the subject of the link's context.
+          format: uri
+          readOnly: true
+        expiry:
+          type: integer
+          deprecated: true
+        uuid:
+          type: string
+          description: Equinix-assigned service token identifier
+          format: uuid
+        issuerSide:
+          type: string
+          description: information about token side
+          deprecated: true
+        name:
+          type: string
+          description: Customer-provided service token name
+        description:
+          type: string
+          description: Customer-provided service token description
+        expirationDateTime:
+          type: string
+          description: Expiration date and time of the service token.
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        connection:
+          $ref: '#/components/schemas/ServiceTokenConnection'
+        state:
+          $ref: '#/components/schemas/ServiceTokenState'
+        notifications:
+          type: array
+          description: Service token related notifications
+          items:
+            $ref: '#/components/schemas/SimplifiedNotification'
+        account:
+          $ref: '#/components/schemas/SimplifiedAccount'
+        changelog:
+          $ref: '#/components/schemas/Changelog'
+        project:
+          $ref: '#/components/schemas/Project'
+      description: Create Service Tokens (v4) generates Equinix Fabric service tokens. These tokens authorize users to access protected resources and services. The tokens remove sensitive content from the environment, rather than just masking it, making the protected data impossible to unencrypt or decrypt. Resource owners can distribute the tokens to trusted partners and vendors, allowing selected third parties to work directly with Equinix network assets.
+    NetworkEquinixStatus:
+      type: string
+      description: Network status
+      enum:
       - PROVISIONING
+      - PROVISIONED
+      - NOT_PROVISIONED
       - DEPROVISIONING
       - DEPROVISIONED
-      - REPROVISIONING
-      - NOT_PROVISIONED
       - NOT_DEPROVISIONED
     ChangeId_5:
       type: string
       description: Network Change UUID
       format: uuid
       example: 6d500177-9404-41f2-99e8-2bf1a84d8db5
-    PortTether:
-      type: object
-      properties:
-        crossConnectId:
-          type: string
-          description: Port cross connect identifier
-        cabinetNumber:
-          type: string
-          description: Port cabinet number
-        systemName:
-          type: string
-          description: Port system name
-        patchPanel:
-          type: string
-          description: Port patch panel
-        patchPanelPortA:
-          type: string
-          description: Port patch panel port A
-        patchPanelPortB:
-          type: string
-          description: Port patch panel port B
-        ibx:
-          type: string
-          description: z-side/Equinix IBX
-      description: Port physical connection
-    NetworkChangeStatus:
+    ServiceProfileAccessPointTypeEnum:
       type: string
-      description: Current outcome of the change flow
+      description: Access point type
       enum:
-      - APPROVED
-      - COMPLETED
-      - FAILED
-      - REJECTED
-      - REQUESTED
-      - SUBMITTED_FOR_APPROVAL
-    PaginationRequest:
-      type: object
-      properties:
-        offset:
-          minimum: 0
-          type: integer
-          description: Index of the first element.
-          default: 0
-        limit:
-          minimum: 1
-          type: integer
-          description: Number of elements to be requested per page. Number must be between 1 and 100, and the default is 20.
-          default: 20
-      description: Pagination request information
-    NetworkChangeResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/NetworkChange'
-      description: List of network changes
-    marketplaceSubscription:
-      type: object
-      properties:
-        href:
-          type: string
-          description: Marketplace Subscription URI
-          format: uri
-          readOnly: true
-          example: https://api.equinix.com/fabric/v4/marketplaceSubscriptions/20d32a80-0d61-4333-bc03-707b591ae2f5
-        type:
-          type: string
-          description: Marketplace Subscription type
-          example: AWS_MARKETPLACE_SUBSCRIPTION
-          enum:
-          - AWS_MARKETPLACE_SUBSCRIPTION
-          - GCP_MARKETPLACE_SUBSCRIPTION
-          - AZURE_MARKETPLACE_SUBSCRIPTION
-        uuid:
-          type: string
-          description: Equinix-assigned Marketplace Subscription identifier
-          example: 20d32a80-0d61-4333-bc03-707b591ae2f5
-      description: Equinix Fabric Entity for Marketplace Subscription
-    CloudRouterChangeOperation:
+      - VD
+      - COLO
+    ConnectionChangeOperation:
       required:
       - op
       - path
@@ -2188,98 +3081,14 @@ components:
         op:
           type: string
           description: Handy shortcut for operation name
-          enum:
-          - replace
-          - add
-          - remove
+          example: add
         path:
           type: string
           description: path inside document leading to updated parameter
+          example: /ipv6
         value:
           description: new value for updated parameter
-      description: Fabric Cloud Router change operation data
-    Change:
-      required:
-      - createdDateTime
-      - type
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: Uniquely identifies a change
-        type:
-          type: string
-          description: Type of change
-          enum:
-          - CONNECTION_CREATION
-          - CONNECTION_UPDATE
-          - CONNECTION_DELETION
-          - CONNECTION_PROVIDER_STATUS_REQUEST
-        status:
-          type: string
-          description: Current outcome of the change flow
-          enum:
-          - APPROVED
-          - COMPLETED
-          - FAILED
-          - REJECTED
-          - REQUESTED
-          - SUBMITTED_FOR_APPROVAL
-        createdDateTime:
-          type: string
-          description: Set when change flow starts
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        updatedDateTime:
-          type: string
-          description: Set when change object is updated
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        information:
-          type: string
-          description: Additional information
-        data:
-          $ref: '#/components/schemas/ConnectionChangeOperation'
-      description: Current state of latest connection change
-    NetworkUpdateRequest:
-      minItems: 1
-      type: array
-      description: Fabric Network Update Request
-      items:
-        $ref: '#/components/schemas/NetworkChangeOperation'
-    Error:
-      required:
-      - errorCode
-      - errorMessage
-      type: object
-      properties:
-        errorCode:
-          pattern: ^EQ-\d{7}$
-          type: string
-        errorMessage:
-          type: string
-        correlationId:
-          type: string
-        details:
-          type: string
-        help:
-          type: string
-        additionalInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/PriceError_additionalInfo'
-      description: Error Response with details
-    PortLoa:
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: uuid
-        type:
-          type: string
-          description: Loa type
-          example: DIGITAL_LOA
-      description: Port Loas
+      description: Connection change operation data
     ServiceProfileAccessPointVD:
       required:
       - type
@@ -2301,443 +3110,6 @@ components:
           format: uuid
           example: 94662143-e21b-4098-bfcf-e9416f47eae1
       description: Virtual Device Point
-    Bandwidths:
-      type: array
-      items:
-        $ref: '#/components/schemas/Bandwidth'
-    NetworkOperation:
-      type: object
-      properties:
-        equinixStatus:
-          $ref: '#/components/schemas/NetworkEquinixStatus'
-      description: Network operational data
-    PortServiceCode:
-      type: string
-      description: type of product
-      enum:
-      - CX
-      - IX
-      - IA
-      - MC
-    PortOrderPurchaseOrder:
-      type: object
-      properties:
-        number:
-          type: string
-          description: purchase order number
-        amount:
-          type: string
-          description: purchase order amount
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        attachmentId:
-          type: string
-          format: uuid
-        selectionType:
-          type: string
-          deprecated: true
-          enum:
-          - EXEMPTION
-          - EXISTING
-          - NEW
-          - BLANKET
-        type:
-          type: string
-          enum:
-          - EXEMPTION
-          - EXISTING
-          - NEW
-          - BLANKET
-      description: purchase order
-    PhysicalPortSettings:
-      type: object
-      properties:
-        errorMessage:
-          type: string
-        packageType:
-          type: string
-          deprecated: true
-      description: Physical Port configuration settings
-    GeoScopeType:
-      type: string
-      description: Geographic boundary types
-      enum:
-      - CANADA
-      - CONUS
-      - JAPAN
-      - UK
-      - AUSTRALIA
-      - BRAZIL
-      - SWITZERLAND
-    PortDemarcationPoint:
-      type: object
-      properties:
-        cabinetUniqueSpaceId:
-          type: string
-          description: Port cabinet unique space id
-        cageUniqueSpaceId:
-          type: string
-          description: Port cage unique space id
-        patchPanel:
-          type: string
-          description: Port patch panel
-        patchPanelName:
-          type: string
-          description: Port patch panel
-          deprecated: true
-        patchPanelPortA:
-          type: string
-          description: Port patch panel port A
-        patchPanelPortB:
-          type: string
-          description: Port patch panel port B
-        connectorType:
-          type: string
-          description: Port connector type
-        ibx:
-          type: string
-          description: Port ibx identifier
-      description: Customer physical Port
-    SimplifiedNetwork:
-      required:
-      - uuid
-      type: object
-      properties:
-        href:
-          type: string
-          description: Network URI
-          format: uri
-          readOnly: true
-          example: https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784
-        uuid:
-          type: string
-          description: Equinix-assigned network identifier
-          format: uuid
-          example: 92dc376a-a932-43aa-a6a2-c806dedbd784
-        name:
-          type: string
-          description: Customer-assigned network name
-          example: My EVPLAN Network
-        state:
-          $ref: '#/components/schemas/NetworkState'
-        account:
-          $ref: '#/components/schemas/SimplifiedAccount'
-        change:
-          $ref: '#/components/schemas/SimplifiedNetworkChange'
-        operation:
-          $ref: '#/components/schemas/NetworkOperation'
-        changeLog:
-          $ref: '#/components/schemas/Changelog'
-        links:
-          type: array
-          description: Network sub-resources links
-          readOnly: true
-          items:
-            $ref: '#/components/schemas/Link'
-        type:
-          $ref: '#/components/schemas/NetworkType'
-        scope:
-          $ref: '#/components/schemas/NetworkScope'
-        location:
-          $ref: '#/components/schemas/SimplifiedLocation'
-      description: Network specification
-    PortAdditionalInfo:
-      type: object
-      properties:
-        key:
-          type: string
-          description: Key
-        value:
-          type: string
-          description: Value
-      description: Additional information
-    ServiceTokenState:
-      type: string
-      description: Service token state
-      enum:
-      - ACTIVE
-      - INACTIVE
-      - EXPIRED
-      - DELETED
-    AccessPointType:
-      type: string
-      description: Access point type
-      enum:
-      - VD
-      - VG
-      - SP
-      - IGW
-      - COLO
-      - SUBNET
-      - CLOUD_ROUTER
-      - NETWORK
-      - METAL_NETWORK
-      - VPIC_INTERFACE
-      - APP_LINK
-    VirtualNetwork:
-      type: object
-      properties:
-        href:
-          type: string
-          description: The Canonical URL at which the resource resides.
-          format: uri
-          readOnly: true
-        uuid:
-          type: string
-          description: Equinix-assigned Virtual Network identifier
-          format: uuid
-      description: Virtual Network Information
-    CloudRouterChange:
-      required:
-      - type
-      - updatedDateTime
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: Uniquely identifies a change
-        type:
-          type: string
-          description: Type of change
-          enum:
-          - ROUTER_UPDATE
-        status:
-          type: string
-          description: Current outcome of the change flow
-          enum:
-          - COMPLETED
-          - FAILED
-          - REQUESTED
-        createdDateTime:
-          type: string
-          description: Set when change flow starts
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        updatedDateTime:
-          type: string
-          description: Set when change object is updated
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        information:
-          type: string
-          description: Additional information
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CloudRouterChangeOperation'
-      description: Current state of latest CloudRouter change
-    ServiceProfileLinkProtocolConfig:
-      type: object
-      properties:
-        encapsulationStrategy:
-          type: string
-          description: was tagType - missing on wiki
-          enum:
-          - CTAGED
-          - BOTH
-          - NAMED
-        namedTags:
-          maxItems: 64
-          type: array
-          items:
-            type: string
-        vlanCTagLabel:
-          type: string
-          description: was ctagLabel
-        reuseVlanSTag:
-          type: boolean
-          example: true
-          default: false
-        encapsulation:
-          type: string
-          description: Port encapsulation - Derived response attribute. Ignored on request payloads.
-          enum:
-          - QINQ
-          - DOT1Q
-          - UNTAGGED
-      description: Configuration for dot1q to qinq translation support
-    ProviderStatus:
-      type: string
-      description: Connection provider readiness status
-      enum:
-      - AVAILABLE
-      - DEPROVISIONED
-      - DEPROVISIONING
-      - FAILED
-      - NOT_AVAILABLE
-      - PENDING_APPROVAL
-      - PENDING_CONFIGURATION
-      - PROVISIONED
-      - PROVISIONING
-      - REJECTED
-      - PENDING_BGP
-      - ERROR
-      - ORDERING
-      - DELETING
-      - PENDING DELETE
-      - N/A
-    SimplifiedVirtualDevice:
-      type: object
-      properties:
-        href:
-          type: string
-          description: url to entity
-          format: uri
-        uuid:
-          type: string
-          description: Network Edge assigned Virtual Device Identifier
-          format: uuid
-        name:
-          type: string
-          description: Customer-assigned Virtual Device name
-        type:
-          type: string
-          description: Type of Virtual Device
-          enum:
-          - EDGE
-        account:
-          $ref: '#/components/schemas/SimplifiedAccount'
-        cluster:
-          type: string
-          description: Virtual Device Cluster Information
-    ErrorList:
-      type: array
-      description: List of Error Message
-      items:
-        $ref: '#/components/schemas/Error'
-    SimplifiedLinkProtocol:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/LinkProtocolType'
-        vlanTag:
-          maximum: 4092
-          minimum: 2
-          type: integer
-          description: vlanTag value specified for DOT1Q connections
-        vlanSTag:
-          maximum: 4092
-          minimum: 2
-          type: integer
-          description: vlanSTag value specified for QINQ connections
-        vlanCTag:
-          maximum: 4092
-          minimum: 2
-          type: integer
-          description: vlanCTag value specified for QINQ connections
-      description: Connection link protocol Configuration
-    SimplifiedServiceProfile:
-      type: object
-      properties:
-        href:
-          type: string
-          description: Service Profile URI response attribute
-          format: uri
-          readOnly: true
-        type:
-          $ref: '#/components/schemas/ServiceProfileTypeEnum'
-        name:
-          maxLength: 50
-          type: string
-          description: Customer-assigned service profile name
-          example: Sample Service Profile
-        uuid:
-          type: string
-          description: Equinix-assigned service profile identifier
-          format: uuid
-        description:
-          type: string
-          description: User-provided service description should be of maximum length 375
-          example: offering connectivity to my-network
-        notifications:
-          type: array
-          description: Recipients of notifications on service profile change
-          items:
-            $ref: '#/components/schemas/SimplifiedNotification'
-        tags:
-          $ref: '#/components/schemas/Tags'
-        visibility:
-          $ref: '#/components/schemas/ServiceProfileVisibilityEnum'
-        allowedEmails:
-          type: array
-          items:
-            type: string
-            format: email
-        accessPointTypeConfigs:
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/ServiceProfileAccessPointType'
-        customFields:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomField'
-        marketingInfo:
-          $ref: '#/components/schemas/MarketingInfo'
-        ports:
-          type: array
-          items:
-            $ref: '#/components/schemas/ServiceProfileAccessPointCOLO'
-        virtualDevices:
-          type: array
-          items:
-            $ref: '#/components/schemas/ServiceProfileAccessPointVD'
-        metros:
-          type: array
-          description: Derived response attribute.
-          items:
-            $ref: '#/components/schemas/ServiceMetro'
-        selfProfile:
-          type: boolean
-          description: response attribute indicates whether the profile belongs to the same organization as the api-invoker.
-        projectId:
-          type: string
-      description: 'Service Profile is a software definition for a named provider service and it''s network connectivity requirements.
-
-        This includes the basic marketing information and one
-
-        or more sets of access points (a set per each access point type) fulfilling the provider service.
-
-        '
-    Project:
-      required:
-      - projectId
-      type: object
-      properties:
-        projectId:
-          type: string
-          description: Subscriber-assigned project ID
-          example: 44f4c4f8-2f39-494e-838c-d8e640591be5
-    ServiceMetro:
-      type: object
-      properties:
-        code:
-          type: string
-          description: metro code
-        name:
-          type: string
-          description: metro name
-        vcBandwidthMax:
-          type: integer
-          description: max VC speed supported in Mbps
-        ibxs:
-          type: array
-          items:
-            type: string
-            description: ibx codes
-        inTrail:
-          type: boolean
-        displayName:
-          type: string
-          description: service metro display name
-        sellerRegions:
-          type: object
-          additionalProperties:
-            type: string
     SimplifiedNotification:
       required:
       - emails
@@ -2770,419 +3142,50 @@ components:
           description: Array of registered users
           items:
             type: string
-    PortOrderSignature:
+    MetalInterconnection:
       type: object
       properties:
-        signatory:
-          type: string
-          description: Port signature Type
-          enum:
-          - DELEGATE
-          - SELF
-          - ACCOUNT_SUPPORT
-        delegate:
-          $ref: '#/components/schemas/PortOrderSignatureDelegate'
-      description: Port signature details
-    Package:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Type of Port Package
-          enum:
-          - STANDARD
-          - UNLIMITED
-          - UNLIMITED_PLUS
-        type:
-          type: string
-          description: Port service Type
-          enum:
-          - EPL
-          - MSP
-      description: Package settings for port
-    SimplifiedTokenNetwork:
-      type: object
-      properties:
-        href:
-          type: string
-          description: url to entity
-          format: uri
         uuid:
           type: string
-          description: Network Identifier
+          description: Equinix Metal Interconnection
           format: uuid
-        type:
-          type: string
-          description: Type of Network
-          enum:
-          - EVPLAN
-          - EPLAN
-          - IPWAN
-          - EVPTREE
-          - EPTREE
-        name:
-          type: string
-          description: Network Name
-        scope:
-          type: string
-          description: scope of Network
-          enum:
-          - LOCAL
-          - REGIONAL
-          - GLOBAL
-        location:
-          $ref: '#/components/schemas/SimplifiedLocation'
-    NetworkState:
-      type: string
-      description: Network status
-      example: ACTIVE
-      enum:
-      - ACTIVE
-      - INACTIVE
-      - DELETED
-    ConnectionPriority:
-      type: string
-      description: Connection priority in redundancy group
-      enum:
-      - PRIMARY
-      - SECONDARY
-    NetworkSortByResponse:
-      type: string
-      description: Possible field names to use on sorting
-      default: /changeLog/updatedDateTime
-      enum:
-      - /name
-      - /type
-      - /uuid
-      - /state
-      - /scope
-      - /location/region
-      - /changeLog/createdDateTime
-      - /changeLog/updatedDateTime
-    PortRedundancy:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          description: Access point redundancy
-        group:
-          type: string
-          description: Port UUID of respective primary port
-          deprecated: true
-        priority:
-          $ref: '#/components/schemas/PortPriority'
-      description: Port redundancy configuration
-    ServiceTokenType:
-      type: string
-      description: Type of Service Token
-      enum:
-      - VC_TOKEN
-      - EPL_TOKEN
-    SimplifiedAccount:
-      type: object
-      properties:
-        accountNumber:
-          type: integer
-          description: Account number
-          format: int64
-        accountName:
-          type: string
-          description: Account name
-        orgId:
-          type: integer
-          description: Customer organization identifier
-          format: int64
-        organizationName:
-          type: string
-          description: Customer organization name
-        globalOrgId:
-          type: string
-          description: Global organization identifier
-        globalOrganizationName:
-          type: string
-          description: Global organization name
-        ucmId:
-          type: string
-          description: Account ucmId
-        globalCustId:
-          type: string
-          description: Account name
-        resellerAccountNumber:
-          type: integer
-          description: Reseller account number
-          format: int64
-        resellerAccountName:
-          type: string
-          description: Reseller account name
-        resellerUcmId:
-          type: string
-          description: Reseller account ucmId
-        resellerOrgId:
-          type: integer
-          description: Reseller customer organization identifier
-          format: int64
-    ConnectionDirection:
-      type: string
-      description: Connection directionality from the requester point of view
-      enum:
-      - INTERNAL
-      - INCOMING
-      - OUTGOING
-    NetworkSortCriteriaResponse:
-      type: object
-      properties:
-        direction:
-          $ref: '#/components/schemas/NetworkSortDirectionResponse'
-        property:
-          $ref: '#/components/schemas/NetworkSortByResponse'
-    ServiceProfileVisibilityEnum:
-      type: string
-      enum:
-      - PRIVATE
-      - PUBLIC
-    NetworkSearchFieldName:
-      type: string
-      description: Possible field names to use on filters
-      example: /name
-      enum:
-      - /name
-      - /uuid
-      - /scope
-      - /type
-      - /operation/equinixStatus
-      - /location/region
-      - /project/projectId
-      - /account/globalCustId
-      - /account/orgId
-      - /deletedDate
-      - /*
-    NetworkSearchResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        sort:
-          type: array
-          items:
-            $ref: '#/components/schemas/NetworkSortCriteriaResponse'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Network'
-      description: List of networks
-    NetworkId:
-      type: string
-      description: Network UUID
-      format: uuid
-      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
-    ConnectionSide:
-      type: object
-      properties:
-        serviceToken:
-          $ref: '#/components/schemas/ServiceToken'
-        accessPoint:
-          $ref: '#/components/schemas/AccessPoint'
-        additionalInfo:
-          type: array
-          description: Any additional information, which is not part of connection metadata or configuration
-          items:
-            $ref: '#/components/schemas/ConnectionSideAdditionalInfo'
-      description: Connection configuration object for each side of multi-segment connection
-    CloudRouterPostRequestBase:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - XF_ROUTER
-        name:
-          type: string
-          description: Customer-provided Cloud Router name
-        location:
-          $ref: '#/components/schemas/SimplifiedLocationWithoutIBX'
-        package:
-          $ref: '#/components/schemas/CloudRouterPostRequestPackage'
-        order:
-          $ref: '#/components/schemas/Order'
-        project:
-          $ref: '#/components/schemas/Project'
-        account:
-          $ref: '#/components/schemas/SimplifiedAccount'
-        notifications:
-          type: array
-          description: Preferences for notifications on connection configuration or status changes
-          items:
-            $ref: '#/components/schemas/SimplifiedNotification'
-        marketplaceSubscription:
-          $ref: '#/components/schemas/marketplaceSubscription'
-      description: Create Cloud Router
-    NetworkSearchRequest:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/NetworkFilter'
-        pagination:
-          $ref: '#/components/schemas/PaginationRequest'
-        sort:
-          type: array
-          items:
-            $ref: '#/components/schemas/NetworkSortCriteria'
-      description: Search requests containing criteria
-    ServiceProfileAccessPointCOLO:
-      required:
-      - type
-      - uuid
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - XF_PORT
-          - IX_PORT
-        uuid:
-          type: string
-          format: uuid
-          example: 94662143-e21b-4098-bfcf-e9416f47eae1
-        location:
-          $ref: '#/components/schemas/SimplifiedLocation'
-        sellerRegion:
-          type: string
-        sellerRegionDescription:
-          type: string
-        crossConnectId:
-          type: string
-      description: Colo Access Point
-    ConnectionChangeOperation:
-      required:
-      - op
-      - path
-      - value
-      type: object
-      properties:
-        op:
-          type: string
-          description: Handy shortcut for operation name
-          example: add
-        path:
-          type: string
-          description: path inside document leading to updated parameter
-          example: /ipv6
-        value:
-          description: new value for updated parameter
-      description: Connection change operation data
-    NetworkSimpleExpression:
-      type: array
-      items:
-        $ref: '#/components/schemas/NetworkFilter'
-    NetworkSortCriteria:
-      type: object
-      properties:
-        direction:
-          $ref: '#/components/schemas/NetworkSortDirection'
-        property:
-          $ref: '#/components/schemas/NetworkSortBy'
-    ServiceProfileAccessPointType:
-      type: object
-      description: Access Point Type
-      oneOf:
-      - $ref: '#/components/schemas/ServiceProfileAccessPointTypeCOLO'
-      - $ref: '#/components/schemas/ServiceProfileAccessPointTypeVD'
-    ServiceProfileAccessPointTypeEnum:
-      type: string
-      description: Access point type
-      enum:
-      - VD
-      - COLO
-    SimplifiedLocationWithoutIBX:
-      required:
-      - metroCode
-      type: object
-      properties:
-        metroHref:
-          type: string
-          description: The Canonical URL at which the resource resides.
-          example: https://api.equinix.com/fabric/v4/metros/AM
-        region:
-          type: string
-          example: AMER, APAC, EMEA
-        metroName:
-          type: string
-          example: Amsterdam
-        metroCode:
-          type: string
-          example: AM
-    PortOperation:
-      type: object
-      properties:
-        operationalStatus:
-          type: string
-          description: Availability of a given physical port.
-          enum:
-          - UP
-          - DOWN
-          - PARTIAL
-        connectionCount:
-          type: integer
-          description: Total number of connections.
-          format: int64
-        evplVCCount:
-          type: integer
-          description: Total number of connections.
-          format: int64
-        fgVCCount:
-          type: integer
-          description: Total number of connections.
-          format: int64
-        accessVCCount:
-          type: integer
-          description: Total number of connections.
-          format: int64
-        opStatusChangedAt:
-          type: string
-          description: Date and time at which port availability changed.
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-      description: Operational specifications for ports.
-    PortInterface:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Port interface type
-      description: Port interface
+      description: Metal Interconnection
   examples:
-    '404':
+    NetworkDeleteResponseExample:
       value:
-      - errorCode: EQ-3045811
-        errorMessage: uuid not found
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: uuid not found
-    SearchFilterOrAnd:
-      value:
-        filter:
-          and:
-          - or:
-            - property: /type
-              operator: LIKE
-              values:
-              - IPv4_BGP_ROUTE
-            - property: /type
-              operator: LIKE
-              values:
-              - abc
-    400_invalid_sorting:
-      value:
-      - errorCode: EQ-3043015
-        errorMessage: Invalid value for sorting direction.
-        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
-        additionalInfo:
-        - reason: Only accept DESC and ASC for sorting direction.
-    Create-Global-EVPLAN-Network-Response:
-      value:
-        href: http://api.corp.equinix.com/fabric/v4/networks/0633e83f-116f-481d-b86f-c472271d1a8c
-        uuid: 0633e83f-116f-481d-b86f-c472271d1a8c
+        href: https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784
         type: EVPLAN
-        name: My-evplan-network-1
+        uuid: 92dc376a-a932-43aa-a6a2-c806dedbd784
+        name: My-EVPLAN-1
+        state: INACTIVE
+        change:
+          href: https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784/changes/6d500177-9404-41f2-99e8-2bf1a84d8db5
+          uuid: 6d500177-9404-41f2-99e8-2bf1a84d8db5
+          type: NETWORK_DELETION
+        location:
+          region: EMEA
+        scope: REGIONAL
+        project:
+          projectId: '123456'
+        notifications:
+        - type: ALL
+          emails:
+          - test@equinix.com
+        operation:
+          equinixStatus: DEPROVISIONING
+        changeLog:
+          createdBy: testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: testuser1
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+          deletedBy: testuser1
+          deletedDateTime: 2020-05-21 10:30:00+00:00
+    Create-Global-EPLAN-Network-Response:
+      value:
+        href: http://api.corp.equinix.com/fabric/v4/networks/0d51722e-b080-4943-92ab-9720eaab2cfa
+        uuid: 0d51722e-b080-4943-92ab-9720eaab2cfa
+        type: EPLAN
+        name: My-eplan-network-1
         scope: GLOBAL
         state: INACTIVE
         connectionsCount: 0
@@ -3191,16 +3194,16 @@ components:
           organizationName: fabric
           globalCustId: 0026u00000595sBAAM
         change:
-          href: http://api.corp.equinix.com/fabric/v4/networks/0633e83f-116f-481d-b86f-c472271d1a8c/changes/ce7c0bbc-7bd2-431f-903f-de796ea9e858
-          uuid: ce7c0bbc-7bd2-431f-903f-de796ea9e858
+          href: http://api.corp.equinix.com/fabric/v4/networks/0d51722e-b080-4943-92ab-9720eaab2cfa/changes/e4f9c57f-a1d6-4520-9a31-fddbe69ed592
+          uuid: e4f9c57f-a1d6-4520-9a31-fddbe69ed592
           type: NETWORK_CREATION
         operation:
           equinixStatus: PROVISIONING
         changeLog:
           createdBy: fabric
-          createdDateTime: 2025-03-03 19:37:29.326000+00:00
+          createdDateTime: 2025-03-03 20:52:23.469000+00:00
         links:
-          href: http://api.corp.equinix.com/fabric/v4/networks/0633e83f-116f-481d-b86f-c472271d1a8c/connections
+          href: http://api.corp.equinix.com/fabric/v4/networks/0d51722e-b080-4943-92ab-9720eaab2cfa/connections
           rel: getConnectionsByNetworkUuid
           method: GET
           contentType: application/json
@@ -3211,91 +3214,7 @@ components:
         - type: ALL
           emails:
           - fabric@gmail.com
-    NetworkPatchResponseExample:
-      value:
-        href: https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784
-        type: EVPLAN
-        uuid: 92dc376a-a932-43aa-a6a2-c806dedbd784
-        name: My-EVPLAN-1
-        state: ACTIVE
-        change:
-          href: https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784/changes/6d500177-9404-41f2-99e8-2bf1a84d8db5
-          uuid: 6d500177-9404-41f2-99e8-2bf1a84d8db5
-          type: NETWORK_UPDATE
-        location:
-          region: EMEA
-        scope: REGIONAL
-        connectionsCount: 0
-        project:
-          projectId: '123456'
-        notifications:
-        - type: ALL
-          emails:
-          - test@equinix.com
-        operation:
-          equinixStatus: PROVISIONED
-        changeLog:
-          createdBy: testuser
-          createdDateTime: 2020-05-21 10:30:00+00:00
-          updatedBy: testuser
-          updatedDateTime: 2020-05-21 10:30:00+00:00
-        links:
-        - href: https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784/connections
-          rel: getConnectionsByNetworkUuid
-          method: GET
-          contentType: application/json
-          authenticate: true
-    CreateNetworkDryRunResponse:
-      value:
-        type: EVPLAN
-        name: My-EVPLAN-1
-        scope: GLOBAL
-        project:
-          projectId: z1a596ed-s24a-097c-12a8-44e00000ee11
-        notifications:
-        - type: ALL
-          emails:
-          - test@equinix.com
-    NetworkPostResponseExample:
-      value:
-        href: https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784
-        type: EVPLAN
-        uuid: 92dc376a-a932-43aa-a6a2-c806dedbd784
-        name: My-EVPLAN-1
-        state: INACTIVE
-        change:
-          href: https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784/changes/6d500177-9404-41f2-99e8-2bf1a84d8db5
-          uuid: 6d500177-9404-41f2-99e8-2bf1a84d8db5
-          type: NETWORK_CREATION
-        location:
-          region: EMEA
-        scope: REGIONAL
-        connectionsCount: 0
-        project:
-          projectId: '123456'
-        notifications:
-        - type: ALL
-          emails:
-          - test@equinix.com
-        operation:
-          equinixStatus: PROVISIONING
-        changeLog:
-          createdBy: testuser
-          createdDateTime: 2020-05-21 10:30:00+00:00
-          updatedBy: testuser
-          updatedDateTime: 2020-05-21 10:30:00+00:00
-    Create-Local-EPTREE-Network:
-      value:
-        type: EPTREE
-        name: My-EPTREE-Network-1
-        scope: LOCAL
-        project:
-          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
-        notifications:
-        - type: ALL
-          emails:
-          - test@equinix.com
-    Create-Regional-EVPLAN-Network-Response:
+    Create-Regional-EPLAN-Network-Response:
       value:
         href: http://api.corp.equinix.com/fabric/v4/networks/884254b7-237d-44f7-af0f-84ba324350ef
         uuid: 884254b7-237d-44f7-af0f-84ba324350ef
@@ -3331,13 +3250,18 @@ components:
         - type: ALL
           emails:
           - fabric@gmail.com
-    Create-Local-EVPLAN-Network-Response:
+    '401':
       value:
-        href: http://api.corp.equinix.com/fabric/v4/networks/726af704-0b1b-46dc-9efc-00fc938084b3
-        uuid: 726af704-0b1b-46dc-9efc-00fc938084b3
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    Create-Global-EVPLAN-Network-Response:
+      value:
+        href: http://api.corp.equinix.com/fabric/v4/networks/0633e83f-116f-481d-b86f-c472271d1a8c
+        uuid: 0633e83f-116f-481d-b86f-c472271d1a8c
         type: EVPLAN
         name: My-evplan-network-1
-        scope: LOCAL
+        scope: GLOBAL
         state: INACTIVE
         connectionsCount: 0
         account:
@@ -3345,16 +3269,16 @@ components:
           organizationName: fabric
           globalCustId: 0026u00000595sBAAM
         change:
-          href: http://api.corp.equinix.com/fabric/v4/networks/726af704-0b1b-46dc-9efc-00fc938084b3/changes/92e2f236-e77d-4818-bbad-cff6b716a610
-          uuid: 92e2f236-e77d-4818-bbad-cff6b716a610
+          href: http://api.corp.equinix.com/fabric/v4/networks/0633e83f-116f-481d-b86f-c472271d1a8c/changes/ce7c0bbc-7bd2-431f-903f-de796ea9e858
+          uuid: ce7c0bbc-7bd2-431f-903f-de796ea9e858
           type: NETWORK_CREATION
         operation:
           equinixStatus: PROVISIONING
         changeLog:
           createdBy: fabric
-          createdDateTime: 2025-03-03 19:43:20.145000+00:00
+          createdDateTime: 2025-03-03 19:37:29.326000+00:00
         links:
-          href: http://api.corp.equinix.com/fabric/v4/networks/726af704-0b1b-46dc-9efc-00fc938084b3/connections
+          href: http://api.corp.equinix.com/fabric/v4/networks/0633e83f-116f-481d-b86f-c472271d1a8c/connections
           rel: getConnectionsByNetworkUuid
           method: GET
           contentType: application/json
@@ -3365,71 +3289,6 @@ components:
         - type: ALL
           emails:
           - fabric@gmail.com
-    Create-Local-EVPTREE-Network:
-      value:
-        type: EVPTREE
-        name: My-EVPTREE-Network-1
-        scope: LOCAL
-        project:
-          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
-        notifications:
-        - type: ALL
-          emails:
-          - test@equinix.com
-    NetworkGetResponseExample:
-      value:
-        href: https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784
-        type: EVPLAN
-        uuid: 92dc376a-a932-43aa-a6a2-c806dedbd784
-        name: My-EVPLAN-1
-        state: ACTIVE
-        location:
-          region: EMEA
-        scope: REGIONAL
-        connectionsCount: 0
-        project:
-          projectId: '123456'
-        notifications:
-        - type: ALL
-          emails:
-          - test@equinix.com
-        operation:
-          equinixStatus: PROVISIONED
-        changeLog:
-          createdBy: testuser
-          createdDateTime: 2020-05-21 10:30:00+00:00
-          updatedBy: testuser
-          updatedDateTime: 2020-05-21 10:30:00+00:00
-        links:
-        - href: https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784/connections
-          rel: getConnectionsByNetworkUuid
-          method: GET
-          contentType: application/json
-          authenticate: true
-    Create-Global-EVPTREE-Network:
-      value:
-        type: EVPTREE
-        name: My-EVPTREE-Network-1
-        scope: GLOBAL
-        project:
-          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
-        notifications:
-        - type: ALL
-          emails:
-          - test@equinix.com
-    GetNetworkConnectionExample:
-      value:
-        pagination:
-          offset: 0
-          limit: 20
-          total: 2
-        data:
-        - href: https://api.equinix.com/fabric/v4/connections/92dc376a-a932-43aa-a6a2-c806dedbd784
-          type: IP_VC
-          uuid: 9b8c5042-b553-4d5e-a2ac-c73bf6d4fd81
-        - href: https://api.equinix.com/fabric/v4/connections/38a1eb68-4daf-4ef0-bd7f-6970727b6fc1
-          type: IP_VC
-          uuid: 38a1eb68-4daf-4ef0-bd7f-6970727b6fc1
     Create-Regional-EVPTREE-Network:
       value:
         type: EVPTREE
@@ -3443,18 +3302,21 @@ components:
         - type: ALL
           emails:
           - test@equinix.com
-    NetworkGetChangeResponseExample:
+    Create-Local-EPLAN-Network:
       value:
-        href: https://api.equinix.com/fabric/v4/networks/2a4fb415-5a7f-436f-bae6-02f5e403deec/changes/4b17da68-3d6b-436d-9c8f-2105f3b950d9
-        type: NETWORK_CREATION
-        uuid: 4b17da68-3d6b-436d-9c8f-2105f3b950d9
-        status: COMPLETED
-        createdDateTime: 2020-05-21 10:30:00+00:00
-        updatedDateTime: 2020-05-21 10:30:50+00:00
-    Create-Regional-EVPLAN-Network:
+        type: EPLAN
+        name: My-EPLAN-Network-1
+        scope: LOCAL
+        project:
+          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
+        notifications:
+        - type: ALL
+          emails:
+          - test@equinix.com
+    Create-Regional-EPLAN-Network:
       value:
-        type: EVPLAN
-        name: My-Network-1
+        type: EPLAN
+        name: My-EPLAN-Network-1
         scope: REGIONAL
         location:
           region: EMEA
@@ -3475,239 +3337,15 @@ components:
         - type: ALL
           emails:
           - test@equinix.com
-    Create-Local-EPLAN-Network-Response:
+    Create-Regional-EVPTREE-Network-Response:
       value:
-        href: http://api.corp.equinix.com/fabric/v4/networks/82402fc0-cb55-4a21-b0b3-1af89f63742b
-        uuid: 82402fc0-cb55-4a21-b0b3-1af89f63742b
-        type: EPLAN
-        name: My-eplan-network-1
-        scope: LOCAL
-        state: INACTIVE
-        connectionsCount: 0
-        account:
-          orgId: 14510
-          organizationName: fabric
-          globalCustId: 0026u00000595sBAAM
-        change:
-          href: http://api.corp.equinix.com/fabric/v4/networks/82402fc0-cb55-4a21-b0b3-1af89f63742b/changes/1449105b-7576-4094-aa34-216f3f9ed122
-          uuid: 1449105b-7576-4094-aa34-216f3f9ed122
-          type: NETWORK_CREATION
-        operation:
-          equinixStatus: PROVISIONING
-        changeLog:
-          createdBy: fabric
-          createdDateTime: 2025-03-03 20:55:57.858000+00:00
-        links:
-          href: http://api.corp.equinix.com/fabric/v4/networks/82402fc0-cb55-4a21-b0b3-1af89f63742b/connections
-          rel: getConnectionsByNetworkUuid
-          method: GET
-          contentType: application/json
-          authenticate: true
-        project:
-          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
-        notifications:
-        - type: ALL
-          emails:
-          - fabric@gmail.com
-    Create-Regional-EPTREE-Network-Response:
-      value:
-        href: http://api.corp.equinix.com/fabric/v4/networks/291fc758-91d3-482b-a9b3-3430685c390e
-        uuid: 291fc758-91d3-482b-a9b3-3430685c390e
-        type: EPTREE
-        name: My-eptree-network-1
-        scope: REGIONAL
-        location:
-          region: EMEA
-        state: INACTIVE
-        connectionsCount: 0
-        account:
-          orgId: 14510
-          organizationName: fabric
-          globalCustId: 0026u00000595sBAAM
-        change:
-          href: http://api.corp.equinix.com/fabric/v4/networks/291fc758-91d3-482b-a9b3-3430685c390e/changes/8345324b-97cc-4c5c-9f15-40bc82b254ad
-          uuid: 8345324b-97cc-4c5c-9f15-40bc82b254ad
-          type: NETWORK_CREATION
-        operation:
-          equinixStatus: PROVISIONING
-        changeLog:
-          createdBy: fabric
-          createdDateTime: 2025-03-06 00:23:29.030000+00:00
-        links:
-          href: http://api.corp.equinix.com/fabric/v4/networks/291fc758-91d3-482b-a9b3-3430685c390e/connections
-          rel: getConnectionsByNetworkUuid
-          method: GET
-          contentType: application/json
-          authenticate: true
-        project:
-          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
-        notifications:
-        - type: ALL
-          emails:
-          - fabric@equinix.com
-    NetworkChangeResponseExample:
-      value:
-        pagination:
-          offset: 0
-          limit: 20
-          total: 1
-        data:
-        - href: https://api.equinix.com/fabric/v4/networks/2a4fb415-5a7f-436f-bae6-02f5e403deec/changes/4b17da68-3d6b-436d-9c8f-2105f3b950d9
-          type: NETWORK_CREATION
-          uuid: 4b17da68-3d6b-436d-9c8f-2105f3b950d9
-          status: COMPLETED
-          createdDateTime: 2020-05-21 10:30:00+00:00
-          updatedDateTime: 2020-05-21 10:30:50+00:00
-        - href: https://api.equinix.com/fabric/v4/networks/2a4fb415-5a7f-436f-bae6-02f5e403deec/changes/da2a2f1b-9ba0-415b-85d6-234bd4c737ec
-          type: NETWORK_DELETION
-          uuid: da2a2f1b-9ba0-415b-85d6-234bd4c737ec
-          status: REQUESTED
-          createdDateTime: 2020-05-21 10:30:00+00:00
-          updatedDateTime: 2020-05-21 10:30:00+00:00
-    NetworkDeleteResponseExample:
-      value:
-        href: https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784
-        type: EVPLAN
-        uuid: 92dc376a-a932-43aa-a6a2-c806dedbd784
-        name: My-EVPLAN-1
-        state: INACTIVE
-        change:
-          href: https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784/changes/6d500177-9404-41f2-99e8-2bf1a84d8db5
-          uuid: 6d500177-9404-41f2-99e8-2bf1a84d8db5
-          type: NETWORK_DELETION
-        location:
-          region: EMEA
-        scope: REGIONAL
-        project:
-          projectId: '123456'
-        notifications:
-        - type: ALL
-          emails:
-          - test@equinix.com
-        operation:
-          equinixStatus: DEPROVISIONING
-        changeLog:
-          createdBy: testuser
-          createdDateTime: 2020-05-21 10:30:00+00:00
-          updatedBy: testuser1
-          updatedDateTime: 2020-05-21 10:30:00+00:00
-          deletedBy: testuser1
-          deletedDateTime: 2020-05-21 10:30:00+00:00
-    UpdateNetworkName:
-      value:
-      - op: replace
-        path: /name
-        value: NewName
-    Create-Local-EVPTREE-Network-Response:
-      value:
-        href: http://api.corp.equinix.com/fabric/v4/networks/4622cce8-114b-4432-94f4-060fda044ae3
-        uuid: 4622cce8-114b-4432-94f4-060fda044ae3
+        href: http://api.corp.equinix.com/fabric/v4/networks/0ec08139-bae5-44c4-bea2-970b14d7c7c0
+        uuid: 0ec08139-bae5-44c4-bea2-970b14d7c7c0
         type: EVPTREE
         name: My-evptree-network-1
-        scope: LOCAL
-        state: INACTIVE
-        connectionsCount: 0
-        account:
-          orgId: 14510
-          organizationName: fabric
-          globalCustId: 0026u00000595sBAAM
-        change:
-          href: http://api.corp.equinix.com/fabric/v4/networks/4622cce8-114b-4432-94f4-060fda044ae3/changes/6eacff89-a363-402f-ae15-84294177a866
-          uuid: 6eacff89-a363-402f-ae15-84294177a866
-          type: NETWORK_CREATION
-        operation:
-          equinixStatus: PROVISIONING
-        changeLog:
-          createdBy: fabric
-          createdDateTime: 2025-03-05 21:22:30.984000+00:00
-        links:
-          href: http://api.corp.equinix.com/fabric/v4/networks/4622cce8-114b-4432-94f4-060fda044ae3/connections
-          rel: getConnectionsByNetworkUuid
-          method: GET
-          contentType: application/json
-          authenticate: true
-        project:
-          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
-        notifications:
-        - type: ALL
-          emails:
-          - fabric@equinix.com
-    Create-Global-EVPTREE-Network-Response:
-      value:
-        href: http://api.corp.equinix.com/fabric/v4/networks/07659346-9489-42cf-891a-683624e801d5
-        uuid: 07659346-9489-42cf-891a-683624e801d5
-        type: EVPTREE
-        name: My-evptree-network-1
-        scope: GLOBAL
-        state: INACTIVE
-        connectionsCount: 0
-        account:
-          orgId: 14510
-          organizationName: fabric
-          globalCustId: 0026u00000595sBAAM
-        change:
-          href: http://api.corp.equinix.com/fabric/v4/networks/07659346-9489-42cf-891a-683624e801d5/changes/1caf3efb-7427-4be1-8100-73fcff471654
-          uuid: 1caf3efb-7427-4be1-8100-73fcff471654
-          type: NETWORK_CREATION
-        operation:
-          equinixStatus: PROVISIONING
-        changeLog:
-          createdBy: fabric
-          createdDateTime: 2025-03-05 21:17:46.656000+00:00
-        links:
-          href: http://api.corp.equinix.com/fabric/v4/networks/07659346-9489-42cf-891a-683624e801d5/connections
-          rel: getConnectionsByNetworkUuid
-          method: GET
-          contentType: application/json
-          authenticate: true
-        project:
-          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
-        notifications:
-        - type: ALL
-          emails:
-          - fabric@equinix.com
-    Create-Global-EVPLAN-Network:
-      value:
-        type: EVPLAN
-        name: My-Network-1
-        scope: GLOBAL
-        project:
-          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
-        notifications:
-        - type: ALL
-          emails:
-          - test@equinix.com
-    Create-Regional-EPTREE-Network:
-      value:
-        type: EPTREE
-        name: My-EPTREE-Network-1
         scope: REGIONAL
         location:
           region: AMER
-        project:
-          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
-        notifications:
-        - type: ALL
-          emails:
-          - test@equinix.com
-    Create-Global-EPLAN-Network:
-      value:
-        type: EPLAN
-        name: My-EPLAN-Network-1
-        scope: GLOBAL
-        project:
-          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
-        notifications:
-        - type: ALL
-          emails:
-          - test@equinix.com
-    Create-Local-EPTREE-Network-Response:
-      value:
-        href: http://api.corp.equinix.com/fabric/v4/networks/c929924e-5d87-46b2-a82f-91a145c1803d
-        uuid: c929924e-5d87-46b2-a82f-91a145c1803d
-        type: EPTREE
-        name: My-eptree-network-1
-        scope: LOCAL
         state: INACTIVE
         connectionsCount: 0
         account:
@@ -3715,16 +3353,16 @@ components:
           organizationName: fabric
           globalCustId: 0026u00000595sBAAM
         change:
-          href: http://api.corp.equinix.com/fabric/v4/networks/c929924e-5d87-46b2-a82f-91a145c1803d/changes/1b32bacb-5898-4efd-9404-b64ec825c652
-          uuid: 1b32bacb-5898-4efd-9404-b64ec825c652
+          href: http://api.corp.equinix.com/fabric/v4/networks/0ec08139-bae5-44c4-bea2-970b14d7c7c0/changes/0e159ddd-47d2-4fa3-97fe-502f8a70ea0e
+          uuid: 0e159ddd-47d2-4fa3-97fe-502f8a70ea0e
           type: NETWORK_CREATION
         operation:
           equinixStatus: PROVISIONING
         changeLog:
           createdBy: fabric
-          createdDateTime: 2025-03-06 00:30:42.972000+00:00
+          createdDateTime: 2025-03-05 20:57:07.206000+00:00
         links:
-          href: http://api.corp.equinix.com/fabric/v4/networks/c929924e-5d87-46b2-a82f-91a145c1803d/connections
+          href: http://api.corp.equinix.com/fabric/v4/networks/0ec08139-bae5-44c4-bea2-970b14d7c7c0/connections
           rel: getConnectionsByNetworkUuid
           method: GET
           contentType: application/json
@@ -3774,30 +3412,29 @@ components:
         sort:
         - property: /changeLog/updatedDateTime
           direction: DESC
-    400_invalid_uuid:
+    Create-Global-EVPLAN-Network:
       value:
-      - errorCode: EQ-3152004
-        errorMessage: Invalid inlput
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Network does not exists with gievn uuid
-    Create-Local-EPLAN-Network:
-      value:
-        type: EPLAN
-        name: My-EPLAN-Network-1
-        scope: LOCAL
+        type: EVPLAN
+        name: My-Network-1
+        scope: GLOBAL
         project:
           projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
         notifications:
         - type: ALL
           emails:
           - test@equinix.com
-    Create-Global-EPLAN-Network-Response:
+    UpdateNetworkName:
       value:
-        href: http://api.corp.equinix.com/fabric/v4/networks/0d51722e-b080-4943-92ab-9720eaab2cfa
-        uuid: 0d51722e-b080-4943-92ab-9720eaab2cfa
-        type: EPLAN
-        name: My-eplan-network-1
-        scope: GLOBAL
+      - op: replace
+        path: /name
+        value: NewName
+    Create-Local-EPTREE-Network-Response:
+      value:
+        href: http://api.corp.equinix.com/fabric/v4/networks/c929924e-5d87-46b2-a82f-91a145c1803d
+        uuid: c929924e-5d87-46b2-a82f-91a145c1803d
+        type: EPTREE
+        name: My-eptree-network-1
+        scope: LOCAL
         state: INACTIVE
         connectionsCount: 0
         account:
@@ -3805,52 +3442,16 @@ components:
           organizationName: fabric
           globalCustId: 0026u00000595sBAAM
         change:
-          href: http://api.corp.equinix.com/fabric/v4/networks/0d51722e-b080-4943-92ab-9720eaab2cfa/changes/e4f9c57f-a1d6-4520-9a31-fddbe69ed592
-          uuid: e4f9c57f-a1d6-4520-9a31-fddbe69ed592
+          href: http://api.corp.equinix.com/fabric/v4/networks/c929924e-5d87-46b2-a82f-91a145c1803d/changes/1b32bacb-5898-4efd-9404-b64ec825c652
+          uuid: 1b32bacb-5898-4efd-9404-b64ec825c652
           type: NETWORK_CREATION
         operation:
           equinixStatus: PROVISIONING
         changeLog:
           createdBy: fabric
-          createdDateTime: 2025-03-03 20:52:23.469000+00:00
+          createdDateTime: 2025-03-06 00:30:42.972000+00:00
         links:
-          href: http://api.corp.equinix.com/fabric/v4/networks/0d51722e-b080-4943-92ab-9720eaab2cfa/connections
-          rel: getConnectionsByNetworkUuid
-          method: GET
-          contentType: application/json
-          authenticate: true
-        project:
-          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
-        notifications:
-        - type: ALL
-          emails:
-          - fabric@gmail.com
-    Create-Regional-EVPTREE-Network-Response:
-      value:
-        href: http://api.corp.equinix.com/fabric/v4/networks/0ec08139-bae5-44c4-bea2-970b14d7c7c0
-        uuid: 0ec08139-bae5-44c4-bea2-970b14d7c7c0
-        type: EVPTREE
-        name: My-evptree-network-1
-        scope: REGIONAL
-        location:
-          region: AMER
-        state: INACTIVE
-        connectionsCount: 0
-        account:
-          orgId: 14510
-          organizationName: fabric
-          globalCustId: 0026u00000595sBAAM
-        change:
-          href: http://api.corp.equinix.com/fabric/v4/networks/0ec08139-bae5-44c4-bea2-970b14d7c7c0/changes/0e159ddd-47d2-4fa3-97fe-502f8a70ea0e
-          uuid: 0e159ddd-47d2-4fa3-97fe-502f8a70ea0e
-          type: NETWORK_CREATION
-        operation:
-          equinixStatus: PROVISIONING
-        changeLog:
-          createdBy: fabric
-          createdDateTime: 2025-03-05 20:57:07.206000+00:00
-        links:
-          href: http://api.corp.equinix.com/fabric/v4/networks/0ec08139-bae5-44c4-bea2-970b14d7c7c0/connections
+          href: http://api.corp.equinix.com/fabric/v4/networks/c929924e-5d87-46b2-a82f-91a145c1803d/connections
           rel: getConnectionsByNetworkUuid
           method: GET
           contentType: application/json
@@ -3861,6 +3462,123 @@ components:
         - type: ALL
           emails:
           - fabric@equinix.com
+    400_invalid_uuid:
+      value:
+      - errorCode: EQ-3152004
+        errorMessage: Invalid inlput
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Network does not exists with gievn uuid
+    NetworkPatchResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784
+        type: EVPLAN
+        uuid: 92dc376a-a932-43aa-a6a2-c806dedbd784
+        name: My-EVPLAN-1
+        state: ACTIVE
+        change:
+          href: https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784/changes/6d500177-9404-41f2-99e8-2bf1a84d8db5
+          uuid: 6d500177-9404-41f2-99e8-2bf1a84d8db5
+          type: NETWORK_UPDATE
+        location:
+          region: EMEA
+        scope: REGIONAL
+        connectionsCount: 0
+        project:
+          projectId: '123456'
+        notifications:
+        - type: ALL
+          emails:
+          - test@equinix.com
+        operation:
+          equinixStatus: PROVISIONED
+        changeLog:
+          createdBy: testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: testuser
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+        links:
+        - href: https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784/connections
+          rel: getConnectionsByNetworkUuid
+          method: GET
+          contentType: application/json
+          authenticate: true
+    '404':
+      value:
+      - errorCode: EQ-3045811
+        errorMessage: uuid not found
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: uuid not found
+    Create-Global-EPLAN-Network:
+      value:
+        type: EPLAN
+        name: My-EPLAN-Network-1
+        scope: GLOBAL
+        project:
+          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
+        notifications:
+        - type: ALL
+          emails:
+          - test@equinix.com
+    Create-Regional-EPTREE-Network-Response:
+      value:
+        href: http://api.corp.equinix.com/fabric/v4/networks/291fc758-91d3-482b-a9b3-3430685c390e
+        uuid: 291fc758-91d3-482b-a9b3-3430685c390e
+        type: EPTREE
+        name: My-eptree-network-1
+        scope: REGIONAL
+        location:
+          region: EMEA
+        state: INACTIVE
+        connectionsCount: 0
+        account:
+          orgId: 14510
+          organizationName: fabric
+          globalCustId: 0026u00000595sBAAM
+        change:
+          href: http://api.corp.equinix.com/fabric/v4/networks/291fc758-91d3-482b-a9b3-3430685c390e/changes/8345324b-97cc-4c5c-9f15-40bc82b254ad
+          uuid: 8345324b-97cc-4c5c-9f15-40bc82b254ad
+          type: NETWORK_CREATION
+        operation:
+          equinixStatus: PROVISIONING
+        changeLog:
+          createdBy: fabric
+          createdDateTime: 2025-03-06 00:23:29.030000+00:00
+        links:
+          href: http://api.corp.equinix.com/fabric/v4/networks/291fc758-91d3-482b-a9b3-3430685c390e/connections
+          rel: getConnectionsByNetworkUuid
+          method: GET
+          contentType: application/json
+          authenticate: true
+        project:
+          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
+        notifications:
+        - type: ALL
+          emails:
+          - fabric@equinix.com
+    Create-Local-EVPLAN-Network:
+      value:
+        type: EVPLAN
+        name: My-Network-1
+        scope: LOCAL
+        project:
+          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
+        notifications:
+        - type: ALL
+          emails:
+          - test@equinix.com
+    400_invalid_sorting:
+      value:
+      - errorCode: EQ-3043015
+        errorMessage: Invalid value for sorting direction.
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - reason: Only accept DESC and ASC for sorting direction.
+    '500':
+      value:
+      - errorCode: EQ-3045004
+        errorMessage: Internal Server Error
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Internal Server Error
     '415':
       value:
       - errorCode: EQ-3040016
@@ -3869,6 +3587,104 @@ components:
         additionalInfo:
         - property: contentType
           reason: The payload format is in an unsupported format
+    Create-Global-EVPTREE-Network:
+      value:
+        type: EVPTREE
+        name: My-EVPTREE-Network-1
+        scope: GLOBAL
+        project:
+          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
+        notifications:
+        - type: ALL
+          emails:
+          - test@equinix.com
+    GetNetworkConnectionExample:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 2
+        data:
+        - href: https://api.equinix.com/fabric/v4/connections/92dc376a-a932-43aa-a6a2-c806dedbd784
+          type: IP_VC
+          uuid: 9b8c5042-b553-4d5e-a2ac-c73bf6d4fd81
+        - href: https://api.equinix.com/fabric/v4/connections/38a1eb68-4daf-4ef0-bd7f-6970727b6fc1
+          type: IP_VC
+          uuid: 38a1eb68-4daf-4ef0-bd7f-6970727b6fc1
+    NetworkGetChangeResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/networks/2a4fb415-5a7f-436f-bae6-02f5e403deec/changes/4b17da68-3d6b-436d-9c8f-2105f3b950d9
+        type: NETWORK_CREATION
+        uuid: 4b17da68-3d6b-436d-9c8f-2105f3b950d9
+        status: COMPLETED
+        createdDateTime: 2020-05-21 10:30:00+00:00
+        updatedDateTime: 2020-05-21 10:30:50+00:00
+    NetworkChangeResponseExample:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 1
+        data:
+        - href: https://api.equinix.com/fabric/v4/networks/2a4fb415-5a7f-436f-bae6-02f5e403deec/changes/4b17da68-3d6b-436d-9c8f-2105f3b950d9
+          type: NETWORK_CREATION
+          uuid: 4b17da68-3d6b-436d-9c8f-2105f3b950d9
+          status: COMPLETED
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedDateTime: 2020-05-21 10:30:50+00:00
+        - href: https://api.equinix.com/fabric/v4/networks/2a4fb415-5a7f-436f-bae6-02f5e403deec/changes/da2a2f1b-9ba0-415b-85d6-234bd4c737ec
+          type: NETWORK_DELETION
+          uuid: da2a2f1b-9ba0-415b-85d6-234bd4c737ec
+          status: REQUESTED
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+    Create-Local-EPTREE-Network:
+      value:
+        type: EPTREE
+        name: My-EPTREE-Network-1
+        scope: LOCAL
+        project:
+          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
+        notifications:
+        - type: ALL
+          emails:
+          - test@equinix.com
+    Create-Regional-EVPLAN-Network-Response:
+      value:
+        href: http://api.corp.equinix.com/fabric/v4/networks/884254b7-237d-44f7-af0f-84ba324350ef
+        uuid: 884254b7-237d-44f7-af0f-84ba324350ef
+        type: EVPLAN
+        name: My-evplan-network-1
+        scope: REGIONAL
+        location:
+          region: AMER
+        state: INACTIVE
+        connectionsCount: 0
+        account:
+          orgId: 14510
+          organizationName: fabric
+          globalCustId: 0026u00000595sBAAM
+        change:
+          href: http://api.corp.equinix.com/fabric/v4/networks/884254b7-237d-44f7-af0f-84ba324350ef/changes/741c0927-d9ed-405b-a4f2-cb61d0dda2c5
+          uuid: 741c0927-d9ed-405b-a4f2-cb61d0dda2c5
+          type: NETWORK_CREATION
+        operation:
+          equinixStatus: PROVISIONING
+        changeLog:
+          createdBy: fabric
+          createdDateTime: 2025-03-03 19:21:43.145000+00:00
+        links:
+          href: http://api.corp.equinix.com/fabric/v4/networks/884254b7-237d-44f7-af0f-84ba324350ef/connections
+          rel: getConnectionsByNetworkUuid
+          method: GET
+          contentType: application/json
+          authenticate: true
+        project:
+          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
+        notifications:
+        - type: ALL
+          emails:
+          - fabric@gmail.com
     Create-Global-EPTREE-Network-Response:
       value:
         href: http://api.corp.equinix.com/fabric/v4/networks/16ee541c-9e93-428b-9557-3f99907aa21c
@@ -4036,51 +3852,13 @@ components:
         correlationId: test
         additionalInfo:
         - property: /zSide/accessPoint/authenticationKey
-    SearchFilterByStatus:
+    Create-Local-EVPLAN-Network-Response:
       value:
-        filter:
-          and:
-          - property: /state
-            operator: '='
-            values:
-            - ACTIVE
-        pagination:
-          offset: 0
-          limit: 20
-        sort:
-        - direction: DESC
-          property: /changeLog/createdDateTime
-    UpdateNetworkNotifications:
-      value:
-      - op: replace
-        path: /notifications
-        value:
-        - type: ALL
-          emails:
-          - test1@test.com
-          - test2@test.com
-    Create-Regional-EPLAN-Network:
-      value:
-        type: EPLAN
-        name: My-EPLAN-Network-1
-        scope: REGIONAL
-        location:
-          region: EMEA
-        project:
-          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
-        notifications:
-        - type: ALL
-          emails:
-          - test@equinix.com
-    Create-Regional-EPLAN-Network-Response:
-      value:
-        href: http://api.corp.equinix.com/fabric/v4/networks/884254b7-237d-44f7-af0f-84ba324350ef
-        uuid: 884254b7-237d-44f7-af0f-84ba324350ef
+        href: http://api.corp.equinix.com/fabric/v4/networks/726af704-0b1b-46dc-9efc-00fc938084b3
+        uuid: 726af704-0b1b-46dc-9efc-00fc938084b3
         type: EVPLAN
         name: My-evplan-network-1
-        scope: REGIONAL
-        location:
-          region: AMER
+        scope: LOCAL
         state: INACTIVE
         connectionsCount: 0
         account:
@@ -4088,16 +3866,16 @@ components:
           organizationName: fabric
           globalCustId: 0026u00000595sBAAM
         change:
-          href: http://api.corp.equinix.com/fabric/v4/networks/884254b7-237d-44f7-af0f-84ba324350ef/changes/741c0927-d9ed-405b-a4f2-cb61d0dda2c5
-          uuid: 741c0927-d9ed-405b-a4f2-cb61d0dda2c5
+          href: http://api.corp.equinix.com/fabric/v4/networks/726af704-0b1b-46dc-9efc-00fc938084b3/changes/92e2f236-e77d-4818-bbad-cff6b716a610
+          uuid: 92e2f236-e77d-4818-bbad-cff6b716a610
           type: NETWORK_CREATION
         operation:
           equinixStatus: PROVISIONING
         changeLog:
           createdBy: fabric
-          createdDateTime: 2025-03-03 19:21:43.145000+00:00
+          createdDateTime: 2025-03-03 19:43:20.145000+00:00
         links:
-          href: http://api.corp.equinix.com/fabric/v4/networks/884254b7-237d-44f7-af0f-84ba324350ef/connections
+          href: http://api.corp.equinix.com/fabric/v4/networks/726af704-0b1b-46dc-9efc-00fc938084b3/connections
           rel: getConnectionsByNetworkUuid
           method: GET
           contentType: application/json
@@ -4114,16 +3892,185 @@ components:
         errorMessage: Cannot delete Fabric Cloud Router in transient state
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
         details: Cannot delete Fabric Cloud Router in transient state.
+    Create-Regional-EVPLAN-Network:
+      value:
+        type: EVPLAN
+        name: My-Network-1
+        scope: REGIONAL
+        location:
+          region: EMEA
+        project:
+          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
+        notifications:
+        - type: ALL
+          emails:
+          - test@equinix.com
+    Create-Regional-EPTREE-Network:
+      value:
+        type: EPTREE
+        name: My-EPTREE-Network-1
+        scope: REGIONAL
+        location:
+          region: AMER
+        project:
+          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
+        notifications:
+        - type: ALL
+          emails:
+          - test@equinix.com
+    SearchFilterOrAnd:
+      value:
+        filter:
+          and:
+          - or:
+            - property: /type
+              operator: LIKE
+              values:
+              - IPv4_BGP_ROUTE
+            - property: /type
+              operator: LIKE
+              values:
+              - abc
     '403':
       value:
       - errorCode: EQ-3045003
         errorMessage: Operation not allowed
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
         details: Operation not allowed for current user
-    Create-Local-EVPLAN-Network:
+    CreateNetworkDryRunResponse:
       value:
         type: EVPLAN
-        name: My-Network-1
+        name: My-EVPLAN-1
+        scope: GLOBAL
+        project:
+          projectId: z1a596ed-s24a-097c-12a8-44e00000ee11
+        notifications:
+        - type: ALL
+          emails:
+          - test@equinix.com
+    Create-Local-EPLAN-Network-Response:
+      value:
+        href: http://api.corp.equinix.com/fabric/v4/networks/82402fc0-cb55-4a21-b0b3-1af89f63742b
+        uuid: 82402fc0-cb55-4a21-b0b3-1af89f63742b
+        type: EPLAN
+        name: My-eplan-network-1
+        scope: LOCAL
+        state: INACTIVE
+        connectionsCount: 0
+        account:
+          orgId: 14510
+          organizationName: fabric
+          globalCustId: 0026u00000595sBAAM
+        change:
+          href: http://api.corp.equinix.com/fabric/v4/networks/82402fc0-cb55-4a21-b0b3-1af89f63742b/changes/1449105b-7576-4094-aa34-216f3f9ed122
+          uuid: 1449105b-7576-4094-aa34-216f3f9ed122
+          type: NETWORK_CREATION
+        operation:
+          equinixStatus: PROVISIONING
+        changeLog:
+          createdBy: fabric
+          createdDateTime: 2025-03-03 20:55:57.858000+00:00
+        links:
+          href: http://api.corp.equinix.com/fabric/v4/networks/82402fc0-cb55-4a21-b0b3-1af89f63742b/connections
+          rel: getConnectionsByNetworkUuid
+          method: GET
+          contentType: application/json
+          authenticate: true
+        project:
+          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
+        notifications:
+        - type: ALL
+          emails:
+          - fabric@gmail.com
+    UpdateNetworkNotifications:
+      value:
+      - op: replace
+        path: /notifications
+        value:
+        - type: ALL
+          emails:
+          - test1@test.com
+          - test2@test.com
+    NetworkPostResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784
+        type: EVPLAN
+        uuid: 92dc376a-a932-43aa-a6a2-c806dedbd784
+        name: My-EVPLAN-1
+        state: INACTIVE
+        change:
+          href: https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784/changes/6d500177-9404-41f2-99e8-2bf1a84d8db5
+          uuid: 6d500177-9404-41f2-99e8-2bf1a84d8db5
+          type: NETWORK_CREATION
+        location:
+          region: EMEA
+        scope: REGIONAL
+        connectionsCount: 0
+        project:
+          projectId: '123456'
+        notifications:
+        - type: ALL
+          emails:
+          - test@equinix.com
+        operation:
+          equinixStatus: PROVISIONING
+        changeLog:
+          createdBy: testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: testuser
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+    Create-Local-EVPTREE-Network-Response:
+      value:
+        href: http://api.corp.equinix.com/fabric/v4/networks/4622cce8-114b-4432-94f4-060fda044ae3
+        uuid: 4622cce8-114b-4432-94f4-060fda044ae3
+        type: EVPTREE
+        name: My-evptree-network-1
+        scope: LOCAL
+        state: INACTIVE
+        connectionsCount: 0
+        account:
+          orgId: 14510
+          organizationName: fabric
+          globalCustId: 0026u00000595sBAAM
+        change:
+          href: http://api.corp.equinix.com/fabric/v4/networks/4622cce8-114b-4432-94f4-060fda044ae3/changes/6eacff89-a363-402f-ae15-84294177a866
+          uuid: 6eacff89-a363-402f-ae15-84294177a866
+          type: NETWORK_CREATION
+        operation:
+          equinixStatus: PROVISIONING
+        changeLog:
+          createdBy: fabric
+          createdDateTime: 2025-03-05 21:22:30.984000+00:00
+        links:
+          href: http://api.corp.equinix.com/fabric/v4/networks/4622cce8-114b-4432-94f4-060fda044ae3/connections
+          rel: getConnectionsByNetworkUuid
+          method: GET
+          contentType: application/json
+          authenticate: true
+        project:
+          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
+        notifications:
+        - type: ALL
+          emails:
+          - fabric@equinix.com
+    SearchFilterByStatus:
+      value:
+        filter:
+          and:
+          - property: /state
+            operator: '='
+            values:
+            - ACTIVE
+        pagination:
+          offset: 0
+          limit: 20
+        sort:
+        - direction: DESC
+          property: /changeLog/createdDateTime
+    Create-Local-EVPTREE-Network:
+      value:
+        type: EVPTREE
+        name: My-EVPTREE-Network-1
         scope: LOCAL
         project:
           projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
@@ -4131,17 +4078,70 @@ components:
         - type: ALL
           emails:
           - test@equinix.com
-    '401':
+    Create-Global-EVPTREE-Network-Response:
       value:
-      - errorCode: EQ-3000039
-        errorMessage: User not found in request or invalid.
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-    '500':
+        href: http://api.corp.equinix.com/fabric/v4/networks/07659346-9489-42cf-891a-683624e801d5
+        uuid: 07659346-9489-42cf-891a-683624e801d5
+        type: EVPTREE
+        name: My-evptree-network-1
+        scope: GLOBAL
+        state: INACTIVE
+        connectionsCount: 0
+        account:
+          orgId: 14510
+          organizationName: fabric
+          globalCustId: 0026u00000595sBAAM
+        change:
+          href: http://api.corp.equinix.com/fabric/v4/networks/07659346-9489-42cf-891a-683624e801d5/changes/1caf3efb-7427-4be1-8100-73fcff471654
+          uuid: 1caf3efb-7427-4be1-8100-73fcff471654
+          type: NETWORK_CREATION
+        operation:
+          equinixStatus: PROVISIONING
+        changeLog:
+          createdBy: fabric
+          createdDateTime: 2025-03-05 21:17:46.656000+00:00
+        links:
+          href: http://api.corp.equinix.com/fabric/v4/networks/07659346-9489-42cf-891a-683624e801d5/connections
+          rel: getConnectionsByNetworkUuid
+          method: GET
+          contentType: application/json
+          authenticate: true
+        project:
+          projectId: d64fa54a-cfcb-4fb0-82ee-86cf47007fa2
+        notifications:
+        - type: ALL
+          emails:
+          - fabric@equinix.com
+    NetworkGetResponseExample:
       value:
-      - errorCode: EQ-3045004
-        errorMessage: Internal Server Error
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Internal Server Error
+        href: https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784
+        type: EVPLAN
+        uuid: 92dc376a-a932-43aa-a6a2-c806dedbd784
+        name: My-EVPLAN-1
+        state: ACTIVE
+        location:
+          region: EMEA
+        scope: REGIONAL
+        connectionsCount: 0
+        project:
+          projectId: '123456'
+        notifications:
+        - type: ALL
+          emails:
+          - test@equinix.com
+        operation:
+          equinixStatus: PROVISIONED
+        changeLog:
+          createdBy: testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: testuser
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+        links:
+        - href: https://api.equinix.com/fabric/v4/networks/92dc376a-a932-43aa-a6a2-c806dedbd784/connections
+          rel: getConnectionsByNetworkUuid
+          method: GET
+          contentType: application/json
+          authenticate: true
   securitySchemes:
     BearerAuth:
       type: http

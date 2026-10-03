@@ -164,19 +164,6 @@ paths:
                   $ref: '#/components/examples/AgentTemplate_500'
 components:
   schemas:
-    PriceError_additionalInfo:
-      type: object
-      properties:
-        property:
-          type: string
-        reason:
-          type: string
-    AgentDefinition:
-      type: object
-      properties:
-        url:
-          type: string
-          description: Agent Template ReadMe (.md) Definition
     AgentTemplates:
       type: object
       properties:
@@ -220,33 +207,11 @@ components:
         changeLog:
           $ref: '#/components/schemas/Changelog'
       description: Agent Template object
-    Pagination:
-      required:
-      - limit
-      - total
-      type: object
-      properties:
-        offset:
-          minimum: 0
-          type: integer
-          description: Index of the first item returned in the response. The default is 0.
-          default: 0
-        limit:
-          minimum: 0
-          type: integer
-          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
-          default: 20
-        total:
-          minimum: 0
-          type: integer
-          description: Total number of elements returned.
-        next:
-          type: string
-          description: URL relative to the next item in the response.
-        previous:
-          type: string
-          description: URL relative to the previous item in the response.
-      description: Pagination response information
+    AgentTemplateId:
+      type: string
+      description: Agent Template UUID
+      format: uuid
+      example: 657400f8-d360-11e9-bb65-2a2ae2dbcce5
     Changelog:
       type: object
       properties:
@@ -302,21 +267,6 @@ components:
           format: date-time
           example: 2020-11-06 07:00:00+00:00
       description: Change log
-    AgentTemplateGetAllResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          description: Data returned from the API call.
-          items:
-            $ref: '#/components/schemas/AgentTemplates'
-    ErrorList:
-      type: array
-      description: List of Error Message
-      items:
-        $ref: '#/components/schemas/Error'
     Error:
       required:
       - errorCode
@@ -339,12 +289,75 @@ components:
           items:
             $ref: '#/components/schemas/PriceError_additionalInfo'
       description: Error Response with details
-    AgentTemplateId:
-      type: string
-      description: Agent Template UUID
-      format: uuid
-      example: 657400f8-d360-11e9-bb65-2a2ae2dbcce5
+    AgentDefinition:
+      type: object
+      properties:
+        url:
+          type: string
+          description: Agent Template ReadMe (.md) Definition
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    AgentTemplateGetAllResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/AgentTemplates'
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
   examples:
+    AgentTemplate_403:
+      value:
+      - errorCode: EQ-3164013
+        errorMessage: Operation not allowed
+        correlationId: 8a72af9d-23f7-4b90-8237-0987130b42dd
+        details: Operation not allowed for current user
+    AgentTemplate_401:
+      value:
+      - errorCode: EQ-3164013
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        additionalInfo:
+        - reason: You are unauthorized to perform this operation
     AgentTemplate_500:
       value:
       - errorCode: EQ-3164004
@@ -388,25 +401,12 @@ components:
             createdDateTime: 2024-05-06 16:21:18.545214
             updatedBy: testuser
             updatedDateTime: 2024-05-06 16:21:18.545214+00:00
-    AgentTemplate_401:
-      value:
-      - errorCode: EQ-3164013
-        errorMessage: User not found in request or invalid.
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        additionalInfo:
-        - reason: You are unauthorized to perform this operation
     AgentTemplate_404:
       value:
       - errorCode: EQ-3164811
         errorMessage: Agent Template not found or already deleted
         correlationId: 9b6baf30-3eb0-458c-af8b-fff3fae32bc7
         details: Agent Template not found or already deleted
-    AgentTemplate_403:
-      value:
-      - errorCode: EQ-3164013
-        errorMessage: Operation not allowed
-        correlationId: 8a72af9d-23f7-4b90-8237-0987130b42dd
-        details: Operation not allowed for current user
   securitySchemes:
     BearerAuth:
       type: http

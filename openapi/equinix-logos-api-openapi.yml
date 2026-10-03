@@ -120,18 +120,36 @@ paths:
                 $ref: '#/components/schemas/ErrorList'
 components:
   schemas:
-    PriceError_additionalInfo:
+    LogoResponse:
       type: object
       properties:
-        property:
+        href:
           type: string
-        reason:
+          format: uri
+          example: https://api.equinix.com/fabric/v4/logos/18a127ad-9d0c-46e2-a66d-8ed85d1858b0
+        uuid:
           type: string
-    ErrorList:
-      type: array
-      description: List of Error Message
-      items:
-        $ref: '#/components/schemas/Error'
+          format: uuid
+          example: 18a127ad-9d0c-46e2-a66d-8ed85d1858b0
+        type:
+          type: string
+          description: Type of logo
+          example: COMPANY_LOGO
+        name:
+          type: string
+          example: Equinix Logo
+        description:
+          type: string
+          example: Company branding logo
+        status:
+          type: string
+          example: CREATED
+        extensionType:
+          type: string
+          example: .png
+        changelog:
+          $ref: '#/components/schemas/Changelog'
+      description: Equinix Fabric Logo Response Object
     Changelog:
       type: object
       properties:
@@ -209,36 +227,18 @@ components:
           items:
             $ref: '#/components/schemas/PriceError_additionalInfo'
       description: Error Response with details
-    LogoResponse:
+    PriceError_additionalInfo:
       type: object
       properties:
-        href:
+        property:
           type: string
-          format: uri
-          example: https://api.equinix.com/fabric/v4/logos/18a127ad-9d0c-46e2-a66d-8ed85d1858b0
-        uuid:
+        reason:
           type: string
-          format: uuid
-          example: 18a127ad-9d0c-46e2-a66d-8ed85d1858b0
-        type:
-          type: string
-          description: Type of logo
-          example: COMPANY_LOGO
-        name:
-          type: string
-          example: Equinix Logo
-        description:
-          type: string
-          example: Company branding logo
-        status:
-          type: string
-          example: CREATED
-        extensionType:
-          type: string
-          example: .png
-        changelog:
-          $ref: '#/components/schemas/Changelog'
-      description: Equinix Fabric Logo Response Object
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
   securitySchemes:
     BearerAuth:
       type: http

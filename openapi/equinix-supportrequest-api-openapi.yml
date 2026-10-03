@@ -87,6 +87,13 @@ components:
       - message
       - subject
       type: object
+    SupportRequestInput_priority:
+      enum:
+      - urgent
+      - high
+      - medium
+      - low
+      type: string
     Error:
       description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
       properties:
@@ -100,13 +107,6 @@ components:
             type: string
           type: array
       type: object
-    SupportRequestInput_priority:
-      enum:
-      - urgent
-      - high
-      - medium
-      - low
-      type: string
   securitySchemes:
     x_auth_token:
       description: 'HTTP header containing the User or Project API key that will be used to authenticate the request.

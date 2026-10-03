@@ -1099,10 +1099,34 @@ paths:
                   $ref: '#/components/examples/500_internal_error'
 components:
   schemas:
-    RouteAggregationId:
+    GetRouteAggregationGetConnectionsResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: List of Connections using a Route Aggregation
+          items:
+            $ref: '#/components/schemas/RouteAggregationConnectionsData'
+    ConnectionType:
       type: string
-      description: Route Aggregations UUID
-      example: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
+      description: Connection type
+      enum:
+      - EVPL_VC
+      - EPL_VC
+      - EC_VC
+      - IP_VC
+      - ACCESS_EPL_VC
+      - EIA_VC
+      - EVPLAN_VC
+      - EPLAN_VC
+      - EVPTREE_VC
+      - EPTREE_VC
+      - IPWAN_VC
+      - IA_VC
+      - MC_VC
+      - IX_VC
     RouteAggregationState:
       type: string
       description: Route Aggregation status
@@ -1114,6 +1138,355 @@ components:
       - DEPROVISIONED
       - NOT_PROVISIONED
       - NOT_DEPROVISIONED
+    ConnectionId:
+      type: string
+      description: Connection UUID
+      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+    GetAllConnectionRouteAggregationsResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: List of Route Aggregations attached to a Connection
+          items:
+            $ref: '#/components/schemas/ConnectionRouteAggregationData'
+    RouteAggregationsSearchBase_filter:
+      type: object
+      properties:
+        and:
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteAggregationsSearchFilterItem'
+    RouteAggregationSortItem:
+      type: object
+      properties:
+        property:
+          type: string
+          description: Possible field names to use on sorting
+          default: /changeLog/updatedDateTime
+          enum:
+          - /type
+          - /uuid
+          - /name
+          - /project/projectId
+          - /state
+          - /connectionsCount
+          - /changeLog/createdDateTime
+          - /changeLog/updatedDateTime
+        direction:
+          type: string
+          description: Sorting direction
+          default: DESC
+          enum:
+          - DESC
+          - ASC
+    CloudRouterRouteAggregationOrExpression:
+      type: object
+      properties:
+        or:
+          maxItems: 8
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/CloudRouterRouteAggregationExpression'
+      description: OR expression containing multiple filter expressions
+    RouteAggregationsSearchBase:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/RouteAggregationsSearchBase_filter'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteAggregationSortItem'
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    RouteAggregationId:
+      type: string
+      description: Route Aggregations UUID
+      example: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
+    CloudRouterRouteAggregationAndExpression:
+      type: object
+      properties:
+        and:
+          maxItems: 8
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/CloudRouterRouteAggregationExpression'
+      description: AND expression containing multiple filter expressions
+    Project:
+      required:
+      - projectId
+      type: object
+      properties:
+        projectId:
+          type: string
+          description: Subscriber-assigned project ID
+          example: 44f4c4f8-2f39-494e-838c-d8e640591be5
+    ChangeId_3:
+      type: string
+      description: Route Aggregations Change UUID
+      format: uuid
+      example: 6d500177-9404-41f2-99e8-2bf1a84d8db5
+    RouteAggregationConnectionsData:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Connection URI
+          format: uri
+          example: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f
+        type:
+          $ref: '#/components/schemas/ConnectionType'
+        uuid:
+          type: string
+          description: Route Aggregation identifier
+          format: uuid
+          example: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
+        name:
+          type: string
+          example: connection-1
+    CloudRouterRouteAggregationsSearchBase:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/CloudRouterRouteAggregationsFilter'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        sort:
+          maxItems: 3
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/RaAttachmentSortItem'
+    RouteAggregationsData:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Route Aggregation URI
+          format: uri
+          example: https://api.equinix.com/fabric/v4/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d
+        type:
+          type: string
+          description: Route Aggregation type
+          enum:
+          - BGP_IPv4_PREFIX_AGGREGATION
+          - BGP_IPv6_PREFIX_AGGREGATION
+        uuid:
+          type: string
+          description: Route Aggregation identifier
+          format: uuid
+          example: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
+        name:
+          type: string
+          example: My-direct-route-1
+        description:
+          type: string
+          description: Customer-provided connection description
+        state:
+          $ref: '#/components/schemas/RouteAggregationState'
+        change:
+          $ref: '#/components/schemas/RouteAggregationsChange'
+        connectionsCount:
+          type: integer
+          example: 0
+        rulesCount:
+          type: integer
+          example: 0
+        project:
+          $ref: '#/components/schemas/RouteAggregationsData_project'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+    RouteAggregationsChangeOperation:
+      required:
+      - op
+      - path
+      - value
+      type: object
+      properties:
+        op:
+          type: string
+          description: Handy shortcut for operation name
+          enum:
+          - add
+          - replace
+          - remove
+        path:
+          type: string
+          description: path inside document leading to updated parameter
+          example: /
+        value:
+          $ref: '#/components/schemas/RouteAggregationsBase'
+      description: Route Aggregation change operation data
+    CloudRouterRouteAggregationsSearchResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: List of route aggregation attachments for a given cloud router
+          items:
+            $ref: '#/components/schemas/ConnectionRouteAggregationData'
+    RouteAggregationsPatchRequestItem:
+      required:
+      - op
+      - path
+      - value
+      type: object
+      properties:
+        op:
+          type: string
+          description: Handy shortcut for operation name
+          example: replace
+        path:
+          type: string
+          description: path to change
+          example: /name
+        value:
+          description: new value for updated parameter
+      description: Route Aggregation change operation data
+    RouteAggregationsSearchFilterItem:
+      type: object
+      properties:
+        property:
+          type: string
+          enum:
+          - /type
+          - /name
+          - /project/projectId
+          - /uuid
+          - /state
+        operator:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+    RouterId:
+      type: string
+      description: Cloud Router UUID
+      format: uuid
+      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+    RouteAggregationChangeData:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Current outcome of the change flow
+          enum:
+          - COMPLETED
+          - FAILED
+          - REQUESTED
+        createdBy:
+          type: string
+          description: Created by User Key
+        createdDateTime:
+          type: string
+          description: Set when change flow starts
+          format: date-time
+        updatedBy:
+          type: string
+          description: Updated by User Key
+        updatedDateTime:
+          type: string
+          description: Set when change object is updated
+          format: date-time
+        information:
+          type: string
+          description: Additional information
+        data:
+          $ref: '#/components/schemas/RouteAggregationsChangeOperation'
+      description: Current state of latest Route Aggregation change
+      allOf:
+      - $ref: '#/components/schemas/RouteAggregationsChange'
+    RaAttachmentSortItem:
+      type: object
+      properties:
+        property:
+          type: string
+          description: Possible field names to use on sorting
+          default: /changeLog/updatedDateTime
+          enum:
+          - /type
+          - /uuid
+          - /attachmentStatus
+          - /changeLog/createdDateTime
+          - /changeLog/updatedDateTime
+        direction:
+          type: string
+          description: Sorting direction
+          default: DESC
+          enum:
+          - DESC
+          - ASC
+    CloudRouterRouteAggregationSimpleExpression:
+      type: object
+      properties:
+        property:
+          type: string
+          enum:
+          - /type
+          - /attachmentStatus
+        operator:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
     RouteAggregationsBase:
       required:
       - name
@@ -1135,6 +1508,45 @@ components:
           description: Customer-provided connection description
         project:
           $ref: '#/components/schemas/Project'
+    CloudRouterRouteAggregationExpression:
+      description: Filter expression that can be AND, OR, or a simple expression
+      anyOf:
+      - $ref: '#/components/schemas/CloudRouterRouteAggregationAndExpression'
+      - $ref: '#/components/schemas/CloudRouterRouteAggregationOrExpression'
+      - $ref: '#/components/schemas/CloudRouterRouteAggregationSimpleExpression'
+    RouteAggregationsData_project:
+      required:
+      - projectId
+      type: object
+      properties:
+        projectId:
+          type: string
+          description: Subscriber-assigned project ID
+          example: 44f4c4f8-2f39-494e-838c-d8e640591be5
+        href:
+          type: string
+          description: Project URI
+          format: uri
+    RouteAggregationChangeDataResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteAggregationChangeData'
+      description: List of Route Aggregation changes
+    RouteAggregationsSearchResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: List of Route Aggregations
+          items:
+            $ref: '#/components/schemas/RouteAggregationsData'
     Changelog:
       type: object
       properties:
@@ -1190,150 +1602,17 @@ components:
           format: date-time
           example: 2020-11-06 07:00:00+00:00
       description: Change log
-    Error:
-      required:
-      - errorCode
-      - errorMessage
-      type: object
-      properties:
-        errorCode:
-          pattern: ^EQ-\d{7}$
-          type: string
-        errorMessage:
-          type: string
-        correlationId:
-          type: string
-        details:
-          type: string
-        help:
-          type: string
-        additionalInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/PriceError_additionalInfo'
-      description: Error Response with details
+    CloudRouterRouteAggregationsFilter:
+      description: Top-level filter that can be either an AND expression or OR expression
+      anyOf:
+      - $ref: '#/components/schemas/CloudRouterRouteAggregationAndExpression'
+      - $ref: '#/components/schemas/CloudRouterRouteAggregationOrExpression'
     RouteAggregationsPatchRequest:
       minItems: 1
       type: array
       description: Patch Route Aggregations request
       items:
         $ref: '#/components/schemas/RouteAggregationsPatchRequestItem'
-    CloudRouterRouteAggregationsFilter:
-      description: Top-level filter that can be either an AND expression or OR expression
-      anyOf:
-      - $ref: '#/components/schemas/CloudRouterRouteAggregationAndExpression'
-      - $ref: '#/components/schemas/CloudRouterRouteAggregationOrExpression'
-    RouteAggregationsPatchRequestItem:
-      required:
-      - op
-      - path
-      - value
-      type: object
-      properties:
-        op:
-          type: string
-          description: Handy shortcut for operation name
-          example: replace
-        path:
-          type: string
-          description: path to change
-          example: /name
-        value:
-          description: new value for updated parameter
-      description: Route Aggregation change operation data
-    CloudRouterRouteAggregationExpression:
-      description: Filter expression that can be AND, OR, or a simple expression
-      anyOf:
-      - $ref: '#/components/schemas/CloudRouterRouteAggregationAndExpression'
-      - $ref: '#/components/schemas/CloudRouterRouteAggregationOrExpression'
-      - $ref: '#/components/schemas/CloudRouterRouteAggregationSimpleExpression'
-    RouteAggregationChangeDataResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/RouteAggregationChangeData'
-      description: List of Route Aggregation changes
-    RouteAggregationsSearchBase:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/RouteAggregationsSearchBase_filter'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        sort:
-          type: array
-          items:
-            $ref: '#/components/schemas/RouteAggregationSortItem'
-    RouteAggregationsData:
-      type: object
-      properties:
-        href:
-          type: string
-          description: Route Aggregation URI
-          format: uri
-          example: https://api.equinix.com/fabric/v4/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d
-        type:
-          type: string
-          description: Route Aggregation type
-          enum:
-          - BGP_IPv4_PREFIX_AGGREGATION
-          - BGP_IPv6_PREFIX_AGGREGATION
-        uuid:
-          type: string
-          description: Route Aggregation identifier
-          format: uuid
-          example: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
-        name:
-          type: string
-          example: My-direct-route-1
-        description:
-          type: string
-          description: Customer-provided connection description
-        state:
-          $ref: '#/components/schemas/RouteAggregationState'
-        change:
-          $ref: '#/components/schemas/RouteAggregationsChange'
-        connectionsCount:
-          type: integer
-          example: 0
-        rulesCount:
-          type: integer
-          example: 0
-        project:
-          $ref: '#/components/schemas/RouteAggregationsData_project'
-        changeLog:
-          $ref: '#/components/schemas/Changelog'
-    ConnectionId:
-      type: string
-      description: Connection UUID
-      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
-    ConnectionType:
-      type: string
-      description: Connection type
-      enum:
-      - EVPL_VC
-      - EPL_VC
-      - EC_VC
-      - IP_VC
-      - ACCESS_EPL_VC
-      - EIA_VC
-      - EVPLAN_VC
-      - EPLAN_VC
-      - EVPTREE_VC
-      - EPTREE_VC
-      - IPWAN_VC
-      - IA_VC
-      - MC_VC
-      - IX_VC
-    RouterId:
-      type: string
-      description: Cloud Router UUID
-      format: uuid
-      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
     PriceError_additionalInfo:
       type: object
       properties:
@@ -1341,63 +1620,6 @@ components:
           type: string
         reason:
           type: string
-    Pagination:
-      required:
-      - limit
-      - total
-      type: object
-      properties:
-        offset:
-          minimum: 0
-          type: integer
-          description: Index of the first item returned in the response. The default is 0.
-          default: 0
-        limit:
-          minimum: 0
-          type: integer
-          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
-          default: 20
-        total:
-          minimum: 0
-          type: integer
-          description: Total number of elements returned.
-        next:
-          type: string
-          description: URL relative to the next item in the response.
-        previous:
-          type: string
-          description: URL relative to the previous item in the response.
-      description: Pagination response information
-    RaAttachmentSortItem:
-      type: object
-      properties:
-        property:
-          type: string
-          description: Possible field names to use on sorting
-          default: /changeLog/updatedDateTime
-          enum:
-          - /type
-          - /uuid
-          - /attachmentStatus
-          - /changeLog/createdDateTime
-          - /changeLog/updatedDateTime
-        direction:
-          type: string
-          description: Sorting direction
-          default: DESC
-          enum:
-          - DESC
-          - ASC
-    CloudRouterRouteAggregationsSearchResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          description: List of route aggregation attachments for a given cloud router
-          items:
-            $ref: '#/components/schemas/ConnectionRouteAggregationData'
     ConnectionRouteAggregationData:
       type: object
       properties:
@@ -1425,115 +1647,6 @@ components:
           - DETACHING
           - FAILED
           - PENDING_BGP_CONFIGURATION
-    CloudRouterRouteAggregationSimpleExpression:
-      type: object
-      properties:
-        property:
-          type: string
-          enum:
-          - /type
-          - /attachmentStatus
-        operator:
-          type: string
-        values:
-          type: array
-          items:
-            type: string
-    ChangeId_3:
-      type: string
-      description: Route Aggregations Change UUID
-      format: uuid
-      example: 6d500177-9404-41f2-99e8-2bf1a84d8db5
-    GetRouteAggregationGetConnectionsResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          description: List of Connections using a Route Aggregation
-          items:
-            $ref: '#/components/schemas/RouteAggregationConnectionsData'
-    CloudRouterRouteAggregationOrExpression:
-      type: object
-      properties:
-        or:
-          maxItems: 8
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/CloudRouterRouteAggregationExpression'
-      description: OR expression containing multiple filter expressions
-    RouteAggregationsSearchBase_filter:
-      type: object
-      properties:
-        and:
-          type: array
-          items:
-            $ref: '#/components/schemas/RouteAggregationsSearchFilterItem'
-    RouteAggregationsSearchFilterItem:
-      type: object
-      properties:
-        property:
-          type: string
-          enum:
-          - /type
-          - /name
-          - /project/projectId
-          - /uuid
-          - /state
-        operator:
-          type: string
-        values:
-          type: array
-          items:
-            type: string
-    CloudRouterRouteAggregationsSearchBase:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/CloudRouterRouteAggregationsFilter'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        sort:
-          maxItems: 3
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/RaAttachmentSortItem'
-    RouteAggregationsSearchResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          description: List of Route Aggregations
-          items:
-            $ref: '#/components/schemas/RouteAggregationsData'
-    RouteAggregationSortItem:
-      type: object
-      properties:
-        property:
-          type: string
-          description: Possible field names to use on sorting
-          default: /changeLog/updatedDateTime
-          enum:
-          - /type
-          - /uuid
-          - /name
-          - /project/projectId
-          - /state
-          - /connectionsCount
-          - /changeLog/createdDateTime
-          - /changeLog/updatedDateTime
-        direction:
-          type: string
-          description: Sorting direction
-          default: DESC
-          enum:
-          - DESC
-          - ASC
     RouteAggregationsChange:
       required:
       - type
@@ -1558,125 +1671,143 @@ components:
           description: Route AGGREGATION Change URI
           format: uri
       description: Current state of latest Route Aggregation change
-    RouteAggregationsChangeOperation:
-      required:
-      - op
-      - path
-      - value
-      type: object
-      properties:
-        op:
-          type: string
-          description: Handy shortcut for operation name
-          enum:
-          - add
-          - replace
-          - remove
-        path:
-          type: string
-          description: path inside document leading to updated parameter
-          example: /
-        value:
-          $ref: '#/components/schemas/RouteAggregationsBase'
-      description: Route Aggregation change operation data
-    RouteAggregationChangeData:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Current outcome of the change flow
-          enum:
-          - COMPLETED
-          - FAILED
-          - REQUESTED
-        createdBy:
-          type: string
-          description: Created by User Key
-        createdDateTime:
-          type: string
-          description: Set when change flow starts
-          format: date-time
-        updatedBy:
-          type: string
-          description: Updated by User Key
-        updatedDateTime:
-          type: string
-          description: Set when change object is updated
-          format: date-time
-        information:
-          type: string
-          description: Additional information
-        data:
-          $ref: '#/components/schemas/RouteAggregationsChangeOperation'
-      description: Current state of latest Route Aggregation change
-      allOf:
-      - $ref: '#/components/schemas/RouteAggregationsChange'
     ErrorList:
       type: array
       description: List of Error Message
       items:
         $ref: '#/components/schemas/Error'
-    GetAllConnectionRouteAggregationsResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          description: List of Route Aggregations attached to a Connection
-          items:
-            $ref: '#/components/schemas/ConnectionRouteAggregationData'
-    RouteAggregationConnectionsData:
-      type: object
-      properties:
-        href:
-          type: string
-          description: Connection URI
-          format: uri
-          example: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f
-        type:
-          $ref: '#/components/schemas/ConnectionType'
-        uuid:
-          type: string
-          description: Route Aggregation identifier
-          format: uuid
-          example: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
-        name:
-          type: string
-          example: connection-1
-    RouteAggregationsData_project:
-      required:
-      - projectId
-      type: object
-      properties:
-        projectId:
-          type: string
-          description: Subscriber-assigned project ID
-          example: 44f4c4f8-2f39-494e-838c-d8e640591be5
-        href:
-          type: string
-          description: Project URI
-          format: uri
-    CloudRouterRouteAggregationAndExpression:
-      type: object
-      properties:
-        and:
-          maxItems: 8
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/CloudRouterRouteAggregationExpression'
-      description: AND expression containing multiple filter expressions
-    Project:
-      required:
-      - projectId
-      type: object
-      properties:
-        projectId:
-          type: string
-          description: Subscriber-assigned project ID
-          example: 44f4c4f8-2f39-494e-838c-d8e640591be5
   examples:
+    DetachConnectionRouteAggregationResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d
+        type: BGP_IPv4_PREFIX_AGGREGATION
+        uuid: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
+        attachmentStatus: DETACHING
+    400_attached_connection:
+      value:
+      - errorCode: EQ-3044007
+        errorMessage: Cannot delete route filter still attached to a connection
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Cannot delete route filter still attached to a connection
+    CloudRouterSearchRouteAggregationsRequest:
+      value:
+        filter:
+          and:
+          - property: /type
+            operator: '='
+            values:
+            - BGP_IPv4_PREFIX_AGGREGATION
+          - property: /attachmentStatus
+            operator: '='
+            values:
+            - ATTACHED
+        pagination:
+          limit: 25
+          offset: 0
+        sort:
+        - property: /changeLog/updatedDateTime
+          direction: DESC
+    RouteAggregationNamePatchResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d
+        type: BGP_IPv4_PREFIX_AGGREGATION
+        uuid: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
+        name: My-prefix-aggregation-v4-updated
+        description: Test aggregation
+        state: REPROVISIONING
+        change:
+          href: https://api.equinix.com/fabric/v4/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/changes/04af0d37-9160-43d8-97ef-9da9786996a3
+          type: BGP_IPv4_PREFIX_AGGREGATION_UPDATE
+          uuid: 04af0d37-9160-43d8-97ef-9da9786996a3
+        connectionsCount: 1
+        rulesCount: 0
+        project:
+          projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
+        changeLog:
+          createdBy: testuser
+          createdByEmail: testuser@equinix.com
+          createdByFullName: testuser testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+    PatchRouteAggregationName:
+      value:
+      - op: replace
+        path: /name
+        value: My-route-aggregation-v4-updated
+    RouteAggregationCreateBgpIpv4PrefixResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d
+        type: BGP_IPv4_PREFIX_AGGREGATION
+        uuid: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
+        name: My-prefix-aggregation-v4
+        description: Test aggregation
+        state: PROVISIONING
+        change:
+          href: https://api.equinix.com/fabric/v4/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/changes/04af0d37-9160-43d8-97ef-9da9786996a3
+          type: BGP_IPv4_PREFIX_AGGREGATION_CREATION
+          uuid: 04af0d37-9160-43d8-97ef-9da9786996a3
+        rulesCount: 0
+        connectionsCount: 0
+        project:
+          projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
+        changeLog:
+          createdBy: testuser
+          createdByEmail: testuser@equinix.com
+          createdByFullName: testuser testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+    400_invalid_input:
+      value:
+      - errorCode: EQ-3044305
+        errorMessage: Invalid input
+        correlationId: 20d32a80-0d61-4333-bc03-707b591ae2f5
+        additionalInfo:
+        - property: type
+    400_Invalid_id:
+      value:
+      - errorCode: EQ-3142519
+        errorMessage: Connection does not exist or do not belong to user,Please check connection Id
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+    SearchRouteAggregationsRequest:
+      value:
+        filter:
+          and:
+          - property: /type
+            operator: '='
+            values:
+            - BGP_IPv4_PREFIX_AGGREGATION
+          - property: /name
+            operator: like
+            values:
+            - '%Route_Aggregation_Demo%'
+          - property: /project/projectId
+            operator: '='
+            values:
+            - dadd3ab6-c0af-430c-8216-43d44f08c1c5
+        pagination:
+          offset: 1
+          limit: 2
+          total: 10
+        sort:
+        - property: /changeLog/updatedDateTime
+          direction: DESC
+    400_invalid_operation:
+      value:
+      - errorCode: EQ-3044011
+        errorMessage: Invalid argument passed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Only replace name operation is supported.
+    RouteAggregationGetConnectionsResponse:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 1
+          next: null
+          previous: null
+        data:
+          href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f
+          type: IP_VC
+          name: test-connection
+          uuid: 05de355a-6c9d-4636-8d7d-7b7595821c15
     RouteAggregationGetChangeResponseExample:
       value:
         href: https://api.equinix.com/fabric/v4/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/changes/04af0d37-9160-43d8-97ef-9da9786996a3
@@ -1697,47 +1828,136 @@ components:
           description: Test aggregation
           project:
             projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
-    400_invalid_input:
+    404_invalid_id:
       value:
-      - errorCode: EQ-3044305
-        errorMessage: Invalid input
-        correlationId: 20d32a80-0d61-4333-bc03-707b591ae2f5
+      - errorCode: EQ-3041120
+        errorMessage: The connection ID was not found or was already deleted.
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+    '415':
+      value:
+      - errorCode: EQ-3040016
+        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
         additionalInfo:
-        - property: type
-    RouteAggregationDeleteBgpIpv4PrefixResponse:
+        - property: contentType
+          reason: The payload format is in an unsupported format
+    ConnectionRouteAggregationsGetAll:
       value:
-        href: https://api.equinix.com/fabric/v4/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d
+        pagination:
+          offset: 0
+          limit: 20
+          total: 4
+        data:
+        - href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d
+          type: BGP_IPv4_PREFIX_AGGREGATION
+          uuid: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
+          attachmentStatus: DETACHING
+        - href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routeAggregations/52f7791a-fe90-49bc-8807-18b3d6eda566
+          type: BGP_IPv6_PREFIX_AGGREGATION
+          uuid: 52f7791a-fe90-49bc-8807-18b3d6eda566
+          attachmentStatus: ATTACHED
+        - href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routeAggregations/8b67bf1c-7afa-4a9e-98c3-d5ab17da6652
+          type: BGP_IPv4_PREFIX_AGGREGATION
+          uuid: 8b67bf1c-7afa-4a9e-98c3-d5ab17da6652
+          attachmentStatus: ATTACHED
+        - href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routeAggregations/65d74639-8f48-4e10-9684-45d364645e97
+          type: BGP_IPv6_PREFIX_AGGREGATION
+          uuid: 65d74639-8f48-4e10-9684-45d364645e97
+          attachmentStatus: ATTACHED
+    AttachConnectionRouteAggregationsResponse:
+      value:
+        href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d
         type: BGP_IPv4_PREFIX_AGGREGATION
         uuid: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
-        name: My-prefix-aggregation-v4
-        description: Test Aggregation
-        state: DEPROVISIONING
-        change:
-          href: https://api.equinix.com/fabric/v4/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/changes/c2ec84c5-6de6-4f5c-b506-3ce218630c31
-          type: BGP_IPv4_PREFIX_AGGREGATION_DELETION
-          uuid: c2ec84c5-6de6-4f5c-b506-3ce218630c31
-        connectionsCount: 0
-        rulesCount: 0
+        attachmentStatus: ATTACHING
+    CloudRouterSearchRouteAggregationsResponse:
+      value:
+        pagination:
+          offset: 1
+          limit: 2
+          total: 10
+          next: /search?offset=3&limit=2
+          previous: /search?offset=0&limit=2
+        data:
+        - href: https://api.equinix.com/fabric/v4/connections/57f82f8c-d899-4a21-93ae-5cfe33c50556/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d
+          type: BGP_IPv4_PREFIX_AGGREGATION
+          uuid: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
+          attachmentStatus: ATTACHED
+          changeLog:
+            createdBy: testuser
+            createdDateTime: 2020-05-21 10:30:00+00:00
+        - href: https://api.equinix.com/fabric/v4/connections/500589e0-4196-4839-8d43-a0c073b4d747/routeAggregations/4ed45b37-2b26-49de-ab35-4ad039586c7a
+          type: BGP_IPv4_PREFIX_AGGREGATION
+          uuid: 4ed45b37-2b26-49de-ab35-4ad039586c7a
+          attachmentStatus: ATTACHED
+          changeLog:
+            createdBy: testuser
+            createdDateTime: 2020-05-21 10:30:00+00:00
+    '403':
+      value:
+      - errorCode: EQ-3045003
+        errorMessage: Operation not allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Operation not allowed for current user
+    SearchRouteAggregationsResponse:
+      value:
+        pagination:
+          offset: 1
+          limit: 2
+          total: 10
+          next: /search?offset=3&limit=2
+          previous: /search?offset=0&limit=2
+        data:
+        - href: https://api.equinix.com/fabric/v4/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d
+          type: BGP_IPv4_PREFIX_AGGREGATION
+          uuid: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
+          name: My_Route_Aggregation_Demo_1
+          description: Test aggregation
+          state: PROVISIONING
+          connectionsCount: 1
+          rulesCount: 0
+          project:
+            projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
+          changeLog:
+            createdBy: testuser
+            createdByEmail: testuser@equinix.com
+            createdByFullName: testuser testuser
+            createdDateTime: 2020-05-21 10:30:00+00:00
+        - href: https://api.equinix.com/fabric/v4/routeAggregations/795a8471-6595-4ac6-a2f4-b3d96ed3a59d
+          type: BGP_IPv4_PREFIX_AGGREGATION
+          uuid: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
+          name: My_Route_Aggregation_Demo_2
+          description: Test aggregation
+          state: PROVISIONING
+          connectionsCount: 0
+          rulesCount: 0
+          project:
+            projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
+          changeLog:
+            createdBy: testuser
+            createdByEmail: testuser@equinix.com
+            createdByFullName: testuser testuser
+            createdDateTime: 2020-05-21 10:30:00+00:00
+    '401':
+      value:
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    500_internal_error:
+      value:
+      - errorCode: EQ-3041011
+        errorMessage: Bad request - Internal Server Error. Please check the request payload and submit again.
+        details: Please contact support@equinix.com for more info
+        correlationId: 9048796775044a60-39cb-4ccc-b272-b80f126e5408
+        additionalInfo:
+        - reason: Please contact support@equinix.com for more info
+    RouteAggregationCreateBgpIpv4Prefix:
+      value:
+        type: BGP_IPv4_PREFIX_AGGREGATION
+        name: My-route-aggregation-v4
+        description: Test aggregation
         project:
           projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
-        changeLog:
-          createdBy: testuser
-          createdByEmail: testuser@equinix.com
-          createdByFullName: testuser testuser
-          createdDateTime: 2020-05-21 10:30:00+00:00
-          updatedBy: testuser1
-          updatedByEmail: testuser@equinix.com
-          updatedByFullName: testuser testuser
-          updatedDateTime: 2020-05-21 10:30:00+00:00
-          deletedBy: testuser1
-          deletedByEmail: testuser@equinix.com
-          deletedByFullName: testuser testuser
-          deletedDateTime: 2020-05-21 10:30:00+00:00
-    PatchRouteAggregationName:
-      value:
-      - op: replace
-        path: /name
-        value: My-route-aggregation-v4-updated
     RouteAggregationGetAllChangesResponseExample:
       value:
         pagination:
@@ -1782,261 +2002,41 @@ components:
             path: /name
             value: My-route-aggregations-v4-updated
             previousValue: My-route-aggregations-v4
-    SearchRouteAggregationsRequest:
-      value:
-        filter:
-          and:
-          - property: /type
-            operator: '='
-            values:
-            - BGP_IPv4_PREFIX_AGGREGATION
-          - property: /name
-            operator: like
-            values:
-            - '%Route_Aggregation_Demo%'
-          - property: /project/projectId
-            operator: '='
-            values:
-            - dadd3ab6-c0af-430c-8216-43d44f08c1c5
-        pagination:
-          offset: 1
-          limit: 2
-          total: 10
-        sort:
-        - property: /changeLog/updatedDateTime
-          direction: DESC
-    500_internal_error:
-      value:
-      - errorCode: EQ-3041011
-        errorMessage: Bad request - Internal Server Error. Please check the request payload and submit again.
-        details: Please contact support@equinix.com for more info
-        correlationId: 9048796775044a60-39cb-4ccc-b272-b80f126e5408
-        additionalInfo:
-        - reason: Please contact support@equinix.com for more info
-    404_invalid_id:
-      value:
-      - errorCode: EQ-3041120
-        errorMessage: The connection ID was not found or was already deleted.
-        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
-    RouteAggregationCreateBgpIpv4Prefix:
-      value:
-        type: BGP_IPv4_PREFIX_AGGREGATION
-        name: My-route-aggregation-v4
-        description: Test aggregation
-        project:
-          projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
-    RouteAggregationCreateBgpIpv4PrefixResponse:
-      value:
-        href: https://api.equinix.com/fabric/v4/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d
-        type: BGP_IPv4_PREFIX_AGGREGATION
-        uuid: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
-        name: My-prefix-aggregation-v4
-        description: Test aggregation
-        state: PROVISIONING
-        change:
-          href: https://api.equinix.com/fabric/v4/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/changes/04af0d37-9160-43d8-97ef-9da9786996a3
-          type: BGP_IPv4_PREFIX_AGGREGATION_CREATION
-          uuid: 04af0d37-9160-43d8-97ef-9da9786996a3
-        rulesCount: 0
-        connectionsCount: 0
-        project:
-          projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
-        changeLog:
-          createdBy: testuser
-          createdByEmail: testuser@equinix.com
-          createdByFullName: testuser testuser
-          createdDateTime: 2020-05-21 10:30:00+00:00
-    SearchRouteAggregationsResponse:
-      value:
-        pagination:
-          offset: 1
-          limit: 2
-          total: 10
-          next: /search?offset=3&limit=2
-          previous: /search?offset=0&limit=2
-        data:
-        - href: https://api.equinix.com/fabric/v4/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d
-          type: BGP_IPv4_PREFIX_AGGREGATION
-          uuid: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
-          name: My_Route_Aggregation_Demo_1
-          description: Test aggregation
-          state: PROVISIONING
-          connectionsCount: 1
-          rulesCount: 0
-          project:
-            projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
-          changeLog:
-            createdBy: testuser
-            createdByEmail: testuser@equinix.com
-            createdByFullName: testuser testuser
-            createdDateTime: 2020-05-21 10:30:00+00:00
-        - href: https://api.equinix.com/fabric/v4/routeAggregations/795a8471-6595-4ac6-a2f4-b3d96ed3a59d
-          type: BGP_IPv4_PREFIX_AGGREGATION
-          uuid: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
-          name: My_Route_Aggregation_Demo_2
-          description: Test aggregation
-          state: PROVISIONING
-          connectionsCount: 0
-          rulesCount: 0
-          project:
-            projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
-          changeLog:
-            createdBy: testuser
-            createdByEmail: testuser@equinix.com
-            createdByFullName: testuser testuser
-            createdDateTime: 2020-05-21 10:30:00+00:00
-    RouteAggregationGetConnectionsResponse:
-      value:
-        pagination:
-          offset: 0
-          limit: 20
-          total: 1
-          next: null
-          previous: null
-        data:
-          href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f
-          type: IP_VC
-          name: test-connection
-          uuid: 05de355a-6c9d-4636-8d7d-7b7595821c15
-    DetachConnectionRouteAggregationResponse:
-      value:
-        href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d
-        type: BGP_IPv4_PREFIX_AGGREGATION
-        uuid: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
-        attachmentStatus: DETACHING
-    CloudRouterSearchRouteAggregationsRequest:
-      value:
-        filter:
-          and:
-          - property: /type
-            operator: '='
-            values:
-            - BGP_IPv4_PREFIX_AGGREGATION
-          - property: /attachmentStatus
-            operator: '='
-            values:
-            - ATTACHED
-        pagination:
-          limit: 25
-          offset: 0
-        sort:
-        - property: /changeLog/updatedDateTime
-          direction: DESC
-    '403':
-      value:
-      - errorCode: EQ-3045003
-        errorMessage: Operation not allowed
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Operation not allowed for current user
-    400_Invalid_id:
-      value:
-      - errorCode: EQ-3142519
-        errorMessage: Connection does not exist or do not belong to user,Please check connection Id
-        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
-    AttachConnectionRouteAggregationsResponse:
-      value:
-        href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d
-        type: BGP_IPv4_PREFIX_AGGREGATION
-        uuid: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
-        attachmentStatus: ATTACHING
-    400_invalid_operation:
-      value:
-      - errorCode: EQ-3044011
-        errorMessage: Invalid argument passed
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Only replace name operation is supported.
-    RouteAggregationNamePatchResponse:
-      value:
-        href: https://api.equinix.com/fabric/v4/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d
-        type: BGP_IPv4_PREFIX_AGGREGATION
-        uuid: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
-        name: My-prefix-aggregation-v4-updated
-        description: Test aggregation
-        state: REPROVISIONING
-        change:
-          href: https://api.equinix.com/fabric/v4/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/changes/04af0d37-9160-43d8-97ef-9da9786996a3
-          type: BGP_IPv4_PREFIX_AGGREGATION_UPDATE
-          uuid: 04af0d37-9160-43d8-97ef-9da9786996a3
-        connectionsCount: 1
-        rulesCount: 0
-        project:
-          projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
-        changeLog:
-          createdBy: testuser
-          createdByEmail: testuser@equinix.com
-          createdByFullName: testuser testuser
-          createdDateTime: 2020-05-21 10:30:00+00:00
-    '401':
-      value:
-      - errorCode: EQ-3000039
-        errorMessage: User not found in request or invalid.
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-    '415':
-      value:
-      - errorCode: EQ-3040016
-        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
-        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
-        additionalInfo:
-        - property: contentType
-          reason: The payload format is in an unsupported format
-    CloudRouterSearchRouteAggregationsResponse:
-      value:
-        pagination:
-          offset: 1
-          limit: 2
-          total: 10
-          next: /search?offset=3&limit=2
-          previous: /search?offset=0&limit=2
-        data:
-        - href: https://api.equinix.com/fabric/v4/connections/57f82f8c-d899-4a21-93ae-5cfe33c50556/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d
-          type: BGP_IPv4_PREFIX_AGGREGATION
-          uuid: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
-          attachmentStatus: ATTACHED
-          changeLog:
-            createdBy: testuser
-            createdDateTime: 2020-05-21 10:30:00+00:00
-        - href: https://api.equinix.com/fabric/v4/connections/500589e0-4196-4839-8d43-a0c073b4d747/routeAggregations/4ed45b37-2b26-49de-ab35-4ad039586c7a
-          type: BGP_IPv4_PREFIX_AGGREGATION
-          uuid: 4ed45b37-2b26-49de-ab35-4ad039586c7a
-          attachmentStatus: ATTACHED
-          changeLog:
-            createdBy: testuser
-            createdDateTime: 2020-05-21 10:30:00+00:00
-    ConnectionRouteAggregationsGetAll:
-      value:
-        pagination:
-          offset: 0
-          limit: 20
-          total: 4
-        data:
-        - href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d
-          type: BGP_IPv4_PREFIX_AGGREGATION
-          uuid: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
-          attachmentStatus: DETACHING
-        - href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routeAggregations/52f7791a-fe90-49bc-8807-18b3d6eda566
-          type: BGP_IPv6_PREFIX_AGGREGATION
-          uuid: 52f7791a-fe90-49bc-8807-18b3d6eda566
-          attachmentStatus: ATTACHED
-        - href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routeAggregations/8b67bf1c-7afa-4a9e-98c3-d5ab17da6652
-          type: BGP_IPv4_PREFIX_AGGREGATION
-          uuid: 8b67bf1c-7afa-4a9e-98c3-d5ab17da6652
-          attachmentStatus: ATTACHED
-        - href: https://api.equinix.com/fabric/v4/connections/81331c52-04c0-4656-a4a7-18c52669348f/routeAggregations/65d74639-8f48-4e10-9684-45d364645e97
-          type: BGP_IPv6_PREFIX_AGGREGATION
-          uuid: 65d74639-8f48-4e10-9684-45d364645e97
-          attachmentStatus: ATTACHED
     400_transient_state:
       value:
       - errorCode: EQ-3044008
         errorMessage: Cannot attach or detach route aggregation with connection in transient state
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
         details: Cannot attach or detach route aggregation with connection in transient state
-    400_attached_connection:
+    RouteAggregationDeleteBgpIpv4PrefixResponse:
       value:
-      - errorCode: EQ-3044007
-        errorMessage: Cannot delete route filter still attached to a connection
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Cannot delete route filter still attached to a connection
+        href: https://api.equinix.com/fabric/v4/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d
+        type: BGP_IPv4_PREFIX_AGGREGATION
+        uuid: 695a8471-6595-4ac6-a2f4-b3d96ed3a59d
+        name: My-prefix-aggregation-v4
+        description: Test Aggregation
+        state: DEPROVISIONING
+        change:
+          href: https://api.equinix.com/fabric/v4/routeAggregations/695a8471-6595-4ac6-a2f4-b3d96ed3a59d/changes/c2ec84c5-6de6-4f5c-b506-3ce218630c31
+          type: BGP_IPv4_PREFIX_AGGREGATION_DELETION
+          uuid: c2ec84c5-6de6-4f5c-b506-3ce218630c31
+        connectionsCount: 0
+        rulesCount: 0
+        project:
+          projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
+        changeLog:
+          createdBy: testuser
+          createdByEmail: testuser@equinix.com
+          createdByFullName: testuser testuser
+          createdDateTime: 2020-05-21 10:30:00+00:00
+          updatedBy: testuser1
+          updatedByEmail: testuser@equinix.com
+          updatedByFullName: testuser testuser
+          updatedDateTime: 2020-05-21 10:30:00+00:00
+          deletedBy: testuser1
+          deletedByEmail: testuser@equinix.com
+          deletedByFullName: testuser testuser
+          deletedDateTime: 2020-05-21 10:30:00+00:00
   securitySchemes:
     BearerAuth:
       type: http

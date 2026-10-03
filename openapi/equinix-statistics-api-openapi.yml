@@ -153,89 +153,6 @@ paths:
       deprecated: true
 components:
   schemas:
-    PriceError_additionalInfo:
-      type: object
-      properties:
-        property:
-          type: string
-        reason:
-          type: string
-    Statistics:
-      type: object
-      properties:
-        startDateTime:
-          type: string
-          description: Start and duration of the statistical analysis interval.
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        endDateTime:
-          type: string
-          description: End and duration of the statistical analysis interval.
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        viewPoint:
-          type: string
-          description: Point of view for connection metrics - aSide or zSide
-          enum:
-          - aSide
-          - zSide
-        bandwidthUtilization:
-          $ref: '#/components/schemas/BandwidthUtilization'
-      description: This API provides service-level traffic metrics so that you can view access and gather key information required to manage service subscription sizing and capacity.
-    ErrorList:
-      type: array
-      description: List of Error Message
-      items:
-        $ref: '#/components/schemas/Error'
-    EndDateTime:
-      type: string
-      description: End date and time
-      format: date-time
-      example: 2024-07-11 18:06:21+00:00
-    Error:
-      required:
-      - errorCode
-      - errorMessage
-      type: object
-      properties:
-        errorCode:
-          pattern: ^EQ-\d{7}$
-          type: string
-        errorMessage:
-          type: string
-        correlationId:
-          type: string
-        details:
-          type: string
-        help:
-          type: string
-        additionalInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/PriceError_additionalInfo'
-      description: Error Response with details
-    viewPoint:
-      type: string
-      description: viewPoint
-      enum:
-      - aSide
-      - zSide
-    BandwidthUtilization:
-      type: object
-      properties:
-        unit:
-          type: string
-          description: Aggregated data transfer capacity. Possible values- Mbps, megabits (1 million bits) per second; Gbps, gigabits (1 billion bits) per second.
-          enum:
-          - Mbps
-        metricInterval:
-          type: string
-          description: An interval formatted value, indicating the time-interval the metric objects within the response represent
-        inbound:
-          $ref: '#/components/schemas/Direction'
-        outbound:
-          $ref: '#/components/schemas/Direction'
-      description: Bandwidth utilization statistics (octet counters-based)
     Direction:
       type: object
       properties:
@@ -270,30 +187,102 @@ components:
           description: Mean bandwidth within statistics object time interval, represented in units specified by response "units" field
           format: float
       description: Bandwidth utilization statistics for a specified interval.
-    VirtualCircuitId:
+    viewPoint:
       type: string
-      description: Virtual Circuit UUID
+      description: viewPoint
+      enum:
+      - aSide
+      - zSide
     PortUUID:
       type: string
       description: Port UUID
       format: uuid
+    VirtualCircuitId:
+      type: string
+      description: Virtual Circuit UUID
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    EndDateTime:
+      type: string
+      description: End date and time
+      format: date-time
+      example: 2024-07-11 18:06:21+00:00
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
     StartDateTime:
       type: string
       description: Start date and time
       format: date-time
       example: 2024-07-11 18:06:21+00:00
+    Statistics:
+      type: object
+      properties:
+        startDateTime:
+          type: string
+          description: Start and duration of the statistical analysis interval.
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        endDateTime:
+          type: string
+          description: End and duration of the statistical analysis interval.
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        viewPoint:
+          type: string
+          description: Point of view for connection metrics - aSide or zSide
+          enum:
+          - aSide
+          - zSide
+        bandwidthUtilization:
+          $ref: '#/components/schemas/BandwidthUtilization'
+      description: This API provides service-level traffic metrics so that you can view access and gather key information required to manage service subscription sizing and capacity.
+    BandwidthUtilization:
+      type: object
+      properties:
+        unit:
+          type: string
+          description: Aggregated data transfer capacity. Possible values- Mbps, megabits (1 million bits) per second; Gbps, gigabits (1 billion bits) per second.
+          enum:
+          - Mbps
+        metricInterval:
+          type: string
+          description: An interval formatted value, indicating the time-interval the metric objects within the response represent
+        inbound:
+          $ref: '#/components/schemas/Direction'
+        outbound:
+          $ref: '#/components/schemas/Direction'
+      description: Bandwidth utilization statistics (octet counters-based)
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
   examples:
-    '401':
-      value:
-      - errorCode: EQ-3000039
-        errorMessage: User not found in request or invalid.
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-    '500':
-      value:
-      - errorCode: EQ-3045004
-        errorMessage: Internal Server Error
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Internal Server Error
     '403':
       value:
       - errorCode: EQ-3045003
@@ -347,6 +336,17 @@ components:
               - intervalEndDateTime: 2021-01-10 20:20:00+00:00
                 max: 42.01401189333334
                 mean: 39.40894303096296
+    '401':
+      value:
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    '500':
+      value:
+      - errorCode: EQ-3045004
+        errorMessage: Internal Server Error
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Internal Server Error
     200_port:
       value:
         href: http://api.equinix.com/fabric/v4/ports/xxxxx191-xx70-xxxx-xx04-xxxxxxxa37xx

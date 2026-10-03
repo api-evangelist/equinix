@@ -87,24 +87,11 @@ paths:
                 $ref: '#/components/schemas/Errors'
 components:
   schemas:
-    FabricPortSpeed:
-      type: string
-      description: Port speed
-      example: SPEED_1_GBPS
-      enum:
-      - SPEED_1_GBPS
-      - SPEED_10_GBPS
-    Phase:
-      type: string
-      description: Circuit phase
-      example: SINGLE
-      enum:
-      - SINGLE
-    AccountNumber:
-      minLength: 1
-      type: string
-      description: Identifier of a billing account, with permission to order colocation products.
-      example: '132028'
+    ProductsAvailabilities:
+      type: array
+      description: A list of ibxs with information about product availabilities
+      items:
+        $ref: '#/components/schemas/ProductsAvailability'
     Dimension:
       required:
       - unit
@@ -123,24 +110,53 @@ components:
           - MILLIMETER
           - CENTIMETER
           - METER
-    AcCircuitConfig:
+    AccountNumber:
+      minLength: 1
+      type: string
+      description: Identifier of a billing account, with permission to order colocation products.
+      example: '132028'
+    Voltage:
+      type: integer
+      description: Voltage numerical value
+      example: 220
+    IbxCode:
+      pattern: ^[A-Z]{2}[0-9]+x?$
+      type: string
+      description: IBX data center identifier.
+      example: CH1
+    PduConfig:
       type: object
       required:
-      - phase
-      - receptacle
-      - soldAmperage
-      - voltage
+      - model
       properties:
-        voltage:
-          $ref: '#/components/schemas/Voltage'
-        soldAmperage:
-          $ref: '#/components/schemas/Amperage'
-        phase:
-          $ref: '#/components/schemas/Phase'
-        receptacle:
+        model:
           type: string
-          description: Receptacle type
-          example: IEC 60309 1P+N+E
+          description: Model Code
+          example: UU30009L
+    Dimensions:
+      type: object
+      required:
+      - width
+      - depth
+      - height
+      properties:
+        width:
+          $ref: '#/components/schemas/Dimension'
+        depth:
+          $ref: '#/components/schemas/Dimension'
+        height:
+          $ref: '#/components/schemas/Dimension'
+    Phase:
+      type: string
+      description: Circuit phase
+      example: SINGLE
+      enum:
+      - SINGLE
+    ErrorAdditionalInfoList:
+      type: array
+      description: Contains application specific information for this error. The object inside this array can have any number of application specific properties.
+      items:
+        $ref: '#/components/schemas/ErrorAdditionalInfo'
     Error:
       required:
       - errorCode
@@ -177,28 +193,13 @@ components:
       description: Amperage Numerical Value
       format: double
       example: 8.9
-    Dimensions:
-      type: object
-      required:
-      - width
-      - depth
-      - height
-      properties:
-        width:
-          $ref: '#/components/schemas/Dimension'
-        depth:
-          $ref: '#/components/schemas/Dimension'
-        height:
-          $ref: '#/components/schemas/Dimension'
-    Voltage:
-      type: integer
-      description: Voltage numerical value
-      example: 220
-    ProductsAvailabilities:
-      type: array
-      description: A list of ibxs with information about product availabilities
-      items:
-        $ref: '#/components/schemas/ProductsAvailability'
+    FabricPortSpeed:
+      type: string
+      description: Port speed
+      example: SPEED_1_GBPS
+      enum:
+      - SPEED_1_GBPS
+      - SPEED_10_GBPS
     ErrorAdditionalInfo:
       properties:
         property:
@@ -209,6 +210,24 @@ components:
           type: string
           description: Fallback error message in plain English.
           example: must not be blank
+    AcCircuitConfig:
+      type: object
+      required:
+      - phase
+      - receptacle
+      - soldAmperage
+      - voltage
+      properties:
+        voltage:
+          $ref: '#/components/schemas/Voltage'
+        soldAmperage:
+          $ref: '#/components/schemas/Amperage'
+        phase:
+          $ref: '#/components/schemas/Phase'
+        receptacle:
+          type: string
+          description: Receptacle type
+          example: IEC 60309 1P+N+E
     ProductsAvailability:
       required:
       - ibx
@@ -248,29 +267,10 @@ components:
           $ref: '#/components/schemas/PduConfig'
         fabricPortSpeed:
           $ref: '#/components/schemas/FabricPortSpeed'
-    ErrorAdditionalInfoList:
-      type: array
-      description: Contains application specific information for this error. The object inside this array can have any number of application specific properties.
-      items:
-        $ref: '#/components/schemas/ErrorAdditionalInfo'
     Errors:
       type: array
       items:
         $ref: '#/components/schemas/Error'
-    IbxCode:
-      pattern: ^[A-Z]{2}[0-9]+x?$
-      type: string
-      description: IBX data center identifier.
-      example: CH1
-    PduConfig:
-      type: object
-      required:
-      - model
-      properties:
-        model:
-          type: string
-          description: Model Code
-          example: UU30009L
   securitySchemes:
     BearerAuth:
       type: http

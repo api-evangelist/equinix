@@ -120,7 +120,39 @@ paths:
                   $ref: '#/components/examples/500_prices'
 components:
   examples:
-    VirtualConnectionProductGwVcTypeFromGWToColo:
+    VirtualPort:
+      value:
+        pagination:
+          offset: 0
+          limit: 1
+          total: 1
+        data:
+        - type: VIRTUAL_PORT_PRODUCT
+          code: ECX00001.PROD
+          name: Equinix Fabric Port Product
+          description: Equinix Fabric Port
+          account:
+            accountNumber: 200001
+          charges:
+          - type: MONTHLY_RECURRING
+            price: 500
+          - type: NON_RECURRING
+            price: 100
+          currency: USD
+          port:
+            type: XF_PORT
+            location:
+              ibx: DA1
+            lag:
+              enabled: false
+            physicalPortsQuantity: 1
+            bandwidth: 1000
+            connectivitySource:
+              type: COLO
+            serviceType: EPL
+            settings:
+              buyout: false
+    VirtualConnectionProductGwVcTypeFromGWToSP:
       value:
         filter:
           and:
@@ -147,35 +179,86 @@ components:
           - property: /connection/zSide/accessPoint/location/metroCode
             operator: '='
             values:
-            - CH
+            - SV
           - property: /connection/zSide/accessPoint/type
             operator: '='
             values:
-            - COLO
-    PrecisionTimeNtpEnterprisePackage:
+            - SP
+          - property: /connection/zSide/accessPoint/profile/uuid
+            operator: '='
+            values:
+            - efeed227-765e-4f74-b14c-0c8a739be23e
+    VirtualConnection:
+      value:
+        pagination:
+          offset: 0
+          limit: 1
+          total: 1
+        data:
+        - type: VIRTUAL_CONNECTION_PRODUCT
+          code: ECX00015.PROD
+          name: Equinix Fabric Virtual Connection Product
+          description: Equinix Fabric Virtual Connection
+          account:
+            accountNumber: 200001
+          charges:
+          - type: MONTHLY_RECURRING
+            price: 500
+          currency: USD
+          connection:
+            type: EVPL_VC
+            bandwidth: 100
+            aSide:
+              accessPoint:
+                type: COLO
+                location:
+                  metroCode: CH
+                port:
+                  settings:
+                    buyout: false
+            zSide:
+              accessPoint:
+                type: SP
+                location:
+                  metroCode: CH
+                profile:
+                  uuid: 20d32a80-0d61-4333-bc03-707b591ae2f2
+    VirtualConnectionProductGwVcTypeFromVDToColo:
       value:
         filter:
           and:
           - property: /type
             operator: '='
             values:
-            - PRECISION_TIME_PRODUCT
-          - property: /account/accountNumber
+            - VIRTUAL_CONNECTION_PRODUCT
+          - property: /connection/type
             operator: '='
             values:
-            - '270001'
-          - property: /timeService/type
+            - IP_VC
+          - property: /connection/bandwidth
+            operator: IN
+            values:
+            - '100'
+          - property: /connection/aSide/accessPoint/type
             operator: '='
             values:
-            - NTP
-          - property: /timeService/package/code
-            operator: '='
-            values:
-            - NTP_ENTERPRISE
+            - VD
           - property: /connection/aSide/accessPoint/location/metroCode
             operator: '='
             values:
             - CH
+          - property: /connection/zSide/accessPoint/location/metroCode
+            operator: '='
+            values:
+            - SV
+          - property: /connection/zSide/accessPoint/type
+            operator: '='
+            values:
+            - SP
+          - property: /connection/zSide/accessPoint/profile/uuid
+            operator: '='
+            values:
+            - efeed227-765e-4f74-b14c-0c8a739be23e
     VirtualPortProduct:
       value:
         filter:
@@ -216,7 +299,7 @@ components:
             operator: '='
             values:
             - 'false'
-    VirtualConnectionProductGwVcTypeFromVDToColo:
+    VirtualConnectionProductEvplVcTypeFromVDToColo:
       value:
         filter:
           and:
@@ -227,7 +310,7 @@ components:
           - property: /connection/type
             operator: '='
             values:
-            - IP_VC
+            - EVPL_VC
           - property: /connection/bandwidth
             operator: IN
             values:
@@ -247,48 +330,8 @@ components:
           - property: /connection/zSide/accessPoint/type
             operator: '='
             values:
-            - SP
-          - property: /connection/zSide/accessPoint/profile/uuid
-            operator: '='
-            values:
-            - efeed227-765e-4f74-b14c-0c8a739be23e
-    MetroConnectProduct:
-      value:
-        filter:
-          and:
-          - property: /type
-            operator: '='
-            values:
-            - METRO_CONNECT_PRODUCT
-          - property: /account/accountNumber
-            operator: '='
-            values:
-            - '200551'
-          - property: /metroConnect/type
-            operator: '='
-            values:
-            - OPTICAL_MC
-          - property: /metroConnect/bandwidth
-            operator: '='
-            values:
-            - '1000'
-          - property: /metroConnect/pathType
-            operator: '='
-            values:
-            - PROTECTED
-          - property: /metroConnect/connectionDestinationType
-            operator: '='
-            values:
             - COLO
-          - property: /metroConnect/aSide/location/ibxCode
-            operator: '='
-            values:
-            - CH1
-          - property: /metroConnect/zSide/location/ibxCode
-            operator: '='
-            values:
-            - CH3
-    VirtualConnectionProductGwVcTypeFromGWToSP:
+    VirtualConnectionProductGwVcTypeFromGWToColo:
       value:
         filter:
           and:
@@ -315,7 +358,249 @@ components:
           - property: /connection/zSide/accessPoint/location/metroCode
             operator: '='
             values:
+            - CH
+          - property: /connection/zSide/accessPoint/type
+            operator: '='
+            values:
+            - COLO
+    FabricCloudRouterProduct:
+      value:
+        filter:
+          and:
+          - property: /type
+            operator: '='
+            values:
+            - CLOUD_ROUTER_PRODUCT
+          - property: /router/location/metroCode
+            operator: '='
+            values:
+            - CH
+          - property: /router/package/code
+            operator: IN
+            values:
+            - LAB
+            - ADVANCED
+            - STANDARD
+            - PREMIUM
+    400_prices:
+      value:
+      - errorCode: EQ-3038010
+        errorMessage: Validation failure
+        details: Invalid request body
+        additionalInfo:
+        - property: /connection/zSide/accessPoint/location/metroCode
+          reason: /connection/zSide/accessPoint/location/metroCode has invalid format
+    VirtualConnectionProductOfflineEvplVcTypeFromColoToSp:
+      value:
+        filter:
+          or:
+          - and:
+            - property: /type
+              operator: '='
+              values:
+              - VIRTUAL_CONNECTION_PRODUCT
+            - property: /connection/type
+              operator: '='
+              values:
+              - EVPL_VC
+            - property: /connection/bandwidth
+              operator: IN
+              values:
+              - '100'
+            - property: /connection/aSide/accessPoint/type
+              operator: '='
+              values:
+              - COLO
+            - property: /connection/aSide/accessPoint/location/metroCode
+              operator: '='
+              values:
+              - CH
+            - property: /connection/aSide/accessPoint/port/settings/buyout
+              operator: '='
+              values:
+              - 'false'
+            - property: /connection/zSide/accessPoint/location/metroCode
+              operator: '='
+              values:
+              - CH
+            - property: /connection/zSide/accessPoint/type
+              operator: '='
+              values:
+              - SP
+            - property: /connection/zSide/accessPoint/profile/uuid
+              operator: '='
+              values:
+              - efeed227-765e-4f74-b14c-0c8a739be23e
+          - and:
+            - property: /connection/uuid
+              operator: '='
+              values:
+              - efeed227-765e-4f74-b14c-0c8a739be23e
+    IpBlock:
+      value:
+        pagination:
+          offset: 0
+          limit: 1
+          total: 1
+        data:
+        - type: IP_BLOCK_PRODUCT
+          code: ECX00005.PROD
+          name: Equinix Fabric IP Addressing Product
+          description: Equinix Fabric IP Addressing
+          charges:
+          - type: MONTHLY_RECURRING
+            price: 20
+          currency: USD
+          ipBlock:
+            type: IPv4
+            prefixLength: 29
+            location:
+              metroCode: CH
+    VirtualConnectionProductVdChainTypeFromVDToChaingroup:
+      value:
+        filter:
+          and:
+          - property: /type
+            operator: '='
+            values:
+            - VIRTUAL_CONNECTION_PRODUCT
+          - property: /connection/type
+            operator: '='
+            values:
+            - VD_CHAIN_VC
+          - property: /connection/bandwidth
+            operator: IN
+            values:
+            - '100'
+          - property: /connection/aSide/accessPoint/type
+            operator: '='
+            values:
+            - VD
+          - property: /connection/aSide/accessPoint/location/metroCode
+            operator: '='
+            values:
+            - CH
+          - property: /connection/zSide/accessPoint/bridge/package/code
+            operator: '='
+            values:
+            - REGIONAL
+          - property: /connection/zSide/accessPoint/type
+            operator: '='
+            values:
+            - CHAINGROUP
+    IpBlockProduct:
+      value:
+        filter:
+          and:
+          - property: /type
+            operator: '='
+            values:
+            - IP_BLOCK_PRODUCT
+          - property: /ipBlock/type
+            operator: '='
+            values:
+            - IPv4
+          - property: /ipBlock/prefixLength
+            operator: '='
+            values:
+            - '29'
+          - property: /ipBlock/location/metroCode
+            operator: IN
+            values:
             - SV
+            - WA
+    PrecisionTimeNtpEnterprisePackage:
+      value:
+        filter:
+          and:
+          - property: /type
+            operator: '='
+            values:
+            - PRECISION_TIME_PRODUCT
+          - property: /account/accountNumber
+            operator: '='
+            values:
+            - '270001'
+          - property: /timeService/type
+            operator: '='
+            values:
+            - NTP
+          - property: /timeService/package/code
+            operator: '='
+            values:
+            - NTP_ENTERPRISE
+          - property: /connection/aSide/accessPoint/location/metroCode
+            operator: '='
+            values:
+            - CH
+    VirtualConnectionProductEvplVcTypeFromColoToColo:
+      value:
+        filter:
+          and:
+          - property: /type
+            operator: '='
+            values:
+            - VIRTUAL_CONNECTION_PRODUCT
+          - property: /connection/type
+            operator: '='
+            values:
+            - EVPL_VC
+          - property: /connection/bandwidth
+            operator: IN
+            values:
+            - '100'
+          - property: /connection/aSide/accessPoint/type
+            operator: '='
+            values:
+            - COLO
+          - property: /connection/aSide/accessPoint/location/metroCode
+            operator: '='
+            values:
+            - CH
+          - property: /connection/aSide/accessPoint/port/settings/buyout
+            operator: '='
+            values:
+            - 'false'
+          - property: /connection/zSide/accessPoint/location/metroCode
+            operator: '='
+            values:
+            - CH
+          - property: /connection/zSide/accessPoint/type
+            operator: '='
+            values:
+            - COLO
+    VirtualConnectionProductEvplVcTypeFromColoToSP:
+      value:
+        filter:
+          and:
+          - property: /type
+            operator: '='
+            values:
+            - VIRTUAL_CONNECTION_PRODUCT
+          - property: /connection/type
+            operator: '='
+            values:
+            - EVPL_VC
+          - property: /connection/bandwidth
+            operator: IN
+            values:
+            - '100'
+          - property: /connection/aSide/accessPoint/type
+            operator: '='
+            values:
+            - COLO
+          - property: /connection/aSide/accessPoint/location/metroCode
+            operator: '='
+            values:
+            - CH
+          - property: /connection/aSide/accessPoint/port/settings/buyout
+            operator: '='
+            values:
+            - 'false'
+          - property: /connection/zSide/accessPoint/location/metroCode
+            operator: '='
+            values:
+            - CH
           - property: /connection/zSide/accessPoint/type
             operator: '='
             values:
@@ -324,28 +609,6 @@ components:
             operator: '='
             values:
             - efeed227-765e-4f74-b14c-0c8a739be23e
-    FabricCloudRouter:
-      value:
-        pagination:
-          offset: 0
-          limit: 1
-          total: 1
-        data:
-        - type: CLOUD_ROUTER_PRODUCT
-          code: ECX00014.PROD
-          name: Equinix Cloud Router Product
-          description: Equinix Cloud Router
-          account:
-            accountNumber: 200001
-          charges:
-          - type: MONTHLY_RECURRING
-            price: 5000
-          currency: USD
-          router:
-            package:
-              code: ADVANCED
-            location:
-              metroCode: CH
     VirtualPortUPP:
       value:
         pagination:
@@ -402,90 +665,52 @@ components:
             operator: '='
             values:
             - CH3
-    IpBlockProduct:
+    VirtualPortProductUPP:
       value:
         filter:
           and:
           - property: /type
             operator: '='
             values:
-            - IP_BLOCK_PRODUCT
-          - property: /ipBlock/type
+            - VIRTUAL_PORT_PRODUCT
+          - property: /account/accountNumber
             operator: '='
             values:
-            - IPv4
-          - property: /ipBlock/prefixLength
+            - '270001'
+          - property: /port/location/ibx
             operator: '='
             values:
-            - '29'
-          - property: /ipBlock/location/metroCode
-            operator: IN
+            - DA1
+          - property: /port/type
+            operator: '='
             values:
-            - SV
-            - WA
-    VirtualPort:
+            - XF_PORT
+          - property: /port/bandwidth
+            operator: '='
+            values:
+            - '1000'
+          - property: /port/package/code
+            operator: '='
+            values:
+            - UNLIMITED_PLUS
+          - property: /port/serviceType
+            operator: '='
+            values:
+            - EPL
+          - property: /port/connectivitySource/type
+            operator: '='
+            values:
+            - COLO
+          - property: /port/lag/enabled
+            operator: '='
+            values:
+            - 'false'
+    500_prices:
       value:
-        pagination:
-          offset: 0
-          limit: 1
-          total: 1
-        data:
-        - type: VIRTUAL_PORT_PRODUCT
-          code: ECX00001.PROD
-          name: Equinix Fabric Port Product
-          description: Equinix Fabric Port
-          account:
-            accountNumber: 200001
-          charges:
-          - type: MONTHLY_RECURRING
-            price: 500
-          - type: NON_RECURRING
-            price: 100
-          currency: USD
-          port:
-            type: XF_PORT
-            location:
-              ibx: DA1
-            lag:
-              enabled: false
-            physicalPortsQuantity: 1
-            bandwidth: 1000
-            connectivitySource:
-              type: COLO
-            serviceType: EPL
-            settings:
-              buyout: false
-    VirtualPortIX:
-      value:
-        pagination:
-          offset: 0
-          limit: 1
-          total: 1
-        data:
-        - type: VIRTUAL_PORT_PRODUCT
-          code: IX00008.PROD
-          name: Equinix Internet Exchange Port Product
-          description: Internet Exchange Port
-          account:
-            accountNumber: 200001
-          charges:
-          - type: MONTHLY_RECURRING
-            price: 500
-          - type: NON_RECURRING
-            price: 100
-          currency: USD
-          port:
-            type: XF_PORT
-            location:
-              ibx: DA1
-            lag:
-              enabled: false
-            physicalPortsQuantity: 1
-            bandwidth: 1000
-            connectivitySource:
-              type: COLO
-            serviceCode: IX
-    VirtualConnectionProductVdChainTypeFromVDToChaingroup:
+      - errorCode: EQ-3038030
+        errorMessage: Internal Server Error
+        details: We couldn't process you request
+    VirtualConnectionProductEvpLanVcTypeFromColoToNetwork:
       value:
         filter:
           and:
@@ -496,27 +721,31 @@ components:
           - property: /connection/type
             operator: '='
             values:
-            - VD_CHAIN_VC
-          - property: /connection/bandwidth
-            operator: IN
-            values:
-            - '100'
+            - EVPLAN_VC
           - property: /connection/aSide/accessPoint/type
             operator: '='
             values:
-            - VD
+            - COLO
           - property: /connection/aSide/accessPoint/location/metroCode
             operator: '='
             values:
-            - CH
-          - property: /connection/zSide/accessPoint/bridge/package/code
+            - DA
+          - property: /connection/aSide/accessPoint/port/settings/buyout
             operator: '='
             values:
-            - REGIONAL
+            - 'true'
           - property: /connection/zSide/accessPoint/type
             operator: '='
             values:
-            - CHAINGROUP
+            - NETWORK
+          - property: /connection/zSide/accessPoint/network/scope
+            operator: '='
+            values:
+            - REGIONAL
+          - property: /connection/bandwidth
+            operator: IN
+            values:
+            - '10'
     PrecisionTimeService:
       value:
         pagination:
@@ -544,89 +773,70 @@ components:
                   location:
                     metroCode: CH
                     ibx: CH3
-    FabricCloudRouterProduct:
+    MetroConnectProduct:
       value:
         filter:
           and:
           - property: /type
             operator: '='
             values:
-            - CLOUD_ROUTER_PRODUCT
-          - property: /router/location/metroCode
-            operator: '='
-            values:
-            - CH
-          - property: /router/package/code
-            operator: IN
-            values:
-            - LAB
-            - ADVANCED
-            - STANDARD
-            - PREMIUM
-    VirtualConnectionProductEvplVcTypeFromColoToSP:
-      value:
-        filter:
-          and:
-          - property: /type
-            operator: '='
-            values:
-            - VIRTUAL_CONNECTION_PRODUCT
-          - property: /connection/type
-            operator: '='
-            values:
-            - EVPL_VC
-          - property: /connection/bandwidth
-            operator: IN
-            values:
-            - '100'
-          - property: /connection/aSide/accessPoint/type
-            operator: '='
-            values:
-            - COLO
-          - property: /connection/aSide/accessPoint/location/metroCode
-            operator: '='
-            values:
-            - CH
-          - property: /connection/aSide/accessPoint/port/settings/buyout
-            operator: '='
-            values:
-            - 'false'
-          - property: /connection/zSide/accessPoint/location/metroCode
-            operator: '='
-            values:
-            - CH
-          - property: /connection/zSide/accessPoint/type
-            operator: '='
-            values:
-            - SP
-          - property: /connection/zSide/accessPoint/profile/uuid
-            operator: '='
-            values:
-            - efeed227-765e-4f74-b14c-0c8a739be23e
-    PrecisionTimePtpStandardPackage:
-      value:
-        filter:
-          and:
-          - property: /type
-            operator: '='
-            values:
-            - PRECISION_TIME_PRODUCT
+            - METRO_CONNECT_PRODUCT
           - property: /account/accountNumber
             operator: '='
             values:
-            - '270001'
-          - property: /timeService/type
+            - '200551'
+          - property: /metroConnect/type
             operator: '='
             values:
-            - PTP
-          - property: /timeService/package/code
+            - OPTICAL_MC
+          - property: /metroConnect/bandwidth
             operator: '='
             values:
-            - PTP_STANDARD
-          - property: /connection/aSide/accessPoint/location/ibx
+            - '1000'
+          - property: /metroConnect/pathType
+            operator: '='
+            values:
+            - PROTECTED
+          - property: /metroConnect/connectionDestinationType
+            operator: '='
+            values:
+            - COLO
+          - property: /metroConnect/aSide/location/ibxCode
+            operator: '='
+            values:
+            - CH1
+          - property: /metroConnect/zSide/location/ibxCode
             operator: '='
             values:
             - CH3
+    VirtualPortProductIX:
+      value:
+        filter:
+          and:
+          - property: /type
+            operator: '='
+            values:
+            - VIRTUAL_PORT_PRODUCT
+          - property: /port/location/ibx
+            operator: '='
+            values:
+            - DA1
+          - property: /port/type
+            operator: '='
+            values:
+            - XF_PORT
+          - property: /port/bandwidth
+            operator: '='
+            values:
+            - '1000'
+          - property: /port/serviceCode
+            operator: '='
+            values:
+            - IX
+          - property: /port/connectivitySource/type
+            operator: '='
+            values:
+            - COLO
     MetroConnect:
       value:
         pagination:
@@ -657,60 +867,6 @@ components:
             zSide:
               location:
                 ibxCode: CH3
-    400_prices:
-      value:
-      - errorCode: EQ-3038010
-        errorMessage: Validation failure
-        details: Invalid request body
-        additionalInfo:
-        - property: /connection/zSide/accessPoint/location/metroCode
-          reason: /connection/zSide/accessPoint/location/metroCode has invalid format
-    VirtualConnectionProductOfflineEvplVcTypeFromColoToSp:
-      value:
-        filter:
-          or:
-          - and:
-            - property: /type
-              operator: '='
-              values:
-              - VIRTUAL_CONNECTION_PRODUCT
-            - property: /connection/type
-              operator: '='
-              values:
-              - EVPL_VC
-            - property: /connection/bandwidth
-              operator: IN
-              values:
-              - '100'
-            - property: /connection/aSide/accessPoint/type
-              operator: '='
-              values:
-              - COLO
-            - property: /connection/aSide/accessPoint/location/metroCode
-              operator: '='
-              values:
-              - CH
-            - property: /connection/aSide/accessPoint/port/settings/buyout
-              operator: '='
-              values:
-              - 'false'
-            - property: /connection/zSide/accessPoint/location/metroCode
-              operator: '='
-              values:
-              - CH
-            - property: /connection/zSide/accessPoint/type
-              operator: '='
-              values:
-              - SP
-            - property: /connection/zSide/accessPoint/profile/uuid
-              operator: '='
-              values:
-              - efeed227-765e-4f74-b14c-0c8a739be23e
-          - and:
-            - property: /connection/uuid
-              operator: '='
-              values:
-              - efeed227-765e-4f74-b14c-0c8a739be23e
     PrecisionTimePtpEnterprisePackage:
       value:
         filter:
@@ -767,348 +923,83 @@ components:
             operator: '='
             values:
             - COLO
-    VirtualConnection:
+    PrecisionTimePtpStandardPackage:
+      value:
+        filter:
+          and:
+          - property: /type
+            operator: '='
+            values:
+            - PRECISION_TIME_PRODUCT
+          - property: /account/accountNumber
+            operator: '='
+            values:
+            - '270001'
+          - property: /timeService/type
+            operator: '='
+            values:
+            - PTP
+          - property: /timeService/package/code
+            operator: '='
+            values:
+            - PTP_STANDARD
+          - property: /connection/aSide/accessPoint/location/ibx
+            operator: '='
+            values:
+            - CH3
+    FabricCloudRouter:
       value:
         pagination:
           offset: 0
           limit: 1
           total: 1
         data:
-        - type: VIRTUAL_CONNECTION_PRODUCT
-          code: ECX00015.PROD
-          name: Equinix Fabric Virtual Connection Product
-          description: Equinix Fabric Virtual Connection
+        - type: CLOUD_ROUTER_PRODUCT
+          code: ECX00014.PROD
+          name: Equinix Cloud Router Product
+          description: Equinix Cloud Router
+          account:
+            accountNumber: 200001
+          charges:
+          - type: MONTHLY_RECURRING
+            price: 5000
+          currency: USD
+          router:
+            package:
+              code: ADVANCED
+            location:
+              metroCode: CH
+    VirtualPortIX:
+      value:
+        pagination:
+          offset: 0
+          limit: 1
+          total: 1
+        data:
+        - type: VIRTUAL_PORT_PRODUCT
+          code: IX00008.PROD
+          name: Equinix Internet Exchange Port Product
+          description: Internet Exchange Port
           account:
             accountNumber: 200001
           charges:
           - type: MONTHLY_RECURRING
             price: 500
+          - type: NON_RECURRING
+            price: 100
           currency: USD
-          connection:
-            type: EVPL_VC
-            bandwidth: 100
-            aSide:
-              accessPoint:
-                type: COLO
-                location:
-                  metroCode: CH
-                port:
-                  settings:
-                    buyout: false
-            zSide:
-              accessPoint:
-                type: SP
-                location:
-                  metroCode: CH
-                profile:
-                  uuid: 20d32a80-0d61-4333-bc03-707b591ae2f2
-    VirtualPortProductIX:
-      value:
-        filter:
-          and:
-          - property: /type
-            operator: '='
-            values:
-            - VIRTUAL_PORT_PRODUCT
-          - property: /port/location/ibx
-            operator: '='
-            values:
-            - DA1
-          - property: /port/type
-            operator: '='
-            values:
-            - XF_PORT
-          - property: /port/bandwidth
-            operator: '='
-            values:
-            - '1000'
-          - property: /port/serviceCode
-            operator: '='
-            values:
-            - IX
-          - property: /port/connectivitySource/type
-            operator: '='
-            values:
-            - COLO
-    VirtualConnectionProductEvplVcTypeFromVDToColo:
-      value:
-        filter:
-          and:
-          - property: /type
-            operator: '='
-            values:
-            - VIRTUAL_CONNECTION_PRODUCT
-          - property: /connection/type
-            operator: '='
-            values:
-            - EVPL_VC
-          - property: /connection/bandwidth
-            operator: IN
-            values:
-            - '100'
-          - property: /connection/aSide/accessPoint/type
-            operator: '='
-            values:
-            - VD
-          - property: /connection/aSide/accessPoint/location/metroCode
-            operator: '='
-            values:
-            - CH
-          - property: /connection/zSide/accessPoint/location/metroCode
-            operator: '='
-            values:
-            - SV
-          - property: /connection/zSide/accessPoint/type
-            operator: '='
-            values:
-            - COLO
-    VirtualConnectionProductEvpLanVcTypeFromColoToNetwork:
-      value:
-        filter:
-          and:
-          - property: /type
-            operator: '='
-            values:
-            - VIRTUAL_CONNECTION_PRODUCT
-          - property: /connection/type
-            operator: '='
-            values:
-            - EVPLAN_VC
-          - property: /connection/aSide/accessPoint/type
-            operator: '='
-            values:
-            - COLO
-          - property: /connection/aSide/accessPoint/location/metroCode
-            operator: '='
-            values:
-            - DA
-          - property: /connection/aSide/accessPoint/port/settings/buyout
-            operator: '='
-            values:
-            - 'true'
-          - property: /connection/zSide/accessPoint/type
-            operator: '='
-            values:
-            - NETWORK
-          - property: /connection/zSide/accessPoint/network/scope
-            operator: '='
-            values:
-            - REGIONAL
-          - property: /connection/bandwidth
-            operator: IN
-            values:
-            - '10'
-    IpBlock:
-      value:
-        pagination:
-          offset: 0
-          limit: 1
-          total: 1
-        data:
-        - type: IP_BLOCK_PRODUCT
-          code: ECX00005.PROD
-          name: Equinix Fabric IP Addressing Product
-          description: Equinix Fabric IP Addressing
-          charges:
-          - type: MONTHLY_RECURRING
-            price: 20
-          currency: USD
-          ipBlock:
-            type: IPv4
-            prefixLength: 29
+          port:
+            type: XF_PORT
             location:
-              metroCode: CH
-    VirtualPortProductUPP:
-      value:
-        filter:
-          and:
-          - property: /type
-            operator: '='
-            values:
-            - VIRTUAL_PORT_PRODUCT
-          - property: /account/accountNumber
-            operator: '='
-            values:
-            - '270001'
-          - property: /port/location/ibx
-            operator: '='
-            values:
-            - DA1
-          - property: /port/type
-            operator: '='
-            values:
-            - XF_PORT
-          - property: /port/bandwidth
-            operator: '='
-            values:
-            - '1000'
-          - property: /port/package/code
-            operator: '='
-            values:
-            - UNLIMITED_PLUS
-          - property: /port/serviceType
-            operator: '='
-            values:
-            - EPL
-          - property: /port/connectivitySource/type
-            operator: '='
-            values:
-            - COLO
-          - property: /port/lag/enabled
-            operator: '='
-            values:
-            - 'false'
-    500_prices:
-      value:
-      - errorCode: EQ-3038030
-        errorMessage: Internal Server Error
-        details: We couldn't process you request
-    VirtualConnectionProductEvplVcTypeFromColoToColo:
-      value:
-        filter:
-          and:
-          - property: /type
-            operator: '='
-            values:
-            - VIRTUAL_CONNECTION_PRODUCT
-          - property: /connection/type
-            operator: '='
-            values:
-            - EVPL_VC
-          - property: /connection/bandwidth
-            operator: IN
-            values:
-            - '100'
-          - property: /connection/aSide/accessPoint/type
-            operator: '='
-            values:
-            - COLO
-          - property: /connection/aSide/accessPoint/location/metroCode
-            operator: '='
-            values:
-            - CH
-          - property: /connection/aSide/accessPoint/port/settings/buyout
-            operator: '='
-            values:
-            - 'false'
-          - property: /connection/zSide/accessPoint/location/metroCode
-            operator: '='
-            values:
-            - CH
-          - property: /connection/zSide/accessPoint/type
-            operator: '='
-            values:
-            - COLO
+              ibx: DA1
+            lag:
+              enabled: false
+            physicalPortsQuantity: 1
+            bandwidth: 1000
+            connectivitySource:
+              type: COLO
+            serviceCode: IX
   schemas:
-    FabricCloudRouterPackages:
-      type: object
-      properties:
-        code:
-          $ref: '#/components/schemas/FabricCloudRouterCode'
-      description: Cloud Router  package
-    VirtualConnectionPriceAccessPointType:
-      type: string
-      description: Virtual Connection access point type
-      enum:
-      - VD
-      - SP
-      - COLO
-      - CLOUD_ROUTER
-      - CHAINGROUP
-      - NETWORK
-      - METAL_NETWORK
-    VirtualConnectionPriceASide:
-      type: object
-      properties:
-        accessPoint:
-          $ref: '#/components/schemas/VirtualConnectionPriceASide_accessPoint'
-    TimeServicePriceConnectionAccessPoint:
-      type: object
-      properties:
-        location:
-          $ref: '#/components/schemas/PriceLocation'
-      description: Time Service Price Connection Access Point configuration
-    ConnectivitySourceType:
-      type: string
-      description: Type of connectivity. COLO, colocation; BMMR, building meet-me room. The default is COLO. <br> A building meet-me room (BMMR) is a room within the same building where an Equinix IBX customer can connect with a non-Equinix IBX customer.
-      default: COLO
-      enum:
-      - COLO
-      - BMMR
-      - REMOTE
-    PriceCategory:
-      type: string
-      description: Price category
-      enum:
-      - COUNTRY
-      - CUSTOMER
-    LinkAggregationGroup:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          description: Parameter showing whether LAG configuration is mandatory. The default is false.
-          default: false
-      description: Link aggregation group (LAG) preferences and settings.
-    PriceError_additionalInfo:
-      type: object
-      properties:
-        property:
-          type: string
-        reason:
-          type: string
-    FilterBody:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/SearchExpression'
-      description: Search requests containing criteria
-    VirtualConnectionPriceZSide_accessPoint_profile:
-      type: object
-      properties:
-        uuid:
-          type: string
-          format: uuid
-    PriceErrorList:
-      type: array
-      items:
-        $ref: '#/components/schemas/PriceError'
-    SearchExpressions:
-      type: array
-      items:
-        $ref: '#/components/schemas/SearchExpression'
-    VirtualConnectionPriceConnectionType:
-      type: string
-      description: Virtual Connection type
-      enum:
-      - EVPL_VC
-      - EPL_VC
-      - EC_VC
-      - IP_VC
-      - VD_CHAIN_VC
-      - ACCESS_EPL_VC
-      - EVPLAN_VC
-      - EPLAN_VC
-      - IPWAN_VC
-      - EVPTREE_VC
-      - EPTREE_VC
-      - IA_VC
-    VirtualPortRedundancy:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          description: Parameter showing whether redundancy is mandatory. The default is false.
-          default: false
-      description: Specifications for redundant connections, which improve service continuity by routing traffic to secondary ports when primary ports are unavailable. <br> Redundancy increases resilience and boosts site reliability scores.
-    VirtualPortType:
-      type: string
-      description: Port type.
-      enum:
-      - XF_PORT
-    VirtualPortServiceCode:
-      type: string
-      description: Port service code.
     PriceLocation:
       type: object
       properties:
@@ -1116,97 +1007,59 @@ components:
           type: string
         ibx:
           type: string
-    FabricCloudRouterCode:
-      type: string
-      description: Cloud Router code
-      enum:
-      - LAB
-      - BASIC
-      - STANDARD
-      - ADVANCED
-      - PREMIUM
-    PriceCharge:
+    VirtualConnectionPriceASide_accessPoint_port:
       type: object
       properties:
-        type:
-          type: string
-          description: Price charge type
-          enum:
-          - MONTHLY_RECURRING
-          - NON_RECURRING
-        price:
-          minimum: 0
-          type: number
-          description: Offering price
-          format: double
-      description: Price  Charge
-    VirtualConnectionPriceASide_accessPoint:
-      type: object
-      properties:
-        uuid:
-          type: string
-          format: uuid
-        type:
-          $ref: '#/components/schemas/VirtualConnectionPriceAccessPointType'
-        location:
-          $ref: '#/components/schemas/PriceLocation'
-        port:
-          $ref: '#/components/schemas/VirtualConnectionPriceASide_accessPoint_port'
-    VirtualPortPackage:
-      type: object
-      properties:
-        code:
-          $ref: '#/components/schemas/VirtualPortPackageCode'
-      description: Virtual Port Package
-    VirtualPortPrice:
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: Unique identifier assigned to the virtual port. Either the uuid or the remaining attributes must be supplied.
-          format: uuid
-        type:
-          $ref: '#/components/schemas/VirtualPortType'
-        location:
-          $ref: '#/components/schemas/VirtualPortLocation'
-        lag:
-          $ref: '#/components/schemas/LinkAggregationGroup'
-        physicalPortsQuantity:
-          type: integer
-          description: Number of physical ports requested. The defaults is 1.
-          default: 1
-        bandwidth:
-          type: integer
-          description: Aggregated data transfer capacity,  expressed as follows <br> -> Mbps, megabits (1 million bits) per second <br> -> Gbps, gigabits (1 billion bits) per second <br> Bandwidth must be divisible by physicalPortsQuantity.
-        redundancy:
-          $ref: '#/components/schemas/VirtualPortRedundancy'
-        connectivitySource:
-          $ref: '#/components/schemas/ConnectivitySource'
-        serviceType:
-          $ref: '#/components/schemas/VirtualPortServiceType'
         settings:
-          $ref: '#/components/schemas/VirtualPortConfiguration'
-        package:
-          $ref: '#/components/schemas/VirtualPortPackage'
-        serviceCode:
-          $ref: '#/components/schemas/VirtualPortServiceCode'
-      description: Preferences and settings for a virtual port connected to an internet service provider (ISP) or other Equinix platform entity.
-    VirtualConnectionPriceZSide:
+          $ref: '#/components/schemas/VirtualConnectionPriceASide_accessPoint_port_settings'
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    SearchExpressions:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchExpression'
+    VirtualConnectionBridgePackageCode:
+      type: string
+      description: Virtual Connection bridge package code
+      enum:
+      - REGIONAL
+      - GLOBAL
+    VirtualConnectionPriceASide:
       type: object
       properties:
         accessPoint:
-          $ref: '#/components/schemas/VirtualConnectionPriceZSide_accessPoint'
-    VirtualPortPackageCode:
+          $ref: '#/components/schemas/VirtualConnectionPriceASide_accessPoint'
+    IpBlockType:
       type: string
-      description: Virtual port package code
-      example: STANDARD, UNLIMITED or UNLIMITED_PLUS
-    VirtualPortServiceType:
-      type: string
-      description: Port service type. The default is managed-service provider (MSP).
-      default: MSP
+      description: IP Block type
       enum:
-      - MSP
-      - EPL
+      - IPv4
+      - IPv6
     SearchExpression:
       type: object
       properties:
@@ -1237,204 +1090,18 @@ components:
           type: array
           items:
             type: string
-    ProductType:
-      type: string
-      description: Product type
-      enum:
-      - VIRTUAL_CONNECTION_PRODUCT
-      - IP_BLOCK_PRODUCT
-      - VIRTUAL_PORT_PRODUCT
-      - CLOUD_ROUTER_PRODUCT
-      - PRECISION_TIME_PRODUCT
-      - METRO_CONNECT_PRODUCT
-    Pagination:
-      required:
-      - limit
-      - total
+    VirtualPortPackage:
       type: object
       properties:
-        offset:
-          minimum: 0
-          type: integer
-          description: Index of the first item returned in the response. The default is 0.
-          default: 0
-        limit:
-          minimum: 0
-          type: integer
-          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
-          default: 20
-        total:
-          minimum: 0
-          type: integer
-          description: Total number of elements returned.
-        next:
-          type: string
-          description: URL relative to the next item in the response.
-        previous:
-          type: string
-          description: URL relative to the previous item in the response.
-      description: Pagination response information
-    FabricCloudRouterPrice:
+        code:
+          $ref: '#/components/schemas/VirtualPortPackageCode'
+      description: Virtual Port Package
+    FabricCloudRouterPackages:
       type: object
       properties:
-        uuid:
-          type: string
-          description: Unique identifier assigned to the Cloud Router
-          format: uuid
-        location:
-          $ref: '#/components/schemas/PriceLocation'
-        package:
-          $ref: '#/components/schemas/FabricCloudRouterPackages'
-      description: Cloud Router  Product configuration
-    VirtualConnectionBridgePackageCode:
-      type: string
-      description: Virtual Connection bridge package code
-      enum:
-      - REGIONAL
-      - GLOBAL
-    VirtualConnectionPrice:
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: Either uuid or rest of attributes are required
-          format: uuid
-        type:
-          $ref: '#/components/schemas/VirtualConnectionPriceConnectionType'
-        bandwidth:
-          minimum: 0
-          type: integer
-        aSide:
-          $ref: '#/components/schemas/VirtualConnectionPriceASide'
-        zSide:
-          $ref: '#/components/schemas/VirtualConnectionPriceZSide'
-      description: Virtual Connection Product configuration
-    TimeServicePriceConnectionASide:
-      type: object
-      properties:
-        accessPoint:
-          $ref: '#/components/schemas/TimeServicePriceConnectionAccessPoint'
-      description: Time Service Price Connection ASide configuration
-    VirtualConnectionPriceZSide_accessPoint_bridge:
-      type: object
-      properties:
-        package:
-          $ref: '#/components/schemas/VirtualConnectionPriceZSide_accessPoint_bridge_package'
-    IpBlockPrice:
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: Either uuid or rest of attributes are required
-          format: uuid
-        type:
-          $ref: '#/components/schemas/IpBlockType'
-        prefixLength:
-          type: integer
-        location:
-          $ref: '#/components/schemas/PriceLocation'
-      description: IP Block Product configuration
-    ConnectivitySource:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/ConnectivitySourceType'
-      description: Physical or virtual port that houses the connection.
-    PriceError:
-      required:
-      - errorCode
-      - errorMessage
-      type: object
-      properties:
-        errorCode:
-          type: string
-          enum:
-          - EQ-3038010
-          - EQ-3038022
-          - EQ-3038030
-        errorMessage:
-          type: string
-          enum:
-          - Validation failure
-          - Invalid value
-          - Internal Server Error
-        correlationId:
-          type: string
-        details:
-          type: string
-        help:
-          type: string
-        additionalInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/PriceError_additionalInfo'
-      description: Error with details
-      discriminator:
-        propertyName: errorCode
-    PriceSearchResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Price'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-    VirtualConnectionPriceASide_accessPoint_port_settings:
-      type: object
-      properties:
-        buyout:
-          type: boolean
-          default: false
-    TimeServicePriceConnection:
-      type: object
-      properties:
-        aSide:
-          $ref: '#/components/schemas/TimeServicePriceConnectionASide'
-      description: Time Service Price Connection configuration
-    SimplifiedAccount:
-      type: object
-      properties:
-        accountNumber:
-          type: integer
-          description: Account number
-          format: int64
-        accountName:
-          type: string
-          description: Account name
-        orgId:
-          type: integer
-          description: Customer organization identifier
-          format: int64
-        organizationName:
-          type: string
-          description: Customer organization name
-        globalOrgId:
-          type: string
-          description: Global organization identifier
-        globalOrganizationName:
-          type: string
-          description: Global organization name
-        ucmId:
-          type: string
-          description: Account ucmId
-        globalCustId:
-          type: string
-          description: Account name
-        resellerAccountNumber:
-          type: integer
-          description: Reseller account number
-          format: int64
-        resellerAccountName:
-          type: string
-          description: Reseller account name
-        resellerUcmId:
-          type: string
-          description: Reseller account ucmId
-        resellerOrgId:
-          type: integer
-          description: Reseller customer organization identifier
-          format: int64
+        code:
+          $ref: '#/components/schemas/FabricCloudRouterCode'
+      description: Cloud Router  package
     precisionTimePackageRequest:
       title: precisionTimePackageRequest
       required:
@@ -1452,42 +1119,6 @@ components:
       description: Precision Time Service Level Request
       example:
         code: NTP_STANDARD
-    IpBlockType:
-      type: string
-      description: IP Block type
-      enum:
-      - IPv4
-      - IPv6
-    TimeServicePrice:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Precision Time Service Type refers to the corresponding Protocol.
-          enum:
-          - NTP
-          - PTP
-        package:
-          $ref: '#/components/schemas/precisionTimePackageRequest'
-        connection:
-          $ref: '#/components/schemas/TimeServicePriceConnection'
-      description: Time Service Product configuration
-    VirtualConnectionPriceZSide_accessPoint:
-      type: object
-      properties:
-        uuid:
-          type: string
-          format: uuid
-        type:
-          $ref: '#/components/schemas/VirtualConnectionPriceAccessPointType'
-        location:
-          $ref: '#/components/schemas/PriceLocation'
-        port:
-          $ref: '#/components/schemas/VirtualConnectionPriceASide_accessPoint_port'
-        profile:
-          $ref: '#/components/schemas/VirtualConnectionPriceZSide_accessPoint_profile'
-        bridge:
-          $ref: '#/components/schemas/VirtualConnectionPriceZSide_accessPoint_bridge'
     Price:
       type: object
       properties:
@@ -1535,6 +1166,207 @@ components:
           $ref: '#/components/schemas/VirtualPortPrice'
         timeService:
           $ref: '#/components/schemas/TimeServicePrice'
+    VirtualPortPrice:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Unique identifier assigned to the virtual port. Either the uuid or the remaining attributes must be supplied.
+          format: uuid
+        type:
+          $ref: '#/components/schemas/VirtualPortType'
+        location:
+          $ref: '#/components/schemas/VirtualPortLocation'
+        lag:
+          $ref: '#/components/schemas/LinkAggregationGroup'
+        physicalPortsQuantity:
+          type: integer
+          description: Number of physical ports requested. The defaults is 1.
+          default: 1
+        bandwidth:
+          type: integer
+          description: Aggregated data transfer capacity,  expressed as follows <br> -> Mbps, megabits (1 million bits) per second <br> -> Gbps, gigabits (1 billion bits) per second <br> Bandwidth must be divisible by physicalPortsQuantity.
+        redundancy:
+          $ref: '#/components/schemas/VirtualPortRedundancy'
+        connectivitySource:
+          $ref: '#/components/schemas/ConnectivitySource'
+        serviceType:
+          $ref: '#/components/schemas/VirtualPortServiceType'
+        settings:
+          $ref: '#/components/schemas/VirtualPortConfiguration'
+        package:
+          $ref: '#/components/schemas/VirtualPortPackage'
+        serviceCode:
+          $ref: '#/components/schemas/VirtualPortServiceCode'
+      description: Preferences and settings for a virtual port connected to an internet service provider (ISP) or other Equinix platform entity.
+    VirtualPortPackageCode:
+      type: string
+      description: Virtual port package code
+      example: STANDARD, UNLIMITED or UNLIMITED_PLUS
+    SimplifiedAccount:
+      type: object
+      properties:
+        accountNumber:
+          type: integer
+          description: Account number
+          format: int64
+        accountName:
+          type: string
+          description: Account name
+        orgId:
+          type: integer
+          description: Customer organization identifier
+          format: int64
+        organizationName:
+          type: string
+          description: Customer organization name
+        globalOrgId:
+          type: string
+          description: Global organization identifier
+        globalOrganizationName:
+          type: string
+          description: Global organization name
+        ucmId:
+          type: string
+          description: Account ucmId
+        globalCustId:
+          type: string
+          description: Account name
+        resellerAccountNumber:
+          type: integer
+          description: Reseller account number
+          format: int64
+        resellerAccountName:
+          type: string
+          description: Reseller account name
+        resellerUcmId:
+          type: string
+          description: Reseller account ucmId
+        resellerOrgId:
+          type: integer
+          description: Reseller customer organization identifier
+          format: int64
+    IpBlockPrice:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Either uuid or rest of attributes are required
+          format: uuid
+        type:
+          $ref: '#/components/schemas/IpBlockType'
+        prefixLength:
+          type: integer
+        location:
+          $ref: '#/components/schemas/PriceLocation'
+      description: IP Block Product configuration
+    VirtualConnectionPriceAccessPointType:
+      type: string
+      description: Virtual Connection access point type
+      enum:
+      - VD
+      - SP
+      - COLO
+      - CLOUD_ROUTER
+      - CHAINGROUP
+      - NETWORK
+      - METAL_NETWORK
+    PriceSearchResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Price'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    FilterBody:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/SearchExpression'
+      description: Search requests containing criteria
+    PriceCharge:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Price charge type
+          enum:
+          - MONTHLY_RECURRING
+          - NON_RECURRING
+        price:
+          minimum: 0
+          type: number
+          description: Offering price
+          format: double
+      description: Price  Charge
+    PriceCategory:
+      type: string
+      description: Price category
+      enum:
+      - COUNTRY
+      - CUSTOMER
+    TimeServicePriceConnectionASide:
+      type: object
+      properties:
+        accessPoint:
+          $ref: '#/components/schemas/TimeServicePriceConnectionAccessPoint'
+      description: Time Service Price Connection ASide configuration
+    TimeServicePrice:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Precision Time Service Type refers to the corresponding Protocol.
+          enum:
+          - NTP
+          - PTP
+        package:
+          $ref: '#/components/schemas/precisionTimePackageRequest'
+        connection:
+          $ref: '#/components/schemas/TimeServicePriceConnection'
+      description: Time Service Product configuration
+    ConnectivitySource:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/ConnectivitySourceType'
+      description: Physical or virtual port that houses the connection.
+    VirtualConnectionPriceZSide:
+      type: object
+      properties:
+        accessPoint:
+          $ref: '#/components/schemas/VirtualConnectionPriceZSide_accessPoint'
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    VirtualPortServiceCode:
+      type: string
+      description: Port service code.
+    ConnectivitySourceType:
+      type: string
+      description: Type of connectivity. COLO, colocation; BMMR, building meet-me room. The default is COLO. <br> A building meet-me room (BMMR) is a room within the same building where an Equinix IBX customer can connect with a non-Equinix IBX customer.
+      default: COLO
+      enum:
+      - COLO
+      - BMMR
+      - REMOTE
+    VirtualPortServiceType:
+      type: string
+      description: Port service type. The default is managed-service provider (MSP).
+      default: MSP
+      enum:
+      - MSP
+      - EPL
+    PriceErrorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PriceError'
     VirtualPortConfiguration:
       type: object
       properties:
@@ -1543,6 +1375,100 @@ components:
           description: Buyout (true) or standard (false) configuration of the port at this access point. <br> Buyout ports offer free, unlimited connections. Standard ports do not. The default is false.
           default: false
       description: Port configuration.
+    VirtualConnectionPriceZSide_accessPoint:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        type:
+          $ref: '#/components/schemas/VirtualConnectionPriceAccessPointType'
+        location:
+          $ref: '#/components/schemas/PriceLocation'
+        port:
+          $ref: '#/components/schemas/VirtualConnectionPriceASide_accessPoint_port'
+        profile:
+          $ref: '#/components/schemas/VirtualConnectionPriceZSide_accessPoint_profile'
+        bridge:
+          $ref: '#/components/schemas/VirtualConnectionPriceZSide_accessPoint_bridge'
+    VirtualConnectionPriceASide_accessPoint:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        type:
+          $ref: '#/components/schemas/VirtualConnectionPriceAccessPointType'
+        location:
+          $ref: '#/components/schemas/PriceLocation'
+        port:
+          $ref: '#/components/schemas/VirtualConnectionPriceASide_accessPoint_port'
+    VirtualConnectionPriceConnectionType:
+      type: string
+      description: Virtual Connection type
+      enum:
+      - EVPL_VC
+      - EPL_VC
+      - EC_VC
+      - IP_VC
+      - VD_CHAIN_VC
+      - ACCESS_EPL_VC
+      - EVPLAN_VC
+      - EPLAN_VC
+      - IPWAN_VC
+      - EVPTREE_VC
+      - EPTREE_VC
+      - IA_VC
+    VirtualConnectionPriceZSide_accessPoint_bridge:
+      type: object
+      properties:
+        package:
+          $ref: '#/components/schemas/VirtualConnectionPriceZSide_accessPoint_bridge_package'
+    TimeServicePriceConnection:
+      type: object
+      properties:
+        aSide:
+          $ref: '#/components/schemas/TimeServicePriceConnectionASide'
+      description: Time Service Price Connection configuration
+    VirtualConnectionPriceZSide_accessPoint_profile:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+    VirtualConnectionPriceZSide_accessPoint_bridge_package:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/VirtualConnectionBridgePackageCode'
+    VirtualPortType:
+      type: string
+      description: Port type.
+      enum:
+      - XF_PORT
+    VirtualConnectionPriceASide_accessPoint_port_settings:
+      type: object
+      properties:
+        buyout:
+          type: boolean
+          default: false
+    VirtualConnectionPrice:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Either uuid or rest of attributes are required
+          format: uuid
+        type:
+          $ref: '#/components/schemas/VirtualConnectionPriceConnectionType'
+        bandwidth:
+          minimum: 0
+          type: integer
+        aSide:
+          $ref: '#/components/schemas/VirtualConnectionPriceASide'
+        zSide:
+          $ref: '#/components/schemas/VirtualConnectionPriceZSide'
+      description: Virtual Connection Product configuration
     VirtualPortLocation:
       type: object
       properties:
@@ -1550,16 +1476,90 @@ components:
           type: string
           description: Code assigned to the Equinix International Business Exchange (IBX) data center from which the port is ordered. <br> The port might be in a different location.
       description: Geographic data for the port.
-    VirtualConnectionPriceASide_accessPoint_port:
+    LinkAggregationGroup:
       type: object
       properties:
-        settings:
-          $ref: '#/components/schemas/VirtualConnectionPriceASide_accessPoint_port_settings'
-    VirtualConnectionPriceZSide_accessPoint_bridge_package:
+        enabled:
+          type: boolean
+          description: Parameter showing whether LAG configuration is mandatory. The default is false.
+          default: false
+      description: Link aggregation group (LAG) preferences and settings.
+    VirtualPortRedundancy:
       type: object
       properties:
-        code:
-          $ref: '#/components/schemas/VirtualConnectionBridgePackageCode'
+        enabled:
+          type: boolean
+          description: Parameter showing whether redundancy is mandatory. The default is false.
+          default: false
+      description: Specifications for redundant connections, which improve service continuity by routing traffic to secondary ports when primary ports are unavailable. <br> Redundancy increases resilience and boosts site reliability scores.
+    PriceError:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          type: string
+          enum:
+          - EQ-3038010
+          - EQ-3038022
+          - EQ-3038030
+        errorMessage:
+          type: string
+          enum:
+          - Validation failure
+          - Invalid value
+          - Internal Server Error
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error with details
+      discriminator:
+        propertyName: errorCode
+    TimeServicePriceConnectionAccessPoint:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/PriceLocation'
+      description: Time Service Price Connection Access Point configuration
+    ProductType:
+      type: string
+      description: Product type
+      enum:
+      - VIRTUAL_CONNECTION_PRODUCT
+      - IP_BLOCK_PRODUCT
+      - VIRTUAL_PORT_PRODUCT
+      - CLOUD_ROUTER_PRODUCT
+      - PRECISION_TIME_PRODUCT
+      - METRO_CONNECT_PRODUCT
+    FabricCloudRouterPrice:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Unique identifier assigned to the Cloud Router
+          format: uuid
+        location:
+          $ref: '#/components/schemas/PriceLocation'
+        package:
+          $ref: '#/components/schemas/FabricCloudRouterPackages'
+      description: Cloud Router  Product configuration
+    FabricCloudRouterCode:
+      type: string
+      description: Cloud Router code
+      enum:
+      - LAB
+      - BASIC
+      - STANDARD
+      - ADVANCED
+      - PREMIUM
   securitySchemes:
     BearerAuth:
       type: http

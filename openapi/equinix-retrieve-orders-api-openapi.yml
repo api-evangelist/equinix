@@ -127,43 +127,6 @@ paths:
               $ref: '#/components/schemas/orderhistoryapirequest'
 components:
   schemas:
-    product-types-enum:
-      title: Product Types(Order Types) Enum
-      type: string
-      example: CROSS_CONNECT
-      enum:
-      - SMART_HANDS
-      - TROUBLE
-      - SHIPMENT
-      - WORK_VISIT
-      - SECURITY_ACCESS
-      - CONFERENCE_ROOM
-      - TOUR_REQUESTS
-      - CROSS_CONNECT
-      - CLOUD_EXCHANGE_PORT
-      - INTERNET_EXCHANGE_PORT
-      - METRO_CONNECT
-      - POWER
-      - IBX_SMARTVIEW_SENSOR
-      - ACCESSORY
-      - CAGE
-      - CABINET
-      - IBX_SMART_VIEW
-    account:
-      title: Account
-      type: object
-      properties:
-        accountNumber:
-          type: string
-          description: Account Number
-          example: 136008
-        accountName:
-          type: string
-          description: Name of Account
-          example: Service Corporation
-      required:
-      - accountNumber
-      - accountName
     ibx-detail-for-locations-endpoint:
       title: IBX Detail (Locations Endpoint)
       type: object
@@ -200,65 +163,44 @@ components:
           type: string
           description: Postal code of ibx location
           example: '30303'
-    genericError:
+    order-header-status-enum:
+      title: Order Header Status Enum
+      description: '<b>ENTERED: </b> Order Created. <br><b>SUBMITTED: </b> When the order is assigned to the Equinix OPS team.<br/><b>IN_PROGRESS: </b> When the order fulfillment is in progress <br/><b>PENDING_QA: </b>The order couldn''t be submitted. This order required manual intervention from Equinix end.<br/><b>CANCELLED: </b> The order is canceled.<br/><b>CLOSED: </b>Order is closed.'
+      type: string
+      example: SUBMITTED
+      enum:
+      - ENTERED
+      - SUBMITTED
+      - IN_PROGRESS
+      - PENDING_QA
+      - CANCELLED
+      - CLOSED
+    link:
+      title: Link
       type: object
-      title: Application Errors
       properties:
-        errors:
+        rel:
+          type: string
+          enum:
+          - self
+          - prev
+          - next
+          - orderFullDetails
+        href:
+          type: string
+          example: https://api.equinix.com/v1/retrieve-orders
+    permissible-location:
+      title: PermissibleLocation
+      type: object
+      properties:
+        ibx:
+          $ref: '#/components/schemas/ibx-detail-for-locations-endpoint'
+        cages:
           type: array
           items:
             type: string
-        ticketId:
-          type: string
-    page-request-model:
-      title: Page Request
-      type: object
-      properties:
-        number:
-          type: integer
-          description: Page number indexed from 0.
-          default: 0
-          example: 0
-        size:
-          type: integer
-          description: Page Size.
-          maximum: 200
-          default: 10
-          example: 25
-    page-details-for-response:
-      title: Orders Response Page Details
-      type: object
-      properties:
-        size:
-          type: integer
-          description: Page Size
-          example: '25'
-        totalElements:
-          type: number
-          description: Total number of records
-          example: '160'
-        totalPages:
-          type: integer
-          description: Total number of pages
-          example: '7'
-        number:
-          type: integer
-          description: Current page number
-          example: '0'
-    order-history-response:
-      title: Order History Response
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/order-header'
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/link'
-        page:
-          $ref: '#/components/schemas/page-details-for-response'
+            description: Cage in ibx
+            example: SV1:01:0101
     ordering-contact:
       title: Ordering Contact
       type: object
@@ -275,43 +217,28 @@ components:
           type: string
           description: Ordering Contact phone
           example: +1 408 123 1234
-    order-history-location-response:
-      title: Order-History-Location-Response
-      type: array
-      items:
-        $ref: '#/components/schemas/permissible-location'
-    sort:
-      title: Sort
-      type: object
-      properties:
-        name:
-          type: string
-          description: ORDERING_CONTACT sort is applicable on ordering contact last name.
-          enum:
-          - ORDERING_CONTACT
-          - ACCOUNT_NUMBER
-          - CREATED_ON
-        direction:
-          type: string
-          enum:
-          - ASC
-          - DESC
-    notification-contact:
-      title: Notification Contact
-      type: object
-      properties:
-        name:
-          type: string
-          description: Notification Contact name
-          example: John Doe
-        email:
-          type: string
-          description: Notification Contact email
-          example: johnDoe@test.com
-        phone:
-          type: string
-          description: Notification Contact phone
-          example: +1 408 123 1234
+    product-types-enum:
+      title: Product Types(Order Types) Enum
+      type: string
+      example: CROSS_CONNECT
+      enum:
+      - SMART_HANDS
+      - TROUBLE
+      - SHIPMENT
+      - WORK_VISIT
+      - SECURITY_ACCESS
+      - CONFERENCE_ROOM
+      - TOUR_REQUESTS
+      - CROSS_CONNECT
+      - CLOUD_EXCHANGE_PORT
+      - INTERNET_EXCHANGE_PORT
+      - METRO_CONNECT
+      - POWER
+      - IBX_SMARTVIEW_SENSOR
+      - ACCESSORY
+      - CAGE
+      - CABINET
+      - IBX_SMART_VIEW
     order-header:
       title: Order Header
       type: object
@@ -356,59 +283,86 @@ components:
             $ref: '#/components/schemas/link'
       required:
       - submittedDate
-    permissible-location:
-      title: PermissibleLocation
+    order-history-response:
+      title: Order History Response
       type: object
       properties:
-        ibx:
-          $ref: '#/components/schemas/ibx-detail-for-locations-endpoint'
-        cages:
+        content:
           type: array
           items:
-            type: string
-            description: Cage in ibx
-            example: SV1:01:0101
-    order-header-status-enum:
-      title: Order Header Status Enum
-      description: '<b>ENTERED: </b> Order Created. <br><b>SUBMITTED: </b> When the order is assigned to the Equinix OPS team.<br/><b>IN_PROGRESS: </b> When the order fulfillment is in progress <br/><b>PENDING_QA: </b>The order couldn''t be submitted. This order required manual intervention from Equinix end.<br/><b>CANCELLED: </b> The order is canceled.<br/><b>CLOSED: </b>Order is closed.'
-      type: string
-      example: SUBMITTED
-      enum:
-      - ENTERED
-      - SUBMITTED
-      - IN_PROGRESS
-      - PENDING_QA
-      - CANCELLED
-      - CLOSED
-    orderhistoryapirequest:
-      title: OrderHistoryAPIRequest
-      type: object
-      properties:
-        filters:
-          $ref: '#/components/schemas/filters'
-        source:
+            $ref: '#/components/schemas/order-header'
+        links:
           type: array
           items:
-            type: string
-            enum:
-            - ORDER_NUMBER
-            - PO_NUMBER
-            - CUSTOMER_REFERENCE_NUMBER
-            - CONTACT_LAST_NAME
-            - SR_NUMBER
-            - TROUBLE_TICKET_NUMBER
-            - WORK_ACTIVITY_NUMBER
-          description: '<b>ORDER_NUMBER:</b> Search by order number(1-123456789).<br><b>CUSTOMER_REFERENCE_NUMBER:</b> Search by customer reference number which was entered as part place order.<br><b>TROUBLE_TICKET_NUMBER:</b> Search by trouble ticket numnber(5-123456).<br><b>WORK_ACTIVITY_NUMBER:</b> Search by work order activity number(3-123456). '
-        q:
-          type: string
-          description: Query value to be queried against source values(Or operation against all sources).<br/>Supports partial text search
-          example: 1-123456789
-        sorts:
-          type: array
-          items:
-            $ref: '#/components/schemas/sort'
+            $ref: '#/components/schemas/link'
         page:
-          $ref: '#/components/schemas/page-request-model'
+          $ref: '#/components/schemas/page-details-for-response'
+    page-details-for-response:
+      title: Orders Response Page Details
+      type: object
+      properties:
+        size:
+          type: integer
+          description: Page Size
+          example: '25'
+        totalElements:
+          type: number
+          description: Total number of records
+          example: '160'
+        totalPages:
+          type: integer
+          description: Total number of pages
+          example: '7'
+        number:
+          type: integer
+          description: Current page number
+          example: '0'
+    notification-contact:
+      title: Notification Contact
+      type: object
+      properties:
+        name:
+          type: string
+          description: Notification Contact name
+          example: John Doe
+        email:
+          type: string
+          description: Notification Contact email
+          example: johnDoe@test.com
+        phone:
+          type: string
+          description: Notification Contact phone
+          example: +1 408 123 1234
+    order-history-location-response:
+      title: Order-History-Location-Response
+      type: array
+      items:
+        $ref: '#/components/schemas/permissible-location'
+    genericError:
+      type: object
+      title: Application Errors
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+        ticketId:
+          type: string
+    page-request-model:
+      title: Page Request
+      type: object
+      properties:
+        number:
+          type: integer
+          description: Page number indexed from 0.
+          default: 0
+          example: 0
+        size:
+          type: integer
+          description: Page Size.
+          maximum: 200
+          default: 10
+          example: 25
     filters:
       title: Retrieve Order filters
       type: object
@@ -461,20 +415,66 @@ components:
         - SV1
         fromDate: 05/01/2018
         toDate: 05/02/2018
-    link:
-      title: Link
+    account:
+      title: Account
       type: object
       properties:
-        rel:
+        accountNumber:
+          type: string
+          description: Account Number
+          example: 136008
+        accountName:
+          type: string
+          description: Name of Account
+          example: Service Corporation
+      required:
+      - accountNumber
+      - accountName
+    orderhistoryapirequest:
+      title: OrderHistoryAPIRequest
+      type: object
+      properties:
+        filters:
+          $ref: '#/components/schemas/filters'
+        source:
+          type: array
+          items:
+            type: string
+            enum:
+            - ORDER_NUMBER
+            - PO_NUMBER
+            - CUSTOMER_REFERENCE_NUMBER
+            - CONTACT_LAST_NAME
+            - SR_NUMBER
+            - TROUBLE_TICKET_NUMBER
+            - WORK_ACTIVITY_NUMBER
+          description: '<b>ORDER_NUMBER:</b> Search by order number(1-123456789).<br><b>CUSTOMER_REFERENCE_NUMBER:</b> Search by customer reference number which was entered as part place order.<br><b>TROUBLE_TICKET_NUMBER:</b> Search by trouble ticket numnber(5-123456).<br><b>WORK_ACTIVITY_NUMBER:</b> Search by work order activity number(3-123456). '
+        q:
+          type: string
+          description: Query value to be queried against source values(Or operation against all sources).<br/>Supports partial text search
+          example: 1-123456789
+        sorts:
+          type: array
+          items:
+            $ref: '#/components/schemas/sort'
+        page:
+          $ref: '#/components/schemas/page-request-model'
+    sort:
+      title: Sort
+      type: object
+      properties:
+        name:
+          type: string
+          description: ORDERING_CONTACT sort is applicable on ordering contact last name.
+          enum:
+          - ORDERING_CONTACT
+          - ACCOUNT_NUMBER
+          - CREATED_ON
+        direction:
           type: string
           enum:
-          - self
-          - prev
-          - next
-          - orderFullDetails
-        href:
-          type: string
-          example: https://api.equinix.com/v1/retrieve-orders
+          - ASC
+          - DESC
   parameters:
     authorizationHeader:
       name: Authorization

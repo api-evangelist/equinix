@@ -236,11 +236,38 @@ paths:
                   $ref: '#/components/examples/500'
 components:
   schemas:
-    Limit:
-      type: integer
-      description: Pagination limit
-      example: 20
-      default: 100
+    AssetId:
+      type: string
+      description: Asset UUID
+      format: uuid
+      example: 757400f8-d360-11e9-bb65-2a2ae2dbcce6
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
     CloudEventAssetType:
       type: string
       enum:
@@ -254,64 +281,6 @@ components:
       - organizations
       - timeServices
       - companyProfiles
-    CloudEventData:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Cloud Event message
-        resource:
-          $ref: '#/components/schemas/ResourceData'
-        auth:
-          $ref: '#/components/schemas/AuthContext'
-    Error:
-      required:
-      - errorCode
-      - errorMessage
-      type: object
-      properties:
-        errorCode:
-          pattern: ^EQ-\d{7}$
-          type: string
-        errorMessage:
-          type: string
-        correlationId:
-          type: string
-        details:
-          type: string
-        help:
-          type: string
-        additionalInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/PriceError_additionalInfo'
-      description: Error Response with details
-    CloudEventSimpleExpression:
-      type: object
-      properties:
-        property:
-          type: string
-          description: "Possible field names to use on filters:\n * `/subject` - Cloud Event subject description\n * `/type` - Cloud Event type\n * `/time` - Time of Cloud Events\n * `/equinixproject` - Equinix Project of Cloud Events\n * `/equinixorganization` - Equinix Organization of Cloud Events\n"
-          example: /subject
-        operator:
-          type: string
-          description: "Possible operators to use on filters:\n * `=` - equal\n * `>` - greater than\n * `>=` - greater than or equal to\n * `<` - less than\n * `<=` - less than or equal to\n * `BETWEEN` - between\n * `IN` - in\n"
-          example: '='
-        values:
-          type: array
-          items:
-            type: string
-            example: equinix.fabric.port.status.*
-    CloudEventSearchRequest:
-      required:
-      - filter
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/CloudEventFilters'
-        pagination:
-          $ref: '#/components/schemas/PaginationRequest'
-      description: Search requests containing criteria
     CloudEvent:
       type: object
       properties:
@@ -377,123 +346,16 @@ components:
       description: Cloud Event UUID
       format: uuid
       example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
-    EndDateTime:
-      type: string
-      description: End date and time
-      format: date-time
-      example: 2024-07-11 18:06:21+00:00
-    CloudEventFilters:
-      type: object
-      properties:
-        and:
-          type: array
-          items:
-            $ref: '#/components/schemas/CloudEventFilter'
-    AssetId:
-      type: string
-      description: Asset UUID
-      format: uuid
-      example: 757400f8-d360-11e9-bb65-2a2ae2dbcce6
-    Offset:
-      type: integer
-      description: Pagination offset
-      example: 0
-      default: 0
-    PriceError_additionalInfo:
-      type: object
-      properties:
-        property:
-          type: string
-        reason:
-          type: string
-    Pagination:
+    CloudEventSearchRequest:
       required:
-      - limit
-      - total
+      - filter
       type: object
       properties:
-        offset:
-          minimum: 0
-          type: integer
-          description: Index of the first item returned in the response. The default is 0.
-          default: 0
-        limit:
-          minimum: 0
-          type: integer
-          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
-          default: 20
-        total:
-          minimum: 0
-          type: integer
-          description: Total number of elements returned.
-        next:
-          type: string
-          description: URL relative to the next item in the response.
-        previous:
-          type: string
-          description: URL relative to the previous item in the response.
-      description: Pagination response information
-    StartDateTime:
-      type: string
-      description: Start date and time
-      format: date-time
-      example: 2024-07-11 18:06:21+00:00
-    ErrorList:
-      type: array
-      description: List of Error Message
-      items:
-        $ref: '#/components/schemas/Error'
-    AuthContext:
-      type: object
-      properties:
-        authtype:
-          type: string
-          description: Cloud Event auth type
-          enum:
-          - system
-          - user
-        authid:
-          type: string
-          description: Cloud Event auth identifier
-          enum:
-          - equinix
-          - userId
-        name:
-          type: string
-          description: Cloud Event username
-        email:
-          type: string
-          description: Cloud Event email
-    OperationalStatus:
-      type: object
-      properties:
-        operationalStatus:
-          type: string
-          description: Operational status for the resource target of the event
-    ResourceData:
-      type: object
-      properties:
-        href:
-          type: string
-          description: Cloud Event asset href
-        uuid:
-          type: string
-          description: Cloud Event asset uuid
-        type:
-          type: string
-          description: Cloud Event asset type
-        name:
-          type: string
-          description: Cloud Event asset name
-        state:
-          type: string
-          description: Cloud Event asset state
-        operation:
-          $ref: '#/components/schemas/OperationalStatus'
-    CloudEventFilter:
-      type: object
-      anyOf:
-      - $ref: '#/components/schemas/CloudEventSimpleExpression'
+        filter:
+          $ref: '#/components/schemas/CloudEventFilters'
+        pagination:
+          $ref: '#/components/schemas/PaginationRequest'
+      description: Search requests containing criteria
     PaginationRequest:
       type: object
       properties:
@@ -518,6 +380,144 @@ components:
           description: Data returned from the API call.
           items:
             $ref: '#/components/schemas/CloudEvent'
+    AuthContext:
+      type: object
+      properties:
+        authtype:
+          type: string
+          description: Cloud Event auth type
+          enum:
+          - system
+          - user
+        authid:
+          type: string
+          description: Cloud Event auth identifier
+          enum:
+          - equinix
+          - userId
+        name:
+          type: string
+          description: Cloud Event username
+        email:
+          type: string
+          description: Cloud Event email
+    CloudEventData:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Cloud Event message
+        resource:
+          $ref: '#/components/schemas/ResourceData'
+        auth:
+          $ref: '#/components/schemas/AuthContext'
+    StartDateTime:
+      type: string
+      description: Start date and time
+      format: date-time
+      example: 2024-07-11 18:06:21+00:00
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    EndDateTime:
+      type: string
+      description: End date and time
+      format: date-time
+      example: 2024-07-11 18:06:21+00:00
+    OperationalStatus:
+      type: object
+      properties:
+        operationalStatus:
+          type: string
+          description: Operational status for the resource target of the event
+    Limit:
+      type: integer
+      description: Pagination limit
+      example: 20
+      default: 100
+    Offset:
+      type: integer
+      description: Pagination offset
+      example: 0
+      default: 0
+    ResourceData:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Cloud Event asset href
+        uuid:
+          type: string
+          description: Cloud Event asset uuid
+        type:
+          type: string
+          description: Cloud Event asset type
+        name:
+          type: string
+          description: Cloud Event asset name
+        state:
+          type: string
+          description: Cloud Event asset state
+        operation:
+          $ref: '#/components/schemas/OperationalStatus'
+    CloudEventFilters:
+      type: object
+      properties:
+        and:
+          type: array
+          items:
+            $ref: '#/components/schemas/CloudEventFilter'
+    CloudEventFilter:
+      type: object
+      anyOf:
+      - $ref: '#/components/schemas/CloudEventSimpleExpression'
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    CloudEventSimpleExpression:
+      type: object
+      properties:
+        property:
+          type: string
+          description: "Possible field names to use on filters:\n * `/subject` - Cloud Event subject description\n * `/type` - Cloud Event type\n * `/time` - Time of Cloud Events\n * `/equinixproject` - Equinix Project of Cloud Events\n * `/equinixorganization` - Equinix Organization of Cloud Events\n"
+          example: /subject
+        operator:
+          type: string
+          description: "Possible operators to use on filters:\n * `=` - equal\n * `>` - greater than\n * `>=` - greater than or equal to\n * `<` - less than\n * `<=` - less than or equal to\n * `BETWEEN` - between\n * `IN` - in\n"
+          example: '='
+        values:
+          type: array
+          items:
+            type: string
+            example: equinix.fabric.port.status.*
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
   examples:
     get-cloud-event:
       value:
@@ -555,34 +555,12 @@ components:
         errorMessage: uuid not found
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
         details: uuid not found
-    search-cloud-events:
+    '500':
       value:
-        filter:
-          and:
-          - property: /type
-            operator: IN
-            values:
-            - equinix.fabric.port.status.*
-          - property: /subject
-            operator: IN
-            values:
-            - /fabric/v4/ports/8ac8ecfe-c7cb-4def-9f77-5ce93c19d83d*
-            - /fabric/v4/ports/c8bba3be-5132-4669-bb47-7f1a8811359b*
-          - property: /equinixorganization
-            operator: '='
-            values:
-            - 526698000597331
-          - property: /equinixproject
-            operator: '='
-            values:
-            - dadd3ab6-c0af-430c-8216-43d44f08c1c5
-          - property: /time
-            operator: '>'
-            values:
-            - 2018-04-05 17:31:00+00:00
-        pagination:
-          offset: 0
-          limit: 20
+      - errorCode: EQ-3045004
+        errorMessage: Internal Server Error
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Internal Server Error
     '403':
       value:
       - errorCode: EQ-3045003
@@ -594,12 +572,6 @@ components:
       - errorCode: EQ-3000039
         errorMessage: User not found in request or invalid.
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-    '500':
-      value:
-      - errorCode: EQ-3045004
-        errorMessage: Internal Server Error
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Internal Server Error
     get-cloud-events-by-asset-id:
       value:
         pagination:
@@ -683,6 +655,34 @@ components:
             auth:
               type: system
               id: equinix
+    search-cloud-events:
+      value:
+        filter:
+          and:
+          - property: /type
+            operator: IN
+            values:
+            - equinix.fabric.port.status.*
+          - property: /subject
+            operator: IN
+            values:
+            - /fabric/v4/ports/8ac8ecfe-c7cb-4def-9f77-5ce93c19d83d*
+            - /fabric/v4/ports/c8bba3be-5132-4669-bb47-7f1a8811359b*
+          - property: /equinixorganization
+            operator: '='
+            values:
+            - 526698000597331
+          - property: /equinixproject
+            operator: '='
+            values:
+            - dadd3ab6-c0af-430c-8216-43d44f08c1c5
+          - property: /time
+            operator: '>'
+            values:
+            - 2018-04-05 17:31:00+00:00
+        pagination:
+          offset: 0
+          limit: 20
   securitySchemes:
     BearerAuth:
       type: http

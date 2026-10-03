@@ -40,6 +40,19 @@ paths:
                   $ref: '#/components/examples/healthResponse'
 components:
   schemas:
+    ApiServices:
+      type: object
+      properties:
+        route:
+          type: string
+          description: service routes
+        status:
+          type: string
+          description: service status
+        changedDateTime:
+          type: string
+          description: service status change date
+      description: Available services details
     HealthResponse:
       type: object
       properties:
@@ -58,19 +71,6 @@ components:
         apiServices:
           $ref: '#/components/schemas/ApiServices'
       description: GET Services Health
-    ApiServices:
-      type: object
-      properties:
-        route:
-          type: string
-          description: service routes
-        status:
-          type: string
-          description: service status
-        changedDateTime:
-          type: string
-          description: service status change date
-      description: Available services details
   examples:
     healthResponse:
       value:
