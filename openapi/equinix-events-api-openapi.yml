@@ -753,45 +753,38 @@ paths:
       - Events
 components:
   schemas:
-    Event:
+    Meta:
       example:
-        interpolated: interpolated
-        relationships:
-        - href: href
-        - href: href
-        ip: ip
-        modified_by: '{}'
-        created_at: 2000-01-23 04:56:07+00:00
-        href: href
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        state: state
-        body: body
-        type: type
+        next:
+          href: href
+        total: 0
+        last:
+          href: href
+        previous:
+          href: href
+        last_page: 1
+        self:
+          href: href
+        first:
+          href: href
+        current_page: 6
       properties:
-        body:
-          type: string
-        created_at:
-          format: date-time
-          type: string
-        href:
-          type: string
-        id:
-          format: uuid
-          type: string
-        interpolated:
-          type: string
-        relationships:
-          items:
-            $ref: '#/components/schemas/Href'
-          type: array
-        state:
-          type: string
-        type:
-          type: string
-        modified_by:
-          type: object
-        ip:
-          type: string
+        first:
+          $ref: '#/components/schemas/Href'
+        last:
+          $ref: '#/components/schemas/Href'
+        next:
+          $ref: '#/components/schemas/Href'
+        previous:
+          $ref: '#/components/schemas/Href'
+        self:
+          $ref: '#/components/schemas/Href'
+        total:
+          type: integer
+        current_page:
+          type: integer
+        last_page:
+          type: integer
       type: object
     Href:
       example:
@@ -864,38 +857,45 @@ components:
         meta:
           $ref: '#/components/schemas/Meta'
       type: object
-    Meta:
+    Event:
       example:
-        next:
-          href: href
-        total: 0
-        last:
-          href: href
-        previous:
-          href: href
-        last_page: 1
-        self:
-          href: href
-        first:
-          href: href
-        current_page: 6
+        interpolated: interpolated
+        relationships:
+        - href: href
+        - href: href
+        ip: ip
+        modified_by: '{}'
+        created_at: 2000-01-23 04:56:07+00:00
+        href: href
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        state: state
+        body: body
+        type: type
       properties:
-        first:
-          $ref: '#/components/schemas/Href'
-        last:
-          $ref: '#/components/schemas/Href'
-        next:
-          $ref: '#/components/schemas/Href'
-        previous:
-          $ref: '#/components/schemas/Href'
-        self:
-          $ref: '#/components/schemas/Href'
-        total:
-          type: integer
-        current_page:
-          type: integer
-        last_page:
-          type: integer
+        body:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        href:
+          type: string
+        id:
+          format: uuid
+          type: string
+        interpolated:
+          type: string
+        relationships:
+          items:
+            $ref: '#/components/schemas/Href'
+          type: array
+        state:
+          type: string
+        type:
+          type: string
+        modified_by:
+          type: object
+        ip:
+          type: string
       type: object
   securitySchemes:
     x_auth_token:

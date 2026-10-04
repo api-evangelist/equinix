@@ -153,6 +153,14 @@ paths:
       deprecated: true
 components:
   schemas:
+    VirtualCircuitId:
+      type: string
+      description: Virtual Circuit UUID
+    EndDateTime:
+      type: string
+      description: End date and time
+      format: date-time
+      example: 2024-07-11 18:06:21+00:00
     Direction:
       type: object
       properties:
@@ -170,6 +178,87 @@ components:
           items:
             $ref: '#/components/schemas/Metrics'
       description: Directional statistics
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
+    StartDateTime:
+      type: string
+      description: Start date and time
+      format: date-time
+      example: 2024-07-11 18:06:21+00:00
+    BandwidthUtilization:
+      type: object
+      properties:
+        unit:
+          type: string
+          description: Aggregated data transfer capacity. Possible values- Mbps, megabits (1 million bits) per second; Gbps, gigabits (1 billion bits) per second.
+          enum:
+          - Mbps
+        metricInterval:
+          type: string
+          description: An interval formatted value, indicating the time-interval the metric objects within the response represent
+        inbound:
+          $ref: '#/components/schemas/Direction'
+        outbound:
+          $ref: '#/components/schemas/Direction'
+      description: Bandwidth utilization statistics (octet counters-based)
+    PortUUID:
+      type: string
+      description: Port UUID
+      format: uuid
+    Statistics:
+      type: object
+      properties:
+        startDateTime:
+          type: string
+          description: Start and duration of the statistical analysis interval.
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        endDateTime:
+          type: string
+          description: End and duration of the statistical analysis interval.
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        viewPoint:
+          type: string
+          description: Point of view for connection metrics - aSide or zSide
+          enum:
+          - aSide
+          - zSide
+        bandwidthUtilization:
+          $ref: '#/components/schemas/BandwidthUtilization'
+      description: This API provides service-level traffic metrics so that you can view access and gather key information required to manage service subscription sizing and capacity.
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
     Metrics:
       type: object
       properties:
@@ -193,102 +282,48 @@ components:
       enum:
       - aSide
       - zSide
-    PortUUID:
-      type: string
-      description: Port UUID
-      format: uuid
-    VirtualCircuitId:
-      type: string
-      description: Virtual Circuit UUID
-    Error:
-      required:
-      - errorCode
-      - errorMessage
-      type: object
-      properties:
-        errorCode:
-          pattern: ^EQ-\d{7}$
-          type: string
-        errorMessage:
-          type: string
-        correlationId:
-          type: string
-        details:
-          type: string
-        help:
-          type: string
-        additionalInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/PriceError_additionalInfo'
-      description: Error Response with details
-    EndDateTime:
-      type: string
-      description: End date and time
-      format: date-time
-      example: 2024-07-11 18:06:21+00:00
-    PriceError_additionalInfo:
-      type: object
-      properties:
-        property:
-          type: string
-        reason:
-          type: string
-    StartDateTime:
-      type: string
-      description: Start date and time
-      format: date-time
-      example: 2024-07-11 18:06:21+00:00
-    Statistics:
-      type: object
-      properties:
-        startDateTime:
-          type: string
-          description: Start and duration of the statistical analysis interval.
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        endDateTime:
-          type: string
-          description: End and duration of the statistical analysis interval.
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        viewPoint:
-          type: string
-          description: Point of view for connection metrics - aSide or zSide
-          enum:
-          - aSide
-          - zSide
-        bandwidthUtilization:
-          $ref: '#/components/schemas/BandwidthUtilization'
-      description: This API provides service-level traffic metrics so that you can view access and gather key information required to manage service subscription sizing and capacity.
-    BandwidthUtilization:
-      type: object
-      properties:
-        unit:
-          type: string
-          description: Aggregated data transfer capacity. Possible values- Mbps, megabits (1 million bits) per second; Gbps, gigabits (1 billion bits) per second.
-          enum:
-          - Mbps
-        metricInterval:
-          type: string
-          description: An interval formatted value, indicating the time-interval the metric objects within the response represent
-        inbound:
-          $ref: '#/components/schemas/Direction'
-        outbound:
-          $ref: '#/components/schemas/Direction'
-      description: Bandwidth utilization statistics (octet counters-based)
-    ErrorList:
-      type: array
-      description: List of Error Message
-      items:
-        $ref: '#/components/schemas/Error'
   examples:
+    200_port:
+      value:
+        href: http://api.equinix.com/fabric/v4/ports/xxxxx191-xx70-xxxx-xx04-xxxxxxxa37xx
+        type: XF_PORT
+        uuid: xxxxx191-xx70-xxxx-xx04-xxxxxxxa37xx
+        name: Equinix-EM-CX-xxx-L-Dot1q-BO-100G-PRI-xx
+        bandwidthUtilization: 10000
+        stats:
+          startDateTime: 2020-05-21 08:00:00+00:00
+          endDateTime: 2020-05-21 10:30:00+00:00
+          bandwidthUtilization:
+            unit: Mbps
+            metricInterval: PT5M
+            inbound:
+              max: 68.00905623111112
+              mean: 48.90562310112
+              lastPolled: 41.00905623111112
+              metrics:
+              - intervalEndDateTime: 2020-05-21 10:30:00+00:00
+                max: 45.5623145112009
+                mean: 31.38641687333333
+            outbound:
+              max: 41.99068261111111
+              mean: 33.70374303096296
+              lastPolled: 41.43428905111111
+              metrics:
+              - intervalEndDateTime: 2020-05-21 10:30:00+00:00
+                max: 42.01401189333334
+                mean: 39.40894303096296
     '403':
       value:
       - errorCode: EQ-3045003
         errorMessage: Operation not allowed
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
         details: Operation not allowed for current user
+    '500':
+      value:
+      - errorCode: EQ-3045004
+        errorMessage: Internal Server Error
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Internal Server Error
     200_vc:
       value:
         href: https://api.equinix.com/fabric/v4/connections/97d1850f-4df0-468c-9281-fa7b0dfa2096
@@ -341,41 +376,6 @@ components:
       - errorCode: EQ-3000039
         errorMessage: User not found in request or invalid.
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-    '500':
-      value:
-      - errorCode: EQ-3045004
-        errorMessage: Internal Server Error
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Internal Server Error
-    200_port:
-      value:
-        href: http://api.equinix.com/fabric/v4/ports/xxxxx191-xx70-xxxx-xx04-xxxxxxxa37xx
-        type: XF_PORT
-        uuid: xxxxx191-xx70-xxxx-xx04-xxxxxxxa37xx
-        name: Equinix-EM-CX-xxx-L-Dot1q-BO-100G-PRI-xx
-        bandwidthUtilization: 10000
-        stats:
-          startDateTime: 2020-05-21 08:00:00+00:00
-          endDateTime: 2020-05-21 10:30:00+00:00
-          bandwidthUtilization:
-            unit: Mbps
-            metricInterval: PT5M
-            inbound:
-              max: 68.00905623111112
-              mean: 48.90562310112
-              lastPolled: 41.00905623111112
-              metrics:
-              - intervalEndDateTime: 2020-05-21 10:30:00+00:00
-                max: 45.5623145112009
-                mean: 31.38641687333333
-            outbound:
-              max: 41.99068261111111
-              mean: 33.70374303096296
-              lastPolled: 41.43428905111111
-              metrics:
-              - intervalEndDateTime: 2020-05-21 10:30:00+00:00
-                max: 42.01401189333334
-                mean: 39.40894303096296
   securitySchemes:
     BearerAuth:
       type: http

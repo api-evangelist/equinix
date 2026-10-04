@@ -72,6 +72,30 @@ paths:
       x-codegen-request-body-name: Payload
 components:
   schemas:
+    Oauth2TokenErrorResponse:
+      required:
+      - developer_message
+      - error_code
+      - error_domain
+      - error_message
+      - error_title
+      type: object
+      properties:
+        error_domain:
+          type: string
+          description: The module associated with this error
+        error_title:
+          type: string
+          description: The error title
+        error_code:
+          type: string
+          description: The code used to identify the error category
+        developer_message:
+          type: string
+          description: The error message to be used for auditing purpose by the consuming application
+        error_message:
+          type: string
+          description: The error message which could be displayed to the end user
     Oauth2TokenRequest:
       required:
       - client_id
@@ -97,30 +121,6 @@ components:
           type: string
           description: For enhanced security, you may encrypt the password value while requesting for an access_token. Currently only "md5-b64" hashing is supported. Any other value would treat password value as raw string
           default: none
-    Oauth2TokenErrorResponse:
-      required:
-      - developer_message
-      - error_code
-      - error_domain
-      - error_message
-      - error_title
-      type: object
-      properties:
-        error_domain:
-          type: string
-          description: The module associated with this error
-        error_title:
-          type: string
-          description: The error title
-        error_code:
-          type: string
-          description: The code used to identify the error category
-        developer_message:
-          type: string
-          description: The error message to be used for auditing purpose by the consuming application
-        error_message:
-          type: string
-          description: The error message which could be displayed to the end user
     Oauth2TokenResponse:
       required:
       - access_token

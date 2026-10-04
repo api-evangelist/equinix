@@ -65,6 +65,13 @@ paths:
       - SupportRequest
 components:
   schemas:
+    SupportRequestInput_priority:
+      enum:
+      - urgent
+      - high
+      - medium
+      - low
+      type: string
     SupportRequestInput:
       example:
         device_id: device_id
@@ -87,13 +94,6 @@ components:
       - message
       - subject
       type: object
-    SupportRequestInput_priority:
-      enum:
-      - urgent
-      - high
-      - medium
-      - low
-      type: string
     Error:
       description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
       properties:

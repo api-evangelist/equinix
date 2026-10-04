@@ -64,17 +64,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: A short, machine-readable error code.
-        error_description:
-          type: string
-          description: A human-readable description of the error.
-      required:
-      - error
     TokenExchangeResponse:
       type: object
       properties:
@@ -95,6 +84,17 @@ components:
       - issued_token_type
       - token_type
       - expires_in
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A short, machine-readable error code.
+        error_description:
+          type: string
+          description: A human-readable description of the error.
+      required:
+      - error
   securitySchemes:
     bearerAuth:
       type: http

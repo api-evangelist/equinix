@@ -77,6 +77,20 @@ paths:
                   $ref: '#/components/examples/port-packages-500'
 components:
   examples:
+    port-packages-500:
+      value:
+      - errorCode: EQ-3143001
+        errorMessage: Internal Error
+        details: Internal system error
+        correlationId: 80066c00-0f20-11f0-8367-d5075ee362a7
+    '415':
+      value:
+      - errorCode: EQ-3040016
+        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: contentType
+          reason: The payload format is in an unsupported format
     port-packages:
       value:
         data:
@@ -119,26 +133,17 @@ components:
         errorMessage: Operation not allowed
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
         details: Operation not allowed for current user
-    port-packages-500:
-      value:
-      - errorCode: EQ-3143001
-        errorMessage: Internal Error
-        details: Internal system error
-        correlationId: 80066c00-0f20-11f0-8367-d5075ee362a7
     '401':
       value:
       - errorCode: EQ-3000039
         errorMessage: User not found in request or invalid.
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-    '415':
-      value:
-      - errorCode: EQ-3040016
-        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
-        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
-        additionalInfo:
-        - property: contentType
-          reason: The payload format is in an unsupported format
   schemas:
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
     PortPackageSourceType:
       type: string
       description: Port Package Source Type
@@ -146,6 +151,35 @@ components:
       - COLO
       - REMOTE
       - BMMR
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
     PortPackage:
       required:
       - code
@@ -189,35 +223,6 @@ components:
           items:
             type: string
       description: Port Package details
-    Error:
-      required:
-      - errorCode
-      - errorMessage
-      type: object
-      properties:
-        errorCode:
-          pattern: ^EQ-\d{7}$
-          type: string
-        errorMessage:
-          type: string
-        correlationId:
-          type: string
-        details:
-          type: string
-        help:
-          type: string
-        additionalInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/PriceError_additionalInfo'
-      description: Error Response with details
-    PriceError_additionalInfo:
-      type: object
-      properties:
-        property:
-          type: string
-        reason:
-          type: string
     AllPortPackagesResponse:
       required:
       - data
@@ -229,11 +234,6 @@ components:
           items:
             $ref: '#/components/schemas/PortPackage'
       description: Port Packages response
-    ErrorList:
-      type: array
-      description: List of Error Message
-      items:
-        $ref: '#/components/schemas/Error'
   securitySchemes:
     BearerAuth:
       type: http

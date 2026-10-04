@@ -130,28 +130,37 @@ paths:
                 $ref: '#/components/schemas/ErrorList'
 components:
   schemas:
-    Error:
-      required:
-      - errorCode
-      - errorMessage
+    TagListResponse:
       type: object
       properties:
-        errorCode:
-          pattern: ^EQ-\d{7}$
-          type: string
-        errorMessage:
-          type: string
-        correlationId:
-          type: string
-        details:
-          type: string
-        help:
-          type: string
-        additionalInfo:
+        data:
           type: array
           items:
-            $ref: '#/components/schemas/PriceError_additionalInfo'
-      description: Error Response with details
+            $ref: '#/components/schemas/TagResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+      description: Equinix Fabric Tag List Response Object
+    TagRequest:
+      required:
+      - displayName
+      - name
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of tag
+          example: RESOURCE_TAG
+        name:
+          minLength: 1
+          type: string
+          description: Name of the Tag
+        displayName:
+          maxLength: 24
+          minLength: 1
+          type: string
+          description: Display name of the Tag
+      description: Equinix Fabric Tag Request Object
     TagResponse:
       type: object
       properties:
@@ -176,27 +185,11 @@ components:
           type: integer
           example: 10000
       description: Equinix Fabric Tag Response Object
-    TagRequest:
-      required:
-      - displayName
-      - name
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of tag
-          example: RESOURCE_TAG
-        name:
-          minLength: 1
-          type: string
-          description: Name of the Tag
-        displayName:
-          maxLength: 24
-          minLength: 1
-          type: string
-          description: Display name of the Tag
-      description: Equinix Fabric Tag Request Object
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
     Pagination:
       required:
       - limit
@@ -231,21 +224,28 @@ components:
           type: string
         reason:
           type: string
-    TagListResponse:
+    Error:
+      required:
+      - errorCode
+      - errorMessage
       type: object
       properties:
-        data:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
           type: array
           items:
-            $ref: '#/components/schemas/TagResponse'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-      description: Equinix Fabric Tag List Response Object
-    ErrorList:
-      type: array
-      description: List of Error Message
-      items:
-        $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
   securitySchemes:
     BearerAuth:
       type: http

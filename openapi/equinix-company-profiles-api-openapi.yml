@@ -563,19 +563,6 @@ paths:
                 $ref: '#/components/schemas/ErrorList'
 components:
   schemas:
-    ServiceProfileListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          description: List of service profiles
-          example:
-          - href: https://api.equinix.com/fabric/v4/serviceProfiles/423af68b-42f0-4f2e-9c5c-2fbd44b4b387
-            uuid: 423af68b-42f0-4f2e-9c5c-2fbd44b4b387
-          items:
-            $ref: '#/components/schemas/CompanyServiceProfile'
-    CompanyProfileChangeItem:
-      type: object
     TagResponse:
       type: object
       properties:
@@ -600,64 +587,57 @@ components:
           type: integer
           example: 10000
       description: Equinix Fabric Tag Response Object
-    CompanyLogo:
+    CompanyProfileSearchRequest:
       type: object
       properties:
-        href:
+        filter:
+          $ref: '#/components/schemas/CompanyProfileSearchFilter'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        sort:
+          $ref: '#/components/schemas/Sort'
+    CompanyProfileChangeItem:
+      type: object
+    Sort:
+      type: object
+      properties:
+        property:
           type: string
+          description: Property to sort by((currently supports tags with filter syntax)
+          example: /tags/@name=equinix.fabric.spotlight.category.featured
+        direction:
+          $ref: '#/components/schemas/CompanyProfileSortDirection'
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    CompanyProfileChange:
+      type: object
+      properties:
         uuid:
           type: string
-        extensionType:
-          type: string
-    Pagination:
-      required:
-      - limit
-      - total
-      type: object
-      properties:
-        offset:
-          minimum: 0
-          type: integer
-          description: Index of the first item returned in the response. The default is 0.
-          default: 0
-        limit:
-          minimum: 0
-          type: integer
-          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
-          default: 20
-        total:
-          minimum: 0
-          type: integer
-          description: Total number of elements returned.
-        next:
-          type: string
-          description: URL relative to the next item in the response.
-        previous:
-          type: string
-          description: URL relative to the previous item in the response.
-      description: Pagination response information
-    AttachTagResponse:
-      required:
-      - type
-      - uuid
-      type: object
-      properties:
-        href:
-          type: string
-          description: URL to the attached tag
-          example: https://api.equinix.com/fabric/v4/tags/260af68b-42f0-4f2e-9c5c-2fbd44b4b387
         type:
           type: string
-          description: Type of the tag or attachment
-          example: TAG
-        uuid:
+        status:
           type: string
-          description: Unique identifier for the tag
-          example: 260af68b-42f0-4f2e-9c5c-2fbd44b4b387
-        attachmentStatus:
+        createdDateTime:
           type: string
-          description: Status of the attachment operation
-          example: ATTACHED
+          format: date-time
+        updatedDateTime:
+          type: string
+          format: date-time
+        data:
+          $ref: '#/components/schemas/CompanyProfileChangeItem'
+    CompanyMetro:
+      type: object
+      properties:
+        href:
+          type: string
+        metroCode:
+          type: string
     TagListResponse:
       type: object
       properties:
@@ -668,154 +648,17 @@ components:
         pagination:
           $ref: '#/components/schemas/Pagination'
       description: Equinix Fabric Tag List Response Object
-    OperatorEnum:
-      type: string
-      description: Comparison operators for filtering
-      example: '='
-    CompanyServiceProfile:
-      type: object
-      properties:
-        href:
-          type: string
-        uuid:
-          type: string
-    CompanyProfileResponse_account:
-      type: object
-      properties:
-        rootOrgId:
-          type: string
-    PrivateService:
-      type: object
-      properties:
-        href:
-          type: string
-        uuid:
-          type: string
-    CompanyProfileRequest:
-      required:
-      - description
-      - name
-      - summary
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          example: COMPANY_PROFILE
-        name:
-          maxLength: 50
-          minLength: 1
-          type: string
-          example: Equinix
-        summary:
-          maxLength: 125
-          minLength: 1
-          type: string
-          example: Global interconnection and data center company
-        description:
-          maxLength: 450
-          minLength: 1
-          type: string
-          example: Equinix, Inc. connects the world's leading businesses to their customers, employees and partners inside the most interconnected data centers.
-        notifications:
-          type: array
-          example:
-          - type: CONTACT
-            emails:
-            - example@example.com
-          - type: NOTIFICATION
-            emails:
-            - example@example.com
-          items:
-            $ref: '#/components/schemas/Notification'
-        webUrl:
-          type: string
-          example: https://www.equinix.com
-        contactUrl:
-          type: string
-          example: https://www.equinix.com/contact-us
-    CompanyProfileState:
-      type: object
-    CompanyProfileSearchRequest:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/CompanyProfileSearchFilter'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        sort:
-          $ref: '#/components/schemas/Sort'
-    PrivateServiceListResponse:
+    ServiceProfileListResponse:
       type: object
       properties:
         data:
           type: array
-          description: List of private services
+          description: List of service profiles
           example:
-          - href: https://api.equinix.com/fabric/v4/privateServices/460af68b-42f0-4f2e-9c5c-2fbd44b4b387
-            uuid: 460af68b-42f0-4f2e-9c5c-2fbd44b4b387
+          - href: https://api.equinix.com/fabric/v4/serviceProfiles/423af68b-42f0-4f2e-9c5c-2fbd44b4b387
+            uuid: 423af68b-42f0-4f2e-9c5c-2fbd44b4b387
           items:
-            $ref: '#/components/schemas/PrivateService'
-    CompanyMetro:
-      type: object
-      properties:
-        href:
-          type: string
-        metroCode:
-          type: string
-    Error:
-      required:
-      - errorCode
-      - errorMessage
-      type: object
-      properties:
-        errorCode:
-          pattern: ^EQ-\d{7}$
-          type: string
-        errorMessage:
-          type: string
-        correlationId:
-          type: string
-        details:
-          type: string
-        help:
-          type: string
-        additionalInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/PriceError_additionalInfo'
-      description: Error Response with details
-    Sort:
-      type: object
-      properties:
-        property:
-          type: string
-          description: Property to sort by((currently supports tags with filter syntax)
-          example: /tags/@name=equinix.fabric.spotlight.category.featured
-        direction:
-          $ref: '#/components/schemas/CompanyProfileSortDirection'
-    AttachServiceProfileResponse:
-      required:
-      - type
-      - uuid
-      type: object
-      properties:
-        href:
-          type: string
-          description: URL to the attached service profile
-          example: https://api.equinix.com/fabric/v4/serviceProfiles/423af68b-42f0-4f2e-9c5c-2fbd44b4b387
-        type:
-          type: string
-          description: Type of the service or attachment
-          example: SERVICE_PROFILE
-        uuid:
-          type: string
-          description: Unique identifier for the service profile
-          example: 423af68b-42f0-4f2e-9c5c-2fbd44b4b387
-        attachmentStatus:
-          type: string
-          description: Status of the attachment operation
-          example: ATTACHED
+            $ref: '#/components/schemas/CompanyServiceProfile'
     CompanyProfileResponse:
       type: object
       properties:
@@ -913,19 +756,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CompanyProfileResponse'
-    Notification:
-      type: object
-    CompanyProfileSearchFieldName:
-      type: string
-      description: Searchable field names in company profile
-      example: /tags/name
-    CompanyProfileSortDirection:
-      type: string
-      description: Sorting direction
-      default: ASC
-      enum:
-      - DESC
-      - ASC
     Changelog:
       type: object
       properties:
@@ -981,6 +811,50 @@ components:
           format: date-time
           example: 2020-11-06 07:00:00+00:00
       description: Change log
+    AttachTagResponse:
+      required:
+      - type
+      - uuid
+      type: object
+      properties:
+        href:
+          type: string
+          description: URL to the attached tag
+          example: https://api.equinix.com/fabric/v4/tags/260af68b-42f0-4f2e-9c5c-2fbd44b4b387
+        type:
+          type: string
+          description: Type of the tag or attachment
+          example: TAG
+        uuid:
+          type: string
+          description: Unique identifier for the tag
+          example: 260af68b-42f0-4f2e-9c5c-2fbd44b4b387
+        attachmentStatus:
+          type: string
+          description: Status of the attachment operation
+          example: ATTACHED
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
     AttachPrivateServiceResponse:
       required:
       - type
@@ -1003,6 +877,15 @@ components:
           type: string
           description: Status of the attachment operation
           example: ATTACHED
+    CompanyLogo:
+      type: object
+      properties:
+        href:
+          type: string
+        uuid:
+          type: string
+        extensionType:
+          type: string
     CompanyProfileSearchFilter:
       type: object
       properties:
@@ -1026,35 +909,152 @@ components:
           - PROVISIONED
           items:
             type: string
-    CompanyProfileChange:
+    AttachServiceProfileResponse:
+      required:
+      - type
+      - uuid
       type: object
       properties:
-        uuid:
+        href:
           type: string
+          description: URL to the attached service profile
+          example: https://api.equinix.com/fabric/v4/serviceProfiles/423af68b-42f0-4f2e-9c5c-2fbd44b4b387
         type:
           type: string
-        status:
+          description: Type of the service or attachment
+          example: SERVICE_PROFILE
+        uuid:
           type: string
-        createdDateTime:
+          description: Unique identifier for the service profile
+          example: 423af68b-42f0-4f2e-9c5c-2fbd44b4b387
+        attachmentStatus:
           type: string
-          format: date-time
-        updatedDateTime:
-          type: string
-          format: date-time
-        data:
-          $ref: '#/components/schemas/CompanyProfileChangeItem'
-    PriceError_additionalInfo:
+          description: Status of the attachment operation
+          example: ATTACHED
+    PrivateService:
       type: object
       properties:
-        property:
+        href:
           type: string
-        reason:
+        uuid:
           type: string
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    CompanyProfileResponse_account:
+      type: object
+      properties:
+        rootOrgId:
+          type: string
+    CompanyServiceProfile:
+      type: object
+      properties:
+        href:
+          type: string
+        uuid:
+          type: string
+    PrivateServiceListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: List of private services
+          example:
+          - href: https://api.equinix.com/fabric/v4/privateServices/460af68b-42f0-4f2e-9c5c-2fbd44b4b387
+            uuid: 460af68b-42f0-4f2e-9c5c-2fbd44b4b387
+          items:
+            $ref: '#/components/schemas/PrivateService'
+    CompanyProfileSearchFieldName:
+      type: string
+      description: Searchable field names in company profile
+      example: /tags/name
+    OperatorEnum:
+      type: string
+      description: Comparison operators for filtering
+      example: '='
     ErrorList:
       type: array
       description: List of Error Message
       items:
         $ref: '#/components/schemas/Error'
+    CompanyProfileRequest:
+      required:
+      - description
+      - name
+      - summary
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          example: COMPANY_PROFILE
+        name:
+          maxLength: 50
+          minLength: 1
+          type: string
+          example: Equinix
+        summary:
+          maxLength: 125
+          minLength: 1
+          type: string
+          example: Global interconnection and data center company
+        description:
+          maxLength: 450
+          minLength: 1
+          type: string
+          example: Equinix, Inc. connects the world's leading businesses to their customers, employees and partners inside the most interconnected data centers.
+        notifications:
+          type: array
+          example:
+          - type: CONTACT
+            emails:
+            - example@example.com
+          - type: NOTIFICATION
+            emails:
+            - example@example.com
+          items:
+            $ref: '#/components/schemas/Notification'
+        webUrl:
+          type: string
+          example: https://www.equinix.com
+        contactUrl:
+          type: string
+          example: https://www.equinix.com/contact-us
+    CompanyProfileSortDirection:
+      type: string
+      description: Sorting direction
+      default: ASC
+      enum:
+      - DESC
+      - ASC
+    Notification:
+      type: object
+    CompanyProfileState:
+      type: object
   securitySchemes:
     BearerAuth:
       type: http

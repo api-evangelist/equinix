@@ -401,7 +401,48 @@ paths:
       tags:
       - SSH Keys
 components:
+  requestBodies:
+    SSHKeyCreateInput:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SSHKeyCreateInput'
+      description: ssh key to create
+      required: true
   schemas:
+    SSHKeyList:
+      example:
+        ssh_keys:
+        - updated_at: 2000-01-23 04:56:07+00:00
+          fingerprint: fingerprint
+          created_at: 2000-01-23 04:56:07+00:00
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          label: label
+          entity:
+            href: href
+          key: key
+          tags:
+          - tags
+          - tags
+        - updated_at: 2000-01-23 04:56:07+00:00
+          fingerprint: fingerprint
+          created_at: 2000-01-23 04:56:07+00:00
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          label: label
+          entity:
+            href: href
+          key: key
+          tags:
+          - tags
+          - tags
+      properties:
+        ssh_keys:
+          items:
+            $ref: '#/components/schemas/SSHKey'
+          type: array
+      type: object
     SSHKeyInput:
       example:
         label: label
@@ -506,47 +547,6 @@ components:
             type: string
           type: array
       type: object
-    SSHKeyList:
-      example:
-        ssh_keys:
-        - updated_at: 2000-01-23 04:56:07+00:00
-          fingerprint: fingerprint
-          created_at: 2000-01-23 04:56:07+00:00
-          href: href
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          label: label
-          entity:
-            href: href
-          key: key
-          tags:
-          - tags
-          - tags
-        - updated_at: 2000-01-23 04:56:07+00:00
-          fingerprint: fingerprint
-          created_at: 2000-01-23 04:56:07+00:00
-          href: href
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          label: label
-          entity:
-            href: href
-          key: key
-          tags:
-          - tags
-          - tags
-      properties:
-        ssh_keys:
-          items:
-            $ref: '#/components/schemas/SSHKey'
-          type: array
-      type: object
-  requestBodies:
-    SSHKeyCreateInput:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/SSHKeyCreateInput'
-      description: ssh key to create
-      required: true
   securitySchemes:
     x_auth_token:
       description: 'HTTP header containing the User or Project API key that will be used to authenticate the request.
