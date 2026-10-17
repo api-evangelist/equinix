@@ -401,74 +401,7 @@ paths:
       tags:
       - SSH Keys
 components:
-  requestBodies:
-    SSHKeyCreateInput:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/SSHKeyCreateInput'
-      description: ssh key to create
-      required: true
   schemas:
-    SSHKeyList:
-      example:
-        ssh_keys:
-        - updated_at: 2000-01-23 04:56:07+00:00
-          fingerprint: fingerprint
-          created_at: 2000-01-23 04:56:07+00:00
-          href: href
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          label: label
-          entity:
-            href: href
-          key: key
-          tags:
-          - tags
-          - tags
-        - updated_at: 2000-01-23 04:56:07+00:00
-          fingerprint: fingerprint
-          created_at: 2000-01-23 04:56:07+00:00
-          href: href
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          label: label
-          entity:
-            href: href
-          key: key
-          tags:
-          - tags
-          - tags
-      properties:
-        ssh_keys:
-          items:
-            $ref: '#/components/schemas/SSHKey'
-          type: array
-      type: object
-    SSHKeyInput:
-      example:
-        label: label
-        key: key
-        tags:
-        - tags
-        - tags
-      properties:
-        key:
-          type: string
-        label:
-          type: string
-        tags:
-          items:
-            type: string
-          type: array
-      type: object
-    Href:
-      example:
-        href: href
-      properties:
-        href:
-          type: string
-      required:
-      - href
-      type: object
     SSHKey:
       example:
         updated_at: 2000-01-23 04:56:07+00:00
@@ -508,19 +441,6 @@ components:
             type: string
           type: array
       type: object
-    Error:
-      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
-      properties:
-        error:
-          description: A description of the error that caused the request to fail.
-          type: string
-        errors:
-          description: A list of errors that contributed to the request failing.
-          items:
-            description: An error message that contributed to the request failing.
-            type: string
-          type: array
-      type: object
     SSHKeyCreateInput:
       example:
         label: label
@@ -547,6 +467,86 @@ components:
             type: string
           type: array
       type: object
+    Error:
+      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
+      properties:
+        error:
+          description: A description of the error that caused the request to fail.
+          type: string
+        errors:
+          description: A list of errors that contributed to the request failing.
+          items:
+            description: An error message that contributed to the request failing.
+            type: string
+          type: array
+      type: object
+    SSHKeyInput:
+      example:
+        label: label
+        key: key
+        tags:
+        - tags
+        - tags
+      properties:
+        key:
+          type: string
+        label:
+          type: string
+        tags:
+          items:
+            type: string
+          type: array
+      type: object
+    SSHKeyList:
+      example:
+        ssh_keys:
+        - updated_at: 2000-01-23 04:56:07+00:00
+          fingerprint: fingerprint
+          created_at: 2000-01-23 04:56:07+00:00
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          label: label
+          entity:
+            href: href
+          key: key
+          tags:
+          - tags
+          - tags
+        - updated_at: 2000-01-23 04:56:07+00:00
+          fingerprint: fingerprint
+          created_at: 2000-01-23 04:56:07+00:00
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          label: label
+          entity:
+            href: href
+          key: key
+          tags:
+          - tags
+          - tags
+      properties:
+        ssh_keys:
+          items:
+            $ref: '#/components/schemas/SSHKey'
+          type: array
+      type: object
+    Href:
+      example:
+        href: href
+      properties:
+        href:
+          type: string
+      required:
+      - href
+      type: object
+  requestBodies:
+    SSHKeyCreateInput:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SSHKeyCreateInput'
+      description: ssh key to create
+      required: true
   securitySchemes:
     x_auth_token:
       description: 'HTTP header containing the User or Project API key that will be used to authenticate the request.

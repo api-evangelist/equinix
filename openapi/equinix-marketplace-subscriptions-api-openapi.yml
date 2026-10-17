@@ -82,28 +82,14 @@ paths:
                   $ref: '#/components/examples/500'
 components:
   schemas:
-    SubscriptionEntitlementResponse:
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: Subscription Entitlement Id
-          format: uuid
-        quantityEntitled:
-          minimum: 0
-          type: integer
-          description: Quantity entitled for the subscription
-        quantityConsumed:
-          minimum: 0
-          type: integer
-          description: Quantity consumed from the entitlement
-        quantityAvailable:
-          minimum: 0
-          type: integer
-          description: Quantity available from the entitlement
-        asset:
-          $ref: '#/components/schemas/SubscriptionAsset'
-      description: Subscription entitlement
+    SubscriptionState:
+      type: string
+      description: Subscription State
+      enum:
+      - ACTIVE
+      - EXPIRED
+      - CANCELLED
+      - GRACE_PERIOD
     ErrorList:
       type: array
       description: List of Error Message
@@ -164,13 +150,52 @@ components:
           format: date-time
           example: 2020-11-06 07:00:00+00:00
       description: Change log
-    SubscriptionRouterPackageType:
+    SubscriptionId:
+      type: string
+      description: Subscription Id
+      format: uuid
+      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
+    SubscriptionAsset:
       type: object
       properties:
-        code:
+        type:
           type: string
-          description: Cloud Router package code
-      description: Cloud Router Package Type
+          description: Type of the subscription asset ( XF_ROUTER ,IP_VC, IPWAN_VC )
+        package:
+          $ref: '#/components/schemas/SubscriptionRouterPackageType'
+        bandwidth:
+          type: integer
+          description: Bandwidth of the asset in Mbps
+      description: Asset information
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
     SubscriptionResponse:
       required:
       - entitlements
@@ -224,60 +249,35 @@ components:
         changelog:
           $ref: '#/components/schemas/Changelog'
       description: Subscription Response
-    SubscriptionState:
-      type: string
-      description: Subscription State
-      enum:
-      - ACTIVE
-      - EXPIRED
-      - CANCELLED
-      - GRACE_PERIOD
-    SubscriptionAsset:
+    SubscriptionRouterPackageType:
       type: object
       properties:
-        type:
+        code:
           type: string
-          description: Type of the subscription asset ( XF_ROUTER ,IP_VC, IPWAN_VC )
-        package:
-          $ref: '#/components/schemas/SubscriptionRouterPackageType'
-        bandwidth:
+          description: Cloud Router package code
+      description: Cloud Router Package Type
+    SubscriptionEntitlementResponse:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Subscription Entitlement Id
+          format: uuid
+        quantityEntitled:
+          minimum: 0
           type: integer
-          description: Bandwidth of the asset in Mbps
-      description: Asset information
-    SubscriptionId:
-      type: string
-      description: Subscription Id
-      format: uuid
-      example: 557400f8-d360-11e9-bb65-2a2ae2dbcce4
-    Error:
-      required:
-      - errorCode
-      - errorMessage
-      type: object
-      properties:
-        errorCode:
-          pattern: ^EQ-\d{7}$
-          type: string
-        errorMessage:
-          type: string
-        correlationId:
-          type: string
-        details:
-          type: string
-        help:
-          type: string
-        additionalInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/PriceError_additionalInfo'
-      description: Error Response with details
-    PriceError_additionalInfo:
-      type: object
-      properties:
-        property:
-          type: string
-        reason:
-          type: string
+          description: Quantity entitled for the subscription
+        quantityConsumed:
+          minimum: 0
+          type: integer
+          description: Quantity consumed from the entitlement
+        quantityAvailable:
+          minimum: 0
+          type: integer
+          description: Quantity available from the entitlement
+        asset:
+          $ref: '#/components/schemas/SubscriptionAsset'
+      description: Subscription entitlement
     SubscriptionTrial:
       type: object
       properties:
@@ -290,6 +290,20 @@ components:
           format: date-time
       description: Free Trial Subscription
   examples:
+    '415':
+      value:
+      - errorCode: EQ-3040016
+        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: contentType
+          reason: The payload format is in an unsupported format
+    '500':
+      value:
+      - errorCode: EQ-3045004
+        errorMessage: Internal Server Error
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Internal Server Error
     subscription-response:
       value:
         href: https://api.equinix.com/fabric/v4/marketplaceSubscriptions/c5557b51-7938-4f7d-afaa-41b930903a5e
@@ -332,31 +346,17 @@ components:
           createdDateTime: 2020-05-21 10:30:00+00:00
           updatedBy: adminuser
           updatedDateTime: 2020-05-21 10:30:00+00:00
-    '415':
+    '401':
       value:
-      - errorCode: EQ-3040016
-        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
-        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
-        additionalInfo:
-        - property: contentType
-          reason: The payload format is in an unsupported format
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
     '403':
       value:
       - errorCode: EQ-3045003
         errorMessage: Operation not allowed
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
         details: Operation not allowed for current user
-    '500':
-      value:
-      - errorCode: EQ-3045004
-        errorMessage: Internal Server Error
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Internal Server Error
-    '401':
-      value:
-      - errorCode: EQ-3000039
-        errorMessage: User not found in request or invalid.
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
   securitySchemes:
     BearerAuth:
       type: http

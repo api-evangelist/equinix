@@ -164,69 +164,16 @@ paths:
                   $ref: '#/components/examples/AgentTemplate_500'
 components:
   schemas:
-    AgentTemplates:
-      type: object
-      properties:
-        href:
-          type: string
-          description: Agent Template URI
-          format: uuid
-          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-        type:
-          type: string
-          description: type
-          example: ANO_AGENT_TEMPLATE
-        uuid:
-          type: string
-          description: Equinix-assigned access point identifier
-          format: uuid
-          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-        name:
-          maxLength: 50
-          minLength: 3
-          type: string
-          description: Equinix-provided agent template name
-        description:
-          type: string
-          description: Equinix-provided agent template description
-        state:
-          type: string
-          description: Agent state
-          enum:
-          - PROVISIONING
-          - PROVISIONED
-          - REPROVISIONING
-          - DEPROVISIONING
-          - DEPROVISIONED
-          - FAILED
-        enabled:
-          type: boolean
-          description: Equinix-provided agent template enabled status
-        agentDefinition:
-          $ref: '#/components/schemas/AgentDefinition'
-        changeLog:
-          $ref: '#/components/schemas/Changelog'
-      description: Agent Template object
-    AgentTemplateGetAllResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          description: Data returned from the API call.
-          items:
-            $ref: '#/components/schemas/AgentTemplates'
-    AgentTemplateId:
-      type: string
-      description: Agent Template UUID
-      format: uuid
-      example: 657400f8-d360-11e9-bb65-2a2ae2dbcce5
     ErrorList:
       type: array
       description: List of Error Message
       items:
         $ref: '#/components/schemas/Error'
+    AgentTemplateId:
+      type: string
+      description: Agent Template UUID
+      format: uuid
+      example: 657400f8-d360-11e9-bb65-2a2ae2dbcce5
     Changelog:
       type: object
       properties:
@@ -282,12 +229,13 @@ components:
           format: date-time
           example: 2020-11-06 07:00:00+00:00
       description: Change log
-    AgentDefinition:
+    PriceError_additionalInfo:
       type: object
       properties:
-        url:
+        property:
           type: string
-          description: Agent Template ReadMe (.md) Definition
+        reason:
+          type: string
     Pagination:
       required:
       - limit
@@ -315,13 +263,6 @@ components:
           type: string
           description: URL relative to the previous item in the response.
       description: Pagination response information
-    PriceError_additionalInfo:
-      type: object
-      properties:
-        property:
-          type: string
-        reason:
-          type: string
     Error:
       required:
       - errorCode
@@ -344,7 +285,82 @@ components:
           items:
             $ref: '#/components/schemas/PriceError_additionalInfo'
       description: Error Response with details
+    AgentDefinition:
+      type: object
+      properties:
+        url:
+          type: string
+          description: Agent Template ReadMe (.md) Definition
+    AgentTemplateGetAllResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/AgentTemplates'
+    AgentTemplates:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Agent Template URI
+          format: uuid
+          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        type:
+          type: string
+          description: type
+          example: ANO_AGENT_TEMPLATE
+        uuid:
+          type: string
+          description: Equinix-assigned access point identifier
+          format: uuid
+          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        name:
+          maxLength: 50
+          minLength: 3
+          type: string
+          description: Equinix-provided agent template name
+        description:
+          type: string
+          description: Equinix-provided agent template description
+        state:
+          type: string
+          description: Agent state
+          enum:
+          - PROVISIONING
+          - PROVISIONED
+          - REPROVISIONING
+          - DEPROVISIONING
+          - DEPROVISIONED
+          - FAILED
+        enabled:
+          type: boolean
+          description: Equinix-provided agent template enabled status
+        agentDefinition:
+          $ref: '#/components/schemas/AgentDefinition'
+        changeLog:
+          $ref: '#/components/schemas/Changelog'
+      description: Agent Template object
   examples:
+    AgentTemplatesResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/agentTemplates/d684aa26-8276-48b7-bb42-a6d9def0a418
+        type: ANO_AGENT_TEMPLATE
+        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+        name: CONNECTION BANDWIDTH UPGRADER AGENT TEMPLATE
+        description: connection bandwidth upgrader agent template
+        state: PROVISIONED
+        enabled: true
+        agentDefinition:
+          url: /equinix/agent-factory/refs/heads/use_pdf_html/agent_factory_schema/equinix/fabric/v1/event_driven/upgrade-bw-primary-connection.md
+        changeLog:
+          createdBy: testuser
+          createdDateTime: 2024-05-06 16:21:18.545214
+          updatedBy: testuser
+          updatedDateTime: 2024-05-06 16:21:18.545214+00:00
     AgentTemplatesGetAllResponseExample:
       value:
         pagination:
@@ -366,6 +382,13 @@ components:
             createdDateTime: 2024-05-06 16:21:18.545214
             updatedBy: testuser
             updatedDateTime: 2024-05-06 16:21:18.545214+00:00
+    AgentTemplate_401:
+      value:
+      - errorCode: EQ-3164013
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        additionalInfo:
+        - reason: You are unauthorized to perform this operation
     AgentTemplate_403:
       value:
       - errorCode: EQ-3164013
@@ -384,29 +407,6 @@ components:
         errorMessage: Agent Template not found or already deleted
         correlationId: 9b6baf30-3eb0-458c-af8b-fff3fae32bc7
         details: Agent Template not found or already deleted
-    AgentTemplate_401:
-      value:
-      - errorCode: EQ-3164013
-        errorMessage: User not found in request or invalid.
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        additionalInfo:
-        - reason: You are unauthorized to perform this operation
-    AgentTemplatesResponseExample:
-      value:
-        href: https://api.equinix.com/fabric/v4/agentTemplates/d684aa26-8276-48b7-bb42-a6d9def0a418
-        type: ANO_AGENT_TEMPLATE
-        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
-        name: CONNECTION BANDWIDTH UPGRADER AGENT TEMPLATE
-        description: connection bandwidth upgrader agent template
-        state: PROVISIONED
-        enabled: true
-        agentDefinition:
-          url: /equinix/agent-factory/refs/heads/use_pdf_html/agent_factory_schema/equinix/fabric/v1/event_driven/upgrade-bw-primary-connection.md
-        changeLog:
-          createdBy: testuser
-          createdDateTime: 2024-05-06 16:21:18.545214
-          updatedBy: testuser
-          updatedDateTime: 2024-05-06 16:21:18.545214+00:00
   securitySchemes:
     BearerAuth:
       type: http

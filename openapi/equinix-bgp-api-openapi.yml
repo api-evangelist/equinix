@@ -361,18 +361,6 @@ paths:
       - BGP
 components:
   schemas:
-    BgpConfig_status:
-      description: Status of the BGP Config. Status "requested" is valid only with the "global" deployment_type.
-      enum:
-      - requested
-      - enabled
-      - disabled
-      type: string
-    BgpSession_address_family:
-      enum:
-      - ipv4
-      - ipv6
-      type: string
     BgpConfigRequestInput:
       example:
         use_case: use_case
@@ -409,85 +397,20 @@ components:
       - asn
       - deployment_type
       type: object
-    Href:
-      example:
-        href: href
-      properties:
-        href:
-          type: string
-      required:
-      - href
-      type: object
-    BgpSession:
-      example:
-        address_family: null
-        updated_at: 2000-01-23 04:56:07+00:00
-        created_at: 2000-01-23 04:56:07+00:00
-        href: href
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        default_route: true
-        device:
-          href: href
-        learned_routes:
-        - 10.32.16.0/31
-        - 10.32.16.0/31
-        status: status
-      properties:
-        address_family:
-          $ref: '#/components/schemas/BgpSession_address_family'
-        created_at:
-          format: date-time
-          type: string
-        default_route:
-          type: boolean
-        device:
-          $ref: '#/components/schemas/Href'
-        href:
-          type: string
-        id:
-          format: uuid
-          type: string
-        learned_routes:
-          items:
-            description: IPv4 or IPv6 range
-            example: 10.32.16.0/31
-            type: string
-          type: array
-        status:
-          description: ' The status of the BGP Session. Multiple status values may be reported when the device is connected to multiple switches, one value per switch. Each status will start with "unknown" and progress to "up" or "down" depending on the connected device. Subsequent "unknown" values indicate a problem acquiring status from the switch. '
-          type: string
-        updated_at:
-          format: date-time
-          type: string
-      required:
-      - address_family
-      type: object
-    GlobalBgpRangeList:
-      example:
-        global_bgp_ranges:
-        - address_family: 6
-          project:
-            href: href
-          range: range
-          href: href
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - address_family: 6
-          project:
-            href: href
-          range: range
-          href: href
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        global_bgp_ranges:
-          items:
-            $ref: '#/components/schemas/GlobalBgpRange'
-          type: array
-      type: object
-    BgpConfigRequestInput_deployment_type:
-      description: Wether the BGP deployment is local or global. Local deployments are configured immediately. Global deployments will need to be reviewed by Equinix Metal engineers.
+    BgpConfig_status:
+      description: Status of the BGP Config. Status "requested" is valid only with the "global" deployment_type.
       enum:
-      - local
+      - requested
+      - enabled
+      - disabled
+      type: string
+    BgpConfig_deployment_type:
+      description: 'In a Local BGP deployment, a customer uses an internal ASN to control routes within a single Equinix Metal datacenter. This means that the routes are never advertised to the global Internet. Global BGP, on the other hand, requires a customer to have a registered ASN and IP space.
+
+        '
+      enum:
       - global
+      - local
       example: local
       type: string
     BgpConfig:
@@ -588,6 +511,50 @@ components:
         status:
           $ref: '#/components/schemas/BgpConfig_status'
       type: object
+    BgpSession:
+      example:
+        address_family: null
+        updated_at: 2000-01-23 04:56:07+00:00
+        created_at: 2000-01-23 04:56:07+00:00
+        href: href
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        default_route: true
+        device:
+          href: href
+        learned_routes:
+        - 10.32.16.0/31
+        - 10.32.16.0/31
+        status: status
+      properties:
+        address_family:
+          $ref: '#/components/schemas/BgpSession_address_family'
+        created_at:
+          format: date-time
+          type: string
+        default_route:
+          type: boolean
+        device:
+          $ref: '#/components/schemas/Href'
+        href:
+          type: string
+        id:
+          format: uuid
+          type: string
+        learned_routes:
+          items:
+            description: IPv4 or IPv6 range
+            example: 10.32.16.0/31
+            type: string
+          type: array
+        status:
+          description: ' The status of the BGP Session. Multiple status values may be reported when the device is connected to multiple switches, one value per switch. Each status will start with "unknown" and progress to "up" or "down" depending on the connected device. Subsequent "unknown" values indicate a problem acquiring status from the switch. '
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - address_family
+      type: object
     BgpSessionList:
       example:
         bgp_sessions:
@@ -621,6 +588,13 @@ components:
             $ref: '#/components/schemas/BgpSession'
           type: array
       type: object
+    BgpConfigRequestInput_deployment_type:
+      description: Wether the BGP deployment is local or global. Local deployments are configured immediately. Global deployments will need to be reviewed by Equinix Metal engineers.
+      enum:
+      - local
+      - global
+      example: local
+      type: string
     Error:
       description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
       properties:
@@ -634,14 +608,10 @@ components:
             type: string
           type: array
       type: object
-    BgpConfig_deployment_type:
-      description: 'In a Local BGP deployment, a customer uses an internal ASN to control routes within a single Equinix Metal datacenter. This means that the routes are never advertised to the global Internet. Global BGP, on the other hand, requires a customer to have a registered ASN and IP space.
-
-        '
+    BgpSession_address_family:
       enum:
-      - global
-      - local
-      example: local
+      - ipv4
+      - ipv6
       type: string
     GlobalBgpRange:
       example:
@@ -663,6 +633,36 @@ components:
           $ref: '#/components/schemas/Href'
         range:
           type: string
+      type: object
+    Href:
+      example:
+        href: href
+      properties:
+        href:
+          type: string
+      required:
+      - href
+      type: object
+    GlobalBgpRangeList:
+      example:
+        global_bgp_ranges:
+        - address_family: 6
+          project:
+            href: href
+          range: range
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - address_family: 6
+          project:
+            href: href
+          range: range
+          href: href
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        global_bgp_ranges:
+          items:
+            $ref: '#/components/schemas/GlobalBgpRange'
+          type: array
       type: object
   securitySchemes:
     x_auth_token:

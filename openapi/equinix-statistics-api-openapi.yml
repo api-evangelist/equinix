@@ -153,41 +153,11 @@ paths:
       deprecated: true
 components:
   schemas:
-    VirtualCircuitId:
-      type: string
-      description: Virtual Circuit UUID
-    EndDateTime:
-      type: string
-      description: End date and time
-      format: date-time
-      example: 2024-07-11 18:06:21+00:00
-    Direction:
-      type: object
-      properties:
-        max:
-          type: number
-          description: Max bandwidth within request time range, represented in units specified by response "units" field
-          format: float
-        mean:
-          type: number
-          description: Mean bandwidth within request time range, represented in units specified by response "units" field
-          format: float
-        metrics:
-          type: array
-          description: Bandwidth utilization statistics for a specified interval.
-          items:
-            $ref: '#/components/schemas/Metrics'
-      description: Directional statistics
     ErrorList:
       type: array
       description: List of Error Message
       items:
         $ref: '#/components/schemas/Error'
-    StartDateTime:
-      type: string
-      description: Start date and time
-      format: date-time
-      example: 2024-07-11 18:06:21+00:00
     BandwidthUtilization:
       type: object
       properties:
@@ -204,32 +174,38 @@ components:
         outbound:
           $ref: '#/components/schemas/Direction'
       description: Bandwidth utilization statistics (octet counters-based)
+    EndDateTime:
+      type: string
+      description: End date and time
+      format: date-time
+      example: 2024-07-11 18:06:21+00:00
     PortUUID:
       type: string
       description: Port UUID
       format: uuid
-    Statistics:
+    viewPoint:
+      type: string
+      description: viewPoint
+      enum:
+      - aSide
+      - zSide
+    Metrics:
       type: object
       properties:
-        startDateTime:
+        intervalEndTimestamp:
           type: string
-          description: Start and duration of the statistical analysis interval.
+          description: Interval end timestamp
           format: date-time
           example: 2020-11-06 07:00:00+00:00
-        endDateTime:
-          type: string
-          description: End and duration of the statistical analysis interval.
-          format: date-time
-          example: 2020-11-06 07:00:00+00:00
-        viewPoint:
-          type: string
-          description: Point of view for connection metrics - aSide or zSide
-          enum:
-          - aSide
-          - zSide
-        bandwidthUtilization:
-          $ref: '#/components/schemas/BandwidthUtilization'
-      description: This API provides service-level traffic metrics so that you can view access and gather key information required to manage service subscription sizing and capacity.
+        max:
+          type: number
+          description: Max bandwidth within statistics object time interval, represented in units specified by response "units" field
+          format: float
+        mean:
+          type: number
+          description: Mean bandwidth within statistics object time interval, represented in units specified by response "units" field
+          format: float
+      description: Bandwidth utilization statistics for a specified interval.
     PriceError_additionalInfo:
       type: object
       properties:
@@ -259,30 +235,65 @@ components:
           items:
             $ref: '#/components/schemas/PriceError_additionalInfo'
       description: Error Response with details
-    Metrics:
+    Statistics:
       type: object
       properties:
-        intervalEndTimestamp:
+        startDateTime:
           type: string
-          description: Interval end timestamp
+          description: Start and duration of the statistical analysis interval.
           format: date-time
           example: 2020-11-06 07:00:00+00:00
+        endDateTime:
+          type: string
+          description: End and duration of the statistical analysis interval.
+          format: date-time
+          example: 2020-11-06 07:00:00+00:00
+        viewPoint:
+          type: string
+          description: Point of view for connection metrics - aSide or zSide
+          enum:
+          - aSide
+          - zSide
+        bandwidthUtilization:
+          $ref: '#/components/schemas/BandwidthUtilization'
+      description: This API provides service-level traffic metrics so that you can view access and gather key information required to manage service subscription sizing and capacity.
+    VirtualCircuitId:
+      type: string
+      description: Virtual Circuit UUID
+    Direction:
+      type: object
+      properties:
         max:
           type: number
-          description: Max bandwidth within statistics object time interval, represented in units specified by response "units" field
+          description: Max bandwidth within request time range, represented in units specified by response "units" field
           format: float
         mean:
           type: number
-          description: Mean bandwidth within statistics object time interval, represented in units specified by response "units" field
+          description: Mean bandwidth within request time range, represented in units specified by response "units" field
           format: float
-      description: Bandwidth utilization statistics for a specified interval.
-    viewPoint:
+        metrics:
+          type: array
+          description: Bandwidth utilization statistics for a specified interval.
+          items:
+            $ref: '#/components/schemas/Metrics'
+      description: Directional statistics
+    StartDateTime:
       type: string
-      description: viewPoint
-      enum:
-      - aSide
-      - zSide
+      description: Start date and time
+      format: date-time
+      example: 2024-07-11 18:06:21+00:00
   examples:
+    '500':
+      value:
+      - errorCode: EQ-3045004
+        errorMessage: Internal Server Error
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Internal Server Error
+    '401':
+      value:
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
     200_port:
       value:
         href: http://api.equinix.com/fabric/v4/ports/xxxxx191-xx70-xxxx-xx04-xxxxxxxa37xx
@@ -312,18 +323,6 @@ components:
               - intervalEndDateTime: 2020-05-21 10:30:00+00:00
                 max: 42.01401189333334
                 mean: 39.40894303096296
-    '403':
-      value:
-      - errorCode: EQ-3045003
-        errorMessage: Operation not allowed
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Operation not allowed for current user
-    '500':
-      value:
-      - errorCode: EQ-3045004
-        errorMessage: Internal Server Error
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Internal Server Error
     200_vc:
       value:
         href: https://api.equinix.com/fabric/v4/connections/97d1850f-4df0-468c-9281-fa7b0dfa2096
@@ -371,11 +370,12 @@ components:
               - intervalEndDateTime: 2021-01-10 20:20:00+00:00
                 max: 42.01401189333334
                 mean: 39.40894303096296
-    '401':
+    '403':
       value:
-      - errorCode: EQ-3000039
-        errorMessage: User not found in request or invalid.
+      - errorCode: EQ-3045003
+        errorMessage: Operation not allowed
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Operation not allowed for current user
   securitySchemes:
     BearerAuth:
       type: http

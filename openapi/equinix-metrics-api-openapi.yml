@@ -296,18 +296,47 @@ paths:
                   $ref: '#/components/examples/500'
 components:
   schemas:
-    StartDateTime:
+    EndDateTime:
       type: string
-      description: Start date and time
+      description: End date and time
       format: date-time
       example: 2024-07-11 18:06:21+00:00
-    PriceError_additionalInfo:
+    Pagination:
+      required:
+      - limit
+      - total
       type: object
       properties:
-        property:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
           type: string
-        reason:
+          description: URL relative to the next item in the response.
+        previous:
           type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    Limit_1:
+      type: integer
+      description: Pagination limit
+      example: 20
+      default: 20
+    MetricFilter:
+      type: object
+      anyOf:
+      - $ref: '#/components/schemas/MetricSimpleExpression'
     PaginationRequest:
       type: object
       properties:
@@ -322,10 +351,20 @@ components:
           description: Number of elements to be requested per page. Number must be between 1 and 100, and the default is 20.
           default: 20
       description: Pagination request information
-    MetricFilter:
+    Metric_datapoints:
       type: object
-      anyOf:
-      - $ref: '#/components/schemas/MetricSimpleExpression'
+      properties:
+        endDateTime:
+          type: string
+          description: Datapoint end date and time
+          format: date-time
+        startDateTime:
+          type: string
+          description: Datapoint start date and time
+          format: date-time
+        value:
+          type: number
+          description: Datapoint value
     MetricFilters:
       type: object
       properties:
@@ -333,33 +372,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MetricFilter'
-    MetricAssetType:
+    Value:
       type: string
-      enum:
-      - ports
-      - connections
-      - metros
-    MetricSimpleExpression:
-      type: object
-      properties:
-        property:
-          type: string
-          description: "Possible field names to use on filters:\n * `/subject` - Metric subject description (required and limited to 1 value)\n * `/name` - Metric names (required)\n * `/dataPoints/endDateTime` - Time of Metrics\n"
-          example: /subject
-        operator:
-          type: string
-          description: "Possible operators to use on filters:\n * `=` - equal\n * `>` - greater than\n * `>=` - greater than or equal to\n * `<` - less than\n * `<=` - less than or equal to\n * `BETWEEN` - between\n * `IN` - in\n"
-          example: '='
-        values:
-          type: array
-          items:
-            type: string
-            example: equinix.fabric.port.bandwidth_rx.usage
-    AssetId:
-      type: string
-      description: Asset UUID
-      format: uuid
-      example: 757400f8-d360-11e9-bb65-2a2ae2dbcce6
+      description: Which value to retrieve
+      example: last
     Metric:
       type: object
       properties:
@@ -386,6 +402,48 @@ components:
           items:
             $ref: '#/components/schemas/Metric_datapoints'
       description: Metric object
+    GetMetricsByAssetResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/Metric'
+    Metric_resource:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Metric resource href
+        uuid:
+          type: string
+          description: Metric resource UUID
+        type:
+          type: string
+          description: Metric resource type
+        state:
+          type: string
+          description: Metric resource state
+        name:
+          type: string
+          description: Metric resource name
+        description:
+          type: string
+          description: Metric resource description
+      description: Metric resource
+    GetMetricsByNameResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/Metric'
     Error:
       required:
       - errorCode
@@ -418,148 +476,61 @@ components:
         pagination:
           $ref: '#/components/schemas/PaginationRequest'
       description: Search requests containing criteria
-    Pagination:
-      required:
-      - limit
-      - total
-      type: object
-      properties:
-        offset:
-          minimum: 0
-          type: integer
-          description: Index of the first item returned in the response. The default is 0.
-          default: 0
-        limit:
-          minimum: 0
-          type: integer
-          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
-          default: 20
-        total:
-          minimum: 0
-          type: integer
-          description: Total number of elements returned.
-        next:
-          type: string
-          description: URL relative to the next item in the response.
-        previous:
-          type: string
-          description: URL relative to the previous item in the response.
-      description: Pagination response information
-    GetMetricsByAssetResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          description: Data returned from the API call.
-          items:
-            $ref: '#/components/schemas/Metric'
-    Limit_1:
-      type: integer
-      description: Pagination limit
-      example: 20
-      default: 20
-    Metric_resource:
-      type: object
-      properties:
-        href:
-          type: string
-          description: Metric resource href
-        uuid:
-          type: string
-          description: Metric resource UUID
-        type:
-          type: string
-          description: Metric resource type
-        state:
-          type: string
-          description: Metric resource state
-        name:
-          type: string
-          description: Metric resource name
-        description:
-          type: string
-          description: Metric resource description
-      description: Metric resource
-    Metric_datapoints:
-      type: object
-      properties:
-        endDateTime:
-          type: string
-          description: Datapoint end date and time
-          format: date-time
-        startDateTime:
-          type: string
-          description: Datapoint start date and time
-          format: date-time
-        value:
-          type: number
-          description: Datapoint value
-    EndDateTime:
-      type: string
-      description: End date and time
-      format: date-time
-      example: 2024-07-11 18:06:21+00:00
-    ErrorList:
-      type: array
-      description: List of Error Message
-      items:
-        $ref: '#/components/schemas/Error'
     Offset:
       type: integer
       description: Pagination offset
       example: 0
       default: 0
-    Value:
+    StartDateTime:
       type: string
-      description: Which value to retrieve
-      example: last
-    GetMetricsByNameResponse:
+      description: Start date and time
+      format: date-time
+      example: 2024-07-11 18:06:21+00:00
+    MetricAssetType:
+      type: string
+      enum:
+      - ports
+      - connections
+      - metros
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
+    MetricSimpleExpression:
       type: object
       properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
+        property:
+          type: string
+          description: "Possible field names to use on filters:\n * `/subject` - Metric subject description (required and limited to 1 value)\n * `/name` - Metric names (required)\n * `/dataPoints/endDateTime` - Time of Metrics\n"
+          example: /subject
+        operator:
+          type: string
+          description: "Possible operators to use on filters:\n * `=` - equal\n * `>` - greater than\n * `>=` - greater than or equal to\n * `<` - less than\n * `<=` - less than or equal to\n * `BETWEEN` - between\n * `IN` - in\n"
+          example: '='
+        values:
           type: array
-          description: Data returned from the API call.
           items:
-            $ref: '#/components/schemas/Metric'
+            type: string
+            example: equinix.fabric.port.bandwidth_rx.usage
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    AssetId:
+      type: string
+      description: Asset UUID
+      format: uuid
+      example: 757400f8-d360-11e9-bb65-2a2ae2dbcce6
   examples:
-    '403':
+    '401':
       value:
-      - errorCode: EQ-3045003
-        errorMessage: Operation not allowed
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Operation not allowed for current user
-    '500':
-      value:
-      - errorCode: EQ-3045004
-        errorMessage: Internal Server Error
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Internal Server Error
-    search-metrics:
-      value:
-        filter:
-          and:
-          - property: /subject
-            operator: '='
-            values:
-            - /fabric/v4/ports/8ac8ecfe-c7cb-4def-9f77-5ce93c19d83d
-          - property: /name
-            operator: IN
-            values:
-            - equinix.fabric.port.bandwidth_rx.usage
-            - equinix.fabric.port.bandwidth_tx.usage
-            - equinix.fabric.port.operation.status
-          - property: /dataPoints/endDateTime
-            operator: BETWEEN
-            values:
-            - 2025-09-01 19:19:50+00:00
-            - 2025-09-03 19:19:50+00:00
-        pagination:
-          offset: 0
-          limit: 10
     get-metrics-by-name:
       value:
         pagination:
@@ -600,12 +571,34 @@ components:
           datapoints:
           - endDateTime: 2026-02-03 23:05:04+00:00
             value: 69.8
-    '404':
+    search-metrics:
       value:
-      - errorCode: EQ-3045811
-        errorMessage: uuid not found
+        filter:
+          and:
+          - property: /subject
+            operator: '='
+            values:
+            - /fabric/v4/ports/8ac8ecfe-c7cb-4def-9f77-5ce93c19d83d
+          - property: /name
+            operator: IN
+            values:
+            - equinix.fabric.port.bandwidth_rx.usage
+            - equinix.fabric.port.bandwidth_tx.usage
+            - equinix.fabric.port.operation.status
+          - property: /dataPoints/endDateTime
+            operator: BETWEEN
+            values:
+            - 2025-09-01 19:19:50+00:00
+            - 2025-09-03 19:19:50+00:00
+        pagination:
+          offset: 0
+          limit: 10
+    '500':
+      value:
+      - errorCode: EQ-3045004
+        errorMessage: Internal Server Error
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: uuid not found
+        details: Internal Server Error
     get-metrics-by-asset-id:
       value:
         pagination:
@@ -692,11 +685,18 @@ components:
             value: 251
           - endDateTime: 2025-05-14 14:57:46+00:00
             value: 243
-    '401':
+    '404':
       value:
-      - errorCode: EQ-3000039
-        errorMessage: User not found in request or invalid.
+      - errorCode: EQ-3045811
+        errorMessage: uuid not found
         correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: uuid not found
+    '403':
+      value:
+      - errorCode: EQ-3045003
+        errorMessage: Operation not allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Operation not allowed for current user
   securitySchemes:
     BearerAuth:
       type: http

@@ -693,22 +693,6 @@ paths:
       description: Equinix API
 components:
   schemas:
-    Attachment:
-      type: object
-      properties:
-        id:
-          maxLength: 36
-          minLength: 36
-          type: string
-          description: Identifier of the binary attachment UUID.
-          example: c77c5f58-a7ea-4e88-9fc4-1a2900027425
-        name:
-          maxLength: 100
-          minLength: 5
-          type: string
-          description: Name of the binary attachment.
-          example: error-log
-      description: Attachments
     NoteRequest:
       type: object
       required:
@@ -733,137 +717,116 @@ components:
           items:
             $ref: '#/components/schemas/Attachment'
       description: Extra notes about a given entity
-    Orders:
-      allOf:
-      - $ref: '#/components/schemas/ordersBase'
-      - $ref: '#/components/schemas/OrderDetails'
-      description: An order could be request, service or ticket to performs specified activity on an colo businesss
-    Negotiations_request:
-      type: object
-      required:
-      - action
-      - referenceId
-      properties:
-        referenceId:
-          type: string
-          description: 'Unique identifier to reference specific activity or order line id. '
-          example: 4-9091830
-        action:
-          type: string
-          description: Type of actions to be carried out with negotiation. Use `APPROVE` to accept order with new proposed date, `APPROVE_NON_EXPEDITE` to accept order without expedite and `CANCEL` to cancel order
-          enum:
-          - APPROVE
-          - APPROVE_NON_EXPEDITE
-          - CANCEL
-        reason:
-          type: string
-          description: Reason for cancelling the negotiation
-          minLength: 5
-          maxLength: 4000
-          example: Cancelling the new time
-    Contacts:
-      type: object
-      properties:
-        registeredUser:
-          type: string
-          description: Username of a registered user.
-          example: john_doe
-        firstName:
-          type: string
-          description: First name of the contact.
-          example: John
-        lastName:
-          type: string
-          description: Last name of the contact.
-          example: Doe
-        type:
-          type: string
-          description: Communications type
-          enum:
-          - ORDERING
-          - NOTIFICATION
-          - TECHNICAL
-          - RESELLER
-        availability:
-          type: string
-          description: Contact's availability to receive calls.
-          default: ANYTIME
-          enum:
-          - WORK_HOURS
-          - ANYTIME
-        timezone:
-          $ref: '#/components/schemas/TIME_ZONE_LIST'
-        details:
-          type: array
-          description: Reference of the related party, could be a party reference or a party role reference
-          items:
-            $ref: '#/components/schemas/ContactsDetails'
-      description: Contact information.
-    price:
-      description: Pricing details for a particular service or order, This can be one time charge or recurring charge
-      type: object
-      properties:
-        value:
-          type: number
-          description: To be used with `valueType` and `type`. Can be used to denote price or discount for an order or service
-        valueType:
-          type: string
-          description: To indicate if `value` is of absolute or percentage value. i.e Use ABSOLUTE for $50 or PERCENTAGE for 50%
-          enum:
-          - ABSOLUTE
-          - PERCENTAGE
-        type:
-          type: string
-          description: 'To indicate the type of `value` and `valueType`. Known values include: ONE_TIME_CHARGE, MONTHLY_CHARGE, MONTHLY_DISCOUNT, ONE_TIME_DISCOUNT, NET_MONTHLY_CHARGE, NET_ONE_TIME_CHARGE'
-    Cancel_Request:
-      type: object
-      required:
-      - reason
-      properties:
-        reason:
-          type: string
-          description: Reason for cancellation
-          minLength: 5
-          maxLength: 4000
-        attachments:
-          type: array
-          description: File(s) attached
-          maxItems: 5
-          items:
-            $ref: '#/components/schemas/Attachment'
-        lineIds:
-          type: array
-          minItems: 0
-          maxItems: 1
-          items:
-            type: string
-          description: Refers to the `lineId` of product/service.
-          example:
-          - 1-D89731S
-      description: Cancelling the Order
-    ContactsDetails:
-      type: object
-      properties:
-        type:
-          type: string
-          description: 'Communications Type '
-          example: PHONE
-          enum:
-          - PHONE
-          - EMAIL
-          - MOBILE
-        value:
-          type: string
-          description: Value of contact details `type`
-          example: +1-4601231122
-      description: Contact information.
-    OrderDetails:
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ordersLine'
+    TIME_ZONE_LIST:
+      type: string
+      description: Contact's timezone
+      example: America/Los_Angeles
+      enum:
+      - Atlantic/Canary
+      - Europe/Dublin
+      - Europe/London
+      - Europe/Lisbon
+      - Africa/Algiers
+      - Europe/Berlin
+      - Europe/Amsterdam
+      - Europe/Copenhagen
+      - Europe/Madrid
+      - Europe/Paris
+      - Europe/Stockholm
+      - Europe/Zurich
+      - Europe/Warsaw
+      - Africa/Cairo
+      - Africa/Johannesburg
+      - Africa/Lagos
+      - Europe/Sofia
+      - Africa/Nairobi
+      - Asia/Jerusalem
+      - Europe/Istanbul
+      - Europe/Moscow
+      - Asia/Riyadh
+      - Asia/Dubai
+      - Asia/Kabul
+      - Asia/Tehran
+      - Asia/Karachi
+      - Indian/Maldives
+      - Asia/Kolkata
+      - Asia/Kathmandu
+      - Asia/Omsk
+      - Asia/Rangoon
+      - Asia/Jakarta
+      - Asia/Ho_Chi_Minh
+      - Asia/Brunei
+      - Asia/Hong_Kong
+      - Asia/Kuala_Lumpur
+      - Asia/Manila
+      - Asia/Shanghai
+      - Asia/Singapore
+      - Asia/Taipei
+      - Australia/Perth
+      - Asia/Seoul
+      - Asia/Tokyo
+      - Australia/Darwin
+      - Australia/Brisbane
+      - Pacific/Guam
+      - Australia/Adelaide
+      - Australia/Sydney
+      - Pacific/Auckland
+      - Pacific/Chatham
+      - Indian/Christmas
+      - America/Scoresbysund
+      - Atlantic/South_Georgia
+      - America/Sao_Paulo
+      - America/Detroit
+      - America/New_York
+      - America/Puerto_Rico
+      - America/Toronto
+      - America/Bogota
+      - America/Chicago
+      - America/Winnipeg
+      - America/Denver
+      - America/Edmonton
+      - America/Mexico_City
+      - America/Los_Angeles
+      - America/Vancouver
+      - America/Phoenix
+      - America/Anchorage
+      - America/Halifax
+      - America/Lima
+      - America/Monterrey
+      - Pacific/Gambier
+      - Pacific/Marquesas
+      - Pacific/Honolulu
+      - Pacific/Fiji
+      - Asia/Muscat
+      - America/Argentina/Buenos_Aires
+      - America/Caracas
+      - Etc/GMT+12
+      - UTC
+      - GMT
+      - America/Santiago
+      - America/St_Johns
+      - Asia/Almaty
+      - Asia/Bangkok
+      - Asia/Calcutta
+      - Asia/Magadan
+      - Asia/Yekaterinburg
+      - Australia/Eucla
+      - Australia/Lord_Howe
+      - Europe/Bratislava
+      - Europe/Brussels
+      - Europe/Prague
+      - Europe/Rome
+      - Europe/Helsinki
+      - Pacific/Kiritimati
+      - Pacific/Midway
+      - Pacific/Tongatapu
+      - Australia/Melbourne
+      - Australia/NSW
+      - Australia/Queensland
+      - Australia/South
+      - Australia/Victoria
+      - Australia/West
+      - Australia/Canberra
     currencyCode:
       description: ISO-4217 currency code
       type: string
@@ -1047,6 +1010,25 @@ components:
       - ZAR
       - ZMW
       - ZWL
+    purchaseOrder:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - EXEMPTED
+          - NEW
+          - EXISTING
+          description: Type of the purchase order
+        number:
+          type: string
+          description: Purchase order number
+        closingDate:
+          type: string
+          description: Closing date of purchase order.
+          format: date
+          example: '2020-08-25T00:00:00.000Z'
+      description: Purchase Order
     ordersBase:
       description: Orders Base is the properties or attributes which common for every order details
       type: object
@@ -1142,148 +1124,6 @@ components:
           type: boolean
           description: When `true`, order can be modified.
           default: false
-    TIME_ZONE_LIST:
-      type: string
-      description: Contact's timezone
-      example: America/Los_Angeles
-      enum:
-      - Atlantic/Canary
-      - Europe/Dublin
-      - Europe/London
-      - Europe/Lisbon
-      - Africa/Algiers
-      - Europe/Berlin
-      - Europe/Amsterdam
-      - Europe/Copenhagen
-      - Europe/Madrid
-      - Europe/Paris
-      - Europe/Stockholm
-      - Europe/Zurich
-      - Europe/Warsaw
-      - Africa/Cairo
-      - Africa/Johannesburg
-      - Africa/Lagos
-      - Europe/Sofia
-      - Africa/Nairobi
-      - Asia/Jerusalem
-      - Europe/Istanbul
-      - Europe/Moscow
-      - Asia/Riyadh
-      - Asia/Dubai
-      - Asia/Kabul
-      - Asia/Tehran
-      - Asia/Karachi
-      - Indian/Maldives
-      - Asia/Kolkata
-      - Asia/Kathmandu
-      - Asia/Omsk
-      - Asia/Rangoon
-      - Asia/Jakarta
-      - Asia/Ho_Chi_Minh
-      - Asia/Brunei
-      - Asia/Hong_Kong
-      - Asia/Kuala_Lumpur
-      - Asia/Manila
-      - Asia/Shanghai
-      - Asia/Singapore
-      - Asia/Taipei
-      - Australia/Perth
-      - Asia/Seoul
-      - Asia/Tokyo
-      - Australia/Darwin
-      - Australia/Brisbane
-      - Pacific/Guam
-      - Australia/Adelaide
-      - Australia/Sydney
-      - Pacific/Auckland
-      - Pacific/Chatham
-      - Indian/Christmas
-      - America/Scoresbysund
-      - Atlantic/South_Georgia
-      - America/Sao_Paulo
-      - America/Detroit
-      - America/New_York
-      - America/Puerto_Rico
-      - America/Toronto
-      - America/Bogota
-      - America/Chicago
-      - America/Winnipeg
-      - America/Denver
-      - America/Edmonton
-      - America/Mexico_City
-      - America/Los_Angeles
-      - America/Vancouver
-      - America/Phoenix
-      - America/Anchorage
-      - America/Halifax
-      - America/Lima
-      - America/Monterrey
-      - Pacific/Gambier
-      - Pacific/Marquesas
-      - Pacific/Honolulu
-      - Pacific/Fiji
-      - Asia/Muscat
-      - America/Argentina/Buenos_Aires
-      - America/Caracas
-      - Etc/GMT+12
-      - UTC
-      - GMT
-      - America/Santiago
-      - America/St_Johns
-      - Asia/Almaty
-      - Asia/Bangkok
-      - Asia/Calcutta
-      - Asia/Magadan
-      - Asia/Yekaterinburg
-      - Australia/Eucla
-      - Australia/Lord_Howe
-      - Europe/Bratislava
-      - Europe/Brussels
-      - Europe/Prague
-      - Europe/Rome
-      - Europe/Helsinki
-      - Pacific/Kiritimati
-      - Pacific/Midway
-      - Pacific/Tongatapu
-      - Australia/Melbourne
-      - Australia/NSW
-      - Australia/Queensland
-      - Australia/South
-      - Australia/Victoria
-      - Australia/West
-      - Australia/Canberra
-    Error:
-      title: Error Info
-      type: array
-      items:
-        title: Error details
-        type: object
-        properties:
-          errorCode:
-            type: string
-            example: EQ-20YYXXX
-          errorMessage:
-            type: string
-            example: Error message
-          details:
-            type: string
-            example: Error details
-          correlationId:
-            type: string
-            example: Correlation ID to trace the error back
-          help:
-            type: string
-            example: URL to a help page for the corresponding errorCode
-          additionalInfo:
-            title: Error details
-            type: object
-            properties:
-              property:
-                type: string
-                example: id
-              reason:
-                type: string
-                example: missing id
     Negotiations:
       title: Negotiations messages
       description: Negotiations message with alternative date and time
@@ -1316,40 +1156,39 @@ components:
           description: Negotiations message
           minLength: 5
           maxLength: 4000
-    productAdditionalInfo:
-      title: Additional product details
-      description: This section is reserved to display product specific information
-      type: array
-      items:
-        properties:
-          key:
-            type: string
-          value:
-            type: string
-      example:
-      - key: ASSET_ID
-        value: 4-89137987923
-      - key: SERIAL_NUMBER
-        value: '232891719'
-    purchaseOrder:
+    OrderDetails:
       type: object
       properties:
-        type:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ordersLine'
+    Cancel_Request:
+      type: object
+      required:
+      - reason
+      properties:
+        reason:
           type: string
-          enum:
-          - EXEMPTED
-          - NEW
-          - EXISTING
-          description: Type of the purchase order
-        number:
-          type: string
-          description: Purchase order number
-        closingDate:
-          type: string
-          description: Closing date of purchase order.
-          format: date
-          example: '2020-08-25T00:00:00.000Z'
-      description: Purchase Order
+          description: Reason for cancellation
+          minLength: 5
+          maxLength: 4000
+        attachments:
+          type: array
+          description: File(s) attached
+          maxItems: 5
+          items:
+            $ref: '#/components/schemas/Attachment'
+        lineIds:
+          type: array
+          minItems: 0
+          maxItems: 1
+          items:
+            type: string
+          description: Refers to the `lineId` of product/service.
+          example:
+          - 1-D89731S
+      description: Cancelling the Order
     Note:
       type: object
       properties:
@@ -1389,6 +1228,93 @@ components:
           items:
             $ref: '#/components/schemas/Attachment'
       description: Extra information about a given entity
+    ContactsDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'Communications Type '
+          example: PHONE
+          enum:
+          - PHONE
+          - EMAIL
+          - MOBILE
+        value:
+          type: string
+          description: Value of contact details `type`
+          example: +1-4601231122
+      description: Contact information.
+    Negotiations_request:
+      type: object
+      required:
+      - action
+      - referenceId
+      properties:
+        referenceId:
+          type: string
+          description: 'Unique identifier to reference specific activity or order line id. '
+          example: 4-9091830
+        action:
+          type: string
+          description: Type of actions to be carried out with negotiation. Use `APPROVE` to accept order with new proposed date, `APPROVE_NON_EXPEDITE` to accept order without expedite and `CANCEL` to cancel order
+          enum:
+          - APPROVE
+          - APPROVE_NON_EXPEDITE
+          - CANCEL
+        reason:
+          type: string
+          description: Reason for cancelling the negotiation
+          minLength: 5
+          maxLength: 4000
+          example: Cancelling the new time
+    price:
+      description: Pricing details for a particular service or order, This can be one time charge or recurring charge
+      type: object
+      properties:
+        value:
+          type: number
+          description: To be used with `valueType` and `type`. Can be used to denote price or discount for an order or service
+        valueType:
+          type: string
+          description: To indicate if `value` is of absolute or percentage value. i.e Use ABSOLUTE for $50 or PERCENTAGE for 50%
+          enum:
+          - ABSOLUTE
+          - PERCENTAGE
+        type:
+          type: string
+          description: 'To indicate the type of `value` and `valueType`. Known values include: ONE_TIME_CHARGE, MONTHLY_CHARGE, MONTHLY_DISCOUNT, ONE_TIME_DISCOUNT, NET_MONTHLY_CHARGE, NET_ONE_TIME_CHARGE'
+    Error:
+      title: Error Info
+      type: array
+      items:
+        title: Error details
+        type: object
+        properties:
+          errorCode:
+            type: string
+            example: EQ-20YYXXX
+          errorMessage:
+            type: string
+            example: Error message
+          details:
+            type: string
+            example: Error details
+          correlationId:
+            type: string
+            example: Correlation ID to trace the error back
+          help:
+            type: string
+            example: URL to a help page for the corresponding errorCode
+          additionalInfo:
+            title: Error details
+            type: object
+            properties:
+              property:
+                type: string
+                example: id
+              reason:
+                type: string
+                example: missing id
     ordersLine:
       description: Orders Line contains information appplicable for all the orders type i.e smart hands, work visit and cross connect
       type: object
@@ -1478,11 +1404,222 @@ components:
         modifiable:
           type: boolean
           description: When `true`, order can be modified
+    Attachment:
+      type: object
+      properties:
+        id:
+          maxLength: 36
+          minLength: 36
+          type: string
+          description: Identifier of the binary attachment UUID.
+          example: c77c5f58-a7ea-4e88-9fc4-1a2900027425
+        name:
+          maxLength: 100
+          minLength: 5
+          type: string
+          description: Name of the binary attachment.
+          example: error-log
+      description: Attachments
     NegotiationsMessages:
       title: Messages
       type: array
       items:
         $ref: '#/components/schemas/Negotiations'
+    productAdditionalInfo:
+      title: Additional product details
+      description: This section is reserved to display product specific information
+      type: array
+      items:
+        properties:
+          key:
+            type: string
+          value:
+            type: string
+      example:
+      - key: ASSET_ID
+        value: 4-89137987923
+      - key: SERIAL_NUMBER
+        value: '232891719'
+    Orders:
+      allOf:
+      - $ref: '#/components/schemas/ordersBase'
+      - $ref: '#/components/schemas/OrderDetails'
+      description: An order could be request, service or ticket to performs specified activity on an colo businesss
+    Contacts:
+      type: object
+      properties:
+        registeredUser:
+          type: string
+          description: Username of a registered user.
+          example: john_doe
+        firstName:
+          type: string
+          description: First name of the contact.
+          example: John
+        lastName:
+          type: string
+          description: Last name of the contact.
+          example: Doe
+        type:
+          type: string
+          description: Communications type
+          enum:
+          - ORDERING
+          - NOTIFICATION
+          - TECHNICAL
+          - RESELLER
+        availability:
+          type: string
+          description: Contact's availability to receive calls.
+          default: ANYTIME
+          enum:
+          - WORK_HOURS
+          - ANYTIME
+        timezone:
+          $ref: '#/components/schemas/TIME_ZONE_LIST'
+        details:
+          type: array
+          description: Reference of the related party, could be a party reference or a party role reference
+          items:
+            $ref: '#/components/schemas/ContactsDetails'
+      description: Contact information.
+    IbxCode:
+      pattern: ^[A-Z]{2}[0-9]+x?$
+      type: string
+      description: IBX data center identifier.
+      example: CH1
+    AccountNumber:
+      minLength: 1
+      type: string
+      description: Identifier of a billing account, with permission to order colocation products.
+      example: '132028'
+    ContractTerm:
+      type: string
+      description: Contract term length.
+      example: TERM_24_MONTHS
+      enum:
+      - TERM_24_MONTHS
+      - TERM_36_MONTHS
+      - TERM_48_MONTHS
+      - TERM_60_MONTHS
+    ValidationErrorAdditionalInfoList:
+      minItems: 1
+      type: array
+      description: Contains application specific information for this error. The object inside this array can have any number of application specific properties.
+      items:
+        $ref: '#/components/schemas/ValidationErrorAdditionalInfo'
+    OrderCreateResponse:
+      required:
+      - orderNumber
+      type: object
+      properties:
+        orderNumber:
+          $ref: '#/components/schemas/OrderNumber'
+    OrderCreateRequest:
+      required:
+      - accountNumber
+      - ibxCode
+      - contractTerm
+      - orderItem
+      type: object
+      properties:
+        accountNumber:
+          $ref: '#/components/schemas/AccountNumber'
+        customerReference:
+          maxLength: 100
+          type: string
+          description: Supplementary identifier for your discretionary use. For example, your internal identifier.
+          example: My Reference
+        endCustomerName:
+          type: string
+          description: End customer name. Applicable and required if a reseller billing account is used.
+          example: Michael Scott
+        ibxCode:
+          $ref: '#/components/schemas/IbxCode'
+        contractTerm:
+          $ref: '#/components/schemas/ContractTerm'
+        orderItem:
+          $ref: '#/components/schemas/OrderItem'
+        purchaseOrderNumber:
+          $ref: '#/components/schemas/PurchaseOrderNumber'
+        technicalContact:
+          $ref: '#/components/schemas/ContactDetails'
+    ValidationErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/ValidationError'
+    OrderNumber:
+      minLength: 1
+      type: string
+      description: Order Number
+      example: 1-126546546546
+    OrderItem:
+      required:
+      - drawCapacity
+      - fabricPort
+      - numberOfCabinets
+      - cabinetDimensions
+      - pdus
+      type: object
+      properties:
+        drawCapacity:
+          $ref: '#/components/schemas/Rating'
+        fabricPort:
+          type: boolean
+          description: Indicates if a single, primary Fabric port should be included and delivered to one of the ordered cabinets.
+          example: true
+        numberOfCabinets:
+          minimum: 1
+          maximum: 2147483647
+          type: integer
+          description: The number of ordered cabinets.
+          example: 1
+        cabinetDimensions:
+          $ref: '#/components/schemas/Dimensions'
+        pdus:
+          type: boolean
+          description: Indicates if an Equinix-recommended set of two PDUs, for single-phase circuit, per cabinet should be installed.
+          example: true
+      description: Order details.
+    ValidationError:
+      required:
+      - errorCode
+      - errorMessage
+      properties:
+        errorCode:
+          maxLength: 10
+          minLength: 10
+          type: string
+          description: Application error code. Format :EQ-<error code>
+          example: EQ-7000422
+        errorMessage:
+          type: string
+          description: Application error message
+          example: Unprocessable Entity
+        correlationId:
+          type: string
+          description: Correlation ID without any sensitive or meaningful information.
+          example: dd270016-e866-4146-9a53-84e5ea65ec06
+        details:
+          type: string
+          description: More information on errors.
+          example: The submitted payload does not meet validation criteria
+        help:
+          type: string
+          description: Help message or URL to a help page for the corresponding errorCode.
+          example: Please fix submitted payload according to additionalInfo
+        additionalInfo:
+          $ref: '#/components/schemas/ValidationErrorAdditionalInfoList'
+      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
+    ContactAvailability:
+      type: string
+      description: When is the best time to call.
+      example: WORK_HOURS
+      enum:
+      - WORK_HOURS
+      - ANYTIME
+      - CUSTOMER_BUSINESS_HOURS
+      - NOT_AVAILABLE
     Phone:
       required:
       - number
@@ -1497,43 +1634,6 @@ components:
         availability:
           $ref: '#/components/schemas/ContactAvailability'
       description: Phone number details.
-    Dimension:
-      required:
-      - unit
-      - value
-      type: object
-      properties:
-        value:
-          type: integer
-          description: Dimension Value
-          example: 482
-        unit:
-          type: string
-          description: Unit of measure of the product
-          example: MILLIMETER
-          enum:
-          - MILLIMETER
-          - CENTIMETER
-          - METER
-    ValidationErrors:
-      type: array
-      items:
-        $ref: '#/components/schemas/ValidationError'
-    OrderNumber:
-      minLength: 1
-      type: string
-      description: Order Number
-      example: 1-126546546546
-    IbxCode:
-      pattern: ^[A-Z]{2}[0-9]+x?$
-      type: string
-      description: IBX data center identifier.
-      example: CH1
-    PurchaseOrderNumber:
-      minLength: 1
-      type: string
-      description: Purchase order number. Optional, unless the billing account requires it.
-      example: 8-132028
     Error_2:
       required:
       - errorCode
@@ -1565,13 +1665,54 @@ components:
         additionalInfo:
           $ref: '#/components/schemas/ErrorAdditionalInfoList'
       description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
-    OrderCreateResponse:
+    ContactDetails:
       required:
-      - orderNumber
+      - email
+      - firstName
+      - lastName
       type: object
       properties:
-        orderNumber:
-          $ref: '#/components/schemas/OrderNumber'
+        firstName:
+          maxLength: 50
+          type: string
+          description: First name.
+          example: John
+        lastName:
+          maxLength: 50
+          type: string
+          description: Last name.
+          example: Smith
+        email:
+          maxLength: 100
+          type: string
+          description: Email address.
+          example: john@smith.com
+        phone:
+          $ref: '#/components/schemas/Phone'
+      description: Contact person details for technical inquiries.
+    PurchaseOrderNumber:
+      minLength: 1
+      type: string
+      description: Purchase order number. Optional, unless the billing account requires it.
+      example: 8-132028
+    Dimension:
+      required:
+      - unit
+      - value
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Dimension Value
+          example: 482
+        unit:
+          type: string
+          description: Unit of measure of the product
+          example: MILLIMETER
+          enum:
+          - MILLIMETER
+          - CENTIMETER
+          - METER
     Dimensions:
       type: object
       required:
@@ -1585,112 +1726,6 @@ components:
           $ref: '#/components/schemas/Dimension'
         height:
           $ref: '#/components/schemas/Dimension'
-    ValidationErrorAdditionalInfoList:
-      minItems: 1
-      type: array
-      description: Contains application specific information for this error. The object inside this array can have any number of application specific properties.
-      items:
-        $ref: '#/components/schemas/ValidationErrorAdditionalInfo'
-    ErrorAdditionalInfo:
-      properties:
-        property:
-          type: string
-          description: Property at which the error occurs. Can be empty.
-          example: $.info
-        reason:
-          type: string
-          description: Fallback error message in plain English.
-          example: must not be blank
-    ContractTerm:
-      type: string
-      description: Contract term length.
-      example: TERM_24_MONTHS
-      enum:
-      - TERM_24_MONTHS
-      - TERM_36_MONTHS
-      - TERM_48_MONTHS
-      - TERM_60_MONTHS
-    ErrorAdditionalInfoList:
-      type: array
-      description: Contains application specific information for this error. The object inside this array can have any number of application specific properties.
-      items:
-        $ref: '#/components/schemas/ErrorAdditionalInfo'
-    Rating:
-      type: number
-      description: Maximum, combined power draw of all cabinets in your order, measured in kVA. Applicable values, in 0.5 increments, depend on the IBX data center.
-      format: double
-      example: 5
-    ContactAvailability:
-      type: string
-      description: When is the best time to call.
-      example: WORK_HOURS
-      enum:
-      - WORK_HOURS
-      - ANYTIME
-      - CUSTOMER_BUSINESS_HOURS
-      - NOT_AVAILABLE
-    AccountNumber:
-      minLength: 1
-      type: string
-      description: Identifier of a billing account, with permission to order colocation products.
-      example: '132028'
-    OrderCreateRequest:
-      required:
-      - accountNumber
-      - ibxCode
-      - contractTerm
-      - orderItem
-      type: object
-      properties:
-        accountNumber:
-          $ref: '#/components/schemas/AccountNumber'
-        customerReference:
-          maxLength: 100
-          type: string
-          description: Supplementary identifier for your discretionary use. For example, your internal identifier.
-          example: My Reference
-        endCustomerName:
-          type: string
-          description: End customer name. Applicable and required if a reseller billing account is used.
-          example: Michael Scott
-        ibxCode:
-          $ref: '#/components/schemas/IbxCode'
-        contractTerm:
-          $ref: '#/components/schemas/ContractTerm'
-        orderItem:
-          $ref: '#/components/schemas/OrderItem'
-        purchaseOrderNumber:
-          $ref: '#/components/schemas/PurchaseOrderNumber'
-        technicalContact:
-          $ref: '#/components/schemas/ContactDetails'
-    OrderItem:
-      required:
-      - drawCapacity
-      - fabricPort
-      - numberOfCabinets
-      - cabinetDimensions
-      - pdus
-      type: object
-      properties:
-        drawCapacity:
-          $ref: '#/components/schemas/Rating'
-        fabricPort:
-          type: boolean
-          description: Indicates if a single, primary Fabric port should be included and delivered to one of the ordered cabinets.
-          example: true
-        numberOfCabinets:
-          minimum: 1
-          maximum: 2147483647
-          type: integer
-          description: The number of ordered cabinets.
-          example: 1
-        cabinetDimensions:
-          $ref: '#/components/schemas/Dimensions'
-        pdus:
-          type: boolean
-          description: Indicates if an Equinix-recommended set of two PDUs, for single-phase circuit, per cabinet should be installed.
-          example: true
-      description: Order details.
     ValidationErrorAdditionalInfo:
       required:
       - reason
@@ -1717,65 +1752,30 @@ components:
           additionalProperties:
             type: string
           description: A map containing additional violation parameters, these can be used to render localized error messages. The list of available parameters is different for each validationRuleTag.
+    Rating:
+      type: number
+      description: Maximum, combined power draw of all cabinets in your order, measured in kVA. Applicable values, in 0.5 increments, depend on the IBX data center.
+      format: double
+      example: 5
+    ErrorAdditionalInfoList:
+      type: array
+      description: Contains application specific information for this error. The object inside this array can have any number of application specific properties.
+      items:
+        $ref: '#/components/schemas/ErrorAdditionalInfo'
     Errors:
       type: array
       items:
         $ref: '#/components/schemas/Error_2'
-    ContactDetails:
-      required:
-      - email
-      - firstName
-      - lastName
-      type: object
+    ErrorAdditionalInfo:
       properties:
-        firstName:
-          maxLength: 50
+        property:
           type: string
-          description: First name.
-          example: John
-        lastName:
-          maxLength: 50
+          description: Property at which the error occurs. Can be empty.
+          example: $.info
+        reason:
           type: string
-          description: Last name.
-          example: Smith
-        email:
-          maxLength: 100
-          type: string
-          description: Email address.
-          example: john@smith.com
-        phone:
-          $ref: '#/components/schemas/Phone'
-      description: Contact person details for technical inquiries.
-    ValidationError:
-      required:
-      - errorCode
-      - errorMessage
-      properties:
-        errorCode:
-          maxLength: 10
-          minLength: 10
-          type: string
-          description: Application error code. Format :EQ-<error code>
-          example: EQ-7000422
-        errorMessage:
-          type: string
-          description: Application error message
-          example: Unprocessable Entity
-        correlationId:
-          type: string
-          description: Correlation ID without any sensitive or meaningful information.
-          example: dd270016-e866-4146-9a53-84e5ea65ec06
-        details:
-          type: string
-          description: More information on errors.
-          example: The submitted payload does not meet validation criteria
-        help:
-          type: string
-          description: Help message or URL to a help page for the corresponding errorCode.
-          example: Please fix submitted payload according to additionalInfo
-        additionalInfo:
-          $ref: '#/components/schemas/ValidationErrorAdditionalInfoList'
-      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
+          description: Fallback error message in plain English.
+          example: must not be blank
   securitySchemes:
     BearerAuth:
       type: http

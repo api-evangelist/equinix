@@ -127,112 +127,6 @@ paths:
               $ref: '#/components/schemas/orderhistoryapirequest'
 components:
   schemas:
-    product-types-enum:
-      title: Product Types(Order Types) Enum
-      type: string
-      example: CROSS_CONNECT
-      enum:
-      - SMART_HANDS
-      - TROUBLE
-      - SHIPMENT
-      - WORK_VISIT
-      - SECURITY_ACCESS
-      - CONFERENCE_ROOM
-      - TOUR_REQUESTS
-      - CROSS_CONNECT
-      - CLOUD_EXCHANGE_PORT
-      - INTERNET_EXCHANGE_PORT
-      - METRO_CONNECT
-      - POWER
-      - IBX_SMARTVIEW_SENSOR
-      - ACCESSORY
-      - CAGE
-      - CABINET
-      - IBX_SMART_VIEW
-    order-history-response:
-      title: Order History Response
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/order-header'
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/link'
-        page:
-          $ref: '#/components/schemas/page-details-for-response'
-    page-details-for-response:
-      title: Orders Response Page Details
-      type: object
-      properties:
-        size:
-          type: integer
-          description: Page Size
-          example: '25'
-        totalElements:
-          type: number
-          description: Total number of records
-          example: '160'
-        totalPages:
-          type: integer
-          description: Total number of pages
-          example: '7'
-        number:
-          type: integer
-          description: Current page number
-          example: '0'
-    ibx-detail-for-locations-endpoint:
-      title: IBX Detail (Locations Endpoint)
-      type: object
-      properties:
-        code:
-          type: string
-          description: Ibx Code
-          example: AT1
-        metro:
-          type: string
-          description: Metro code where ibx is located
-          example: AT
-        region:
-          type: string
-          description: Region where ibx is located
-          example: AMER
-        country:
-          type: string
-          description: Country where ibx is located
-          example: United States of America
-        city:
-          type: string
-          description: City where ibx is located
-          example: Atlanta
-        state:
-          type: string
-          description: State where ibx is located
-          example: GA
-        address:
-          type: string
-          description: Address of the ibx
-          example: 180 Peachtree Street NW, 2nd, 3rd and 6th Floors
-        postalCode:
-          type: string
-          description: Postal code of ibx location
-          example: '30303'
-    link:
-      title: Link
-      type: object
-      properties:
-        rel:
-          type: string
-          enum:
-          - self
-          - prev
-          - next
-          - orderFullDetails
-        href:
-          type: string
-          example: https://api.equinix.com/v1/retrieve-orders
     order-header:
       title: Order Header
       type: object
@@ -277,108 +171,49 @@ components:
             $ref: '#/components/schemas/link'
       required:
       - submittedDate
-    ordering-contact:
-      title: Ordering Contact
+    order-history-response:
+      title: Order History Response
       type: object
       properties:
-        name:
-          type: string
-          description: Ordering Contact name
-          example: John Doe
-        email:
-          type: string
-          description: Ordering Contact email
-          example: johnDoe@test.com
-        phone:
-          type: string
-          description: Ordering Contact phone
-          example: +1 408 123 1234
-    order-header-status-enum:
-      title: Order Header Status Enum
-      description: '<b>ENTERED: </b> Order Created. <br><b>SUBMITTED: </b> When the order is assigned to the Equinix OPS team.<br/><b>IN_PROGRESS: </b> When the order fulfillment is in progress <br/><b>PENDING_QA: </b>The order couldn''t be submitted. This order required manual intervention from Equinix end.<br/><b>CANCELLED: </b> The order is canceled.<br/><b>CLOSED: </b>Order is closed.'
-      type: string
-      example: SUBMITTED
-      enum:
-      - ENTERED
-      - SUBMITTED
-      - IN_PROGRESS
-      - PENDING_QA
-      - CANCELLED
-      - CLOSED
-    permissible-location:
-      title: PermissibleLocation
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/order-header'
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/link'
+        page:
+          $ref: '#/components/schemas/page-details-for-response'
+    orderhistoryapirequest:
+      title: OrderHistoryAPIRequest
       type: object
       properties:
-        ibx:
-          $ref: '#/components/schemas/ibx-detail-for-locations-endpoint'
-        cages:
+        filters:
+          $ref: '#/components/schemas/filters'
+        source:
           type: array
           items:
             type: string
-            description: Cage in ibx
-            example: SV1:01:0101
-    page-request-model:
-      title: Page Request
-      type: object
-      properties:
-        number:
-          type: integer
-          description: Page number indexed from 0.
-          default: 0
-          example: 0
-        size:
-          type: integer
-          description: Page Size.
-          maximum: 200
-          default: 10
-          example: 25
-    account:
-      title: Account
-      type: object
-      properties:
-        accountNumber:
+            enum:
+            - ORDER_NUMBER
+            - PO_NUMBER
+            - CUSTOMER_REFERENCE_NUMBER
+            - CONTACT_LAST_NAME
+            - SR_NUMBER
+            - TROUBLE_TICKET_NUMBER
+            - WORK_ACTIVITY_NUMBER
+          description: '<b>ORDER_NUMBER:</b> Search by order number(1-123456789).<br><b>CUSTOMER_REFERENCE_NUMBER:</b> Search by customer reference number which was entered as part place order.<br><b>TROUBLE_TICKET_NUMBER:</b> Search by trouble ticket numnber(5-123456).<br><b>WORK_ACTIVITY_NUMBER:</b> Search by work order activity number(3-123456). '
+        q:
           type: string
-          description: Account Number
-          example: 136008
-        accountName:
-          type: string
-          description: Name of Account
-          example: Service Corporation
-      required:
-      - accountNumber
-      - accountName
-    notification-contact:
-      title: Notification Contact
-      type: object
-      properties:
-        name:
-          type: string
-          description: Notification Contact name
-          example: John Doe
-        email:
-          type: string
-          description: Notification Contact email
-          example: johnDoe@test.com
-        phone:
-          type: string
-          description: Notification Contact phone
-          example: +1 408 123 1234
-    sort:
-      title: Sort
-      type: object
-      properties:
-        name:
-          type: string
-          description: ORDERING_CONTACT sort is applicable on ordering contact last name.
-          enum:
-          - ORDERING_CONTACT
-          - ACCOUNT_NUMBER
-          - CREATED_ON
-        direction:
-          type: string
-          enum:
-          - ASC
-          - DESC
+          description: Query value to be queried against source values(Or operation against all sources).<br/>Supports partial text search
+          example: 1-123456789
+        sorts:
+          type: array
+          items:
+            $ref: '#/components/schemas/sort'
+        page:
+          $ref: '#/components/schemas/page-request-model'
     filters:
       title: Retrieve Order filters
       type: object
@@ -431,40 +266,162 @@ components:
         - SV1
         fromDate: 05/01/2018
         toDate: 05/02/2018
-    orderhistoryapirequest:
-      title: OrderHistoryAPIRequest
+    notification-contact:
+      title: Notification Contact
       type: object
       properties:
-        filters:
-          $ref: '#/components/schemas/filters'
-        source:
-          type: array
-          items:
-            type: string
-            enum:
-            - ORDER_NUMBER
-            - PO_NUMBER
-            - CUSTOMER_REFERENCE_NUMBER
-            - CONTACT_LAST_NAME
-            - SR_NUMBER
-            - TROUBLE_TICKET_NUMBER
-            - WORK_ACTIVITY_NUMBER
-          description: '<b>ORDER_NUMBER:</b> Search by order number(1-123456789).<br><b>CUSTOMER_REFERENCE_NUMBER:</b> Search by customer reference number which was entered as part place order.<br><b>TROUBLE_TICKET_NUMBER:</b> Search by trouble ticket numnber(5-123456).<br><b>WORK_ACTIVITY_NUMBER:</b> Search by work order activity number(3-123456). '
-        q:
+        name:
           type: string
-          description: Query value to be queried against source values(Or operation against all sources).<br/>Supports partial text search
-          example: 1-123456789
-        sorts:
-          type: array
-          items:
-            $ref: '#/components/schemas/sort'
-        page:
-          $ref: '#/components/schemas/page-request-model'
+          description: Notification Contact name
+          example: John Doe
+        email:
+          type: string
+          description: Notification Contact email
+          example: johnDoe@test.com
+        phone:
+          type: string
+          description: Notification Contact phone
+          example: +1 408 123 1234
+    link:
+      title: Link
+      type: object
+      properties:
+        rel:
+          type: string
+          enum:
+          - self
+          - prev
+          - next
+          - orderFullDetails
+        href:
+          type: string
+          example: https://api.equinix.com/v1/retrieve-orders
+    ibx-detail-for-locations-endpoint:
+      title: IBX Detail (Locations Endpoint)
+      type: object
+      properties:
+        code:
+          type: string
+          description: Ibx Code
+          example: AT1
+        metro:
+          type: string
+          description: Metro code where ibx is located
+          example: AT
+        region:
+          type: string
+          description: Region where ibx is located
+          example: AMER
+        country:
+          type: string
+          description: Country where ibx is located
+          example: United States of America
+        city:
+          type: string
+          description: City where ibx is located
+          example: Atlanta
+        state:
+          type: string
+          description: State where ibx is located
+          example: GA
+        address:
+          type: string
+          description: Address of the ibx
+          example: 180 Peachtree Street NW, 2nd, 3rd and 6th Floors
+        postalCode:
+          type: string
+          description: Postal code of ibx location
+          example: '30303'
+    product-types-enum:
+      title: Product Types(Order Types) Enum
+      type: string
+      example: CROSS_CONNECT
+      enum:
+      - SMART_HANDS
+      - TROUBLE
+      - SHIPMENT
+      - WORK_VISIT
+      - SECURITY_ACCESS
+      - CONFERENCE_ROOM
+      - TOUR_REQUESTS
+      - CROSS_CONNECT
+      - CLOUD_EXCHANGE_PORT
+      - INTERNET_EXCHANGE_PORT
+      - METRO_CONNECT
+      - POWER
+      - IBX_SMARTVIEW_SENSOR
+      - ACCESSORY
+      - CAGE
+      - CABINET
+      - IBX_SMART_VIEW
+    ordering-contact:
+      title: Ordering Contact
+      type: object
+      properties:
+        name:
+          type: string
+          description: Ordering Contact name
+          example: John Doe
+        email:
+          type: string
+          description: Ordering Contact email
+          example: johnDoe@test.com
+        phone:
+          type: string
+          description: Ordering Contact phone
+          example: +1 408 123 1234
+    order-header-status-enum:
+      title: Order Header Status Enum
+      description: '<b>ENTERED: </b> Order Created. <br><b>SUBMITTED: </b> When the order is assigned to the Equinix OPS team.<br/><b>IN_PROGRESS: </b> When the order fulfillment is in progress <br/><b>PENDING_QA: </b>The order couldn''t be submitted. This order required manual intervention from Equinix end.<br/><b>CANCELLED: </b> The order is canceled.<br/><b>CLOSED: </b>Order is closed.'
+      type: string
+      example: SUBMITTED
+      enum:
+      - ENTERED
+      - SUBMITTED
+      - IN_PROGRESS
+      - PENDING_QA
+      - CANCELLED
+      - CLOSED
     order-history-location-response:
       title: Order-History-Location-Response
       type: array
       items:
         $ref: '#/components/schemas/permissible-location'
+    account:
+      title: Account
+      type: object
+      properties:
+        accountNumber:
+          type: string
+          description: Account Number
+          example: 136008
+        accountName:
+          type: string
+          description: Name of Account
+          example: Service Corporation
+      required:
+      - accountNumber
+      - accountName
+    page-details-for-response:
+      title: Orders Response Page Details
+      type: object
+      properties:
+        size:
+          type: integer
+          description: Page Size
+          example: '25'
+        totalElements:
+          type: number
+          description: Total number of records
+          example: '160'
+        totalPages:
+          type: integer
+          description: Total number of pages
+          example: '7'
+        number:
+          type: integer
+          description: Current page number
+          example: '0'
     genericError:
       type: object
       title: Application Errors
@@ -475,6 +432,49 @@ components:
             type: string
         ticketId:
           type: string
+    permissible-location:
+      title: PermissibleLocation
+      type: object
+      properties:
+        ibx:
+          $ref: '#/components/schemas/ibx-detail-for-locations-endpoint'
+        cages:
+          type: array
+          items:
+            type: string
+            description: Cage in ibx
+            example: SV1:01:0101
+    sort:
+      title: Sort
+      type: object
+      properties:
+        name:
+          type: string
+          description: ORDERING_CONTACT sort is applicable on ordering contact last name.
+          enum:
+          - ORDERING_CONTACT
+          - ACCOUNT_NUMBER
+          - CREATED_ON
+        direction:
+          type: string
+          enum:
+          - ASC
+          - DESC
+    page-request-model:
+      title: Page Request
+      type: object
+      properties:
+        number:
+          type: integer
+          description: Page number indexed from 0.
+          default: 0
+          example: 0
+        size:
+          type: integer
+          description: Page Size.
+          maximum: 200
+          default: 10
+          example: 25
   parameters:
     authorizationHeader:
       name: Authorization

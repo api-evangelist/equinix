@@ -375,6 +375,19 @@ components:
         size:
           type: number
       type: object
+    LicenseCreateInput:
+      example:
+        size: 0.8008281904610115
+        licensee_product_id: licensee_product_id
+        description: description
+      properties:
+        description:
+          type: string
+        licensee_product_id:
+          type: string
+        size:
+          type: number
+      type: object
     LicenseList:
       example:
         licenses:
@@ -400,15 +413,6 @@ components:
             $ref: '#/components/schemas/License'
           type: array
       type: object
-    Href:
-      example:
-        href: href
-      properties:
-        href:
-          type: string
-      required:
-      - href
-      type: object
     Error:
       description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
       properties:
@@ -421,19 +425,6 @@ components:
             description: An error message that contributed to the request failing.
             type: string
           type: array
-      type: object
-    LicenseCreateInput:
-      example:
-        size: 0.8008281904610115
-        licensee_product_id: licensee_product_id
-        description: description
-      properties:
-        description:
-          type: string
-        licensee_product_id:
-          type: string
-        size:
-          type: number
       type: object
     License:
       example:
@@ -459,6 +450,15 @@ components:
           $ref: '#/components/schemas/Href'
         size:
           type: number
+      type: object
+    Href:
+      example:
+        href: href
+      properties:
+        href:
+          type: string
+      required:
+      - href
       type: object
   securitySchemes:
     x_auth_token:

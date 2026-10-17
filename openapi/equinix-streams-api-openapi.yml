@@ -699,234 +699,7 @@ paths:
                 example:
                   $ref: '#/components/examples/500'
 components:
-  examples:
-    stream-asset-get-all-example:
-      value:
-        pagination:
-          offset: 0
-          limit: 20
-          total: 1
-        data:
-        - href: https://api.equinix.com/fabric/v4/ports/e684aa26-8276-48b7-bb42-a6d9def0a419
-          uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
-          type: XF_PORT
-          metricsEnabled: false
-          attachmentStatus: ATTACHED
-    StreamPutRequestExample:
-      value:
-        name: splunk1
-        description: subscription 1
-    StreamDeleteRequestExample:
-      value:
-        href: https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418
-        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
-        type: TELEMETRY_STREAM
-        name: stream1
-        description: stream 1
-        project:
-          projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
-        state: DEPROVISIONING
-        assetsCount: 1
-        streamSubscriptionsCount: 2
-        changeLog:
-          createdDateTime: 2024-05-06 16:21:18.545214+00:00
-    stream-get-all-example:
-      value:
-        pagination:
-          offset: 0
-          limit: 20
-          total: 1
-        data:
-        - href: https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418
-          uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
-          type: TELEMETRY_STREAM
-          name: stream 1
-          description: stream dec 1
-          project:
-            projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
-          state: PROVISIONED
-          assetsCount: 1
-          streamSubscriptionsCount: 2
-          alertRulesCount: 3
-          changeLog:
-            createdDateTime: 2024-05-06 16:21:18.545214+00:00
-    '415':
-      value:
-      - errorCode: EQ-3040016
-        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
-        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
-        additionalInfo:
-        - property: contentType
-          reason: The payload format is in an unsupported format
-    '403':
-      value:
-      - errorCode: EQ-3045003
-        errorMessage: Operation not allowed
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Operation not allowed for current user
-    '500':
-      value:
-      - errorCode: EQ-3045004
-        errorMessage: Internal Server Error
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: Internal Server Error
-    StreamRouterAssetDetachResponseExample:
-      value:
-        href: https://api.equinix.com/fabric/v4/streams/e684aa26-8276-48b7-bb42-a6d9def0a419/routers/d684aa26-8276-48b7-bb42-a6d9def0a418
-        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
-        type: XF_ROUTER
-        metricsEnabled: false
-        attachmentStatus: DETACHING
-    '404':
-      value:
-      - errorCode: EQ-3045811
-        errorMessage: uuid not found
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
-        details: uuid not found
-    StreamConnectionAssetResponseExample:
-      value:
-        href: https://api.equinix.com/fabric/v4/streams/e684aa26-8276-48b7-bb42-a6d9def0a419/connections/d684aa26-8276-48b7-bb42-a6d9def0a418
-        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
-        type: IP_VC
-        metricsEnabled: false
-        attachmentStatus: ATTACHED
-    StreamAssetSearchRequestExample:
-      value:
-        filter:
-          and:
-          - property: /streamUuid
-            operator: '='
-            values:
-            - e684aa26-8276-48b7-bb42-a6d9def0a419
-        pagination:
-          offset: 0
-          limit: 20
-        sort:
-        - direction: DESC
-          property: /uuid
-    StreamRouterAssetAttachResponseExample:
-      value:
-        href: https://api.equinix.com/fabric/v4/streams/e684aa26-8276-48b7-bb42-a6d9def0a419/routers/d684aa26-8276-48b7-bb42-a6d9def0a418
-        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
-        type: XF_ROUTER
-        metricsEnabled: false
-        attachmentStatus: ATTACHING
-    StreamResponseExample:
-      value:
-        href: https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418
-        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
-        type: TELEMETRY_STREAM
-        name: stream1
-        description: stream 1
-        project:
-          projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
-        state: PROVISIONED
-        assetsCount: 1
-        streamSubscriptionsCount: 2
-        alertRulesCount: 3
-        changeLog:
-          createdDateTime: 2024-05-06 16:21:18.545214+00:00
-    StreamAssetPutRequestExample:
-      value:
-        metricsEnabled: false
-    StreamPostRequestExample:
-      value:
-        type: TELEMETRY_STREAM
-        name: splunk1
-        description: subscription-1
-        project:
-          projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
-    '401':
-      value:
-      - errorCode: EQ-3000039
-        errorMessage: User not found in request or invalid.
-        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
   schemas:
-    PriceError_additionalInfo:
-      type: object
-      properties:
-        property:
-          type: string
-        reason:
-          type: string
-    StreamAsset:
-      type: object
-      properties:
-        href:
-          type: string
-          description: Stream Asset URI
-          format: uri
-          readOnly: true
-        uuid:
-          type: string
-          description: Equinix-assigned access point identifier
-          format: uuid
-          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
-        type:
-          type: string
-          description: Asset types
-          enum:
-          - XF_PORT
-          - IP_VC
-          - EVPLAN_VC
-          - EVPL_VC
-          - XF_METRO
-          - XF_ROUTER
-          - ORGANIZATION
-          - PROJECT
-        metricsEnabled:
-          type: boolean
-          description: enable metric
-          example: false
-        attachmentStatus:
-          type: string
-          description: asset status
-          enum:
-          - ATTACHING
-          - ATTACHED
-          - DETACHED
-          - DETACHING
-          - FAILED
-      description: Stream object
-    StreamAssetSortDirection:
-      type: string
-      description: Sorting direction
-      default: DESC
-      enum:
-      - DESC
-      - ASC
-    PaginationRequest:
-      type: object
-      properties:
-        offset:
-          minimum: 0
-          type: integer
-          description: Index of the first element.
-          default: 0
-        limit:
-          minimum: 1
-          type: integer
-          description: Number of elements to be requested per page. Number must be between 1 and 100, and the default is 20.
-          default: 20
-      description: Pagination request information
-    GetAllStreamAssetResponse:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-        data:
-          type: array
-          description: Data returned from the API call.
-          items:
-            $ref: '#/components/schemas/StreamAsset'
-    StreamAssetOrFilter:
-      type: object
-      properties:
-        or:
-          maxItems: 3
-          type: array
-          items:
-            $ref: '#/components/schemas/StreamAssetSimpleExpression'
     Changelog:
       type: object
       properties:
@@ -982,6 +755,56 @@ components:
           format: date-time
           example: 2020-11-06 07:00:00+00:00
       description: Change log
+    Project:
+      required:
+      - projectId
+      type: object
+      properties:
+        projectId:
+          type: string
+          description: Subscriber-assigned project ID
+          example: 44f4c4f8-2f39-494e-838c-d8e640591be5
+    Pagination:
+      required:
+      - limit
+      - total
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first item returned in the response. The default is 0.
+          default: 0
+        limit:
+          minimum: 0
+          type: integer
+          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+        total:
+          minimum: 0
+          type: integer
+          description: Total number of elements returned.
+        next:
+          type: string
+          description: URL relative to the next item in the response.
+        previous:
+          type: string
+          description: URL relative to the previous item in the response.
+      description: Pagination response information
+    PaginationRequest:
+      type: object
+      properties:
+        offset:
+          minimum: 0
+          type: integer
+          description: Index of the first element.
+          default: 0
+        limit:
+          minimum: 1
+          type: integer
+          description: Number of elements to be requested per page. Number must be between 1 and 100, and the default is 20.
+          default: 20
+      description: Pagination request information
     StreamAssetFilters:
       type: object
       properties:
@@ -990,6 +813,43 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/StreamAssetFilter'
+    StreamPostRequest:
+      required:
+      - name
+      - project
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - TELEMETRY_STREAM
+        name:
+          type: string
+          description: Customer-provided stream name
+        description:
+          type: string
+          description: Customer-provided stream description
+        project:
+          $ref: '#/components/schemas/Project'
+      description: Create Stream
+    StreamAssetSortDirection:
+      type: string
+      description: Sorting direction
+      default: DESC
+      enum:
+      - DESC
+      - ASC
+    StreamId:
+      type: string
+      description: Stream UUID
+      format: uuid
+      example: 657400f8-d360-11e9-bb65-2a2ae2dbcce5
+    StreamAssetFilter:
+      type: object
+      anyOf:
+      - $ref: '#/components/schemas/StreamAssetSimpleExpression'
+      - $ref: '#/components/schemas/StreamAssetOrFilter'
     Asset:
       type: string
       enum:
@@ -1001,6 +861,176 @@ components:
       - projects
       - networkEdgeDevices
       - companyProfiles
+    StreamAsset:
+      type: object
+      properties:
+        href:
+          type: string
+          description: Stream Asset URI
+          format: uri
+          readOnly: true
+        uuid:
+          type: string
+          description: Equinix-assigned access point identifier
+          format: uuid
+          example: c9b8e7a2-f3b1-4576-a4a9-1366a63df170
+        type:
+          type: string
+          description: Asset types
+          enum:
+          - XF_PORT
+          - IP_VC
+          - EVPLAN_VC
+          - EVPL_VC
+          - XF_METRO
+          - XF_ROUTER
+          - ORGANIZATION
+          - PROJECT
+        metricsEnabled:
+          type: boolean
+          description: enable metric
+          example: false
+        attachmentStatus:
+          type: string
+          description: asset status
+          enum:
+          - ATTACHING
+          - ATTACHED
+          - DETACHED
+          - DETACHING
+          - FAILED
+      description: Stream object
+    StreamAssetSortCriteria:
+      type: object
+      properties:
+        direction:
+          $ref: '#/components/schemas/StreamAssetSortDirection'
+        property:
+          $ref: '#/components/schemas/StreamAssetSortBy'
+    AssetId_1:
+      type: string
+      description: Stream Asset UUID
+      format: uuid
+      example: 757400f8-d360-11e9-bb65-2a2ae2dbcce6
+    StreamAssetSortBy:
+      type: string
+      description: Possible field names to use on sorting
+      default: /uuid
+      enum:
+      - /uuid
+    GetAllStreamResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/Stream'
+    StreamPutRequest:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+          description: Customer-provided stream name
+        description:
+          type: string
+          description: Customer-provided stream description
+      description: Update Stream
+    StreamAssetOrFilter:
+      type: object
+      properties:
+        or:
+          maxItems: 3
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamAssetSimpleExpression'
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          pattern: ^EQ-\d{7}$
+          type: string
+        errorMessage:
+          type: string
+        correlationId:
+          type: string
+        details:
+          type: string
+        help:
+          type: string
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError_additionalInfo'
+      description: Error Response with details
+    StreamAssetPutRequest:
+      type: object
+      properties:
+        metricsEnabled:
+          type: boolean
+          description: enable metric
+          example: false
+          default: false
+      description: Update Stream Asset
+    StreamAssetSimpleExpression:
+      type: object
+      properties:
+        property:
+          type: string
+          description: "Possible field names to use on filters:\n * `/uuid` - Asset uuid\n * `/streamUuid` - Stream uuid\n * `/projectId` - Asset projectId\n * `/*` - all-category search\n"
+          example: /name
+        operator:
+          type: string
+          description: "Possible operators to use on filters:\n * `=` - equal\n * `!=` - not equal\n * `>` - greater than\n * `>=` - greater than or equal to\n * `<` - less than\n * `<=` - less than or equal to\n * `[NOT] BETWEEN` - (not) between\n * `[NOT] LIKE` - (not) like\n * `[NOT] IN` - (not) in\n * `ILIKE` - case-insensitive like\n"
+          example: '='
+        values:
+          type: array
+          items:
+            type: string
+            example: FabricStreamAsset-1
+    ErrorList:
+      type: array
+      description: List of Error Message
+      items:
+        $ref: '#/components/schemas/Error'
+    GetAllStreamAssetResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          description: Data returned from the API call.
+          items:
+            $ref: '#/components/schemas/StreamAsset'
+    PriceError_additionalInfo:
+      type: object
+      properties:
+        property:
+          type: string
+        reason:
+          type: string
+    StreamAssetSearchRequest:
+      required:
+      - filter
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/StreamAssetFilters'
+        pagination:
+          $ref: '#/components/schemas/PaginationRequest'
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamAssetSortCriteria'
+      description: Search requests containing criteria
     Stream:
       type: object
       properties:
@@ -1053,178 +1083,148 @@ components:
         changeLog:
           $ref: '#/components/schemas/Changelog'
       description: Stream object
-    StreamAssetSortCriteria:
-      type: object
-      properties:
-        direction:
-          $ref: '#/components/schemas/StreamAssetSortDirection'
-        property:
-          $ref: '#/components/schemas/StreamAssetSortBy'
-    Error:
-      required:
-      - errorCode
-      - errorMessage
-      type: object
-      properties:
-        errorCode:
-          pattern: ^EQ-\d{7}$
-          type: string
-        errorMessage:
-          type: string
-        correlationId:
-          type: string
-        details:
-          type: string
-        help:
-          type: string
-        additionalInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/PriceError_additionalInfo'
-      description: Error Response with details
-    StreamAssetSimpleExpression:
-      type: object
-      properties:
-        property:
-          type: string
-          description: "Possible field names to use on filters:\n * `/uuid` - Asset uuid\n * `/streamUuid` - Stream uuid\n * `/projectId` - Asset projectId\n * `/*` - all-category search\n"
-          example: /name
-        operator:
-          type: string
-          description: "Possible operators to use on filters:\n * `=` - equal\n * `!=` - not equal\n * `>` - greater than\n * `>=` - greater than or equal to\n * `<` - less than\n * `<=` - less than or equal to\n * `[NOT] BETWEEN` - (not) between\n * `[NOT] LIKE` - (not) like\n * `[NOT] IN` - (not) in\n * `ILIKE` - case-insensitive like\n"
-          example: '='
-        values:
-          type: array
-          items:
-            type: string
-            example: FabricStreamAsset-1
-    StreamAssetSearchRequest:
-      required:
-      - filter
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/StreamAssetFilters'
-        pagination:
-          $ref: '#/components/schemas/PaginationRequest'
-        sort:
-          type: array
-          items:
-            $ref: '#/components/schemas/StreamAssetSortCriteria'
-      description: Search requests containing criteria
-    StreamAssetSortBy:
-      type: string
-      description: Possible field names to use on sorting
-      default: /uuid
-      enum:
-      - /uuid
-    StreamPutRequest:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          type: string
-          description: Customer-provided stream name
-        description:
-          type: string
-          description: Customer-provided stream description
-      description: Update Stream
-    Pagination:
-      required:
-      - limit
-      - total
-      type: object
-      properties:
-        offset:
-          minimum: 0
-          type: integer
-          description: Index of the first item returned in the response. The default is 0.
-          default: 0
-        limit:
-          minimum: 0
-          type: integer
-          description: Maximum number of search results returned per page. Number must be between 1 and 100, and the default is 20.
-          default: 20
-        total:
-          minimum: 0
-          type: integer
-          description: Total number of elements returned.
-        next:
-          type: string
-          description: URL relative to the next item in the response.
-        previous:
-          type: string
-          description: URL relative to the previous item in the response.
-      description: Pagination response information
-    StreamId:
-      type: string
-      description: Stream UUID
-      format: uuid
-      example: 657400f8-d360-11e9-bb65-2a2ae2dbcce5
-    AssetId_1:
-      type: string
-      description: Stream Asset UUID
-      format: uuid
-      example: 757400f8-d360-11e9-bb65-2a2ae2dbcce6
-    StreamPostRequest:
-      required:
-      - name
-      - project
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - TELEMETRY_STREAM
-        name:
-          type: string
-          description: Customer-provided stream name
-        description:
-          type: string
-          description: Customer-provided stream description
+  examples:
+    '401':
+      value:
+      - errorCode: EQ-3000039
+        errorMessage: User not found in request or invalid.
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+    StreamPutRequestExample:
+      value:
+        name: splunk1
+        description: subscription 1
+    StreamRouterAssetDetachResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/streams/e684aa26-8276-48b7-bb42-a6d9def0a419/routers/d684aa26-8276-48b7-bb42-a6d9def0a418
+        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+        type: XF_ROUTER
+        metricsEnabled: false
+        attachmentStatus: DETACHING
+    StreamResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418
+        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+        type: TELEMETRY_STREAM
+        name: stream1
+        description: stream 1
         project:
-          $ref: '#/components/schemas/Project'
-      description: Create Stream
-    GetAllStreamResponse:
-      type: object
-      properties:
+          projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
+        state: PROVISIONED
+        assetsCount: 1
+        streamSubscriptionsCount: 2
+        alertRulesCount: 3
+        changeLog:
+          createdDateTime: 2024-05-06 16:21:18.545214+00:00
+    StreamAssetSearchRequestExample:
+      value:
+        filter:
+          and:
+          - property: /streamUuid
+            operator: '='
+            values:
+            - e684aa26-8276-48b7-bb42-a6d9def0a419
         pagination:
-          $ref: '#/components/schemas/Pagination'
+          offset: 0
+          limit: 20
+        sort:
+        - direction: DESC
+          property: /uuid
+    StreamRouterAssetAttachResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/streams/e684aa26-8276-48b7-bb42-a6d9def0a419/routers/d684aa26-8276-48b7-bb42-a6d9def0a418
+        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+        type: XF_ROUTER
+        metricsEnabled: false
+        attachmentStatus: ATTACHING
+    StreamConnectionAssetResponseExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/streams/e684aa26-8276-48b7-bb42-a6d9def0a419/connections/d684aa26-8276-48b7-bb42-a6d9def0a418
+        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+        type: IP_VC
+        metricsEnabled: false
+        attachmentStatus: ATTACHED
+    StreamDeleteRequestExample:
+      value:
+        href: https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418
+        uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+        type: TELEMETRY_STREAM
+        name: stream1
+        description: stream 1
+        project:
+          projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
+        state: DEPROVISIONING
+        assetsCount: 1
+        streamSubscriptionsCount: 2
+        changeLog:
+          createdDateTime: 2024-05-06 16:21:18.545214+00:00
+    StreamPostRequestExample:
+      value:
+        type: TELEMETRY_STREAM
+        name: splunk1
+        description: subscription-1
+        project:
+          projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
+    '415':
+      value:
+      - errorCode: EQ-3040016
+        errorMessage: Unsupported media type, please check the request's Content-Type or Content-Encoding
+        correlationId: cebc3d33-9037-4a2b-a7af-0ad65602cdec
+        additionalInfo:
+        - property: contentType
+          reason: The payload format is in an unsupported format
+    '500':
+      value:
+      - errorCode: EQ-3045004
+        errorMessage: Internal Server Error
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Internal Server Error
+    stream-get-all-example:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 1
         data:
-          type: array
-          description: Data returned from the API call.
-          items:
-            $ref: '#/components/schemas/Stream'
-    ErrorList:
-      type: array
-      description: List of Error Message
-      items:
-        $ref: '#/components/schemas/Error'
-    StreamAssetPutRequest:
-      type: object
-      properties:
-        metricsEnabled:
-          type: boolean
-          description: enable metric
-          example: false
-          default: false
-      description: Update Stream Asset
-    StreamAssetFilter:
-      type: object
-      anyOf:
-      - $ref: '#/components/schemas/StreamAssetSimpleExpression'
-      - $ref: '#/components/schemas/StreamAssetOrFilter'
-    Project:
-      required:
-      - projectId
-      type: object
-      properties:
-        projectId:
-          type: string
-          description: Subscriber-assigned project ID
-          example: 44f4c4f8-2f39-494e-838c-d8e640591be5
+        - href: https://api.equinix.com/fabric/v4/streams/d684aa26-8276-48b7-bb42-a6d9def0a418
+          uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+          type: TELEMETRY_STREAM
+          name: stream 1
+          description: stream dec 1
+          project:
+            projectId: dadd3ab6-c0af-430c-8216-43d44f08c1c5
+          state: PROVISIONED
+          assetsCount: 1
+          streamSubscriptionsCount: 2
+          alertRulesCount: 3
+          changeLog:
+            createdDateTime: 2024-05-06 16:21:18.545214+00:00
+    StreamAssetPutRequestExample:
+      value:
+        metricsEnabled: false
+    '404':
+      value:
+      - errorCode: EQ-3045811
+        errorMessage: uuid not found
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: uuid not found
+    stream-asset-get-all-example:
+      value:
+        pagination:
+          offset: 0
+          limit: 20
+          total: 1
+        data:
+        - href: https://api.equinix.com/fabric/v4/ports/e684aa26-8276-48b7-bb42-a6d9def0a419
+          uuid: d684aa26-8276-48b7-bb42-a6d9def0a418
+          type: XF_PORT
+          metricsEnabled: false
+          attachmentStatus: ATTACHED
+    '403':
+      value:
+      - errorCode: EQ-3045003
+        errorMessage: Operation not allowed
+        correlationId: c82ff3bc-de07-47e5-b3ec-53a009d01515
+        details: Operation not allowed for current user
   securitySchemes:
     BearerAuth:
       type: http

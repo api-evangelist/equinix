@@ -116,34 +116,6 @@ paths:
       - Usages
 components:
   schemas:
-    DeviceUsage:
-      example:
-        total: total
-        unit: unit
-        quantity: quantity
-      properties:
-        quantity:
-          type: string
-        total:
-          type: string
-        unit:
-          type: string
-      type: object
-    DeviceUsageList:
-      example:
-        usages:
-        - total: total
-          unit: unit
-          quantity: quantity
-        - total: total
-          unit: unit
-          quantity: quantity
-      properties:
-        usages:
-          items:
-            $ref: '#/components/schemas/DeviceUsage'
-          type: array
-      type: object
     ProjectUsageList:
       example:
         usages:
@@ -183,6 +155,34 @@ components:
             description: An error message that contributed to the request failing.
             type: string
           type: array
+      type: object
+    DeviceUsageList:
+      example:
+        usages:
+        - total: total
+          unit: unit
+          quantity: quantity
+        - total: total
+          unit: unit
+          quantity: quantity
+      properties:
+        usages:
+          items:
+            $ref: '#/components/schemas/DeviceUsage'
+          type: array
+      type: object
+    DeviceUsage:
+      example:
+        total: total
+        unit: unit
+        quantity: quantity
+      properties:
+        quantity:
+          type: string
+        total:
+          type: string
+        unit:
+          type: string
       type: object
     ProjectUsage:
       example:

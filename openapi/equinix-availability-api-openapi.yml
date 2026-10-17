@@ -105,16 +105,78 @@ components:
           type: string
           description: Receptacle type
           example: IEC 60309 1P+N+E
-    AccountNumber:
-      minLength: 1
+    Phase:
       type: string
-      description: Identifier of a billing account, with permission to order colocation products.
-      example: '132028'
+      description: Circuit phase
+      example: SINGLE
+      enum:
+      - SINGLE
     IbxCode:
       pattern: ^[A-Z]{2}[0-9]+x?$
       type: string
       description: IBX data center identifier.
       example: CH1
+    Dimensions:
+      type: object
+      required:
+      - width
+      - depth
+      - height
+      properties:
+        width:
+          $ref: '#/components/schemas/Dimension'
+        depth:
+          $ref: '#/components/schemas/Dimension'
+        height:
+          $ref: '#/components/schemas/Dimension'
+    AccountNumber:
+      minLength: 1
+      type: string
+      description: Identifier of a billing account, with permission to order colocation products.
+      example: '132028'
+    FabricPortSpeed:
+      type: string
+      description: Port speed
+      example: SPEED_1_GBPS
+      enum:
+      - SPEED_1_GBPS
+      - SPEED_10_GBPS
+    ProductsAvailabilities:
+      type: array
+      description: A list of ibxs with information about product availabilities
+      items:
+        $ref: '#/components/schemas/ProductsAvailability'
+    Error:
+      required:
+      - errorCode
+      - errorMessage
+      properties:
+        errorCode:
+          maxLength: 10
+          minLength: 10
+          pattern: ^EQ-70[0-9]{5}$
+          type: string
+          description: Application error code. Format :EQ-<error code>
+          example: EQ-7000500
+        errorMessage:
+          type: string
+          description: Application error message
+          example: Internal Server Error
+        correlationId:
+          type: string
+          description: Correlation ID without any sensitive or meaningful information.
+          example: dd270016-e866-4146-9a53-84e5ea65ec06
+        details:
+          type: string
+          description: More information on errors.
+          example: Could not connect to database
+        help:
+          type: string
+          description: Help message or URL to a help page for the corresponding errorCode.
+          example: Please check system logs.
+        additionalInfo:
+          $ref: '#/components/schemas/ErrorAdditionalInfoList'
+      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
     PduConfig:
       type: object
       required:
@@ -124,40 +186,6 @@ components:
           type: string
           description: Model Code
           example: UU30009L
-    FabricPortSpeed:
-      type: string
-      description: Port speed
-      example: SPEED_1_GBPS
-      enum:
-      - SPEED_1_GBPS
-      - SPEED_10_GBPS
-    Voltage:
-      type: integer
-      description: Voltage numerical value
-      example: 220
-    Amperage:
-      type: number
-      description: Amperage Numerical Value
-      format: double
-      example: 8.9
-    Dimension:
-      required:
-      - unit
-      - value
-      type: object
-      properties:
-        value:
-          type: integer
-          description: Dimension Value
-          example: 482
-        unit:
-          type: string
-          description: Unit of measure of the product
-          example: MILLIMETER
-          enum:
-          - MILLIMETER
-          - CENTIMETER
-          - METER
     ProductsAvailability:
       required:
       - ibx
@@ -197,60 +225,42 @@ components:
           $ref: '#/components/schemas/PduConfig'
         fabricPortSpeed:
           $ref: '#/components/schemas/FabricPortSpeed'
-    Phase:
-      type: string
-      description: Circuit phase
-      example: SINGLE
-      enum:
-      - SINGLE
-    Error:
+    Amperage:
+      type: number
+      description: Amperage Numerical Value
+      format: double
+      example: 8.9
+    Dimension:
       required:
-      - errorCode
-      - errorMessage
+      - unit
+      - value
+      type: object
       properties:
-        errorCode:
-          maxLength: 10
-          minLength: 10
-          pattern: ^EQ-70[0-9]{5}$
+        value:
+          type: integer
+          description: Dimension Value
+          example: 482
+        unit:
           type: string
-          description: Application error code. Format :EQ-<error code>
-          example: EQ-7000500
-        errorMessage:
-          type: string
-          description: Application error message
-          example: Internal Server Error
-        correlationId:
-          type: string
-          description: Correlation ID without any sensitive or meaningful information.
-          example: dd270016-e866-4146-9a53-84e5ea65ec06
-        details:
-          type: string
-          description: More information on errors.
-          example: Could not connect to database
-        help:
-          type: string
-          description: Help message or URL to a help page for the corresponding errorCode.
-          example: Please check system logs.
-        additionalInfo:
-          $ref: '#/components/schemas/ErrorAdditionalInfoList'
-      description: Error responses are included with 4xx and 5xx HTTP responses from the API service. Either "error" or "errors" will be set.
+          description: Unit of measure of the product
+          example: MILLIMETER
+          enum:
+          - MILLIMETER
+          - CENTIMETER
+          - METER
+    Voltage:
+      type: integer
+      description: Voltage numerical value
+      example: 220
+    ErrorAdditionalInfoList:
+      type: array
+      description: Contains application specific information for this error. The object inside this array can have any number of application specific properties.
+      items:
+        $ref: '#/components/schemas/ErrorAdditionalInfo'
     Errors:
       type: array
       items:
         $ref: '#/components/schemas/Error'
-    Dimensions:
-      type: object
-      required:
-      - width
-      - depth
-      - height
-      properties:
-        width:
-          $ref: '#/components/schemas/Dimension'
-        depth:
-          $ref: '#/components/schemas/Dimension'
-        height:
-          $ref: '#/components/schemas/Dimension'
     ErrorAdditionalInfo:
       properties:
         property:
@@ -261,16 +271,6 @@ components:
           type: string
           description: Fallback error message in plain English.
           example: must not be blank
-    ErrorAdditionalInfoList:
-      type: array
-      description: Contains application specific information for this error. The object inside this array can have any number of application specific properties.
-      items:
-        $ref: '#/components/schemas/ErrorAdditionalInfo'
-    ProductsAvailabilities:
-      type: array
-      description: A list of ibxs with information about product availabilities
-      items:
-        $ref: '#/components/schemas/ProductsAvailability'
   securitySchemes:
     BearerAuth:
       type: http
