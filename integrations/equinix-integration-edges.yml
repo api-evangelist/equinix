@@ -4,6 +4,10 @@ checked:
 - https://azuremarketplace.microsoft.com/
 - https://cloudsecurityalliance.org/star/registry
 - https://eucoc.cloud/en/public-register/list-of-adherent-services
+- https://manrs.org/netops/participants/
+- https://www.peeringdb.com/api/fac
+- https://www.peeringdb.com/api/ix
+- https://www.peeringdb.com/api/net
 marketplace_apps: []
 edges:
 - partner_name: Microsoft Azure Marketplace
@@ -50,6 +54,89 @@ edges:
     detected_by: sweep-compliance-assurance.py
     detected: '2026-10-20'
   detected_by: sweep-compliance-assurance.py
+  first_seen: '2026-10-20'
+- partner_name: PeeringDB (interconnection register)
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.peeringdb.com/net/1282
+  category: network interconnection register
+  contract_reference:
+    register: PeeringDB (peeringdb.com/api net, ix, fac, org)
+    standard: null
+    spec_file: null
+    role: peeringdb-facility-operator+ix-operator+network
+    registered_name: Equinix, Inc.
+    register_id: https://www.peeringdb.com/net/1282
+    matched_domain: equinix.com
+    matched_by: domain
+    asns:
+    - 14609
+    - 15830
+    - 24115
+    - 54825
+    - 64275
+    - 265376
+    - 266849
+    - 394749
+    info_types:
+    - Content
+    - Enterprise
+    - NSP
+    - Route Server
+    ix_presence: 74
+    exchanges_operated:
+    - Equinix Amsterdam
+    - Equinix Ashburn
+    - Equinix Atlanta
+    - Equinix Barcelona
+    - Equinix Bogota
+    - Equinix Chicago
+    - Equinix Dallas
+    - Equinix Denver
+    - Equinix Dublin
+    - Equinix Frankfurt
+    facilities_operated: 224
+    signal_note: 'participation only: PeeringDB is self-registered by network operators; ASNs, IX presence and facility
+      counts are context, never counted'
+    detected_by: sweep-network-edge.py
+    detected: '2026-10-20'
+  detected_by: sweep-network-edge.py
+  first_seen: '2026-10-20'
+- partner_name: MANRS (Mutually Agreed Norms for Routing Security)
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://manrs.org/participant/019eccd4-bc10-71b9-a741-62b97b88d42e
+  category: routing-security programme
+  contract_reference:
+    register: MANRS participants (manrs.org netops / cdn-cloud-providers / ixps / equipment-vendors)
+    standard: MANRS
+    spec_file: null
+    role: manrs-participant
+    registered_name: Equinix Metal
+    register_id: https://manrs.org/participant/019eccd4-bc10-71b9-a741-62b97b88d42e
+    matched_domain: equinix.com
+    matched_by: domain
+    domain_source: peeringdb net website for AS54825
+    certified_products:
+    - product: MANRS CDN and Cloud Providers
+      program: cdn-cloud-providers
+      lapsed: false
+      approved: '2021-01-28'
+    signal_note: certified_products = one entry per MANRS programme admitted to (reviewed against the programme's
+      actions), never per ASN; ASNs are context. The tables list current participants only, so lapsed is always
+      false
+    detected_by: sweep-network-edge.py
+    detected: '2026-10-20'
+    identity_source: peeringdb net website by the participant's ASN (labelled provenance step)
+  detected_by: sweep-network-edge.py
   first_seen: '2026-10-20'
 source:
 - https://cloudsecurityalliance.org/star/registry
