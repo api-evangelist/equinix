@@ -8,6 +8,8 @@ checked:
 - https://www.peeringdb.com/api/fac
 - https://www.peeringdb.com/api/ix
 - https://www.peeringdb.com/api/net
+- https://www.epra.com/membership/our-members
+- https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&SIC=6798&type=&dateb=&owner=include&start=0&count=100&hidefilings=0
 marketplace_apps: []
 edges:
 - partner_name: Microsoft Azure Marketplace
@@ -138,6 +140,41 @@ edges:
     identity_source: peeringdb net website by the participant's ASN (labelled provenance step)
   detected_by: sweep-network-edge.py
   first_seen: '2026-10-20'
+- partner_name: SEC (REIT registrant, SIC 6798)
+  partner: null
+  partner_match: register-name
+  type: contract
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001101239
+  category: Real estate investment trust (SEC registrant)
+  contract_reference:
+    register: SEC EDGAR company list, SIC 6798 (Real Estate Investment Trusts)
+    spec_file: null
+    standard: SEC registrant, SIC 6798 Real Estate Investment Trusts (Internal Revenue Code ss856-860 REIT)
+    role: sec-reit-registrant
+    registered_name: EQUINIX INC
+    register_id: CIK 0001101239
+    state_of_record: CA
+    sic_description: Real Estate Investment Trusts
+    tickers:
+    - EQIX
+    exchanges:
+    - Nasdaq
+    last_filing: '2026-09-08'
+    matched_domain: null
+    matched_by: register-name
+    register_name_note: register-name 'equinix' = equinix; no wikidata P856
+    signal_note: 'participation only: an SEC filer classified SIC 6798 is a REIT registrant; registration is not
+      a certification; ticker / exchange / filing date are context, never counted'
+    detected_by: sweep-reit-real-estate-securities.py
+    detected: '2026-10-21'
+    identity_source: register-name
+    identity_note: register gave only the name; exact normalised match to the repo's apis.yml name, one repo, Wikidata
+      P856 not contradicting (Kin 2026-10-20 decision 2)
+  detected_by: sweep-reit-real-estate-securities.py
+  first_seen: '2026-10-21'
 source:
 - https://cloudsecurityalliance.org/star/registry
 - https://eucoc.cloud/en/public-register/list-of-adherent-services
